@@ -291,6 +291,7 @@
 					<input class="telephone-certification" type="tel" placeholder="인증번호" maxlength="6">
 					<input type="button" id="tel-certification" value="인증확인">
 				</div>
+				
 				<div class="findloca">
 				<input type="text" id="si" readonly>
 				<input type="text" id="gu" readonly>
