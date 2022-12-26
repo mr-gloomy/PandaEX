@@ -474,7 +474,7 @@ $(function() {
 		$('.back-joinpage').fadeIn();
 		$(".modal-join").slideDown(300);
 		$('.modal-top').text("PANDA JOIN");
-		$('.modal-body').css("height", "650px");
+		$('.modal-body').css("height", "770px");
 	});
 })
 $(function() {
@@ -499,7 +499,7 @@ $(function() {
 		$('.modal-join').fadeIn();
 		$('.join-text').fadeIn();
 		$('.back-joinpage').fadeIn();
-		$('.modal-body').css("height", "650px");
+		$('.modal-body').css("height", "770px");
 		$('.modal-text').fadeOut();
 		$('.login-submit').fadeOut();
 		$('.find').fadeOut();
@@ -514,7 +514,8 @@ $(function() {
 	$('#findlocation').on('click', function() {
 		navigator.geolocation.getCurrentPosition(function(position) {
 //			alert("좌측상단 위치정보 허용해주세요");
-			
+			var error = "위치정보 조회실패";
+			var error2 = "위치정보 조회를 동의해주세요.(테스트문구입니다)";
 			var userlat = position.coords.latitude;
 			var userlong = position.coords.longitude;
 			var href = window.location.href;
@@ -543,6 +544,17 @@ $(function() {
 							var gu = addp.documents[0].region_2depth_name;
 							$('#si').attr('value',si);
 							$('#gu').attr('value',gu);
+//							if($('#si').val() != "" ){
+							if($('#si').val() == "" ){
+							$('#si').css('border','2px solid rgb(0 255 7');
+							$('#gu').css('border','2px solid rgb(0 255 7');
+							} else {
+								$('#si').attr('value',error);
+								$('#gu').attr('value',error);
+								$('.locationfind-false').text(error2);
+								window.open('https://support.google.com/chrome/answer/142065?hl=ko&co=GENIE.Platform%3DDesktop','_blank','height=600,width=500');
+								
+							}
 						}
 					});
 				}	
