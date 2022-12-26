@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itwillbs.mapper.BoardMapper">
+
+		<!-- 시간정보 조회 -->
+		<select id="getTime" resultType="string">
+		  	select now()
+		</select>
+		
+		<!-- 게시판 글쓰기 -->
+		<insert id="create">
+			insert into tbl_board (title,content,writer) 
+			values (#{title},#{content},#{writer})
+		</insert>
+		
+		<!-- 게시판 전체목록(all) -->
+		<select id="listAll" resultType="BoardVO">
+			select * from tbl_board
+		</select>
+		
+		<!-- 조회수 1증가 -->
+		<update id="updateReadcnt">
+			update tbl_board set viewcnt=viewcnt+1
+			where bno=#{bno}
+		</update>
+		
+		  <!-- 글번호(bno) 글정보 모두 조회  -->
+  		<select id="getBoard" resultType="com.itwillbs.domain.BoardVO">
+  		 select * from tbl_board 
+  		 where bno = #{bno}  	
+ 		 </select>
+ 		 
+ 		 <!-- 글 번호에 해당하는 글 수정 -->
+ 		 <update id="updateBoard">
+ 		 update tbl_board set title=#{title},content=#{content} 
+ 		 where bno=#{bno}
+ 		 </update>
+ 		 
+ 		 <!-- 글 삭제 -->
+ 		 <delete id="deleteBoard">
+ 		 delete from tbl_board
+ 		 where bno=#{bno}
+ 		 </delete>
+ 		 
+ 		 <!-- 페이징처리 -->
+ 		 <select id="listPage" resultType="BoardVO">
+ 		 <![CDATA[
+			select * from tbl_board 
+			where bno>0 
+			order by bno desc, regdate desc
+			limit #{page},10
+			]]>
+ 		 </select>
+ 		 
+ 		 <!-- 페이징처리 -->
+ 		 <select id="listPage2" resultType="BoardVO">
+ 		 <![CDATA[
+			select * from tbl_board 
+			where bno>0 
+			order by bno desc, regdate desc
+			limit #{pageStart},#{perPageNum}
+			]]>
+ 		 </select>
+ 		 
+ 		 
+ 		 
+</mapper>

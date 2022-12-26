@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+		<!-- 디비연결정보 - DataSource -->
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<!-- 객체에 있는 set() 메서드 -->
+		<property name="driverClassName"
+			value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
+		<property name="url"
+			value="jdbc:log4jdbc:mysql://db.itwillbs.dev:3306/class7_220721_team1" />
+		<property name="username" value="class7_220721_team1" />
+		<property name="password" value="1234" />
+	</bean>
+	<!-- 디비연결정보 - DataSource -->	
+	
+	<!-- mybatis설정(디비연결, 설정, mapper) -->	
+	<bean id="sqlSessionFactory"
+		  class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="configLocation" 
+				  value="classpath:/mybatis-config.xml" />
+		<property name="mapperLocations" 
+				  value="classpath:/*Mapper.xml" /> 
+	</bean>
+	<!-- mybatis설정(디비연결, 설정, mapper) -->	
+	
+	<!-- 디비연결(mybatis 설정 + 자원해제) -->
+	<bean id="sqlSession"
+		  class="org.mybatis.spring.SqlSessionTemplate"
+		  destroy-method="clearCache">
+		  <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>
+	<!-- 디비연결(mybatis 설정 + 자원해제) -->
+	
+	<!-- 다른 패키지 정보를 스캔(객체bean 으로 인식 처리) -->	
+	<context:component-scan base-package="com.panda.persistence" />
+	<context:component-scan base-package="com.panda.service" />	
+</beans>
