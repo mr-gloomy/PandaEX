@@ -572,26 +572,39 @@ $(document).on("keyup",".telephone",function() {
 	$(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") );
 });
 /* 닉네임 유효성 체크 */
-$('#user-nick-join').on("blur keyup", function() {
-	$(this).val($(this).val().replace(/[^a-zA-Z0-9ㄱ-힣]/g, ''));
-	if($('#user-nick-join').val() != null && $('#user-nick-join').val().length < 3 ){
-		$('.nicktooltip').css("color","red");
-		$('.nicktooltip').text("닉네임은 3글자이상 특수기호 사용금지");
-	} else if($('#user-nick-join').val() != null && $('#user-nick-join').val().length >= 3) {
-		$('.nicktooltip').css("color","rgb(105 155 105)");
-		$('.nicktooltip').text("사용가능한 닉네임입니다.(쿼리에서비교는 추후추가)");
-	}
-});
+$('#user-nick-join').on(
+		"blur keyup",
+		function() {
+			$(this).val($(this).val().replace(/[^a-zA-Z0-9ㄱ-힣]/g, ''));
+			if ($('#user-nick-join').val() != null
+					&& $('#user-nick-join').val().length < 3) {
+				$('.nicktooltip').css("color", "red");
+				$('.nicktooltip').text("닉네임은 3글자이상 특수기호 사용금지");
+			} else if ($('#user-nick-join').val() != null
+					&& $('#user-nick-join').val().length >= 3) {
+				$('.nicktooltip').css("color", "rgb(105 155 105)");
+				$('.nicktooltip').text("사용가능한 닉네임입니다.(쿼리에서비교는 추후추가)");
+			}
+		});
 /* 이름 유효성 체크 */
-$('#user-name-join').on("keyup",function(){
+$('#user-name-join').on("keyup", function() {
 	$(this).val($(this).val().replace(/[^ㄱ-힣]/g, ''));
-	if($('#user-name-join').val().length >= 2){
-		$('.nametooltip').css("color","rgb(105 155 105)");
-		$('.nametooltip').text("멋진 이름이네요!");
-	} else {
-		$('.nametooltip').css("color","red");
-		$('.nametooltip').text("사용불가능한 이름입니다.");
+	for (var i = 0; i < $('#user-name-join').val().length; i++) {
+		var namechk = $('#user-name-join').val().substring(i, i + 1);
+		if (namechk.match(/([^가-힣\x20])/i)) {
+			$('.nametooltip').css("color", "red");
+			$('.nametooltip').text("사용불가능한 이름입니다.");
+			return;
+		}
+		if ($('#user-name-join').val().length < 2) {
+			$('.nametooltip').css("color", "red");
+			$('.nametooltip').text("사용불가능한 이름입니다.");
+			return;
+		} else {
+			$('.nametooltip').css("color", "rgb(105 155 105)");
+			$('.nametooltip').text("멋진 이름이네요!");
+		}
 	}
 });
 /* 비밀번호 유효성 체크 */
-
+var 졸림 = "일어나서할게요";
