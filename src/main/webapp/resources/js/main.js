@@ -547,15 +547,15 @@ $(function() {
 							$('#gu').attr('value',gu);
 //	성공					if($('#si').val() != "" ){
 							if($('#si').val() == "" ){
-							$('#si').css('border','2px solid rgb(105 155 105');
-							$('#gu').css('border','2px solid rgb(105 155 105');
+							$('#si').css('border','2px solid rgb(105 155 105)');
+							$('#gu').css('border','2px solid rgb(105 155 105)');
 							$('.locationfind-false').text(succe);
-							$('.locationfind-false').css('color','rgb(105 155 105');
+							$('.locationfind-false').css('color','rgb(105 155 105)');
 							} else {
 								$('#si').attr('value',error);
 								$('#gu').attr('value',error);
-								$('#si').css('border','2px solid rgb(255 50 50');
-								$('#gu').css('border','2px solid rgb(255 50 50');
+								$('#si').css('border','2px solid rgb(255 50 50)');
+								$('#gu').css('border','2px solid rgb(255 50 50)');
 								$('.locationfind-false').text(error2);
 								window.open('https://support.google.com/chrome/answer/142065?hl=ko&co=GENIE.Platform%3DDesktop','_blank','height=600,width=500');							
 							}
@@ -571,12 +571,27 @@ $(function() {
 $(document).on("keyup",".telephone",function() { 
 	$(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") );
 });
-/* 닉네임 특수문자 체크 */
-
+/* 닉네임 유효성 체크 */
 $('#user-nick-join').on("blur keyup", function() {
-	if($('#user-nick-join').val() != null){
-		$(this).val($(this).val().replace(/[^a-zA-Z0-9ㄱ-힣]/g, ''));
+	$(this).val($(this).val().replace(/[^a-zA-Z0-9ㄱ-힣]/g, ''));
+	if($('#user-nick-join').val() != null && $('#user-nick-join').val().length < 3 ){
 		$('.nicktooltip').css("color","red");
 		$('.nicktooltip').text("닉네임은 3글자이상 특수기호 사용금지");
+	} else if($('#user-nick-join').val() != null && $('#user-nick-join').val().length >= 3) {
+		$('.nicktooltip').css("color","rgb(105 155 105)");
+		$('.nicktooltip').text("사용가능한 닉네임입니다.(쿼리에서비교는 추후추가)");
 	}
 });
+/* 이름 유효성 체크 */
+$('#user-name-join').on("keyup",function(){
+	$(this).val($(this).val().replace(/[^ㄱ-힣]/g, ''));
+	if($('#user-name-join').val().length >= 2){
+		$('.nametooltip').css("color","rgb(105 155 105)");
+		$('.nametooltip').text("멋진 이름이네요!");
+	} else {
+		$('.nametooltip').css("color","red");
+		$('.nametooltip').text("사용불가능한 이름입니다.");
+	}
+});
+/* 비밀번호 유효성 체크 */
+

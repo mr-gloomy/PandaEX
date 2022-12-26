@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!Doctype html>
 <html>
 <!-- Header -->
 
 <header>
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<!-- 임시 -->
 	<script>
 		function mo() {
@@ -271,12 +273,12 @@
 			<img class="kakaologin" src="/resources/images/icons/kakao_login_large_wide.png">
 		<div class="modal-join">
 			<div class="join-text">
-				<input type="text" placeholder="아이디" maxlength="10">
+				<input id="user-id-join" type="text" placeholder="아이디" maxlength="10" >
 				<div id="tooltip" class="idtooltip">아이디는 영어,숫자 5~10글자, 한글사용불가</div>
-				<input type="text" placeholder="비밀번호" maxlength="20">
+				<input id="user-pw-join" type="text" placeholder="비밀번호" maxlength="20" >
 				<div id="tooltip" class="pwtooltip">비밀번호는 영어대소문자,숫자,특수기호 5~20글자, 한글사용불가</div>
-				<input type="text" placeholder="비밀번호 확인" maxlength="20">
-				<div id="tooltip" class="pwchktooltip">비밀번호가 일치하지 않습니다</div>
+				<input id="user-name-join" type="text" placeholder="이름입력" maxlength="6">
+				<div id="tooltip" class="nametooltip">이름을 입력해주세요</div>
 				<input id="user-nick-join" type="text" placeholder="닉네임" maxlength="10">
 				<div id="tooltip" class="nicktooltip" >사용하실 닉네임을 입력해주세요.</div>
 				<div class="tellsel">
