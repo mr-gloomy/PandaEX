@@ -3812,10 +3812,11 @@ input.num-product::-webkit-inner-spin-button {
 }
 .login-modal .modal-body .modal-join .join-text #tooltip{
 	font-size: 5px;
-	color: red;
+	color: black;
 	margin-bottom: 10px;
 	padding-left: 10px;
 }
+
 .login-modal .modal-body .modal-join .join-text #name{
 	margin-bottom: 15px;
 }

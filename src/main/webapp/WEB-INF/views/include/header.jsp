@@ -277,8 +277,8 @@
 				<div id="tooltip" class="pwtooltip">비밀번호는 영어대소문자,숫자,특수기호 5~20글자, 한글사용불가</div>
 				<input type="text" placeholder="비밀번호 확인" maxlength="20">
 				<div id="tooltip" class="pwchktooltip">비밀번호가 일치하지 않습니다</div>
-				<input type="text" placeholder="닉네임" maxlength="10">
-				<div id="tooltip" class="nicktooltip">닉네임은 3글자이상, 특수기호 사용불가</div>
+				<input id="user-nick-join" type="text" placeholder="닉네임" maxlength="10">
+				<div id="tooltip" class="nicktooltip" >사용하실 닉네임을 입력해주세요.</div>
 				<div class="tellsel">
 					<div id="tel">
 						<input class="select" type="text" value="통신사" readonly> <img
@@ -293,6 +293,7 @@
 					<input class="telephone-certification" type="tel"
 						placeholder="인증번호" maxlength="6"> <input type="button"
 						id="tel-certification" value="인증확인">
+					<input type="hidden" class="sucess-certification" value="" memo="인증완료 시 밸류값저장(0/1)">
 				</div>
 				<div class="mylocation">우리동네 조회하기</div>
 				<div class="findloca">

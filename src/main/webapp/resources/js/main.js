@@ -516,6 +516,7 @@ $(function() {
 //			alert("좌측상단 위치정보 허용해주세요");
 			var error = "위치정보 조회실패";
 			var error2 = "위치정보 조회를 동의해주세요.(테스트문구입니다)";
+			var succe = "위치조회가 완료되었습니다.";
 			var userlat = position.coords.latitude;
 			var userlong = position.coords.longitude;
 			var href = window.location.href;
@@ -544,16 +545,19 @@ $(function() {
 							var gu = addp.documents[0].region_2depth_name;
 							$('#si').attr('value',si);
 							$('#gu').attr('value',gu);
-//							if($('#si').val() != "" ){
+//	성공					if($('#si').val() != "" ){
 							if($('#si').val() == "" ){
-							$('#si').css('border','2px solid rgb(0 255 7');
-							$('#gu').css('border','2px solid rgb(0 255 7');
+							$('#si').css('border','2px solid rgb(105 155 105');
+							$('#gu').css('border','2px solid rgb(105 155 105');
+							$('.locationfind-false').text(succe);
+							$('.locationfind-false').css('color','rgb(105 155 105');
 							} else {
 								$('#si').attr('value',error);
 								$('#gu').attr('value',error);
+								$('#si').css('border','2px solid rgb(255 50 50');
+								$('#gu').css('border','2px solid rgb(255 50 50');
 								$('.locationfind-false').text(error2);
-								window.open('https://support.google.com/chrome/answer/142065?hl=ko&co=GENIE.Platform%3DDesktop','_blank','height=600,width=500');
-								
+								window.open('https://support.google.com/chrome/answer/142065?hl=ko&co=GENIE.Platform%3DDesktop','_blank','height=600,width=500');							
 							}
 						}
 					});
@@ -563,4 +567,16 @@ $(function() {
 		
 	})
 });
+/* 전화번호 자동 하이픈 생성 */
+$(document).on("keyup",".telephone",function() { 
+	$(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") );
+});
+/* 닉네임 특수문자 체크 */
 
+$('#user-nick-join').on("blur keyup", function() {
+	if($('#user-nick-join').val() != null){
+		$(this).val($(this).val().replace(/[^a-zA-Z0-9ㄱ-힣]/g, ''));
+		$('.nicktooltip').css("color","red");
+		$('.nicktooltip').text("닉네임은 3글자이상 특수기호 사용금지");
+	}
+});
