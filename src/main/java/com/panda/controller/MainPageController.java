@@ -19,7 +19,7 @@ public class MainPageController {
 	@RequestMapping(value = "/index",method = RequestMethod.GET)
 	public void indexGET() {
 		
-		logger.debug(" 메인페이지 GET() 호출 ");
+		logger.debug(" 메인페이지 GET() 호출123123 ");
 		
 	}
 	
