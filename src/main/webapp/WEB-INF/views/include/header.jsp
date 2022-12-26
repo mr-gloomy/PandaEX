@@ -108,7 +108,7 @@
 										style="width: 64.5px; margin-top: 7px;">
 								</div>
 								<div class="user-logout">
-									<input type="button" onclick="location.href='#'" class="logout"
+									<input type="button" onclick="location.href='#'" id="user-join" class="logout"
 										value="회원가입" style="margin-top: 7px;">
 								</div>
 							</c:when>
