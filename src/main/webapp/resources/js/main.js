@@ -329,6 +329,8 @@
 		$('.join').fadeIn();
 		$('.social-login').fadeIn();
 		$('.kakaologin').fadeIn();
+		$('.modal-top').text("PANDA LOGIN");
+		$('.modal-body').css("height", "500px");
 		event.preventDefault();
 		event.stopPropagation();
 		return false;
@@ -481,13 +483,29 @@ $(function() {
 		$('.join').fadeIn();
 		$('.social-login').fadeIn();
 		$('.kakaologin').fadeIn();
-		$('.back-joinpage').hide();
+		$('.back-joinpage').fadeOut();
 		$(".modal-join").slideUp(300);
 		$('.modal-top').text("PANDA LOGIN");
 		$('.modal-body').css("height", "500px");
 	});
 })
-
+$(function() {
+	$('#user-join').on('click',function() {
+		$('html').css('overflow', 'hidden');
+		$(".login-modal").css("display", "flex");
+		$('.modal-top').text("PANDA JOIN");
+		$('.modal-join').fadeIn();
+		$('.join-text').fadeIn();
+		$('.back-joinpage').fadeIn();
+		$('.modal-body').css("height", "650px");
+		$('.modal-text').fadeOut();
+		$('.login-submit').fadeOut();
+		$('.find').fadeOut();
+		$('.join').fadeout();
+		$('.social-login').fadeOut();
+		$('.kakaologin').fadeOut();
+	});
+});
 
 /* 우리동네(gps값 기준) 조회 */
 $(function() {
