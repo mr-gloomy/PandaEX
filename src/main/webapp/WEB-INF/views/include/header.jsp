@@ -279,15 +279,18 @@
 				<input type="text" placeholder="닉네임" maxlength="10">
 				<div id="tooltip" class="nicktooltip">닉네임은 3글자이상, 특수기호 사용불가</div>
 				<div class="tellsel">
-				<select id="tel" >
-				<option id="disabled" selected disabled>통신사</option>
-				<option value="SKT">SKT</option>
-				<option value="KT">KT</option>
-				<option value="LG U+">LG U+</option>
-				</select>
-				<input type="tel" placeholder="월요일에 디자인예정" maxlength="13">
+					<div id="tel">
+						<input class="select" type="text" value="통신사" readonly>
+						<img id="updown" src="/resources/images/icons/updown.png">
+					</div> 
+					<input class="telephone" type="tel" placeholder="전화번호" maxlength="13">
+					<input type="button" class="tel-certification" value="문자전송">
 				</div>
 				<div id="tooltip" class="teltooltip">사용중인 전화번호입니다.</div>
+				<div id="telephone-certification">
+					<input class="telephone-certification" type="tel" placeholder="인증번호" maxlength="6">
+					<input type="button" id="tel-certification" value="인증확인">
+				</div>
 				<div class="findloca">
 				<input type="text" id="si" readonly>
 				<input type="text" id="gu" readonly>

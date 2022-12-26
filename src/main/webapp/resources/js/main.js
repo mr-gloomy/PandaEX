@@ -51,9 +51,11 @@
 		var top = $(window).scrollTop();
 
 		if (top >= 620) {
-			$('.remote').css("display", "flex");
+			$('.remote').css("opacity", "1");
+			$('.remote').css("transition", "1.5s");
 		} else {
-			$('.remote').css("display", "none");
+			$('.remote').css("opacity", "0");
+			$('.remote').css("transition", "1.5s");
 		}
 	});
 
@@ -469,7 +471,7 @@ $(function() {
 		$('.join').fadeOut();
 		$('.social-login').fadeOut();
 		$('.kakaologin').fadeOut();
-		$('.back-joinpage').show();
+		$('.back-joinpage').fadeIn();
 		$(".modal-join").slideDown(300);
 		$('.modal-top').text("PANDA JOIN");
 		$('.modal-body').css("height", "650px");

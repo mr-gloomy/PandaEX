@@ -3547,7 +3547,8 @@ input.num-product::-webkit-inner-spin-button {
     min-height: 120px;
     z-index: 5000;
     position: fixed;
-    display: none;
+    display: flex;
+    opacity : 0;
     top: 280px; 
     right: 45px;
     flex-direction: column;
@@ -3555,6 +3556,7 @@ input.num-product::-webkit-inner-spin-button {
     justify-content: flex-start;
     border-radius: 20px;
     box-shadow: 0px 8px 16px 0px rgb(0 0 0 / 20%);
+    transition : opacity 1.5s;
 }
 
 .remote .chat-button .kakao{
@@ -3809,7 +3811,7 @@ input.num-product::-webkit-inner-spin-button {
 	flex-direction: column
 }
 .login-modal .modal-body .modal-join .join-text #tooltip{
-	font-size: 10px;
+	font-size: 5px;
 	color: red;
 	margin-bottom: 10px;
 	padding-left: 10px;
@@ -3821,6 +3823,7 @@ input.num-product::-webkit-inner-spin-button {
 	cursor: context-menu;
 }
 .login-modal .modal-body .modal-join .join-text .findloca {
+	padding-top : 10px;
 	display: flex;
     flex-direction: row;
 }
@@ -3837,30 +3840,65 @@ input.num-product::-webkit-inner-spin-button {
 	padding-left: 0px;
 	cursor: pointer;
 }
-.login-modal .modal-body .modal-join .join-text .tellsel select{
-   -webkit-appearance:none; 
-   -moz-appearance:none; 
-   appearance:none;
-   width : 65px;
-   background:url('../images/icons/updown.png') no-repeat 100% 50%/15px auto;
+.login-modal .modal-body .modal-join .join-text .tellsel{
+	display: flex;
 }
-.login-modal .modal-body .modal-join .join-text .tellsel select>option{
-	color : red;
-	appearance:none;
-}
-.login-modal .modal-body .modal-join .join-text .tellsel select #disabled{
-	color : black;
-}
-.login-modal .modal-body .modal-join .join-text .tellsel select::ms-expand{
-	display: none; /*for IE10,11 */
-}
+.login-modal .modal-body .modal-join .join-text .tellsel #tel{
 
+	margin-right: 10px;
+	border-radius: 5px;
+	padding-left: 0px;
+	display: flex;
+}
+.login-modal .modal-body .modal-join .join-text .tellsel .telephone{
+	width: 175px;
+    margin-right: 10px;
+}
+.login-modal .modal-body .modal-join .join-text .tellsel .tel-certification{
+	width: 75px;
+    padding-left: 0px;
+}
+.login-modal .modal-body .modal-join .join-text .teltooltip {
+	margin-left : 90px;
+}
+.login-modal .modal-body .modal-join .join-text .tellsel .select{
+   margin-left: 0px;
+   background-color: rgb(215 215 215 / 40%);
+   height: 40px;
+   border-radius: 5px;
+   opacity: 0.6;
+   width : 80px;
+   padding-left : -10px;
+   cursor: pointer;
+}
+.login-modal .modal-body .modal-join .join-text .tellsel #tel #updown{
+	width: 15px;
+    height: 15px;
+    position: absolute;
+    margin: 12px 0 0 60px;
+    cursor: pointer;
+}
+.login-modal .modal-body .modal-join .join-text #telephone-certification{
+	display: flex;
+    justify-content: space-between;
+}
+.login-modal .modal-body .modal-join .join-text #telephone-certification .telephone-certification{
+	width: 175px;
+    padding-right: 10px;
+    margin-left: 90px;
+    margin-top: -10px;
+}
+.login-modal .modal-body .modal-join .join-text #telephone-certification #tel-certification{
+	width: 75px;
+    padding-left: 0px;
+    margin-top: -10px;
+}
 .login-modal .modal-body .modal-join .join-text input[type=text],
 .login-modal .modal-body .modal-join .join-text input[type=password],
 .login-modal .modal-body .modal-join .join-text input[type=email],
 .login-modal .modal-body .modal-join .join-text input[type=tel],
 .login-modal .modal-body .modal-join .join-text input[type=button]{
-	width: 300px;
+	width: 350px;
 	background-color: rgb(197 197 197 / 70%);
 	height: 40px;
 	border-radius: 5px;
