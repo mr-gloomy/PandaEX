@@ -286,7 +286,7 @@
 						<input class="select" type="text" value="통신사" readonly> <img
 							id="updown" src="/resources/images/icons/updown.png">
 					</div>
-					<input class="telephone" type="tel" placeholder="핸드폰번호"
+					<input id="user-tel-join" class="telephone" type="tel" placeholder="핸드폰번호"
 						maxlength="13"> <input type="button"
 						class="tel-certification" value="문자전송">
 				</div>

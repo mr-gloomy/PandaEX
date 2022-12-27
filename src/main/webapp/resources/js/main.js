@@ -578,16 +578,32 @@ $(document).on("keyup",".telephone",function() {
 		var tellength = $('.telephone').val().length;
 		var telval = $('.telephone').val();
 		var phonetel = telval.split("-", 1);
-		var phonetelchk_array = ['010', '011', '016', '017', '019'];
-		if (tellength > 8) {
-			alert(phonetel);
-			if (phonetel.indexOf(phonetelchk_array) != false) {
-				alert("유효함");
-			} else {
-				alert("유효하지않음");
-			}
+//		var phonetelchk_array = ['010', '011', '016', '017', '019'];
+//		var chksuccess = phonetelchk_array.find(val => (val != phonetel));
+		if (tellength > 11){
+		if (phonetel == '010' || phonetel == '011') {
+			$('.teltooltip').text("전화번호가 유효합니다.(쿼리에서비교는 추후추가)");
+			$('#user-tel-join').css('border','2px solid rgb(105 155 105)');
+			$('.teltooltip').css("color", "rgb(105 155 105)");
+		} else if(phonetel == '016' || phonetel == '017') {
+			$('.teltooltip').text("전화번호가 유효합니다.(쿼리에서비교는 추후추가)");
+			$('#user-tel-join').css('border','2px solid rgb(105 155 105)');
+			$('.teltooltip').css("color", "rgb(105 155 105)");
+		} else if(phonetel == '019') {
+			$('.teltooltip').text("전화번호가 유효합니다.(쿼리에서비교는 추후추가)");
+			$('.teltooltip').css("color", "rgb(105 155 105)");
+			$('#user-tel-join').css('border','2px solid rgb(105 155 105)');
+		} else {
+			$('.teltooltip').text("전화번호 앞자리가 유효하지 않습니다..");
+			$('.teltooltip').css("color", "red");
+			$('#user-tel-join').css('border','2px solid rgb(255 50 50)');
 		}
-	});
+	} else{
+		$('.teltooltip').text("전화번호 앞자리가 유효하지 않습니다..");
+		$('.teltooltip').css("color", "red");
+		$('#user-tel-join').css('border','2px solid rgb(255 50 50)');
+	}
+});
 
 
 
@@ -603,7 +619,7 @@ $('#user-nick-join').on(
 				$('#user-nick-join').css('border','2px solid rgb(255 50 50)');
 			} else if ($('#user-nick-join').val() != null
 					&& $('#user-nick-join').val().length >= 3) {
-				$('.nicktooltip').css("color", "rgb(105 155 105)");
+		 		$('.nicktooltip').css("color", "rgb(105 155 105)");
 				$('.nicktooltip').text("사용가능한 닉네임입니다.(쿼리에서비교는 추후추가)");
 				$('#user-nick-join').css('border','2px solid rgb(105 155 105)');
 			}
