@@ -276,10 +276,10 @@
 				<input id="user-id-join" type="text" placeholder="아이디" maxlength="10" >
 				<div id="tooltip" class="idtooltip">아이디는 영어,숫자 5~10글자, 한글,특수문자 사용불가</div>
 				<input id="user-pw-join" type="text" placeholder="비밀번호"maxlength="15">
-				<div id="tooltip" class="pwtooltip">사용가능한 비밀번호입니다.</div>
+				<div id="tooltip" class="pwtooltip">비밀번호는 영어대/소문자, 숫자, 특수기호 포함 8~15글자, 한글사용 불가</div>
 				<div class="passlv">
-					<div class="passlv-info">비밀번호 안전도 │</div>
-					<div class="lv-info">낮음</div>
+					<div class="passlv-info">비밀번호 안전도 :</div>
+					<div class="lv-info"></div>
 					<input type="text" readonly class="lv1"> 
 					<input type="text" readonly class="lv2"> 
 					<input type="text" readonly class="lv3">

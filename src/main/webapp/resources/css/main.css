@@ -3354,7 +3354,7 @@ input.num-product::-webkit-inner-spin-button {
 	display: none;
     position: absolute;
     width: 110px;
-    height: 44px;
+    height: 100px;
     z-index: 1000;
     margin-right: 10px;
     margin-top: 58px;
@@ -3967,6 +3967,7 @@ input.num-product::-webkit-inner-spin-button {
 }
 .login-modal .modal-body .modal-join .join-text .passlv .lv-info {
 	width: 20px;
+	transition: color 0.3s;
 }
 .login-modal .modal-body .modal-join .join-text .passlv .lv1,
 .login-modal .modal-body .modal-join .join-text .passlv .lv2,
@@ -3974,6 +3975,8 @@ input.num-product::-webkit-inner-spin-button {
 	width: 20px;
     height: 10px;
     border-radius: 0px;
+    cursor: context-menu;
+    transition: all 0.3s;
 }
 /* 추가 - 김태홍  손대면 안됍니다!!!!*/
 /*////////////////////////////////////////////////////////*/

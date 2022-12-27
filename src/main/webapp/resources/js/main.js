@@ -472,6 +472,7 @@ $(function() {
 		$('.social-login').fadeOut();
 		$('.kakaologin').fadeOut();
 		$('.back-joinpage').fadeIn();
+		$('.passlv').fadeOut();
 		$(".modal-join").slideDown(300);
 		$('.modal-top').text("PANDA JOIN");
 		$('.modal-body').css("height", "770px");
@@ -486,6 +487,7 @@ $(function() {
 		$('.social-login').fadeIn();
 		$('.kakaologin').fadeIn();
 		$('.back-joinpage').fadeOut();
+		$('.passlv').fadeOut();
 		$(".modal-join").slideUp(300);
 		$('.modal-top').text("PANDA LOGIN");
 		$('.modal-body').css("height", "500px");
@@ -503,7 +505,8 @@ $(function() {
 		$('.modal-text').fadeOut();
 		$('.login-submit').fadeOut();
 		$('.find').fadeOut();
-		$('.join').fadeout();
+		$('.join').fadeOut();
+		$('.passlv').fadeOut();
 		$('.social-login').fadeOut();
 		$('.kakaologin').fadeOut();
 	});
@@ -647,23 +650,77 @@ $('#user-name-join').on("keyup", function() {
 		}
 	}
 });
-/* 비밀번호 유효성 체크 / 안전도 검사 */
-var 졸림 = "일어나서할게요~";
 
-
-/* 회원가입 아이디/패스워드 특수문자,영어,스페이스바 등 입력제어 */
+/* 회원가입 아이디/패스워드 제어 */
 $(function() {
 	$('#user-id-join').on("blur keyup", function() {
 		$(this).val($(this).val().replace(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g, ''));
 		$(this).val($(this).val().replace(/[ \{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/gi, ''));
 	});
 })
-$(function() {
-	$('#user-pw-join').on("blur keyup", function() {
-		$(this).val($(this).val().replace(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g, ''));
-		$(this).val($(this).val().replace(" ", ''));
-	});
-})
+$('#user-pw-join').on("blur keyup", function() {
+	var passle = $('#user-pw-join').val().length;
+	var pass = $('#user-pw-join');
+	var passval = $('#user-pw-join').val();
+	var passtip = $('.pwtooltip');
+	var lv1 = $(".lv1");
+	var lv2 = $(".lv2");
+	var lv3 = $(".lv3");
+	var lvinfo = $(".lv-info");
+	var nouse = "비밀번호는 영어대/소문자, 숫자, 특수기호 포함 8~15글자, 한글사용 불가";
+	var reg = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+	var use = "사용가능한 비밀번호입니다.";
+	$(this).val($(this).val().replace(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g, ''));
+	$(this).val($(this).val().replace(" ", ''));
+	if (true === reg.test(passval)) {
+		if (passle < 8) {
+			$(passtip).text(nouse);
+			$(passtip).css("color", "red");
+			$(".passlv").fadeOut(500);
+			$(pass).css('border', '2px solid rgb(255 50 50)');
+			return;
+		} else if (passle >= 8 && passle < 11) {
+			$(passtip).text(use);
+			$(passtip).css("color", "rgb(105 155 105)");
+			$(".passlv").fadeIn(500);
+			$(lv1).css("background-color", "F47A9E");
+			$(lv2).css("background-color", "white");
+			$(lv3).css("background-color", "white");
+			$(lvinfo).css("color", "F47A9E");
+			$(lvinfo).text("낮음");
+			$(pass).css('border', '2px solid rgb(105 155 105)');
+			return;
+		} else if (passle > 11 && passle < 13) {
+			$(passtip).text(use);
+			$(passtip).css("color", "rgb(105 155 105)");
+			$(".passlv").fadeIn(500);
+			$(lv1).css("background-color", "#00956E");
+			$(lv2).css("background-color", "#00956E");
+			$(lv3).css("background-color", "white");
+			$(lvinfo).css("color", "#00956E");
+			$(lvinfo).text("중간");
+			$(pass).css('border', '2px solid rgb(105 155 105)');
+			return;
+		} else if (passle > 13 && passle <= 15) {
+			$(passtip).text(use);
+			$(passtip).css("color", "rgb(105 155 105)");
+			$(".passlv").fadeIn(500);
+			$(lv1).css("background-color", "#2076BB");
+			$(lv2).css("background-color", "#2076BB");
+			$(lv3).css("background-color", "#2076BB");
+			$(lvinfo).css("color", "#2076BB");
+			$(lvinfo).text("높음");
+			$(pass).css('border', '2px solid rgb(105 155 105)');
+			return;
+		}
+	} else {
+		$(passtip).text(nouse);
+		$(passtip).css("color", "red");
+		$(".passlv").fadeOut(500);
+		$(pass).css('border', '2px solid rgb(255 50 50)');
+	}
+});
+
 /* 판다 서비스 이용 약관 동의여부 체크 */
 $("#service-chk").change(function() {
 	if ($("#service-chk").is(":checked")) {
