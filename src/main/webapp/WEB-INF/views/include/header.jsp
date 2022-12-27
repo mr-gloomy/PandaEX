@@ -296,11 +296,11 @@
 						<input class="select" type="text" value="통신사" readonly> <img
 							id="updown" src="/resources/images/icons/updown.png">
 					</div>
-					<input class="telephone" type="tel" placeholder="전화번호"
+					<input id="user-tel-join" class="telephone" type="tel" placeholder="핸드폰번호"
 						maxlength="13"> <input type="button"
 						class="tel-certification" value="문자전송">
 				</div>
-				<div id="tooltip" class="teltooltip">사용중인 전화번호입니다.</div>
+				<div id="tooltip" class="teltooltip">사용중인 핸드폰번호입니다.</div>
 				<div id="telephone-certification">
 					<input class="telephone-certification" type="tel"
 						placeholder="인증번호" maxlength="6"> <input type="button"
@@ -329,5 +329,6 @@
 		</div>	
 	</div>
 </div>
+
 
 <!-- 만들다 뒤질거같다. -->

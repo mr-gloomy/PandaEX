@@ -23,4 +23,9 @@ public class MainPageController {
 		
 	}
 	
+	@RequestMapping(value = "/test",method = RequestMethod.GET)
+	public void test() {
+		
+		
+	}
 }
