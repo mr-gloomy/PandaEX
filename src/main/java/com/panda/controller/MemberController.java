@@ -23,7 +23,6 @@ import com.panda.service.MemberService;
 public class MemberController {
 	
 	// 로거객체
-	
 	private static final Logger mylog
 		= LoggerFactory.getLogger(MemberController.class);
 	
