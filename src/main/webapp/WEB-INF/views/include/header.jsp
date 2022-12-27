@@ -16,6 +16,7 @@
 		function lo() {
 			alert('로그아웃할래요');
 		}
+		
 	</script>
 
 

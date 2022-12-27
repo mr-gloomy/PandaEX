@@ -819,12 +819,41 @@ $('.select').on('blur',function(){
 });
 $('.skt').on('click',function(){
 	$(".select").attr('value','SKT');	
-})
+});
 $('.kt').on('click',function(){
 	$(".select").attr('value','KT');	
-})
+});
 $('.lgu').on('click',function(){
 	$(".select").attr('value','LGU+');	
-})
+});
+/* 로그인테스트 */
+$('.submit').on('click', function() {
+	alert("로그인테스트");
+	var href = window.location.href;
+	var id = $("user_id").val();
+	var pw = $("user_pw").val();
+	var login = {"user_id":id,"user_pw":pw};
+	$.ajax({
+		url : href,
+		type : 'post',
+		contentType : "application/json",
+		data : JSON.stringify(login),
+		success : function(result) {
+			if(result == 0){
+				alert("디비와 정보 불일치");
+				return false;
+			} else if(result == 9){
+				alert("로그인실패");
+				return false;
+			} else {
+				alert("로그인 성공")
+			}
+			
+		},
+		error : function() {
+			alert("로그인실패 에이잭스실패");
+		}
+	});
 
+});
 	

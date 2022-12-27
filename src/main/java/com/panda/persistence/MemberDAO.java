@@ -17,5 +17,4 @@ public interface MemberDAO {
 			public MemberVO loginMember(MemberVO vo);
 			
 			
-			//
 }
