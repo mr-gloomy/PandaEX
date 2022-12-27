@@ -3606,7 +3606,7 @@ input.num-product::-webkit-inner-spin-button {
 	display : flex;
 	z-index : 100002;
 	position : absolute;
-	top : 18%;
+	top : 10%;
 	left : 39%;
 	height: 500px;
 	width: 400px;
@@ -3679,7 +3679,7 @@ input.num-product::-webkit-inner-spin-button {
 	display: flex;
 }
 .login-modal .modal-body .modal-text .check-box input[type="checkbox"] {
-	accent-color : black; 
+	accent-color: #605c5cd9;
 	height:17px;
 }
 
@@ -3812,10 +3812,11 @@ input.num-product::-webkit-inner-spin-button {
 }
 .login-modal .modal-body .modal-join .join-text #tooltip{
 	font-size: 5px;
-	color: red;
+	color: black;
 	margin-bottom: 10px;
 	padding-left: 10px;
 }
+
 .login-modal .modal-body .modal-join .join-text #name{
 	margin-bottom: 15px;
 }
@@ -3836,9 +3837,10 @@ input.num-product::-webkit-inner-spin-button {
     cursor: context-menu;
 }
 .login-modal .modal-body .modal-join .join-text .findloca #findlocation{
-	width: 40px;
-	padding-left: 0px;
-	cursor: pointer;
+	width: 30px;
+    height: 30px;
+    cursor: pointer;
+    margin-top: 5px;
 }
 .login-modal .modal-body .modal-join .join-text .tellsel{
 	display: flex;
@@ -3857,6 +3859,7 @@ input.num-product::-webkit-inner-spin-button {
 .login-modal .modal-body .modal-join .join-text .tellsel .tel-certification{
 	width: 75px;
     padding-left: 0px;
+    cursor: pointer;
 }
 .login-modal .modal-body .modal-join .join-text .teltooltip {
 	margin-left : 90px;
@@ -3892,6 +3895,49 @@ input.num-product::-webkit-inner-spin-button {
 	width: 75px;
     padding-left: 0px;
     margin-top: -10px;
+    cursor: pointer;
+}
+.login-modal .modal-body .modal-join .join-text .mylocation {
+	margin-bottom: -10px;
+    margin-top: 15px;
+    font-size: 15px;
+}
+.login-modal .modal-body .modal-join .join-text .locationfind-false {
+	font-size: 15px;
+    color: red;
+}
+.login-modal .modal-body .modal-join .join-text .terms input[type=checkbox]{
+	position: absolute;
+	width: 30px; /*Desired width*/
+	height: 30px; /*Desired height*/
+	cursor: pointer;
+	zoom: 0.5;
+    margin-top: 55px;
+	accent-color: #605c5cd9;
+}
+.login-modal .modal-body .modal-join .join-text .terms .terms-service,
+.login-modal .modal-body .modal-join .join-text .terms .terms-advertising{
+	text-shadow: 0px 0.2px 0px #181616;
+	margin-bottom: 2px;
+}
+.login-modal .modal-body .modal-join .join-text .terms #advertising-chk{
+    margin-top: 193px;
+}
+.login-modal .modal-body .modal-join .join-text .terms{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.login-modal .modal-body .modal-join .join-text .terms p{
+	font-size: 12px;
+	padding-left: 20px;
+	margin-bottom: 10px;
+	
+}
+.login-modal .modal-body .modal-join .join-text #join-success {
+	background: #006c00;
+    color: white;
+    cursor: pointer;
 }
 .login-modal .modal-body .modal-join .join-text input[type=text],
 .login-modal .modal-body .modal-join .join-text input[type=password],
