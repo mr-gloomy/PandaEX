@@ -350,14 +350,23 @@
 /* 로그인창 캡스락 알림 */
 function chkCapsLock(event) {
 	if (event.getModifierState("CapsLock")) {
-		document.getElementById("capslock").innerText = "Caps Lock이 켜져 있습니다."
+		document.getElementById("capslock").innerText = "Caps Lock이 켜져 있습니다.";
 	} else {
-		document.getElementById("capslock").innerText = ""
+		document.getElementById("capslock").innerText = "";
 	}
 }
-
+function chkCapsLock2(event) {
+	if (event.getModifierState("CapsLock")) {
+    	$('.capsl').css("opacity","0.8");
+    } else {
+    	$('.capsl').css("opacity","0");
+    }
+}
+function chkCapsLock3(event) {
+    	$('.capsl').css("opacity","0");  
+}
 function chkCapsLock1(event) {
-	document.getElementById("capslock").innerText = ""
+	document.getElementById("capslock").innerText = "";
 }
 /* 로그인창 패스워드 보기/안보기 */
 $(document).ready(function() {
@@ -597,12 +606,12 @@ $(document).on("keyup",".telephone",function() {
 			$('.teltooltip').css("color", "rgb(105 155 105)");
 			$('#user-tel-join').css('border','2px solid rgb(105 155 105)');
 		} else {
-			$('.teltooltip').text("전화번호 앞자리가 유효하지 않습니다..");
+			$('.teltooltip').text("전화번호 앞자리가 유효하지 않습니다.");
 			$('.teltooltip').css("color", "red");
 			$('#user-tel-join').css('border','2px solid rgb(255 50 50)');
 		}
 	} else{
-		$('.teltooltip').text("전화번호가 유효하지 않습니다..");
+		$('.teltooltip').text("전화번호가 유효하지 않습니다.");
 		$('.teltooltip').css("color", "red");
 		$('#user-tel-join').css('border','2px solid rgb(255 50 50)');
 	}
@@ -613,18 +622,30 @@ $(document).on("keyup",".telephone",function() {
 /* 닉네임 유효성 체크 */
 $('#user-nick-join').on("blur keyup",function() {
 			$(this).val($(this).val().replace(/[^a-zA-Z0-9ㄱ-힣]/g, ''));
-			if ($('#user-nick-join').val() != null
-					&& $('#user-nick-join').val().length < 3) {
+			if ($('#user-nick-join').val() != null && $('#user-nick-join').val().length < 3) {
 				$('.nicktooltip').css("color", "red");
 				$('.nicktooltip').text("사용불가능한 닉네임입니다.");
 				$('#user-nick-join').css('border','2px solid rgb(255 50 50)');
-			} else if ($('#user-nick-join').val() != null
-					&& $('#user-nick-join').val().length >= 3) {
+			} else if ($('#user-nick-join').val() != null && $('#user-nick-join').val().length >= 3) {
 		 		$('.nicktooltip').css("color", "rgb(105 155 105)");
 				$('.nicktooltip').text("사용가능한 닉네임입니다.(쿼리에서비교는 추후추가)");
 				$('#user-nick-join').css('border','2px solid rgb(105 155 105)');
 			}
 		});
+/* 아이디 유효성 체크 */
+$('#user-id-join').on("blur keyup",function(){
+	if ($('#user-id-join').val() != null && $('#user-id-join').val().length < 5) {
+		$(".idtooltip").text("아이디는 영어,숫자 5~10글자, 한글,특수문자 사용불가");
+		$(".idtooltip").css("color","red");
+		$("#user-id-join").css('border','2px solid rgb(255 50 50)');
+	} else if ($('#user-id-join').val() != null && $('#user-id-join').val().length >= 5) {
+		$(".idtooltip").text("사용가능한 아이디입니다.(쿼리비교 추후추가)");
+		$(".idtooltip").css("color","rgb(105 155 105)");
+		$("#user-id-join").css('border','2px solid rgb(105 155 105)');
+	}
+});
+
+
 /* 이름 유효성 체크 */
 $('#user-name-join').on(
 		"blur keyup",

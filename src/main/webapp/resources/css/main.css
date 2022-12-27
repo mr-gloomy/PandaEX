@@ -3978,5 +3978,14 @@ input.num-product::-webkit-inner-spin-button {
     cursor: context-menu;
     transition: all 0.5s;
 }
+.login-modal .modal-body .modal-join .join-text .capsl {
+	position: absolute;
+    width: 30px;
+    height: 30px;
+    margin: 70px 0 0 305px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
 /* 추가 - 김태홍  손대면 안됍니다!!!!*/
 /*////////////////////////////////////////////////////////*/

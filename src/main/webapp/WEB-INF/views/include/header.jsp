@@ -275,14 +275,17 @@
 			<div class="join-text">
 				<input id="user-id-join" type="text" placeholder="아이디" maxlength="10" >
 				<div id="tooltip" class="idtooltip">아이디는 영어,숫자 5~10글자, 한글,특수문자 사용불가</div>
-				<input id="user-pw-join" type="text" placeholder="비밀번호"maxlength="15">
+				<input id="user-pw-join" type="password" placeholder="비밀번호"maxlength="15"
+				onkeypress="chkCapsLock2(event)" onclick="chkCapsLock2(event)"
+				onblur="chkCapsLock3(event)">
+				<img class="capsl" src ="/resources/images/icons/capslock.png" alt="캡스락">
 				<div id="tooltip" class="pwtooltip">비밀번호는 영어대/소문자, 숫자, 특수기호 포함 8~15글자, 한글사용 불가</div>
 				<div class="passlv">
 					<div class="passlv-info">비밀번호 안전도 :</div>
 					<div class="lv-info"></div>
-					<input type="text" readonly class="lv1"> 
-					<input type="text" readonly class="lv2"> 
-					<input type="text" readonly class="lv3">
+					<input type="text" readonly class="lv1" tabindex="-1"> 
+					<input type="text" readonly class="lv2" tabindex="-1"> 
+					<input type="text" readonly class="lv3" tabindex="-1">
 					<!-- 비밀번호는 영어대/소문자,숫자,특수기호 8~15글자, 한글사용불가 -->
 				</div>
 				<input id="user-name-join" type="text" placeholder="이름입력" maxlength="6">
@@ -291,34 +294,34 @@
 				<div id="tooltip" class="nicktooltip" >사용하실 닉네임을 입력해주세요.</div>
 				<div class="tellsel">
 					<div id="tel">
-						<input class="select" type="text" value="통신사" readonly> <img
+						<input class="select" type="text" value="통신사" readonly tabindex="-1"> <img
 							id="updown" src="/resources/images/icons/updown.png">
 					</div>
 					<input id="user-tel-join" class="telephone" type="tel" placeholder="핸드폰번호"
 						maxlength="13"> <input type="button"
-						class="tel-certification" value="문자전송">
+						class="tel-certification" value="문자전송" tabindex="-1">
 				</div>
 				<div id="tooltip" class="teltooltip">핸드폰번호를 입력하세요.</div>
 				<div id="telephone-certification">
 					<input class="telephone-certification" type="tel"
 						placeholder="인증번호" maxlength="6"> <input type="button"
-						id="tel-certification" value="인증확인">
-					<input type="hidden" class="sucess-certification" value="" memo="인증완료 시 밸류값저장(0/1)">
+						id="tel-certification" value="인증확인" tabindex="-1">
+					<input type="hidden" class="sucess-certification" value="" memo="인증완료 시 밸류값저장(0/1)" tabindex="-1">
 				</div>
 				<div class="mylocation">우리동네 조회하기</div>
 				<div class="findloca">
-					<input type="text" id="si" readonly> <input type="text"
-						id="gu" readonly> <img
+					<input type="text" id="si" readonly tabindex="-1"> <input type="text"
+						id="gu" readonly tabindex="-1"> <img
 						src="/resources/images/icons/placeholder.png" id="findlocation">
 				</div>
 				<div class="locationfind-false">&nbsp;</div>
 				<div class="terms">
 					<div class="terms-service">판다 서비스 이용 약관</div>
-						<input id="service-chk" type="checkbox"><p>판다 이용약관, 개인정보 수집 및 이용 (선택), 위치기반서비스 이용약관에 모두 동의합니다.</p>
-						<input id="service-chk-val" value="0" type="hidden" memo="survice-chk y/n">
+						<input id="service-chk" type="checkbox" tabindex="-1"><p>판다 이용약관, 개인정보 수집 및 이용 (선택), 위치기반서비스 이용약관에 모두 동의합니다.</p>
+						<input id="service-chk-val" value="0" type="hidden" memo="survice-chk y/n" tabindex="-1">
 					<div class="terms-advertising">개인 정보 광고 활용 동의(선택)</div>
-						<input id="advertising-chk" type="checkbox"><p>판다 서비스 이용 중 판다가 제공하는 고객맞춤 컨텐츠 추천 등 광고 정보를 수신합니다.</p>
-						<input id="advertising-chk-val" value="0" type="hidden" memo="advertising-chk y/n">
+						<input id="advertising-chk" type="checkbox" tabindex="-1"><p>판다 서비스 이용 중 판다가 제공하는 고객맞춤 컨텐츠 추천 등 광고 정보를 수신합니다.</p>
+						<input id="advertising-chk-val" value="0" type="hidden" memo="advertising-chk y/n" tabindex="-1">
 				</div>
 				<input id="join-success" type="button" value="판다 중고거래 시작하기" >
 			</div>
