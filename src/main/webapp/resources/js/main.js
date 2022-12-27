@@ -830,14 +830,14 @@ $('.lgu').on('click',function(){
 $('.submit').on('click', function() {
 	alert("로그인테스트");
 	var href = window.location.href;
-	var id = $("user_id").val();
-	var pw = $("user_pw").val();
+	var id = $("#user_id").val();
+	var pw = $("#user_pw").val();
 	var login = {"user_id":id,"user_pw":pw};
 	$.ajax({
 		url : href,
-		type : 'post',
-		contentType : "application/json",
-		data : JSON.stringify(login),
+		type : 'get',
+        async: false,
+		data : login,
 		success : function(result) {
 			if(result == 0){
 				alert("디비와 정보 불일치");
@@ -847,6 +847,7 @@ $('.submit').on('click', function() {
 				return false;
 			} else {
 				alert("로그인 성공")
+				console.log(login);				
 			}
 			
 		},
