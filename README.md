@@ -2,6 +2,18 @@
 👍💚판다 (PANDA)💚🥁
 - 중고 거래 & 기부 경매 사이트 
 
+📋 사용 기능
+Spring Framework
+Java 11
+JSP
+MySQL
+Javascript
+Jquery
+HTML5
+CSS3
+AJAX
+Jsoup
+Json
 
 
 [회원팀] 
