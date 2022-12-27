@@ -8,7 +8,7 @@
 	<!-- 회원가입 -->
 	<insert id="insert" >
        insert into user(user_id,user_pw,user_nick,user_email,user_tel,user_name,user_addr,user_temp,user_area)
-       values (#{user_id},#{user_pw},#{user_name},#{user_phone},#{latitude},#{longitude},#{roadFullAddr})
+       values (#{user_id},#{user_pw},#{user_nick},#{user_email},#{user_tel},#{user_name},#{user_addr},#{user_temp},#{user_area})
     </insert>
 
 
@@ -21,30 +21,15 @@
 	
 	<!-- 전화번호 중복 체크 -->
 	<select id="phoneCheck" resultType="int">
-		select count(*) from mfg_member
-		where user_phone =#{user_phone}
+		select count(*) from user
+		where user_tel=#{user_tel}
 	</select>
-	
-	
-	<!-- 회원정보수정 -->
-	<!-- 전화번호 중복 체크 -->
-	<select id="updatePhoneCheck" resultType="int">
-		select count(*) from mfg_member
-		where user_phone =#{user_phone} 
-	</select>
-	
-	<!-- 전화번호 업데이트처리 -->
-	<update id="updatePhone">
-		update mfg_member
-		set user_phone=#{user_phone}
-		where user_id=#{user_id}
-	</update>
 	
 	
 	
 	<!-- 로그인 -->
 	<select id="login" resultType="MemberVO">
-		select * from mfg_member
+		select * from user
 		where user_id=#{user_id} and user_pw=#{user_pw}	
 	</select>
 	
@@ -54,13 +39,13 @@
 	<!-- 정보 찾기 -->
 	<select id="findKakao" parameterType="java.util.HashMap" resultType="MemberVO">
 		select *
-		from mfg_member
+		from user
 		where user_id=#{user_id} and user_name=#{user_name}
 	</select>
 	
 	<!-- 정보 저장 -->
 	<insert id="kakaoInsert" parameterType="java.util.HashMap">
-		insert into mfg_member(user_id, user_name)
+		insert into user(user_id, user_name)
 		values(#{user_id}, #{user_name})
 	</insert>
 	
@@ -69,20 +54,20 @@
 	<!-- 아이디 찾기 -->
 	<select id="findId" resultType="MemberVO">
 		select user_id
-		from mfg_member
+		from user
 		where user_name=#{user_name} and user_phone=#{user_phone}
 	</select>
 	
 	<!-- 비밀번호 찾기 -->
 	<select id="findPw" resultType="MemberVO">
 		select user_pw
-		from mfg_member
+		from user
 		where user_id=#{user_id} and user_phone=#{user_phone}
 	</select>
 	
 	<!-- 비밀번호 변경 -->
 	<update id="updatePw">
-		update mfg_member
+		update user
 		set user_pw=#{user_pw}
 		where user_id=#{user_id}
 	</update>
@@ -93,13 +78,13 @@
 	<!-- 회원정보 가져오기 -->
 	<select id="getMember" resultType="MemberVO">
 	  select * 
-	  from mfg_member
+	  from user
 	  where user_id=#{user_id}	
 	</select>
 	
 	<!-- 회원정보 수정 -->
 	<update id="updateMember">
-		update mfg_member 
+		update user
 		<set>		
 			user_name=#{user_name},
 			user_pw=#{user_pw} ,
@@ -118,7 +103,7 @@
 	
 	<!-- 회원 탈퇴 -->
 	<delete id="deleteMember">
-		delete from mfg_member
+		delete from user
 		where user_id=#{user_id} and user_pw=#{user_pw}
 	</delete>
 	
@@ -126,13 +111,13 @@
 	<!-- 비밀번호 체크 -->
 	<select id="pwCheck" resultType="int">
 		select count(*)
-		from mfg_member
+		from user
 		where user_id=#{user_id} and user_pw=#{user_pw}
 	</select>
 	
 	<!-- 역지오코딩 주소 저장 /  ▼ 11/10 풀리퀘 전 추가해주세요 (찜한 상품 갯수까지) -->
 	<update id="saveAddr" >
-		update mfg_member set roadFullAddr=#{roadFullAddr}
+		update user set roadFullAddr=#{roadFullAddr}
 		where user_id=#{user_id}
 	</update>
 	
@@ -140,7 +125,7 @@
 	
 	<!-- SNS 회원 주소 입력  -->
 	<update id="addressUpdate" >
-	update mfg_member
+	update user
 	set roadFullAddr=#{roadFullAddr}
 	where user_id=#{user_id}
 	</update>

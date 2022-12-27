@@ -265,6 +265,8 @@
 			<a>계정이 없으신가요?</a>&nbsp;&nbsp;
 			<p id="onclick-join">회원가입</p>
 		</div>
+		
+		
 		<div class="social-login">
 			<img src="/resources/images/icons/division-line.png">
 			<p>Social Login</p>
@@ -273,14 +275,22 @@
 			<img class="kakaologin" src="/resources/images/icons/kakao_login_large_wide.png">
 		<div class="modal-join">
 			<div class="join-text">
-				<input id="user-id-join" type="text" placeholder="아이디" maxlength="10" >
+			
+			<!--  로그인 모달 인풋창 -->
+				<form action="/member/insert" method="post">
+			
+				<input id="user-id-join" type="text" placeholder="아이디" maxlength="10"  name="user_id">
 				<div id="tooltip" class="idtooltip">아이디는 영어,숫자 5~10글자, 한글사용불가</div>
-				<input id="user-pw-join" type="text" placeholder="비밀번호" maxlength="20" >
+				
+				<input id="user-pw-join" type="text" placeholder="비밀번호" maxlength="20"  name="user_pw">
 				<div id="tooltip" class="pwtooltip">비밀번호는 영어대소문자,숫자,특수기호 5~20글자, 한글사용불가</div>
-				<input id="user-name-join" type="text" placeholder="이름입력" maxlength="6">
+				
+				<input id="user-name-join" type="text" placeholder="이름입력" maxlength="6" name="user_name">
 				<div id="tooltip" class="nametooltip">이름을 입력해주세요</div>
-				<input id="user-nick-join" type="text" placeholder="닉네임" maxlength="10">
+				
+				<input id="user-nick-join" type="text" placeholder="닉네임" maxlength="10" name="user_nick">
 				<div id="tooltip" class="nicktooltip" >사용하실 닉네임을 입력해주세요.</div>
+				
 				<div class="tellsel">
 					<div id="tel">
 						<input class="select" type="text" value="통신사" readonly> <img
@@ -310,7 +320,11 @@
 					<div class="terms-advertising">개인 정보 광고 활용 동의(선택)</div>
 						<input id="advertising-chk" type="checkbox"><p>판다 서비스 이용 중 판다가 제공하는 고객맞춤 컨텐츠 추천 등 광고 정보를 수신합니다.</p>
 				</div>
-				<input id="join-success" type="button" value="판다 중고거래 시작하기" >
+<!-- 				<input id="join-success" type="submit" value="판다 중고거래 시작하기" > -->
+				<button id="join-success" type="submit"  >회원가입</button>
+				</form>
+				
+				<!--  로그인 모달 인풋창 -->
 			</div>
 		</div>	
 	</div>

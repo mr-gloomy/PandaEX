@@ -16,7 +16,7 @@ public class MemberVO {
 	private Timestamp user_regdate;
 	private String user_name;
 	private String user_addr;
-	private Double user_tmp;
+	private Double user_temp;
 	private String user_area;
 	
 }
