@@ -88,7 +88,6 @@
 		</div>
 	</section>
 	
-	<h1>/admin/main.jsp</h1>
 	
 	
 	<!-- 푸터 -->
