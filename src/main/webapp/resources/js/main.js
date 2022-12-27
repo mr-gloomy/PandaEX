@@ -611,9 +611,7 @@ $(document).on("keyup",".telephone",function() {
 
 
 /* 닉네임 유효성 체크 */
-$('#user-nick-join').on(
-		"keyup",
-		function() {
+$('#user-nick-join').on("blur keyup",function() {
 			$(this).val($(this).val().replace(/[^a-zA-Z0-9ㄱ-힣]/g, ''));
 			if ($('#user-nick-join').val() != null
 					&& $('#user-nick-join').val().length < 3) {
@@ -628,6 +626,23 @@ $('#user-nick-join').on(
 			}
 		});
 /* 이름 유효성 체크 */
+$('#user-name-join').on(
+		"blur keyup",
+		function() {
+			if ($('#user-name-join').val() != null
+					&& $('#user-name-join').val().length < 2) {
+				$('.nametooltip').css("color", "red");
+				$('.nametooltip').text("사용불가능한 이름입니다.");
+				$('#user-name-join').css('border', '2px solid rgb(255 50 50)');
+			} else if ($('#user-name-join').val() != null
+					&& $('#user-name-join').val().length >= 2) {
+				$('.nametooltip').css("color", "rgb(105 155 105)");
+				$('.nametooltip').text("멋진 이름이네요!");
+				$('#user-name-join')
+						.css('border', '2px solid rgb(105 155 105)');
+			}
+		});
+/* 이름 자음 불가 */
 $('#user-name-join').on("keyup", function() {
 	$(this).val($(this).val().replace(/[^ㄱ-힣]/g, ''));
 	for (var i = 0; i < $('#user-name-join').val().length; i++) {
@@ -635,23 +650,11 @@ $('#user-name-join').on("keyup", function() {
 		if (namechk.match(/([^가-힣\x20])/i)) {
 			$('.nametooltip').css("color", "red");
 			$('.nametooltip').text("사용불가능한 이름입니다.");
-			$('#user-name-join').css('border','2px solid rgb(255 50 50)');
-			return;
+			$('#user-name-join').css('border', '2px solid rgb(255 50 50)');
 		}
-		if ($('#user-name-join').val().length < 2) {
-			$('.nametooltip').css("color", "red");
-			$('.nametooltip').text("사용불가능한 이름입니다.");
-			$('#user-name-join').css('border','2px solid rgb(255 50 50)');
-			return;
-		} else {
-			$('.nametooltip').css("color", "rgb(105 155 105)");
-			$('.nametooltip').text("멋진 이름이네요!");
-			$('#user-name-join').css('border','2px solid rgb(105 155 105)');
-		}
+
 	}
 });
-
-/* 회원가입 아이디/패스워드 제어 */
 $(function() {
 	$('#user-id-join').on("blur keyup", function() {
 		$(this).val($(this).val().replace(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g, ''));
