@@ -512,8 +512,10 @@ $(function() {
 /* 우리동네(gps값 기준) 조회 */
 $(function() {
 	$('#findlocation').on('click', function() {
+		// 참고하세요~
+		// watchPosition() : 최초 위치조회 후 실시간 추적(wgs84좌표)
+		// getCurrentPosition() : 최초에 한해 위치 추적(wgs84좌표)
 		navigator.geolocation.getCurrentPosition(function(position) {
-//			alert("좌측상단 위치정보 허용해주세요");
 			var error = "위치정보 조회실패";
 			var error2 = "위치정보 조회를 동의해주세요.(테스트문구입니다)";
 			var succe = "위치조회가 완료되었습니다.";
@@ -546,7 +548,7 @@ $(function() {
 							$('#si').attr('value',si);
 							$('#gu').attr('value',gu);
 //	성공					if($('#si').val() != "" ){
-							if($('#si').val() == "" ){
+							if($('#si').val() != "" ){
 							$('#si').css('border','2px solid rgb(105 155 105)');
 							$('#gu').css('border','2px solid rgb(105 155 105)');
 							$('.locationfind-false').text(succe);
@@ -571,6 +573,24 @@ $(function() {
 $(document).on("keyup",".telephone",function() { 
 	$(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") );
 });
+/* 전화번호 앞자리 유효성 검사 */
+	$('.telephone').on('keyup', function() {
+		var tellength = $('.telephone').val().length;
+		var telval = $('.telephone').val();
+		var phonetel = telval.split("-", 1);
+		var phonetelchk_array = ['010', '011', '016', '017', '019'];
+		if (tellength > 8) {
+			alert(phonetel);
+			if (phonetel.indexOf(phonetelchk_array) != false) {
+				alert("유효함");
+			} else {
+				alert("유효하지않음");
+			}
+		}
+	});
+
+
+
 /* 닉네임 유효성 체크 */
 $('#user-nick-join').on(
 		"blur keyup",
@@ -579,11 +599,13 @@ $('#user-nick-join').on(
 			if ($('#user-nick-join').val() != null
 					&& $('#user-nick-join').val().length < 3) {
 				$('.nicktooltip').css("color", "red");
-				$('.nicktooltip').text("닉네임은 3글자이상 특수기호 사용금지");
+				$('.nicktooltip').text("사용불가능한 닉네임입니다.");
+				$('#user-nick-join').css('border','2px solid rgb(255 50 50)');
 			} else if ($('#user-nick-join').val() != null
 					&& $('#user-nick-join').val().length >= 3) {
 				$('.nicktooltip').css("color", "rgb(105 155 105)");
 				$('.nicktooltip').text("사용가능한 닉네임입니다.(쿼리에서비교는 추후추가)");
+				$('#user-nick-join').css('border','2px solid rgb(105 155 105)');
 			}
 		});
 /* 이름 유효성 체크 */
@@ -594,15 +616,18 @@ $('#user-name-join').on("keyup", function() {
 		if (namechk.match(/([^가-힣\x20])/i)) {
 			$('.nametooltip').css("color", "red");
 			$('.nametooltip').text("사용불가능한 이름입니다.");
+			$('#user-name-join').css('border','2px solid rgb(255 50 50)');
 			return;
 		}
 		if ($('#user-name-join').val().length < 2) {
 			$('.nametooltip').css("color", "red");
 			$('.nametooltip').text("사용불가능한 이름입니다.");
+			$('#user-name-join').css('border','2px solid rgb(255 50 50)');
 			return;
 		} else {
 			$('.nametooltip').css("color", "rgb(105 155 105)");
 			$('.nametooltip').text("멋진 이름이네요!");
+			$('#user-name-join').css('border','2px solid rgb(105 155 105)');
 		}
 	}
 });
