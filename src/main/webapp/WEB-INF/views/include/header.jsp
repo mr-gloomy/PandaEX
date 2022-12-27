@@ -237,13 +237,13 @@
 			<!-- 			<img src="/resources/images/icons/reset.png" alt="idreset" id="idreset" class="resetimg"> -->
 			<input type="text" id="user_id" name="user_id" placeholder="PANDA ID"
 				maxlength="10" class="id" onkeypress="chkCapsLock(event)"
-				onclick="chkCapsLock(event)" onblur="chkCapsLock1(event)"> <img
+				onclick="chkCapsLock(event)" onblur="chkCapsLock1(event)" autocomplete="off"> <img
 				src="/resources/images/icons/pass.png" alt="id입력" class="passimg">
 			<!-- 			<img src="/resources/images/icons/reset.png" alt="idreset" id="pwreset"class="resetimg"> -->
 			<input type="password" id="user_pw" name="user_pw"
 				placeholder="PANDA PW" maxlength="15" class="pass"
 				onkeypress="chkCapsLock(event)" onclick="chkCapsLock(event)"
-				onblur="chkCapsLock1(event)">
+				onblur="chkCapsLock1(event)" autocomplete="off">
 			<div id="capslock"
 				style="font-size: 12px; margin: -2px 0 0 200px; color: darkblue; position: absolute;"></div>
 			<div class="check-box">
@@ -273,24 +273,24 @@
 			<img class="kakaologin" src="/resources/images/icons/kakao_login_large_wide.png">
 		<div class="modal-join">
 			<div class="join-text">
-				<input id="user-id-join" type="text" placeholder="아이디" maxlength="10" >
+				<input id="user-id-join" type="text" placeholder="아이디" maxlength="10" autocomplete="off" >
 				<div id="tooltip" class="idtooltip">아이디는 영어,숫자 5~10글자, 한글,특수문자 사용불가</div>
 				<input id="user-pw-join" type="password" placeholder="비밀번호"maxlength="15"
 				onkeypress="chkCapsLock2(event)" onclick="chkCapsLock2(event)"
-				onblur="chkCapsLock3(event)">
+				onblur="chkCapsLock3(event)" autocomplete="off">
 				<img class="capsl" src ="/resources/images/icons/capslock.png" alt="캡스락">
 				<div id="tooltip" class="pwtooltip">비밀번호는 영어대/소문자, 숫자, 특수기호 포함 8~15글자, 한글사용 불가</div>
 				<div class="passlv">
 					<div class="passlv-info">비밀번호 안전도 :</div>
 					<div class="lv-info"></div>
-					<input type="text" readonly class="lv1" tabindex="-1"> 
+					<input type="text" readonly class="lv1" tabindex="-1" > 
 					<input type="text" readonly class="lv2" tabindex="-1"> 
 					<input type="text" readonly class="lv3" tabindex="-1">
 					<!-- 비밀번호는 영어대/소문자,숫자,특수기호 8~15글자, 한글사용불가 -->
 				</div>
-				<input id="user-name-join" type="text" placeholder="이름입력" maxlength="6">
+				<input id="user-name-join" type="text" placeholder="이름입력" maxlength="6" autocomplete="off">
 				<div id="tooltip" class="nametooltip">이름을 입력해주세요</div>
-				<input id="user-nick-join" type="text" placeholder="닉네임" maxlength="10">
+				<input id="user-nick-join" type="text" placeholder="닉네임" maxlength="10" autocomplete="off">
 				<div id="tooltip" class="nicktooltip" >사용하실 닉네임을 입력해주세요.</div>
 				<div class="tellsel">
 					<div id="tel">
@@ -298,7 +298,7 @@
 							id="updown" src="/resources/images/icons/updown.png">
 					</div>
 					<input id="user-tel-join" class="telephone" type="tel" placeholder="핸드폰번호"
-						maxlength="13"> <input type="button"
+						maxlength="13" autocomplete="off"> <input type="button"
 						class="tel-certification" value="문자전송" tabindex="-1">
 				</div>
 				<div id="tooltip" class="teltooltip">핸드폰번호를 입력하세요.</div>
