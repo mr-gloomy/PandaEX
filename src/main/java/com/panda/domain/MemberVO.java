@@ -6,11 +6,6 @@ import lombok.Data;
 
 @Data
 public class MemberVO {
-<<<<<<< HEAD
-	
-=======
-
->>>>>>> branch 'master' of https://github.com/mr-gloomy/PandaEX.git
 	private String user_no;
 	private String user_id;
 	private String user_pw;
