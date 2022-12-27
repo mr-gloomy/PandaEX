@@ -3841,7 +3841,11 @@ input.num-product::-webkit-inner-spin-button {
     height: 30px;
     cursor: pointer;
     margin-top: 5px;
+    opacity: 0.7;
 }
+.login-modal .modal-body .modal-join .join-text .findloca #findlocation:hover{
+	opacity: 1;
+	}
 .login-modal .modal-body .modal-join .join-text .tellsel{
 	display: flex;
 }
@@ -3860,6 +3864,9 @@ input.num-product::-webkit-inner-spin-button {
 	width: 75px;
     padding-left: 0px;
     cursor: pointer;
+}
+.login-modal .modal-body .modal-join .join-text .tellsel .tel-certification:hover{
+	opacity: 1;
 }
 .login-modal .modal-body .modal-join .join-text .teltooltip {
 	margin-left : 90px;
@@ -3897,6 +3904,9 @@ input.num-product::-webkit-inner-spin-button {
     padding-left: 0px;
     margin-top: -10px;
     cursor: pointer;
+}
+.login-modal .modal-body .modal-join .join-text #telephone-certification #tel-certification:hover{
+	opacity: 1;
 }
 .login-modal .modal-body .modal-join .join-text .mylocation {
 	margin-bottom: -10px;
@@ -3939,7 +3949,11 @@ input.num-product::-webkit-inner-spin-button {
 	background: #006c00;
     color: white;
     cursor: pointer;
+    opacity: 0.7;
 }
+.login-modal .modal-body .modal-join .join-text #join-success:hover {
+	opacity: 1;
+	}
 .login-modal .modal-body .modal-join .join-text input[type=text],
 .login-modal .modal-body .modal-join .join-text input[type=password],
 .login-modal .modal-body .modal-join .join-text input[type=email],

@@ -243,7 +243,7 @@
 			<input type="password" id="user_pw" name="user_pw"
 				placeholder="PANDA PW" maxlength="15" class="pass"
 				onkeypress="chkCapsLock(event)" onclick="chkCapsLock(event)"
-				onblur="chkCapsLock1(event)" autocomplete="off">
+				onblur="chkCapsLock1(event)" autocomplete="new-password">
 			<div id="capslock"
 				style="font-size: 12px; margin: -2px 0 0 200px; color: darkblue; position: absolute;"></div>
 			<div class="check-box">
@@ -277,7 +277,7 @@
 				<div id="tooltip" class="idtooltip">아이디는 영어,숫자 5~10글자, 한글,특수문자 사용불가</div>
 				<input id="user-pw-join" type="password" placeholder="비밀번호"maxlength="15"
 				onkeypress="chkCapsLock2(event)" onclick="chkCapsLock2(event)"
-				onblur="chkCapsLock3(event)" autocomplete="off">
+				onblur="chkCapsLock3(event)" autocomplete="new-password">
 				<img class="capsl" src ="/resources/images/icons/capslock.png" alt="캡스락">
 				<div id="tooltip" class="pwtooltip">비밀번호는 영어대/소문자, 숫자, 특수기호 포함 8~15글자, 한글사용 불가</div>
 				<div class="passlv">
