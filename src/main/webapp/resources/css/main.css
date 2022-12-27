@@ -3952,6 +3952,11 @@ input.num-product::-webkit-inner-spin-button {
 	cursor: text;
 	padding-left: 10px;
 }
-
+.login-modal .modal-body .modal-join .join-text .passlv {
+	position: absolute;
+    font-size: 5px;
+    margin-top: 105px;
+    margin-left: 220px;
+}
 /* 추가 - 김태홍  손대면 안됍니다!!!!*/
 /*////////////////////////////////////////////////////////*/

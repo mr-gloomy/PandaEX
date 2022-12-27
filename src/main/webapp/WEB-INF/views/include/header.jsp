@@ -236,12 +236,12 @@
 				class="userimg">
 			<!-- 			<img src="/resources/images/icons/reset.png" alt="idreset" id="idreset" class="resetimg"> -->
 			<input type="text" id="user_id" name="user_id" placeholder="PANDA ID"
-				maxlength="15" class="id" onkeypress="chkCapsLock(event)"
+				maxlength="10" class="id" onkeypress="chkCapsLock(event)"
 				onclick="chkCapsLock(event)" onblur="chkCapsLock1(event)"> <img
 				src="/resources/images/icons/pass.png" alt="id입력" class="passimg">
 			<!-- 			<img src="/resources/images/icons/reset.png" alt="idreset" id="pwreset"class="resetimg"> -->
 			<input type="password" id="user_pw" name="user_pw"
-				placeholder="PANDA PW" maxlength="20" class="pass"
+				placeholder="PANDA PW" maxlength="15" class="pass"
 				onkeypress="chkCapsLock(event)" onclick="chkCapsLock(event)"
 				onblur="chkCapsLock1(event)">
 			<div id="capslock"
@@ -265,8 +265,6 @@
 			<a>계정이 없으신가요?</a>&nbsp;&nbsp;
 			<p id="onclick-join">회원가입</p>
 		</div>
-		
-		
 		<div class="social-login">
 			<img src="/resources/images/icons/division-line.png">
 			<p>Social Login</p>
@@ -275,22 +273,21 @@
 			<img class="kakaologin" src="/resources/images/icons/kakao_login_large_wide.png">
 		<div class="modal-join">
 			<div class="join-text">
-			
-			<!--  로그인 모달 인풋창 -->
-				<form action="/member/insert" method="post">
-			
-				<input id="user-id-join" type="text" placeholder="아이디" maxlength="10"  name="user_id">
-				<div id="tooltip" class="idtooltip">아이디는 영어,숫자 5~10글자, 한글사용불가</div>
-				
-				<input id="user-pw-join" type="text" placeholder="비밀번호" maxlength="20"  name="user_pw">
-				<div id="tooltip" class="pwtooltip">비밀번호는 영어대소문자,숫자,특수기호 5~20글자, 한글사용불가</div>
-				
-				<input id="user-name-join" type="text" placeholder="이름입력" maxlength="6" name="user_name">
+				<input id="user-id-join" type="text" placeholder="아이디" maxlength="10" >
+				<div id="tooltip" class="idtooltip">아이디는 영어,숫자 5~10글자, 한글,특수문자 사용불가</div>
+				<input id="user-pw-join" type="text" placeholder="비밀번호"maxlength="15">
+				<div id="tooltip" class="pwtooltip">사용가능한 비밀번호입니다.</div>
+				<div class="passlv">
+					<div class="passlv-info">비밀번호 안전도 │</div>
+					<input type="text" readonly class="lv1"> 
+					<input type="text" readonly class="lv2"> 
+					<input type="text" readonly class="lv3">
+					<!-- 비밀번호는 영어대/소문자,숫자,특수기호 8~15글자, 한글사용불가 -->
+				</div>
+				<input id="user-name-join" type="text" placeholder="이름입력" maxlength="6">
 				<div id="tooltip" class="nametooltip">이름을 입력해주세요</div>
-				
-				<input id="user-nick-join" type="text" placeholder="닉네임" maxlength="10" name="user_nick">
+				<input id="user-nick-join" type="text" placeholder="닉네임" maxlength="10">
 				<div id="tooltip" class="nicktooltip" >사용하실 닉네임을 입력해주세요.</div>
-				
 				<div class="tellsel">
 					<div id="tel">
 						<input class="select" type="text" value="통신사" readonly> <img
@@ -300,7 +297,7 @@
 						maxlength="13"> <input type="button"
 						class="tel-certification" value="문자전송">
 				</div>
-				<div id="tooltip" class="teltooltip">사용중인 핸드폰번호입니다.</div>
+				<div id="tooltip" class="teltooltip">핸드폰번호를 입력하세요.</div>
 				<div id="telephone-certification">
 					<input class="telephone-certification" type="tel"
 						placeholder="인증번호" maxlength="6"> <input type="button"
@@ -317,14 +314,12 @@
 				<div class="terms">
 					<div class="terms-service">판다 서비스 이용 약관</div>
 						<input id="service-chk" type="checkbox"><p>판다 이용약관, 개인정보 수집 및 이용 (선택), 위치기반서비스 이용약관에 모두 동의합니다.</p>
+						<input id="service-chk-val" value="0" type="hidden" memo="survice-chk y/n">
 					<div class="terms-advertising">개인 정보 광고 활용 동의(선택)</div>
 						<input id="advertising-chk" type="checkbox"><p>판다 서비스 이용 중 판다가 제공하는 고객맞춤 컨텐츠 추천 등 광고 정보를 수신합니다.</p>
+						<input id="advertising-chk-val" value="0" type="hidden" memo="advertising-chk y/n">
 				</div>
-<!-- 				<input id="join-success" type="submit" value="판다 중고거래 시작하기" > -->
-				<button id="join-success" type="submit"  >회원가입</button>
-				</form>
-				
-				<!--  로그인 모달 인풋창 -->
+				<input id="join-success" type="button" value="판다 중고거래 시작하기" >
 			</div>
 		</div>	
 	</div>

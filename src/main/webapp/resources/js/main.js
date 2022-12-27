@@ -517,7 +517,7 @@ $(function() {
 		// getCurrentPosition() : 최초에 한해 위치 추적(wgs84좌표)
 		navigator.geolocation.getCurrentPosition(function(position) {
 			var error = "위치정보 조회실패";
-			var error2 = "위치정보 조회를 동의해주세요.(테스트문구입니다)";
+			var error2 = "위치정보 조회를 동의 후 재시도해주세요";
 			var succe = "위치조회가 완료되었습니다.";
 			var userlat = position.coords.latitude;
 			var userlong = position.coords.longitude;
@@ -599,7 +599,7 @@ $(document).on("keyup",".telephone",function() {
 			$('#user-tel-join').css('border','2px solid rgb(255 50 50)');
 		}
 	} else{
-		$('.teltooltip').text("전화번호 앞자리가 유효하지 않습니다..");
+		$('.teltooltip').text("전화번호가 유효하지 않습니다..");
 		$('.teltooltip').css("color", "red");
 		$('#user-tel-join').css('border','2px solid rgb(255 50 50)');
 	}
@@ -609,7 +609,7 @@ $(document).on("keyup",".telephone",function() {
 
 /* 닉네임 유효성 체크 */
 $('#user-nick-join').on(
-		"blur keyup",
+		"keyup",
 		function() {
 			$(this).val($(this).val().replace(/[^a-zA-Z0-9ㄱ-힣]/g, ''));
 			if ($('#user-nick-join').val() != null
@@ -647,5 +647,37 @@ $('#user-name-join').on("keyup", function() {
 		}
 	}
 });
-/* 비밀번호 유효성 체크 */
+/* 비밀번호 유효성 체크 / 안전도 검사 */
 var 졸림 = "일어나서할게요~";
+
+
+/* 회원가입 아이디/패스워드 특수문자,영어,스페이스바 등 입력제어 */
+$(function() {
+	$('#user-id-join').on("blur keyup", function() {
+		$(this).val($(this).val().replace(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g, ''));
+		$(this).val($(this).val().replace(/[ \{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/gi, ''));
+	});
+})
+$(function() {
+	$('#user-pw-join').on("blur keyup", function() {
+		$(this).val($(this).val().replace(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g, ''));
+		$(this).val($(this).val().replace(" ", ''));
+	});
+})
+/* 판다 서비스 이용 약관 동의여부 체크 */
+$("#service-chk").change(function() {
+	if ($("#service-chk").is(":checked")) {
+		$('#service-chk-val').attr('value', '1');
+	} else {
+		$('#service-chk-val').attr('value','0');
+	}
+});
+/* 개인 정보 광고 활용 동의(선택) 약관 동의여부 체크 */
+$("#advertising-chk").change(function() {
+	if ($("#advertising-chk").is(":checked")) {
+		$('#advertising-chk-val').attr('value', '1');
+	} else {
+		$('#advertising-chk-val').attr('value', '0');
+	}
+});
+
