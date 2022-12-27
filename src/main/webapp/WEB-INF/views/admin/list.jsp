@@ -9,6 +9,8 @@
 <body>
 	<h1>/admin/list.jsp</h1>
 	
+	
+	
 
 </body>
 </html>

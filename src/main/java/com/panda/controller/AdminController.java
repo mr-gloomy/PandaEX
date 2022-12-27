@@ -50,11 +50,18 @@ public class AdminController {
 		service.insertBoard(vo);
 		mylog.debug(" 게시판 글쓰기 완료");
 		
-		
-		
-		
 		return "redirect:/admin/list";
 	}
 	
+	// 공지사항 게시판 list
+	// http://localhost:8080/admin/list
+	@RequestMapping(value = "/list",method = RequestMethod.GET)
+	public void listGET() {
+		mylog.debug(" listGET() 호출 ");
+		
+		
+		
+		
+	}
 	
 }
