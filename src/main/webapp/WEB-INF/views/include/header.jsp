@@ -279,6 +279,7 @@
 				<div id="tooltip" class="pwtooltip">사용가능한 비밀번호입니다.</div>
 				<div class="passlv">
 					<div class="passlv-info">비밀번호 안전도 │</div>
+					<div class="lv-info">낮음</div>
 					<input type="text" readonly class="lv1"> 
 					<input type="text" readonly class="lv2"> 
 					<input type="text" readonly class="lv3">

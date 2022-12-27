@@ -3953,10 +3953,27 @@ input.num-product::-webkit-inner-spin-button {
 	padding-left: 10px;
 }
 .login-modal .modal-body .modal-join .join-text .passlv {
+	display: flex;
+	flex-direction :row;
+	align-items : center;
 	position: absolute;
     font-size: 5px;
     margin-top: 105px;
-    margin-left: 220px;
+    margin-left: 185px;
+    height: auto;
+}
+.login-modal .modal-body .modal-join .join-text .passlv .passlv-info {
+	width: 85px;
+}
+.login-modal .modal-body .modal-join .join-text .passlv .lv-info {
+	width: 20px;
+}
+.login-modal .modal-body .modal-join .join-text .passlv .lv1,
+.login-modal .modal-body .modal-join .join-text .passlv .lv2,
+.login-modal .modal-body .modal-join .join-text .passlv .lv3 {
+	width: 20px;
+    height: 10px;
+    border-radius: 0px;
 }
 /* 추가 - 김태홍  손대면 안됍니다!!!!*/
 /*////////////////////////////////////////////////////////*/
