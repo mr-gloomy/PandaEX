@@ -3880,6 +3880,7 @@ input.num-product::-webkit-inner-spin-button {
     position: absolute;
     margin: 12px 0 0 60px;
     cursor: pointer;
+    z-index: -1;
 }
 .login-modal .modal-body .modal-join .join-text #telephone-certification{
 	display: flex;
@@ -3985,6 +3986,28 @@ input.num-product::-webkit-inner-spin-button {
     margin: 70px 0 0 305px;
     opacity: 0;
     transition: opacity 0.3s;
+}
+.login-modal .modal-body .modal-join .join-text .tellsel #tel #telecom {
+	position: absolute;
+    margin-top: 40px;
+    width: 80px;
+    border-radius: 0 0 5px 5px;
+    background-color: rgb(197 197 197 / 60%);
+    opacity: 0.6;
+    transition: all 0.5s;
+    font-size: 12px;
+    display: none;
+    letter-spacing: 5px;
+}
+.login-modal .modal-body .modal-join .join-text .tellsel #tel #telecom div {
+	padding-left: 10px;
+}
+.login-modal .modal-body .modal-join .join-text .tellsel #tel #telecom .skt:hover,
+.login-modal .modal-body .modal-join .join-text .tellsel #tel #telecom .kt:hover,
+.login-modal .modal-body .modal-join .join-text .tellsel #tel #telecom .lgu:hover {
+	opacity: 1;
+	transition: opacity 0.3s;
+	background: rgb(105 155 105);
 }
 
 /* 추가 - 김태홍  손대면 안됍니다!!!!*/

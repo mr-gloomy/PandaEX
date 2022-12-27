@@ -762,3 +762,69 @@ $("#advertising-chk").change(function() {
 	}
 });
 
+/* 회원가입 입력창 반응형 */
+$("#user-id-join").on('focus', function() {
+	$("#user-id-join").css("opacity", "1");
+});
+$("#user-id-join").on('blur', function() {
+	$("#user-id-join").css("opacity", "0.6");
+});
+$("#user-pw-join").on('focus', function() {
+	$("#user-pw-join").css("opacity", "1");
+});
+$("#user-pw-join").on('blur', function() {
+	$("#user-pw-join").css("opacity", "0.6");
+});
+$("#user-name-join").on('focus', function() {
+	$("#user-name-join").css("opacity", "1");
+});
+$("#user-name-join").on('blur', function() {
+	$("#user-name-join").css("opacity", "0.6");
+});
+$("#user-nick-join").on('focus', function() {
+	$("#user-nick-join").css("opacity", "1");
+});
+$("#user-nick-join").on('blur', function() {
+	$("#user-nick-join").css("opacity", "0.6");
+});
+$("#user-tel-join").on('focus', function() {
+	$("#user-tel-join").css("opacity", "1");
+});
+$("#user-tel-join").on('blur', function() {
+	$("#user-tel-join").css("opacity", "0.6");
+});
+$(".telephone-certification").on('focus', function() {
+	$(".telephone-certification").css("opacity", "1");
+});
+$(".telephone-certification").on('blur', function() {
+	$(".telephone-certification").css("opacity", "0.6");
+});
+/* 통신사 선택창 */
+$('.select').on('click',function(){
+	$('#telecom').slideDown(200);
+	$('.select').css('opacity','0.6');
+	$('.select').css('border-radius','5px 5px 0 0');
+	$('.select').css('background-color','rgb(197 197 197 / 60%)');
+	$('.select').css('border-bottom','1px solid #a1a1a1a8');
+	$('.select').css('transition','all 0.2s');
+});
+
+$('.select').on('blur',function(){
+	$('#telecom').slideUp(200);
+	$('.select').css('opacity','0.7');
+	$('.select').css('border-radius','5px');
+	$('.select').css('background-color','rgb(197 197 197 / 70%)');
+	$('.select').css('border-bottom','0px');
+	$('.select').css('transition','all 0.2s');
+});
+$('.skt').on('click',function(){
+	$(".select").attr('value','SKT');	
+})
+$('.kt').on('click',function(){
+	$(".select").attr('value','KT');	
+})
+$('.lgu').on('click',function(){
+	$(".select").attr('value','LGU+');	
+})
+
+	

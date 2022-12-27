@@ -289,13 +289,18 @@
 					<!-- 비밀번호는 영어대/소문자,숫자,특수기호 8~15글자, 한글사용불가 -->
 				</div>
 				<input id="user-name-join" type="text" placeholder="이름입력" maxlength="6" autocomplete="off">
-				<div id="tooltip" class="nametooltip">이름을 입력해주세요</div>
+				<div id="tooltip" class="nametooltip">본명을 입력해주세요</div>
 				<input id="user-nick-join" type="text" placeholder="닉네임" maxlength="10" autocomplete="off">
 				<div id="tooltip" class="nicktooltip" >사용하실 닉네임을 입력해주세요.</div>
 				<div class="tellsel">
 					<div id="tel">
 						<input class="select" type="text" value="통신사" readonly tabindex="-1"> <img
 							id="updown" src="/resources/images/icons/updown.png">
+							<div id="telecom">
+								<div class="skt">SKT</div>
+								<div class="kt">KT</div>
+								<div class="lgu">LGU+</div>
+							</div>
 					</div>
 					<input id="user-tel-join" class="telephone" type="tel" placeholder="핸드폰번호"
 						maxlength="13" autocomplete="off"> <input type="button"
