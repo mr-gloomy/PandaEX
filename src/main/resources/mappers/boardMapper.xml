@@ -8,7 +8,17 @@
 		insert into board(title,content,writer) 
 		values (#{title},#{content},#{writer})
 	</insert>
-
+	
+	<!-- 글 목록 전체 -->
+	<select id="listAll" resultType="BoardVO">
+		select * from board
+	</select>
+	
+	<!-- 조회수 증가 -->
+	<update id="cnt">
+		update board set viewcnt=viewcnt+1 
+		where bno=#{bno}
+	</update>
 
 
 

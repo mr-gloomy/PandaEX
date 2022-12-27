@@ -1,5 +1,7 @@
 package com.panda.persistence;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -27,6 +29,26 @@ public class BoardDAOImpl implements BoardDAO {
 	public void insertBoard(BoardVO vo) throws Exception {
 		
 		sqlSession.insert(NAMESPACE+".createBoard",vo);
+	}
+
+	@Override
+	public List<BoardVO> getBoardAll() throws Exception {
+		mylog.debug(" DAO : 글 전체목록 실행");
+		
+		List<BoardVO> boardList = sqlSession.selectList(NAMESPACE+".listAll");
+		
+		mylog.debug(" 글 갯수 : "+boardList.size());
+		
+		return boardList;
+	}
+
+	@Override
+	public void upCnt(Integer bno) throws Exception {
+		mylog.debug(" 조회수 증가 실행");
+		
+		
+		sqlSession.update(NAMESPACE+".cnt",bno);
+		
 	}
 
 }
