@@ -26,7 +26,7 @@ import com.panda.service.MemberService;
 @RequestMapping(value = "/member/*")
 public class MemberController {
 	
-/*	// 로거객체
+	// 로거객체
 	private static final Logger mylog
 		= LoggerFactory.getLogger(MemberController.class);
 	
@@ -141,6 +141,6 @@ public class MemberController {
 		
 	}
 	
-	}*/
+	}
 	
 }

@@ -8,6 +8,7 @@
 
 <header>
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<jsp:include page="../addon/chat.jsp"/>
 <script src="/resources/js/main.js"></script>
 	<!-- 임시 -->
 	<script>
