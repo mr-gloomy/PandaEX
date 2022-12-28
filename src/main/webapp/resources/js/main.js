@@ -828,33 +828,27 @@ $('.lgu').on('click',function(){
 });
 /* 로그인테스트 */
 $('.submit').on('click', function() {
-	alert("로그인테스트");
+	var login1 = {"user_id:":$("#user_id").val(),"pw":$("#user_pw").val()}
 	var href = window.location.href;
-	var id = $("#user_id").val();
-	var pw = $("#user_pw").val();
-	var login = {"user_id":id,"user_pw":pw};
+	var id1 = $("#user_id").val();
+	var pw1 = $("#user_pw").val();
+	if(id1 != "" && pw1 != ""){
 	$.ajax({
-		url : href,
-		type : 'get',
-        async: false,
-		data : login,
+		url : "/ajaxlogin",
+		type : 'post',
+		contentType:"application/json",
+		data : JSON.stringify(login1),
 		success : function(result) {
-			if(result == 0){
-				alert("디비와 정보 불일치");
-				return false;
-			} else if(result == 9){
-				alert("로그인실패");
-				return false;
-			} else {
-				alert("로그인 성공")
-				console.log(login);				
-			}
+			alert("로그인성공 페이지에 값전달 에이잭스성공");
+			console.log(login1);
 			
 		},
 		error : function() {
 			alert("로그인실패 에이잭스실패");
 		}
 	});
-
+	} else {
+		alert("입력해라");
+	}
 });
 	

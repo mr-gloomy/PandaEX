@@ -25,7 +25,7 @@
 	<c:set var="admin" value="관리자" />
 	<c:set var="adminchk" value="1" />
 	<!-- 밸류값 0 : 일반유저, 1: 어드민 입니다. -->
-	<c:set var="userid" value="null" />
+	<c:set var="user_id" value="null" />
 	<!-- 밸류값 null : 비로그인상태, null제외한 다른값 로그인상태화면 -->
 
 
@@ -84,11 +84,11 @@
 					<div class="category">
 						<div class="user-sel-images">
 							<c:choose>
-								<c:when test="${userid eq 'null'}">
+								<c:when test="${user_id eq 'null'}">
 									<img class="bamboo" src="/resources/images/icons/bamboo.png"
 										style="margin-left: 166px;">
 								</c:when>
-								<c:when test="${userid ne 'null' and adminchk lt '1' }">
+								<c:when test="${user_id ne 'null' and adminchk lt '1' }">
 									<img class="bamboo" src="/resources/images/icons/bamboo.png"
 										style="height: 88px;">
 								</c:when>
@@ -100,7 +100,7 @@
 
 						<!-- 로그인 시 -->
 						<c:choose>
-							<c:when test="${userid eq 'null' }">
+							<c:when test="${user_id eq 'null' }">
 								<p>
 									<strong>로그인</strong> 후 이용해주세요
 								</p>
@@ -115,9 +115,9 @@
 										value="회원가입" style="margin-top: 7px;">
 								</div>
 							</c:when>
-							<c:when test="${userid ne 'null' and adminchk gt '0'}">
+							<c:when test="${user_id ne 'null' and adminchk gt '0'}">
 								<p>
-									<span>${username }</span> 님 환영합니다
+									<span>${user_pw }</span> 님 환영합니다
 								</p>
 								<ul>
 									<li><a class="my" href="#">내 정보<img class="right"
@@ -132,7 +132,7 @@
 									<input type="button" onclick="lo()" class="logout" value="로그아웃">
 								</div>
 							</c:when>
-							<c:when test="${userid ne 'null' and adminchk lt '1'}">
+							<c:when test="${user_id ne 'null' and adminchk lt '1'}">
 								<p style="margin-bottom: 5px;">
 									<span class="login-admin">${admin }</span> 님 환영합니다
 								</p>
@@ -219,6 +219,8 @@
 </header>
 </head>
 
+
+
 <!-- 로그인 모달창 -->
 <script
 	src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
@@ -232,13 +234,14 @@
 			class="modalhide">
 		<img src="/resources/images/icons/back.png" alt="IMG-back"
 		class="back-joinpage">
+			<form class="ajax-login" >
 		<div class="modal-text">
 			<img src="/resources/images/icons/user.png" alt="id입력"
 				class="userimg">
 			<!-- 			<img src="/resources/images/icons/reset.png" alt="idreset" id="idreset" class="resetimg"> -->
 			<input type="text" id="user_id" name="user_id" placeholder="PANDA ID"
 				maxlength="10" class="id" onkeypress="chkCapsLock(event)"
-				onclick="chkCapsLock(event)" onblur="chkCapsLock1(event)" autocomplete="off"> <img
+				onclick="chkCapsLock(event)" onblur="chkCapsLock1(event)" autocomplete="off" class="id"> <img
 				src="/resources/images/icons/pass.png" alt="id입력" class="passimg">
 			<!-- 			<img src="/resources/images/icons/reset.png" alt="idreset" id="pwreset"class="resetimg"> -->
 			<input type="password" id="user_pw" name="user_pw"
@@ -257,6 +260,7 @@
 		<div class="login-submit">
 			<input type="button" value="로그인" class="submit">
 		</div>
+				</form>
 		<div class="find">
 			<div class="findid">아이디찾기</div>
 			<div class="division">│</div>
