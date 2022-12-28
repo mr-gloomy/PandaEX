@@ -10,6 +10,7 @@
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <jsp:include page="../addon/chat.jsp"/>
 <script src="/resources/js/main.js"></script>
+<script src="/resources/js/chat.js"></script>
 	<!-- 임시 -->
 	<script>
 		function mo() {
@@ -61,7 +62,7 @@
 					<div
 						class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search"
 						style="padding-right: 0px;">
-						<a href="#" memo="채팅방연동예정"> <img class="panda-header-chaticon"
+						<a  memo="채팅방연동예정"> <img id="chat-on" class="panda-header-chaticon"
 							src="/resources/images/icons/Panda_Chat.png" alt="panda-chat">
 							<img class="panda-header-chaticon-hover"
 							src="/resources/images/icons/panda_chat_hover.gif"
