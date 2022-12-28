@@ -312,7 +312,6 @@
 
    });
 
-<<<<<<< HEAD
    /* 채팅봇 */
    var bot = $('.chat-bot');
    $(bot).on('click', function() {
@@ -348,7 +347,6 @@
       });
       $('.modal-body').css("height", "500px");
    });
-=======
 	/* 채팅봇 */
 	var bot = $('.chat-bot');
 	$(bot).on('click', function() {
@@ -385,7 +383,6 @@
 		});
 		$('.modal-body').css("height", "500px");
 	});
->>>>>>> refs/remotes/origin/master
 
 })(jQuery);
 /* 로그인창 캡스락 알림 */
@@ -514,7 +511,6 @@ $(".pass").on('blur', function() {
 
 /* 모달창 회원가입 */
 $(function() {
-<<<<<<< HEAD
    $('#onclick-join').on("click", function() {
       $('.modal-text').fadeOut();
       $('.login-submit').fadeOut();
@@ -548,7 +544,6 @@ $(function() {
       $('.modal-findid').fadeOut();
       $('.modal-findpw').fadeOut();
    });
-=======
 	$('#onclick-join').on("click", function() {
 		$('.modal-text').fadeOut();
 		$('.login-submit').fadeOut();
@@ -564,11 +559,9 @@ $(function() {
 		$('.modal-findid').fadeOut();
 		$('.modal-findpw').fadeOut();
 	});
->>>>>>> refs/remotes/origin/master
 })
 /* 뒤로가기 */
 $(function() {
-<<<<<<< HEAD
    $('#user-join').on('click',function() {
       $('html').css('overflow', 'hidden');
       $(".login-modal").css("display", "flex");
@@ -587,7 +580,6 @@ $(function() {
       $('.modal-findid').fadeOut();
       $('.modal-findpw').fadeOut();
    });
-=======
 	$('.back-joinpage').on("click", function() {
 		$('.modal-text').fadeIn();
 		$('.login-submit').fadeIn();
@@ -623,12 +615,10 @@ $(function() {
 		$('.modal-findid').fadeOut();
 		$('.modal-findpw').fadeOut();
 	});
->>>>>>> refs/remotes/origin/master
 });
 
 /* 모달창 아이디/비밀번호찾기 */
 $(function(){
-<<<<<<< HEAD
    $('.findid').on('click',function(){
       $('.modal-findid').fadeIn();
       $('.modal-findpw').fadeOut();
@@ -657,7 +647,6 @@ $(function(){
       $('.modal-top').text("PANDA FIND PW");
       $('.modal-body').css("height", "300px");
    });
-=======
 	$('.findid').on('click',function(){
 		$('.modal-findid').fadeIn();
 		$('.modal-findpw').fadeOut();
@@ -686,7 +675,6 @@ $(function(){
 		$('.modal-top').text("PANDA FIND PW");
 		$('.modal-body').css("height", "300px");
 	});
->>>>>>> refs/remotes/origin/master
 });
 
 

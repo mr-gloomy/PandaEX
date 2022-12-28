@@ -372,7 +372,7 @@
 						<input id="advertising-chk" type="checkbox" tabindex="-1"><p>판다 서비스 이용 중 판다가 제공하는 고객맞춤 컨텐츠 추천 등 광고 정보를 수신합니다.</p>
 						<input id="advertising-chk-val" value="0" type="hidden" memo="advertising-chk y/n" tabindex="-1">
 				</div>
-				<input type="submit" value="로긴">
+				<input type="submit" value="회원가입" class="member-join">
 			</div>
 			</form>
 		</div>	

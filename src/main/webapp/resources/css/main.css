@@ -4051,7 +4051,8 @@ input.num-product::-webkit-inner-spin-button {
     cursor: text;
 }
 #search-id,
-#search-pw {
+#search-pw,
+.login-submit input[type="submit"] {
 	width: 350px;
 	height: 40px;
 	color : white;
@@ -4059,8 +4060,20 @@ input.num-product::-webkit-inner-spin-button {
     opacity: 0.8;
 }
 #search-id:hover,
-#search-pw:hover{
+#search-pw:hover
+.login-submit input[type="submit"],
+.memberjoin{
 opacity: 1;
+}
+.member-join {
+	width: 350px;
+	height: 40px;
+	color : white;
+	background: rgb(32 120 0 / 80%);
+    opacity: 0.8;
+}
+.member-join:hover {
+    opacity: 1;
 }
 /* 추가 - 김태홍  손대면 안됍니다!!!!*/
 /*////////////////////////////////////////////////////////*/
