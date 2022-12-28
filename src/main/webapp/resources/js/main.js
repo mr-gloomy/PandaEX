@@ -333,9 +333,12 @@
 		$('.kakaologin').fadeIn();
 		$('.modal-top').text("PANDA LOGIN");
 		$('.modal-body').css("height", "500px");
+		$('.modal-findid').fadeOut();
+		$('.modal-findpw').fadeOut();
 		event.preventDefault();
 		event.stopPropagation();
 		return false;
+		
 	});
 	$('.modalhide').on('click', function() {
 		$('.login-modal').css("display", "none");
@@ -485,8 +488,11 @@ $(function() {
 		$(".modal-join").slideDown(300);
 		$('.modal-top').text("PANDA JOIN");
 		$('.modal-body').css("height", "770px");
+		$('.modal-findid').fadeOut();
+		$('.modal-findpw').fadeOut();
 	});
 })
+/* 뒤로가기 */
 $(function() {
 	$('.back-joinpage').on("click", function() {
 		$('.modal-text').fadeIn();
@@ -500,6 +506,8 @@ $(function() {
 		$(".modal-join").slideUp(300);
 		$('.modal-top').text("PANDA LOGIN");
 		$('.modal-body').css("height", "500px");
+		$('.modal-findid').fadeOut();
+		$('.modal-findpw').fadeOut();
 	});
 })
 $(function() {
@@ -518,8 +526,43 @@ $(function() {
 		$('.passlv').fadeOut();
 		$('.social-login').fadeOut();
 		$('.kakaologin').fadeOut();
+		$('.modal-findid').fadeOut();
+		$('.modal-findpw').fadeOut();
 	});
 });
+
+/* 모달창 아이디/비밀번호찾기 */
+$(function(){
+	$('.findid').on('click',function(){
+		$('.modal-findid').fadeIn();
+		$('.modal-findpw').fadeOut();
+		$('.modal-text').fadeOut();
+		$('.login-submit').fadeOut();
+		$('.back-joinpage').fadeIn();
+		$('.find').fadeOut();
+		$('.join').fadeOut();
+		$('.social-login').fadeOut();
+		$('.kakaologin').fadeOut();
+		$('.modal-top').text("PANDA FIND ID");
+		$('.modal-body').css("height", "300px");
+	});
+});
+$(function(){
+	$('.findpw').on('click',function(){
+		$('.modal-findpw').fadeIn();
+		$('.modal-findid').fadeOut();
+		$('.modal-text').fadeOut();
+		$('.login-submit').fadeOut();
+		$('.back-joinpage').fadeIn();
+		$('.find').fadeOut();
+		$('.join').fadeOut();
+		$('.social-login').fadeOut();
+		$('.kakaologin').fadeOut();
+		$('.modal-top').text("PANDA FIND PW");
+		$('.modal-body').css("height", "300px");
+	});
+});
+
 
 /* 우리동네(gps값 기준) 조회 */
 $(function() {
@@ -826,35 +869,36 @@ $('.kt').on('click',function(){
 $('.lgu').on('click',function(){
 	$(".select").attr('value','LGU+');	
 });
-/* 로그인테스트 */
-$('.submit').on('click', function() {
-	alert("로그인테스트");
-	var href = window.location.href;
-	var id = $("#user_id").val();
-	var pw = $("#user_pw").val();
-	var login = {"user_id":id,"user_pw":pw};
-	$.ajax({
-		url : href,
-		type : 'get',
-        async: false,
-		data : login,
-		success : function(result) {
-			if(result == 0){
-				alert("디비와 정보 불일치");
-				return false;
-			} else if(result == 9){
-				alert("로그인실패");
-				return false;
-			} else {
-				alert("로그인 성공")
-				console.log(login);				
-			}
-			
-		},
-		error : function() {
-			alert("로그인실패 에이잭스실패");
-		}
-	});
-
-});
+//* 로그인테스트 */
+//$('.submit').on('click', function() {
+//	var login1 = {"user_id:":$("#user_id").val(),"pw":$("#user_pw").val()}
+//	var href = window.location.href;
+//	var id1 = {"user_id":$("#user_id").val()};
+//	var pw1 = {"user_pw":$("#user_pw").val()};
+//	if(id1 != "" && pw1 != ""){
+//	$.ajax({
+//		url : "/ajaxlogin/login",
+//		type : 'post',
+//		data: login1,
+//		success : function(result) {
+////			alert("로그인성공 페이지에 값전달 에이잭스성공");
+////			console.log(id1);
+//			if(result == "OK"){
+//				alert("성공");
+//				alert("아이디중복없음");
+//				console.log(login1);
+//			} else {
+//				alert("반만성공");
+//				alert("아이디중복");
+//			}
+//			
+//		},
+//		error : function() {
+//			alert("로그인실패 에이잭스실패");
+//		}
+//	});
+//	} else {ㅇ
+//		alert("입력해라");
+//	}
+//});
 	
