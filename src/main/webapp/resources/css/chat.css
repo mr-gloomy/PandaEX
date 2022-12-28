@@ -1,6 +1,7 @@
 @charset "UTF-8";
+
 .chat{
-    display: flex;
+    display: none;
     flex-direction: column;
     right: 5.5%;
     top: 13%;
@@ -13,6 +14,7 @@
     border: 6px solid black;
     align-items: center;
     cursor : context-menu;
+    animation: slideDown 1.5s;
 }
 
 .chat .chat-body .chat-top{

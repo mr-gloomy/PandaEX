@@ -3,17 +3,20 @@
 // 창 끄기 켜기 제어
 $(function(){
 	$('.off').on('click',function(){
+		$('.chat').css('display','none');
 		$('.menu-name').text("채팅");
 		$('.option-list').fadeOut(400);
-		$('.chat').slideUp(400);
 	})
 	$('.panda-header-chaticon-hover').on('click',function(){
-		$('.chat').slideDown(400);
-		$('.chat-list').delay(400).fadeIn(400);
+		$('.chat').css('display','flex');
+		$('.chat-list').fadeIn(400);
+		$('.option-list').fadeOut(10);
 	})
 	$('.panda-header-chaticon').on('click',function(){
-		$('.chat').slideDown(400);
-		$('.chat-list').delay(400).fadeIn(400);
+		$('.chat').css('display','flex');
+		$('.chat').delay(100).slideDown(400);
+		$('.chat-list').fadeIn(400);
+		$('.option-list').fadeOut(100);
 	})
 	$('.chatting').on('click',function(){
 		$('.menu-name').text("채팅");
