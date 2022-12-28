@@ -31,11 +31,11 @@
 	</div>
 
 	<div class="box-body">
-		<form role="form">
+		<form role="form" method="post">
 			
 			<div class="form-group">
 				<label>제목</label> <input type="text" class="form-control"
-					placeholder="Enter ..." value=${cvo.title } readonly>
+					placeholder="Enter ..." value=${cvo.title } >
 			</div>
 			<div class="form-group">
 				<label>작성자</label> <input type="text" class="form-control"
@@ -44,18 +44,14 @@
 
 			<div class="form-group">
 				<label>내용</label>
-				<textarea class="form-control" rows="3" readonly>${cvo.content }</textarea>
+				<textarea class="form-control" rows="3" >${cvo.content }</textarea>
 			</div>
 
 
 
-			<!-- 본인글만 가능 -->
-			<button type="button" class="btn btn-block btn-success btn-lg" onclick="location.href='/admin/modify?bno=${cvo.bno}';">수정</button>
-			<button type="button" class="btn btn-block btn-success btn-lg" onclick="location.href='/admin/remove';">삭제</button>
-			<!-- 본인글만 가능 -->
 			
 			
-			<button type="button" class="btn btn-block btn-success btn-lg" onclick="location.href='/admin/list';">목록</button>
+			<button type="submit" class="btn btn-block btn-success btn-lg" >수정하기</button>
 			
 			
 			<!-- <div class="form-group">

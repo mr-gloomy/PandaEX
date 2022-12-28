@@ -389,7 +389,11 @@
 		var result = '${result}';
 		
 		if(result=='registOK'){
-			console.log("글쓰기 완료!");
+			
+			alert("글쓰기 완료! ");
+		}else if(result=='modOK'){
+			
+			alert("글수정 완료! ");
 		}
 		
 	     </script> 
