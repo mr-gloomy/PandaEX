@@ -26,7 +26,7 @@
 	<c:set var="admin" value="관리자" />
 	<c:set var="adminchk" value="1" />
 	<!-- 밸류값 0 : 일반유저, 1: 어드민 입니다. -->
-	<c:set var="user_id" value="null" />
+	<c:set var="user_id" value="" />
 	<!-- 밸류값 null : 비로그인상태, null제외한 다른값 로그인상태화면 -->
 
 
@@ -85,11 +85,11 @@
 					<div class="category">
 						<div class="user-sel-images">
 							<c:choose>
-								<c:when test="${user_id eq 'null'}">
+								<c:when test="${user_id eq ''}">
 									<img class="bamboo" src="/resources/images/icons/bamboo.png"
 										style="margin-left: 166px;">
 								</c:when>
-								<c:when test="${user_id ne 'null' and adminchk lt '1' }">
+								<c:when test="${user_id ne '' and adminchk lt '1' }">
 									<img class="bamboo" src="/resources/images/icons/bamboo.png"
 										style="height: 88px;">
 								</c:when>
@@ -101,7 +101,7 @@
 
 						<!-- 로그인 시 -->
 						<c:choose>
-							<c:when test="${user_id eq 'null' }">
+							<c:when test="${user_id eq '' }">
 								<p>
 									<strong>로그인</strong> 후 이용해주세요
 								</p>
@@ -116,7 +116,7 @@
 										value="회원가입" style="margin-top: 7px;">
 								</div>
 							</c:when>
-							<c:when test="${user_id ne 'null' and adminchk gt '0'}">
+							<c:when test="${user_id ne '' and adminchk gt '0'}">
 								<p>
 									<span>${user_pw }</span> 님 환영합니다
 								</p>
@@ -133,7 +133,7 @@
 									<input type="button" onclick="lo()" class="logout" value="로그아웃">
 								</div>
 							</c:when>
-							<c:when test="${user_id ne 'null' and adminchk lt '1'}">
+							<c:when test="${user_id ne '' and adminchk lt '1'}">
 								<p style="margin-bottom: 5px;">
 									<span class="login-admin">${admin }</span> 님 환영합니다
 								</p>
@@ -340,6 +340,22 @@
 			</div>
 			</form>
 		</div>	
+		<div class="modal-findid">
+			<div class="findid-input">
+				<input type="text" id="findid-id" placeholder="가입하신 이름을 입력해주세요." maxlength="6" autocomplete="off">
+				<input type="text" id="findid-nick" placeholder="사용중인 닉네임을 입력해주세요." maxlength="10" autocomplete="off">
+				<div class="error-text">&nbsp;</div>
+				<input id="search-id" type="button" value="아이디 찾기">
+			</div>
+		</div>
+		<div class="modal-findpw">
+			<div class="findpw-input">
+				<input type="text" id="findpw-pw" placeholder="사용중인 아이디를 입력해주세요." maxlength="6" autocomplete="off">
+				<input type="text" id="findpw-tel" placeholder="가입하신 전화번호 입력해주세요." maxlength="10" autocomplete="off">
+				<div class="error-text">&nbsp;</div>
+				<input id="search-pw" type="button" value="비밀번호찾기">
+			</div>
+		</div>
 	</div>
 </div>
 

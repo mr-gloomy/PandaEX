@@ -333,6 +333,8 @@
 		$('.kakaologin').fadeIn();
 		$('.modal-top').text("PANDA LOGIN");
 		$('.modal-body').css("height", "500px");
+		$('.modal-findid').fadeOut();
+		$('.modal-findpw').fadeOut();
 		event.preventDefault();
 		event.stopPropagation();
 		return false;
@@ -485,8 +487,11 @@ $(function() {
 		$(".modal-join").slideDown(300);
 		$('.modal-top').text("PANDA JOIN");
 		$('.modal-body').css("height", "770px");
+		$('.modal-findid').fadeOut();
+		$('.modal-findpw').fadeOut();
 	});
 })
+/* 뒤로가기 */
 $(function() {
 	$('.back-joinpage').on("click", function() {
 		$('.modal-text').fadeIn();
@@ -500,6 +505,8 @@ $(function() {
 		$(".modal-join").slideUp(300);
 		$('.modal-top').text("PANDA LOGIN");
 		$('.modal-body').css("height", "500px");
+		$('.modal-findid').fadeOut();
+		$('.modal-findpw').fadeOut();
 	});
 })
 $(function() {
@@ -518,8 +525,43 @@ $(function() {
 		$('.passlv').fadeOut();
 		$('.social-login').fadeOut();
 		$('.kakaologin').fadeOut();
+		$('.modal-findid').fadeOut();
+		$('.modal-findpw').fadeOut();
 	});
 });
+
+/* 모달창 아이디/비밀번호찾기 */
+$(function(){
+	$('.findid').on('click',function(){
+		$('.modal-findid').fadeIn();
+		$('.modal-findpw').fadeOut();
+		$('.modal-text').fadeOut();
+		$('.login-submit').fadeOut();
+		$('.back-joinpage').fadeIn();
+		$('.find').fadeOut();
+		$('.join').fadeOut();
+		$('.social-login').fadeOut();
+		$('.kakaologin').fadeOut();
+		$('.modal-top').text("PANDA FIND ID");
+		$('.modal-body').css("height", "300px");
+	});
+});
+$(function(){
+	$('.findpw').on('click',function(){
+		$('.modal-findpw').fadeIn();
+		$('.modal-findid').fadeOut();
+		$('.modal-text').fadeOut();
+		$('.login-submit').fadeOut();
+		$('.back-joinpage').fadeIn();
+		$('.find').fadeOut();
+		$('.join').fadeOut();
+		$('.social-login').fadeOut();
+		$('.kakaologin').fadeOut();
+		$('.modal-top').text("PANDA FIND PW");
+		$('.modal-body').css("height", "300px");
+	});
+});
+
 
 /* 우리동네(gps값 기준) 조회 */
 $(function() {
