@@ -312,6 +312,7 @@
 
    });
 
+<<<<<<< HEAD
    /* 채팅봇 */
    var bot = $('.chat-bot');
    $(bot).on('click', function() {
@@ -347,6 +348,44 @@
       });
       $('.modal-body').css("height", "500px");
    });
+=======
+	/* 채팅봇 */
+	var bot = $('.chat-bot');
+	$(bot).on('click', function() {
+		ht.open();
+	});
+	/* 로그인 모달창 제어 */
+	$('.usermodal').click(function() {
+		$('html').css({
+			'overflow' : 'hidden'
+		});
+		$(".login-modal").css("display", "flex");
+		$(".back-joinpage").hide();
+		$(".modal-join").hide();
+		$('.modal-text').fadeIn();
+		$('.login-submit').fadeIn();
+		$('.find').fadeIn();
+		$('.join').fadeIn();
+		$('.social-login').fadeIn();
+		$('.kakaologin').fadeIn();
+		$('.modal-top').text("PANDA LOGIN");
+		$('.modal-body').css("height", "500px");
+		$('.modal-findid').fadeOut();
+		$('.modal-findpw').fadeOut();
+		event.preventDefault();
+		event.stopPropagation();
+		return false;
+		
+	});
+	$('.modalhide').on('click', function() {
+		$('.login-modal').css("display", "none");
+		$('#element').off('scroll touchmove mousewheel');
+		$('html').css({
+			'overflow' : 'visible'
+		});
+		$('.modal-body').css("height", "500px");
+	});
+>>>>>>> refs/remotes/origin/master
 
 })(jQuery);
 /* 로그인창 캡스락 알림 */
@@ -475,6 +514,7 @@ $(".pass").on('blur', function() {
 
 /* 모달창 회원가입 */
 $(function() {
+<<<<<<< HEAD
    $('#onclick-join').on("click", function() {
       $('.modal-text').fadeOut();
       $('.login-submit').fadeOut();
@@ -508,8 +548,27 @@ $(function() {
       $('.modal-findid').fadeOut();
       $('.modal-findpw').fadeOut();
    });
+=======
+	$('#onclick-join').on("click", function() {
+		$('.modal-text').fadeOut();
+		$('.login-submit').fadeOut();
+		$('.find').fadeOut();
+		$('.join').fadeOut();
+		$('.social-login').fadeOut();
+		$('.kakaologin').fadeOut();
+		$('.back-joinpage').fadeIn();
+		$('.passlv').fadeOut();
+		$(".modal-join").slideDown(300);
+		$('.modal-top').text("PANDA JOIN");
+		$('.modal-body').css("height", "770px");
+		$('.modal-findid').fadeOut();
+		$('.modal-findpw').fadeOut();
+	});
+>>>>>>> refs/remotes/origin/master
 })
+/* 뒤로가기 */
 $(function() {
+<<<<<<< HEAD
    $('#user-join').on('click',function() {
       $('html').css('overflow', 'hidden');
       $(".login-modal").css("display", "flex");
@@ -528,10 +587,48 @@ $(function() {
       $('.modal-findid').fadeOut();
       $('.modal-findpw').fadeOut();
    });
+=======
+	$('.back-joinpage').on("click", function() {
+		$('.modal-text').fadeIn();
+		$('.login-submit').fadeIn();
+		$('.find').fadeIn();
+		$('.join').fadeIn();
+		$('.social-login').fadeIn();
+		$('.kakaologin').fadeIn();
+		$('.back-joinpage').fadeOut();
+		$('.passlv').fadeOut();
+		$(".modal-join").slideUp(300);
+		$('.modal-top').text("PANDA LOGIN");
+		$('.modal-body').css("height", "500px");
+		$('.modal-findid').fadeOut();
+		$('.modal-findpw').fadeOut();
+	});
+})
+$(function() {
+	$('#user-join').on('click',function() {
+		$('html').css('overflow', 'hidden');
+		$(".login-modal").css("display", "flex");
+		$('.modal-top').text("PANDA JOIN");
+		$('.modal-join').fadeIn();
+		$('.join-text').fadeIn();
+		$('.back-joinpage').fadeIn();
+		$('.modal-body').css("height", "770px");
+		$('.modal-text').fadeOut();
+		$('.login-submit').fadeOut();
+		$('.find').fadeOut();
+		$('.join').fadeOut();
+		$('.passlv').fadeOut();
+		$('.social-login').fadeOut();
+		$('.kakaologin').fadeOut();
+		$('.modal-findid').fadeOut();
+		$('.modal-findpw').fadeOut();
+	});
+>>>>>>> refs/remotes/origin/master
 });
 
 /* 모달창 아이디/비밀번호찾기 */
 $(function(){
+<<<<<<< HEAD
    $('.findid').on('click',function(){
       $('.modal-findid').fadeIn();
       $('.modal-findpw').fadeOut();
@@ -560,6 +657,36 @@ $(function(){
       $('.modal-top').text("PANDA FIND PW");
       $('.modal-body').css("height", "300px");
    });
+=======
+	$('.findid').on('click',function(){
+		$('.modal-findid').fadeIn();
+		$('.modal-findpw').fadeOut();
+		$('.modal-text').fadeOut();
+		$('.login-submit').fadeOut();
+		$('.back-joinpage').fadeIn();
+		$('.find').fadeOut();
+		$('.join').fadeOut();
+		$('.social-login').fadeOut();
+		$('.kakaologin').fadeOut();
+		$('.modal-top').text("PANDA FIND ID");
+		$('.modal-body').css("height", "300px");
+	});
+});
+$(function(){
+	$('.findpw').on('click',function(){
+		$('.modal-findpw').fadeIn();
+		$('.modal-findid').fadeOut();
+		$('.modal-text').fadeOut();
+		$('.login-submit').fadeOut();
+		$('.back-joinpage').fadeIn();
+		$('.find').fadeOut();
+		$('.join').fadeOut();
+		$('.social-login').fadeOut();
+		$('.kakaologin').fadeOut();
+		$('.modal-top').text("PANDA FIND PW");
+		$('.modal-body').css("height", "300px");
+	});
+>>>>>>> refs/remotes/origin/master
 });
 
 

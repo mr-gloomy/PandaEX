@@ -51,4 +51,17 @@ public class BoardDAOImpl implements BoardDAO {
 		
 	}
 
+	@Override
+	public BoardVO getContent(Integer bno) throws Exception {
+		
+		return sqlSession.selectOne(NAMESPACE+".content", bno);
+	}
+
+	@Override
+	public Integer updateBoard(BoardVO vo) throws Exception {
+		Integer result = sqlSession.update(NAMESPACE+".modBoard", vo);
+		
+		return result;
+	}
+
 }

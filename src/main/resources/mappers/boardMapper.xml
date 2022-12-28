@@ -19,7 +19,18 @@
 		update board set viewcnt=viewcnt+1 
 		where bno=#{bno}
 	</update>
-
-
+	
+	<!--  글 내용 가져오기 -->
+	<select id="content" resultType="BoardVO">
+		select * from board 
+		where bno=#{bno}		
+	</select>
+	
+	<!-- 수정하기 -->
+	<update id="modBoard">
+		update board set title=#{title},content=#{content} 
+		where bno=#{bno}
+	</update>
+	
 
 </mapper>
