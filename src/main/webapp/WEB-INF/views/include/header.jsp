@@ -8,6 +8,7 @@
 
 <header>
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="/resources/js/main.js"></script>
 	<!-- 임시 -->
 	<script>
 		function mo() {
@@ -234,7 +235,8 @@
 			class="modalhide">
 		<img src="/resources/images/icons/back.png" alt="IMG-back"
 		class="back-joinpage">
-			<form class="ajax-login" >
+			
+			<form action="/member/login" method="post">
 		<div class="modal-text">
 			<img src="/resources/images/icons/user.png" alt="id입력"
 				class="userimg">
@@ -277,6 +279,7 @@
 		</div>
 			<img class="kakaologin" src="/resources/images/icons/kakao_login_large_wide.png">
 		<div class="modal-join">
+		<form action="/member/insert" method="post">
 			<div class="join-text">
 				<input id="user-id-join" type="text" placeholder="아이디" maxlength="10" autocomplete="off" >
 				<div id="tooltip" class="idtooltip">아이디는 영어,숫자 5~10글자, 한글,특수문자 사용불가</div>
@@ -335,6 +338,7 @@
 				</div>
 				<input id="join-success" type="button" value="판다 중고거래 시작하기" >
 			</div>
+			</form>
 		</div>	
 	</div>
 </div>

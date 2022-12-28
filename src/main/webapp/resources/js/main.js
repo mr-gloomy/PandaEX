@@ -826,29 +826,36 @@ $('.kt').on('click',function(){
 $('.lgu').on('click',function(){
 	$(".select").attr('value','LGU+');	
 });
-/* 로그인테스트 */
-$('.submit').on('click', function() {
-	var login1 = {"user_id:":$("#user_id").val(),"pw":$("#user_pw").val()}
-	var href = window.location.href;
-	var id1 = $("#user_id").val();
-	var pw1 = $("#user_pw").val();
-	if(id1 != "" && pw1 != ""){
-	$.ajax({
-		url : "/ajaxlogin",
-		type : 'post',
-		contentType:"application/json",
-		data : JSON.stringify(login1),
-		success : function(result) {
-			alert("로그인성공 페이지에 값전달 에이잭스성공");
-			console.log(login1);
-			
-		},
-		error : function() {
-			alert("로그인실패 에이잭스실패");
-		}
-	});
-	} else {
-		alert("입력해라");
-	}
-});
+//* 로그인테스트 */
+//$('.submit').on('click', function() {
+//	var login1 = {"user_id:":$("#user_id").val(),"pw":$("#user_pw").val()}
+//	var href = window.location.href;
+//	var id1 = {"user_id":$("#user_id").val()};
+//	var pw1 = {"user_pw":$("#user_pw").val()};
+//	if(id1 != "" && pw1 != ""){
+//	$.ajax({
+//		url : "/ajaxlogin/login",
+//		type : 'post',
+//		data: login1,
+//		success : function(result) {
+////			alert("로그인성공 페이지에 값전달 에이잭스성공");
+////			console.log(id1);
+//			if(result == "OK"){
+//				alert("성공");
+//				alert("아이디중복없음");
+//				console.log(login1);
+//			} else {
+//				alert("반만성공");
+//				alert("아이디중복");
+//			}
+//			
+//		},
+//		error : function() {
+//			alert("로그인실패 에이잭스실패");
+//		}
+//	});
+//	} else {
+//		alert("입력해라");
+//	}
+//});
 	

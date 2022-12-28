@@ -72,7 +72,7 @@ public class MemberController {
 //		out.println("location.href='/member/login'");
 //		out.println("</script>");
 //		out.close();
-		return "redirect:/member/login";
+		return "redirect:/main/index";
 	}
 
 	
