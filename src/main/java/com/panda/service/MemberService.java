@@ -10,6 +10,9 @@ public interface MemberService {
 		
 		//로그인
 		public boolean memberLogin(MemberVO vo) throws Exception;
+
+		//회원조회
+		public MemberVO getMember(String user_id) throws Exception;
 		
 		
 
