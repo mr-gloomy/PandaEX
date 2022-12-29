@@ -173,10 +173,10 @@
 
 	<%--추천상품 섹션 --%>
 	<!-- Product -->
-	<section class="bg0 p-t-23 p-b-140" style="padding-bottom: 50px;">
+	<section class="bg0 p-t-23 p-b-140" style="padding-bottom: 15px; padding-top: 30px;">
 		<div class="container">
 			<div class="p-b-10">
-				<h3 class="ltext-103 cl5">Product Overview</h3>
+				<h3 class="ltext-103 cl5" style="color: #505050;cursor:context-menu;opacity: 0.8;">너의 취향대로 PANDA!</h3>
 			</div>
 
 			<div class="flex-w flex-sb-m p-b-52">
@@ -400,9 +400,12 @@
 		</div>
 	</section>
 
-
 	<%--상품들~~ --%>
-
+	
+	<%--이벤트 칸 --%>
+	<section class="event-section">
+		<div class="event-body">공간잡기</div>
+	</section>
 
 
 

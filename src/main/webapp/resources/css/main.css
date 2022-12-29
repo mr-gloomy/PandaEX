@@ -4089,7 +4089,7 @@ opacity: 1;
     margin: 0px 261.5px 0px 261.5px;
 	padding : 0px 15px 0px 15px;
 	display: block;
-	padding-bottom: 50px;
+	padding-bottom: 30px;
 }
 .rek .rek-item-container {
 	display: flex;
@@ -4146,8 +4146,10 @@ opacity: 1;
 }
 .rek .rek-item-container .rek-item-rank .rank-1,
 .rek .rek-item-container .rek-item-rank .rank-2,
+.rek .rek-item-container .rek-item-rank .rank-3,
 .rek .rek-item-container .rek-item-rank .rank-4,
-.rek .rek-item-container .rek-item-rank .rank-5{
+.rek .rek-item-container .rek-item-rank .rank-5,
+.rek .rek-item-container .rek-item-rank .rank-6{
 	margin-right : 10px;
 }
 .rek .rek-item-container .rek-item-rank .rank1-3{
@@ -4208,9 +4210,21 @@ margin-top: 5px;
 	display: block;
 	transition : display 0.5s;
 	animation : fadeIn 0.5s;
+/* 	animation: loader-scale 1s; */
 }
 .rekcontent .rektext .rek-go a{
 	color: #666666;
 }
+.event-section {
+	background: #fff7eb;
+}
+.event-body{
+	width: 1380px;
+    margin: 0px 261.5px 0px 261.5px;
+    padding: 0px 15px 30px 15px;
+    display: block;
+    height: 400px;
+}
+
 /* 추가 - 김태홍  손대면 안됍니다!!!!*/
 /*////////////////////////////////////////////////////////*/
