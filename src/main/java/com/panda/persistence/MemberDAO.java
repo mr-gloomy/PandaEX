@@ -7,8 +7,10 @@ public interface MemberDAO {
 			public void insert(MemberVO vo) throws Exception;
 		
 			//로그인
-			public MemberVO loginMember(String user_id, String user_pw);
 			public MemberVO loginMember(MemberVO vo);
+			
+			//회원조회
+			public MemberVO getMember(String user_id);
 			
 			
 }

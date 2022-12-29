@@ -95,6 +95,16 @@ public class UserInfoResponseVO {
 	public void setRes_list(List<AccountVO> res_list) {
 		this.res_list = res_list;
 	}
+	@Override
+	public String toString() {
+		return "UserInfoResponseVO [api_tran_id=" + api_tran_id + ", api_tran_dtm=" + api_tran_dtm + ", rsp_code="
+				+ rsp_code + ", rsp_message=" + rsp_message + ", user_seq_no=" + user_seq_no + ", user_ci=" + user_ci
+				+ ", user_name=" + user_name + ", user_info=" + user_info + ", user_gender=" + user_gender
+				+ ", user_cell_no=" + user_cell_no + ", user_email=" + user_email + ", res_cnt=" + res_cnt
+				+ ", res_list=" + res_list + "]";
+	}
+	
+	
 	
 	
 }

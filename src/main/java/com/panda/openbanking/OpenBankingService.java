@@ -9,6 +9,8 @@ import com.panda.openbanking.domain.RequestTokenVO;
 import com.panda.openbanking.domain.ResponseTokenVO;
 import com.panda.openbanking.domain.UserInfoRequestVO;
 import com.panda.openbanking.domain.UserInfoResponseVO;
+import com.panda.openbanking.domain.WithdrawRequestVO;
+import com.panda.openbanking.domain.WithdrawResponseVO;
 
 
 @Service
@@ -33,4 +35,9 @@ public class OpenBankingService {
 		return openBankingApiClient.findAccount(accountSearchRequestVO);
 	}
 
+	// 출금입금
+		public WithdrawResponseVO getwithdraw( WithdrawRequestVO withdrawRequestVO) {
+			return openBankingApiClient.withdraw(withdrawRequestVO);
+		}
+	
 }
