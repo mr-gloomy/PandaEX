@@ -43,8 +43,8 @@ $(function(){
 		$('.chat').css("background-image","linear-gradient(135deg, #370942 0%, #ed6605 100%)");
 		$('.chat-footer').css("background","none");
 	});
-	$('.pupplewine').on('click',function(){
-		$('.chat').css("background-image","linear-gradient(135deg, #040d5c 0%, #02aa0d 100%)");
+	$('.blueberry').on('click',function(){
+		$('.chat').css("background-image","linear-gradient(135deg, #009fff 0%, #ec2f4b 100%)");
 		$('.chat-footer').css("background","none");
 	});
 	$('.Lavender').on('click',function(){

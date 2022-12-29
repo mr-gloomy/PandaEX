@@ -244,8 +244,8 @@
 			<div class="backsel">백그라운드 색상 변경</div>
 			<div class="background">
 				<div class="bluegreen">블루그린</div>
+				<div class="blueberry">블루베리</div>
 				<div class="orangered">오렌지레드</div>
-				<div class="pupplewine">퍼플와인</div>
 				<div class="Lavender">라벤더</div>
 				<div class="blacksimple">블랙심플</div>
 			
