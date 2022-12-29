@@ -14,7 +14,7 @@
     border: 6px solid black;
     align-items: center;
     cursor : context-menu;
-    animation: slideDown 1.5s;
+    animation: fadeIn 1.5s;
 }
 
 .chat .chat-body .chat-top{

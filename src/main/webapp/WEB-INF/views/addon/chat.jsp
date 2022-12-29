@@ -36,7 +36,7 @@
 		<%-- value=""  << 채팅방없을때 화면 표시 확인해보세요 밸류값 비워야함 --%>
 		<%-- value="1"  << 채팅방있을때 화면 표시 확인해보세요 --%>
 											
-		<c:set var="oppenent" value="" />
+		<c:set var="oppenent" value='' />
 		<c:set var="oppenentname" value="김태홍"/>
 		<c:set var="lasttextsample1" value="이거살려고하는데요"/>
 		<c:set var="lasttextsample2" value="네고괜찮은가요..?"/>
