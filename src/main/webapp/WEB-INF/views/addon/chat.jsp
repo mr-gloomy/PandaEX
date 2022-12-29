@@ -36,7 +36,7 @@
 		<%-- value=""  << 채팅방없을때 화면 표시 확인해보세요 밸류값 비워야함 --%>
 		<%-- value="1"  << 채팅방있을때 화면 표시 확인해보세요 --%>
 											
-		<c:set var="oppenent" value="" />
+		<c:set var="oppenent" value='' />
 		<c:set var="oppenentname" value="김태홍"/>
 		<c:set var="lasttextsample1" value="이거살려고하는데요"/>
 		<c:set var="lasttextsample2" value="네고괜찮은가요..?"/>
@@ -244,8 +244,8 @@
 			<div class="backsel">백그라운드 색상 변경</div>
 			<div class="background">
 				<div class="bluegreen">블루그린</div>
+				<div class="blueberry">블루베리</div>
 				<div class="orangered">오렌지레드</div>
-				<div class="pupplewine">퍼플와인</div>
 				<div class="Lavender">라벤더</div>
 				<div class="blacksimple">블랙심플</div>
 			
