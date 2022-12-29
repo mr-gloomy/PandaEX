@@ -23,14 +23,6 @@
 	</script>
 
 
-	<%-- 변수값은 임시값입니다. --%>
-	<c:set var="username" value="김태홍" />
-	<c:set var="admin" value="관리자" />
-	<c:set var="adminchk" value="1" />
-	<!-- 밸류값 0 : 일반유저, 1: 어드민 입니다. -->
-	<c:set var="user_id" value="" />
-	<!-- 밸류값 null : 비로그인상태, null제외한 다른값 로그인상태화면 -->
-
 
 
 
@@ -86,24 +78,19 @@
 					<div class="hoversup"></div>
 					<div class="category">
 						<div class="user-sel-images">
-							<c:choose>
-								<c:when test="${user_id eq ''}">
+								<c:if test="${user_id eq ''}">
 									<img class="bamboo" src="/resources/images/icons/bamboo.png"
 										style="margin-left: 166px;">
-								</c:when>
-								<c:when test="${user_id ne '' and adminchk lt '1' }">
+								</c:if>
+								<c:if test="${user_id ne '' and adminchk lt '1' }">
 									<img class="bamboo" src="/resources/images/icons/bamboo.png"
 										style="height: 88px;">
-								</c:when>
-								<c:otherwise>
-									<img class="bamboo" src="/resources/images/icons/bamboo.png">
-								</c:otherwise>
-							</c:choose>
+								</c:if>
 						</div>
 
 						<!-- 로그인 시 -->
-						<c:choose>
-							<c:when test="${user_id == null }">
+						
+							<c:if test="${sessionScope.user_id == null }">
 								<p>
 									<strong>로그인</strong> 후 이용해주세요
 								</p>
@@ -117,8 +104,8 @@
 									<input type="button" onclick="location.href='#'" id="user-join" class="logout"
 										value="회원가입" style="margin-top: 7px;">
 								</div>
-							</c:when>
-							<c:when test="${user_id != null and adminchk gt '0'}">
+							</c:if>
+							<c:if test="${user_id != null}">
 								<p>
 									<span>${sessionScope.user_id}</span> 님 환영합니다
 								</p>
@@ -134,8 +121,8 @@
 								<div class="user-logout">
 									<input type="button" onclick="lo()" class="logout" value="로그아웃">
 								</div>
-							</c:when>
-							<c:when test="${user_id ne '' and adminchk lt '1'}">
+							</c:if>
+							<c:if test="${user_id ne '' and adminchk lt '1'}">
 								<p style="margin-bottom: 5px;">
 									<span class="login-admin">${admin }</span> 님 환영합니다
 								</p>
@@ -147,8 +134,7 @@
 									<input type="button" onclick="lo()" class="logout" value="로그아웃"
 										style="margin-top: 7px;">
 								</div>
-							</c:when>
-						</c:choose>
+							</c:if>
 						<!-- 로그인 시  -->
 
 

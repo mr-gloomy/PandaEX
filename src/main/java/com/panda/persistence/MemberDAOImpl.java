@@ -1,5 +1,8 @@
 package com.panda.persistence;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -17,7 +20,6 @@ public class MemberDAOImpl implements MemberDAO{
 			= LoggerFactory.getLogger(MemberDAOImpl.class);
 	
 	
-	
 	@Inject
 	private SqlSession sqlSession;
 	
@@ -30,28 +32,31 @@ public class MemberDAOImpl implements MemberDAO{
 		sqlSession.insert(NAMESPACE+".insert",vo);
 	}
 
-	@Override
-	public int idCheck(MemberVO vo) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public MemberVO getMember(String user_id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	@Override
 	public MemberVO loginMember(String user_id, String user_pw) {
-		sqlSession.insert(NAMESPACE+".login");
-		return null;
+		
+		//sqlSession.selectOne(statement,userid,userpw); (x)
+		//sqlSession.selectOne(statement,vo); (o) vo 객체 생성해서 set호출 저장
+		
+		// VO객체 안에 전달된 정보를 한번에 전달 불가능한 경우
+		// ->  관련없는 데이터를 1개 이상 전달하는 경우(join)
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		
+		//paramMap.put("mapper에 매핑될 이름", 데이터);
+		paramMap.put("user_id", user_id);
+		paramMap.put("user_pw", user_pw);
+		
+		MemberVO vo 
+		      = sqlSession.selectOne(NAMESPACE+".login",paramMap);
+		
+		return vo;
 	}
-
 	@Override
 	public MemberVO loginMember(MemberVO vo) {
-		sqlSession.insert(NAMESPACE+".login",vo);
-		return null;
+		
+		return sqlSession.selectOne(NAMESPACE+".login",vo);
 	}
 
 }

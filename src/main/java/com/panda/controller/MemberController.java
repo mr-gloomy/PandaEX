@@ -52,7 +52,7 @@ public class MemberController {
 //		log.info("@@@@@ kakao :" + kakaoAuthUrl);		
 //		model.addAttribute("kakaoURL", kakaoAuthUrl);
 	 
-		return "redirect:/member/login";
+		return "redirect:/main/index";
 	}
 	
 	// 회원가입 - POST
@@ -76,74 +76,57 @@ public class MemberController {
 	}
 
 	
-	// 아이디 중복 체크
-	@RequestMapping(value = "/idCheck", method = RequestMethod.GET)
-	public String idCheck(MemberVO vo, @ModelAttribute("userid") String user_id) throws Exception {
-		mylog.info("idCheck() 호출");
-		mylog.info("@@@@@@"+vo);
-		
-		MemberVO checkVO = service.getMember(user_id);
-		mylog.debug(checkVO + "");
-		
-		if(checkVO == null) {
-			//디비에 정보가 없음 -> 해당 아이디 사용 가능 
-			return "OK";
-		}else {
-			return "NO";
-			
-		}
-	}
-	//비밀번호 중복 체크 
-	
-	//로그인 get
-	
-	@GetMapping(value="/login")
-	public void loginGET() throws Exception{
-		mylog.debug("loginGET 호출");
-		//연결된 뷰페이지 구현
-	}
-	
 	//로그인 post
 	@PostMapping(value="/login")
-	public String loginPOST(MemberVO vo, HttpSession session) throws Exception{
+	public String loginPOST(MemberVO vo, HttpServletRequest request) throws Exception{
+		HttpSession session =request.getSession();	
 		mylog.debug("loginPOST() 호출");
 		
-		//전달 정보 저장(userid,userpw)
+		//전달 정보 저장(user_id,user_pw)
 		mylog.debug("로그인정보 :" + vo);
 		
 		//서비스 - DAO (로그인체크)
-		MemberVO loginStatus = service.memberLogin(vo);
-		mylog.debug("로그인상태 : " + loginStatus);
+		boolean loginStatus = service.memberLogin(vo);
+		mylog.debug(" 로그인 상태 : "+loginStatus);
 		
-		// 로그인 여부 확인
-		if(loginStatus != null) {
-		                    
-		session.setAttribute("user_id", loginStatus.getUser_id());
-		session.setAttribute("loginStatus", loginStatus);
-		session.setAttribute("user_name", loginStatus.getUser_name());
-		String user_id = (String)session.getAttribute("user_id");
-		String user_name = (String)session.getAttribute("user_name");
-		
-		mylog.info(user_id + "세션값");
-				
-		
-		//로그인 성공 시만 있게 하기 (실패 시 alert) -> main
-		
+		// 로그인 여부에 따라서 페이지 이동
+		// 성공 - main페이지 (실패시 alert으로 제어)
 		String resultURI="";
-		if(loginStatus != null) {
-			resultURI ="redirect:/main/index";
-			session.setAttribute("userid", vo.getUser_id());
-
-			}
-			return resultURI;
-
+		if(loginStatus) {
+			//return "redirect:/member/main";
+			resultURI = "redirect:/main/index";
+			session.setAttribute("user_id", vo.getUser_id());
+			session.setAttribute("user_name", vo.getUser_id());
+			session.setAttribute("user_nick", vo.getUser_id());
 		}else {
-			
+			//return "redirect:/member/login";
+			resultURI = "redirect:/main/index";
 		}
-		return "/main/index";
-
+		
+		return resultURI;
 	}
+	// http://localhost:8080/member/main
+		// 메인페이지
+		@RequestMapping(value = "/main",method = RequestMethod.GET)
+		public String mainGET(HttpSession session) throws Exception{
+			mylog.info(" mainGET() 호출 ");
+			
+			if(session.getAttribute("id") == null) {
+				mylog.debug("아이디 정보 없음");
+				return "redirect:/main/index";
+			}
+			
+			// 연결된 뷰페이지 호출		
+			return "/member/index";
+		}
+		
 	
+	//로그아웃
+	@GetMapping("/logout")
+	public String logout(HttpSession session) throws Exception {
+		session.invalidate();
+		return "/main/index";
+	}
 	
 	
 }
