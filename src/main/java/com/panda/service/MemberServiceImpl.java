@@ -41,14 +41,18 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	//로긴
 	
+	
+	//로긴
 	@Override
-	public boolean memberLogin(MemberVO vo) {
-		// TODO Auto-generated method stub
-		return false;
+	public MemberVO memberLogin(MemberVO vo) throws Exception {
+		dao.loginMember(vo);
+		
+		return null;
 	}
+
+
+	
 
 
 

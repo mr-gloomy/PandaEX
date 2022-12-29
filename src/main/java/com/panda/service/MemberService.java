@@ -10,12 +10,12 @@ public interface MemberService {
 		
 		
 		//아이디 중복체크
-		public int idCheck(MemberVO vo);
+		public int idCheck(MemberVO vo) throws Exception;
 
 		//회원조회
-		public MemberVO getMember(String user_id);
+		public MemberVO getMember(String user_id) throws Exception;
 
 		//로그인
-		public boolean memberLogin(MemberVO vo);
+		public MemberVO memberLogin(MemberVO vo) throws Exception;
 
 }

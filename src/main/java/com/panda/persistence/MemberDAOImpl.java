@@ -44,13 +44,13 @@ public class MemberDAOImpl implements MemberDAO{
 
 	@Override
 	public MemberVO loginMember(String user_id, String user_pw) {
-		// TODO Auto-generated method stub
+		sqlSession.insert(NAMESPACE+".login");
 		return null;
 	}
 
 	@Override
 	public MemberVO loginMember(MemberVO vo) {
-		// TODO Auto-generated method stub
+		sqlSession.insert(NAMESPACE+".login",vo);
 		return null;
 	}
 

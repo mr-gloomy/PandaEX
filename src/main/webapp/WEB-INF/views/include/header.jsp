@@ -103,7 +103,7 @@
 
 						<!-- 로그인 시 -->
 						<c:choose>
-							<c:when test="${user_id eq '' }">
+							<c:when test="${user_id == null }">
 								<p>
 									<strong>로그인</strong> 후 이용해주세요
 								</p>
@@ -118,9 +118,9 @@
 										value="회원가입" style="margin-top: 7px;">
 								</div>
 							</c:when>
-							<c:when test="${user_id ne '' and adminchk gt '0'}">
+							<c:when test="${user_id != null and adminchk gt '0'}">
 								<p>
-									<span>${user_pw }</span> 님 환영합니다
+									<span>${sessionScope.user_id}</span> 님 환영합니다
 								</p>
 								<ul>
 									<li><a class="my" href="#">내 정보<img class="right"

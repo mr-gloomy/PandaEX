@@ -35,7 +35,7 @@ public class MemberController {
 
 
 	
-	//http://localhost:8080/member/insert
+	//http://localhost:8080/main/index
 	
 	// 회원가입 - GET
 	@RequestMapping(value = "/insert", method = RequestMethod.GET)
@@ -112,7 +112,7 @@ public class MemberController {
 		mylog.debug("로그인정보 :" + vo);
 		
 		//서비스 - DAO (로그인체크)
-		boolean loginStatus = service.memberLogin(vo);
+		MemberVO loginStatus = service.memberLogin(vo);
 		mylog.debug("로그인상태 : " + loginStatus);
 		
 		// 로그인 여부 확인
@@ -124,23 +124,26 @@ public class MemberController {
 		String user_id = (String)session.getAttribute("user_id");
 		String user_name = (String)session.getAttribute("user_name");
 		
-		log.info(user_id + "세션값");
+		mylog.info(user_id + "세션값");
 				
 		
-		//로그인 성공 -> main
-		//로그인 실패 -> login 그대로..
+		//로그인 성공 시만 있게 하기 (실패 시 alert) -> main
 		
 		String resultURI="";
-		if(loginStatus) {
+		if(loginStatus != null) {
 			resultURI ="redirect:/main/index";
 			session.setAttribute("userid", vo.getUser_id());
-		
+
+			}
+			return resultURI;
+
+		}else {
+			
 		}
-		return resultURI;
-		
-		
+		return "/main/index";
+
 	}
 	
-	}
+	
 	
 }
