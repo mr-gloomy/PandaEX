@@ -4075,5 +4075,142 @@ opacity: 1;
 .member-join:hover {
     opacity: 1;
 }
+
+/*******************************************/
+/* 메인페이지 css */
+.main-filter {
+	width: 1350px;
+	border : 1px solid black;
+/* 	margin: 0px 261.5px 0px 261.5px; */
+}
+
+.rek {
+	width: 1380px;
+    margin: 0px 261.5px 0px 261.5px;
+	padding : 0px 15px 0px 15px;
+	display: block;
+	padding-bottom: 50px;
+}
+.rek .rek-item-container {
+	display: flex;
+    flex-direction: row;
+}
+.rek .rek-item-container .rek-ad{
+	width: 330px;
+	height: auto;
+	margin-right : 10px;
+	margin-left: 5px;
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+.rek .rek-item-container .rek-ad .ad-1{
+	margin-bottom: 10px;
+}
+.rek .rek-item-container .rek-ad .ad-2{
+	margin-bottom: 5px;
+}
+.rek .rek-item-container .rek-ad .ad-1,
+.rek .rek-item-container .rek-ad .ad-2{
+	width: 330px;
+    height: 250px;
+}
+
+.rek .rek-item-container .rek-item-rank{
+	width: 990px;
+    display: flex;
+    margin-top: 5px;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.rek .rek-item-container .rek-item-rank #rekrank{
+	width: 330px;
+    height: 250px;
+    margin-bottom : 10px;
+}
+.rek .rek-item-container .rek-item-rank #rekrank,
+.rek .rek-item-container .rek-ad #ad-all{
+	border-radius: 10px;
+	border: 1px solid #00000073;
+	opacity: 0.95;
+	
+}
+.rek .rek-item-container .rek-item-rank #rekrank:hover,
+.rek .rek-item-container .rek-ad #ad-all:hover{
+	opacity: 1;
+	transition : all 0.2s;
+	border: 1px solid black;
+}
+.rek .rek-item-container .rek-item-rank .rank-1,
+.rek .rek-item-container .rek-item-rank .rank-2,
+.rek .rek-item-container .rek-item-rank .rank-4,
+.rek .rek-item-container .rek-item-rank .rank-5{
+	margin-right : 10px;
+}
+.rek .rek-item-container .rek-item-rank .rank1-3{
+margin-top: 5px;
+}
+.rek .rek-item-container .rek-item-rank .rank1-3,
+.rek .rek-item-container .rek-item-rank .rank4-6{
+    display: flex;
+    flex-direction: row;
+}
+.rek .rek-item-container .rek-item-rank .rank-4,
+.rek .rek-item-container .rek-item-rank .rank-5,
+.rek .rek-item-container .rek-item-rank .rank-6,
+.rek .rek-item-container .rek-ad .ad-2{
+	margin-bottom: 5px;
+}
+.rekcontent {
+	padding : 15px 5px 15px 5px;
+	display: flex;
+}
+.rekcontent .rekimage img {
+	width: 150px;
+    height: 220PX;
+    margin-right: 5px
+}
+.rekcontent .rekimage{
+	border-radius: 10px;
+}
+
+.rektext{
+	width: 160px;
+}
+.rekcontent .rekimage .rektext .rek-location{
+	height: 22.5;
+    overflow: hidden;
+}
+.rekcontent .rektext .rek-go{
+	display: flex;
+    height: 130px;
+    align-items: center;
+    justify-content: center;
+    cursor: context-menu;
+}
+.rekcontent .rektext .rek-info div {
+	cursor: context-menu;
+}
+.rekcontent .rektext .rek-go .rek-go-btn {
+	padding: 8px;
+    border: 1px solid rgb(0 0 0 / 50%);
+    border-radius: 15px;
+    cursor : pointer;
+    margin-top: 10px;
+    display: none;
+}
+
+.rek .rek-item-container .rek-ad #ad-all:hover .rekcontent .rektext .rek-go .rek-go-btn,
+.rek .rek-item-container .rek-item-rank #rekrank:hover .rekcontent .rektext .rek-go .rek-go-btn{
+	display: block;
+	transition : display 0.5s;
+	animation : fadeIn 0.5s;
+}
+.rekcontent .rektext .rek-go a{
+	color: #666666;
+}
 /* 추가 - 김태홍  손대면 안됍니다!!!!*/
 /*////////////////////////////////////////////////////////*/
