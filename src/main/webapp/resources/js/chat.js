@@ -60,3 +60,30 @@ $(function(){
 });
 
 //$( 'p' ).slideUp( 200 ).delay( 2000 ).slideDown( 200 );
+
+// 채팅창 제어
+$(function(){
+	$('#chatOpen').on('click',function(){
+		
+		var id = $('#idVal').val();
+		
+		$.ajax({
+			url:'/chat/getRooms/'+id,
+			type:'get',
+			contentType:"application/json; charset:UTF-8",
+			success:function(data) {
+				$(data).each(function(index,item) {
+					var date = new Date(item.msg_date);
+					var month = date.getMonth()+1;
+					var msg = JSON.parse(item.message);
+					alert(msg);
+					$(".chat-position").append("<div class='yes-chatroom'><c:choose><c:when test='${oppenent == '' }'>"
+								+"<img class='opponent-img src='/resources/images/icons/man.png'></c:when><c:when test='${oppenent != '' }'>"
+								+"<img class='opponent-img' src='${oppenent }'></c:when></c:choose><div class='nameandtext'><div class='oppname'>"+item.receive_id+"</div>"						
+								+"<div class='text'>"+msg.msg+"</div><div class='timeposition'>"
+								+"<div class='lasttime'>"+month+"."+date.getDate()+"</div></div></div></div>");
+				});
+			}
+		});
+	});
+});
