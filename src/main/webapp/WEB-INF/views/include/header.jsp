@@ -8,6 +8,9 @@
 
 <header>
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<jsp:include page="../addon/chat.jsp"/>
+<script src="/resources/js/main.js"></script>
+<script src="/resources/js/chat.js"></script>
 	<!-- 임시 -->
 	<script>
 		function mo() {
@@ -25,7 +28,7 @@
 	<c:set var="admin" value="관리자" />
 	<c:set var="adminchk" value="1" />
 	<!-- 밸류값 0 : 일반유저, 1: 어드민 입니다. -->
-	<c:set var="user_id" value="null" />
+	<c:set var="user_id" value="" />
 	<!-- 밸류값 null : 비로그인상태, null제외한 다른값 로그인상태화면 -->
 
 
@@ -59,7 +62,7 @@
 					<div
 						class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search"
 						style="padding-right: 0px;">
-						<a href="#" memo="채팅방연동예정"> <img class="panda-header-chaticon"
+						<a  memo="채팅방연동예정"> <img id="chat-on" class="panda-header-chaticon"
 							src="/resources/images/icons/Panda_Chat.png" alt="panda-chat">
 							<img class="panda-header-chaticon-hover"
 							src="/resources/images/icons/panda_chat_hover.gif"
@@ -84,11 +87,11 @@
 					<div class="category">
 						<div class="user-sel-images">
 							<c:choose>
-								<c:when test="${user_id eq 'null'}">
+								<c:when test="${user_id eq ''}">
 									<img class="bamboo" src="/resources/images/icons/bamboo.png"
 										style="margin-left: 166px;">
 								</c:when>
-								<c:when test="${user_id ne 'null' and adminchk lt '1' }">
+								<c:when test="${user_id ne '' and adminchk lt '1' }">
 									<img class="bamboo" src="/resources/images/icons/bamboo.png"
 										style="height: 88px;">
 								</c:when>
@@ -100,7 +103,7 @@
 
 						<!-- 로그인 시 -->
 						<c:choose>
-							<c:when test="${user_id eq 'null' }">
+							<c:when test="${user_id eq '' }">
 								<p>
 									<strong>로그인</strong> 후 이용해주세요
 								</p>
@@ -115,7 +118,7 @@
 										value="회원가입" style="margin-top: 7px;">
 								</div>
 							</c:when>
-							<c:when test="${user_id ne 'null' and adminchk gt '0'}">
+							<c:when test="${user_id ne '' and adminchk gt '0'}">
 								<p>
 									<span>${user_pw }</span> 님 환영합니다
 								</p>
@@ -132,7 +135,7 @@
 									<input type="button" onclick="lo()" class="logout" value="로그아웃">
 								</div>
 							</c:when>
-							<c:when test="${user_id ne 'null' and adminchk lt '1'}">
+							<c:when test="${user_id ne '' and adminchk lt '1'}">
 								<p style="margin-bottom: 5px;">
 									<span class="login-admin">${admin }</span> 님 환영합니다
 								</p>
@@ -219,7 +222,36 @@
 </header>
 </head>
 
+ <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script type="text/javascript">
+	
+	
+	// 아이디 틀렸을 경우
+    $(document).ready(function() {
+       //alert('팝업!');
+       $('#login').submit(function(){
+	//	alert("테스트");
+	//	alert($('#loginid').val());
+       if ($('#user_id').val()=="") {
+          alert('입력하신 정보가 틀립니다.');
+          return false;
+          }
 
+    // 비밀번호 틀렸을 경우
+       if($('#user_pw').val()=="") {
+          alert('입력하신 정보가 틀립니다.');
+          return false;
+          }
+    
+    // 아이디, 비밀번호 일치하는 경우
+//     	if($('#loginid').val()==$('id'.val()) && $('#loginpw').val()==$('pw'.val() {
+//     		alert('환영합니다!');
+//     		return false;
+//    			}
+    	});
+          });
+		
+	</script>
 
 <!-- 로그인 모달창 -->
 <script
@@ -234,20 +266,27 @@
 			class="modalhide">
 		<img src="/resources/images/icons/back.png" alt="IMG-back"
 		class="back-joinpage">
-			<form class="ajax-login" >
+			
+			<form action="/member/login" method="post" id="login">
 		<div class="modal-text">
 			<img src="/resources/images/icons/user.png" alt="id입력"
 				class="userimg">
 			<!-- 			<img src="/resources/images/icons/reset.png" alt="idreset" id="idreset" class="resetimg"> -->
+			
 			<input type="text" id="user_id" name="user_id" placeholder="PANDA ID"
 				maxlength="10" class="id" onkeypress="chkCapsLock(event)"
-				onclick="chkCapsLock(event)" onblur="chkCapsLock1(event)" autocomplete="off" class="id"> <img
-				src="/resources/images/icons/pass.png" alt="id입력" class="passimg">
+				onclick="chkCapsLock(event)" onblur="chkCapsLock1(event)" autocomplete="off" class="id" > 
+				
+				<img src="/resources/images/icons/pass.png" alt="id입력" class="passimg">
 			<!-- 			<img src="/resources/images/icons/reset.png" alt="idreset" id="pwreset"class="resetimg"> -->
+			
+			
 			<input type="password" id="user_pw" name="user_pw"
 				placeholder="PANDA PW" maxlength="15" class="pass"
 				onkeypress="chkCapsLock(event)" onclick="chkCapsLock(event)"
 				onblur="chkCapsLock1(event)" autocomplete="new-password">
+				
+				
 			<div id="capslock"
 				style="font-size: 12px; margin: -2px 0 0 200px; color: darkblue; position: absolute;"></div>
 			<div class="check-box">
@@ -258,7 +297,8 @@
 			</div>
 		</div>
 		<div class="login-submit">
-			<input type="button" value="로그인" class="submit">
+			<input type="submit" value="로그인" >
+			<!-- 로그인 실패 시, ajax 로 얼럿 뜨게 만들기(페이지 이동 막기) -->
 		</div>
 				</form>
 		<div class="find">
@@ -277,12 +317,13 @@
 		</div>
 			<img class="kakaologin" src="/resources/images/icons/kakao_login_large_wide.png">
 		<div class="modal-join">
+		<form action="/member/insert" method="post">
 			<div class="join-text">
-				<input id="user-id-join" type="text" placeholder="아이디" maxlength="10" autocomplete="off" >
+				<input id="user-id-join" type="text" placeholder="아이디" maxlength="10" autocomplete="off" name="user_id">
 				<div id="tooltip" class="idtooltip">아이디는 영어,숫자 5~10글자, 한글,특수문자 사용불가</div>
 				<input id="user-pw-join" type="password" placeholder="비밀번호"maxlength="15"
 				onkeypress="chkCapsLock2(event)" onclick="chkCapsLock2(event)"
-				onblur="chkCapsLock3(event)" autocomplete="new-password">
+				onblur="chkCapsLock3(event)" autocomplete="new-password" name="user_pw">
 				<img class="capsl" src ="/resources/images/icons/capslock.png" alt="캡스락">
 				<div id="tooltip" class="pwtooltip">비밀번호는 영어대/소문자, 숫자, 특수기호 포함 8~15글자, 한글사용 불가</div>
 				<div class="passlv">
@@ -293,9 +334,9 @@
 					<input type="text" readonly class="lv3" tabindex="-1">
 					<!-- 비밀번호는 영어대/소문자,숫자,특수기호 8~15글자, 한글사용불가 -->
 				</div>
-				<input id="user-name-join" type="text" placeholder="이름입력" maxlength="6" autocomplete="off">
+				<input id="user-name-join" type="text" placeholder="이름입력" maxlength="6" autocomplete="off" name="user_name">
 				<div id="tooltip" class="nametooltip">본명을 입력해주세요</div>
-				<input id="user-nick-join" type="text" placeholder="닉네임" maxlength="10" autocomplete="off">
+				<input id="user-nick-join" type="text" placeholder="닉네임" maxlength="10" autocomplete="off" name="user_nick">
 				<div id="tooltip" class="nicktooltip" >사용하실 닉네임을 입력해주세요.</div>
 				<div class="tellsel">
 					<div id="tel">
@@ -308,7 +349,7 @@
 							</div>
 					</div>
 					<input id="user-tel-join" class="telephone" type="tel" placeholder="핸드폰번호"
-						maxlength="13" autocomplete="off"> <input type="button"
+						maxlength="13" autocomplete="off" name="user_tel"> <input type="button"
 						class="tel-certification" value="문자전송" tabindex="-1">
 				</div>
 				<div id="tooltip" class="teltooltip">핸드폰번호를 입력하세요.</div>
@@ -319,7 +360,7 @@
 					<input type="hidden" class="sucess-certification" value="" memo="인증완료 시 밸류값저장(0/1)" tabindex="-1">
 				</div>
 				<div class="mylocation">우리동네 조회하기</div>
-				<div class="findloca">
+				<div class="findloca"> <!-- 배열로 넣기  -->
 					<input type="text" id="si" readonly tabindex="-1"> <input type="text"
 						id="gu" readonly tabindex="-1"> <img
 						src="/resources/images/icons/placeholder.png" id="findlocation">
@@ -333,9 +374,26 @@
 						<input id="advertising-chk" type="checkbox" tabindex="-1"><p>판다 서비스 이용 중 판다가 제공하는 고객맞춤 컨텐츠 추천 등 광고 정보를 수신합니다.</p>
 						<input id="advertising-chk-val" value="0" type="hidden" memo="advertising-chk y/n" tabindex="-1">
 				</div>
-				<input id="join-success" type="button" value="판다 중고거래 시작하기" >
+				<input type="submit" value="회원가입" class="member-join">
 			</div>
+			</form>
 		</div>	
+		<div class="modal-findid">
+			<div class="findid-input">
+				<input type="text" id="findid-id" placeholder="가입하신 이름을 입력해주세요." maxlength="6" autocomplete="off">
+				<input type="text" id="findid-nick" placeholder="사용중인 닉네임을 입력해주세요." maxlength="10" autocomplete="off">
+				<div class="error-text">&nbsp;</div>
+				<input id="search-id" type="button" value="아이디 찾기">
+			</div>
+		</div>
+		<div class="modal-findpw">
+			<div class="findpw-input">
+				<input type="text" id="findpw-pw" placeholder="사용중인 아이디를 입력해주세요." maxlength="6" autocomplete="off">
+				<input type="text" id="findpw-tel" placeholder="가입하신 전화번호 입력해주세요." maxlength="10" autocomplete="off">
+				<div class="error-text">&nbsp;</div>
+				<input id="search-pw" type="button" value="비밀번호찾기">
+			</div>
+		</div>
 	</div>
 </div>
 

@@ -14,4 +14,10 @@ public interface BoardDAO {
 	
 	// 조회수 증가
 	public void upCnt(Integer bno)throws Exception;
+	
+	// 글 내용 가져오기
+	public BoardVO getContent(Integer bno)throws Exception;
+	
+	// 글 수정하기
+	public Integer updateBoard(BoardVO vo)throws Exception;
 }

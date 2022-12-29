@@ -66,7 +66,7 @@ public class AdminController {
 	// 공지사항 게시판 list GET
 	// http://localhost:8080/admin/list
 	@RequestMapping(value = "/list",method = RequestMethod.GET)
-	public void listGET(Model model,HttpSession session,@ModelAttribute("result") String result)throws Exception {
+	public void listGET(Model model,HttpSession session)throws Exception {
 		
 		mylog.debug(" listGET() 호출 ");
 		
@@ -80,27 +80,57 @@ public class AdminController {
 		}
 		
 	// 게시판 본문보기 GET
+	// http://localhost:8080/admin/content
+	// http://localhost:8080/admin/content?bno=1
 	@RequestMapping(value = "/content",method = RequestMethod.GET)
 	public void contentGET(Model model,@RequestParam("bno") int bno,HttpSession session) throws Exception{
 		mylog.debug(" contentGET() 호출 => 글번호(bno) : "+bno);
 		
 		
-		boolean isUpdateCheck = (boolean)session.getAttribute("result");
+		boolean isUpdateCheck = (boolean)session.getAttribute("updateCheck");
+		mylog.debug(" 조회수 증가 전 isUpdateCheck : "+isUpdateCheck);
+		
 		
 		if(isUpdateCheck) {
 			// list >> content 로 왔을때만 
 			mylog.debug(" 조회수 1증가 ! ");
 			
+			
 			session.setAttribute("updateCheck", !isUpdateCheck);
+			
+			mylog.debug(" isUpdateCheck : "+isUpdateCheck);
 			
 			service.upReadCnt(bno);
 			
 		}
+		
 		// 서비스 -> DAO (특정 글번호에 해당하는 정보 가져오기)
+		BoardVO cvo = service.getContent(bno);
 		
+		model.addAttribute("cvo", cvo);
 		
+	}
+	
+	
+	// 게시판 수정 GET
+	@RequestMapping(value = "/modify",method = RequestMethod.GET)
+	public void modifyGET(Model model,@ModelAttribute("bno") int bno)throws Exception{
+		model.addAttribute("cvo", service.getContent(bno));	
 		
+	}
+	
+	// 게시판 수정 POST
+	@RequestMapping(value = "/modify",method = RequestMethod.POST)
+	public String modifyPOST(BoardVO vo,RedirectAttributes rttr)throws Exception{
+		Integer result = service.updateBoard(vo);
 		
+		if(result>0) {
+			// "수정완료" - 정보전달
+			rttr.addFlashAttribute("result","modOK");
+			
+		}
+		
+		return "";
 	}
 	
 }

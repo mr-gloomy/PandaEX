@@ -2,28 +2,28 @@
 👍💚판다 (PANDA)💚🥁
 - 중고 거래 & 기부 경매 사이트 
 
-📋 사용 기능
-Spring Framework
-Java 11
-JSP
-MySQL
-Javascript
-Jquery
-HTML5
-CSS3
-AJAX
-Jsoup
-Json
+## 📋 사용 기능
+- Spring Framework
+- Java 11
+- JSP
+- MySQL
+- Javascript
+- Jquery
+- HTML5
+- CSS3
+- AJAX
+- Jsoup
+- Json
 
 
-[회원팀] 
+##[회원팀] 
 - 네이버, 카카오 API를 이용한 간편 로그인 구현 
 
 - 메인 사이트에서 바로 확인 가능한 모달 로그인 / 회원가입 기능 구현 (ajax 사용) 
 - 챗봇 기능 
 - 현재 위치 받아오기 기능 구현 (크롬 브라우저) 
 
-[상품 & 경매팀]
+##[상품 & 경매팀]
 - 중고거래 사이트 내에서 상품 거래 페이지, 상세 페이지 등 구현 
 - 채팅 기능 구현 
 - 검색 기능 구현 
@@ -31,7 +31,7 @@ Json
 - ~~기능ㄴ, ~~기능 사용
 
 
-[결제팀]
+##[결제팀]
 - 금융결제원 API를 활용한 결제 시스템 구축
 -
 -

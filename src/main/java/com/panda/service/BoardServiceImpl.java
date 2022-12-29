@@ -34,6 +34,21 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void upReadCnt(Integer bno) throws Exception {
 		
+		dao.upCnt(bno);
+	}
+
+	@Override
+	public BoardVO getContent(Integer bno) throws Exception {
+		
+		
+		return dao.getContent(bno);
+	}
+
+	@Override
+	public Integer updateBoard(BoardVO vo) throws Exception {
+		
+		
+		return dao.updateBoard(vo);
 	}
 
 }

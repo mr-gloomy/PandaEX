@@ -1,0 +1,241 @@
+@charset "UTF-8";
+
+.chat{
+    display: none;
+    flex-direction: column;
+    right: 5.5%;
+    top: 13%;
+    position: fixed;
+    z-index: 1000;
+    width: 250px;
+    height: 450px;
+  	background-image: linear-gradient(to bottom, #423a3a, #bdbdb6);
+    border-radius: 30px;
+    border: 6px solid black;
+    align-items: center;
+    cursor : context-menu;
+    animation: slideDown 1.5s;
+}
+
+.chat .chat-body .chat-top{
+	width: 130px;
+    height: 20px;
+    background: black;
+    border-radius: 0 0 10px 10px;
+    z-index : 1002;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+	}
+.chat .chat-body .chat-top p{
+	color : white;
+	font-size: 14px;
+    padding-bottom: 3px;
+}
+.chat .chat-body .chat-top .chat-clock {
+	position: absolute;
+    margin-left: -175px;
+    font-size: 11px;
+    color : white;
+}
+.chat .chat-body{
+	z-index : 1000;
+}
+.chat .chat-footer{
+	margin-top: 353px;
+    width: 238px;
+    height: 65px;
+    background: #605f5f;
+    border-radius: 0 0 24px 24px;
+    display: flex;
+	justify-content: center;
+    align-items: center;
+}
+.chat .chat-footer .off{
+    width: 40px;
+    height: 40px;
+    opacity: 0.4;
+    z-index: 1001;
+}
+.chat .chat-footer .off1{
+    position: absolute;
+    background: #9d9d9d9c;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    opacity: 0.4;
+    z-index: 1000;
+}
+.chat .chat-footer .off:hover{
+  opacity: 1;
+}
+.chat .chat-footer .off:hover .iff1{
+  opacity: 1;
+}
+
+.chat .chat-body .chat-top .wi-fi{
+	margin-left: 192px;
+	width: 18px;
+    height: 18px;
+    position: absolute;
+}
+.chat .chat-body .chat-top .signal{
+	width: 15px;
+    height: 15px;
+    margin-left: 150px;
+    position: absolute;
+}
+.chat .chat-body .chat-menu{
+	display: flex;
+	justify-content: flex-end;
+}
+
+.chat .chat-body .chat-menu .chatting,
+.chat .chat-body .chat-menu .option{
+	position: absolute;
+    width: 27px;
+    height: 27px;
+    margin-top: 10px;
+    opacity: 0.7;
+}
+.chat .chat-body .chat-menu .chatting:hover,
+.chat .chat-body .chat-menu .option:hover{
+	opacity: 1;
+}
+.chat .chat-body .chat-menu .option{
+	margin-right: -46px;
+}
+.chat .chat-body .chat-menu .chatting{
+	margin-right: -15px;
+}
+.chat .chat-body .chat-menu,
+.chat .chat-body .menu-name {
+	margin-top : 0px;
+}
+.chat .chat-body .menu-name{
+    margin-left: -45px;
+    color: #ffffffb5;
+    position: absolute;
+    margin-top: 14px;
+}
+.chat .chat-body .addv1 .addv{
+	width: 200px;
+    height: 35px;
+    cursor: pointer;
+}
+.chat .chat-body .addv1{
+	display: flex;
+    justify-content: center;
+    align-items: center;
+	margin-left: -45px;
+    margin-top: 45px;
+    width: 220px;
+    height: 40px;
+    position: absolute;
+    border-radius: 3px;
+    background: white;
+}
+.chat .chat-body .addv1 .addt{
+	position: absolute;
+    margin: -29px 202px 0 0;
+    font-size: 10px;
+    color: #9d5454;
+    font-weight: bold;
+}
+.chat .chat-body .chat-list{
+	display: flex;
+	position: absolute;
+	flex-direction: column;
+	width: 220px;
+    height: 255px;
+    overflow:  overlay;
+}
+.chat .chat-body .chat-list::-webkit-scrollbar{
+	width: 10px;
+	border-radius: 20px;
+}
+.chat .chat-body .chat-list::-webkit-scrollbar-thumb{
+	background-color: #2f3542;
+	height: 10px;
+	border-radius: 20px;
+	background-clip: padding-box;
+    border: 1px solid transparent;
+}
+.chat .chat-body .chat-list::-webkit-scrollbar-track{
+	background-color: grey;
+    border-radius: 20px;
+}
+
+.chat .chat-body .chat-list,
+.chat .chat-body .option-list{
+	margin: 90px 0px 0px -45px;
+    color: white;
+}
+.chat .chat-body .chat-list .nochat{
+	width: 50px;
+    position: absolute;
+    height: 50px;
+    margin: 70px 0px 0px 80px;
+}
+.chat .chat-body .chat-list .no-chatroom{
+	margin: 135px 0px 0px 15px;
+}
+.chat .chat-body .chat-list .chat-position{
+	display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+.chat .chat-body .chat-list .chat-position .yes-chatroom{
+	margin-top: 5px;
+    margin-bottom: 0px;
+    width: 220px;
+    height: 50px;
+    border-radius: 5px;
+    background: rgb(159 155 155 / 10%);
+    border: 0.1px solid #efe1e138;
+    box-shadow: 0px 0.5px 0px 0px rgb(0 0 0 / 20);
+    cursor : pointer;
+}
+.chat .chat-body .chat-list .chat-position .yes-chatroom .opponent-img{
+	width: 22px;
+    height: 22px;
+    position: absolute;
+    margin-top: 3px;
+    background: white;
+    border-radius: 50%;
+}
+.chat .chat-body .chat-list .chat-position .yes-chatroom .nameandtext{
+	display: flex;
+    flex-direction: column;
+    margin: -22px 0px 0px 25px;
+    font-size: 11px;
+    margin-top: 0px;
+}
+.chat .chat-body .chat-list .chat-position .yes-chatroom .nameandtext .text{
+	width: 105px;
+    height: 30px;
+    overflow: hidden;
+}
+.chat .chat-body .chat-list .chat-position .yes-chatroom .timeposition{
+	display: flex;
+    justify-content: flex-end;
+    margin: -45px 15px 0px 0px;
+}
+.chat .chat-body .option-list{
+	display: flex;
+    position: absolute;
+    flex-direction: column;
+    font-size: 15px;
+}	
+.chat .chat-body .option-list .background div {
+	cursor: pointer;
+	opacity: 0.7;
+}
+.chat .chat-body .option-list .background div:hover {
+	opacity: 1;
+}
+.chat .chat-body .option-list .backsel {
+	color: #ffffffb5;
+	border-bottom: 1px solid #ffffffb5;
+}

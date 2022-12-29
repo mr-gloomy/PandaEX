@@ -72,7 +72,7 @@ public class MemberController {
 //		out.println("location.href='/member/login'");
 //		out.println("</script>");
 //		out.close();
-		return "redirect:/member/login";
+		return "redirect:/main/index";
 	}
 
 	
@@ -115,23 +115,32 @@ public class MemberController {
 		boolean loginStatus = service.memberLogin(vo);
 		mylog.debug("로그인상태 : " + loginStatus);
 		
+		// 로그인 여부 확인
+		if(loginStatus != null) {
+		                    
+		session.setAttribute("user_id", loginStatus.getUser_id());
+		session.setAttribute("loginStatus", loginStatus);
+		session.setAttribute("user_name", loginStatus.getUser_name());
+		String user_id = (String)session.getAttribute("user_id");
+		String user_name = (String)session.getAttribute("user_name");
+		
+		log.info(user_id + "세션값");
+				
+		
 		//로그인 성공 -> main
 		//로그인 실패 -> login 그대로..
 		
 		String resultURI="";
 		if(loginStatus) {
-			resultURI ="redirect:/member/main";
+			resultURI ="redirect:/main/index";
 			session.setAttribute("userid", vo.getUser_id());
 		
-		}else {
-			resultURI = "redirect:/member/login";    //ajax	호출..?
-			
 		}
 		return resultURI;
 		
 		
 	}
 	
-
+	}
 	
 }
