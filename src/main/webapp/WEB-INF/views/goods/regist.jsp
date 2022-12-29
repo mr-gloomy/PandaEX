@@ -16,7 +16,6 @@
     margin-top: 0.25rem;
     margin-left: 0rem;
 }
-
 </style>
 
 </head>
@@ -37,11 +36,13 @@
 		 	<!-- 숨겨진항목 --> 
 		    <input type="hidden" name="goods_no">
 		    <input type="hidden" name="goods_donation" value="0"> <!-- 0: 중고상품 1: 기부상품 -->
+		    <input type="hidden" name="goods_like" value="1"> <!-- 0: on 1: off -->
+		    <input type="hidden" name="goods_trade" value="0"> <!-- 0:거래전, 1:거래중, 2:거래후 --> 
 		    
 		    <!-- 보이는 항목 -->
 		    <label for="inputEmail3" class="col-sm-2 col-form-label">상품이미지</label>
 		    <div class="col-sm-10">
-<!-- 		      <input type="file" name="goods_image" accept="image/jpg, image/jpeg, image/png" multiple=""> -->
+		      <input type="file" name="goods_image" accept="image/jpg, image/jpeg, image/png" multiple="">
 			  <div class="sc-hkaZBZ fIHSLw">
 				<b>* 상품 이미지는 640x640에 최적화 되어 있습니다.</b> 
 				<br>- 상품 이미지는 PC에서는 1:1, 모바일에서는 1:1.23 비율로 보여집니다. 
@@ -56,15 +57,16 @@
 		    <label for="inputEmail3" class="col-sm-2 col-form-label">카테고리</label>
 		    <div class="col-sm-10">
 			  <div class="sc-hkaZBZ fIHSLw">
-			  	<select class="form-select" name="goods_category" naria-label="Default select example" >
+			  	<select class="form-select" name="goods_category" >
 				  <option selected>카테고리를 입력하세요</option>
-				  <option value="1">전자기기</option>
-				  <option value="2">의류/뷰티/잡화</option>
-				  <option value="3">생활가전/주방</option>
-				  <option value="4">인테리어/가구</option>
-				  <option value="5">도서/티켓/가구</option>
-				  <option value="6">식품</option>
-				  <option value="7">기타 중고물품</option>
+				  <option value="All">All</option>
+				  <option value="전자기기">전자기기</option>
+				  <option value="의류/뷰티/잡화">의류/뷰티/잡화</option>
+				  <option value="생활가전/주방">생활가전/주방</option>
+				  <option value="인테리어/가구">인테리어/가구</option>
+				  <option value="도서/티켓/교환권">도서/티켓/교환권</option>
+				  <option value="식품">식품</option>
+				  <option value="기타 중고물품">기타 중고물품</option>
 				</select>
 			  </div>
 		    </div>

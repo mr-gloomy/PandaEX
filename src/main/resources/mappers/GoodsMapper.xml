@@ -2,16 +2,24 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
+
 <mapper namespace="com.panda.mapper.GoodsMapper">
+
 	
-	<!-- 중고상품 등록 -->
+	<!-- 상품 등록(user_nick 빠짐) -->
 	<insert id="createGoods">
-		insert into goods(goods_image,goods_category,goods_title,goods_condition,goods_price,goods_discount,goods_detail,goods_like,goods_donation)
-		values (#{goods_image},#{goods_category},#{goods_title},#{goods_condition},#{goods_price},#{goods_discount},#{goods_detail},#{goods_like},#{goods_donation})
+		insert into goods(goods_category,goods_title,goods_condition,goods_price,goods_discount,goods_detail,goods_refund,goods_like,goods_donation)
+		values(#{goods_category},#{goods_title},#{goods_condition},#{goods_price},#{goods_discount},#{goods_detail},#{goods_refund},#{goods_like},#{goods_donation})
 	</insert> 
 	
+	<!-- 상품목록 -->
 	
+	<!-- 게시판 전체목록(all) -->
+	<select resultType="GoodsVO"  id="listAll">
+		select * from goods 
+		where goods_donation = 0
+	</select>
+		
 	
 
 
