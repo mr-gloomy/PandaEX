@@ -37,19 +37,19 @@ $(function(){
 $(function(){
 	$('.bluegreen').on('click',function(){
 		$('.chat').css("background-image","linear-gradient(135deg, #040d5c 0%, #02aa0d 100%)");
-		$('.chat-footer').css("background-image","linear-gradient(135deg, #040d5c 0%, #02aa0d 100%)");
+		$('.chat-footer').css("background","none");
 	});
 	$('.orangered').on('click',function(){
 		$('.chat').css("background-image","linear-gradient(135deg, #370942 0%, #ed6605 100%)");
-		$('.chat-footer').css("background-image","linear-gradient(135deg, #370942 0%, #ed6605 100%)");
+		$('.chat-footer').css("background","none");
 	});
 	$('.pupplewine').on('click',function(){
 		$('.chat').css("background-image","linear-gradient(135deg, #040d5c 0%, #02aa0d 100%)");
-		$('.chat-footer').css("background-image","linear-gradient(135deg, #040d5c 0%, #02aa0d 100%)");
+		$('.chat-footer').css("background","none");
 	});
 	$('.Lavender').on('click',function(){
 		$('.chat').css("background-image","linear-gradient(135deg, #fa98f7 0%, #076387 100%)");
-		$('.chat-footer').css("background-image","linear-gradient(135deg, #fa98f7 0%, #076387 100%)");
+		$('.chat-footer').css("background","none");
 	});
 	$('.blacksimple').on('click',function(){
 		$('.chat').css("background-image","linear-gradient(to bottom, #423a3a, #bdbdb6)");
