@@ -4,11 +4,11 @@
 <%@ page session="false" %>
 <html>
 <head>
-	<title>Home</title>
+	<title>openBank</title>
 </head>
 <body>
 <h1>
-	Hello world!  
+	openBank.jsp 
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
@@ -16,7 +16,7 @@
 <!-- 필수조건 : 필수 Y -->
 
 <!-- 인증 요청 작업 수행 -->
-<form action="https://testapi.openbanking.or.kr/oauth/2.0/authorize" method="get">
+<form action=" https://testapi.openbanking.or.kr/oauth/2.0/authorize" method="get">
  <!-- 고정값 : code -->
 <input type="hidden" name="response_type" value="code">
 <!-- 오픈뱅킹에서 발급한 이용기관 앱의 Client ID -->
@@ -32,6 +32,7 @@
 
 <input type="submit" value="인증하고 토큰발급">
 </form>
+
 
 </body>
 </html>
