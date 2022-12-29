@@ -1,6 +1,6 @@
 package com.panda.openbanking.domain;
 
-public class RequestTokenVO {
+public class RequestTokenVO { // 응답 메시지
 	private String code;
 	private String scope;
 	private String client_info;

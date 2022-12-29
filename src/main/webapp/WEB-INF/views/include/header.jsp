@@ -69,7 +69,9 @@
 					<div
 						class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search"
 						style="padding-right: 0px;">
-						<a  memo="채팅방연동예정"> <img id="chat-on" class="panda-header-chaticon"
+						<a id="chatOpen">
+						 <input type="hidden" id="idVal" value="${user_id }">
+						 <img id="chat-on" class="panda-header-chaticon"
 							src="/resources/images/icons/Panda_Chat.png" alt="panda-chat">
 							<img class="panda-header-chaticon-hover"
 							src="/resources/images/icons/panda_chat_hover.gif"
