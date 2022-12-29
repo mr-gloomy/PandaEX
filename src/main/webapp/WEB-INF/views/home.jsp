@@ -23,10 +23,10 @@
 <input type="hidden" name="client_id" value="e20ec780-27a9-4ce1-9055-6722c59fac24">
 <!-- 사용자 인증이 성공하면 이용기관으로 연결되는 URL callback_uri -->
 <input type="hidden" name="redirect_uri" value="http://localhost:8080/openbanking/callback">
-<!-- Access Token 권한 범위 -->
+<!-- Access Token 권한 범위 			 로그인  조회   이체 -->
 <input type="hidden" name="scope" value="login inquiry transfer">
 <!-- 보안위협에 대응하기 위해 세팅하는 난수값 (32자리) -->
-<input type="hidden" name="state" value="123456781234567812345678">
+<input type="hidden" name="state" value="12345678123456781234567812345678">
 <!-- 사용자인증타입 구분주 2) (0:최초인증, 1:재인증, 2:인증생략) -->
 <input type="hidden" name="auth_type" value="0">
 

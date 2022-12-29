@@ -88,6 +88,7 @@ public class OpenBankingApiClient {
 				new HttpEntity<String>(setHeaderAccessToken(userInfoRequestVO.getAccess_token()));
 		
 		// user_seq_no 파라미터
+		// http://testapi.openbanking.or.kr/v2.0/user/me?user_seq_no=11111
 		UriComponents uriBuulder = UriComponentsBuilder.fromHttpUrl(requestUrl)
 				.queryParam("user_seq_no", userInfoRequestVO.getUser_seq_no()).build();
 	
