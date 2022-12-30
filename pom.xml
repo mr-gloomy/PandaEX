@@ -211,6 +211,27 @@
 	    <artifactId>spring-websocket</artifactId>
 	    <version>${org.springframework-version}</version>
 	</dependency>
+	  <!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+	  <dependency>
+	    <groupId>commons-fileupload</groupId>
+	    <artifactId>commons-fileupload</artifactId>
+	    <version>1.3.3</version>
+	  </dependency>
+	  
+	  <!-- https://mvnrepository.com/artifact/net.coobird/thumbnailator -->
+	  <dependency>
+	    <groupId>net.coobird</groupId>
+	    <artifactId>thumbnailator</artifactId>
+	    <version>0.4.8</version>
+	  </dependency>
+	  
+	  <!-- https://mvnrepository.com/artifact/javax.annotation/javax.annotation-api -->
+	  <dependency>
+	    <groupId>javax.annotation</groupId>
+	    <artifactId>javax.annotation-api</artifactId>
+	    <version>1.3.2</version>
+	  </dependency>
+	
 
 
       <!-- 외부 라이브러리 추가 -->    

@@ -1,7 +1,9 @@
 package com.panda.controller;
 
+import java.io.File;
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
@@ -18,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.panda.domain.GoodsVO;
 import com.panda.service.GoodsService;
+import com.panda.utils.UploadFileUtils;
 
 @Controller
 @RequestMapping("/goods/*")
@@ -30,6 +33,10 @@ public class GoodsController {
 	@Inject
 	private GoodsService service;
 	
+	// 이미지 썸네일 작업
+	@Resource(name="uploadPath")
+	private String uploadPath;
+	
 	// http://localhost:8080/goods/regist
 	// http://localhost:8080/goods/list
 	
@@ -41,19 +48,33 @@ public class GoodsController {
 	
 	// 상품 글쓰기 POST
 	@RequestMapping(value = "/regist", method = RequestMethod.POST)
-	public String registPOST(GoodsVO gvo) throws Exception {
+	public String registPOST(GoodsVO gvo, MultipartFile file) throws Exception {
 		mylog.debug(" /goods/regist(POST) 호출 ");	
 		mylog.debug(" GET방식의 데이터 전달 -> DB 저장 -> 페이지 이동 ");
 		// 0. 한글처리 (필터)
 		// 1. 전달된 정보 저장 
 		mylog.debug(gvo.toString());
 		
-		// 2. 서비스 -> DAO 접근 (mapper)
+		// 2. 이미지 파일 첨부
+		String imgUploadPath = uploadPath + File.separator + "imgUpload";
+		String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+		String fileName = null;
+
+		if(file != null) {
+		 fileName =  UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath); 
+		} else {
+		 fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
+		}
+
+		gvo.setGoods_img(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+		gvo.setGoods_thumbnail(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
+		
+		// 3. 서비스 -> DAO 접근 (mapper)
 		service.insertGoods(gvo);
 			
 		mylog.debug(" 게시판 글쓰기 완료 ");
 			
-		// 3. 페이지로 이동(list페이지)
+		// 4. 페이지로 이동(list페이지)
 			
 		return "redirect:/goods/list";
 	}

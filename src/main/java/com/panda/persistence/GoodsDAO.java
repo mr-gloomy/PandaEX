@@ -6,9 +6,6 @@ import com.panda.domain.GoodsVO;
 
 public interface GoodsDAO {
 	
-	// 시간정보
-	public String getTime();
-	
 	// 상품 글쓰기
 	public void createGoods(GoodsVO gvo) throws Exception;
 	

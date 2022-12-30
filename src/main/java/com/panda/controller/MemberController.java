@@ -2,6 +2,8 @@ package com.panda.controller;
 
 import java.io.PrintWriter;
 
+
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.panda.domain.MemberVO;
 import com.panda.service.MemberService;
@@ -57,7 +60,7 @@ public class MemberController {
 	
 	// 회원가입 - POST
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	public String insertPOST(MemberVO vo) throws Exception {
+	public String insertPOST(MemberVO vo, HttpServletResponse response) throws Exception {
 		mylog.info("insertPOST() 호출");
 		mylog.info(vo.toString());
 		
@@ -65,17 +68,39 @@ public class MemberController {
 
 		mylog.info("회원가입 성공! ");
 		
-//		response.setContentType("text/html; charset=UTF-8");
-//		PrintWriter out=response.getWriter();
-//		out.println("<script>");
-//		out.println("alert('회원가입완료!');");
-//		out.println("location.href='/member/login'");
-//		out.println("</script>");
-//		out.close();
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out=response.getWriter();
+		out.println("<script>");
+		out.println("alert('회원가입완료!');");
+		out.println("location.href='/main/index'");
+		out.println("</script>");
+		out.close();
 		return "redirect:/main/index";
 	}
 
-	
+		// GET 방식 - /members/ckID + 데이터
+		// 아이디 정보를 전달받아서 서비스에서 해당아이디가 중복인지 여부판단
+		@RequestMapping(value = "/ckID",method = RequestMethod.GET )
+		public String checkID(MemberVO vo,
+				 @ModelAttribute("user_id") String user_id) throws Exception{
+			mylog.debug(" checkID() 호출 ");
+			mylog.debug(vo+"");
+			mylog.debug(user_id+"");
+			
+			
+			MemberVO checkVO = service.getMember(user_id);
+			mylog.debug(checkVO+"");
+			
+			if(checkVO ==null) {
+				//디비에 정보가 없음 -> 해당 아이디 사용 가능 
+				return "OK";
+						
+			}else {
+				//디비에 정보가 있음 -> 해당 아이디를 사용 x 
+				return "NO";
+			}
+		}
+		
 	//로그인 post
 	@PostMapping(value="/login")
 	public String loginPOST(MemberVO vo, HttpServletRequest request) throws Exception{
@@ -96,8 +121,9 @@ public class MemberController {
 			//return "redirect:/member/main";
 			resultURI = "redirect:/main/index";
 			session.setAttribute("user_id", vo.getUser_id());
-			session.setAttribute("user_name", vo.getUser_id());
-			session.setAttribute("user_nick", vo.getUser_id());
+			session.setAttribute("user_name", vo.getUser_name()); 
+			session.setAttribute("user_nick", vo.getUser_nick());
+
 		}else {
 			//return "redirect:/member/login";
 			resultURI = "redirect:/main/index";

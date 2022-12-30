@@ -41,6 +41,11 @@ public class MemberServiceImpl implements MemberService {
 		
 		return (resultVO != null)? true:false; 
 	}
+
+	@Override
+	public MemberVO getMember(String user_id) {
+		return dao.getMember(user_id);
+	}
 	
 	
 	

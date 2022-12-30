@@ -24,12 +24,6 @@ public class GoodsDAOImpl implements GoodsDAO{
 	// mapper NAMESPACE 
 	private static final String NAMESPACE = "com.panda.mapper.GoodsMapper";
 	
-	// 시간정보 
-	@Override
-	public String getTime() {
-		return sqlSession.selectOne(NAMESPACE+".getTime");
-	}
-	
 	// 상품 글쓰기
 	@Override
 	public void createGoods(GoodsVO gvo) throws Exception {
@@ -64,7 +58,7 @@ public class GoodsDAOImpl implements GoodsDAO{
 	// 글번호(goods_no) 정보 조회
 	@Override
 	public GoodsVO getGoods(Integer goods_no) throws Exception {
-		mylog.debug("getBoard(Integer bno) 호출");
+		mylog.debug("getBoard(Integer goods_no) 호출");
 		
 		GoodsVO vo = sqlSession.selectOne(NAMESPACE + ".getGoods", goods_no);
 		
