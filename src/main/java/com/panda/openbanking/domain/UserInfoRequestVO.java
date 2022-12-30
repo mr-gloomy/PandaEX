@@ -17,5 +17,11 @@ public class UserInfoRequestVO {
 	public void setUser_seq_no(String user_seq_no) {
 		this.user_seq_no = user_seq_no;
 	}
+	@Override
+	public String toString() {
+		return "UserInfoRequestVO [access_token=" + access_token + ", user_seq_no=" + user_seq_no + "]";
+	}
+	
+	
 	
 }

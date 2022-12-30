@@ -1,5 +1,10 @@
 package com.panda.openbanking;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -16,6 +21,8 @@ import com.panda.openbanking.domain.RequestTokenVO;
 import com.panda.openbanking.domain.ResponseTokenVO;
 import com.panda.openbanking.domain.UserInfoRequestVO;
 import com.panda.openbanking.domain.UserInfoResponseVO;
+import com.panda.openbanking.domain.WithdrawRequestVO;
+import com.panda.openbanking.domain.WithdrawResponseVO;
 
 @Service
 public class OpenBankingApiClient {
@@ -28,6 +35,9 @@ public class OpenBankingApiClient {
 	private HttpHeaders httpHeaders;
 	// REST방식으로 API요청할 때 스프링에서 제공하는 타입
 	private RestTemplate restTemplate;  
+	
+	private static final Logger mylog
+	= LoggerFactory.getLogger(OpenBankingController.class);
 	
 	// 헤더에 토큰 추가 메서드 정의
 	public HttpHeaders setHeaderAccessToken(String access_token) {
@@ -80,7 +90,7 @@ public class OpenBankingApiClient {
 		httpHeaders=new HttpHeaders();
 		restTemplate=new RestTemplate();
 
-		String requestUrl="https://testapi.openbanking.or.kr/2.0/user/me";
+		String requestUrl="https://testapi.openbanking.or.kr/v2.0/user/me";
 
 
 //		httpHeaders(token) 담아서 감 =>HttpEntity
@@ -88,9 +98,12 @@ public class OpenBankingApiClient {
 				new HttpEntity<String>(setHeaderAccessToken(userInfoRequestVO.getAccess_token()));
 		
 		// user_seq_no 파라미터
+		// http://testapi.openbanking.or.kr/v2.0/user/me?user_seq_no=11111
 		UriComponents uriBuulder = UriComponentsBuilder.fromHttpUrl(requestUrl)
 				.queryParam("user_seq_no", userInfoRequestVO.getUser_seq_no()).build();
 	
+		mylog.debug(uriBuulder+"");
+		
 		return restTemplate.exchange(uriBuulder.toString(), 
 				HttpMethod.GET,param,UserInfoResponseVO.class).getBody();
 	}
@@ -117,4 +130,45 @@ public class OpenBankingApiClient {
 		return restTemplate.exchange(uriBuulder.toString(), 
 				HttpMethod.GET,param,AccountSearchResponseVO.class).getBody();
 	}
+
+	// 출금이체 API 
+	public WithdrawResponseVO withdraw(WithdrawRequestVO withdrawRequestVO) {
+		/// REST 방식 요청에 필요한 객체 생성
+		restTemplate = new RestTemplate();
+		httpHeaders = new HttpHeaders();
+		
+		// application/x-www-form-urlencoded; charset=UTF-8" 객체저장 불가능
+		Map<String, String> parameters = new HashMap<String, String>();
+		parameters.put("bank_tran_id", withdrawRequestVO.getBank_tran_id());
+		parameters.put("cntr_account_type", withdrawRequestVO.getCntr_account_type());
+		parameters.put("cntr_account_num", withdrawRequestVO.getCntr_account_num());
+		parameters.put("dps_print_content", withdrawRequestVO.getDps_print_content());
+		parameters.put("fintech_use_num", withdrawRequestVO.getFintech_use_num());
+		parameters.put("tran_amt", withdrawRequestVO.getTran_amt());
+		parameters.put("tran_dtime", withdrawRequestVO.getTran_dtime());
+		parameters.put("req_client_name", withdrawRequestVO.getReq_client_name());
+		parameters.put("req_client_num", withdrawRequestVO.getReq_client_num());
+		parameters.put("transfer_purpose", withdrawRequestVO.getTransfer_purpose());
+		parameters.put("req_client_bank_code", withdrawRequestVO.getReq_client_bank_code());
+		parameters.put("req_client_account_num", withdrawRequestVO.getReq_client_account_num());
+		//parameters.put("req_client_fintech_use_num", withdrawRequestVO.getReq_client_fintech_use_num());
+		parameters.put("recv_client_name", withdrawRequestVO.getRecv_client_name());
+		parameters.put("recv_client_bank_code", withdrawRequestVO.getRecv_client_bank_code());
+		parameters.put("recv_client_account_num", withdrawRequestVO.getRecv_client_account_num());
+		
+		System.out.println("저장parameters@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ : "+parameters);
+		
+		// HttpHeader,HttpBody parameters 담아서 감 => HttpEntity
+		//HttpEntity<MultiValueMap<String, String>> param = new HttpEntity<MultiValueMap<String, String>>(parameters, httpHeaders);
+		HttpEntity<Map<String, String>> param = new HttpEntity<Map<String, String>>(parameters, setHeaderAccessToken(withdrawRequestVO.getAccess_token()));
+		
+		System.out.println("저장@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@토큰넣은 : " +param);
+		//String requestUrl = "https://testapi.openbanking.or.kr/oauth/2.0/transfer/withdraw/fin_num";
+		String requestUrl = "https://testapi.openbanking.or.kr/v2.0/transfer/withdraw/fin_num";
+		
+		
+		//return restTemplate.exchange(requestUrl, HttpMethod.POST, param, WithdrawResponseVO.class).getBody();
+		return restTemplate.postForEntity(requestUrl, param, WithdrawResponseVO.class).getBody();
+	}
+	
 }

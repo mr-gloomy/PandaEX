@@ -16,19 +16,22 @@
 <h2>scope : ${responseTokenVO.scope }</h2>
 <h2>user_seq_no : ${responseTokenVO.user_seq_no }</h2> <!-- 사용자일련번호 -->
 
-<h2>사용자정보 조회</h2>
+<h2>사용자정보 조회</h2> <!-- p32 -->
 <form action="userInfo" method="get">
- <input type="hidden" name="access_token" value = "${responseTokenVO.refresh_token }">
- <input type="hidden" name="tser_seq_no" value = "${responseTokenVO.user_seq_no }">
+ <input type="hidden" name="access_token" value = "${responseTokenVO.access_token }">
+ <input type="hidden" name="user_seq_no" value = "${responseTokenVO.user_seq_no }">
  <input type="submit" value = "사용자정보조회">
 </form>
 
-<h2>등록계좌조회</h2>
+<h2>등록계좌조회</h2> <!-- p36 -->
 <form action="accountList" method="get">
- <input type="hidden" name="access_token" value = "${responseTokenVO.refresh_token }">
- <input type="hidden" name="tser_seq_no" value = "${responseTokenVO.user_seq_no }">
- <input type="hidden" name="include_cancel_yn" value = "Y">
- <input type="hidden" name="sort_order" value = "D">
+ <input type="hidden" name="access_token" value = "${responseTokenVO.access_token }">
+ <input type="hidden" name="user_seq_no" value = "${responseTokenVO.user_seq_no }">
+ <input type="hidden" name="include_cancel_yn" value = "Y"> <!-- 해지계좌포함여부 - ‘Y’:해지계좌포함, ‘N’:해지계좌불포함 -->
+ <input type="hidden" name="sort_order" value = "D"> 
+<!--  정렬순서
+- ‘D’:Descending, ‘A’:Ascending
+- 정렬 기준 : 조회서비스 동의일시, 출금서비스 동의일시 중 최근 값 -->
  <input type="submit" value = "등록계좌조회">
 </form>
 

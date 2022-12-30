@@ -24,34 +24,34 @@ public class MemberServiceImpl implements MemberService {
 	public void insert(MemberVO vo) throws Exception {
 			dao.insert(vo);
 	}
-	
-	//아이디체크
-	@Override
-	public int idCheck(MemberVO vo)  {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	//비번체크
-	
 
-	
+	//로긴
+	@Override
+	public boolean memberLogin(MemberVO vo) {
+		mylog.debug("memberLogin(vo) 호출");
+		
+		MemberVO resultVO = dao.loginMember(vo);
+		
+		mylog.debug(" DAO 처리 결과 : "+resultVO);
+		// null-false , not null-true
+//		if(resultVO != null) 
+//			return true;
+//		else 
+//			return false;
+		
+		return (resultVO != null)? true:false; 
+	}
 
 	@Override
 	public MemberVO getMember(String user_id) {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.getMember(user_id);
 	}
 	
 	
-	//로긴
-	@Override
-	public MemberVO memberLogin(MemberVO vo) throws Exception {
-		dao.loginMember(vo);
-		
-		return null;
-	}
+	
 
 
+	
 	
 
 

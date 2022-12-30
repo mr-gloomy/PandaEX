@@ -71,166 +71,166 @@
 					<%--!!!!!여기가 채팅방 한세트입니다.!!!!! --%>
 					<%--// 첫번째 게시글 id값은 펑션제어이고 ajax이용 화면 불러오기로 나중에 설정해주세요 --%>
 					<%--// 첫번째 게시글 펑션제어는 맨밑에 스크립트안에 있으니 삭제하시면 됍니다. --%>
-					<div class="yes-chatroom" memo="채팅방 세트시작">
-					<%-- 상대방 이미지 존재여부 --%>
-						<c:choose>
-							<c:when test="${oppenent == '' }">
-								<img class="opponent-img"
-									src="/resources/images/icons/opponent.png"
-									memo="대화상대 프로필사진 없거나/구현귀찮을때.">
-							</c:when>
-							<c:when test="${oppenent != '' }">
-							<img class="opponent-img"
-									src="${oppenent }"
-									memo="대화상대 프로필사진가져오기 구현성공 시.">
-							</c:when>
-						</c:choose>
-						<%-- 상대방 이미지 존재여부 --%>
+<!-- 					<div class="yes-chatroom" memo="채팅방 세트시작"> -->
+<%-- 					상대방 이미지 존재여부 --%>
+<%-- 						<c:choose> --%>
+<%-- 							<c:when test="${oppenent == '' }"> --%>
+<!-- 								<img class="opponent-img" -->
+<!-- 									src="/resources/images/icons/opponent.png" -->
+<!-- 									memo="대화상대 프로필사진 없거나/구현귀찮을때."> -->
+<%-- 							</c:when> --%>
+<%-- 							<c:when test="${oppenent != '' }"> --%>
+<!-- 							<img class="opponent-img" -->
+<%-- 									src="${oppenent }" --%>
+<!-- 									memo="대화상대 프로필사진가져오기 구현성공 시."> -->
+<%-- 							</c:when> --%>
+<%-- 						</c:choose> --%>
+<%-- 						상대방 이미지 존재여부 --%>
 						
-						<div class="nameandtext"> <%--위치조정 div --%>
-						<%--대화중인 상대이름 칸 --%>  
-							<div class="oppname">${oppenentname }</div>
+<%-- 						<div class="nameandtext"> 위치조정 div --%>
+<%-- 						대화중인 상대이름 칸   --%>
+<%-- 							<div class="oppname">${oppenentname }</div> --%>
 							
-						<%--마지막으로 남긴말 --%>  
-							<div class="text">${lasttextsample1 }</div>
+<%-- 						마지막으로 남긴말   --%>
+<%-- 							<div class="text">${lasttextsample1 }</div> --%>
 							
-							<div class="timeposition"><%--위치조정 div --%>
-						<%-- 최종대화시간 --%>
-							<div class="lasttime">${lasttime }</div>
-							</div><%--위치조정 div --%>
-						</div><%--위치조정 div --%>
-					</div memo="채팅방 세트끝 주석제거하고 정리하세요">
-					<%--!!!!!여기가 채팅방 한세트입니다.!!!!!  --%>
-					<%-- 					</c:forEach> --%>
+<%-- 							<div class="timeposition">위치조정 div --%>
+<%-- 						최종대화시간 --%>
+<%-- 							<div class="lasttime">${lasttime }</div> --%>
+<%-- 							</div>위치조정 div --%>
+<%-- 						</div>위치조정 div --%>
+<!-- 					</div memo="채팅방 세트끝 주석제거하고 정리하세요"> -->
+<%-- 					!!!!!여기가 채팅방 한세트입니다.!!!!!  --%>
+<%-- 										</c:forEach> --%>
 					
 					
-					<!-- 예제샘플입니다 삭제하셔도 상관없어요 -->
-					<div class="yes-chatroom" memo="예제샘플1 시작">
-						<c:choose>
-							<c:when test="${oppenent == '' }">
-								<img class="opponent-img"
-									src="/resources/images/icons/man.png"
-									memo="대화상대 프로필사진 없거나/구현귀찮을때.">
-							</c:when>
-							<c:when test="${oppenent != '' }">
-							<img class="opponent-img"
-									src="${oppenent }"
-									memo="대화상대 프로필사진가져오기 구현성공 시.">
-							</c:when>
-						</c:choose>
-						<div class="nameandtext">
-							<div class="oppname">정영진</div>							
-							<div class="text">저기근데 당근마켓에는 이거 5만원에 올라왔던데 왜 여기는 10만원에 파는건가요?</div>
-							<div class="timeposition">
-							<div class="lasttime">오전 07:50</div>
-							</div>
-						</div>
-					</div memo="예제샘플1 끝">
-					<div class="yes-chatroom" memo="예제샘플2 시작">
-						<c:choose>
-							<c:when test="${oppenent == '' }">
-								<img class="opponent-img"
-									src="/resources/images/icons/girl.png"
-									memo="대화상대 프로필사진 없거나/구현귀찮을때.">
-							</c:when>
-							<c:when test="${oppenent != '' }">
-							<img class="opponent-img"
-									src="${oppenent }"
-									memo="대화상대 프로필사진가져오기 구현성공 시.">
-							</c:when>
-						</c:choose>
-						<div class="nameandtext">
-							<div class="oppname">정지원</div>							
-							<div class="text">사기꾼 신고할겠습니다. 답장하지마세요.</div>
-							<div class="timeposition">
-							<div class="lasttime">오후 12:20</div>
-							</div>
-						</div>
-					</div memo="예제샘플2 끝">
-					<div class="yes-chatroom" memo="예제샘플3 시작">
-						<c:choose>
-							<c:when test="${oppenent == '' }">
-								<img class="opponent-img"
-									src="/resources/images/icons/panda-user.png"
-									memo="대화상대 프로필사진 없거나/구현귀찮을때.">
-							</c:when>
-							<c:when test="${oppenent != '' }">
-							<img class="opponent-img"
-									src="${oppenent }"
-									memo="대화상대 프로필사진가져오기 구현성공 시.">
-							</c:when>
-						</c:choose>
-						<div class="nameandtext">
-							<div class="oppname">정규태</div>							
-							<div class="text">지환씨~ 모델 쩜 어트리뷰트 쩜. 호출!</div>
-							<div class="timeposition">
-							<div class="lasttime">어제</div>
-							</div>
-						</div>
-					</div memo="예제샘플3 끝">
-					<div class="yes-chatroom" memo="예제샘플4 시작">
-						<c:choose>
-							<c:when test="${oppenent == '' }">
-								<img class="opponent-img"
-									src="/resources/images/icons/man1.png"
-									memo="대화상대 프로필사진 없거나/구현귀찮을때.">
-							</c:when>
-							<c:when test="${oppenent != '' }">
-							<img class="opponent-img"
-									src="${oppenent }"
-									memo="대화상대 프로필사진가져오기 구현성공 시.">
-							</c:when>
-						</c:choose>
-						<div class="nameandtext">
-							<div class="oppname">mumallaengi muchim</div>							
-							<div class="text">Hello, nego ga nuong?</div>
-							<div class="timeposition">
-							<div class="lasttime">2일 전</div>
-							</div>
-						</div>
-					</div memo="예제샘플4 끝">
-					<div class="yes-chatroom" memo="예제샘플5 시작">
-						<c:choose>
-							<c:when test="${oppenent == '' }">
-								<img class="opponent-img"
-									src="/resources/images/icons/halbae.png"
-									memo="대화상대 프로필사진 없거나/구현귀찮을때.">
-							</c:when>
-							<c:when test="${oppenent != '' }">
-							<img class="opponent-img"
-									src="${oppenent }"
-									memo="대화상대 프로필사진가져오기 구현성공 시.">
-							</c:when>
-						</c:choose>
-						<div class="nameandtext">
-							<div class="oppname">최춘갑</div>							
-							<div class="text">우리손주가..갖고싶어하는데 네고를..어찌..좀</div>
-							<div class="timeposition">
-							<div class="lasttime">2일 전</div>
-							</div>
-						</div>
-					</div memo="예제샘플5 끝">
-					<div class="yes-chatroom" memo="예제샘플6 시작">
-						<c:choose>
-							<c:when test="${oppenent == '' }">
-								<img class="opponent-img"
-									src="/resources/images/icons/girl12.png"
-									memo="대화상대 프로필사진 없거나/구현귀찮을때.">
-							</c:when>
-							<c:when test="${oppenent != '' }">
-							<img class="opponent-img"
-									src="${oppenent }"
-									memo="대화상대 프로필사진가져오기 구현성공 시.">
-							</c:when>
-						</c:choose>
-						<div class="nameandtext">
-							<div class="oppname">최송이</div>							
-							<div class="text">아니요 오늘은 각코 할게요 ㅅㄱ~</div>
-							<div class="timeposition">
-							<div class="lasttime">3일전</div>
-							</div>
-						</div>
-					</div memo="예제샘플6 끝">
+<!-- 					예제샘플입니다 삭제하셔도 상관없어요 -->
+<!-- 					<div class="yes-chatroom"> -->
+<%-- 						<c:choose> --%>
+<%-- 							<c:when test="${oppenent == '' }"> --%>
+<!-- 								<img class="opponent-img" -->
+<!-- 									src="/resources/images/icons/man.png" -->
+<!-- 									memo="대화상대 프로필사진 없거나/구현귀찮을때."> -->
+<%-- 							</c:when> --%>
+<%-- 							<c:when test="${oppenent != '' }"> --%>
+<!-- 							<img class="opponent-img" -->
+<%-- 									src="${oppenent }" --%>
+<!-- 									memo="대화상대 프로필사진가져오기 구현성공 시."> -->
+<%-- 							</c:when> --%>
+<%-- 						</c:choose> --%>
+<!-- 						<div class="nameandtext"> -->
+<!-- 							<div class="oppname">정영진</div>							 -->
+<!-- 							<div class="text">저기근데 당근마켓에는 이거 5만원에 올라왔던데 왜 여기는 10만원에 파는건가요?</div> -->
+<!-- 							<div class="timeposition"> -->
+<!-- 							<div class="lasttime">오전 07:50</div> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div memo="예제샘플1 끝"> -->
+<!-- 					<div class="yes-chatroom" memo="예제샘플2 시작"> -->
+<%-- 						<c:choose> --%>
+<%-- 							<c:when test="${oppenent == '' }"> --%>
+<!-- 								<img class="opponent-img" -->
+<!-- 									src="/resources/images/icons/girl.png" -->
+<!-- 									memo="대화상대 프로필사진 없거나/구현귀찮을때."> -->
+<%-- 							</c:when> --%>
+<%-- 							<c:when test="${oppenent != '' }"> --%>
+<!-- 							<img class="opponent-img" -->
+<%-- 									src="${oppenent }" --%>
+<!-- 									memo="대화상대 프로필사진가져오기 구현성공 시."> -->
+<%-- 							</c:when> --%>
+<%-- 						</c:choose> --%>
+<!-- 						<div class="nameandtext"> -->
+<!-- 							<div class="oppname">정지원</div>							 -->
+<!-- 							<div class="text">사기꾼 신고할겠습니다. 답장하지마세요.</div> -->
+<!-- 							<div class="timeposition"> -->
+<!-- 							<div class="lasttime">오후 12:20</div> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div memo="예제샘플2 끝"> -->
+<!-- 					<div class="yes-chatroom" memo="예제샘플3 시작"> -->
+<%-- 						<c:choose> --%>
+<%-- 							<c:when test="${oppenent == '' }"> --%>
+<!-- 								<img class="opponent-img" -->
+<!-- 									src="/resources/images/icons/panda-user.png" -->
+<!-- 									memo="대화상대 프로필사진 없거나/구현귀찮을때."> -->
+<%-- 							</c:when> --%>
+<%-- 							<c:when test="${oppenent != '' }"> --%>
+<!-- 							<img class="opponent-img" -->
+<%-- 									src="${oppenent }" --%>
+<!-- 									memo="대화상대 프로필사진가져오기 구현성공 시."> -->
+<%-- 							</c:when> --%>
+<%-- 						</c:choose> --%>
+<!-- 						<div class="nameandtext"> -->
+<!-- 							<div class="oppname">정규태</div>							 -->
+<!-- 							<div class="text">지환씨~ 모델 쩜 어트리뷰트 쩜. 호출!</div> -->
+<!-- 							<div class="timeposition"> -->
+<!-- 							<div class="lasttime">어제</div> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div memo="예제샘플3 끝"> -->
+<!-- 					<div class="yes-chatroom" memo="예제샘플4 시작"> -->
+<%-- 						<c:choose> --%>
+<%-- 							<c:when test="${oppenent == '' }"> --%>
+<!-- 								<img class="opponent-img" -->
+<!-- 									src="/resources/images/icons/man1.png" -->
+<!-- 									memo="대화상대 프로필사진 없거나/구현귀찮을때."> -->
+<%-- 							</c:when> --%>
+<%-- 							<c:when test="${oppenent != '' }"> --%>
+<!-- 							<img class="opponent-img" -->
+<%-- 									src="${oppenent }" --%>
+<!-- 									memo="대화상대 프로필사진가져오기 구현성공 시."> -->
+<%-- 							</c:when> --%>
+<%-- 						</c:choose> --%>
+<!-- 						<div class="nameandtext"> -->
+<!-- 							<div class="oppname">mumallaengi muchim</div>							 -->
+<!-- 							<div class="text">Hello, nego ga nuong?</div> -->
+<!-- 							<div class="timeposition"> -->
+<!-- 							<div class="lasttime">2일 전</div> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div memo="예제샘플4 끝"> -->
+<!-- 					<div class="yes-chatroom" memo="예제샘플5 시작"> -->
+<%-- 						<c:choose> --%>
+<%-- 							<c:when test="${oppenent == '' }"> --%>
+<!-- 								<img class="opponent-img" -->
+<!-- 									src="/resources/images/icons/halbae.png" -->
+<!-- 									memo="대화상대 프로필사진 없거나/구현귀찮을때."> -->
+<%-- 							</c:when> --%>
+<%-- 							<c:when test="${oppenent != '' }"> --%>
+<!-- 							<img class="opponent-img" -->
+<%-- 									src="${oppenent }" --%>
+<!-- 									memo="대화상대 프로필사진가져오기 구현성공 시."> -->
+<%-- 							</c:when> --%>
+<%-- 						</c:choose> --%>
+<!-- 						<div class="nameandtext"> -->
+<!-- 							<div class="oppname">최춘갑</div>							 -->
+<!-- 							<div class="text">우리손주가..갖고싶어하는데 네고를..어찌..좀</div> -->
+<!-- 							<div class="timeposition"> -->
+<!-- 							<div class="lasttime">2일 전</div> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div memo="예제샘플5 끝"> -->
+<!-- 					<div class="yes-chatroom" memo="예제샘플6 시작"> -->
+<%-- 						<c:choose> --%>
+<%-- 							<c:when test="${oppenent == '' }"> --%>
+<!-- 								<img class="opponent-img" -->
+<!-- 									src="/resources/images/icons/girl12.png" -->
+<!-- 									memo="대화상대 프로필사진 없거나/구현귀찮을때."> -->
+<%-- 							</c:when> --%>
+<%-- 							<c:when test="${oppenent != '' }"> --%>
+<!-- 							<img class="opponent-img" -->
+<%-- 									src="${oppenent }" --%>
+<!-- 									memo="대화상대 프로필사진가져오기 구현성공 시."> -->
+<%-- 							</c:when> --%>
+<%-- 						</c:choose> --%>
+<!-- 						<div class="nameandtext"> -->
+<!-- 							<div class="oppname">최송이</div>							 -->
+<!-- 							<div class="text">아니요 오늘은 각코 할게요 ㅅㄱ~</div> -->
+<!-- 							<div class="timeposition"> -->
+<!-- 							<div class="lasttime">3일전</div> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div memo="예제샘플6 끝"> -->
 					
 					
 					

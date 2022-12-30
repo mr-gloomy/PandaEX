@@ -1,5 +1,8 @@
 package com.panda.persistence;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -17,7 +20,6 @@ public class MemberDAOImpl implements MemberDAO{
 			= LoggerFactory.getLogger(MemberDAOImpl.class);
 	
 	
-	
 	@Inject
 	private SqlSession sqlSession;
 	
@@ -30,28 +32,21 @@ public class MemberDAOImpl implements MemberDAO{
 		sqlSession.insert(NAMESPACE+".insert",vo);
 	}
 
-	@Override
-	public int idCheck(MemberVO vo) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public MemberVO getMember(String user_id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public MemberVO loginMember(String user_id, String user_pw) {
-		sqlSession.insert(NAMESPACE+".login");
-		return null;
-	}
-
+	//로그인
 	@Override
 	public MemberVO loginMember(MemberVO vo) {
-		sqlSession.insert(NAMESPACE+".login",vo);
-		return null;
+		
+		return sqlSession.selectOne(NAMESPACE+".login",vo);
 	}
 
+	//회원조회
+	@Override
+	public MemberVO getMember(String user_id) {
+		MemberVO vo = sqlSession.selectOne(NAMESPACE + ".getMember",user_id);
+		mylog.debug("@@@@@@@@@@@@@@@@@@@@@@@");
+		
+		return vo;
+	}
+
+	
 }

@@ -23,15 +23,22 @@
 	</script>
 
 
-	<%-- 변수값은 임시값입니다. --%>
-	<c:set var="username" value="김태홍" />
-	<c:set var="admin" value="관리자" />
-	<c:set var="adminchk" value="1" />
-	<!-- 밸류값 0 : 일반유저, 1: 어드민 입니다. -->
-	<c:set var="user_id" value="" />
-	<!-- 밸류값 null : 비로그인상태, null제외한 다른값 로그인상태화면 -->
 
-
+    // 비밀번호 틀렸을 경우
+       if($('#user_pw').val()=="") {
+          alert('입력하신 정보가 틀립니다.');
+          return false;
+          }
+    
+    // 아이디, 비밀번호 일치하는 경우
+//     	if($('#loginid').val()==$('id'.val()) && $('#loginpw').val()==$('pw'.val() {
+//     		alert('환영합니다!');
+//     		return false;
+//    			}
+    	});
+          });
+		
+	</script>
 
 
 
@@ -62,7 +69,9 @@
 					<div
 						class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search"
 						style="padding-right: 0px;">
-						<a  memo="채팅방연동예정"> <img id="chat-on" class="panda-header-chaticon"
+						<a id="chatOpen">
+						 <input type="hidden" id="idVal" value="${user_id }">
+						 <img id="chat-on" class="panda-header-chaticon"
 							src="/resources/images/icons/Panda_Chat.png" alt="panda-chat">
 							<img class="panda-header-chaticon-hover"
 							src="/resources/images/icons/panda_chat_hover.gif"
@@ -86,24 +95,19 @@
 					<div class="hoversup"></div>
 					<div class="category">
 						<div class="user-sel-images">
-							<c:choose>
-								<c:when test="${user_id eq ''}">
+								<c:if test="${user_id eq ''}">
 									<img class="bamboo" src="/resources/images/icons/bamboo.png"
 										style="margin-left: 166px;">
-								</c:when>
-								<c:when test="${user_id ne '' and adminchk lt '1' }">
+								</c:if>
+								<c:if test="${user_id ne '' and adminchk lt '1' }">
 									<img class="bamboo" src="/resources/images/icons/bamboo.png"
 										style="height: 88px;">
-								</c:when>
-								<c:otherwise>
-									<img class="bamboo" src="/resources/images/icons/bamboo.png">
-								</c:otherwise>
-							</c:choose>
+								</c:if>
 						</div>
 
 						<!-- 로그인 시 -->
-						<c:choose>
-							<c:when test="${user_id == null }">
+						
+							<c:if test="${sessionScope.user_id == null }">
 								<p>
 									<strong>로그인</strong> 후 이용해주세요
 								</p>
@@ -117,10 +121,10 @@
 									<input type="button" onclick="location.href='#'" id="user-join" class="logout"
 										value="회원가입" style="margin-top: 7px;">
 								</div>
-							</c:when>
-							<c:when test="${user_id != null and adminchk gt '0'}">
+							</c:if>
+							<c:if test="${user_id != null}">
 								<p>
-									<span>${sessionScope.user_id}</span> 님 환영합니다
+									<span>${sessionScope.user_id}/${sessionScope.user_nick }</span> 님 환영합니다
 								</p>
 								<ul>
 									<li><a class="my" href="#">내 정보<img class="right"
@@ -132,10 +136,12 @@
 									<input type="button" onclick="mo()" class="modify" value="정보수정">
 								</div>
 								<div class="user-logout">
-									<input type="button" onclick="lo()" class="logout" value="로그아웃">
+									<input type="button" onclick="location.href='/member/logout';" value="로그아웃">
+<!-- 									<input type="button" onclick="location.href='/member/logout';" class="logout" value="로그아웃"> -->
+									
 								</div>
-							</c:when>
-							<c:when test="${user_id ne '' and adminchk lt '1'}">
+							</c:if>
+							<c:if test="${user_id ne '' and adminchk lt '1'}">
 								<p style="margin-bottom: 5px;">
 									<span class="login-admin">${admin }</span> 님 환영합니다
 								</p>
@@ -144,11 +150,11 @@
 											class="right" src="/resources/images/icons/right-arrow.png"></a></li>
 								</ul>
 								<div class="user-logout" style="margin-left: 40px;">
-									<input type="button" onclick="lo()" class="logout" value="로그아웃"
+									<input type="button" onclick=" location.href='/logout';" class="logout" value="로그아웃"
 										style="margin-top: 7px;">
+										
 								</div>
-							</c:when>
-						</c:choose>
+							</c:if>
 						<!-- 로그인 시  -->
 
 
@@ -222,36 +228,7 @@
 </header>
 </head>
 
- <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script type="text/javascript">
-	
-	
-	// 아이디 틀렸을 경우
-    $(document).ready(function() {
-       //alert('팝업!');
-       $('#login').submit(function(){
-	//	alert("테스트");
-	//	alert($('#loginid').val());
-       if ($('#user_id').val()=="") {
-          alert('입력하신 정보가 틀립니다.');
-          return false;
-          }
-
-    // 비밀번호 틀렸을 경우
-       if($('#user_pw').val()=="") {
-          alert('입력하신 정보가 틀립니다.');
-          return false;
-          }
-    
-    // 아이디, 비밀번호 일치하는 경우
-//     	if($('#loginid').val()==$('id'.val()) && $('#loginpw').val()==$('pw'.val() {
-//     		alert('환영합니다!');
-//     		return false;
-//    			}
-    	});
-          });
-		
-	</script>
+ 
 
 <!-- 로그인 모달창 -->
 <script
@@ -361,9 +338,9 @@
 				</div>
 				<div class="mylocation">우리동네 조회하기</div>
 				<div class="findloca"> <!-- 배열로 넣기  -->
-					<input type="text" id="si" readonly tabindex="-1"> <input type="text"
-						id="gu" readonly tabindex="-1"> <img
-						src="/resources/images/icons/placeholder.png" id="findlocation">
+					<input type="text" id="si" readonly tabindex="-1" name="addr[0]"> 
+					<input type="text" id="gu" readonly tabindex="-1" name="addr[1]"> 
+					<img src="/resources/images/icons/placeholder.png" id="findlocation">
 				</div>
 				<div class="locationfind-false">&nbsp;</div>
 				<div class="terms">
@@ -378,6 +355,46 @@
 			</div>
 			</form>
 		</div>	
+		
+		<script type="text/javascript">
+        $(document).ready(function(){
+        	
+        	$("#user_id").keyup(function(){
+        		//alert("이벤트!");
+        		//키보드 입력시마다, 입력된 아이디 정보가 사용가능한지 확인(DB)
+        		
+        		//$("#userIDdiv").append("@");
+        		//$("#userIDdiv").text("@");
+        		//$("#userIDdiv").html("<h2> @ </h2>");
+        		
+        		//alert($("#userid").val());
+        	
+	        		// 문제 없을때(5~10자리 일때)
+	        		// 해당 아이디 정보가,디비에 있는지 체크
+	        		// GET 방식 - /members/ckID + 데이터
+	        		$.ajax({
+	        			type:"GET",
+	        			url:"/members/ckID",
+	        			data:{userid:$("#user_id").val()},
+	        			success:function(){
+	        				//alert("성공");
+	        				if(data == "OK"){
+	        	        		$("#userIDdiv").html("<font color='blue'> 정상적인 아이디 사용입니다 </font>");
+	        				}else{
+	        	        		$("#userIDdiv").html("<font color='green'> 이미 사용중인 아이디입니다 </font>");
+
+	        			}
+	        		});
+	        		
+	        		$("#userIDdiv").html("<font color='blue'> 정상적인 아이디 사용입니다 </font>");
+        		}
+        		
+        	
+        });    
+     </script>
+     
+     
+     
 		<div class="modal-findid">
 			<div class="findid-input">
 				<input type="text" id="findid-id" placeholder="가입하신 이름을 입력해주세요." maxlength="6" autocomplete="off">
