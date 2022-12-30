@@ -345,7 +345,7 @@
 						</table>
 					</div>
 				</div>
-				<div class="row">
+				<!-- <div class="row">
 					<div class="col-sm-5">
 						<div class="dataTables_info" id="example1_info" role="status"
 							aria-live="polite">Showing 1 to 10 of 57 entries</div>
@@ -374,12 +374,25 @@
 							</ul>
 						</div>
 					</div>
-				</div>
+				</div> -->
 			</div>
 		</div>
 
 	</div>
 
+		<br><br>
+		
+		<ul>
+		
+			<li><a href="#">«</a></li>
+			<c:forEach var="i" begin="${pvo.startPage }" end="${pvo.endPage }" step="1">
+			
+			<li><a href="/admin/list?page=${i }">${i }</a></li>
+			
+			</c:forEach>
+			<li><a href="#">»</a></li>
+			
+		</ul>
 
 
 

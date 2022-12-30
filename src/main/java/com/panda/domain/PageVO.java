@@ -1,6 +1,7 @@
 package com.panda.domain;
 
 public class PageVO {
+	
 	// 하단부 페이징처리에 필요한 객체 정보
 	// startPage, endPage, prev, next
 	// totalCount(DB)

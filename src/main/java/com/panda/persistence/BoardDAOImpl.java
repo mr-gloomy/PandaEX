@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.panda.domain.BoardVO;
+import com.panda.domain.Criteria;
 
 @Repository
 public class BoardDAOImpl implements BoardDAO {
@@ -32,14 +33,14 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
-	public List<BoardVO> getBoardAll() throws Exception {
+	public List<BoardVO> getBoardAll(Criteria cri) throws Exception {
 		mylog.debug(" DAO : 글 전체목록 실행");
 		
-		List<BoardVO> boardList = sqlSession.selectList(NAMESPACE+".listAll");
+//		List<BoardVO> boardList = sqlSession.selectList(NAMESPACE+".listAll");
 		
-		mylog.debug(" 글 갯수 : "+boardList.size());
+//		mylog.debug(" 글 갯수 : "+boardList.size());
 		
-		return boardList;
+		return sqlSession.selectList(NAMESPACE+".listAll",cri);
 	}
 
 	@Override
@@ -70,6 +71,12 @@ public class BoardDAOImpl implements BoardDAO {
 		Integer result = sqlSession.delete(NAMESPACE+".remBoard", bno);
 		
 		return result;
+	}
+
+	@Override
+	public Integer totalCnt() throws Exception {
+		
+		return sqlSession.selectOne(NAMESPACE+".countBoard");
 	}
 
 }

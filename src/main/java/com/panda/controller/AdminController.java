@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.panda.domain.BoardVO;
+import com.panda.domain.Criteria;
+import com.panda.domain.PageVO;
 import com.panda.service.BoardService;
 
 @Controller
@@ -63,17 +65,26 @@ public class AdminController {
 		return "redirect:/admin/list";
 	}
 	
-	// 공지사항 게시판 list GET
+	// 공지사항 게시판 list GET (페이징처리)
 	// http://localhost:8080/admin/list
 	@RequestMapping(value = "/list",method = RequestMethod.GET)
-	public void listGET(Model model,HttpSession session)throws Exception {
+	public void listGET(Criteria cri,Model model,HttpSession session)throws Exception {
 		
 		mylog.debug(" listGET() 호출 ");
 		
 //		mylog.debug(" 글쓰기 결과 (result) : "+result);
+		
 		session.setAttribute("updateCheck", true);
 		
-		List<BoardVO> boardList =  service.getBoardAll();
+		List<BoardVO> boardList =  service.getBoardAll(cri);
+		
+		// 페이징처리 하단부 정보 준비 -> view페이지 전달
+		PageVO pvo = new PageVO();
+		
+		pvo.setCri(cri);
+		mylog.debug(" totalCnt : "+service.totalCnt());
+		pvo.setTotalCount(service.totalCnt()); // 작성되어있는 글 전체 개수
+		
 		
 		model.addAttribute("boardList", boardList);
 		

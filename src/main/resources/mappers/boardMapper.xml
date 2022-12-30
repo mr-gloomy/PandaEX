@@ -5,37 +5,50 @@
 <mapper namespace="com.panda.mapper.BoardMapper">
 	<!-- 글쓰기 -->
 	<insert id="createBoard">
-		insert into board(title,content,writer) 
-		values (#{title},#{content},#{writer})
+		insert into board(title,content,writer)
+		values
+		(#{title},#{content},#{writer})
 	</insert>
-	
+
 	<!-- 글 목록 전체 -->
+	<!-- 페이징처리 -->
 	<select id="listAll" resultType="BoardVO">
-		select * from board
+ 		 <![CDATA[
+			select * from board 
+			where bno>0 
+			order by bno desc, regdate desc
+			limit #{pageStart},#{perPageNum}
+			]]>
 	</select>
-	
+
 	<!-- 조회수 증가 -->
 	<update id="cnt">
-		update board set viewcnt=viewcnt+1 
+		update board set viewcnt=viewcnt+1
 		where bno=#{bno}
 	</update>
-	
-	<!--  글 내용 가져오기 -->
+
+	<!-- 글 내용 가져오기 -->
 	<select id="content" resultType="BoardVO">
-		select * from board 
-		where bno=#{bno}		
+		select * from board
+		where
+		bno=#{bno}
 	</select>
-	
+
 	<!-- 수정하기 -->
 	<update id="modBoard">
-		update board set title=#{title},content=#{content} 
+		update board set title=#{title},content=#{content}
 		where bno=#{bno}
 	</update>
-	
+
 	<!-- 삭제하기 -->
 	<delete id="remBoard">
-		delete from board 
+		delete from board
 		where bno=#{bno}
 	</delete>
+
+	<!-- 게시판 글전체 개수 -->
+	<select id="countBoard" resultType="int">
+		select count(bno) from board
+	</select>
 
 </mapper>
