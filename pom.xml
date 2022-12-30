@@ -205,6 +205,12 @@
 	    <version>2.14.1</version>
 	</dependency>
 	
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-websocket -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-websocket</artifactId>
+	    <version>${org.springframework-version}</version>
+	</dependency>
 
 
       <!-- 외부 라이브러리 추가 -->    

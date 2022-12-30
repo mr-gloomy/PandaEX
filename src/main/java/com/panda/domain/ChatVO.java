@@ -6,8 +6,8 @@ import lombok.Data;
 
 @Data
 public class ChatVO {
-	private	String id1;
-	private	String id2;
+	private	String send_id;
+	private	String receive_id;
 	private	String bang_id;
 	private	String message;
 	private	int goods_no;

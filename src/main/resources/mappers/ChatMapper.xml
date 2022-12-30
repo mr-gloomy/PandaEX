@@ -8,4 +8,20 @@
 		from chat where send_id=#{id} or receive_id=#{id} 
 		group by bang_id
 	</select>
+	
+	<insert id="test">
+		insert into chat (send_id,receive_id,bang_id,message,goods_no) values("ddd","dd123","dfsadfasd12d","ddd12","12")
+	</insert>
+	
+	<select id="getRoom" resultType="String">
+		select bang_id from chat where (send_id=#{send_id} or send_id=#{receive_id}) and (receive_id=#{send_id} or receive_id=#{receive_id}) limit 1
+	</select>
+	
+	<select id="getRecord" resultType="String">
+		select message from chat where bang_id=#{bang_id}
+	</select>
+	
+	<insert id="recordMsg">
+		insert into chat (send_id,receive_id,bang_id,message,goods_no) values(#{send_id},#{receive_id},#{bang_id},#{message},#{goods_no})
+	</insert> 
 </mapper>
