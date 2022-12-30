@@ -4278,5 +4278,28 @@ margin-top: 5px;
 	display: flex;
     align-items: center;
 }
+#rek-tag{
+	position: absolute;
+    width: 20px;
+    height: 20px;
+    margin: -11px 0px 0px -5px;
+    z-index: 2;
+}
+#rek-tag1{
+	position: absolute;
+    width: 30px;
+    height: 30px;
+    margin: -14px 0px 0px -5px;
+    z-index: 2;
+}
+#rek-mark{
+	position: absolute;
+    width: 32px;
+    height: 40px;
+    margin: -17px 0px 0px -10px;
+    z-index: 2;
+    opacity: 0.5;
+}
+
 /* 추가 - 김태홍  손대면 안됍니다!!!!*/
 /*////////////////////////////////////////////////////////*/

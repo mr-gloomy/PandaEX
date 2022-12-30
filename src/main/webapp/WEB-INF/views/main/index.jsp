@@ -238,6 +238,7 @@
 			<div class="rek-ad">
 				<div class="ad-1" id="ad-all">
 					<div class="rekcontent" memo="추천상품시작">
+						<img src="/resources/images/icons/ads.png" id="rek-tag1">
 						<div class="rekimage">
 							<img src="/resources/images/icons/PANDA.png">
 						</div>
@@ -258,6 +259,7 @@
 				</div>
 				<div class="ad-2" id="ad-all">
 					<div class="rekcontent" memo="추천상품시작">
+					<img src="/resources/images/icons/ads.png" id="rek-tag1">
 						<div class="rekimage">
 							<img src="/resources/images/icons/PANDA.png">
 						</div>
@@ -282,6 +284,8 @@
 					<div class="rank-1" id="rekrank">
 						<div class="rank-1-item">
 							<div class="rekcontent" memo="추천상품시작">
+							<img src="/resources/images/icons/rekmark.png" id="rek-mark">
+							<img src="/resources/images/icons/one.png" id="rek-tag">
 								<div class="rekimage">
 									<img src="/resources/images/icons/PANDA.png">
 								</div>
@@ -304,6 +308,8 @@
 					<div class="rank-2" id="rekrank">
 						<div class="rank-2-item">
 							<div class="rekcontent" memo="추천상품시작">
+							<img src="/resources/images/icons/rekmark.png" id="rek-mark">
+							<img src="/resources/images/icons/two.png" id="rek-tag">
 								<div class="rekimage">
 									<img src="/resources/images/icons/PANDA.png">
 								</div>
@@ -326,6 +332,8 @@
 					<div class="rank-3" id="rekrank">
 						<div class="rank-3-item">
 							<div class="rekcontent" memo="추천상품시작">
+							<img src="/resources/images/icons/rekmark.png" id="rek-mark">
+							<img src="/resources/images/icons/three.png" id="rek-tag">
 								<div class="rekimage">
 									<img src="/resources/images/icons/PANDA.png">
 								</div>
@@ -350,6 +358,8 @@
 					<div class="rank-4" id="rekrank">
 						<div class="rank-4-item">
 							<div class="rekcontent" memo="추천상품시작">
+							<img src="/resources/images/icons/rekmark.png" id="rek-mark">
+							<img src="/resources/images/icons/four.png" id="rek-tag">
 								<div class="rekimage">
 									<img src="/resources/images/icons/PANDA.png">
 								</div>
@@ -372,6 +382,8 @@
 					<div class="rank-5" id="rekrank">
 						<div class="rank-5-item">
 							<div class="rekcontent" memo="추천상품시작">
+							<img src="/resources/images/icons/rekmark.png" id="rek-mark">
+							<img src="/resources/images/icons/five.png" id="rek-tag">
 								<div class="rekimage">
 									<img src="/resources/images/icons/PANDA.png">
 								</div>
@@ -394,6 +406,8 @@
 					<div class="rank-6" id="rekrank">
 						<div class="rank-6-item">
 							<div class="rekcontent" memo="추천상품시작">
+							<img src="/resources/images/icons/rekmark.png" id="rek-mark">
+							<img src="/resources/images/icons/six.png" id="rek-tag">
 								<div class="rekimage">
 									<img src="/resources/images/icons/PANDA.png">
 								</div>
