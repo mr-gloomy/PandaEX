@@ -173,10 +173,13 @@
 
 	<%--추천상품 섹션 --%>
 	<!-- Product -->
-	<section class="bg0 p-t-23 p-b-140" style="padding-bottom: 15px; padding-top: 30px;">
+	<section class="bg0 p-t-23 p-b-140"
+		style="padding-bottom: 15px; padding-top: 30px;">
 		<div class="container">
 			<div class="p-b-10">
-				<h3 class="ltext-103 cl5" style="color: #505050;cursor:context-menu;opacity: 0.8;">너의 취향대로 PANDA!</h3>
+				<h3 class="ltext-103 cl5"
+					style="color: #505050; cursor: context-menu; opacity: 0.8;">너의
+					취향대로 PANDA!</h3>
 			</div>
 
 			<div class="flex-w flex-sb-m p-b-52">
@@ -246,7 +249,9 @@
 								<div class="rek-interest">관심 5</div>
 							</div>
 							<div class="rek-go">
-								<div class="rek-go-btn"><a href="#">자세히 보기</a></div>
+								<div class="rek-go-btn">
+									<a href="#">자세히 보기</a>
+								</div>
 							</div>
 						</div>
 					</div memo="추천상품끝">
@@ -264,7 +269,9 @@
 								<div class="rek-interest">관심 5</div>
 							</div>
 							<div class="rek-go">
-								<div class="rek-go-btn"><a href="#">자세히 보기</a></div>
+								<div class="rek-go-btn">
+									<a href="#">자세히 보기</a>
+								</div>
 							</div>
 						</div>
 					</div memo="추천상품끝">
@@ -286,7 +293,9 @@
 										<div class="rek-interest">관심 5</div>
 									</div>
 									<div class="rek-go">
-										<div class="rek-go-btn"><a href="#">자세히 보기</a></div>
+										<div class="rek-go-btn">
+											<a href="#">자세히 보기</a>
+										</div>
 									</div>
 								</div>
 							</div memo="추천상품끝">
@@ -306,7 +315,9 @@
 										<div class="rek-interest">관심 5</div>
 									</div>
 									<div class="rek-go">
-										<div class="rek-go-btn"><a href="#">자세히 보기</a></div>
+										<div class="rek-go-btn">
+											<a href="#">자세히 보기</a>
+										</div>
 									</div>
 								</div>
 							</div memo="추천상품끝">
@@ -326,7 +337,9 @@
 										<div class="rek-interest">관심 5</div>
 									</div>
 									<div class="rek-go">
-										<div class="rek-go-btn"><a href="#">자세히 보기</a></div>
+										<div class="rek-go-btn">
+											<a href="#">자세히 보기</a>
+										</div>
 									</div>
 								</div>
 							</div memo="추천상품끝">
@@ -348,7 +361,9 @@
 										<div class="rek-interest">관심 5</div>
 									</div>
 									<div class="rek-go">
-										<div class="rek-go-btn"><a href="#">자세히 보기</a></div>
+										<div class="rek-go-btn">
+											<a href="#">자세히 보기</a>
+										</div>
 									</div>
 								</div>
 							</div memo="추천상품끝">
@@ -368,7 +383,9 @@
 										<div class="rek-interest">관심 5</div>
 									</div>
 									<div class="rek-go">
-										<div class="rek-go-btn"><a href="#">자세히 보기</a></div>
+										<div class="rek-go-btn">
+											<a href="#">자세히 보기</a>
+										</div>
 									</div>
 								</div>
 							</div memo="추천상품끝">
@@ -388,23 +405,36 @@
 										<div class="rek-interest">관심 5</div>
 									</div>
 									<div class="rek-go">
-										<div class="rek-go-btn"><a href="#">자세히 보기</a></div>
+										<div class="rek-go-btn">
+											<a href="#">자세히 보기</a>
+										</div>
 									</div>
 								</div>
 							</div memo="추천상품끝">
 						</div>
 					</div>
-					<div class="rank4-6"></div>
 				</div>
 			</div>
 		</div>
 	</section>
 
 	<%--상품들~~ --%>
-	
+
 	<%--이벤트 칸 --%>
 	<section class="event-section">
-		<div class="event-body">공간잡기</div>
+		<div class="event-body">
+			<div class="event-body-1">
+				<div class="body-1-1"><img src="/resources/images/eventsmall1.jpg"></div>
+				<div class="body-1-2"><img src="/resources/images/eventsmall2.png"></div>
+			</div>
+			<div class="event-body-2">
+				<div class="body2-1">
+					<img src="/resources/images/eventbanner-chat.png">
+					<div class="p"><p>24시간 간편한 채팅상담 중고거래 궁금증을 해결해드려요!</p></div>
+				</div>
+			</div>
+
+		</div>
 	</section>
 
 
