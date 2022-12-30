@@ -32,5 +32,10 @@
 		where bno=#{bno}
 	</update>
 	
+	<!-- 삭제하기 -->
+	<delete id="remBoard">
+		delete from board 
+		where bno=#{bno}
+	</delete>
 
 </mapper>

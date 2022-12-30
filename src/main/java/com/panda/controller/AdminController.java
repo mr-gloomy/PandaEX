@@ -122,15 +122,32 @@ public class AdminController {
 	// 게시판 수정 POST
 	@RequestMapping(value = "/modify",method = RequestMethod.POST)
 	public String modifyPOST(BoardVO vo,RedirectAttributes rttr)throws Exception{
+		
+		mylog.debug(" modifyPOST() 호출"); 
+		
 		Integer result = service.updateBoard(vo);
 		
 		if(result>0) {
 			// "수정완료" - 정보전달
 			rttr.addFlashAttribute("result","modOK");
-			
 		}
 		
-		return "";
+		return "redirect:/admin/list";
+	}
+	
+	// 게시판 삭제 POST
+	@RequestMapping(value = "/remove",method = RequestMethod.POST)
+	public String removePOST(@RequestParam("bno")int bno, RedirectAttributes rttr)throws Exception{
+		
+
+		Integer result = service.deleteBoard(bno);
+		
+		if(result>0) {
+			// "수정완료" - 정보전달
+			rttr.addFlashAttribute("result","remOK");
+		}
+		
+		return "redirect:/admin/list";
 	}
 	
 }
