@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.panda.domain.BoardVO;
+import com.panda.domain.Criteria;
 import com.panda.persistence.BoardDAO;
 
 @Service
@@ -26,9 +27,9 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<BoardVO> getBoardAll() throws Exception {
+	public List<BoardVO> getBoardAll(Criteria cri) throws Exception {
 		
-		return dao.getBoardAll();
+		return dao.getBoardAll(cri);
 	}
 
 	@Override
@@ -49,6 +50,20 @@ public class BoardServiceImpl implements BoardService {
 		
 		
 		return dao.updateBoard(vo);
+	}
+
+	@Override
+	public Integer deleteBoard(int bno) throws Exception {
+		
+		
+		return dao.deleteBoard(bno);
+	}
+
+	@Override
+	public Integer totalCnt() throws Exception {
+		
+		
+		return dao.totalCnt();
 	}
 
 }

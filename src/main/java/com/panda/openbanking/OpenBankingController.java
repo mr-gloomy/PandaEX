@@ -1,5 +1,7 @@
 package com.panda.openbanking;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -7,8 +9,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.panda.openbanking.domain.AccountSearchRequestVO;
 import com.panda.openbanking.domain.AccountSearchResponseVO;
@@ -16,6 +20,8 @@ import com.panda.openbanking.domain.RequestTokenVO;
 import com.panda.openbanking.domain.ResponseTokenVO;
 import com.panda.openbanking.domain.UserInfoRequestVO;
 import com.panda.openbanking.domain.UserInfoResponseVO;
+import com.panda.openbanking.domain.WithdrawRequestVO;
+import com.panda.openbanking.domain.WithdrawResponseVO;
 
 @Controller
 @RequestMapping("/openbanking/*")
@@ -58,8 +64,12 @@ public class OpenBankingController {
 	@RequestMapping(value = "/userInfo", method = RequestMethod.GET)
 	public String getUserInfo(UserInfoRequestVO userInfoRequestVO, Model model) throws Exception{
 		
+		mylog.debug("userInfoRequestVO : " + userInfoRequestVO);
+		
 		//토큰발급 => 처리 메서드 호출 리턴 받기
 		UserInfoResponseVO userInfo =openBankingService.findUser(userInfoRequestVO);
+		
+		mylog.debug(userInfo+"userInfo@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		
 		//정보를 들고  bank_main.jsp 이동
 		model.addAttribute("userInfo", userInfo);
@@ -80,5 +90,24 @@ public class OpenBankingController {
 			model.addAttribute("access_token", accountSearchRequestVO.getAccess_token());
 			
 			return "account/list";
+		}
+		
+		// 출금이체
+		@RequestMapping(value = "/withdraw", method = RequestMethod.POST)
+		public @ResponseBody WithdrawResponseVO getWithdraw(@RequestBody WithdrawRequestVO withdrawRequestVO, Model model)
+				throws IOException {
+			// Service 객체의 findAccount() 메서드를 호출하여 사용자 정보 조회
+			// => 파라미터 : AccountSearchRequestVO, 리턴타입 AccountSearchResponseVO
+			// AccountSearchResponseVO accountList =
+			// openBankingService.findAccount(accountSearchRequestVO);
+			System.out.println(withdrawRequestVO + "@@@@@@@@@@@@@@@@@@@@@@@@");
+			WithdrawResponseVO withdrawOK = openBankingService.getwithdraw(withdrawRequestVO);
+
+			// Model 객체에 AccountSearchResponseVO 객체와 엑세스토큰 저장
+			model.addAttribute("withdrawOK", withdrawOK);
+			model.addAttribute("access_token", withdrawRequestVO.getAccess_token());
+			System.out.println("결과@@@@@@@@@@@@@" + withdrawOK);
+			// return "account/withdraw";
+			return withdrawOK;
 		}
 }

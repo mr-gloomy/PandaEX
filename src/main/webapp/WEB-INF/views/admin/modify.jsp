@@ -35,16 +35,16 @@
 			
 			<div class="form-group">
 				<label>제목</label> <input type="text" class="form-control"
-					placeholder="Enter ..." value=${cvo.title } >
+					placeholder="Enter ..." value=${cvo.title } name="title">
 			</div>
 			<div class="form-group">
 				<label>작성자</label> <input type="text" class="form-control"
-					placeholder="Enter ..." value=${cvo.writer } readonly>
+					placeholder="Enter ..." value=${cvo.writer } readonly name="writer">
 			</div>
 
 			<div class="form-group">
 				<label>내용</label>
-				<textarea class="form-control" rows="3" >${cvo.content }</textarea>
+				<textarea class="form-control" rows="3" name="content">${cvo.content }</textarea>
 			</div>
 
 

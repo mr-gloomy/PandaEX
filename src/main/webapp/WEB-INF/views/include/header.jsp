@@ -10,7 +10,7 @@
 
 
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
-<jsp:include page="../addon/chat.jsp"/>
+<jsp:include page="../addon/chatList.jsp"/>
 <script src="/resources/js/main.js"></script>
 <script src="/resources/js/chat.js"></script>
 	<!-- 임시 -->

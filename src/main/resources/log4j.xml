@@ -14,6 +14,9 @@
 	<logger name="com.panda.controller">
 		<level value="debug" />
 	</logger>
+	<logger name="com.panda.openbanking">
+		<level value="debug" />
+	</logger>
 	<logger name="com.panda.persistence">
 		<level value="debug" />
 	</logger>
