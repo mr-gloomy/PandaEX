@@ -16,6 +16,7 @@
 	작성자 : <input type="text" name="writer"> <br>
 			<button type="submit" class="">글쓰기</button>	
 	</form>
+			<button type="button" class="" onclick="location.href='/admin/list';">글목록</button>	
 	
 	
 </body>

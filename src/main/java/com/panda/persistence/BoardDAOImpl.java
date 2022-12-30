@@ -64,4 +64,12 @@ public class BoardDAOImpl implements BoardDAO {
 		return result;
 	}
 
+	@Override
+	public Integer deleteBoard(int bno) {
+		
+		Integer result = sqlSession.delete(NAMESPACE+".remBoard", bno);
+		
+		return result;
+	}
+
 }

@@ -267,6 +267,9 @@
 		<div class="box-header">
 			<h3 class="box-title">통합게시판</h3>
 		</div>
+		
+			<button class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer" onclick="location.href='/admin/boardRegist';">
+							글쓰기</button>
 
 		<div class="box-body">
 			<div id="example1_wrapper"
@@ -320,7 +323,7 @@
 										style="width: 322.266px;">작성자</th>
 									<th class="sorting" tabindex="0" aria-controls="example1"
 										rowspan="1" colspan="1"
-										aria-label="Engine version: activate to sort column ascending"
+										ar	ia-label="Engine version: activate to sort column ascending"
 										style="width: 257.094px;">작성일</th>
 									<th class="sorting" tabindex="0" aria-controls="example1"
 										rowspan="1" colspan="1"
@@ -386,16 +389,23 @@
 	  <script type="text/javascript" >
 	     	// alert('${result}'); => EL표현식 -> JS사용 값전달 가능 (DB데이터 사용가능) 
 	     	// ajax호출시 (DB데이터 전달 가능)
+	     	
 		var result = '${result}';
-		
+			
 		if(result=='registOK'){
 			
 			alert("글쓰기 완료! ");
+			
 		}else if(result=='modOK'){
 			
-			alert("글수정 완료! ");
+			alert("글 수정 완료! ");
+			
+		}else if(result=='remOK'){
+			
+			alert("글 삭제 완료! ");
+			
 		}
-		
+			
 	     </script> 
      
 
