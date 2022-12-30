@@ -35,11 +35,7 @@ public class MainPageController {
 	}
 	
 	@GetMapping("/chat")
-	public String chat(Model model, 
-
-			
-			
-			) throws Exception{
+	public String chat(Model model,ChatVO vo) throws Exception{
 		vo.setSend_id("gd");
 		vo.setReceive_id("sadf");
 		String bang_id = service.getRoom(vo);
