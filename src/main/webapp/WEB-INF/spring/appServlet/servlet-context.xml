@@ -38,4 +38,17 @@
 		<websocket:sockjs websocket-enabled="true"/>
 	</websocket:handlers>
 	
+	<!-- 업로드 패스 설정 --> 
+   <beans:bean class="java.lang.String" id="uploadPath">
+    <beans:constructor-arg value="D:\final_project\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\${pageContext.request.contextPath}\resources" />
+   </beans:bean>
+   
+   <!-- 일반 파일 업로드 경로 -->
+   <resources mapping="/imgUpload/**" location="/resources/imgUpload/" />
+   
+   <beans:bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver">
+    <beans:property name="maxUploadSize" value="10485760"/>
+   </beans:bean>
+	
+	
 </beans:beans>
