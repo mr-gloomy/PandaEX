@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -44,6 +45,8 @@ public class MemberController {
 	@RequestMapping(value = "/insert", method = RequestMethod.GET)
 	public String joinGET() throws Exception {
 		mylog.info("/member/insert 이동");
+		
+		
 		
 //		// 네이버 URL
 //		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
@@ -146,6 +149,25 @@ public class MemberController {
 			return "/member/index";
 		}
 		
+		//카카오 로그인
+		@RequestMapping(value="/kakaoLogin", method=RequestMethod.GET)
+		public String kakaoLogin(@RequestParam(value = "code", required = false) String code) throws Exception {
+			mylog.info("#########" + code);
+			return "main/index";
+			/*
+			 * 리턴값의 testPage는 아무 페이지로 대체해도 괜찮습니다.
+			 * 없는 페이지를 넣어도 무방합니다.
+			 * 404가 떠도 제일 중요한건 #########인증코드 가 잘 출력이 되는지가 중요하므로 너무 신경 안쓰셔도 됩니다.
+			 */
+			
+			
+			// 위에서 만든 코드 아래에 코드 추가
+			String access_Token = service.getAccessToken(code);
+			System.out.println("###access_Token#### : " + access_Token);
+	        
+			return "member/testPage";
+	    	}
+	    	
 	
 	//로그아웃
 	@GetMapping("/logout")

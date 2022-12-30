@@ -7,6 +7,8 @@
 <!-- Header -->
 
 <header>
+
+
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <jsp:include page="../addon/chat.jsp"/>
 <script src="/resources/js/main.js"></script>
@@ -23,22 +25,6 @@
 	</script>
 
 
-
-    // 비밀번호 틀렸을 경우
-       if($('#user_pw').val()=="") {
-          alert('입력하신 정보가 틀립니다.');
-          return false;
-          }
-    
-    // 아이디, 비밀번호 일치하는 경우
-//     	if($('#loginid').val()==$('id'.val()) && $('#loginpw').val()==$('pw'.val() {
-//     		alert('환영합니다!');
-//     		return false;
-//    			}
-    	});
-          });
-		
-	</script>
 
 
 
@@ -287,12 +273,23 @@
 			<a>계정이 없으신가요?</a>&nbsp;&nbsp;
 			<p id="onclick-join">회원가입</p>
 		</div>
+		
+		
+		<!-- 카카오 로그인 -->
 		<div class="social-login">
 			<img src="/resources/images/icons/division-line.png">
 			<p>Social Login</p>
 			<img src="/resources/images/icons/division-line.png">
 		</div>
-			<img class="kakaologin" src="/resources/images/icons/kakao_login_large_wide.png">
+			 
+			 <a class="p-2" href="https://kauth.kakao.com/oauth/authorize?client_id=d2adbec5b44fdcc0559d1e3ca898739e&redirect_uri=http://localhost:8080/main/index&response_type=code">
+			 
+			<img class="kakaologin" src="${pageContext.request.contextPath }/resources/images/icons/kakao_login_large_wide.png"" style="width:268pt;height:50pt;margin:auto;"><br><br>
+			 </a>
+			 
+			 
+			 
+			 
 		<div class="modal-join">
 		<form action="/member/insert" method="post">
 			<div class="join-text">
@@ -383,7 +380,7 @@
 	        				}else{
 	        	        		$("#userIDdiv").html("<font color='green'> 이미 사용중인 아이디입니다 </font>");
 
-	        			}
+	        			
 	        		});
 	        		
 	        		$("#userIDdiv").html("<font color='blue'> 정상적인 아이디 사용입니다 </font>");
