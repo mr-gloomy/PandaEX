@@ -214,21 +214,74 @@
 						Filter
 					</div>
 
-					<div
-						class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 js-show-search">
-						<i class="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search"></i>
-						<i
-							class="icon-close-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
-						Search
-					</div>
+					<!-- 					<div -->
+					<!-- 						class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 js-show-search"> -->
+					<!-- 						<i class="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search"></i> -->
+					<!-- 						<i -->
+					<!-- 							class="icon-close-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i> -->
+					<!-- 						Search -->
+					<!-- 					</div> -->
 				</div>
 
 
 			</div>
-
+			<!-- 검색필터 -->
 			<div class="main-filter">
-				<div class="filter-body">검색필터로 사용합니다.</div>
+				<div class="filter-body">
+					<div class="filter-category">
+						<ul class="filter-option">
+							<li>카테고리</li>
+							<li>상품상태</li>
+							<li>환불여부</li>
+							<li>가격범위</li>
+						</ul>
+					</div>
+					<div class="filter-solt">
+						<div class="filter-category-sel">
+							<ul class="select-category">
+								<li>전자기기</li>
+								<li>의류/뷰티/잡화</li>
+								<li>생활가전/주방</li>
+								<li>인테리어/가구</li>
+								<li>도서/티켓/교환권</li>
+								<li>식품</li>
+								<li>기타 중고물품</li>
+							</ul>
+						</div>
+						<div class="filter-condition-sel">
+							<ul class="select-condition">
+								<li>새상품</li>
+								<li>거이 새 것</li>
+								<li>사용감 있음</li>
+							</ul>
+						</div>
+						<div class="filter-discount-sel">
+							<ul class="select-discount">
+								<li>가능</li>
+								<li>불가능</li>
+							</ul>
+						</div>
+						<div class="filter-price-sel">
+							<ul class="select-price">
+								<li>1만원 이하</li>
+								<li>1만원 ~ 3만원</li>
+								<li>3만원 ~ 5만원</li>
+								<li>5만원 ~ 10만원</li>
+								<li class="direct-input">직접입력
+									<div class="low-price">
+										<input type="text" title="최소가격입력" value="0" placeholder="100">
+									</div>
+									<p class="price-division">~</p>
+									<div class="max-price">
+										<input type="text" title="최대가격입력" value="0" placeholder="10000">
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
 			</div>
+			<!-- 검색필터 -->
 		</div>
 	</section>
 	<%--추천상품 섹션 --%>
@@ -259,7 +312,7 @@
 				</div>
 				<div class="ad-2" id="ad-all">
 					<div class="rekcontent" memo="추천상품시작">
-					<img src="/resources/images/icons/ads.png" id="rek-tag1">
+						<img src="/resources/images/icons/ads.png" id="rek-tag1">
 						<div class="rekimage">
 							<img src="/resources/images/icons/PANDA.png">
 						</div>
@@ -284,8 +337,8 @@
 					<div class="rank-1" id="rekrank">
 						<div class="rank-1-item">
 							<div class="rekcontent" memo="추천상품시작">
-							<img src="/resources/images/icons/rekmark.png" id="rek-mark">
-							<img src="/resources/images/icons/one.png" id="rek-tag">
+								<img src="/resources/images/icons/rekmark.png" id="rek-mark">
+								<img src="/resources/images/icons/one.png" id="rek-tag">
 								<div class="rekimage">
 									<img src="/resources/images/icons/PANDA.png">
 								</div>
@@ -308,8 +361,8 @@
 					<div class="rank-2" id="rekrank">
 						<div class="rank-2-item">
 							<div class="rekcontent" memo="추천상품시작">
-							<img src="/resources/images/icons/rekmark.png" id="rek-mark">
-							<img src="/resources/images/icons/two.png" id="rek-tag">
+								<img src="/resources/images/icons/rekmark.png" id="rek-mark">
+								<img src="/resources/images/icons/two.png" id="rek-tag">
 								<div class="rekimage">
 									<img src="/resources/images/icons/PANDA.png">
 								</div>
@@ -332,8 +385,8 @@
 					<div class="rank-3" id="rekrank">
 						<div class="rank-3-item">
 							<div class="rekcontent" memo="추천상품시작">
-							<img src="/resources/images/icons/rekmark.png" id="rek-mark">
-							<img src="/resources/images/icons/three.png" id="rek-tag">
+								<img src="/resources/images/icons/rekmark.png" id="rek-mark">
+								<img src="/resources/images/icons/three.png" id="rek-tag">
 								<div class="rekimage">
 									<img src="/resources/images/icons/PANDA.png">
 								</div>
@@ -358,8 +411,8 @@
 					<div class="rank-4" id="rekrank">
 						<div class="rank-4-item">
 							<div class="rekcontent" memo="추천상품시작">
-							<img src="/resources/images/icons/rekmark.png" id="rek-mark">
-							<img src="/resources/images/icons/four.png" id="rek-tag">
+								<img src="/resources/images/icons/rekmark.png" id="rek-mark">
+								<img src="/resources/images/icons/four.png" id="rek-tag">
 								<div class="rekimage">
 									<img src="/resources/images/icons/PANDA.png">
 								</div>
@@ -382,8 +435,8 @@
 					<div class="rank-5" id="rekrank">
 						<div class="rank-5-item">
 							<div class="rekcontent" memo="추천상품시작">
-							<img src="/resources/images/icons/rekmark.png" id="rek-mark">
-							<img src="/resources/images/icons/five.png" id="rek-tag">
+								<img src="/resources/images/icons/rekmark.png" id="rek-mark">
+								<img src="/resources/images/icons/five.png" id="rek-tag">
 								<div class="rekimage">
 									<img src="/resources/images/icons/PANDA.png">
 								</div>
@@ -406,8 +459,8 @@
 					<div class="rank-6" id="rekrank">
 						<div class="rank-6-item">
 							<div class="rekcontent" memo="추천상품시작">
-							<img src="/resources/images/icons/rekmark.png" id="rek-mark">
-							<img src="/resources/images/icons/six.png" id="rek-tag">
+								<img src="/resources/images/icons/rekmark.png" id="rek-mark">
+								<img src="/resources/images/icons/six.png" id="rek-tag">
 								<div class="rekimage">
 									<img src="/resources/images/icons/PANDA.png">
 								</div>
@@ -438,13 +491,19 @@
 	<section class="event-section">
 		<div class="event-body">
 			<div class="event-body-1">
-				<div class="body-1-1"><img src="/resources/images/eventsmall1.jpg"></div>
-				<div class="body-1-2"><img src="/resources/images/eventsmall2.png"></div>
+				<div class="body-1-1">
+					<img src="/resources/images/eventsmall1.jpg">
+				</div>
+				<div class="body-1-2">
+					<img src="/resources/images/eventsmall2.png">
+				</div>
 			</div>
 			<div class="event-body-2">
 				<div class="body2-1">
 					<img src="/resources/images/eventbanner-chat.png">
-					<div class="p"><p>24시간 간편한 채팅상담 중고거래 궁금증을 해결해드려요!</p></div>
+					<div class="p">
+						<p>24시간 간편한 채팅상담 중고거래 궁금증을 해결해드려요!</p>
+					</div>
 				</div>
 			</div>
 
