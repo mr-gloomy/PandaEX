@@ -40,7 +40,7 @@ public class MemberServiceImpl implements MemberService {
 
 	//로긴
 	@Override
-	public boolean memberLogin(MemberVO vo) {
+	public boolean memberLogin(MemberVO vo)throws Exception {
 		mylog.debug("memberLogin(vo) 호출");
 		
 		MemberVO resultVO = dao.loginMember(vo);
@@ -56,13 +56,13 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public MemberVO getMember(String user_id) {
+	public MemberVO getMember(String user_id)throws Exception {
 		return dao.getMember(user_id);
 	}
 	
 	
 	@Override
-	public String getAccessToken (String authorize_code) {
+	public String getAccessToken (String authorize_code)throws Exception {
 		String access_Token = "";
 		String refresh_Token = "";
 		String reqURL = "https://kauth.kakao.com/oauth/token";
@@ -121,7 +121,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public KakaoVO getUserInfo(String access_Token) {
+	public KakaoVO getUserInfo(String access_Token)throws Exception {
 		// 요청하는 클라이언트마다 가진 정보가 다를 수 있기에 HashMap타입으로 선언
 		HashMap<String, Object> userInfo = new HashMap<String, Object>();
 		String reqURL = "https://kapi.kakao.com/v2/user/me";

@@ -9,14 +9,14 @@ public interface MemberDAO {
 			public void insert(MemberVO vo) throws Exception;
 		
 			//로그인
-			public MemberVO loginMember(MemberVO vo);
+			public MemberVO loginMember(MemberVO vo)throws Exception;
 			
 			//회원조회
-			public MemberVO getMember(String user_id);
+			public MemberVO getMember(String user_id)throws Exception;
 
-			public KakaoVO findkakao(HashMap<String, Object> userInfo);
+			public KakaoVO findkakao(HashMap<String, Object> userInfo)throws Exception;
 
-			public void kakaoinsert(HashMap<String, Object> userInfo);
+			public void kakaoinsert(HashMap<String, Object> userInfo)throws Exception;
 			
 			
 }

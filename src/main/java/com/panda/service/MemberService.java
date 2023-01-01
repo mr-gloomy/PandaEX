@@ -30,7 +30,7 @@ public interface MemberService {
 		//회원조회
 		public MemberVO getMember(String user_id) throws Exception;
 
-		public KakaoVO getUserInfo(String access_Token);
+		public KakaoVO getUserInfo(String access_Token)throws Exception;
 
 	
 		

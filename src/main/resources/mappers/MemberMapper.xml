@@ -27,7 +27,7 @@
  	 where user_id != #{user_id} 	
  	</select>
  	
-	<select id="findKakao" parameterType="java.util.HashMap" resultType="kdto">
+	<select id="findKakao" parameterType="java.util.HashMap" resultType="MemberVO">
 		select * from kakao_user where k_name=#{nickname} and k_email=#{email}
 	</select>
 
