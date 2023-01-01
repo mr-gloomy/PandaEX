@@ -1,6 +1,8 @@
 package com.panda.openbanking;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -17,6 +19,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.panda.openbanking.domain.AccountSearchRequestVO;
 import com.panda.openbanking.domain.AccountSearchResponseVO;
+import com.panda.openbanking.domain.DepositRequestVO;
+import com.panda.openbanking.domain.DepositResponseVO;
 import com.panda.openbanking.domain.RequestTokenVO;
 import com.panda.openbanking.domain.ResponseTokenVO;
 import com.panda.openbanking.domain.UserInfoRequestVO;
@@ -161,7 +165,8 @@ public class OpenBankingApiClient {
 		// HttpHeader,HttpBody parameters 담아서 감 => HttpEntity
 		//HttpEntity<MultiValueMap<String, String>> param = new HttpEntity<MultiValueMap<String, String>>(parameters, httpHeaders);
 		HttpEntity<Map<String, String>> param = new HttpEntity<Map<String, String>>(parameters, setHeaderAccessToken(withdrawRequestVO.getAccess_token()));
-		
+//		HttpEntity<String> param=
+//				new HttpEntity<String>(setHeaderAccessToken(withdrawRequestVO.getAccess_token()));
 		System.out.println("저장@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@토큰넣은 : " +param);
 		//String requestUrl = "https://testapi.openbanking.or.kr/oauth/2.0/transfer/withdraw/fin_num";
 		String requestUrl = "https://testapi.openbanking.or.kr/v2.0/transfer/withdraw/fin_num";
@@ -170,5 +175,55 @@ public class OpenBankingApiClient {
 		//return restTemplate.exchange(requestUrl, HttpMethod.POST, param, WithdrawResponseVO.class).getBody();
 		return restTemplate.postForEntity(requestUrl, param, WithdrawResponseVO.class).getBody();
 	}
+	
+
+	// 입금이체
+	public DepositResponseVO deposit( DepositRequestVO depositRequestVO) throws Exception{
+		/// REST 방식 요청에 필요한 객체 생성
+		restTemplate = new RestTemplate();
+		httpHeaders = new HttpHeaders();
+		
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("cntr_account_type", depositRequestVO.getCntr_account_type());
+		parameters.put("cntr_account_num", depositRequestVO.getCntr_account_num());
+		parameters.put("wd_pass_phrase", depositRequestVO.getWd_pass_phrase());
+		parameters.put("wd_print_content", depositRequestVO.getWd_print_content());
+		parameters.put("name_check_option", depositRequestVO.getName_check_option());
+		parameters.put("tran_dtime", depositRequestVO.getTran_dtime());
+		parameters.put("req_cnt", depositRequestVO.getReq_cnt());
+		
+		
+		Map<String, String> parameters2 = new HashMap<String, String>();
+		parameters2.put("tran_no", depositRequestVO.getTran_no());
+		parameters2.put("bank_tran_id", depositRequestVO.getBank_tran_id());
+//		parameters2.put("bank_tran_id", depositRequestVO.getBank_tran_id());
+//		parameters2.put("bank_tran_id", "M202202083U123432345");
+		parameters2.put("fintech_use_num", depositRequestVO.getFintech_use_num());
+		parameters2.put("print_content", depositRequestVO.getPrint_content());
+		parameters2.put("tran_amt", depositRequestVO.getTran_amt());
+		parameters2.put("req_client_name", depositRequestVO.getReq_client_name());
+		parameters2.put("req_client_bank_code", depositRequestVO.getReq_client_bank_code());
+		parameters2.put("req_client_account_num", depositRequestVO.getReq_client_account_num());
+		parameters2.put("req_client_num", depositRequestVO.getReq_client_num());
+		parameters2.put("transfer_purpose", depositRequestVO.getTransfer_purpose());
+		
+		List<Map> req_list = new ArrayList<Map>();
+		req_list.add(parameters2);
+		//depositRequestVO.setReq_list(req_list);
+		parameters.put("req_list", req_list);
+		System.out.println("저장parameters###############################"+parameters);
+		
+		// HttpHeader,HttpBody parameters 담아서 감 => HttpEntity
+		//HttpEntity<MultiValueMap<String, String>> param = new HttpEntity<MultiValueMap<String, String>>(parameters, httpHeaders);
+		HttpEntity<Map<String, Object>> param = new HttpEntity<Map<String, Object>>(parameters, setHeaderAccessToken(depositRequestVO.getAccess_token()));
+		
+		String requestUrl = "https://testapi.openbanking.or.kr/v2.0/transfer/deposit/fin_num";
+		
+		
+		
+		System.out.println("저장###############################주소저장" + param);
+		return restTemplate.exchange(requestUrl, HttpMethod.POST, param, DepositResponseVO.class).getBody();
+	}	
+	
 	
 }
