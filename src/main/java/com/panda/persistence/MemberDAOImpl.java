@@ -1,5 +1,7 @@
 package com.panda.persistence;
 
+import java.util.HashMap;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -31,19 +33,31 @@ public class MemberDAOImpl implements MemberDAO{
 
 	//로그인
 	@Override
-	public MemberVO loginMember(MemberVO vo) {
+	public MemberVO loginMember(MemberVO vo)throws Exception {
 		
 		return sqlSession.selectOne(NAMESPACE+".login",vo);
 	}
 
 	//회원조회
 	@Override
-	public MemberVO getMember(String user_id) {
+	public MemberVO getMember(String user_id)throws Exception {
 		MemberVO vo = sqlSession.selectOne(NAMESPACE + ".getMember",user_id);
 		mylog.debug("@@@@@@@@@@@@@@@@@@@@@@@");
 		
 		return vo;
 	}
+	// 정보 저장
+		public void kakaoinsert(HashMap<String, Object> userInfo)throws Exception {
+			sqlSession.insert("Member.kakaoInsert",userInfo);
+		}
 
+		// 정보 확인
+		public KakaoVO findkakao(HashMap<String, Object> userInfo)throws Exception {
+			System.out.println("RN:"+userInfo.get("nickname"));
+			System.out.println("RE:"+userInfo.get("email"));
+			return sqlSession.selectOne("Member.findKakao", userInfo);
+		}
+
+	}
 	
-}
+

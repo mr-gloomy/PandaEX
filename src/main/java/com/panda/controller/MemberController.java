@@ -1,8 +1,7 @@
 package com.panda.controller;
 
 import java.io.PrintWriter;
-
-
+import java.util.HashMap;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -11,19 +10,17 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.panda.domain.MemberVO;
+import com.panda.persistence.KakaoVO;
 import com.panda.service.MemberService;
 
 @Controller
@@ -37,27 +34,14 @@ public class MemberController {
 	@Inject
 	private MemberService service;
 
-
+	@Autowired
+	private HttpSession session;
 	
 	//http://localhost:8080/main/index
 	
 	// 회원가입 - GET
 	@RequestMapping(value = "/insert", method = RequestMethod.GET)
 	public String joinGET() throws Exception {
-		mylog.info("/member/insert 이동");
-		
-		
-		
-//		// 네이버 URL
-//		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
-//		log.info("@@@@@ naver : "+naverAuthUrl);
-//		model.addAttribute("naverURL", naverAuthUrl);
-//		
-//		// 카카오 URL
-//		String kakaoAuthUrl = kakaoLoginBO.getAuthorizationUrl(session);
-//		log.info("@@@@@ kakao :" + kakaoAuthUrl);		
-//		model.addAttribute("kakaoURL", kakaoAuthUrl);
-	 
 		return "redirect:/main/index";
 	}
 	
@@ -146,26 +130,26 @@ public class MemberController {
 			}
 			
 			// 연결된 뷰페이지 호출		
-			return "/member/index";
+			return "/main/index";
 		}
 		
 		//카카오 로그인
 		@RequestMapping(value="/kakaoLogin", method=RequestMethod.GET)
 		public String kakaoLogin(@RequestParam(value = "code", required = false) String code) throws Exception {
-			mylog.info("#########" + code);
-			return "main/index";
-			/*
-			 * 리턴값의 testPage는 아무 페이지로 대체해도 괜찮습니다.
-			 * 없는 페이지를 넣어도 무방합니다.
-			 * 404가 떠도 제일 중요한건 #########인증코드 가 잘 출력이 되는지가 중요하므로 너무 신경 안쓰셔도 됩니다.
-			 */
-			
-			
-			// 위에서 만든 코드 아래에 코드 추가
+			System.out.println("#########" + code);
 			String access_Token = service.getAccessToken(code);
+			KakaoVO userInfo = service.getUserInfo(access_Token);
 			System.out.println("###access_Token#### : " + access_Token);
-	        
-			return "member/testPage";
+			
+			// 아래 코드가 추가되는 내용
+			session.invalidate();
+			// 위 코드는 session객체에 담긴 정보를 초기화 하는 코드.
+			session.setAttribute("kakaoN", userInfo.getK_name());
+			session.setAttribute("kakaoE", userInfo.getK_email());
+			// 위 2개의 코드는 닉네임과 이메일을 session객체에 담는 코드
+			// jsp에서 ${sessionScope.kakaoN} 이런 형식으로 사용할 수 있다.
+		    
+			return "main/index";
 	    	}
 	    	
 	

@@ -7,10 +7,12 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.panda.domain.MemberVO;
+import com.panda.persistence.KakaoVO;
 
 
 public interface MemberService {
@@ -27,6 +29,8 @@ public interface MemberService {
 
 		//회원조회
 		public MemberVO getMember(String user_id) throws Exception;
+
+		public KakaoVO getUserInfo(String access_Token)throws Exception;
 
 	
 		

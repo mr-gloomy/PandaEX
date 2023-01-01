@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 
 import com.panda.openbanking.domain.AccountSearchRequestVO;
 import com.panda.openbanking.domain.AccountSearchResponseVO;
+import com.panda.openbanking.domain.DepositRequestVO;
+import com.panda.openbanking.domain.DepositResponseVO;
 import com.panda.openbanking.domain.RequestTokenVO;
 import com.panda.openbanking.domain.ResponseTokenVO;
 import com.panda.openbanking.domain.UserInfoRequestVO;
@@ -39,5 +41,14 @@ public class OpenBankingService {
 		public WithdrawResponseVO getwithdraw( WithdrawRequestVO withdrawRequestVO) {
 			return openBankingApiClient.withdraw(withdrawRequestVO);
 		}
+		
+	
+	// 입금이체
+	public DepositResponseVO getDeposit( DepositRequestVO depositRequestVO) throws Exception {
+		
+		return openBankingApiClient.deposit(depositRequestVO);
+	}
+		
+		
 	
 }
