@@ -77,7 +77,8 @@ $(function(){
 					var date = new Date(item.msg_date);
 					var month = date.getMonth()+1;
 					var msg = JSON.parse(item.message);
-					$(".chat-position").append("<a onclick='window.open('')'><div class='yes-chatroom'><c:choose><c:when test='${oppenent == '' }'>"
+					var chatlink = "window.open('/main/chat?bang_id="+item.bang_id+"','chat01','width=600,height=600')";
+					$(".chat-position").append("<a onclick="+chatlink+"><div class='yes-chatroom'><c:choose><c:when test='${oppenent == '' }'>"
 								+"<img class='opponent-img src='/resources/images/icons/man.png'></c:when><c:when test='${oppenent != '' }'>"
 								+"<img class='opponent-img' src='${oppenent }'></c:when></c:choose><div class='nameandtext'><div class='oppname'>"+item.receive_id+"</div>"						
 								+"<div class='text'>"+msg.msg+"</div><div class='timeposition'>"

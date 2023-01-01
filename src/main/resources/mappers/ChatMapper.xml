@@ -4,9 +4,7 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.panda.mapper.ChatMapper">
 	<select id="getRooms" resultType="map">
-		select msg_no, send_id, receive_id, bang_id, message, goods_no, max(msg_date) msg_date 
-		from chat where send_id=#{id} or receive_id=#{id} 
-		group by bang_id
+		select * from chat where (bang_id, msg_date) in (select bang_id, max(msg_date) as msg_date from chat group by bang_id) and (send_id=#{id} or receive_id=#{id}) order by bang_id
 	</select>
 	
 	<insert id="test">

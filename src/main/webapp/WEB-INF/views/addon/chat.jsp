@@ -26,17 +26,18 @@
 		
 		var cur_session='${user_id}';
 		
+		
 		var webSocket = {
 			init: function(param) {
 				this._url = param.url;
 				this._initSocket();
 			},
 			sendChat: function() {
-				this._sendMessage('${user_id}','12','sadf','${bang_id}', 'CMD_MSG_SEND', $('#message').val());
+				this._sendMessage('${user_id}','12','sadf','${param.bang_id}', 'CMD_MSG_SEND', $('#message').val());
 				$('#message').val('');
 			},
 			sendEnter: function() {
-				this._sendMessage('${user_id}','12','sadf','${bang_id}', 'CMD_ENTER', $('#message').val());
+				this._sendMessage('${user_id}','12','sadf','${param.bang_id}', 'CMD_ENTER', $('#message').val());
 				$('#message').val('');
 			},
 			receiveMessage: function(msgData) {
@@ -80,11 +81,11 @@
 					webSocket.closeMessage(JSON.parse(evt.data));
 				}
 			},
-			_sendMessage: function(send_id, goods_no ,sellid ,bang_id ,cmd ,msg) {
+			_sendMessage: function(send_id, goods_no ,receive_id ,bang_id ,cmd ,msg) {
 				var msgData = {
 						send_id : send_id,
 						goods_no : goods_no,
-						sell_id : sellid,
+						receive_id : receive_id,
 						bang_id : bang_id,
 						cmd : cmd,
 						msg : msg

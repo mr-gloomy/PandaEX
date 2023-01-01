@@ -42,8 +42,8 @@ public class ChattingHandler extends TextWebSocketHandler {
 		ObjectMapper objectMapper = new ObjectMapper();
 		Map<String, String> mapReceive = objectMapper.readValue(message.getPayload(), Map.class);
 		
-		
-		String id = (String)session.getAttributes().get("id");
+		logger.info(mapReceive.toString());
+		String id = (String)session.getAttributes().get("user_id");
 		
 		
 		switch (mapReceive.get("cmd")) {
@@ -86,8 +86,8 @@ public class ChattingHandler extends TextWebSocketHandler {
 					mapToSend.put("send_id",id);
 					mapToSend.put("bang_id", bang_id);
 					mapToSend.put("cmd", "CMD_MSG_SEND");
-					mapToSend.put("msg", id + " : " + mapReceive.get("msg"));
-					
+					mapToSend.put("msg", (String)mapReceive.get("msg"));
+//					mapToSend.put("msg_date",mapReceive.get("cur_time"));
 					
 					String jsonStr = objectMapper.writeValueAsString(mapToSend);
 					sess.sendMessage(new TextMessage(jsonStr));
@@ -97,6 +97,7 @@ public class ChattingHandler extends TextWebSocketHandler {
 					chatMap.put("bang_id", mapReceive.get("bang_id"));
 					chatMap.put("goods_no", Integer.parseInt(mapReceive.get("goods_no")));
 					chatMap.put("message", jsonStr);
+//					chatMap.put("msg_date", Long.parseLong(mapReceive.get("cur_time")));
 					service.recordMsg(chatMap);
 					
 					logger.info(jsonStr);
