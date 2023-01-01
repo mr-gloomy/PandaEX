@@ -5,63 +5,51 @@
 
 <mapper namespace="com.panda.mapper.MemberMapper">
 
-	<!-- 회원가입 -->
 	<insert id="insert" >
        insert into user(user_id,user_pw,user_nick,user_email,user_tel,user_name,user_addr,user_temp,user_area)
        values (#{user_id},#{user_pw},#{user_nick},#{user_email},#{user_tel},#{user_name},#{user_addr},#{user_temp},#{user_area})
     </insert>
 
-	<!-- 특정 회원정보 조회 -->
  	<select id="getMember" resultType="MemberVO">
  	  select * from user
  	  where user_id = #{user_id} 
  	</select>
 	
 	
-	<!-- 로그인 -->
 	<select id="login" resultType="MemberVO">
 		select * from user
 		where user_id=#{user_id} and user_pw=#{user_pw}	
 	</select>
 	
 	
-	 	<!-- 회원목록 -->
  	<select id="getMemberList" resultType="MemberVO">
  	 select * from tbl_member 
  	 where user_id != #{user_id} 	
  	</select>
  	
-	<!-- 카카오 로그인 -->
-	<!-- 정보 찾기 -->
-	<select id="findKakao" parameterType="java.util.HashMap" resultType="MemberVO">
-		select * 
-		from user 
-		where user_id=#{user_id} and user_name=#{user_name}
+	<select id="findKakao" parameterType="java.util.HashMap" resultType="kdto">
+		select * from kakao_user where k_name=#{nickname} and k_email=#{email}
 	</select>
-	
-	<!-- 정보 저장 -->
+
 	<insert id="kakaoInsert" parameterType="java.util.HashMap">
-		insert into user(user_id,user_name) 
-		values(#{user_id},#{user_name})
+		insert into kakao_user(k_name, k_email)
+			values(#{nickname}, #{email})
 	</insert>
 	
 	
 	
-	<!-- 아이디 찾기 -->
 	<select id="findId" resultType="MemberVO">
 		select user_id 
 		from user 
 		where user_name=#{user_name} and user_phone=#{user_phone}
 	</select>
 	
-	<!-- 비밀번호 찾기 -->
 	<select id="findPw" resultType="MemberVO">
 		select user_pw 
 		from user 
 		where user_id=#{user_id} and user_phone=#{user_phone}
 	</select>
 	
-	<!-- 비밀번호 변경 -->
 	<update id="updatePw">
 		update user 
 		set user_pw=#{user_pw} 
@@ -69,36 +57,6 @@
 	</update>
 	
 	
-	
-	
-	
-	<!-- 회원정보 수정 -->
-	<update id="updateMember">
-		update user
-		<set>		
-			user_name=#{user_name},
-			user_pw=#{user_pw} ,
-			<if test="latitude!=null and !latitude.equals('')">
-				latitude =#{latitude},
-			</if>
-			<if test="longitude !=null and !longitude.equals('')">
-				longitude =#{longitude}
-			</if>				
-		</set>
-		where user_id=#{user_id}
-	</update>
-	
-	
-	
-	
-	<!-- 회원 탈퇴 -->
-	<delete id="deleteMember">
-		delete from user
-		where user_id=#{user_id} and user_pw=#{user_pw}
-	</delete>
-	
-	
-	<!-- 비밀번호 체크 -->
 	<select id="pwCheck" resultType="int">
 		select count(*)
 		from user
@@ -106,15 +64,6 @@
 	</select>
 
 
-	
-	<!-- SNS 회원 주소 입력  -->
-	<update id="addressUpdate" >
-	update user
-	set roadFullAddr=#{roadFullAddr}
-	where user_id=#{user_id}
-	</update>
-	
-	
 	
 	
 	
