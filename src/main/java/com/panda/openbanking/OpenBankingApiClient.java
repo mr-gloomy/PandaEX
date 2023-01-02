@@ -145,6 +145,7 @@ public class OpenBankingApiClient {
 		/// REST 방식 요청에 필요한 객체 생성
 		httpHeaders = new HttpHeaders();
 		httpHeaders.add("Content-Type", "application/json; charset=UTF-8");
+//		httpHeaders.add("Access_Token",setHeaderAccessToken(withdrawRequestVO.getAccess_token()));
 //		 Content-Type  application/json; charset=UTF-8
 		// WithdrawRequestVO => 저장
 //		requestTokenVO.setClient_id(client_id);
@@ -167,13 +168,16 @@ public class OpenBankingApiClient {
 //		parameters.add("req_client_bank_code", withdrawRequestVO.getReq_client_bank_code());
 //		parameters.add("req_client_account_num", withdrawRequestVO.getReq_client_account_num());
 		parameters.add("req_client_fintech_use_num", withdrawRequestVO.getReq_client_fintech_use_num());
-		parameters.add("recv_client_name", withdrawRequestVO.getRecv_client_name());
-		parameters.add("recv_client_bank_code", withdrawRequestVO.getRecv_client_bank_code());
-		parameters.add("recv_client_account_num", withdrawRequestVO.getRecv_client_account_num());
+//		parameters.add("recv_client_name", withdrawRequestVO.getRecv_client_name());
+//		parameters.add("recv_client_bank_code", withdrawRequestVO.getRecv_client_bank_code());
+//		parameters.add("recv_client_account_num", withdrawRequestVO.getRecv_client_account_num());
 //		
 //		httpHeaders,parameters 담아서 감 =>HttpEntity
 		HttpEntity<MultiValueMap<String, String>> param=
-				new HttpEntity<MultiValueMap<String,String>>(parameters,httpHeaders);
+				new HttpEntity<MultiValueMap<String,String>>(parameters,setHeaderAccessToken(withdrawRequestVO.getAccess_token()));
+																		// httpHeaders
+//		HttpEntity<String> param=
+//				new HttpEntity<String>(setHeaderAccessToken(accountSearchRequestVO.getAccess_token()));
 		
 		String requestUrl = "https://testapi.openbanking.or.kr/v2.0/transfer/withdraw/fin_num";
 //		https://openapi.openbanking.or.kr/v2.0/transfer/withdraw/fin_num

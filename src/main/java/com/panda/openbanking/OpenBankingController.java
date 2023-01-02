@@ -108,7 +108,7 @@ public class OpenBankingController {
 			// Model 객체에 AccountSearchResponseVO 객체와 엑세스토큰 저장
 			model.addAttribute("withdrawOK", withdrawOK);
 			model.addAttribute("access_token", withdrawRequestVO.getAccess_token());
-			System.out.println("결과@@@@@@@@@@@@@" + withdrawOK);
+			System.out.println("결과@@@@@@@@@@@@@ : " + withdrawOK);
 			// return "account/withdraw";
 			return "account/deposit";
 		}
