@@ -33,15 +33,14 @@ public class AuctionServiceImpl implements AuctionService {
 		return adao.getAuctionListAll();
 	}
 
-	// 경매 상품 조회수 증가
+	// 경매 상품 조회수 1증가
 	@Override
 	public void updateViewcnt(Integer auction_no) throws Exception {
 		mylog.debug("updateViewcnt(Integer auction_no) - DAO 호출(조회수 1증가)");
-		
 		adao.updateViewcnt(auction_no);
 	}
 
-	// 경매번호 조회
+	// 경매번호 정보 조회
 	@Override
 	public AuctionVO getAuction(Integer auction_no) throws Exception {
 		mylog.debug("getAuction(Integer auction_no) 호출");

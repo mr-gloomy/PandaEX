@@ -45,7 +45,7 @@ public class AuctionDAOImpl implements AuctionDAO{
 		return auctionList;
 	}
 
-	// 경매 상품 조회수 증가
+	// 경매 상품 조회수 1증가
 	@Override
 	public void updateViewcnt(Integer auction_no) throws Exception {
 		mylog.debug("updateViewcnt(Integer auction_no) - sqlSession 객체");
@@ -53,12 +53,12 @@ public class AuctionDAOImpl implements AuctionDAO{
 		sqlSession.update(NAMESPACE+".updateViewcnt", auction_no);
 	}
 
-	// 경매번호 조회
+	// 경매번호 정보 조회
 	@Override
 	public AuctionVO getAuction(Integer auction_no) throws Exception {
-		mylog.debug("getBoard(Integer auction_no) 호출");
+		mylog.debug("getAuction(Integer auction_no) 호출");
 		
-		AuctionVO avo = sqlSession.selectOne(NAMESPACE + ".getGoods", auction_no);
+		AuctionVO avo = sqlSession.selectOne(NAMESPACE + ".getAuction", auction_no);
 		
 		return avo;
 	}
