@@ -1,6 +1,8 @@
 package com.panda.openbanking;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -17,6 +19,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.panda.openbanking.domain.AccountSearchRequestVO;
 import com.panda.openbanking.domain.AccountSearchResponseVO;
+import com.panda.openbanking.domain.DepositRequestVO;
+import com.panda.openbanking.domain.DepositResponseVO;
 import com.panda.openbanking.domain.RequestTokenVO;
 import com.panda.openbanking.domain.ResponseTokenVO;
 import com.panda.openbanking.domain.UserInfoRequestVO;
@@ -127,48 +131,105 @@ public class OpenBankingApiClient {
 				.queryParam("sort_order", accountSearchRequestVO.getSort_order())
 				.build();
 	
+		mylog.debug(uriBuulder+"");
+		
 		return restTemplate.exchange(uriBuulder.toString(), 
 				HttpMethod.GET,param,AccountSearchResponseVO.class).getBody();
 	}
 
 	// 출금이체 API 
 	public WithdrawResponseVO withdraw(WithdrawRequestVO withdrawRequestVO) {
+//			HTTP URL https://openapi.openbanking.or.kr/v2.0/transfer/withdraw/fin_num
+//			HTTP Method POST
+//			Content-Type application/json; charset=UTF-8
+		/// REST 방식 요청에 필요한 객체 생성
+		httpHeaders = new HttpHeaders();
+		httpHeaders.add("Content-Type", "application/json; charset=UTF-8");
+		
+		// WithdrawRequestVO => 저장
+//		requestTokenVO.setClient_id(client_id);
+		withdrawRequestVO.setBank_tran_id();
+		
+		
+		MultiValueMap<String, String> parameters // MultiValueMap<이름, 값>
+				=new LinkedMultiValueMap<String, String>();
+		parameters.add("bank_tran_id", withdrawRequestVO.getBank_tran_id());
+		parameters.add("cntr_account_type", withdrawRequestVO.getCntr_account_type());
+		parameters.add("cntr_account_num", withdrawRequestVO.getCntr_account_num());
+		parameters.add("dps_print_content", withdrawRequestVO.getDps_print_content());
+		parameters.add("fintech_use_num", withdrawRequestVO.getFintech_use_num());
+		parameters.add("tran_amt", withdrawRequestVO.getTran_amt());
+		parameters.add("tran_dtime", withdrawRequestVO.getTran_dtime());
+		parameters.add("req_client_name", withdrawRequestVO.getReq_client_name());
+		parameters.add("req_client_num", withdrawRequestVO.getReq_client_num());
+		parameters.add("transfer_purpose", withdrawRequestVO.getTransfer_purpose());
+//		parameters.add("req_client_bank_code", withdrawRequestVO.getReq_client_bank_code());
+//		parameters.add("req_client_account_num", withdrawRequestVO.getReq_client_account_num());
+		parameters.add("req_client_fintech_use_num", withdrawRequestVO.getReq_client_fintech_use_num());
+		parameters.add("recv_client_name", withdrawRequestVO.getRecv_client_name());
+		parameters.add("recv_client_bank_code", withdrawRequestVO.getRecv_client_bank_code());
+		parameters.add("recv_client_account_num", withdrawRequestVO.getRecv_client_account_num());
+//		
+//		httpHeaders,parameters 담아서 감 =>HttpEntity
+		HttpEntity<MultiValueMap<String, String>> param=
+				new HttpEntity<MultiValueMap<String,String>>(parameters,httpHeaders);
+		
+		String requestUrl = "https://testapi.openbanking.or.kr/v2.0/transfer/withdraw/fin_num";
+			
+		restTemplate=new RestTemplate();
+		return restTemplate.exchange(requestUrl, 
+				HttpMethod.POST,param,WithdrawResponseVO.class).getBody();
+
+	}
+	
+
+	// 입금이체
+	public DepositResponseVO deposit( DepositRequestVO depositRequestVO) throws Exception{
 		/// REST 방식 요청에 필요한 객체 생성
 		restTemplate = new RestTemplate();
 		httpHeaders = new HttpHeaders();
 		
-		// application/x-www-form-urlencoded; charset=UTF-8" 객체저장 불가능
-		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put("bank_tran_id", withdrawRequestVO.getBank_tran_id());
-		parameters.put("cntr_account_type", withdrawRequestVO.getCntr_account_type());
-		parameters.put("cntr_account_num", withdrawRequestVO.getCntr_account_num());
-		parameters.put("dps_print_content", withdrawRequestVO.getDps_print_content());
-		parameters.put("fintech_use_num", withdrawRequestVO.getFintech_use_num());
-		parameters.put("tran_amt", withdrawRequestVO.getTran_amt());
-		parameters.put("tran_dtime", withdrawRequestVO.getTran_dtime());
-		parameters.put("req_client_name", withdrawRequestVO.getReq_client_name());
-		parameters.put("req_client_num", withdrawRequestVO.getReq_client_num());
-		parameters.put("transfer_purpose", withdrawRequestVO.getTransfer_purpose());
-		parameters.put("req_client_bank_code", withdrawRequestVO.getReq_client_bank_code());
-		parameters.put("req_client_account_num", withdrawRequestVO.getReq_client_account_num());
-		//parameters.put("req_client_fintech_use_num", withdrawRequestVO.getReq_client_fintech_use_num());
-		parameters.put("recv_client_name", withdrawRequestVO.getRecv_client_name());
-		parameters.put("recv_client_bank_code", withdrawRequestVO.getRecv_client_bank_code());
-		parameters.put("recv_client_account_num", withdrawRequestVO.getRecv_client_account_num());
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		parameters.put("cntr_account_type", depositRequestVO.getCntr_account_type());
+		parameters.put("cntr_account_num", depositRequestVO.getCntr_account_num());
+		parameters.put("wd_pass_phrase", depositRequestVO.getWd_pass_phrase());
+		parameters.put("wd_print_content", depositRequestVO.getWd_print_content());
+		parameters.put("name_check_option", depositRequestVO.getName_check_option());
+		parameters.put("tran_dtime", depositRequestVO.getTran_dtime());
+		parameters.put("req_cnt", depositRequestVO.getReq_cnt());
 		
-		System.out.println("저장parameters@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ : "+parameters);
+		
+		Map<String, String> parameters2 = new HashMap<String, String>();
+		parameters2.put("tran_no", depositRequestVO.getTran_no());
+		parameters2.put("bank_tran_id", depositRequestVO.getBank_tran_id());
+//		parameters2.put("bank_tran_id", depositRequestVO.getBank_tran_id());
+//		parameters2.put("bank_tran_id", "M202202083U123432345");
+		parameters2.put("fintech_use_num", depositRequestVO.getFintech_use_num());
+		parameters2.put("print_content", depositRequestVO.getPrint_content());
+		parameters2.put("tran_amt", depositRequestVO.getTran_amt());
+		parameters2.put("req_client_name", depositRequestVO.getReq_client_name());
+		parameters2.put("req_client_bank_code", depositRequestVO.getReq_client_bank_code());
+		parameters2.put("req_client_account_num", depositRequestVO.getReq_client_account_num());
+		parameters2.put("req_client_num", depositRequestVO.getReq_client_num());
+		parameters2.put("transfer_purpose", depositRequestVO.getTransfer_purpose());
+		
+		List<Map> req_list = new ArrayList<Map>();
+		req_list.add(parameters2);
+		//depositRequestVO.setReq_list(req_list);
+		parameters.put("req_list", req_list);
+		System.out.println("저장parameters###############################"+parameters);
 		
 		// HttpHeader,HttpBody parameters 담아서 감 => HttpEntity
 		//HttpEntity<MultiValueMap<String, String>> param = new HttpEntity<MultiValueMap<String, String>>(parameters, httpHeaders);
-		HttpEntity<Map<String, String>> param = new HttpEntity<Map<String, String>>(parameters, setHeaderAccessToken(withdrawRequestVO.getAccess_token()));
+		HttpEntity<Map<String, Object>> param = new HttpEntity<Map<String, Object>>(parameters, setHeaderAccessToken(depositRequestVO.getAccess_token()));
 		
-		System.out.println("저장@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@토큰넣은 : " +param);
-		//String requestUrl = "https://testapi.openbanking.or.kr/oauth/2.0/transfer/withdraw/fin_num";
-		String requestUrl = "https://testapi.openbanking.or.kr/v2.0/transfer/withdraw/fin_num";
+		String requestUrl = "https://testapi.openbanking.or.kr/v2.0/transfer/deposit/fin_num";
 		
 		
-		//return restTemplate.exchange(requestUrl, HttpMethod.POST, param, WithdrawResponseVO.class).getBody();
-		return restTemplate.postForEntity(requestUrl, param, WithdrawResponseVO.class).getBody();
-	}
+		
+		System.out.println("저장###############################주소저장" + param);
+		return restTemplate.exchange(requestUrl, HttpMethod.POST, param, DepositResponseVO.class).getBody();
+	}	
+	
 	
 }

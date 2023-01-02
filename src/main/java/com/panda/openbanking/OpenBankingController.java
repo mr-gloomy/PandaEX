@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.panda.openbanking.domain.AccountSearchRequestVO;
 import com.panda.openbanking.domain.AccountSearchResponseVO;
+import com.panda.openbanking.domain.DepositRequestVO;
+import com.panda.openbanking.domain.DepositResponseVO;
 import com.panda.openbanking.domain.RequestTokenVO;
 import com.panda.openbanking.domain.ResponseTokenVO;
 import com.panda.openbanking.domain.UserInfoRequestVO;
@@ -109,5 +111,27 @@ public class OpenBankingController {
 			System.out.println("결과@@@@@@@@@@@@@" + withdrawOK);
 			// return "account/withdraw";
 			return withdrawOK;
+		}
+		
+		//입금이체
+		@RequestMapping(value = "/deposit", method = RequestMethod.POST)
+		public @ResponseBody DepositResponseVO getDeposit(@RequestBody DepositRequestVO depositRequestVO,Model model)
+				throws Exception {
+			// Service 객체의 findAccount() 메서드를 호출하여 사용자 정보 조회
+			// => 파라미터 : AccountSearchRequestVO, 리턴타입 AccountSearchResponseVO
+			// AccountSearchResponseVO accountList =
+			// openBankingService.findAccount(accountSearchRequestVO);
+			System.out.println("##########################" + depositRequestVO);
+			DepositResponseVO depositOK = openBankingService.getDeposit(depositRequestVO);
+			System.out.println("@#@#@@#@#@#@@#갔다옴");
+			//System.out.println("##########################" + depositOK);
+			// Model 객체에 AccountSearchResponseVO 객체와 엑세스토큰 저장
+			model.addAttribute("withdrawOK", depositOK);
+			model.addAttribute("access_token", depositRequestVO.getAccess_token());
+			System.out.println("결과###############" + depositOK);
+			// return "account/withdraw";
+			
+			
+			return depositOK;
 		}
 }

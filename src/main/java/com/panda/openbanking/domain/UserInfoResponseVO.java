@@ -2,6 +2,7 @@ package com.panda.openbanking.domain;
 
 import java.util.List;
 
+
 // 2.2.1 사용자정보조회 API 응답 데이터
 public class UserInfoResponseVO {
 	private String api_tran_id;
@@ -35,6 +36,7 @@ public class UserInfoResponseVO {
 	public void setRsp_code(String rsp_code) {
 		this.rsp_code = rsp_code;
 	}
+	
 	public String getRsp_message() {
 		return rsp_message;
 	}
@@ -100,9 +102,10 @@ public class UserInfoResponseVO {
 		return "UserInfoResponseVO [api_tran_id=" + api_tran_id + ", api_tran_dtm=" + api_tran_dtm + ", rsp_code="
 				+ rsp_code + ", rsp_message=" + rsp_message + ", user_seq_no=" + user_seq_no + ", user_ci=" + user_ci
 				+ ", user_name=" + user_name + ", user_info=" + user_info + ", user_gender=" + user_gender
-				+ ", user_cell_no=" + user_cell_no + ", user_email=" + user_email + ", res_cnt=" + res_cnt
-				+ ", res_list=" + res_list + "]";
+				+ ", user_cell_no=" + user_cell_no + ",  user_email="
+				+ user_email + ", res_cnt=" + res_cnt + ", res_list=" + res_list + "]";
 	}
+	
 	
 	
 	

@@ -35,10 +35,12 @@ public class MainPageController {
 	}
 	
 	@GetMapping("/chat")
-	public String chat(Model model,ChatVO vo) throws Exception{
-		vo.setSend_id("gd");
-		vo.setReceive_id("sadf");
-		String bang_id = service.getRoom(vo);
+	public String chat(Model model,ChatVO vo,String bang_id) throws Exception{
+		
+		if (vo!=null) {
+			bang_id = service.getRoom(vo);
+		}
+		
 		if (bang_id==null) {
             for (int i = 0; i < 15; i++) {
                 char upperCh = (char)((int)(Math.random()*25) + 97);

@@ -33,10 +33,10 @@ public class DepositRequestVO {
 	private String transfer_purpose; //이체용도 TR
 	
 	public String getBank_tran_id() {
-		return "M202202083U"+ (int)((Math.random()+1)*100000000);
+		return "M202202391U"+ (int)((Math.random()+1)*100000000);
 	}
 //	public void setBank_tran_id() {
-//		this.bank_tran_id = "M202202083U"+ (Math.random()+1)*100000000;
+//		this.bank_tran_id = "M202202391U"+ (Math.random()+1)*100000000;
 //	}
 
 	public String getAccess_token() {
