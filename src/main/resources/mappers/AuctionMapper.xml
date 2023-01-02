@@ -16,5 +16,24 @@
 		select * from auction
 	</select>
 	
+	<!-- 경매 상품 조회수 1증가 -->
+	<update id="updateViewcnt">
+		update auction set auction_viewcount = auction_viewcount+1 
+		where auction_no = #{auction_no}
+	</update>
+	
+	<!-- 경매번호 정보 조회  -->
+	<select id="getAuction" resultType="AuctionVO">
+		select * from auction 
+		where auction_no = #{auction_no}
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
 
 </mapper>
