@@ -20,13 +20,11 @@
 
 </head>
 <body class="animsition">
-  
 <!-- Title page -->
-<section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('');">
-	<h2 class="ltext-105 cl0 txt-center">
-		상세페이지
-	</h2>
+<section style="margin-top: 120px;">
+	<h3>중고상품 상세내역</h3>
 </section>	
+
 
 <!-- Content page -->
 <section class="bg0 p-t-75 p-b-120">

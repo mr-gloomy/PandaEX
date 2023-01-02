@@ -20,21 +20,21 @@
 	margin: 20px;
 }
 </style>
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+
 
 </head>
-<body class="animsition">
-  
+<body>
 <!-- Title page -->
-<section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('');">
-	<h2 class="ltext-105 cl0 txt-center">
-		중고상품 등록
-	</h2>
+<section style="margin-top: 80px;">
+	<h3>중고상품 등록</h3>
 </section>	
 
-cvcvcx<!-- Content page -->
+<!-- Content page -->
 <section class="bg0 p-t-75 p-b-120">
   <div class="container">
-	<form method="post">
+	<form action="regist" method="post" enctype="multipart/form-data">
 	  <div class="row mb-3">
 	  	<!-- 상품번호 --> 
 	    <input type="hidden" name="goods_no">
@@ -50,25 +50,69 @@ cvcvcx<!-- Content page -->
 	      <tr>
     		<th>이미지</th>
     		<td>
-    		  <input type="file" name="file" id="goods_img" enctype="multipart/form-data">
-				<div class="inputArea">
-				 <div class="select_img"><img src="" /></div>
-				 <script>
-				  $("#goods_img").change(function(){
-				  	if(this.files && this.files[0]) {
-				   		var reader = new FileReader;
-				    	reader.onload = function(data) {
-				     		$(".select_img img").attr("src", data.target.result).width(130);        
-				    	}
-				    	reader.readAsDataURL(this.files[0]);
-				   	  }
-				  });
-				 </script>
-				 
-				<!-- 이 프로젝트가 완성되어 서버에 업로드하여 실행된다면 저 경로가 아닌 새로운 경로를 확인해야합니다. -->
-				실제경로 <%=request.getRealPath("/") %>
-				
-				</div>
+    		<div class='uploadDiv'>
+    			<input type="file" name="uploadFile" id="goods_img" multiple="multiple">
+    		</div>
+    		
+    		<div class='uploadResult'>
+				<ul>
+		
+				</ul>
+			</div>
+			
+			
+    		
+			<script type="text/javascript">
+			// 파일 업로드 상세
+			var regex = new RegExp("(.*?)\.(exe|sh|zip|alz|war)$");
+			var maxSize = 5242880; //5MB
+
+			function checkExtension(fileName, fileSize) {
+
+				if (fileSize >= maxSize) {
+					alert("파일 사이즈 초과");
+					return false;
+				}
+				if (regex.test(fileName)) {
+					alert("해당 종류의 파일은 업로드할 수 없습니다.");
+					return false;
+				}
+				return true;
+			}
+
+			var cloneObj = $(".uploadDiv").clone();
+
+			$("#uploadBtn").on("click", function(e) {
+
+				var formData = new FormData();/
+				var inputFile = $("input[name='uploadFile']");
+				var files = inputFile[0].files;
+				//console.log(files);
+
+				for (var i = 0; i < files.length; i++) {
+					
+					if (!checkExtension(files[i].name, files[i].size)) {
+						return false;
+					}
+
+					formData.append("uploadFile", files[i]);
+
+				}
+
+			$.ajax({
+				 url: '/regist',
+				 processData: false, 
+				 contentType: false,
+				 data: formData,
+				 type: 'POST',
+				 success: function(result){
+				 alert("Uploaded");
+				 }
+			}); //$.ajax 
+			</script>
+
+    			
+    		
     			<br> <b>* 상품 이미지는 640x640에 최적화 되어 있습니다.</b> 
 				<br>- 상품 이미지는 PC에서는 1:1, 모바일에서는 1:1.23 비율로 보여집니다. 
 				<br>- 이미지는 상품 등록 시 정사각형으로 잘려서 등록됩니다. 
@@ -163,7 +207,7 @@ cvcvcx<!-- Content page -->
 		</table>
 		<!-- 버튼 -->
 		<div class="col-sm-7" align="center" style="margin: 20px">
-	            <button type="submit" class="btn btn-primary">작성완료</button>
+	            <button type="submit" class="btn btn-primary" id="uploadBtn">작성완료</button>
 	            <button type="reset" class="btn btn-primary">초기화</button>
 	            <button type="submit" class="btn btn-primary">목록이동</button>
 	  	</div>

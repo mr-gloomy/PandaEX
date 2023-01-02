@@ -2,6 +2,8 @@ package com.panda.domain;
 
 import java.sql.Timestamp;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Data;
 
 @Data
@@ -19,7 +21,7 @@ public class GoodsVO {
 	private String goods_like;		//상품 찜
 	private String goods_trade; 	//상품상태
 	private String goods_detail;	//상품상세설명
-	private String goods_img;		//이미지
+	private MultipartFile goods_img;//이미지
 	private String goods_thumbnail; //이미지썸네일 
 	
 
