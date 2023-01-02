@@ -45,7 +45,7 @@
 <%-- 		<input type="hidden" name="access_token" value="${sessionScope.token }"> --%>
 <!-- 		<input type="hidden" name="access_token" value="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiIxMTAxMDE0NzM5Iiwic2NvcGUiOlsiaW5xdWlyeSIsImxvZ2luIiwib29iIiwidHJhbnNmZXIiXSwiaXNzIjoiaHR0cHM6Ly93d3cub3BlbmJhbmtpbmcub3Iua3IiLCJleHAiOjE2NzYyNTg0MDQsImp0aSI6IjQ0NTAyNTNhLWY1YTEtNGRmOC05ODQ0LTdlNzVmYWRhZTRhZiJ9._yvPTWTIohkjlQx5ii_UmnyIFLB3VzFNFtlOcfdpC9U"> -->
 		
-		<input type="hidden" name="bank_tran_id" value="M202202391U7BC366365">
+		<input type="hidden" name="bank_tran_id" value="M202202391U766366365">
 		<input type="hidden" name="cntr_account_type" value="N">
 		<input type="hidden" name="cntr_account_num" value="7777777777777777">
 		<input type="hidden" name="dps_print_content" value="마지막">

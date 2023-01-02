@@ -145,10 +145,11 @@ public class OpenBankingApiClient {
 		/// REST 방식 요청에 필요한 객체 생성
 		httpHeaders = new HttpHeaders();
 		httpHeaders.add("Content-Type", "application/json; charset=UTF-8");
-		
+//		 Content-Type  application/json; charset=UTF-8
 		// WithdrawRequestVO => 저장
 //		requestTokenVO.setClient_id(client_id);
-		withdrawRequestVO.setBank_tran_id();
+		mylog.debug(withdrawRequestVO.toString());
+//		withdrawRequestVO.setBank_tran_id(bank_tran_id);;
 		
 		
 		MultiValueMap<String, String> parameters // MultiValueMap<이름, 값>
@@ -175,6 +176,7 @@ public class OpenBankingApiClient {
 				new HttpEntity<MultiValueMap<String,String>>(parameters,httpHeaders);
 		
 		String requestUrl = "https://testapi.openbanking.or.kr/v2.0/transfer/withdraw/fin_num";
+//		https://openapi.openbanking.or.kr/v2.0/transfer/withdraw/fin_num
 			
 		restTemplate=new RestTemplate();
 		return restTemplate.exchange(requestUrl, 
