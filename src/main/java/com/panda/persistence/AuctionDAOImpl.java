@@ -53,7 +53,7 @@ public class AuctionDAOImpl implements AuctionDAO{
 		sqlSession.update(NAMESPACE+".updateViewcnt", auction_no);
 	}
 
-	// 경매번호 정보 조회
+	// 경매번호 사용한 정보 조회
 	@Override
 	public AuctionVO getAuction(Integer auction_no) throws Exception {
 		mylog.debug("getAuction(Integer auction_no) 호출");
