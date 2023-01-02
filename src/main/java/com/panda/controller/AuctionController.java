@@ -67,7 +67,7 @@ public class AuctionController {
 	  model.addAttribute("auctionList", auctionList);
    }
    
-   
+    // http://localhost:8080/auction/a_read
 	// 기부경매 상품 상세페이지
 	@GetMapping(value = "/a_read")
 	public void a_readGET(@RequestParam("auction_no") int auction_no, HttpSession session, Model model) throws Exception{
@@ -89,7 +89,6 @@ public class AuctionController {
 		
 		// 연결된 뷰페이지로 정보 전달
 		model.addAttribute("avo", avo);
-		
 	}   
    
    
