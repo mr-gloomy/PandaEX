@@ -11,104 +11,7 @@
 <script src="${pageContext.request.contextPath }/resources/js/jquery/jquery-2.2.4.min.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/jquery.serializeObject.js"></script>
 <h1>views/bank_main.jsp</h1>
-<script type="text/javascript">
-	$(document).ready(function() {
-		$('#price').val(sessionStorage.getItem('price'));
-		$('#price2').val(sessionStorage.getItem('price'));
-		alert("test");
-// 		$(".btn-danger").click(function(){
-		function pay(){
-		$('#clickTest').click(function(){
-		//$('#clickTest').on("click", function(){
-			
-		//페이지 로드 시 함수 바로 실행
-// 		window.onload = function(){
-			alert('클릭');
-			//let info = $('#fr').serializeArray();
-			let info = $('#fr').serializeObject();
-			let infoD = $('#fr22').serializeObject();
-			
-			var result = confirm("이체를 진행하시겠습니까?");
-			if(result){
-			
-			alert('실행');
-			//출금이체////////////////////////////////////
-			$.ajax({
-				url  : "/openbanking/withdraw",
-				type : "POST",
-				async : true,
-				data : JSON.stringify(info),
-				dataType:"json",
-				contentType : "application/json;charset=UTF-8",
-				success 	: function(data) {
-					if(data.rsp_code == "A0000"){
-						alert("출금성공");
-						$('#result').html(data.account_num_masked + " / " + data.bank_name + " / " + data.account_holder_name + "님의 계좌에서 <br>");
-						
-						$('#req_account_num_masked').val(data.account_num_masked);
-						$('#req_bank_name').val(data.bank_name);
-						$('#req_account_holder_name').val(data.account_holder_name);
-					} else {
-						alert('출금에 실패하였습니다.');
-						$.ajax({
-							url  : "/deal/deleteBuyer",
-							type : "GET",
-							dataType:'json',
-							data : {
-								'deal_num':'${sessionScope.prod_num}',
-							},
-							contentType : "application/json;charset=UTF-8",
-		    });
-						location.href = "/";
-						return false;
-					}
-				
-			    },
-			    error		: function(error) {
-			    	console.log(error);
-			    	alert('이체에 실패하셨습니다.');
-			    	$.ajax({
-						url  : "/deal/deleteBuyer",
-						type : "GET",
-						dataType:'json',
-						data : {
-							'deal_num':'${sessionScope.prod_num}',
-						},
-						contentType : "application/json;charset=UTF-8",
-	    });
-			    	location.href = "/";
-			    }
-			});
-			}else{
-			    alert("이체를 취소하였습니다.");
-			    var answer = confirm("거래를 취소하시겠습니까?");
-			    
-			    if(answer){
-					$.ajax({
-									url  : "/deal/deleteBuyer",
-									type : "GET",
-									dataType:'json',
-									data : {
-										'deal_num':'${sessionScope.prod_num}',
-									},
-									contentType : "application/json;charset=UTF-8",
-				    });
-				    location.href = "/";
-				}//if 종료
-				 else{
-					return false;
-				}
-			}
-// 		    }
-			
-		}); // click
-		}; 
-		// pay click
-		
 
- 	});//jquery
-			
-</script>    
 <h1>인증완료(토큰발급)</h1>
 <h2>access_token : ${responseTokenVO.access_token }</h2>
 <h2>token_type : ${responseTokenVO.token_type }</h2>
@@ -137,7 +40,7 @@
 </form>
 
 <h2> 출금API </h2>
-<form method="post" action="withdraw" id="fr">
+<form method="post" action="withdraw" >
 		<input type="hidden" name="access_token" value="${responseTokenVO.access_token }">
 <%-- 		<input type="hidden" name="access_token" value="${sessionScope.token }"> --%>
 <!-- 		<input type="hidden" name="access_token" value="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiIxMTAxMDE0NzM5Iiwic2NvcGUiOlsiaW5xdWlyeSIsImxvZ2luIiwib29iIiwidHJhbnNmZXIiXSwiaXNzIjoiaHR0cHM6Ly93d3cub3BlbmJhbmtpbmcub3Iua3IiLCJleHAiOjE2NzYyNTg0MDQsImp0aSI6IjQ0NTAyNTNhLWY1YTEtNGRmOC05ODQ0LTdlNzVmYWRhZTRhZiJ9._yvPTWTIohkjlQx5ii_UmnyIFLB3VzFNFtlOcfdpC9U"> -->
@@ -150,7 +53,7 @@
 <!-- 		<input type="hidden" name="fintech_use_num" value="120220208388941285310465"> -->
 <!-- 		<input type="hidden" name="wd_print_content" value="오픈뱅킹출금"> -->
 		
-		<input type="hidden" id="price" name="tran_amt" value="1000"> <!-- tran_amt : 거래금액 -->
+		<input type="hidden" name="tran_amt" value="1000"> <!-- tran_amt : 거래금액 -->
 		<input type="hidden" name="tran_dtime" value="20230101200200"> <!-- 요청일시 -->
 		<input type="hidden" name="req_client_name" value="강중혁">
 <!-- 		<input type="hidden" name="req_client_bank_code" value="004"> -->
@@ -166,7 +69,7 @@
 		<input type="hidden" name="recv_client_name" value="강중혁">
 		<input type="hidden" name="recv_client_bank_code" value="004">
 		<input type="hidden" name="recv_client_account_num" value="7777777777777777">
-		 <input type="submit" value = "출금API " id="clickTest">
+		 <input type="submit" value = "출금API ">
 	</form>
 
 </body>

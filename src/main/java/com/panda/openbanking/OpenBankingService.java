@@ -37,14 +37,14 @@ public class OpenBankingService {
 		return openBankingApiClient.findAccount(accountSearchRequestVO);
 	}
 
-	// 출금입금
-		public WithdrawResponseVO getwithdraw( WithdrawRequestVO withdrawRequestVO) {
-			return openBankingApiClient.withdraw(withdrawRequestVO);
-		}
-		
+	// 출금이체
+	public WithdrawResponseVO getwithdraw(WithdrawRequestVO withdrawRequestVO) {
+		return openBankingApiClient.withdraw(withdrawRequestVO);
+	}
+	
 	
 	// 입금이체
-	public DepositResponseVO getDeposit( DepositRequestVO depositRequestVO) throws Exception {
+	public DepositResponseVO getDeposit(DepositRequestVO depositRequestVO) throws Exception {
 		
 		return openBankingApiClient.deposit(depositRequestVO);
 	}
