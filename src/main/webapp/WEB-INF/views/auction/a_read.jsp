@@ -14,7 +14,12 @@
 <body>
 	<br><br><br><br><br><br>
 <%-- 	${avo } --%>
+<<<<<<< HEAD
 <!-- 수정,삭제_경매번호 전달-->
+=======
+	
+	<!-- 수정,삭제_경매번호 전달-->
+>>>>>>> branch 'master' of https://github.com/mr-gloomy/PandaEX.git
 	<form role="form" method="post">
 		<input type="hidden" name="auction_no" value="${avo.auction_no }">
 	</form>
@@ -124,6 +129,25 @@
                 </div>
             </div>
         </nav>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		var formObj = $("form[role='form']");
+		console.log(formObj);
+		
+		//수정버튼
+		$(".btn-danger").click(function(){
+			formObj.attr("action","/auction/a_modify");
+			formObj.attr("method","get");
+			formObj.submit();
+		});
+		
+		//목록버튼
+		$(".btn-success").click(function(){
+			location.href="/auction/a_list";
+		});
+	});
+</script>
 
 
 <div class="container-fluid" id="app" data-v-app=""><div class="row pt-5"><span class="text-muted mr-3">카테고리</span><span class="text-muted mr-3">&gt;</span><a href="/auctionara/auction/category?categoryNo=7"><span class="text-muted">유아도서</span></a></div><div class="row mt-4 py-4 border-bottom border-top"><div class="col-5 p-0"><div id="carousel" class="carousel slide" data-ride="carousel" data-bs-interval="false"><ol class="carousel-indicators"><li data-bs-target="#carousel" data-bs-slide-to="0" class="active"></li></ol><div class="carousel-inner"><div class="carousel-item active"><img src="/auctionara/attachment/download?attachmentNo=465" class="d-block w-100"><!--v-if--></div></div><!--v-if--><!--v-if--></div></div><div class="col ml-5 pl-3 pr-0 d-flex flex-column"><div class="row pr-1 mb-3"><h3 class="fw-bold">야물야물 그림책 전20권 최신 개정판</h3></div><div class="row mb-3 mr-5"><div class="col-3 p-0 text-muted"><i class="fa-solid fa-gavel pr-2"></i><span id="count">0</span> 건 </div><div class="col text-muted p-0"><i class="fa-solid fa-clock pr-2"></i> 8월 30일 00:00 마감 (<span id="timer">2795일 6시간 59분 2초 후</span>) </div></div><div class="row mb-2 mr-5"><div class="col-3 p-0 d-flex align-items-end"><h5 class="fw-bold">최초 입찰가</h5><h5 id="maxBidLabel" class="fw-bold" style="display: none;">현재 최고가</h5></div><div class="col p-0"><h3 class="text-primary fw-bold"><span id="openingBid" class="comma">15,000</span> 원</h3><h3 class="text-primary fw-bold" id="blind" style="display: none;"><span id="maxBid" class="comma">0</span> 원</h3></div></div><div class="row mr-5"><div class="col-3 p-0 d-flex align-items-end"><h5 class="fw-bold">즉시 낙찰가</h5></div><div class="col p-0"><h3 class="text-info fw-bold"><span id="closingBid" class="comma">70,000</span> 원</h3></div></div><div class="row mt-3 mr-5 mb-auto pt-3 border-top" style="display: none;"><div class="col-3 p-0 d-flex align-items-end"><h5 class="fw-bold">내 입찰가</h5></div><div class="col p-0"><h3 class="text-secondary fw-bold"><span id="myBid" class="comma">0</span> 원 <span class="text-warning pl-2 align-self-center" id="topBidder" style="display: none;"><i class="fa-solid fa-crown"></i> 최고 입찰자</span></h3></div></div><div class="row mt-auto mb-3 pl-5 d-flex justify-content-end"><div id="refresh" class="col-3 text-muted p-0 pointer"><span class="pl-5"><i id="rotate" class="fa-solid fa-arrow-rotate-left"></i> 새로고침</span></div><div class="col-3 p-0 pl-2 mr-2 text-muted pointer" data-bs-toggle="modal" data-bs-target="#reportModal"><i class="fa-solid fa-land-mine-on pl-3 pr-2"></i> 신고하기 </div></div><div class="row"><div class="col p-0"><a class="btn btn-info btn-lg btn-block py-3" href="/auctionara/chat" role="button"><i class="fa-solid fa-comments-dollar pr-2"></i> 1:1 채팅 관리 </a><!--v-if--></div><div class="col"><button type="button" class="btn btn-primary btn-lg btn-block py-3" data-bs-toggle="modal" data-bs-target="#cancelAuctionModal"><i class="fa-solid fa-ban pr-2"></i> 경매 취소 </button><!--v-if--><!--v-if--></div></div></div></div><div class="row mt-4"><div class="col-8"><div class="row mb-3"><h5 class="fw-bold">경매 물품 정보</h5></div><div class="row"><nav aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item active">물품 상태 : <span class="text-primary pl-1">중하</span></li></ol></nav></div><div class="row"><pre class="text-muted pr-4">0세부터 3세까지 모두 읽을 수 있는 그림책이에요
