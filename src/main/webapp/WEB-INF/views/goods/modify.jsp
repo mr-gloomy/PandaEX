@@ -9,10 +9,6 @@
 <!-- 헤더 -->	
 <%@ include file="../include/header.jsp" %>
 <%@ include file="../include/css.jsp" %>
-<!-- 서머노트를 위해 추가해야할 부분 -->
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <!-- css -->
 <link rel="icon" type="image/png" href="http://example.com/myicon.png"> 
 
@@ -33,6 +29,8 @@
     
 }
 </style>
+
+
 </head>
 <body class="animsition">
 <!-- Title page -->
@@ -41,6 +39,7 @@
 		중고상품등록
 	</h2>
 </section>
+
 
 <!-- Content page -->
  <section class="bg0 p-t-75 p-b-120">
@@ -85,13 +84,13 @@
     		  <td>
     		    <select class="form-select" name="goods_category" >
 				  <option selected>카테고리를 입력하세요</option>
-				  <option value=".machine">전자기기</option>
-				  <option value=".beauty">의류/뷰티/잡화</option>
-				  <option value=".kitchen">생활가전/주방</option>
-				  <option value=".interior">인테리어/가구</option>
-				  <option value=".book">도서/티켓/교환권</option>
-				  <option value=".food">식품</option>
-				  <option value=".etc">기타 중고물품</option>
+				  <option value="전자기기">전자기기</option>
+				  <option value="의류/뷰티/잡화">의류/뷰티/잡화</option>
+				  <option value="생활가전/주방">생활가전/주방</option>
+				  <option value="인테리어/가구">인테리어/가구</option>
+				  <option value="도서/티켓/교환권">도서/티켓/교환권</option>
+				  <option value="식품">식품</option>
+				  <option value="기타 중고물품">기타 중고물품</option>
 			    </select>
     		  </td>
 	    	</tr>
@@ -117,7 +116,6 @@
 					  <input class="form-check-input" type="radio" name="goods_condition" value="사용감 있음">
 					  <label class="form-check-label" for="inlineRadio3">사용감 있음</label>
 				    </div>
-		
 				   </div>
 	    		</td>
 	    	</tr>
@@ -160,23 +158,7 @@
 	    	<tr> 
 	    	  <th>상품소개</th>
 	    	  <td>
-	    		 <textarea id="summernote" name="goods_detail"></textarea>
-	    		 <script>
-    			  $('#summernote').summernote({
-    			        placeholder: '내용을 입력해주세요.',
-    			        tabsize: 2,
-    			        height: 120,
-    			        toolbar: [
-    			          ['style', ['style']],
-    			          ['font', ['bold', 'underline', 'clear']],
-    			          ['color', ['color']],
-    			          ['para', ['ul', 'ol', 'paragraph']],
-    			          ['table', ['table']],
-    			          ['insert', ['link', 'picture', 'video']],
-    			          ['view', ['fullscreen', 'codeview', 'help']]
-    			        ]
-    			      });
-				 </script>
+	    		<textarea name="goods_detail" class="form-control" rows="5" placeholder="내용을 입력하세요."></textarea>
 	    	  </td>
 	    	</tr>
 		</table>

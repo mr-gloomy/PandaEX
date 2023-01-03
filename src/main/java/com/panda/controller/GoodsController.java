@@ -1,12 +1,12 @@
 package com.panda.controller;
 
 import java.io.File;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.panda.domain.GoodsVO;
@@ -80,12 +81,12 @@ public class GoodsController {
 	
 	// 상품 글쓰기 POST
 	@RequestMapping(value = "/regist", method = RequestMethod.POST)
-	public String registPOST(GoodsVO gvo, MultipartFile[] uploadFile, Model model) throws Exception {
+	public String registPOST(GoodsVO vo, MultipartFile[] uploadFile) throws Exception {
 		mylog.debug(" /goods/regist(POST) 호출 ");	
 		mylog.debug(" GET방식의 데이터 전달 -> DB 저장 -> 페이지 이동 ");
 		// 0. 한글처리 (필터)
 		// 1. 전달된 정보 저장 
-		mylog.debug(gvo.toString());
+		mylog.debug(vo.toString());
 		
 		// 2. 이미지 파일 첨부
 		String uploadFolder = "C:\\upload";
@@ -108,16 +109,17 @@ public class GoodsController {
 			String uploadFileName =  multipartFile.getOriginalFilename();
 			
 			uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\") + 1);
-			mylog.info("only file name: " + uploadFileName);
+			mylog.info("업로드 파일명 : " + uploadFileName);
 			
 			// 파일명 중복방지 - 고유값 파일명 생성
 			UUID uuid = UUID.randomUUID(); 
 			uploadFileName = uuid.toString() + "_" + uploadFileName; 
 			
 
+			File saveFile = new File(uploadPath, uploadFileName);
+			
 			try {
 				
-				File saveFile = new File(uploadPath, uploadFileName);
 				multipartFile.transferTo(saveFile);
 				
 				// 이미지 파일 확인
@@ -136,14 +138,15 @@ public class GoodsController {
 		} // end for
 		
 		// 3. 서비스 -> DAO 접근 (mapper)
-		service.insertGoods(gvo);
+		service.insertGoods(vo);
 			
-		mylog.debug(" 게시판 글쓰기 완료 ");
+		mylog.debug(" 글쓰기 완료 ");
 			
 		// 4. 페이지로 이동(list페이지)
 			
 		return "redirect:/goods/list";
 	}
+	
 	
 	// 상품목록(All)
 	@RequestMapping(value = "/list",method = RequestMethod.GET)
@@ -167,7 +170,7 @@ public class GoodsController {
 	
 	// 게시판 본문보기
 	@RequestMapping(value = "/read",method = RequestMethod.GET)
-	public void readGET(Model model,@RequestParam("goods_no") int goods_no,HttpSession session) throws Exception{
+	public void readGET(Model model,@RequestParam("goods_no") int goods_no, HttpSession session) throws Exception{
 		// 전달정보 (goods_no) 
 		mylog.debug("전달정보 (goods_no): " + goods_no);
 		
@@ -185,9 +188,9 @@ public class GoodsController {
 		}
 		
 		// 서비스 -> DAO (특정 글번호에 해당하는 정보 가져오기)
-		GoodsVO gvo = service.getGoods(goods_no);
+		GoodsVO vo = service.getGoods(goods_no);
 		// 연결된 뷰페이지로 정보 전달(model)	
-		model.addAttribute("gvo", gvo);
+		model.addAttribute("vo", vo);
 		
 	}
 //		//수정 GET
