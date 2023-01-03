@@ -14,12 +14,8 @@
 <body>
 	<br><br><br><br><br><br>
 <%-- 	${avo } --%>
-<<<<<<< HEAD
-<!-- 수정,삭제_경매번호 전달-->
-=======
-	
+
 	<!-- 수정,삭제_경매번호 전달-->
->>>>>>> branch 'master' of https://github.com/mr-gloomy/PandaEX.git
 	<form role="form" method="post">
 		<input type="hidden" name="auction_no" value="${avo.auction_no }">
 	</form>
