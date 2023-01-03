@@ -26,6 +26,7 @@
 		
 		var cur_session='${user_id}';
 		
+		var cur_time = new Date().getTime();
 		
 		var webSocket = {
 			init: function(param) {
@@ -33,11 +34,11 @@
 				this._initSocket();
 			},
 			sendChat: function() {
-				this._sendMessage('${user_id}','12','sadf','${param.bang_id}', 'CMD_MSG_SEND', $('#message').val());
+				this._sendMessage('${user_id}','12','sadf','${param.bang_id}', 'CMD_MSG_SEND', cur_time, $('#message').val());
 				$('#message').val('');
 			},
 			sendEnter: function() {
-				this._sendMessage('${user_id}','12','sadf','${param.bang_id}', 'CMD_ENTER', $('#message').val());
+				this._sendMessage('${user_id}','12','sadf','${param.bang_id}', 'CMD_ENTER', cur_time, $('#message').val());
 				$('#message').val('');
 			},
 			receiveMessage: function(msgData) {
@@ -53,10 +54,12 @@
 // 						$('#divChatData').scrollTop($('#divChatData')[0].scrollHeight);
 					}
 				}
+				
 				// 입장
 				else if(msgData.cmd == 'CMD_ENTER') {
 					$('#divChatData').append('<div>' + msgData.msg + '</div>');
 				}
+				
 				// 퇴장
 				else if(msgData.cmd == 'CMD_EXIT') {					
 					$('#divChatData').append('<div>' + msgData.msg + '</div>');
@@ -81,14 +84,15 @@
 					webSocket.closeMessage(JSON.parse(evt.data));
 				}
 			},
-			_sendMessage: function(send_id, goods_no ,receive_id ,bang_id ,cmd ,msg) {
+			_sendMessage: function(send_id, goods_no ,receive_id ,bang_id ,cmd,time ,msg) {
 				var msgData = {
 						send_id : send_id,
 						goods_no : goods_no,
 						receive_id : receive_id,
 						bang_id : bang_id,
 						cmd : cmd,
-						msg : msg
+						msg : msg,
+						time : time
 				};
 				var jsonData = JSON.stringify(msgData);
 				this._socket.send(jsonData);

@@ -74,15 +74,42 @@ $(function(){
 			success:function(data) {
 				$(".chat-position").empty();
 				$(data).each(function(index,item) {
-					var date = new Date(item.msg_date);
-					var month = date.getMonth()+1;
+					var dataD = item.msg_date;
+					var date = 
+						function timeForToday(dataD) {
+				        const today = new Date();
+				        const timeValue = new Date(dataD);
+
+				        const betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
+				        if (betweenTime < 1) return '방금전';
+				        if (betweenTime < 60) {
+				            return `${betweenTime}분전`;
+				        }
+
+				        const betweenTimeHour = Math.floor(betweenTime / 60);
+				        if (betweenTimeHour < 24) {
+				            return `${betweenTimeHour}시간전`;
+				        }
+
+				        const betweenTimeDay = Math.floor(betweenTime / 60 / 24);
+				        if (betweenTimeDay < 365) {
+				            return `${betweenTimeDay}일전`;
+				        }
+
+				        return `${Math.floor(betweenTimeDay / 365)}년전`;
+				 }	
+						
+						
 					var msg = JSON.parse(item.message);
+					
+					
+					
 					var chatlink = "window.open('/main/chat?bang_id="+item.bang_id+"','chat01','width=600,height=600')";
 					$(".chat-position").append("<a onclick="+chatlink+"><div class='yes-chatroom'><c:choose><c:when test='${oppenent == '' }'>"
 								+"<img class='opponent-img src='/resources/images/icons/man.png'></c:when><c:when test='${oppenent != '' }'>"
 								+"<img class='opponent-img' src='${oppenent }'></c:when></c:choose><div class='nameandtext'><div class='oppname'>"+item.receive_id+"</div>"						
 								+"<div class='text'>"+msg.msg+"</div><div class='timeposition'>"
-								+"<div class='lasttime'>"+month+"."+date.getDate()+"</div></div></div></div></a>");
+								+"<div class='lasttime'>"+date+"</div></div></div></div></a>");
 				});
 			}
 		});
