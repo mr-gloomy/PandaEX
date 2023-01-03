@@ -12,13 +12,13 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.panda.domain.AuctionVO;
-import com.panda.domain.GoodsVO;
 import com.panda.service.AuctionService;
 
 @Controller
@@ -36,6 +36,7 @@ public class AuctionController {
    public void a_registGET() throws Exception {
 	   mylog.debug("/auction/a_regist(GET) 호출 -> 페이지 이동");
    }
+   
    
    // 기부경매 상품 등록하기 POST
    @RequestMapping(value = "/a_regist", method = RequestMethod.POST)
@@ -67,7 +68,8 @@ public class AuctionController {
 	  model.addAttribute("auctionList", auctionList);
    }
    
-    // http://localhost:8080/auction/a_read
+   
+    // http://localhost:8080/auction/a_read?auction_no=1
 	// 기부경매 상품 상세페이지
 	@GetMapping(value = "/a_read")
 	public void a_readGET(@RequestParam("auction_no") int auction_no, HttpSession session, Model model) throws Exception{
@@ -90,6 +92,48 @@ public class AuctionController {
 		// 연결된 뷰페이지로 정보 전달
 		model.addAttribute("avo", avo);
 	}   
+	
+	// http://localhost:8080/auction/a_modify?auction_no=1
+	// 수정 GET
+	@GetMapping(value = "/a_modify")
+	public void a_modifyGET(Model model, @ModelAttribute("auction_no") int auction_no) throws Exception{
+		// model 객체 사용 - view 페이지로 정보 전달
+		model.addAttribute(service.getAuction(auction_no));
+	}
+	
    
-   
+    // 수정 POST
+//	@PostMapping(value = "/a_modify")
+//	public String a_modifyPOST(AuctionVO avo, RedirectAttributes rttr) throws Exception {
+//		// 전달된 정보(수정할 정보) 저장
+//		mylog.debug(avo+"");
+		
+		// 서비스 - DAO : 정보 수정 메서드 호출
+//		Integer result = service.updateAuction(avo);
+//		
+//		if (result > 0) {
+//			// "수정완료" - 정보 전달
+//			rttr.addFlashAttribute("result", "modOK");
+//		}
+//		
+//		// 페이지 이동
+//		return "redirect:/auction/a_list";
+//	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

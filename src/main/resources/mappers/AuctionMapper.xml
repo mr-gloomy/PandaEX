@@ -22,7 +22,7 @@
 		where auction_no = #{auction_no}
 	</update>
 	
-	<!-- 경매번호 정보 조회  -->
+	<!-- 경매번호 사용한 글정보 조회  -->
 	<select id="getAuction" resultType="AuctionVO">
 		select * from auction 
 		where auction_no = #{auction_no}

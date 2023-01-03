@@ -1,9 +1,15 @@
 package com.panda.controller;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
-import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
@@ -20,7 +26,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.panda.domain.GoodsVO;
 import com.panda.service.GoodsService;
-import com.panda.utils.UploadFileUtils;
+
+import net.coobird.thumbnailator.Thumbnailator;
 
 @Controller
 @RequestMapping("/goods/*")
@@ -33,10 +40,6 @@ public class GoodsController {
 	@Inject
 	private GoodsService service;
 	
-	// 이미지 썸네일 작업
-	@Resource(name="uploadPath")
-	private String uploadPath;
-	
 	// http://localhost:8080/goods/regist
 	// http://localhost:8080/goods/list
 	
@@ -46,9 +49,38 @@ public class GoodsController {
 		mylog.debug(" /goods/regist(GET) 호출 -> 페이지 이동 ");		
 	}
 	
+	// 파일 년/월/일 폴더생성
+	private String getFolder() {
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+		Date date = new Date();
+
+		String str = sdf.format(date);
+
+		return str.replace("-", File.separator);
+	}
+	
+	// 이미지 파일 판단
+	private boolean checkImageType(File file) {
+
+		try {
+			String contentType = Files.probeContentType(file.toPath());
+
+			return contentType.startsWith("image");
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return false;
+	}
+
+			
+	
 	// 상품 글쓰기 POST
 	@RequestMapping(value = "/regist", method = RequestMethod.POST)
-	public String registPOST(GoodsVO gvo, MultipartFile file) throws Exception {
+	public String registPOST(GoodsVO gvo, MultipartFile[] uploadFile, Model model) throws Exception {
 		mylog.debug(" /goods/regist(POST) 호출 ");	
 		mylog.debug(" GET방식의 데이터 전달 -> DB 저장 -> 페이지 이동 ");
 		// 0. 한글처리 (필터)
@@ -56,18 +88,52 @@ public class GoodsController {
 		mylog.debug(gvo.toString());
 		
 		// 2. 이미지 파일 첨부
-		String imgUploadPath = uploadPath + File.separator + "imgUpload";
-		String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
-		String fileName = null;
+		String uploadFolder = "C:\\upload";
+		
+	    File uploadPath = new File(uploadFolder, getFolder());
+        mylog.info("업로드 경로 : " + uploadPath);
+        
+        // 업로드 날짜별로 폴더 생성
+	    if (uploadPath.exists() == false) {
+	    	uploadPath.mkdirs();
+	    }
+	    
+	    // 파일 업로드
+		for (MultipartFile multipartFile : uploadFile) {
 
-		if(file != null) {
-		 fileName =  UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath); 
-		} else {
-		 fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
-		}
+			mylog.info("-------------------------------------");
+			mylog.info("파일명: " + multipartFile.getOriginalFilename());
+			mylog.info("파일크기: " + multipartFile.getSize());
+			
+			String uploadFileName =  multipartFile.getOriginalFilename();
+			
+			uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\") + 1);
+			mylog.info("only file name: " + uploadFileName);
+			
+			// 파일명 중복방지 - 고유값 파일명 생성
+			UUID uuid = UUID.randomUUID(); 
+			uploadFileName = uuid.toString() + "_" + uploadFileName; 
+			
 
-		gvo.setGoods_img(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
-		gvo.setGoods_thumbnail(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
+			try {
+				
+				File saveFile = new File(uploadPath, uploadFileName);
+				multipartFile.transferTo(saveFile);
+				
+				// 이미지 파일 확인
+				 if (checkImageType(saveFile)) {
+				
+					 FileOutputStream thumbnail = new FileOutputStream(new File(uploadPath, "s_" + uploadFileName));
+					
+					 Thumbnailator.createThumbnail(multipartFile.getInputStream(), thumbnail, 100,100);
+					
+					 thumbnail.close();
+				 }
+			} catch (Exception e) {
+				mylog.error(e.getMessage());
+			} 
+			
+		} // end for
 		
 		// 3. 서비스 -> DAO 접근 (mapper)
 		service.insertGoods(gvo);
@@ -78,7 +144,6 @@ public class GoodsController {
 			
 		return "redirect:/goods/list";
 	}
-	
 	
 	// 상품목록(All)
 	@RequestMapping(value = "/list",method = RequestMethod.GET)

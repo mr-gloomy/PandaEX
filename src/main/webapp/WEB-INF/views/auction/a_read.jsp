@@ -14,6 +14,12 @@
 <body>
 	<br><br><br><br><br><br>
 <%-- 	${avo } --%>
+	
+	<!-- 수정,삭제_경매번호 전달-->
+	<form role="form" method="post">
+		<input type="hidden" name="auction_no" value="${avo.auction_no }">
+	</form>
+
 <section class="bg0 p-t-75 p-b-120">
   <div class="container">
 	<div class="row">
@@ -37,8 +43,9 @@
 								<h4><span>즉시 낙찰가</span>
 									<span style="color:blue;"> <fmt:formatNumber value="${avo.auction_bid }"/> 원</span></h4><br>
 							</p><br><br>
-							<button style="width:200px;">판매자와 1:1 채팅</button>
-							<button style="width:200px;">동네인증 필요</button>
+							<button type="submit" class="btn btn-danger" style="width:200px;">수정</button>
+							<button type="submit" class="btn btn-warning" style="width:200px;">삭제</button>
+							<button type="submit" class="btn btn-success" style="width:200px;">목록</button>
 
 						</div>
 					</div>
@@ -73,6 +80,25 @@
 			</div>
   </div>
 </section>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		var formObj = $("form[role='form']");
+		console.log(formObj);
+		
+		//수정버튼
+		$(".btn-danger").click(function(){
+			formObj.attr("action","/auction/a_modify");
+			formObj.attr("method","get");
+			formObj.submit();
+		});
+		
+		//목록버튼
+		$(".btn-success").click(function(){
+			location.href="/auction/a_list";
+		});
+	});
+</script>
 
 
 	<!--   푸터 -->
