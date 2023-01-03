@@ -27,11 +27,11 @@
  	 where user_id != #{user_id} 	
  	</select>
  	
-	<select id="findKakao" parameterType="java.util.HashMap" resultType="MemberVO">
+	<select id="findKakao" resultType="HashMap">
 		select * from kakao_user where k_name=#{nickname} and k_email=#{email}
 	</select>
 
-	<insert id="kakaoInsert" parameterType="java.util.HashMap">
+	<insert id="kakaoInsert">
 		insert into kakao_user(k_name, k_email)
 			values(#{nickname}, #{email})
 	</insert>

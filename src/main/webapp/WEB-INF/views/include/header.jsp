@@ -282,7 +282,7 @@
 			<img src="/resources/images/icons/division-line.png">
 		</div>
 			 
-			 <a class="p-2" href="https://kauth.kakao.com/oauth/authorize?client_id=d2adbec5b44fdcc0559d1e3ca898739e&redirect_uri=http://localhost:8080/main/index&response_type=code">
+			 <a class="p-2" href="https://kauth.kakao.com/oauth/authorize?client_id=d2adbec5b44fdcc0559d1e3ca898739e&redirect_uri=http://localhost:8080/member/kakaoLogin&response_type=code">
 			 
 			<img src="/resources/images/icons/kakao_login_large_wide.png"" style="width:268pt;height:50pt;margin:auto;"><br><br>
 			 </a>
