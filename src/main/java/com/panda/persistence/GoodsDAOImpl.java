@@ -26,10 +26,10 @@ public class GoodsDAOImpl implements GoodsDAO{
 	
 	// 상품 글쓰기
 	@Override
-	public void createGoods(GoodsVO gvo) throws Exception {
-		mylog.debug("createGoods(GoodsVO gvo) -> mapper 동작 호출");
+	public void createGoods(GoodsVO vo) throws Exception {
+		mylog.debug("createGoods(GoodsVO vo) -> mapper 동작 호출");
 		
-		sqlSession.insert(NAMESPACE +".createGoods", gvo);
+		sqlSession.insert(NAMESPACE +".createGoods", vo);
 		
 		mylog.debug("글쓰기 완료 -> 서비스");
 	}

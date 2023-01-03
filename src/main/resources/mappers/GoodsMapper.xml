@@ -18,6 +18,27 @@
 		select * from goods
 	</select>
 		
+	<!-- 글 조회수 1증가 -->
+ 	<update id="updateViewcnt">
+ 		update goods set goods_viewcount = goods_viewcount+1
+ 		where goods_no = #{goods_no} 
+ 	</update>
+ 	
+ 	<!-- 글번호(goods_no) 글정보 모두 조회 -->
+ 	<select id="getGoods" resultType="com.panda.domain.GoodsVO">
+ 		select * from goods where goods_no = #{goods_no}
+ 	</select>
+ 	
+ 	<!-- 글정보 수정 -->
+ 	<update id="updateGoods">
+ 		update goods set #{goods_category},#{goods_title},#{goods_condition},#{goods_price},#{goods_discount},#{goods_detail},#{goods_refund},#{goods_like},#{goods_img},#{goods_thumbnail}
+ 		where goods_no=#{goods_no}
+ 	</update>
+ 	
+ 	<!-- 글정보 삭제 -->
+ 	<delete id="deleteGoods">
+ 		delete from goods where goods_no = #{goods_no }
+ 	</delete>
 	
 
 
