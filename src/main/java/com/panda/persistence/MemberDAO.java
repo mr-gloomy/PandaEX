@@ -19,4 +19,9 @@ public interface MemberDAO {
 			public void kakaoinsert(HashMap<String, Object> userInfo)throws Exception;
 			
 			
+			//이메일인증~
+			int updateMailKey(MemberVO vo) throws Exception;
+			int updateMailAuth(MemberVO vo) throws Exception;
+			int emailAuthFail(String id) throws Exception;
+			
 }

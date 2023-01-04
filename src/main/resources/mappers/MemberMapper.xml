@@ -23,7 +23,7 @@
 	
 	
  	<select id="getMemberList" resultType="MemberVO">
- 	 select * from tbl_member 
+ 	 select * from user
  	 where user_id != #{user_id} 	
  	</select>
  	
@@ -64,7 +64,17 @@
 	</select>
 
 
+	<update id="updateMailKey" parameterType="MemberVO">
+    update user set mail_key=#{mail_key} where user_email=#{user_email} and user_id=#{user_id}
+	</update>
 	
+	<update id="updateMailAuth" parameterType="MemberVO">
+    update user set mail_auth=1 where user_email=#{user_email} and mail_key=#{mail_key}
+	</update>
+	
+	<select id="emailAuthFail" parameterType="String" resultType="int">
+    select count(*) from user where user_id=#{user_id} and mail_auth=1
+	</select>
 	
 	
 </mapper>
