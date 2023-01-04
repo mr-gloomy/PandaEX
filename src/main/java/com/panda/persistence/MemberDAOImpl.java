@@ -48,14 +48,14 @@ public class MemberDAOImpl implements MemberDAO{
 	}
 	// 정보 저장
 		public void kakaoinsert(HashMap<String, Object> userInfo)throws Exception {
-			sqlSession.insert("Member.kakaoInsert",userInfo);
+			mylog.info(userInfo.toString());
+			sqlSession.insert(NAMESPACE+".kakaoInsert",userInfo);
 		}
 
 		// 정보 확인
-		public KakaoVO findkakao(HashMap<String, Object> userInfo)throws Exception {
-			System.out.println("RN:"+userInfo.get("nickname"));
-			System.out.println("RE:"+userInfo.get("email"));
-			return sqlSession.selectOne("Member.findKakao", userInfo);
+		public HashMap<String, Object> findkakao(HashMap<String, Object> userInfo)throws Exception {
+			mylog.info("dddddddddddddddddddddddddddd"+sqlSession.selectOne(NAMESPACE+".findKakao", userInfo).toString());
+			return sqlSession.selectOne(NAMESPACE+".findKakao", userInfo);
 		}
 
 	}

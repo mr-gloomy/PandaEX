@@ -14,7 +14,7 @@ public interface MemberDAO {
 			//회원조회
 			public MemberVO getMember(String user_id)throws Exception;
 
-			public KakaoVO findkakao(HashMap<String, Object> userInfo)throws Exception;
+			public HashMap<String, Object> findkakao(HashMap<String, Object> userInfo)throws Exception;
 
 			public void kakaoinsert(HashMap<String, Object> userInfo)throws Exception;
 			

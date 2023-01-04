@@ -24,12 +24,12 @@ public class ChatDAOImpl implements ChatDAO{
 	private final String mapper = "com.panda.mapper.ChatMapper";
 	
 	public List getRooms(String id) throws Exception{
-		logger.info(sqlSession.selectList(mapper+".getRooms",id).toString());
+//		logger.info(sqlSession.selectList(mapper+".getRooms",id).toString());
 		return sqlSession.selectList(mapper+".getRooms",id);
 	}
 	
 	public String getRoom(ChatVO vo) throws Exception{
-		logger.info(sqlSession.selectOne(mapper+".getRoom",vo));
+//		logger.info(sqlSession.selectOne(mapper+".getRoom",vo));
 		return sqlSession.selectOne(mapper+".getRoom",vo);
 	}
 	
