@@ -47,6 +47,7 @@
 				if(msgData.cmd == 'CMD_MSG_SEND') {	
 					var msg_time = new Date(msgData.msg_date);
 					var time_hour = (msg_time.getHours()>12)?"오후 "+(msg_time.getHours()-12):"오전 "+msg_time.getHours();
+					
 					if(msgData.send_id != cur_session) {
 						$('#divChatData').append("<div class='direct-chat-msg'><div class='direct-chat-info clearfix'><span class='direct-chat-name pull-left'>"+msgData.sell_id+"</span><span class='direct-chat-timestamp pull-right'>"+time_hour+" : "+msg_time.getMinutes()+"</span></div><div class='direct-chat-text'>"+msgData.msg+"</div></div>");
 // 						$('#divChatData').scrollTop($('#divChatData')[0].scrollHeight);

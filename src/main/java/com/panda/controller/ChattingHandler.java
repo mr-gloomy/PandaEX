@@ -61,11 +61,10 @@ public class ChattingHandler extends TextWebSocketHandler {
 			map.put("receive_id", mapReceive.get("receive_id"));
 			
 			String bang_id = service.getRoom(map);
-			logger.info(bang_id);
 			
 			if (bang_id!=null) {
 				List msgs = service.getMsg(bang_id);
-				logger.info(msgs.toString());
+				
 				for (int i=0;i<msgs.size();i++) {
 					String msg = (String)msgs.get(i);
 					session.sendMessage(new TextMessage(msg));
