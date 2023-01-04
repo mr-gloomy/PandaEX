@@ -33,6 +33,9 @@ public interface MemberService {
 		public HashMap<String,Object> getUserInfo(String access_Token)throws Exception;
 
 	
-		
+		//이메일인증~
+		int updateMailKey(MemberVO vo) throws Exception;
+		int updateMailAuth(MemberVO vo) throws Exception;
+		int emailAuthFail(String id) throws Exception;
 
 }

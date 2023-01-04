@@ -43,6 +43,7 @@
 	<!-- 다른 패키지 정보를 스캔(객체bean 으로 인식 처리) -->	
 	<context:component-scan base-package="com.panda.persistence" />
 	<context:component-scan base-package="com.panda.service" />	
+	<context:component-scan base-package="com.panda.mail" />	
 	
 	
 </beans>

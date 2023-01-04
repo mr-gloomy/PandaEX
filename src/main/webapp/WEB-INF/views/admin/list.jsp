@@ -5,6 +5,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js">
+	
+</script>
 <meta charset="UTF-8">
 <title>관리자 페이지</title>
 </head>
@@ -15,261 +18,180 @@
 	<jsp:include page="../include/css.jsp" />
 	<!-- remote -->
 	<jsp:include page="../addon/remote.jsp" />
-	
-	<br><br><br><br><br>
-	
-	
+
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+
+
 	<div class="flex-w flex-sb-m p-b-52">
-				<div class="flex-w flex-l-m filter-tope-group m-tb-10">
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
-						All Products
-					</button>
+		<div class="flex-w flex-l-m filter-tope-group m-tb-10">
 
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".women">
-						Women
-					</button>
 
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".men">
-						Men
-					</button>
+			<button
+				class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1"
+				name="button" value="all">전체</button>
 
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".bag">
-						Bag
-					</button>
+			<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
+				name="button" value="notice">공지사항</button>
 
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".shoes">
-						Shoes
-					</button>
+			<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
+				name="button" value="event">이벤트</button>
 
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".watches">
-						Watches
-					</button>
+			<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
+				name="button" value="donate">기부문의</button>
+
+		</div>
+
+		<div class="flex-w flex-c-m m-tb-10">
+			<div
+				class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-filter">
+				<i
+					class="icon-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-filter-list"></i>
+				<i
+					class="icon-close-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+				Filter
+			</div>
+
+			<div
+				class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 js-show-search">
+				<i class="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search"></i>
+				<i
+					class="icon-close-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+				Search
+			</div>
+		</div>
+
+		<!-- Search product -->
+		<div class="dis-none panel-search w-full p-t-10 p-b-15">
+			<div class="bor8 dis-flex p-l-15">
+				<button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
+					<i class="zmdi zmdi-search"></i>
+				</button>
+
+				<input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text"
+					name="search-product" placeholder="Search">
+			</div>
+		</div>
+
+		<!-- Filter -->
+		<div class="dis-none panel-filter w-full p-t-10">
+			<div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
+				<div class="filter-col1 p-r-15 p-b-27">
+					<div class="mtext-102 cl2 p-b-15">Sort By</div>
+
+					<ul>
+						<li class="p-b-6"><a href="#"
+							class="filter-link stext-106 trans-04"> Default </a></li>
+
+						<li class="p-b-6"><a href="#"
+							class="filter-link stext-106 trans-04"> Popularity </a></li>
+
+						<li class="p-b-6"><a href="#"
+							class="filter-link stext-106 trans-04"> Average rating </a></li>
+
+						<li class="p-b-6"><a href="#"
+							class="filter-link stext-106 trans-04 filter-link-active">
+								Newness </a></li>
+
+						<li class="p-b-6"><a href="#"
+							class="filter-link stext-106 trans-04"> Price: Low to High </a></li>
+
+						<li class="p-b-6"><a href="#"
+							class="filter-link stext-106 trans-04"> Price: High to Low </a></li>
+					</ul>
 				</div>
 
-				<div class="flex-w flex-c-m m-tb-10">
-					<div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-filter">
-						<i class="icon-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-filter-list"></i>
-						<i class="icon-close-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
-						 Filter
-					</div>
+				<div class="filter-col2 p-r-15 p-b-27">
+					<div class="mtext-102 cl2 p-b-15">Price</div>
 
-					<div class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 js-show-search">
-						<i class="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search"></i>
-						<i class="icon-close-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
-						Search
-					</div>
+					<ul>
+						<li class="p-b-6"><a href="#"
+							class="filter-link stext-106 trans-04 filter-link-active">
+								All </a></li>
+
+						<li class="p-b-6"><a href="#"
+							class="filter-link stext-106 trans-04"> $0.00 - $50.00 </a></li>
+
+						<li class="p-b-6"><a href="#"
+							class="filter-link stext-106 trans-04"> $50.00 - $100.00 </a></li>
+
+						<li class="p-b-6"><a href="#"
+							class="filter-link stext-106 trans-04"> $100.00 - $150.00 </a></li>
+
+						<li class="p-b-6"><a href="#"
+							class="filter-link stext-106 trans-04"> $150.00 - $200.00 </a></li>
+
+						<li class="p-b-6"><a href="#"
+							class="filter-link stext-106 trans-04"> $200.00+ </a></li>
+					</ul>
 				</div>
-				
-				<!-- Search product -->
-				<div class="dis-none panel-search w-full p-t-10 p-b-15">
-					<div class="bor8 dis-flex p-l-15">
-						<button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
-							<i class="zmdi zmdi-search"></i>
-						</button>
 
-						<input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder="Search">
-					</div>	
+				<div class="filter-col3 p-r-15 p-b-27">
+					<div class="mtext-102 cl2 p-b-15">Color</div>
+
+					<ul>
+						<li class="p-b-6"><span class="fs-15 lh-12 m-r-6"
+							style="color: #222;"> <i class="zmdi zmdi-circle"></i>
+						</span> <a href="#" class="filter-link stext-106 trans-04"> Black </a></li>
+
+						<li class="p-b-6"><span class="fs-15 lh-12 m-r-6"
+							style="color: #4272d7;"> <i class="zmdi zmdi-circle"></i>
+						</span> <a href="#"
+							class="filter-link stext-106 trans-04 filter-link-active">
+								Blue </a></li>
+
+						<li class="p-b-6"><span class="fs-15 lh-12 m-r-6"
+							style="color: #b3b3b3;"> <i class="zmdi zmdi-circle"></i>
+						</span> <a href="#" class="filter-link stext-106 trans-04"> Grey </a></li>
+
+						<li class="p-b-6"><span class="fs-15 lh-12 m-r-6"
+							style="color: #00ad5f;"> <i class="zmdi zmdi-circle"></i>
+						</span> <a href="#" class="filter-link stext-106 trans-04"> Green </a></li>
+
+						<li class="p-b-6"><span class="fs-15 lh-12 m-r-6"
+							style="color: #fa4251;"> <i class="zmdi zmdi-circle"></i>
+						</span> <a href="#" class="filter-link stext-106 trans-04"> Red </a></li>
+
+						<li class="p-b-6"><span class="fs-15 lh-12 m-r-6"
+							style="color: #aaa;"> <i class="zmdi zmdi-circle-o"></i>
+						</span> <a href="#" class="filter-link stext-106 trans-04"> White </a></li>
+					</ul>
 				</div>
 
-				<!-- Filter -->
-				<div class="dis-none panel-filter w-full p-t-10">
-					<div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
-						<div class="filter-col1 p-r-15 p-b-27">
-							<div class="mtext-102 cl2 p-b-15">
-								Sort By
-							</div>
+				<div class="filter-col4 p-b-27">
+					<div class="mtext-102 cl2 p-b-15">Tags</div>
 
-							<ul>
-								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04">
-										Default
-									</a>
-								</li>
-
-								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04">
-										Popularity
-									</a>
-								</li>
-
-								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04">
-										Average rating
-									</a>
-								</li>
-
-								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04 filter-link-active">
-										Newness
-									</a>
-								</li>
-
-								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04">
-										Price: Low to High
-									</a>
-								</li>
-
-								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04">
-										Price: High to Low
-									</a>
-								</li>
-							</ul>
-						</div>
-
-						<div class="filter-col2 p-r-15 p-b-27">
-							<div class="mtext-102 cl2 p-b-15">
-								Price
-							</div>
-
-							<ul>
-								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04 filter-link-active">
-										All
-									</a>
-								</li>
-
-								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04">
-										$0.00 - $50.00
-									</a>
-								</li>
-
-								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04">
-										$50.00 - $100.00
-									</a>
-								</li>
-
-								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04">
-										$100.00 - $150.00
-									</a>
-								</li>
-
-								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04">
-										$150.00 - $200.00
-									</a>
-								</li>
-
-								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04">
-										$200.00+
-									</a>
-								</li>
-							</ul>
-						</div>
-
-						<div class="filter-col3 p-r-15 p-b-27">
-							<div class="mtext-102 cl2 p-b-15">
-								Color
-							</div>
-
-							<ul>
-								<li class="p-b-6">
-									<span class="fs-15 lh-12 m-r-6" style="color: #222;">
-										<i class="zmdi zmdi-circle"></i>
-									</span>
-
-									<a href="#" class="filter-link stext-106 trans-04">
-										Black
-									</a>
-								</li>
-
-								<li class="p-b-6">
-									<span class="fs-15 lh-12 m-r-6" style="color: #4272d7;">
-										<i class="zmdi zmdi-circle"></i>
-									</span>
-
-									<a href="#" class="filter-link stext-106 trans-04 filter-link-active">
-										Blue
-									</a>
-								</li>
-
-								<li class="p-b-6">
-									<span class="fs-15 lh-12 m-r-6" style="color: #b3b3b3;">
-										<i class="zmdi zmdi-circle"></i>
-									</span>
-
-									<a href="#" class="filter-link stext-106 trans-04">
-										Grey
-									</a>
-								</li>
-
-								<li class="p-b-6">
-									<span class="fs-15 lh-12 m-r-6" style="color: #00ad5f;">
-										<i class="zmdi zmdi-circle"></i>
-									</span>
-
-									<a href="#" class="filter-link stext-106 trans-04">
-										Green
-									</a>
-								</li>
-
-								<li class="p-b-6">
-									<span class="fs-15 lh-12 m-r-6" style="color: #fa4251;">
-										<i class="zmdi zmdi-circle"></i>
-									</span>
-
-									<a href="#" class="filter-link stext-106 trans-04">
-										Red
-									</a>
-								</li>
-
-								<li class="p-b-6">
-									<span class="fs-15 lh-12 m-r-6" style="color: #aaa;">
-										<i class="zmdi zmdi-circle-o"></i>
-									</span>
-
-									<a href="#" class="filter-link stext-106 trans-04">
-										White
-									</a>
-								</li>
-							</ul>
-						</div>
-
-						<div class="filter-col4 p-b-27">
-							<div class="mtext-102 cl2 p-b-15">
-								Tags
-							</div>
-
-							<div class="flex-w p-t-4 m-r--5">
-								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-									Fashion
-								</a>
-
-								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-									Lifestyle
-								</a>
-
-								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-									Denim
-								</a>
-
-								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-									Streetstyle
-								</a>
-
-								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-									Crafts
-								</a>
-							</div>
-						</div>
+					<div class="flex-w p-t-4 m-r--5">
+						<a href="#"
+							class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+							Fashion </a> <a href="#"
+							class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+							Lifestyle </a> <a href="#"
+							class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+							Denim </a> <a href="#"
+							class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+							Streetstyle </a> <a href="#"
+							class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+							Crafts </a>
 					</div>
 				</div>
 			</div>
-	
-	
+		</div>
+	</div>
+
+
 	<!-- 테이블 시작 -->
 	<div class="box">
 		<div class="box-header">
 			<h3 class="box-title">통합게시판</h3>
 		</div>
-		
-			<button class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer" onclick="location.href='/admin/boardRegist';">
-							글쓰기</button>
+
+		<button
+			class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer"
+			onclick="location.href='/admin/boardRegist';">글쓰기</button>
 
 		<div class="box-body">
 			<div id="example1_wrapper"
@@ -288,20 +210,19 @@
 					</div>
 					<div class="col-sm-6">
 						<div id="example1_filter" class="dataTables_filter">
-							
+
 							<!-- 검색 -->
-						
-							<label>Search:
-							<input type="search"
+
+							<label>Search: <input type="search"
 								class="form-control input-sm" placeholder=""
 								aria-controls="example1"></label>
 						</div>
 					</div>
 				</div>
-				
-			
-				
-				
+
+
+
+
 				<div class="row">
 					<div class="col-sm-12">
 						<table id="example1"
@@ -312,7 +233,7 @@
 									<th class="sorting_asc" tabindex="0" aria-controls="example1"
 										rowspan="1" colspan="1" aria-sort="ascending"
 										aria-label="Rendering engine: activate to sort column descending"
-										style="width: 297.469px;"></th>
+										style="width: 297.469px;">글 종류</th>
 									<th class="sorting" tabindex="0" aria-controls="example1"
 										rowspan="1" colspan="1"
 										aria-label="Browser: activate to sort column ascending"
@@ -322,8 +243,8 @@
 										aria-label="Platform(s): activate to sort column ascending"
 										style="width: 322.266px;">작성자</th>
 									<th class="sorting" tabindex="0" aria-controls="example1"
-										rowspan="1" colspan="1"
-										ar	ia-label="Engine version: activate to sort column ascending"
+										rowspan="1" colspan="1" ar
+										ia-label="Engine version: activate to sort column ascending"
 										style="width: 257.094px;">작성일</th>
 									<th class="sorting" tabindex="0" aria-controls="example1"
 										rowspan="1" colspan="1"
@@ -333,13 +254,19 @@
 							</thead>
 							<tbody>
 								<c:forEach var="vo" items="${boardList }" step="1">
-								<tr role="row" class="odd">
-									<td class="sorting_1">${vo.bno }</td>
-									<td><a href="/admin/content?bno=${vo.bno }">${vo.title }</a></td>
-									<td>${vo.writer }</td>
-									<td><fmt:formatDate value="${vo.regdate }" type="date" /></td>
-									<td>${vo.viewcnt }</td>
-								</tr>
+									<tr role="row" class="odd">
+										<td class="sorting_1">
+										<c:choose>
+											<c:when test="${vo.category.equals('notice') }">공지사항</c:when>
+											<c:when test="${vo.category.equals('event') }">이벤트</c:when>
+											<c:when test="${vo.category.equals('donate') }">기부문의</c:when>
+										</c:choose>
+										</td>
+										<td><a href="/admin/content?bno=${vo.bno }">${vo.title }</a></td>
+										<td>${vo.writer }</td>
+										<td><fmt:formatDate value="${vo.regdate }" type="date" /></td>
+										<td>${vo.viewcnt }</td>
+									</tr>
 								</c:forEach>
 							</tbody>
 						</table>
@@ -378,49 +305,100 @@
 			</div>
 		</div>
 
-	</div>
 
-		<br><br>
-		
-		<ul>
-		
-			<li><a href="#">«</a></li>
-			<c:forEach var="i" begin="${pvo.startPage }" end="${pvo.endPage }" step="1">
-			
-			<li><a href="/admin/list?page=${i }">${i }</a></li>
-			
-			</c:forEach>
-			<li><a href="#">»</a></li>
-			
-		</ul>
+
+		<br> <br>
+
+		<div class="box-footer clearfix">
+			<ul class="pagination pagination-sm no-margin pull-right">
+				<!-- 이전 버튼 -->
+				<c:if test="${pvo.prev }">
+					<li><a href="/admin/list?page=${pvo.startPage-1 }">이전</a></li>
+				</c:if>
+
+				<c:forEach var="i" begin="${pvo.startPage }" end="${pvo.endPage }"
+					step="1">
+
+					<li><a href="/admin/list?page=${i }">${i }</a></li>
+
+				</c:forEach>
+
+
+				<!-- 다음 버튼 -->
+				<c:if test="${pvo.next }">
+					<li><a href="/admin/list?page=${pvo.endPage+1 }">다음</a></li>
+				</c:if>
+
+			</ul>
+
+		</div>
+	</div>
 
 
 
 	<!-- 푸터 -->
 	<jsp:include page="../include/footer.jsp" />
-	
-	  <script type="text/javascript" >
-	     	// alert('${result}'); => EL표현식 -> JS사용 값전달 가능 (DB데이터 사용가능) 
-	     	// ajax호출시 (DB데이터 전달 가능)
-	     	
+<script
+	src="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.16/dist/sweetalert2.all.min.js"></script>
+<script type="text/javascript">
+		// alert('${result}'); => EL표현식 -> JS사용 값전달 가능 (DB데이터 사용가능) 
+		// ajax호출시 (DB데이터 전달 가능)
+
 		var result = '${result}';
+
+		if (result == 'registOK') {
+
+			Swal.fire(
+					  '글 쓰기 성공',
+					  '좋은 글이네용',
+					  'success'
+					)
+
+		} else if (result == 'modOK') {
 			
-		if(result=='registOK'){
+			Swal.fire(
+					  '글 수정 성공',
+					  '수정하길 잘했어용',
+					  'success'
+					)
 			
-			alert("글쓰기 완료! ");
-			
-		}else if(result=='modOK'){
-			
-			alert("글 수정 완료! ");
-			
-		}else if(result=='remOK'){
-			
-			alert("글 삭제 완료! ");
-			
+
+		} else if (result == 'remOK') {
+
+			Swal.fire(
+					  '글 삭제 성공',
+					  '삭제할만하긴 했어용',
+					  'success'
+					)
+
 		}
-			
-	     </script> 
-     
+</script>
+
+<script type="text/javascript">
+		$(document).ready(function() {
+			$('button[name=button]').on('click', function() {
+				$.ajax({
+					type:"post",
+					url:"/admin/list",
+					contentType:"application/json",
+					data:JSON.stringify(board),
+					success:function(data){
+						alert('성공');
+						console.log(data);
+						
+						
+					},error:function(data){
+						alert('에러');
+						console.log(data);
+					}
+					
+				});
+				
+			});
+
+		});
+	</script>
+
 
 
 

@@ -208,7 +208,7 @@
 							</c:if>
 							<c:if test="${user_id != null}">
 								<p>
-									<span>${sessionScope.user_id}/${sessionScope.user_nick }</span> 님 환영합니다
+									<span>${sessionScope.user_id}</span> 님 환영합니다
 								</p>
 								<ul>
 									<li><a class="my" href="#">내 정보<img class="right"
@@ -225,6 +225,11 @@
 									
 								</div>
 							</c:if>
+							
+							
+							 
+							 
+							 <!-- 관리자  -->
 							<c:if test="${user_id ne '' and adminchk lt '1'}">
 								<p style="margin-bottom: 5px;">
 									<span class="login-admin">${admin }</span> 님 환영합니다
@@ -378,26 +383,26 @@
 			<img src="/resources/images/icons/division-line.png">
 			<p>Social Login</p>
 			<img src="/resources/images/icons/division-line.png">
-		</div>
+		
 			 
 			 <a class="p-2" href="https://kauth.kakao.com/oauth/authorize?client_id=d2adbec5b44fdcc0559d1e3ca898739e&redirect_uri=http://localhost:8080/member/kakaoLogin&response_type=code">
 			 
-			<img src="/resources/images/icons/kakao_login_large_wide.png"" style="width:268pt;height:50pt;margin:auto;"><br><br>
+			<img src="/resources/images/icons/kakao_login_large_wide.png" style="width:268pt;height:50pt;margin:auto;"><br><br>
 			 </a>
-			 
+			 </div>
 			 
 			 
 			 
 		<div class="modal-join">
 		<form action="/member/insert" method="post">
 			<div class="join-text">
-				<input id="user-id-join" type="text" placeholder="아이디" maxlength="10" autocomplete="off" name="user_id">
+				<input id="user-id-join" type="text" placeholder="아이디" maxlength="10" autocomplete="on" name="user_id" required>
 				<div id="tooltip" class="idtooltip">아이디는 영어,숫자 5~10글자, 한글,특수문자 사용불가</div>
 				<input id="user-pw-join" type="password" placeholder="비밀번호"maxlength="15"
 				onkeypress="chkCapsLock2(event)" onclick="chkCapsLock2(event)"
-				onblur="chkCapsLock3(event)" autocomplete="new-password" name="user_pw">
+				onblur="chkCapsLock3(event)" autocomplete="new-password" name="user_pw" required>
 				<img class="capsl" src ="/resources/images/icons/capslock.png" alt="캡스락">
-				<div id="tooltip" class="pwtooltip">비밀번호는 영어대/소문자, 숫자, 특수기호 포함 8~15글자, 한글사용 불가</div>
+				<div id="tooltip" class="pwtooltip">첫 글자 대/소문자, 숫자, 특수기호 포함 8~15글자, 한글사용 불가</div>
 				<div class="passlv">
 					<div class="passlv-info">비밀번호 안전도 :</div>
 					<div class="lv-info"></div>
@@ -406,9 +411,9 @@
 					<input type="text" readonly class="lv3" tabindex="-1">
 					<!-- 비밀번호는 영어대/소문자,숫자,특수기호 8~15글자, 한글사용불가 -->
 				</div>
-				<input id="user-name-join" type="text" placeholder="이름입력" maxlength="6" autocomplete="off" name="user_name">
+				<input id="user-name-join" type="text" placeholder="이름입력" maxlength="6" autocomplete="off" name="user_name" required>
 				<div id="tooltip" class="nametooltip">본명을 입력해주세요</div>
-				<input id="user-nick-join" type="text" placeholder="닉네임" maxlength="10" autocomplete="off" name="user_nick">
+				<input id="user-nick-join" type="text" placeholder="닉네임" maxlength="10" autocomplete="off" name="user_nick" required>
 				<div id="tooltip" class="nicktooltip" >사용하실 닉네임을 입력해주세요.</div>
 				<div class="tellsel">
 					<div id="tel">
@@ -420,21 +425,21 @@
 								<div class="lgu">LGU+</div>
 							</div>
 					</div>
-					<input id="user-tel-join" class="telephone" type="tel" placeholder="핸드폰번호"
-						maxlength="13" autocomplete="off" name="user_tel"> <input type="button"
-						class="tel-certification" value="문자전송" tabindex="-1">
-				</div>
-				<div id="tooltip" class="teltooltip">핸드폰번호를 입력하세요.</div>
+					<input id="user-tel-join" class="telephone" type="tel" placeholder="전화번호"
+						maxlength="13" autocomplete="off" name="user_tel" required> 
+											</div>
+				<br>
+				
 				<div id="telephone-certification">
-					<input class="telephone-certification" type="tel"
-						placeholder="인증번호" maxlength="6"> <input type="button"
-						id="tel-certification" value="인증확인" tabindex="-1">
 					<input type="hidden" class="sucess-certification" value="" memo="인증완료 시 밸류값저장(0/1)" tabindex="-1">
+					<input type="email"
+						placeholder="이메일 주소!" name="user_email" required> 
+						
 				</div>
 				<div class="mylocation">우리동네 조회하기</div>
 				<div class="findloca"> <!-- 배열로 넣기  -->
-					<input type="text" id="si" readonly tabindex="-1" name="addr[0]"> 
-					<input type="text" id="gu" readonly tabindex="-1" name="addr[1]"> 
+					<input type="text" id="si" readonly tabindex="-1" name="user_area"> 
+					<input type="text" id="gu" readonly tabindex="-1" name="user_addr"> 
 					<img src="/resources/images/icons/placeholder.png" id="findlocation">
 				</div>
 				<div class="locationfind-false">&nbsp;</div>

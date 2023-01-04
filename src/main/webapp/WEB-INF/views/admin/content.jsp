@@ -31,6 +31,9 @@
 <div class="box box-warning">
 	<div class="box-header with-border">
 		<h3 class="box-title">공지사항</h3>
+		<div>
+		조회수 : ${cvo.viewcnt }
+		</div>
 	</div>
 
 	<div class="box-body">

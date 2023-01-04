@@ -51,12 +51,29 @@ public class MemberDAOImpl implements MemberDAO{
 			mylog.info(userInfo.toString());
 			sqlSession.insert(NAMESPACE+".kakaoInsert",userInfo);
 		}
-
 		// 정보 확인
 		public HashMap<String, Object> findkakao(HashMap<String, Object> userInfo)throws Exception {
+			
 			return sqlSession.selectOne(NAMESPACE+".findKakao", userInfo);
 		}
 
+		
+		//이메일 인증~
+		@Override
+		public int updateMailKey(MemberVO vo) throws Exception {
+		    return sqlSession.update(NAMESPACE + ".updateMailKey", vo);
+		}
+
+		@Override
+		public int updateMailAuth(MemberVO vo) throws Exception {
+		    return sqlSession.update(NAMESPACE + ".updateMailAuth", vo);
+		}
+
+		@Override
+		public int emailAuthFail(String id) throws Exception {
+		    return sqlSession.selectOne(NAMESPACE + ".emailAuthFail", id);
+		}
+		
 	}
 	
 

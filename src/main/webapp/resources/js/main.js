@@ -848,7 +848,7 @@ $('#user-pw-join').on("blur keyup", function() {
    var lv2 = $(".lv2");
    var lv3 = $(".lv3");
    var lvinfo = $(".lv-info");
-   var nouse = "비밀번호는 영어대/소문자, 숫자, 특수기호 포함 8~15글자, 한글사용 불가";
+   var nouse = "비밀번호는 첫글자는 대문자! 소문자, 숫자, 특수기호 포함 8~15글자, 한글사용 불가";
    var reg = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
    var use = "사용가능한 비밀번호입니다.";
    $(this).val($(this).val().replace(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g, ''));

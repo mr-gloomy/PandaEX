@@ -61,7 +61,7 @@ $(function(){
 
 //$( 'p' ).slideUp( 200 ).delay( 2000 ).slideDown( 200 );
 
-// 채팅창 제어
+// 채팅창 목록 불러오기
 $(function(){
 	$('#chatOpen').on('click',function(){
 		
@@ -75,10 +75,9 @@ $(function(){
 				$(".chat-position").empty();
 				$(data).each(function(index,item) {
 					var dataD = item.msg_date;
-					/*var date = 
-						function timeForToday(dataD) {
+					function timeForToday(value) {
 				        const today = new Date();
-				        const timeValue = new Date(dataD);
+				        const timeValue = new Date(value);
 
 				        const betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
 				        if (betweenTime < 1) return '방금전';
@@ -97,7 +96,7 @@ $(function(){
 				        }
 
 				        return `${Math.floor(betweenTimeDay / 365)}년전`;
-				 }	*/
+				 }	
 						
 						
 					var msg = JSON.parse(item.message);
@@ -109,9 +108,10 @@ $(function(){
 								+"<img class='opponent-img src='/resources/images/icons/man.png'></c:when><c:when test='${oppenent != '' }'>"
 								+"<img class='opponent-img' src='${oppenent }'></c:when></c:choose><div class='nameandtext'><div class='oppname'>"+item.receive_id+"</div>"						
 								+"<div class='text'>"+msg.msg+"</div><div class='timeposition'>"
-								+"<div class='lasttime'></div></div></div></div></a>");
+								+"<div class='lasttime'>"+timeForToday(dataD)+"</div></div></div></div></a>");
 				});
 			}
 		});
 	});
 });
+//채팅창 목록 불러오기
