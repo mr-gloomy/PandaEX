@@ -70,8 +70,8 @@ public class MemberController {
 	
 	
 	@GetMapping("/registerEmail")
-	public String emailConfirm(MemberVO vo)throws Exception{
-
+	public String emailConfirm(MemberVO vo,String email)throws Exception{
+		vo.setUser_email(email);
 	    service.updateMailAuth(vo);
 
 	    return "/member/emailAuthSuccess";
@@ -104,7 +104,7 @@ public class MemberController {
 		
 	//로그인 post
 	@PostMapping(value="/login")
-	public String loginPOST(String id, MemberVO vo, HttpServletRequest request, Model model) throws Exception{
+	public String loginPOST(String user_id, MemberVO vo, HttpServletRequest request, Model model) throws Exception{
 		HttpSession session =request.getSession();	
 		mylog.debug("loginPOST() 호출");
 		
@@ -113,7 +113,7 @@ public class MemberController {
 		
 		
 		//이메일 인증 했는지 확인
-        if (service.emailAuthFail(id) != 1) {
+        if (service.emailAuthFail(user_id) != 1) {
             return "/member/emailAuthFail";
         }
 
