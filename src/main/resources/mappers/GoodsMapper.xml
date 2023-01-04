@@ -8,8 +8,8 @@
 	
 	<!-- 상품 등록(user_nick 빠짐) -->
 	<insert id="createGoods">
-		insert into goods(goods_category,goods_title,goods_condition,goods_price,goods_discount,goods_detail,goods_refund,goods_like,goods_img,goods_thumbnail)
-		values(#{goods_category},#{goods_title},#{goods_condition},#{goods_price},#{goods_discount},#{goods_detail},#{goods_refund},#{goods_like},#{goods_img},#{goods_thumbnail})
+		insert into goods(goods_category,goods_title,goods_condition,goods_price,goods_discount,goods_detail,goods_refund,goods_like,file1)
+		values(#{goods_category},#{goods_title},#{goods_condition},#{goods_price},#{goods_discount},#{goods_detail},#{goods_refund},#{goods_like},#{file1})
 	</insert> 
 	
 	
@@ -31,7 +31,7 @@
  	
  	<!-- 글정보 수정 -->
  	<update id="updateGoods">
- 		update goods set #{goods_category},#{goods_title},#{goods_condition},#{goods_price},#{goods_discount},#{goods_detail},#{goods_refund},#{goods_like},#{goods_img},#{goods_thumbnail}
+ 		update goods set #{goods_category},#{goods_title},#{goods_condition},#{goods_price},#{goods_discount},#{goods_detail},#{goods_refund},#{goods_like},#{file1}
  		where goods_no=#{goods_no}
  	</update>
  	
