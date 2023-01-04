@@ -46,6 +46,13 @@ public class AuctionServiceImpl implements AuctionService {
 		mylog.debug("getAuction(Integer auction_no) 호출");
 		return adao.getAuction(auction_no);
 	}
+
+	// 사용자 정보 조회
+	@Override
+	public AuctionVO getUser(Integer user_no) throws Exception {
+		mylog.debug("getUser(Integer user_no) 호출");
+		return adao.getUser(user_no);
+	}
 	
 	
 	

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,151 +10,399 @@
 <!-- 헤더 -->
 <%@ include file="../include/header.jsp"%>
 <%@ include file="../include/css.jsp"%>
+ <!-- 파비콘 -->
+<link rel="icon" href="/resources/image/favicon.ico">
+<!-- Noto Sans 폰트 -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
+<!-- CSS -->
+<link rel="stylesheet" type="text/css" href="/resources/css/reset.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+<link rel="stylesheet" type="text/css" href="/resources/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="/resources/css/custom.css">
 </head>
 <body>
-	<br><br><br><br><br><br>
-<%-- 	${avo } --%>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+<%-- 		${avo } --%>
+<%-- 		${avo1 } --%>
 
 	<!-- 수정,삭제_경매번호 전달-->
 	<form role="form" method="post">
 		<input type="hidden" name="auction_no" value="${avo.auction_no }">
+		<input type="hidden" name="user_no" value="${avo1.user_no }">
 	</form>
 
-<section class="bg0 p-t-75 p-b-120">
-  <div class="container">
-	<div class="row">
-				<div class="order-md-2 col-md-7 col-lg-8 p-b-30">
-					<div class="p-t-7 p-l-85 p-l-15-lg p-l-0-md">
-						<h3 class="mtext-111 cl2 p-b-16">
-							${avo.auction_title }
-						</h3>
 
-						<p class="stext-113 cl6 p-b-26">
-							<span>입찰횟수 ${avo.auction_cnt }건</span>  
-							<span> 
-								마감<fmt:formatDate value="${avo.auction_cdate }" pattern="YYYY-MM-dd HH:mm:00"/>
-							</span>
-						</p>
+<!-- <button type="submit" class="btn btn-danger"
+	style="width: 200px;">수정</button>
+<button type="submit" class="btn btn-warning"
+	style="width: 200px;">삭제</button>
+<button type="submit" class="btn btn-success"
+	style="width: 200px;">목록</button>
+ -->
 
-						<div>
-							<p class="stext-114 cl6 p-r-40 p-b-11">
-								<h4><span>최초 입찰가</span>
-									<span style="color:red;"> <fmt:formatNumber value="${avo.auction_price }"/>원</span></h4> <br>
-								<h4><span>즉시 낙찰가</span>
-									<span style="color:blue;"> <fmt:formatNumber value="${avo.auction_bid }"/> 원</span></h4><br>
-							</p><br><br>
-							<button type="submit" class="btn btn-danger" style="width:200px;">수정</button>
-							<button type="submit" class="btn btn-warning" style="width:200px;">삭제</button>
-							<button type="submit" class="btn btn-success" style="width:200px;">목록</button>
+	<div class="container">
+		<!-- <script type="text/javascript">
+			$(document).ready(function(){
+			var formObj = $("form[role='form']");
+			console.log(formObj);
+			
+			//수정버튼
+			$(".btn-danger").click(function(){
+				formObj.attr("action","/auction/a_modify");
+				formObj.attr("method","get");
+				formObj.submit();
+			});
+			
+			//목록버튼
+			$(".btn-success").click(function(){
+				location.href="/auction/a_list";
+			});
+			});
+		</script> -->
 
+
+		<div class="container-fluid" id="app" data-v-app="">
+			<div class="row pt-5">
+				<span class="text-muted mr-3">카테고리</span><span
+					class="text-muted mr-3">&gt;</span><a
+					href=""><span
+					class="text-muted">${avo.auction_category}</span></a>
+			</div>
+			<div class="row mt-4 py-4 border-bottom border-top">
+				<div class="col-5 p-0">
+					<div id="carousel" class="carousel slide" data-ride="carousel"
+						data-bs-interval="false">
+						<ol class="carousel-indicators">
+							<li data-bs-target="#carousel" data-bs-slide-to="0"
+								class="active"></li>
+						</ol>
+						<div class="carousel-inner">
+							<div class="carousel-item active">
+								<img src="/resources/images/gallery-04.jpg"
+									class="d-block w-100">
+								<!--v-if-->
+							</div>
 						</div>
+						<!--v-if-->
+						<!--v-if-->
 					</div>
 				</div>
-
-				<div class="order-md-1 col-11 col-md-5 col-lg-4 m-lr-auto p-b-30">
-					<div class="how-bor2">
-						<div class="hov-img0">
-							<img src="images/about-02.jpg" alt="IMG">
+				<div class="col ml-5 pl-3 pr-0 d-flex flex-column">
+					<div class="row pr-1 mb-3">
+						<h3 class="fw-bold">${avo.auction_title }</h3>
+					</div>
+					<div class="row mb-3 mr-5">
+						<div class="col-3 p-0 text-muted">
+							<i class="fa-solid fa-gavel pr-2"></i><span id="count">${avo.auction_cnt }</span> 건
+						</div>
+						<div class="col text-muted p-0">
+							<i class="fa-solid fa-clock pr-2"></i> 
+								<fmt:formatDate value="${avo.auction_cdate }" pattern="yyyy-MM-dd HH:mm:ss"/> 마감 (<span
+								id="timer"></span>)
+						</div>
+					</div>
+					<div class="row mb-2 mr-5">
+						<div class="col-3 p-0 d-flex align-items-end">
+							<h5 class="fw-bold">최초 입찰가</h5>
+							<h5 id="maxBidLabel" class="fw-bold" style="display: none;">현재
+								최고가</h5>
+						</div>
+						<div class="col p-0">
+							<h3 class="text-primary fw-bold">
+								<span id="openingBid" class="comma">
+								<fmt:formatNumber value="${avo.auction_price }"/>
+								</span> 원
+							</h3>
+							<h3 class="text-primary fw-bold" id="blind"
+								style="display: none;">
+								<span id="maxBid" class="comma">0</span> 원
+							</h3>
+						</div>
+					</div>
+					<div class="row mr-5">
+						<div class="col-3 p-0 d-flex align-items-end">
+							<h5 class="fw-bold">즉시 낙찰가</h5>
+						</div>
+						<div class="col p-0">
+							<h3 class="text-info fw-bold">
+								<span id="closingBid" class="comma">
+								<fmt:formatNumber value="${avo.auction_bid }"/>
+								</span> 원
+							</h3>
+						</div>
+					</div>
+					<div class="row mt-3 mr-5 mb-auto pt-3 border-top"
+						style="display: none;">
+						<div class="col-3 p-0 d-flex align-items-end">
+							<h5 class="fw-bold">내 입찰가</h5>
+						</div>
+						<div class="col p-0">
+							<h3 class="text-secondary fw-bold">
+								<span id="myBid" class="comma">0</span> 원 <span
+									class="text-warning pl-2 align-self-center" id="topBidder"
+									style="display: none;"><i class="fa-solid fa-crown"></i>
+									최고 입찰자</span>
+							</h3>
+						</div>
+					</div>
+					<div class="row mt-auto mb-3 pl-5 d-flex justify-content-end">
+						<div id="refresh" class="col-3 text-muted p-0 pointer">
+							<span class="pl-5"><i id="rotate"
+								class="fa-solid fa-arrow-rotate-left"></i> 새로고침</span>
+						</div>
+						<div class="col-3 p-0 pl-2 mr-2 text-muted pointer"
+							data-bs-toggle="modal" data-bs-target="#reportModal">
+							<i class="fa-solid fa-land-mine-on pl-3 pr-2"></i> 신고하기
+						</div>
+					</div>
+					<div class="row">
+						<div class="col p-0">
+							<a class="btn btn-info btn-lg btn-block py-3"
+								href="/auctionara/chat" role="button"><i
+								class="fa-solid fa-comments-dollar pr-2"></i> 1:1 채팅 관리 </a>
+							<!--v-if-->
+						</div>
+						<div class="col">
+							<button type="button"
+								class="btn btn-primary btn-lg btn-block py-3"
+								data-bs-toggle="modal" data-bs-target="#cancelAuctionModal">
+								<i class="fa-solid fa-ban pr-2"></i> 경매 취소
+							</button>
+							<!--v-if-->
+							<!--v-if-->
 						</div>
 					</div>
 				</div>
 			</div>
-  <hr>
-  
-  <div class="row p-b-148">
-				<div class="col-md-7 col-lg-8">
-					<div class="p-t-7 p-r-85 p-r-15-lg p-r-0-md">
-						<h3 class="mtext-111 cl2 p-b-16">
-							경매 물품 정보
-						</h3>
-
-						<p class="stext-113 cl6 p-b-26">
+			<div class="row mt-4">
+				<div class="col-8">
+					<div class="row mb-3">
+						<h5 class="fw-bold">경매 물품 정보</h5>
+					</div>
+					<div class="row">
+						<nav aria-label="breadcrumb">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item active">물품 상태 : <span
+									class="text-primary pl-1">${avo.auction_condition }</span></li>
+							</ol>
+						</nav>
+					</div>
+					<div class="row">
+						<p class="text-muted pr-4">
 							${avo.auction_detail }
 						</p>
 					</div>
 				</div>
-
-				<div class="col-11 col-md-5 col-lg-4 m-lr-auto">
-						<h3 class="mtext-111 cl2 p-b-16">판매자 정보</h3>
+				<div class="col">
+					<div class="row ml-3 mb-3">
+						<h5 class="fw-bold">판매자 정보</h5>
+					</div>
+					<div class="row ml-3 pb-3 border-bottom">
+						<div class="col-2">
+							<img id="profile" class="rounded-circle"
+								src="/resources/image/default_attachment.jpg">
+						</div>
+						<div class="col ml-4">
+							<h6 class="row fw-bold mb-2">${avo1.user_nick }</h6>
+							<h6 class="row text-muted">${avo1.user_area } ${avo1.user_addr }</h6>
+						</div>
+					</div>
+					<div class="row ml-3 py-3 border-bottom">
+						<div class="col-4 text-muted ml-2">
+							긍정 평가 <span class="text-success fw-bold fs-large ml-3">2개</span>
+						</div>
+						<div class="col-4 text-muted ml-2">
+							부정 평가 <span class="text-primary fw-bold fs-large ml-3">0개</span>
+						</div>
+					</div>
+					<div class="row ml-3 pt-3 pb-2">
+						<div class="text-muted">가입일 : 
+						<fmt:formatDate value="${avo1.user_regdate }" pattern="yyyy-MM-dd"/></div>
+					</div>
+					<div class="row ml-3">
+						<div class="text-muted">누적 제재 : 4회</div>
+					</div>
 				</div>
 			</div>
-  </div>
-</section>
-<script type="text/javascript">
-	$(document).ready(function(){
-		var formObj = $("form[role='form']");
-		console.log(formObj);
-		
-		//수정버튼
-		$(".btn-danger").click(function(){
-			formObj.attr("action","/auction/a_modify");
-			formObj.attr("method","get");
-			formObj.submit();
-		});
-		
-		//목록버튼
-		$(".btn-success").click(function(){
-			location.href="/auction/a_list";
-		});
-	});
-</script>
-<div class="container">
-        <nav class="navbar navbar-primary bg-white sticky-top pt-3">
-            <a class="navbar-brand mb-2" href="/auctionara/">
-                <img src="/auctionara/image/logo.png" alt="logo" class="d-inline-block">
-            </a>
-            <form class="position-relative" action="/auctionara/auction/search" method="get">
-                <input class="form-control bg-light rounded-pill border-0" type="search" placeholder="찾으시는 물품의 키워드를 입력해주세요" name="keyword" autocomplete="off" value="">
-                <i class="fa-solid fa-magnifying-glass text-secondary position-absolute"></i>
-            </form>
-            <div class="d-flex">
-                <a href="/auctionara/auction/write"><button class="btn btn-primary rounded-pill"><i class="fa-solid fa-pen-to-square mx-1"></i> 경매 등록</button></a>
-                <div class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><i class="fa-solid fa-user"></i></a>
-                    <ul class="dropdown-menu ml-4">
-                    	
-                    		
-                    			<li><a class="dropdown-item" href="/auctionara/chat">채팅</a></li>
-								<li><a class="dropdown-item" href="/auctionara/mypage/index">마이페이지</a></li>
-								<li><a class="dropdown-item" href="/auctionara/member/logout">로그아웃</a></li>
-                    		
-                    		
-                    	
-                    	
-                    </ul>
-                </div>
-            </div>
-        </nav>
+			<div class="modal fade" id="modal465" tabindex="-1"
+				aria-hidden="true">
+				<div class="photo-modal-wrap">
+					<div
+						class="modal-dialog modal-dialog-centered border-0 photo-modal">
+						<div class="modal-content">
+							<img src="/auctionara/attachment/download?attachmentNo=465"
+								class="img-fluid img-thumbnail">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal fade" id="biddingModal" tabindex="-1"
+				aria-labelledby="biddingModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="biddingModalLabel">
+								<i class="fa-solid fa-gavel pr-2"></i>입찰하기
+							</h5>
+							<button type="button" class="btn-close close"
+								data-bs-dismiss="modal">
+								<span aria-hidden="true">×</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<div class="row">
+								<div class="col-10">
+									<div class="form-group pl-2">
+										<label for="inputBid"> 입찰 가격을 입력해주세요 ( 입찰 단위 : <span
+											class="comma text-primary">1,000</span> 원 )
+										</label><input type="number" class="form-control" id="inputBid"
+											autocomplete="off" max="999999900"><small
+											class="form-text text-info pl-1">일만오천원</small>
+										<div class="invalid-feedback">최고 입찰가보다 높고, 입찰 단위에 부합하는
+											금액만 가능합니다.</div>
+									</div>
+								</div>
+								<div class="col align-self-center p-0">원</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary">입찰 단위만큼
+								올리기</button>
+							<button type="button" class="btn btn-info"
+								data-bs-dismiss="modal">즉시 낙찰하기</button>
+							<button type="button" class="btn btn-primary" id="insertBid"
+								data-bs-dismiss="modal">입찰하기</button>
+							<button type="button" class="btn btn-primary d-none"
+								id="blindBid" data-bs-dismiss="modal">입찰하기</button>
+						</div>
+						<!--v-if-->
+					</div>
+				</div>
+			</div>
+			<div class="modal fade" id="failBiddingModal" aria-hidden="true"
+				aria-labelledby="failBiddingModalLable" tabindex="-1">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="failBiddingModalLable">😢 입찰 실패</h5>
+							<button type="button" class="btn-close close"
+								data-bs-dismiss="modal">
+								<span aria-hidden="true">×</span>
+							</button>
+						</div>
+						<div class="modal-body">누군가 이미 낙찰하여 경매가 종료되었습니다</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal fade" id="reportModal"
+				aria-labelledby="reportModalLable" tabindex="-1" aria-hidden="true"
+				style="display: none;">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="reportModalLable">🥺 경매 신고하기</h5>
+							<button type="button" class="btn-close close"
+								data-bs-dismiss="modal">
+								<span aria-hidden="true">×</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							경매 신고 이유를 알려주세요! <input type="text" class="form-control mt-2"
+								autocomplete="off" maxlength="100">
+							<div class="text-right mt-1">
+								<span class="text-primary">0</span> / 100
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-bs-dismiss="modal">돌아가기</button>
+							<button type="button" class="btn btn-primary"
+								data-bs-dismiss="modal" disabled="">신고하기</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal fade" id="stopAuctionModal" aria-hidden="true"
+				aria-labelledby="stopAuctionModalLable" tabindex="-1"
+				style="display: none;">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="stopAuctionModalLable">
+								<i class="fa-solid fa-ban pr-2 text-primary"></i> 경매 중지
+							</h5>
+							<button type="button" class="btn-close close"
+								data-bs-dismiss="modal">
+								<span aria-hidden="true">×</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							입찰자가 있는 경매를 중지하면 <span class="fw-bold text-primary">사이트
+								이용에 관한 불이익</span>을 받게 됩니다. <br>
+							<br> 정말 경매를 중지하시겠습니까?
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-bs-dismiss="modal">아니오</button>
+							<button type="button" class="btn btn-primary"
+								data-bs-dismiss="modal">예</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal fade" id="cancelAuctionModal"
+				aria-labelledby="cancelAuctionModalLable" tabindex="-1"
+				aria-hidden="true" style="display: none;">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="cancelAuctionModalLable">
+								<i class="fa-solid fa-ban pr-2 text-primary"></i> 경매 취소
+							</h5>
+							<button type="button" class="btn-close close"
+								data-bs-dismiss="modal">
+								<span aria-hidden="true">×</span>
+							</button>
+						</div>
+						<div class="modal-body">정말 경매를 취소하시겠습니까?</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-bs-dismiss="modal">아니오</button>
+							<button type="button" class="btn btn-primary"
+								data-bs-dismiss="modal">예</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal fade" id="failCancleModal" aria-hidden="true"
+				aria-labelledby="failCancleModalLable" tabindex="-1">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="failCancleModalLable">🥺 경매
+								취소/중지 실패</h5>
+							<button type="button" class="btn-close close"
+								data-bs-dismiss="modal">
+								<span aria-hidden="true">×</span>
+							</button>
+						</div>
+						<div class="modal-body">이미 낙찰된 경매이므로 경매를 취소하거나 중지할 수 없습니다.</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
-<script type="text/javascript">
-	$(document).ready(function(){
-		var formObj = $("form[role='form']");
-		console.log(formObj);
-		
-		//수정버튼
-		$(".btn-danger").click(function(){
-			formObj.attr("action","/auction/a_modify");
-			formObj.attr("method","get");
-			formObj.submit();
-		});
-		
-		//목록버튼
-		$(".btn-success").click(function(){
-			location.href="/auction/a_list";
-		});
-	});
-</script>
-
-
-<div class="container-fluid" id="app" data-v-app=""><div class="row pt-5"><span class="text-muted mr-3">카테고리</span><span class="text-muted mr-3">&gt;</span><a href="/auctionara/auction/category?categoryNo=7"><span class="text-muted">유아도서</span></a></div><div class="row mt-4 py-4 border-bottom border-top"><div class="col-5 p-0"><div id="carousel" class="carousel slide" data-ride="carousel" data-bs-interval="false"><ol class="carousel-indicators"><li data-bs-target="#carousel" data-bs-slide-to="0" class="active"></li></ol><div class="carousel-inner"><div class="carousel-item active"><img src="/auctionara/attachment/download?attachmentNo=465" class="d-block w-100"><!--v-if--></div></div><!--v-if--><!--v-if--></div></div><div class="col ml-5 pl-3 pr-0 d-flex flex-column"><div class="row pr-1 mb-3"><h3 class="fw-bold">야물야물 그림책 전20권 최신 개정판</h3></div><div class="row mb-3 mr-5"><div class="col-3 p-0 text-muted"><i class="fa-solid fa-gavel pr-2"></i><span id="count">0</span> 건 </div><div class="col text-muted p-0"><i class="fa-solid fa-clock pr-2"></i> 8월 30일 00:00 마감 (<span id="timer">2795일 6시간 59분 2초 후</span>) </div></div><div class="row mb-2 mr-5"><div class="col-3 p-0 d-flex align-items-end"><h5 class="fw-bold">최초 입찰가</h5><h5 id="maxBidLabel" class="fw-bold" style="display: none;">현재 최고가</h5></div><div class="col p-0"><h3 class="text-primary fw-bold"><span id="openingBid" class="comma">15,000</span> 원</h3><h3 class="text-primary fw-bold" id="blind" style="display: none;"><span id="maxBid" class="comma">0</span> 원</h3></div></div><div class="row mr-5"><div class="col-3 p-0 d-flex align-items-end"><h5 class="fw-bold">즉시 낙찰가</h5></div><div class="col p-0"><h3 class="text-info fw-bold"><span id="closingBid" class="comma">70,000</span> 원</h3></div></div><div class="row mt-3 mr-5 mb-auto pt-3 border-top" style="display: none;"><div class="col-3 p-0 d-flex align-items-end"><h5 class="fw-bold">내 입찰가</h5></div><div class="col p-0"><h3 class="text-secondary fw-bold"><span id="myBid" class="comma">0</span> 원 <span class="text-warning pl-2 align-self-center" id="topBidder" style="display: none;"><i class="fa-solid fa-crown"></i> 최고 입찰자</span></h3></div></div><div class="row mt-auto mb-3 pl-5 d-flex justify-content-end"><div id="refresh" class="col-3 text-muted p-0 pointer"><span class="pl-5"><i id="rotate" class="fa-solid fa-arrow-rotate-left"></i> 새로고침</span></div><div class="col-3 p-0 pl-2 mr-2 text-muted pointer" data-bs-toggle="modal" data-bs-target="#reportModal"><i class="fa-solid fa-land-mine-on pl-3 pr-2"></i> 신고하기 </div></div><div class="row"><div class="col p-0"><a class="btn btn-info btn-lg btn-block py-3" href="/auctionara/chat" role="button"><i class="fa-solid fa-comments-dollar pr-2"></i> 1:1 채팅 관리 </a><!--v-if--></div><div class="col"><button type="button" class="btn btn-primary btn-lg btn-block py-3" data-bs-toggle="modal" data-bs-target="#cancelAuctionModal"><i class="fa-solid fa-ban pr-2"></i> 경매 취소 </button><!--v-if--><!--v-if--></div></div></div></div><div class="row mt-4"><div class="col-8"><div class="row mb-3"><h5 class="fw-bold">경매 물품 정보</h5></div><div class="row"><nav aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item active">물품 상태 : <span class="text-primary pl-1">중하</span></li></ol></nav></div><div class="row"><pre class="text-muted pr-4">0세부터 3세까지 모두 읽을 수 있는 그림책이에요
-저희 애들도 참 좋아하더라구요
-사용감은 있어요 총 20권 입니다
-</pre></div></div><div class="col"><div class="row ml-3 mb-3"><h5 class="fw-bold">판매자 정보</h5></div><div class="row ml-3 pb-3 border-bottom"><div class="col-2"><img id="profile" class="rounded-circle" src="/auctionara/attachment/download?attachmentNo=479"></div><div class="col ml-4"><h6 class="row fw-bold mb-2">판매자</h6><h6 class="row text-muted">평일 오후 7시 ~ 오후 10시</h6></div></div><div class="row ml-3 py-3 border-bottom"><div class="col-4 text-muted ml-2">긍정 평가 <span class="text-success fw-bold fs-large ml-3">2개</span></div><div class="col-4 text-muted ml-2">부정 평가 <span class="text-primary fw-bold fs-large ml-3">0개</span></div></div><div class="row ml-3 pt-3 pb-2"><div class="text-muted">마지막 접속일 : 2023-01-03</div></div><div class="row ml-3"><div class="text-muted">누적 제재 : 4회</div></div></div></div><div class="modal fade" id="modal465" tabindex="-1" aria-hidden="true"><div class="photo-modal-wrap"><div class="modal-dialog modal-dialog-centered border-0 photo-modal"><div class="modal-content"><img src="/auctionara/attachment/download?attachmentNo=465" class="img-fluid img-thumbnail"></div></div></div></div><div class="modal fade" id="biddingModal" tabindex="-1" aria-labelledby="biddingModalLabel" aria-hidden="true"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="biddingModalLabel"><i class="fa-solid fa-gavel pr-2"></i>입찰하기</h5><button type="button" class="btn-close close" data-bs-dismiss="modal"><span aria-hidden="true">×</span></button></div><div class="modal-body"><div class="row"><div class="col-10"><div class="form-group pl-2"><label for="inputBid"> 입찰 가격을 입력해주세요 ( 입찰 단위 : <span class="comma text-primary">1,000</span> 원 )</label><input type="number" class="form-control" id="inputBid" autocomplete="off" max="999999900"><small class="form-text text-info pl-1">일만오천원</small><div class="invalid-feedback">최고 입찰가보다 높고, 입찰 단위에 부합하는 금액만 가능합니다.</div></div></div><div class="col align-self-center p-0">원</div></div></div><div class="modal-footer"><button type="button" class="btn btn-secondary">입찰 단위만큼 올리기</button><button type="button" class="btn btn-info" data-bs-dismiss="modal">즉시 낙찰하기</button><button type="button" class="btn btn-primary" id="insertBid" data-bs-dismiss="modal">입찰하기</button><button type="button" class="btn btn-primary d-none" id="blindBid" data-bs-dismiss="modal">입찰하기</button></div><!--v-if--></div></div></div><div class="modal fade" id="failBiddingModal" aria-hidden="true" aria-labelledby="failBiddingModalLable" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="failBiddingModalLable">😢 입찰 실패</h5><button type="button" class="btn-close close" data-bs-dismiss="modal"><span aria-hidden="true">×</span></button></div><div class="modal-body"> 누군가 이미 낙찰하여 경매가 종료되었습니다 </div></div></div></div><div class="modal fade" id="reportModal" aria-labelledby="reportModalLable" tabindex="-1" aria-hidden="true" style="display: none;"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="reportModalLable">🥺 경매 신고하기</h5><button type="button" class="btn-close close" data-bs-dismiss="modal"><span aria-hidden="true">×</span></button></div><div class="modal-body"> 경매 신고 이유를 알려주세요! <input type="text" class="form-control mt-2" autocomplete="off" maxlength="100"><div class="text-right mt-1"><span class="text-primary">0</span> / 100</div></div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">돌아가기</button><button type="button" class="btn btn-primary" data-bs-dismiss="modal" disabled="">신고하기</button></div></div></div></div><div class="modal fade" id="stopAuctionModal" aria-hidden="true" aria-labelledby="stopAuctionModalLable" tabindex="-1" style="display: none;"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="stopAuctionModalLable"><i class="fa-solid fa-ban pr-2 text-primary"></i> 경매 중지</h5><button type="button" class="btn-close close" data-bs-dismiss="modal"><span aria-hidden="true">×</span></button></div><div class="modal-body"> 입찰자가 있는 경매를 중지하면 <span class="fw-bold text-primary">사이트 이용에 관한 불이익</span>을 받게 됩니다. <br><br> 정말 경매를 중지하시겠습니까? </div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">아니오</button><button type="button" class="btn btn-primary" data-bs-dismiss="modal">예</button></div></div></div></div><div class="modal fade" id="cancelAuctionModal" aria-labelledby="cancelAuctionModalLable" tabindex="-1" aria-hidden="true" style="display: none;"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="cancelAuctionModalLable"><i class="fa-solid fa-ban pr-2 text-primary"></i> 경매 취소</h5><button type="button" class="btn-close close" data-bs-dismiss="modal"><span aria-hidden="true">×</span></button></div><div class="modal-body"> 정말 경매를 취소하시겠습니까? </div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">아니오</button><button type="button" class="btn btn-primary" data-bs-dismiss="modal">예</button></div></div></div></div><div class="modal fade" id="failCancleModal" aria-hidden="true" aria-labelledby="failCancleModalLable" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="failCancleModalLable">🥺 경매 취소/중지 실패</h5><button type="button" class="btn-close close" data-bs-dismiss="modal"><span aria-hidden="true">×</span></button></div><div class="modal-body"> 이미 낙찰된 경매이므로 경매를 취소하거나 중지할 수 없습니다. </div></div></div></div></div>
-
-<script src="https://unpkg.com/vue@next"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
-<script>
+		<script src="https://unpkg.com/vue@next"></script>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+		<script>
     const app = Vue.createApp({
         data() {
             return {
@@ -286,7 +534,7 @@
             	document.getElementById("rotate").classList.add("rotate");
             }, 500), 
             bidding() {
-            	axios.get("/auctionara/auction/detail/refresh", {
+            	axios.get("/Panda/auction/a_read/refresh", {
             		params: {
                 		bidderNo : 114,
                 		auctionNo : this.auctionNo,
@@ -558,71 +806,72 @@
     });
     app.mount("#app");
 </script>
-<style scoped="">
-    .carousel-item img {
-        object-fit: cover;
-        height: 26em;
-        border-radius: 1rem;
-    }
+		<style scoped="">
+.carousel-item img {
+	object-fit: cover;
+	height: 26em;
+	border-radius: 1rem;
+}
 
-    .carousel-item {
-        transition: transform .1s ease;
-    }
+.carousel-item {
+	transition: transform .1s ease;
+}
 
-    .carousel-caption {
-        right: 5%;
-        bottom: 0;
-        text-align: right;
-    }
+.carousel-caption {
+	right: 5%;
+	bottom: 0;
+	text-align: right;
+}
 
-    .text-warning {
-    	font-size: 0.5em;
-    	vertical-align: middle;
-    }
-    
-    @keyframes rotate {
-	  from {
-	    transform: rotate(0deg);
-	  }
-	  to {
-	    transform: rotate(360deg);
-	  }
-	}
+.text-warning {
+	font-size: 0.5em;
+	vertical-align: middle;
+}
+
+@
+keyframes rotate {from { transform:rotate(0deg);
 	
-	.rotate {
-		animation: rotate 0.5s ease-out;
-	}
-	
-	.modal.fade .modal-dialog {
-		transition: transform .1s ease-out;
-	}
-	
-	.photo-modal-wrap {
- 		width: fit-content;
- 		height: 100%;
-    	margin: 0 auto;
-    	max-width: 70%; 
-	}
-	
-	.photo-modal {
- 		width: 100%; 
- 		max-width: 100%;
-	}
-	
-	#profile {
-    	object-fit: cover;
-    	width: 50px;
-        height: 50px; 	
-	}
-	
+}
+
+to {
+	transform: rotate(360deg);
+}
+
+}
+.rotate {
+	animation: rotate 0.5s ease-out;
+}
+
+.modal.fade .modal-dialog {
+	transition: transform .1s ease-out;
+}
+
+.photo-modal-wrap {
+	width: fit-content;
+	height: 100%;
+	margin: 0 auto;
+	max-width: 70%;
+}
+
+.photo-modal {
+	width: 100%;
+	max-width: 100%;
+}
+
+#profile {
+	object-fit: cover;
+	width: 50px;
+	height: 50px;
+}
 </style>
 
 
 
 
 
-</div>
-	<!--   푸터 -->
-	<%@ include file="../include/footer.jsp"%>
+	</div>
+<br><br><br><br><br><br>
+<!--   푸터 -->
+<%@ include file="../include/footer.jsp"%>
 </body>
 </html>

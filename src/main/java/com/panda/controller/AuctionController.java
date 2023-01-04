@@ -69,11 +69,15 @@ public class AuctionController {
    }
    
    
-    // http://localhost:8080/auction/a_read?auction_no=1
+    // http://localhost:8080/auction/a_read?auction_no=1&user_no=1
 	// 기부경매 상품 상세페이지
 	@GetMapping(value = "/a_read")
-	public void a_readGET(@RequestParam("auction_no") int auction_no, HttpSession session, Model model) throws Exception{
+	public void a_readGET(@RequestParam("auction_no") int auction_no, 
+						  @RequestParam("user_no") int user_no, 
+						  HttpSession session, Model model) throws Exception{
+		
 		mylog.debug("전달정보 : " + auction_no);
+		mylog.debug("전달정보 : " + user_no);
 		
 		// 세션객체
 		boolean isUpdateCheck = (boolean) session.getAttribute("updateCheck");
@@ -88,10 +92,13 @@ public class AuctionController {
 		
 		// 서비스 -> DAO (특정 글번호에 해당하는 정보 가져오기)
 		AuctionVO avo = service.getAuction(auction_no);
+		AuctionVO avo1 = service.getUser(user_no);
 		
 		// 연결된 뷰페이지로 정보 전달
 		model.addAttribute("avo", avo);
+		model.addAttribute("avo1", avo1);
 	}   
+	
 	
 	// http://localhost:8080/auction/a_modify?auction_no=1
 	// 수정 GET

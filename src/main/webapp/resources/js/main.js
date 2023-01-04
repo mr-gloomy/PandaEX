@@ -347,42 +347,42 @@
       });
       $('.modal-body').css("height", "500px");
    });
-	/* 채팅봇 */
-	var bot = $('.chat-bot');
-	$(bot).on('click', function() {
-		ht.open();
-	});
-	/* 로그인 모달창 제어 */
-	$('.usermodal').click(function() {
-		$('html').css({
-			'overflow' : 'hidden'
-		});
-		$(".login-modal").css("display", "flex");
-		$(".back-joinpage").hide();
-		$(".modal-join").hide();
-		$('.modal-text').fadeIn();
-		$('.login-submit').fadeIn();
-		$('.find').fadeIn();
-		$('.join').fadeIn();
-		$('.social-login').fadeIn();
-		$('.kakaologin').fadeIn();
-		$('.modal-top').text("PANDA LOGIN");
-		$('.modal-body').css("height", "500px");
-		$('.modal-findid').fadeOut();
-		$('.modal-findpw').fadeOut();
-		event.preventDefault();
-		event.stopPropagation();
-		return false;
-		
-	});
-	$('.modalhide').on('click', function() {
-		$('.login-modal').css("display", "none");
-		$('#element').off('scroll touchmove mousewheel');
-		$('html').css({
-			'overflow' : 'visible'
-		});
-		$('.modal-body').css("height", "500px");
-	});
+   /* 채팅봇 */
+   var bot = $('.chat-bot');
+   $(bot).on('click', function() {
+      ht.open();
+   });
+   /* 로그인 모달창 제어 */
+   $('.usermodal').click(function() {
+      $('html').css({
+         'overflow' : 'hidden'
+      });
+      $(".login-modal").css("display", "flex");
+      $(".back-joinpage").hide();
+      $(".modal-join").hide();
+      $('.modal-text').fadeIn();
+      $('.login-submit').fadeIn();
+      $('.find').fadeIn();
+      $('.join').fadeIn();
+      $('.social-login').fadeIn();
+      $('.kakaologin').fadeIn();
+      $('.modal-top').text("PANDA LOGIN");
+      $('.modal-body').css("height", "500px");
+      $('.modal-findid').fadeOut();
+      $('.modal-findpw').fadeOut();
+      event.preventDefault();
+      event.stopPropagation();
+      return false;
+      
+   });
+   $('.modalhide').on('click', function() {
+      $('.login-modal').css("display", "none");
+      $('#element').off('scroll touchmove mousewheel');
+      $('html').css({
+         'overflow' : 'visible'
+      });
+      $('.modal-body').css("height", "500px");
+   });
 
 })(jQuery);
 /* 로그인창 캡스락 알림 */

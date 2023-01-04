@@ -18,7 +18,8 @@ public interface AuctionDAO {
 	// 경매번호 정보 조회
 	public AuctionVO getAuction(Integer auction_no) throws Exception;
 	
-	
+	// 사용자 정보 조회
+	public AuctionVO getUser(Integer user_no) throws Exception;
 	
 	
 }
