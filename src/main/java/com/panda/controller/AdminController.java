@@ -86,6 +86,7 @@ public class AdminController {
 		pvo.setTotalCount(service.totalCnt()); // 작성되어있는 글 전체 개수
 		
 		
+		model.addAttribute("pvo", pvo);
 		model.addAttribute("boardList", boardList);
 		
 		}
