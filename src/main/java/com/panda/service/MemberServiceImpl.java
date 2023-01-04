@@ -13,12 +13,16 @@ import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.panda.domain.MemberVO;
+import com.panda.mail.MailHandler;
+import com.panda.mail.TempKey;
 import com.panda.persistence.MemberDAO;
 
 @Service
@@ -30,10 +34,33 @@ public class MemberServiceImpl implements MemberService {
 	@Inject
 	private MemberDAO dao;
 
+	@Autowired
+    JavaMailSender mailSender;
+	
 	//횐갑
 	@Override
 	public void insert(MemberVO vo) throws Exception {
-			dao.insert(vo);
+			 //랜덤 문자열을 생성해서 mail_key 컬럼에 넣어주기
+	        String mail_key = new TempKey().getKey(30,false); //랜덤키 길이 설정
+	        vo.setMail_key(mail_key);
+
+	        //회원가입
+	        dao.insert(vo);
+	        dao.updateMailKey(vo);
+
+	        //회원가입 완료하면 인증을 위한 이메일 발송
+	        MailHandler sendMail = new MailHandler(mailSender);
+	        sendMail.setSubject("[PANDA 인증메일 입니다.]"); //메일제목
+	        sendMail.setText(
+	                "<h1>PANDA 메일인증</h1>" +
+	                "<br>PANDA에 오신것을 환영합니다!" +
+	                "<br>아래 [이메일 인증 확인]을 눌러주세요." +
+	                "<br><a href='http://localhost:8080/member/registerEmail?email=" + vo.getUser_email() +
+	                "&mail_key=" + mail_key +
+	                "' target='_blank'>이메일 인증 확인</a>");
+	        sendMail.setFrom("leweeewel@gmail.com", "Panda 판다");
+	        sendMail.setTo(vo.getUser_email());
+	        sendMail.send();
 	}
 
 	//로긴
@@ -149,10 +176,11 @@ public class MemberServiceImpl implements MemberService {
 
 			JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
 			JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
-
+			String email="";
 			String nickname = properties.getAsJsonObject().get("nickname").getAsString();
-			String email = kakao_account.getAsJsonObject().get("email").getAsString();
-
+			if (kakao_account.getAsJsonObject().get("email")!=null) {
+				email = kakao_account.getAsJsonObject().get("email").getAsString();
+			}
 			userInfo.put("nickname", nickname);
 			userInfo.put("email", email);
 
@@ -177,8 +205,21 @@ public class MemberServiceImpl implements MemberService {
 				}
 	}
 	
-	
-	
+	//이메일인증..
+	@Override
+	public int updateMailKey(MemberVO vo) throws Exception {
+	    return dao.updateMailKey(vo);
+	}
+
+	@Override
+	public int updateMailAuth(MemberVO vo) throws Exception {
+	    return dao.updateMailAuth(vo);
+	}
+
+	@Override
+	public int emailAuthFail(String id) throws Exception {
+	    return dao.emailAuthFail(id);
+	}
 	
 
 
