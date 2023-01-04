@@ -19,8 +19,8 @@ import org.springframework.stereotype.Service;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.panda.domain.KakaoVO;
 import com.panda.domain.MemberVO;
-import com.panda.persistence.KakaoVO;
 import com.panda.persistence.MemberDAO;
 
 @Service

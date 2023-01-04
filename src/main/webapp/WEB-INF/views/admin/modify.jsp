@@ -39,7 +39,7 @@
 			</div>
 			<div class="form-group">
 				<label>작성자</label> <input type="text" class="form-control"
-					placeholder="Enter ..." value=${cvo.writer } readonly name="writer">
+					placeholder="Enter ..." value=${cvo.writer } name="writer" readonly>
 			</div>
 
 			<div class="form-group">

@@ -5,9 +5,9 @@
 <mapper namespace="com.panda.mapper.BoardMapper">
 	<!-- 글쓰기 -->
 	<insert id="createBoard">
-		insert into board(title,content,writer)
+		insert into board(category,title,content,writer)
 		values
-		(#{title},#{content},#{writer})
+		(#{category},#{title},#{content},#{writer})
 	</insert>
 
 	<!-- 글 목록 전체 -->

@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.panda.domain.KakaoVO;
 import com.panda.domain.MemberVO;
-import com.panda.persistence.KakaoVO;
 import com.panda.service.MemberService;
 
 @Controller

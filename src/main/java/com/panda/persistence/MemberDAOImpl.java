@@ -54,7 +54,7 @@ public class MemberDAOImpl implements MemberDAO{
 
 		// 정보 확인
 		public HashMap<String, Object> findkakao(HashMap<String, Object> userInfo)throws Exception {
-			mylog.info("dddddddddddddddddddddddddddd"+sqlSession.selectOne(NAMESPACE+".findKakao", userInfo).toString());
+//			mylog.info("dddddddddddddddddddddddddddd"+sqlSession.selectOne(NAMESPACE+".findKakao", userInfo).toString());
 			return sqlSession.selectOne(NAMESPACE+".findKakao", userInfo);
 		}
 

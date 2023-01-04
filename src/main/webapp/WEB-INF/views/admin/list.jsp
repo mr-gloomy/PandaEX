@@ -5,8 +5,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script
-	src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js">
+	
 </script>
 <meta charset="UTF-8">
 <title>관리자 페이지</title>
@@ -28,18 +28,20 @@
 
 	<div class="flex-w flex-sb-m p-b-52">
 		<div class="flex-w flex-l-m filter-tope-group m-tb-10">
+
+
 			<button
 				class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1"
-				id="btnA">전체</button>
+				name="button" value="all">전체</button>
 
 			<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
-				id="btnN">공지사항</button>
+				name="button" value="notice">공지사항</button>
 
 			<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
-				id="btnE">이벤트</button>
+				name="button" value="event">이벤트</button>
 
 			<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
-				id="btnD">기부문의</button>
+				name="button" value="donate">기부문의</button>
 
 		</div>
 
@@ -231,7 +233,7 @@
 									<th class="sorting_asc" tabindex="0" aria-controls="example1"
 										rowspan="1" colspan="1" aria-sort="ascending"
 										aria-label="Rendering engine: activate to sort column descending"
-										style="width: 297.469px;"></th>
+										style="width: 297.469px;">글 종류</th>
 									<th class="sorting" tabindex="0" aria-controls="example1"
 										rowspan="1" colspan="1"
 										aria-label="Browser: activate to sort column ascending"
@@ -253,7 +255,13 @@
 							<tbody>
 								<c:forEach var="vo" items="${boardList }" step="1">
 									<tr role="row" class="odd">
-										<td class="sorting_1">${vo.bno }</td>
+										<td class="sorting_1">
+										<c:choose>
+											<c:when test="${vo.category.equals('notice') }">공지사항</c:when>
+											<c:when test="${vo.category.equals('event') }">이벤트</c:when>
+											<c:when test="${vo.category.equals('donate') }">기부문의</c:when>
+										</c:choose>
+										</td>
 										<td><a href="/admin/content?bno=${vo.bno }">${vo.title }</a></td>
 										<td>${vo.writer }</td>
 										<td><fmt:formatDate value="${vo.regdate }" type="date" /></td>
@@ -330,8 +338,9 @@
 
 	<!-- 푸터 -->
 	<jsp:include page="../include/footer.jsp" />
-
-	<script type="text/javascript">
+<script
+	src="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.16/dist/sweetalert2.all.min.js"></script>
+<script type="text/javascript">
 		// alert('${result}'); => EL표현식 -> JS사용 값전달 가능 (DB데이터 사용가능) 
 		// ajax호출시 (DB데이터 전달 가능)
 
@@ -339,32 +348,55 @@
 
 		if (result == 'registOK') {
 
-			alert("글쓰기 완료! ");
+			Swal.fire(
+					  '글 쓰기 성공',
+					  '좋은 글이네용',
+					  'success'
+					)
 
 		} else if (result == 'modOK') {
-
-			alert("글 수정 완료! ");
+			
+			Swal.fire(
+					  '글 수정 성공',
+					  '수정하길 잘했어용',
+					  'success'
+					)
+			
 
 		} else if (result == 'remOK') {
 
-			alert("글 삭제 완료! ");
+			Swal.fire(
+					  '글 삭제 성공',
+					  '삭제할만하긴 했어용',
+					  'success'
+					)
 
 		}
-	</script>
-	
-	<script type="text/javascript">
-		$(document).ready(function(){
-			$("#btnA").click(function(){
+</script>
+
+<script type="text/javascript">
+		$(document).ready(function() {
+			$('button[name=button]').on('click', function() {
 				$.ajax({
-					type:"GET",
-					url:"/admin/list?cate=",
+					type:"post",
+					url:"/admin/list",
+					contentType:"application/json",
+					data:JSON.stringify(board),
+					success:function(data){
+						alert('성공');
+						console.log(data);
+						
+						
+					},error:function(data){
+						alert('에러');
+						console.log(data);
+					}
+					
 				});
 				
 			});
-			
-			
+
 		});
-	
 	</script>
 
 

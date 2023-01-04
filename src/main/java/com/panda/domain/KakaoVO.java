@@ -1,4 +1,4 @@
-package com.panda.persistence;
+package com.panda.domain;
 
 import lombok.Data;
 
