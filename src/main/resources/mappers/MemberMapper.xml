@@ -23,7 +23,7 @@
 	
 	
  	<select id="getMemberList" resultType="MemberVO">
- 	 select * from tbl_member 
+ 	 select * from user
  	 where user_id != #{user_id} 	
  	</select>
  	
