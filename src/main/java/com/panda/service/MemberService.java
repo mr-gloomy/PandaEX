@@ -11,8 +11,8 @@ import java.util.HashMap;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import com.panda.domain.KakaoVO;
 import com.panda.domain.MemberVO;
-import com.panda.persistence.KakaoVO;
 
 
 public interface MemberService {
@@ -30,7 +30,7 @@ public interface MemberService {
 		//회원조회
 		public MemberVO getMember(String user_id) throws Exception;
 
-		public KakaoVO getUserInfo(String access_Token)throws Exception;
+		public HashMap<String,Object> getUserInfo(String access_Token)throws Exception;
 
 	
 		

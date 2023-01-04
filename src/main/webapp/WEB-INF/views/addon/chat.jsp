@@ -45,12 +45,14 @@
 			
 				// 정의된 CMD 코드에 따라서 분기 처리
 				if(msgData.cmd == 'CMD_MSG_SEND') {	
+					var msg_time = new Date(msgData.msg_date);
+					var time_hour = (msg_time.getHours()>12)?"오후 "+(msg_time.getHours()-12):"오전 "+msg_time.getHours();
 					if(msgData.send_id != cur_session) {
-						$('#divChatData').append("<div class='direct-chat-msg'><div class='direct-chat-info clearfix'><span class='direct-chat-name pull-left'>"+msgData.sell_id+"</span><span class='direct-chat-timestamp pull-right'>23 Jan 2:00 pm</span></div><div class='direct-chat-text'>"+msgData.msg+"</div></div>");
+						$('#divChatData').append("<div class='direct-chat-msg'><div class='direct-chat-info clearfix'><span class='direct-chat-name pull-left'>"+msgData.sell_id+"</span><span class='direct-chat-timestamp pull-right'>"+time_hour+" : "+msg_time.getMinutes()+"</span></div><div class='direct-chat-text'>"+msgData.msg+"</div></div>");
 // 						$('#divChatData').scrollTop($('#divChatData')[0].scrollHeight);
 					}
 					else {
-						$('#divChatData').append("<div class='direct-chat-msg right'><div class='direct-chat-info clearfix'><span class='direct-chat-name pull-right'>"+msgData.send_id+"</span><span class='direct-chat-timestamp pull-left'>23 Jan 2:05 pm</span></div><img class='direct-chat-img' src='../dist/img/user3-128x128.jpg' alt='Message User Image'><div class='direct-chat-text'>"+msgData.msg+"</div></div>");
+						$('#divChatData').append("<div class='direct-chat-msg right'><div class='direct-chat-info clearfix'><span class='direct-chat-name pull-right'>"+msgData.send_id+"</span><span class='direct-chat-timestamp pull-left'>"+time_hour+" : "+msg_time.getMinutes()+"</span></div><img class='direct-chat-img' src='../dist/img/user3-128x128.jpg' alt='Message User Image'><div class='direct-chat-text'>"+msgData.msg+"</div></div>");
 // 						$('#divChatData').scrollTop($('#divChatData')[0].scrollHeight);
 					}
 				}

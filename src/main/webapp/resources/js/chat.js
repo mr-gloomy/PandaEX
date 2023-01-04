@@ -75,7 +75,7 @@ $(function(){
 				$(".chat-position").empty();
 				$(data).each(function(index,item) {
 					var dataD = item.msg_date;
-					var date = 
+					/*var date = 
 						function timeForToday(dataD) {
 				        const today = new Date();
 				        const timeValue = new Date(dataD);
@@ -97,7 +97,7 @@ $(function(){
 				        }
 
 				        return `${Math.floor(betweenTimeDay / 365)}년전`;
-				 }	
+				 }	*/
 						
 						
 					var msg = JSON.parse(item.message);
@@ -109,7 +109,7 @@ $(function(){
 								+"<img class='opponent-img src='/resources/images/icons/man.png'></c:when><c:when test='${oppenent != '' }'>"
 								+"<img class='opponent-img' src='${oppenent }'></c:when></c:choose><div class='nameandtext'><div class='oppname'>"+item.receive_id+"</div>"						
 								+"<div class='text'>"+msg.msg+"</div><div class='timeposition'>"
-								+"<div class='lasttime'>"+date+"</div></div></div></div></a>");
+								+"<div class='lasttime'></div></div></div></div></a>");
 				});
 			}
 		});

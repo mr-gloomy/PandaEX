@@ -13,14 +13,12 @@ import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.panda.domain.MemberVO;
-import com.panda.persistence.KakaoVO;
 import com.panda.persistence.MemberDAO;
 
 @Service
@@ -82,7 +80,7 @@ public class MemberServiceImpl implements MemberService {
 			sb.append("grant_type=authorization_code");
         
 			sb.append("&client_id=d2adbec5b44fdcc0559d1e3ca898739e"); //본인이 발급받은 key
-			sb.append("&redirect_uri=http://localhost:8080/main/index"); // 본인이 설정한 주소
+			sb.append("&redirect_uri=http://localhost:8080/member/kakaoLogin"); // 본인이 설정한 주소
             
 			sb.append("&code=" + authorize_code);
 			bw.write(sb.toString());
@@ -121,7 +119,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public KakaoVO getUserInfo(String access_Token)throws Exception {
+	public HashMap<String, Object> getUserInfo(String access_Token)throws Exception {
 		// 요청하는 클라이언트마다 가진 정보가 다를 수 있기에 HashMap타입으로 선언
 		HashMap<String, Object> userInfo = new HashMap<String, Object>();
 		String reqURL = "https://kapi.kakao.com/v2/user/me";
@@ -161,8 +159,9 @@ public class MemberServiceImpl implements MemberService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		// catch 아래 코드 추가.
-				KakaoVO result = dao.findkakao(userInfo);
+//		 catch 아래 코드 추가.
+		HashMap<String, Object> result = dao.findkakao(userInfo);
+				mylog.info("ddddddddddddddd"+result);
 				// 위 코드는 먼저 정보가 저장되있는지 확인하는 코드.
 				System.out.println("S:" + result);
 				if(result==null) {
