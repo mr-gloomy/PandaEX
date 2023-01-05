@@ -9,10 +9,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>views/account/deposit.jsp</h1>
-	<h3>입금 API </h3>
+	<h1>views/account/withdraw.jsp</h1>
+	<h3>출금 API </h3>
 	
-	${depositOK }
+	${withdrawOK }
 	
 	
 	

@@ -19,7 +19,7 @@ public class DepositRequestVO {
 	private String req_cnt; //입금요청건수 1
 	private List req_list; //입금요청목록
 	
-	private String tran_no; //거래순ㄹ번 1
+	private String tran_no; //거래순번 1
 	private String bank_tran_id; //은행거래고유번호
 	private String fintech_use_num; //핀테크이용번호
 	private String print_content; //입금계좌인자내역

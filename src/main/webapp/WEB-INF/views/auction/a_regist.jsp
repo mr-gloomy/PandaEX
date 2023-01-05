@@ -17,15 +17,22 @@
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <!-- JS -->
 <script>
-	$("#searchKeyword").keyup(function(e) {
-	    console.log("키업!");
-		var content = $(this).val();
-		$("#textLengthCheck").val("(" + content.length + "/ 30)"); //실시간 글자수 카운팅
-		if (content.length > 30) {
-			alert("최대 30자까지 입력 가능합니다.");
-			$(this).val(content.substring(0, 30));
-			$('#textLengthCheck').html("(30 / 최대 30자)");
-		}
+	$(document).ready(function(){
+		$("#searchKeyword").keyup(function(e) {
+			//alert("@@@@@@@@@@@@@@@@@@@@");
+		    console.log("키업!");
+			var content = $(this).val();
+			$("#textLengthCheck").val("(" + content.length + "/ 30)"); //실시간 글자수 카운팅
+			if (content.length > 30) {
+				alert("최대 30자까지 입력 가능합니다.");
+				$(this).val(content.substring(0, 30));
+				$('#textLengthCheck').html("(30 / 최대 30자)");
+			}
+		});
+		
+		$("#resetB").click(function() {
+			$(".note-editable").empty();
+		});
 	});
 </script>
 
@@ -139,12 +146,12 @@
 								<input type="text" class="form-control" id="searchKeyword" name="auction_title" placeholder="상품명을 입력해주세요" maxlength="30" />
 								<div class="text-right mt-1">
 									<span class="text-success">
-										<input type="text" id="textLengthCheck">
-									</span> / 30
+										<input type="text" id="textLengthCheck" style="display: inline-block; text-align: right;">
+									</span>
 								</div>
 							</div>
 						</div>
-						<div class="row py-4 border-bottom">
+						<div class="row py-4 border-bottom" style="margin-top:-30px;">
 							<div class="col-sm-2">
 								<label class="form-label">가격</label>
 							</div>
@@ -160,7 +167,7 @@
 							<div class="col-sm">
 								<textarea id="summernote" name="auction_detail" rows="5" maxlength="1000"></textarea>
 								<div class="text-right mt-1">
-									<span class="text-success">{{ detailCount }}</span> / 1000
+									<span class="text-success"></span>
 								</div>
 								<script>
 								 $('#summernote').summernote({
@@ -181,7 +188,7 @@
 						</div>
 						<div class="G_btn" align="center">
 							<button type="submit" class="btn btn-success py-2 px-3">작성완료</button>
-							<button type="reset" class="btn btn-success py-2 px-3">초기화</button>
+							<button type="reset" class="btn btn-success py-2 px-3" id="resetB">초기화</button>
 							<button onclick="href='/auction/a_list';" class="btn btn-success py-2 px-3">목록이동</button>
 						</div>
 					</div>
