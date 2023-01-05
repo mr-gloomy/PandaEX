@@ -15,7 +15,13 @@
  	  where user_id = #{user_id} 
  	</select>
 	
-	
+	<select id="getNick" resultType="MemberVO">
+ 	  select * from user
+ 	  where user_nick = #{user_nick} 
+ 	</select>
+ 	
+ 	
+ 	
 	<select id="login" resultType="MemberVO">
 		select * from user
 		where user_id=#{user_id} and user_pw=#{user_pw}	

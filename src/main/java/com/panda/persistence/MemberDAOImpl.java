@@ -46,7 +46,17 @@ public class MemberDAOImpl implements MemberDAO{
 		
 		return vo;
 	}
-	// 정보 저장
+	
+	
+	@Override
+	public MemberVO getNick(String user_nick) throws Exception {
+		MemberVO vo = sqlSession.selectOne(NAMESPACE + ".getNick",user_nick);
+		mylog.debug("nickname");
+		
+		return vo;
+	}
+
+		// 정보 저장
 		public void kakaoinsert(HashMap<String, Object> userInfo)throws Exception {
 			mylog.info(userInfo.toString());
 			sqlSession.insert(NAMESPACE+".kakaoInsert",userInfo);

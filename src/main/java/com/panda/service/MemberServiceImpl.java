@@ -87,6 +87,13 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	
+	
+	@Override
+	public MemberVO getNick(String user_nick) throws Exception {
+		
+		return dao.getNick(user_nick);
+	}
+
 	@Override
 	public String getAccessToken (String authorize_code)throws Exception {
 		String access_Token = "";

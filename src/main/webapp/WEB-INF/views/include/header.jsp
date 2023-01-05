@@ -9,7 +9,7 @@
 <header>
 
 
-<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js"></script>
 <jsp:include page="../addon/chatList.jsp"/>
 <script src="/resources/js/main.js"></script>
 <script src="/resources/js/chat.js"></script>
@@ -184,7 +184,6 @@
 								</div>
 								<div class="user-logout">
 									<input type="button" onclick="location.href='/member/logout';" value="로그아웃">
-<!-- 									<input type="button" onclick="location.href='/member/logout';" class="logout" value="로그아웃"> -->
 									
 								</div>
 							</c:if>
@@ -281,6 +280,7 @@
 
 
 </head>
+
 <!-- sweet alert  -->
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
  
@@ -363,8 +363,9 @@
 		<form action="/member/insert" method="post">
 			<div class="join-text">
 				<input id="user-id-join" type="text" placeholder="아이디" maxlength="10" autocomplete="on" name="user_id" required>
-				<div id="tooltip" class="idtooltip">아이디는 영어,숫자 5~10글자, 한글,특수문자 사용불가</div>
-				<button> 중복체크</button>
+<!-- 				<div id="tooltip" class="idtooltip">아이디는 영어,숫자 5~10글자, 한글,특수문자 사용불가</div> -->
+				<br>
+				 <div id="userIDdiv"></div>
 				
 				
 				<input id="user-pw-join" type="password" placeholder="비밀번호"maxlength="15"
@@ -384,6 +385,8 @@
 				<div id="tooltip" class="nametooltip">본명을 입력해주세요</div>
 				<input id="user-nick-join" type="text" placeholder="닉네임" maxlength="10" autocomplete="off" name="user_nick" required>
 				<div id="tooltip" class="nicktooltip" >사용하실 닉네임을 입력해주세요.</div>
+				<div id="userNickdiv"></div>
+				
 				<div class="tellsel">
 					<div id="tel">
 						<input class="select" type="text" value="통신사" readonly tabindex="-1"> <img
@@ -400,9 +403,9 @@
 				<br>
 				
 				<div id="telephone-certification">
-					<input type="hidden" class="sucess-certification" value="" memo="인증완료 시 밸류값저장(0/1)" tabindex="-1">
+<!-- 					<input type="hidden" class="sucess-certification" value="" memo="인증완료 시 밸류값저장(0/1)" tabindex="-1"> -->
 					<input type="email"
-						placeholder="이메일 주소!" name="user_email" required> 
+						placeholder="ex) abc@panda.com" name="user_email" required> 
 						
 				</div>
 				<div class="mylocation">우리동네 조회하기</div>
@@ -425,6 +428,10 @@
 			</form>
 		</div>	
 		
+		
+     
+     
+		<!-- 아이디 비번  찾기-->
      
 		<div class="modal-findid">
 			<div class="findid-input">
@@ -446,4 +453,67 @@
 </div>
 
 
-<!-- 만들다 뒤질거같다. -->
+
+<script type="text/javascript">
+        $(document).ready(function(){
+        	
+        	$("#user-id-join").keyup(function(){
+        		if(5>$("#user-id-join").val().length || $("#user-id-join").val().length > 10){
+	        		// 문제 있을때
+	        		$("#userIDdiv").html("<font color='red'> 영어,숫자 5~10글자, 한글,특수문자 사용불가 </font>");
+        		}else{
+	        		// 문제 없을때(5~10자리 일때)
+	        		// 해당 아이디 정보가,디비에 있는지 체크
+	        		// GET 방식 - /members/ckID + 데이터
+	        		$.ajax({
+	        			type:"GET",
+	        			url:"/members/ckID",
+	        			data:{user_id:$("#user-id-join").val()},
+	        			success:function(data){
+	        				//alert("성공");
+	        				console.log(data);
+	        				if(data == "OK"){
+	        	        		$("#userIDdiv").html("<font color='blue'> 정상적인 아이디 사용입니다 </font>");
+	        				}else{
+	        	        		$("#userIDdiv").html("<font color='green'> 이미 사용중인 아이디입니다 </font>");
+
+	        				}
+	        			}
+	        		});
+	        		
+	        		$("#userIDdiv").html("<font color='blue'> 정상적인 아이디 사용입니다 </font>");
+        		}
+        		
+        	});
+        	
+        	$("#user-nick-join").keyup(function(){
+        		if(2>$("#user-nick-join").val().length || $("#user-nick-join").val().length > 10){
+	        		// 문제 있을때
+	        		$("#userNickdiv").html("<font color='red'> 닉네임은 2~10글자 입력.. </font>");
+        		}else{
+	        		// 문제 없을때(5~10자리 일때)
+	        		// 해당 아이디 정보가,디비에 있는지 체크
+	        		// GET 방식 - /members/ckID + 데이터
+	        		$.ajax({
+	        			type:"GET",
+	        			url:"/members/ckNick",
+	        			data:{user_nick:$("#user-nick-join").val()},
+	        			success:function(data){
+	        				//alert("성공");
+	        				console.log(data);
+	        				if(data == "OK"){
+	        	        		$("#userNickdiv").html("<font color='blue'> 정상적인 닉네임 사용입니다 </font>");
+	        				}else{
+	        	        		$("#userNickdiv").html("<font color='green'> 이미 사용중인 닉네임입니다 </font>");
+
+	        				}
+	        			}
+	        		});
+	        		
+	        		$("#userNickdiv").html("<font color='blue'> 정상적인 닉네임 사용입니다 </font>");
+        		}
+        		
+        	});
+        	
+        });    
+     </script>
