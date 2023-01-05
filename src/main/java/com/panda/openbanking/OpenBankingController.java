@@ -18,8 +18,12 @@ import com.panda.openbanking.domain.AccountSearchRequestVO;
 import com.panda.openbanking.domain.AccountSearchResponseVO;
 import com.panda.openbanking.domain.DepositRequestVO;
 import com.panda.openbanking.domain.DepositResponseVO;
+import com.panda.openbanking.domain.DepositVO;
 import com.panda.openbanking.domain.RequestTokenVO;
 import com.panda.openbanking.domain.ResponseTokenVO;
+import com.panda.openbanking.domain.ResultRequestVO;
+import com.panda.openbanking.domain.ResultResponseVO;
+import com.panda.openbanking.domain.ResultVO;
 import com.panda.openbanking.domain.UserInfoRequestVO;
 import com.panda.openbanking.domain.UserInfoResponseVO;
 import com.panda.openbanking.domain.WithdrawRequestVO;
@@ -96,38 +100,67 @@ public class OpenBankingController {
 		
 		// 출금이체
 		@RequestMapping(value = "/withdraw", method = RequestMethod.POST)
-		public String getWithdraw(WithdrawRequestVO withdrawRequestVO, Model model)
-				throws IOException {
+		public String getWithdraw(WithdrawRequestVO withdrawRequestVO, Model model,ResultRequestVO resultRequestVO, ResultVO resultVO)
+				throws Exception {
 			// Service 객체의 findAccount() 메서드를 호출하여 사용자 정보 조회
 			// => 파라미터 : AccountSearchRequestVO, 리턴타입 AccountSearchResponseVO
 			// AccountSearchResponseVO accountList =
 			// openBankingService.findAccount(accountSearchRequestVO);
 			System.out.println(withdrawRequestVO + "@@@@@@@@@@@@@@@@@@@@@@@@");
 			WithdrawResponseVO withdrawOK = openBankingService.getwithdraw(withdrawRequestVO);
+			
+			resultRequestVO.setAccess_token(withdrawRequestVO.getAccess_token());
+			resultRequestVO.setCheck_type("1");
+			resultRequestVO.setTran_dtime("20230106023000");
+			resultRequestVO.setReq_cnt("1");
+
+			resultVO.setTran_no("1");
+			resultVO.setOrg_bank_tran_id(withdrawRequestVO.getBank_tran_id());
+			resultVO.setOrg_bank_tran_date(withdrawRequestVO.getTran_dtime());
+			resultVO.setOrg_tran_amt(withdrawRequestVO.getTran_amt());
+			
+			ResultResponseVO withdrawResultOK = openBankingService.getResult(resultRequestVO, resultVO);
 
 			// Model 객체에 AccountSearchResponseVO 객체와 엑세스토큰 저장
 			model.addAttribute("withdrawOK", withdrawOK);
+			model.addAttribute("withdrawResultOK", withdrawResultOK);
 			model.addAttribute("access_token", withdrawRequestVO.getAccess_token());
-			System.out.println("결과@@@@@@@@@@@@@ : " + withdrawOK);
+			System.out.println("withdrawOK 결과 : " + withdrawOK);
+			System.out.println("withdrawResultOK 결과 : " + withdrawResultOK);
 			 return "account/withdraw";
 		}
 		
 		//입금이체
 		@RequestMapping(value = "/deposit", method = RequestMethod.POST)
-		public String  getDeposit(DepositRequestVO depositRequestVO,Model model)
+		public String  getDeposit(DepositRequestVO depositRequestVO,DepositVO depositVO, Model model,ResultRequestVO resultRequestVO, ResultVO resultVO)
 				throws Exception {
 			// Service 객체의 findAccount() 메서드를 호출하여 사용자 정보 조회
 			// => 파라미터 : AccountSearchRequestVO, 리턴타입 AccountSearchResponseVO
 			// AccountSearchResponseVO accountList =
 			// openBankingService.findAccount(accountSearchRequestVO);
 			System.out.println("##########################" + depositRequestVO);
-			DepositResponseVO depositOK = openBankingService.getDeposit(depositRequestVO);
+			DepositResponseVO depositOK = openBankingService.getDeposit(depositRequestVO,depositVO);
 			System.out.println("@#@#@@#@#@#@@#갔다옴");
+			
+			resultRequestVO.setAccess_token(depositRequestVO.getAccess_token());
+			resultRequestVO.setCheck_type("1");
+			resultRequestVO.setTran_dtime("20230106023000"); // 요청일시
+			resultRequestVO.setReq_cnt("1");
+
+			resultVO.setTran_no(depositVO.getTran_no());
+			resultVO.setOrg_bank_tran_id(depositVO.getBank_tran_id());
+			resultVO.setOrg_bank_tran_date(depositRequestVO.getTran_dtime()); // 원거래 거래일자
+			resultVO.setOrg_tran_amt(depositVO.getTran_amt());
+			
+			ResultResponseVO depositResultOK = openBankingService.getResult(resultRequestVO, resultVO);
+
 			//System.out.println("##########################" + depositOK);
 			// Model 객체에 AccountSearchResponseVO 객체와 엑세스토큰 저장
 			model.addAttribute("depositOK", depositOK);
+			model.addAttribute("depositResultOK", depositResultOK);
 			model.addAttribute("access_token", depositRequestVO.getAccess_token());
 			System.out.println("결과###############" + depositOK);
+			System.out.println("결과###############" + depositResultOK);
 			
 			return "account/deposit";
 		}

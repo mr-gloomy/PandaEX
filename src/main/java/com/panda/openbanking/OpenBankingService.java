@@ -7,8 +7,12 @@ import com.panda.openbanking.domain.AccountSearchRequestVO;
 import com.panda.openbanking.domain.AccountSearchResponseVO;
 import com.panda.openbanking.domain.DepositRequestVO;
 import com.panda.openbanking.domain.DepositResponseVO;
+import com.panda.openbanking.domain.DepositVO;
 import com.panda.openbanking.domain.RequestTokenVO;
 import com.panda.openbanking.domain.ResponseTokenVO;
+import com.panda.openbanking.domain.ResultRequestVO;
+import com.panda.openbanking.domain.ResultResponseVO;
+import com.panda.openbanking.domain.ResultVO;
 import com.panda.openbanking.domain.UserInfoRequestVO;
 import com.panda.openbanking.domain.UserInfoResponseVO;
 import com.panda.openbanking.domain.WithdrawRequestVO;
@@ -44,11 +48,19 @@ public class OpenBankingService {
 	
 	
 	// 입금이체
-	public DepositResponseVO getDeposit(DepositRequestVO depositRequestVO) throws Exception {
+	public DepositResponseVO getDeposit(DepositRequestVO depositRequestVO, DepositVO depositVO) throws Exception {
 		
-		return openBankingApiClient.deposit(depositRequestVO);
+		return openBankingApiClient.deposit(depositRequestVO,depositVO);
 	}
 		
-		
+	// 이체결과조회 API(출금)
+	public ResultResponseVO getResult(ResultRequestVO resultRequestVO,ResultVO resultVO) throws Exception {
+		return openBankingApiClient.result(resultRequestVO,resultVO);
+	}
+	
+//	// 이체결과조회 API(입금)
+//	public ResultResponseVO getResult(ResultResponseVO resultResponseVO) throws Exception {
+//		return openBankingApiClient.result(resultResponseVO);
+//	}
 	
 }

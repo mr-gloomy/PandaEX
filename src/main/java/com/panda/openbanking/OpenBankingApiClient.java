@@ -21,9 +21,12 @@ import com.panda.openbanking.domain.AccountSearchRequestVO;
 import com.panda.openbanking.domain.AccountSearchResponseVO;
 import com.panda.openbanking.domain.DepositRequestVO;
 import com.panda.openbanking.domain.DepositResponseVO;
+import com.panda.openbanking.domain.DepositVO;
 import com.panda.openbanking.domain.RequestTokenVO;
 import com.panda.openbanking.domain.ResponseTokenVO;
 import com.panda.openbanking.domain.ResultRequestVO;
+import com.panda.openbanking.domain.ResultResponseVO;
+import com.panda.openbanking.domain.ResultVO;
 import com.panda.openbanking.domain.UserInfoRequestVO;
 import com.panda.openbanking.domain.UserInfoResponseVO;
 import com.panda.openbanking.domain.WithdrawRequestVO;
@@ -190,7 +193,7 @@ public class OpenBankingApiClient {
 	
 
 	// 입금이체
-	public DepositResponseVO deposit( DepositRequestVO depositRequestVO) throws Exception{
+	public DepositResponseVO deposit(DepositRequestVO depositRequestVO,DepositVO depositVO) throws Exception{
 		/// REST 방식 요청에 필요한 객체 생성
 		restTemplate = new RestTemplate();
 		httpHeaders = new HttpHeaders();
@@ -209,21 +212,20 @@ public class OpenBankingApiClient {
 		parameters.add("tran_dtime", depositRequestVO.getTran_dtime());
 		parameters.add("req_cnt", depositRequestVO.getReq_cnt());
 		
-		MultiValueMap<String, String> parameters2 // MultiValueMap<이름, 값>
-		=new LinkedMultiValueMap<String, String>();
+		MultiValueMap<String, Object> parameters2 // MultiValueMap<이름, 값>
+		=new LinkedMultiValueMap<String, Object>();
 //		Map<String, String> parameters2 = new HashMap<String, String>();
-		parameters2.add("tran_no", depositRequestVO.getTran_no());
-		parameters2.add("bank_tran_id", depositRequestVO.getBank_tran_id());
+		parameters2.add("tran_no", depositVO.getTran_no());
+		parameters2.add("bank_tran_id", depositVO.getBank_tran_id());
 //		parameters2.put("bank_tran_id", depositRequestVO.getBank_tran_id());
 //		parameters2.put("bank_tran_id", "M202202083U123432345");
-		parameters2.add("fintech_use_num", depositRequestVO.getFintech_use_num());
-		parameters2.add("print_content", depositRequestVO.getPrint_content());
-		parameters2.add("tran_amt", depositRequestVO.getTran_amt());
-		parameters2.add("req_client_name", depositRequestVO.getReq_client_name());
-		parameters2.add("req_client_bank_code", depositRequestVO.getReq_client_bank_code());
-		parameters2.add("req_client_account_num", depositRequestVO.getReq_client_account_num());
-		parameters2.add("req_client_num", depositRequestVO.getReq_client_num());
-		parameters2.add("transfer_purpose", depositRequestVO.getTransfer_purpose());
+		parameters2.add("fintech_use_num", depositVO.getFintech_use_num());
+		parameters2.add("print_content", depositVO.getPrint_content());
+		parameters2.add("tran_amt", depositVO.getTran_amt());
+		parameters2.add("req_client_name", depositVO.getReq_client_name());
+		parameters2.add("req_client_bank_code", depositVO.getReq_client_bank_code());
+		parameters2.add("req_client_num", depositVO.getReq_client_num());
+		parameters2.add("transfer_purpose", depositVO.getTransfer_purpose());
 		
 		List<Map> req_list = new ArrayList<Map>();
 		req_list.add(parameters2);
@@ -247,62 +249,53 @@ public class OpenBankingApiClient {
 		System.out.println("저장###############################주소저장" + param);
 		return restTemplate.exchange(requestUrl, HttpMethod.POST, param, DepositResponseVO.class).getBody();
 	}
-//	
-//	// 이체결과조회(출금)
-//		public DepositResponseVO result(ResultRequestVO resultRequestVO) throws Exception{
-//			/// REST 방식 요청에 필요한 객체 생성
-//			restTemplate = new RestTemplate();
-//			httpHeaders = new HttpHeaders();
-//			httpHeaders.add("Content-Type", "application/json; charset=UTF-8");
-//			
-//			mylog.debug(resultRequestVO.toString());
-//			
-//			MultiValueMap<String, Object> parameters // MultiValueMap<이름, 값>
-//			=new LinkedMultiValueMap<String, Object>();
-////			Map<String, Object> parameters = new HashMap<String, Object>();
-//			parameters.add("check_type", "1");
-//			parameters.add("tran_dtime", resultRequestVO.getTran_dtime());
-//			parameters.add("req_cnt", resultRequestVO.getReq_cnt());
-//			parameters.add("req_list", resultRequestVO.getReq_list());
-//			
-//			MultiValueMap<String, String> parameters2 // MultiValueMap<이름, 값>
-//			=new LinkedMultiValueMap<String, String>();
-////			Map<String, String> parameters2 = new HashMap<String, String>();
-//			parameters2.add("tran_no", resultRequestVO.getTran_no());
-//			parameters2.add("bank_tran_id", depositRequestVO.getBank_tran_id());
-////			parameters2.put("bank_tran_id", depositRequestVO.getBank_tran_id());
-////			parameters2.put("bank_tran_id", "M202202083U123432345");
-//			parameters2.add("fintech_use_num", depositRequestVO.getFintech_use_num());
-//			parameters2.add("print_content", depositRequestVO.getPrint_content());
-//			parameters2.add("tran_amt", depositRequestVO.getTran_amt());
-//			parameters2.add("req_client_name", depositRequestVO.getReq_client_name());
-//			parameters2.add("req_client_bank_code", depositRequestVO.getReq_client_bank_code());
-//			parameters2.add("req_client_account_num", depositRequestVO.getReq_client_account_num());
-//			parameters2.add("req_client_num", depositRequestVO.getReq_client_num());
-//			parameters2.add("transfer_purpose", depositRequestVO.getTransfer_purpose());
-//			
-//			List<Map> req_list = new ArrayList<Map>();
-//			req_list.add(parameters2);
-//			//depositRequestVO.setReq_list(req_list);
-//			
-//			parameters.add("req_list", req_list);
-//			System.out.println("저장parameters###############################"+parameters);
-//			
-////			httpHeaders,parameters 담아서 감 =>HttpEntity
-//		HttpEntity<MultiValueMap<String, Object>> param=
-//							new HttpEntity<MultiValueMap<String,Object>>(parameters,setHeaderAccessToken(depositRequestVO.getAccess_token()));
-//			
-//			// HttpHeader,HttpBody parameters 담아서 감 => HttpEntity
-//			//HttpEntity<MultiValueMap<String, String>> param = new HttpEntity<MultiValueMap<String, String>>(parameters, httpHeaders);
-////			HttpEntity<Map<String, Object>> param = new HttpEntity<Map<String, Object>>(parameters, setHeaderAccessToken(depositRequestVO.getAccess_token()));
-//			
-//			String requestUrl = "https://testapi.openbanking.or.kr/v2.0/transfer/deposit/fin_num";
-//			
-//			
-//			
-//			System.out.println("저장###############################주소저장" + param);
-//			return restTemplate.exchange(requestUrl, HttpMethod.POST, param, DepositResponseVO.class).getBody();
-//		}	
+
+	public ResultResponseVO result(ResultRequestVO resultRequestVO,ResultVO resultVO) {
+		/// REST 방식 요청에 필요한 객체 생성
+		restTemplate = new RestTemplate();
+		httpHeaders = new HttpHeaders();
+		httpHeaders.add("Content-Type", "application/json; charset=UTF-8");
+		
+		mylog.debug(resultRequestVO.toString());
+		
+		MultiValueMap<String, Object> parameters // MultiValueMap<이름, 값>
+		=new LinkedMultiValueMap<String, Object>();
+//		Map<String, Object> parameters = new HashMap<String, Object>();
+		parameters.add("check_type", resultRequestVO.getCheck_type());
+		parameters.add("tran_dtime", resultRequestVO.getTran_dtime());
+		parameters.add("req_cnt", resultRequestVO.getReq_cnt());
+		parameters.add("req_list", resultRequestVO.getReq_cnt());
+		
+		MultiValueMap<String, Object> parameters2 // MultiValueMap<이름, 값>
+		=new LinkedMultiValueMap<String, Object>();
+//		Map<String, String> parameters2 = new HashMap<String, String>();
+		parameters2.add("tran_no", resultVO.getTran_no());
+		parameters2.add("org_bank_tran_id", resultVO.getOrg_bank_tran_id());
+		parameters2.add("org_bank_tran_date", resultVO.getOrg_bank_tran_date());
+		parameters2.add("org_tran_amt", resultVO.getOrg_tran_amt());
+		
+		List<Map> req_list = new ArrayList<Map>();
+		req_list.add(parameters2);
+		//depositRequestVO.setReq_list(req_list);
+		
+		parameters.add("req_list", req_list);
+		System.out.println("저장parameters###############################"+parameters);
+		
+//		httpHeaders,parameters 담아서 감 =>HttpEntity
+	HttpEntity<MultiValueMap<String, Object>> param=
+						new HttpEntity<MultiValueMap<String,Object>>(parameters,setHeaderAccessToken(resultRequestVO.getAccess_token()));
+		
+		// HttpHeader,HttpBody parameters 담아서 감 => HttpEntity
+		//HttpEntity<MultiValueMap<String, String>> param = new HttpEntity<MultiValueMap<String, String>>(parameters, httpHeaders);
+//		HttpEntity<Map<String, Object>> param = new HttpEntity<Map<String, Object>>(parameters, setHeaderAccessToken(depositRequestVO.getAccess_token()));
+		
+		String requestUrl = "https://testapi.openbanking.or.kr/v2.0/transfer/result";
+		
+		
+		
+		System.out.println("저장###############################주소저장" + param);
+		return restTemplate.exchange(requestUrl, HttpMethod.POST, param, ResultResponseVO.class).getBody();
+	}
 	
 	
 }
