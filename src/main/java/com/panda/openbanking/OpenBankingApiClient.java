@@ -145,7 +145,7 @@ public class OpenBankingApiClient {
 		/// REST 방식 요청에 필요한 객체 생성
 		httpHeaders = new HttpHeaders();
 		httpHeaders.add("Content-Type", "application/json; charset=UTF-8");
-//		httpHeaders.add("Access_Token",setHeaderAccessToken(withdrawRequestVO.getAccess_token()));
+//		httpHeaders.add("Access_Token",setHeaderAccessToken(withdrawReque stVO.getAccess_token()));
 //		 Content-Type  application/json; charset=UTF-8
 		// WithdrawRequestVO => 저장
 //		requestTokenVO.setClient_id(client_id);
