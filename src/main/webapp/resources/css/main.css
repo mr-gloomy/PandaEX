@@ -4711,9 +4711,9 @@ input.num-product::-webkit-outer-spin-button, input.num-product::-webkit-inner-s
 	display: flex;
     flex-direction: column;
     align-items: center;
-	top : 82.5px;
-	min-height: 1000px;
-	position: relative;
+    top: 100px;
+    min-height: 800px;
+    position: relative;
 	
 }
 
@@ -4856,10 +4856,48 @@ input.num-product::-webkit-outer-spin-button, input.num-product::-webkit-inner-s
 	display: flex;
     flex-direction: row;
     justify-content: space-between;
+    border: 1px solid rgb(170 170 170 / 80%);
+    border-radius: 5px;
+    height: 160px;
 }
-
-
-
+.pay_body .body-5 .body-5-1 .pay-name{
+	margin-left : 10px;
+}
+.pay_body .body-5 .body-5-1 .pay_price{
+	text-align: right;
+	padding-right: 5px;
+}
+.pay_body .body-5 .body-5-1 .pay_price .coinprice{
+	text-align: right;
+}
+.pay_body .body-5 .body-5-1 .pay-name div,
+.pay_body .body-5 .body-5-1 .pay_price div{
+	margin-bottom: 5px;
+}
+.pay_body .body-5 .body-5-1 .pay-name .body-5-1-1,
+.pay_body .body-5 .body-5-1 .pay_price .body-5-1-2{
+	margin-top :5px;
+}
+.pay_body .body-5 .body-5-2{
+	display: flex;
+    justify-content: space-between;
+    border-top: 1px solid black;
+    margin-top: -45px;
+}
+.pay_body .body-5 .body-5-2 div{
+	padding-top: 10px;
+}
+.pay_body .body-5 .body-5-2 .body-5-2-1{
+	padding-left : 10px;
+}
+.pay_body .body-5 .body-5-2 .body-5-2-2{
+	padding-right: 5px;
+	color: red;
+}
+.pay_body .body-5 .fareinfo{
+	font-size: 10px;
+    margin-top: 12px;
+}
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
