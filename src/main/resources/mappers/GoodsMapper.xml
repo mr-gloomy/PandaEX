@@ -40,6 +40,6 @@
  		delete from goods where goods_no = #{goods_no }
  	</delete>
 	
-
+	
 
 </mapper>
