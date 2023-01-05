@@ -218,8 +218,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int emailAuthFail(String id) throws Exception {
-	    return dao.emailAuthFail(id);
+	public int emailAuthFail(String user_id) throws Exception {
+	    return dao.emailAuthFail(user_id);
 	}
 	
 

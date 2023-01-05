@@ -113,7 +113,7 @@ public class MemberController {
 		
 		
 		//이메일 인증 했는지 확인
-        if (service.emailAuthFail(user_id) != 1) {
+		if (service.emailAuthFail(user_id) != 1 /* || vo.getMail_key() == null */) {
             return "/member/emailAuthFail";
         }
 

@@ -36,6 +36,6 @@ public interface MemberService {
 		//이메일인증~
 		int updateMailKey(MemberVO vo) throws Exception;
 		int updateMailAuth(MemberVO vo) throws Exception;
-		int emailAuthFail(String id) throws Exception;
+		int emailAuthFail(String user_id) throws Exception;
 
 }

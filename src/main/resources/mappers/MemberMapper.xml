@@ -41,13 +41,13 @@
 	<select id="findId" resultType="MemberVO">
 		select user_id 
 		from user 
-		where user_name=#{user_name} and user_phone=#{user_phone}
+		where user_name=#{user_name} and user_phone=#{user_tel}
 	</select>
 	
 	<select id="findPw" resultType="MemberVO">
 		select user_pw 
 		from user 
-		where user_id=#{user_id} and user_phone=#{user_phone}
+		where user_id=#{user_id} and user_phone=#{user_tel}
 	</select>
 	
 	<update id="updatePw">

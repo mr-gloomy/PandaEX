@@ -24,43 +24,6 @@
 		
 	</script>
 
-
-	<script type="text/javascript">
-        $(document).ready(function(){
-        	
-        	$("#user_id").keyup(function(){
-        		//alert("이벤트!");
-        		//키보드 입력시마다, 입력된 아이디 정보가 사용가능한지 확인(DB)
-        		
-        		//$("#userIDdiv").append("@");
-        		//$("#userIDdiv").text("@");
-        		//$("#userIDdiv").html("<h2> @ </h2>");
-        		
-        		//alert($("#userid").val());
-        	
-	        		// 문제 없을때(5~10자리 일때)
-	        		// 해당 아이디 정보가,디비에 있는지 체크
-	        		// GET 방식 - /members/ckID + 데이터
-	        		$.ajax({
-	        			type:"GET",
-	        			url:"/members/ckID",
-	        			data:{userid:$("#user_id").val()},
-	        			success:function(){
-	        				//alert("성공");
-	        				if(data == "OK"){
-	        	        		$("#userIDdiv").html("<font color='blue'> 정상적인 아이디 사용입니다 </font>");
-	        				}else{
-	        	        		$("#userIDdiv").html("<font color='green'> 이미 사용중인 아이디입니다 </font>");
-
-	        			
-	        		});
-	        		
-	        		$("#userIDdiv").html("<font color='blue'> 정상적인 아이디 사용입니다 </font>");
-        		}
-        		
-        	
-        });    
-     </script>
 <script>	
 	$(document).ready(function(){
 		// 저장된 쿠키값을 가져와서 ID 칸에 넣어준다. 없으면 공백으로 들어감.
@@ -315,8 +278,11 @@
 		</div>
 	</div>
 </header>
-</head>
 
+
+</head>
+<!-- sweet alert  -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
  
 
 <!-- 로그인 모달창 -->
@@ -398,6 +364,9 @@
 			<div class="join-text">
 				<input id="user-id-join" type="text" placeholder="아이디" maxlength="10" autocomplete="on" name="user_id" required>
 				<div id="tooltip" class="idtooltip">아이디는 영어,숫자 5~10글자, 한글,특수문자 사용불가</div>
+				<button> 중복체크</button>
+				
+				
 				<input id="user-pw-join" type="password" placeholder="비밀번호"maxlength="15"
 				onkeypress="chkCapsLock2(event)" onclick="chkCapsLock2(event)"
 				onblur="chkCapsLock3(event)" autocomplete="new-password" name="user_pw" required>
