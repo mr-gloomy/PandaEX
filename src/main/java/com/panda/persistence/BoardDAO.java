@@ -27,4 +27,7 @@ public interface BoardDAO {
 	
 	// 글 전체갯수
 	public Integer totalCnt()throws Exception;
+	
+	// 글 목록조회 카테고리
+	public List<BoardVO> getBoardCate(Criteria cri, String category);
 }

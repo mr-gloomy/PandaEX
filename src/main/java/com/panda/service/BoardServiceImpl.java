@@ -66,4 +66,10 @@ public class BoardServiceImpl implements BoardService {
 		return dao.totalCnt();
 	}
 
+//	@Override
+//	public List<BoardVO> getBoardCate(Criteria cri, String category) {
+//		
+//		return dao.getBoardCate(cri, category);
+//	}
+
 }

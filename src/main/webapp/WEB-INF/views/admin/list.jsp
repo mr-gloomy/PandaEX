@@ -32,16 +32,16 @@
 
 			<button
 				class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1"
-				name="button" value="all">전체</button>
+				name="button" value="all" id="btnA">전체</button>
 
 			<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
-				name="button" value="notice">공지사항</button>
+				name="button" value="notice" id="btnN">공지사항</button>
 
 			<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
-				name="button" value="event">이벤트</button>
+				name="button" value="event" id="btnE">이벤트</button>
 
 			<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
-				name="button" value="donate">기부문의</button>
+				name="button" value="donate" id="btnD">기부문의</button>
 
 		</div>
 
@@ -377,11 +377,11 @@
 <script type="text/javascript">
 		$(document).ready(function() {
 			$('button[name=button]').on('click', function() {
+				var cate = $("button[name=button]").val();
 				$.ajax({
-					type:"post",
-					url:"/admin/list",
-					contentType:"application/json",
-					data:JSON.stringify(board),
+					type:"get",
+					url:"/admins/list",
+					data:{category:cate},
 					success:function(data){
 						alert('성공');
 						console.log(data);

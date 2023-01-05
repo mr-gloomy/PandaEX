@@ -1,6 +1,8 @@
 package com.panda.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.panda.domain.BoardVO;
 import com.panda.domain.Criteria;
@@ -23,8 +25,12 @@ public interface BoardService {
 	
 	// 글 삭제하기
 	public Integer deleteBoard(int bno)throws Exception;
-
+	
+	// 글 전체갯수 
 	public Integer totalCnt()throws Exception;
+	
+	// 글 목록조회(카테고리)
+//	public HashMap<String, String> getBoardCate(Criteria cri, String category);
 	
 	
 }
