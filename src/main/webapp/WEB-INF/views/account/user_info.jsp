@@ -18,5 +18,6 @@
 	<h3>핀테크이용번호 : ${user.fintech_use_num }</h3>
 	</c:forEach>
 	${access_token }
+	
 </body>
 </html>

@@ -8,7 +8,14 @@ public class ResponseTokenVO {
 	private String refresh_token;
 	private String scope;
 	private String user_seq_no;
+	private String bank_tran_id; //은행거래고유번호
 	
+	public String getBank_tran_id() {
+		return "M202202391U"+ (int)((Math.random()+1)*100000000);
+	}
+	public void setBank_tran_id(String bank_tran_id) {
+		this.bank_tran_id = bank_tran_id;
+	}
 	public String getAccess_token() {
 		return access_token;
 	}
