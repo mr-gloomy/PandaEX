@@ -20,6 +20,35 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
 <link rel="stylesheet" type="text/css" href="/resources/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/resources/css/custom.css">
+<script type="text/javascript">
+function CountDownTimer(dt, id) {
+     var end = new Date(dt);
+     var _second = 1000;
+     var _minute = _second * 60;
+     var _hour = _minute * 60;
+     var _day = _hour * 24;
+     var timer;
+     function showRemaining() {
+         var now = new Date();
+         var distance = end - now;
+         if (distance < 0) {
+             clearInterval(timer);
+             document.getElementById(id).innerHTML = '타임딜 종료됨';
+             return;
+         }
+         var days = Math.floor(distance / _day);
+         var hours = Math.floor((distance % _day) / _hour);
+         var minutes = Math.floor((distance % _hour) / _minute);
+         var seconds = Math.floor((distance % _minute) / _second);
+         document.getElementById(id).innerHTML = days + '일 ';
+         document.getElementById(id).innerHTML += hours + '시간 ';
+         document.getElementById(id).innerHTML += minutes + '분 ';
+         document.getElementById(id).innerHTML += seconds + '초 후';
+     }
+     timer = setInterval(showRemaining, 250);
+ }
+</script>
+
 </head>
 <body>
 	<br>
@@ -103,8 +132,9 @@
 						</div>
 						<div class="col text-muted p-0">
 							<i class="fa-solid fa-clock pr-2"></i> 
-								<fmt:formatDate value="${avo.auction_cdate }" pattern="yyyy-MM-dd HH:mm:ss"/> 마감 (<span
-								id="timer"></span>)
+								<fmt:formatDate value="${avo.auction_cdate }" pattern="yyyy-MM-dd HH:mm:ss"/> 마감 
+								<script>CountDownTimer('${avo.auction_cdate }','timer')</script>
+								(<span id="timer"></span>)
 						</div>
 					</div>
 					<div class="row mb-2 mr-5">
@@ -398,414 +428,9 @@
 			</div>
 		</div>
 
-		<script src="https://unpkg.com/vue@next"></script>
-		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-		<script
-			src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
-		<script>
-    const app = Vue.createApp({
-        data() {
-            return {
-                show: false,
-                inputBid: 0,
-                inputBidReplace: "",
-                auctionNo: 549,
-                bidUnit: 1000,
-                openingBid: 15000,
-                closingBid: 70000,
-                maxBid: 0,
-                biddingCount: 0,
-                myBidding: false,
-                topBidder: 0,
-                closedTime: '2030-08-30 00:00:00',
-                alert: 0,
-                interval: "",
-                auctionClose: false,
-                reportReason: "",
-                succBidStatus: 3,
-            };
-        },
-        computed: {
-            bidVaild() { // 입찰 금액 유효성 검사
-            	if (this.maxBid == 0) {
-                	return this.inputBid >= this.openingBid && (this.inputBid % this.bidUnit) == 0;
-                } else {
-                	return this.inputBid > this.maxBid && (this.inputBid % this.bidUnit) == 0;
-                }
-            },
-            reportCount() {
-                return this.reportReason.length;
-            },
-        },        
-        methods: {
-            comma() {
-                // 금액 콤마 찍기
-                const comma = document.getElementsByClassName("comma");
-                for (i = 0; i < comma.length; i++) {
-                    comma[i].innerHTML = comma[i].innerHTML.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                };
-            },
-            bidReplace() {
-            	// 금액이 10억 이상이면 마지막 자리 지우기
-            	if(this.inputBid >= 1000000000) {
-            		this.inputBid = parseInt(this.inputBid / 10);
-            	}
-            	
-            	// 한글 금액 표기
-                const numKor = new Array("", "일", "이", "삼", "사", "오", "육", "칠", "팔", "구", "십"); // 숫자 문자
-                const danKor = new Array("", "십", "백", "천", "", "십", "백", "천", "", "십", "백", "천", "", "십", "백", "천"); // 만위 문자
-                const input = String(this.inputBid);
-                let result = "";
-                for (i = 0; i < input.length; i++) {
-                    let str = "";
-                    const num = numKor[input.charAt(input.length - (i + 1))];
-                    if (num != "") str += num + danKor[i]; // 숫자가 0인 경우 텍스트를 표현하지 않음
-                    switch (i) {
-                        case 4:
-                            str += "만";
-                            break; // 4자리인 경우 '만'을 붙여줌
-                        case 8:
-                            str += "억";
-                            break; // 8자리인 경우 '억'을 붙여줌
-                    }
-                    result = str + result;
-                }
-                result = result + "원";
-                return this.inputBidReplace = result;
-            },
-            closeBidModal() { // 현재 최소 입찰 가능 금액을 모달창에 갱신
-                if (this.maxBid == 0) {
-                    this.inputBid = this.openingBid;
-                } else {
-                    this.inputBid = this.maxBid + this.bidUnit;
-                }
-                
-                this.inputBid = parseInt(this.inputBid / this.bidUnit) * this.bidUnit;
-                this.bidReplace();
-            },
-            refresh() {
-            	this.alert = 0; // 입찰 경고창 닫기
-            	axios.get("/auctionara/auction/detail/refresh", {
-            		params: {
-                		bidderNo : 114,
-                		auctionNo : this.auctionNo,
-            	      }
-            	}).then(resp=>{
-            		if(resp.data){
-            			// 즉시 낙찰 여부 확인
-            			if(this.closingBid <= resp.data.maxBiddingPrice) { // 이미 낙찰됨
-            				this.closeAuction(); // 경매 종료
-            			} 
-            			
-            			// 입찰 횟수 갱신
-        				document.getElementById("count").innerText = resp.data.biddingCount;
-                		this.biddingCount = resp.data.biddingCount;  
-                		
-                		// 내 입찰가 갱신
-                		document.getElementById("myBid").innerText = resp.data.myBiddingPrice;
-                		
-                        if(document.getElementById("blind").innerText == "블라인드") { // 블라인드 모드일 때
-                        	this.maxBid = resp.data.myBiddingPrice;
-                        	this.topBidder = 0;
-                        } else { // 일반 모드일 때
-                			// 최고 입찰가 갱신
-                    		document.getElementById("maxBid").innerText = resp.data.maxBiddingPrice;
-                    		this.maxBid = resp.data.maxBiddingPrice;
-                    		
-                    		// 최고 입찰자 갱신
-                    		this.topBidder = parseInt(resp.data.topBidder);
-                        }	
-                		this.comma();
-                		this.closeBidModal();
-            		};
-	            }).catch(err=>{
-	            	if(err.response.status == 403) {
-		            	alert("비공개 처리 된 경매입니다");
-		            	location.href = "/auctionara/";	            		
-	            	}
-            	});
-            },
-            throttleRefresh: _.throttle((app) => { // 0.5초에 한 번씩 새로고침 가능
-            	app.refresh();
-            	
-            	// 새로고침 아이콘 회전
-            	document.getElementById("rotate").classList.remove("rotate");
-            	document.getElementById("rotate").offsetWidth = document.getElementById("rotate").offsetWidth;
-            	document.getElementById("rotate").classList.add("rotate");
-            }, 500), 
-            bidding() {
-            	axios.get("/Panda/auction/a_read/refresh", {
-            		params: {
-                		bidderNo : 114,
-                		auctionNo : this.auctionNo,
-            	      }
-            	}).then(resp=>{	
-            		if(this.closingBid <= resp.data.maxBiddingPrice) { // 누군가 이미 낙찰하여 경매 종료
-            			// 낙찰 알림 모달
-            			const modal = new bootstrap.Modal(document.getElementById("failBiddingModal"));
-                    	modal.show();
-                    	
-            			this.closeAuction(); // 경매 종료
-            			this.refresh();
-            		} else {
-                        if(this.inputBid <= resp.data.maxBiddingPrice) { // 누군가 이미 같거나 높은 가격을 입찰했을 때 입찰 실패 & 경고 표시 (일반 입찰 때만)
-                        	const modal = new bootstrap.Modal(document.getElementById("biddingModal"));
-                        	modal.show();
-                        	this.refresh();
-                        	this.alert = 1;
-                        } else { // 입찰 성공
-                        	if(this.inputBid >= this.closingBid) { // 즉시 낙찰
-                            	axios.post("/auctionara/auction/detail/bidding/close", {
-                                    bidderNo : 114,
-                                    auctionNo : this.auctionNo,
-                                    biddingPrice : this.inputBid,
-                                }).then(resp=>{
-                                	this.refresh();
-                                	this.myBidding = true;
-                                })
-                        	} else { // 일반 입찰
-                            	axios.post("/auctionara/auction/detail/bidding", {
-                                    bidderNo : 114,
-                                    auctionNo : this.auctionNo,
-                                    biddingPrice : this.inputBid,
-                                }).then(resp=>{
-                                	this.refresh();
-                                	this.myBidding = true;
-                                })
-                        	}
-                        }
-            		}
-            	}).catch(err=>{
-	            	if(err.response.status == 403) {
-		            	alert("비공개 처리 된 경매입니다");
-		            	location.href = "/auctionara/";	            		
-	            	}
-            	});
-            },
-            blindBidding() {
-            	axios.get("/auctionara/auction/detail/refresh", {
-            		params: {
-                		bidderNo : 114,
-                		auctionNo : this.auctionNo,
-            	      }
-            	}).then(resp=>{	
-            		if(this.closingBid <= resp.data.maxBiddingPrice) { // 누군가 이미 낙찰하여 경매 종료
-            			// 낙찰 알림 모달
-            			const modal = new bootstrap.Modal(document.getElementById("failBiddingModal"));
-                    	modal.show();
-                    	
-            			this.closeAuction(); // 경매 종료
-            			this.refresh();
-            		} else {
-                    	if(this.inputBid >= this.closingBid) { // 즉시 낙찰
-                        	axios.post("/auctionara/auction/detail/bidding/close", {
-                                bidderNo : 114,
-                                auctionNo : this.auctionNo,
-                                biddingPrice : this.inputBid,
-                            }).then(resp=>{
-                            	this.refresh();
-                            	this.myBidding = true;
-                            })
-                    	} else { // 일반 입찰
-                        	axios.post("/auctionara/auction/detail/bidding", {
-                                bidderNo : 114,
-                                auctionNo : this.auctionNo,
-                                biddingPrice : this.inputBid,
-                            }).then(resp=>{
-                            	this.refresh();
-                            	this.myBidding = true;
-                            })
-                    	}       	
-            		}
-            	}).catch(err=>{
-	            	if(err.response.status == 403) {
-		            	alert("비공개 처리 된 경매입니다");
-		            	location.href = "/auctionara/";	            		
-	            	}
-            	});
-            },
-            closeBidding() {
-            	axios.get("/auctionara/auction/detail/refresh", {
-            		params: {
-                		bidderNo : 114,
-                		auctionNo : this.auctionNo,
-            	      }
-            	}).then(resp=>{	
-            		if(this.closingBid <= resp.data.maxBiddingPrice) { // 누군가 이미 낙찰
-            			// 낙찰 알림 모달
-            			const modal = new bootstrap.Modal(document.getElementById("failBiddingModal"));
-                    	modal.show();
-                    	
-	        			this.closeAuction(); // 경매 종료
-	        			this.refresh();					
-            		} else {  // 내가 즉시 낙찰
-                    	axios.post("/auctionara/auction/detail/bidding/close", {
-                        	bidderNo : 114,
-                            auctionNo : this.auctionNo,
-                            biddingPrice : this.closingBid,
-                        }).then(resp=>{
-                        	this.refresh();
-                        	this.myBidding = true;
-                    	})  
-            		}
-            	}).catch(err=>{
-	            	if(err.response.status == 403) {
-		            	alert("비공개 처리 된 경매입니다");
-		            	location.href = "/auctionara/";	            		
-	            	}
-            	});
-            },
-            closeAuction() {
-            	if(this.auctionClose == false) {
-            		this.closedTime = new Date(); // 현재 시간을 넣어 타이머 종료
 
-            		document.getElementById("maxBidLabel").innerText = "최종 낙찰가";
-                	document.getElementById("blind").innerHTML = '<span id="maxBid" class="comma"></span> 원'; // 최종 낙찰가 표시
-                	document.getElementById("timer").innerText = "종료되었습니다"; // 타이머 종료
-                	document.getElementById("refresh").remove(); // 새로고침 버튼 제거
-                	if(document.getElementById("startBidding")) {
-                		document.getElementById("startBidding").remove(); // 입찰 버튼 제거
-                	}
-                	
-                	if(document.getElementById("topBidder")) {
-	                	document.getElementById("topBidder").classList.remove("d-none"); // 최고 입찰자 배지 표시
-	                	document.getElementById("topBidder").innerHTML = '<i class="fa-solid fa-crown"></i> 낙찰</span>'; // 최고 입찰자 -> 낙찰로 변경
-	                }
-					
-                	// 입찰 모달 제거
-                	if(document.getElementsByClassName("modal-backdrop").length > 0) {
-                		document.getElementsByClassName("modal-backdrop")[0].remove();
-                	}
-                	document.getElementById("biddingModal").remove();
-                	
-                	this.auctionClose = true;            		
-            	}
-            },
-            checkAuction1() {
-            	axios.get("/auctionara/auction/detail/refresh", {
-            		params: {
-                		bidderNo : 114,
-                		auctionNo : this.auctionNo,
-            	      }
-            	}).then(resp=>{
-            		if(this.closingBid <= resp.data.maxBiddingPrice) { // 누군가 이미 낙찰하여 경매 취소 실패
-            			this.closeAuction();
-            			this.refresh();
-            			const modal = new bootstrap.Modal(document.getElementById("failCancleModal"));
-                    	modal.show();
-            		} else if(resp.data.biddingCount > 0) { // 경매 중지로 전환
-            			this.refresh();
-            			const modal = new bootstrap.Modal(document.getElementById("stopAuctionModal"));
-                    	modal.show();
-            		} else {
-            			location.href = "/auctionara/auction/detail/cancel/549";
-            		}
-            	}).catch(err=>{
-	            	if(err.response.status == 403) {
-		            	alert("비공개 처리 된 경매입니다");
-		            	location.href = "/auctionara/";      		
-	            	}
-            	});           	
-            },
-            checkAuction2() {
-            	axios.get("/auctionara/auction/detail/refresh", {
-            		params: {
-                		bidderNo : 114,
-                		auctionNo : this.auctionNo,
-            	      }
-            	}).then(resp=>{
-            		if(this.closingBid <= resp.data.maxBiddingPrice) { // 누군가 이미 낙찰하여 경매 중지 실패
-            			this.closeAuction();
-            			this.refresh();
-            			const modal = new bootstrap.Modal(document.getElementById("failCancleModal"));
-                    	modal.show();
-            		} else {
-            			location.href = "/auctionara/auction/detail/stop/549"
-            		}
-            	}).catch(err=>{
-	            	if(err.response.status == 403) {
-		            	alert("비공개 처리 된 경매입니다");
-		            	location.href = "/auctionara/";	            		
-	            	}
-            	});
-            },
-            report() {
-            	axios.post("/auctionara/auction/detail/report", {
-            		auctionNo: this.auctionNo,
-            		auctionReporterNo: 114,
-            		auctionReportReason: this.reportReason,
-            	})
-            	.then(resp => {}); 
-            }
-        },
-        mounted() {
-            document.getElementById("biddingModal").addEventListener("hidden.bs.modal", this.closeBidModal);
-            
-            const refresh = this.refresh;
-            const closeAuction = this.closeAuction;
-			
-         	// 마감 타이머 함수
-            function timer(dday) {
-            	let timerText;
-                const today = new Date();
-                const gap = dday - today; 
-                const d = Math.floor(gap / (1000 * 60 * 60 * 24)); // 일
-                const h = Math.floor((gap / (1000 * 60 * 60)) % 24); // 시
-                const m = Math.floor((gap / (1000 * 60)) % 60); // 분
-                const s = Math.ceil((gap / 1000) % 60); // 초 (초는 1~60초 후로 표기)
-                if (gap <= 0) { // 마감 시간이 되어 경매 종료 시
-                	closeAuction(); // 마감 처리
-                	refresh(); // 최종 정보 불러오기
-                	clearInterval(interval); // 반복 종료
-                } else {
-                	if(d == 0 && h == 0 && m == 0) {
-                		timerText = s + "초 후";
-                	} else if(d == 0 && h == 0) {
-                		timerText = m + "분 " + s + "초 후";
-                	} else if(d == 0 && m == 0) {
-                		timerText = h + "시간 " + s + "초 후";
-                	} else if(d == 0) {
-                		timerText = h + "시간 " + m + "분 " + s + "초 후";
-                	} else if(h == 0) {
-                		timerText = d + "일 " + m + "분 " + s + "초 후";
-                	} else if(m == 0) {
-                		timerText = d + "일 " + h + "시간 " + s + "초 후";
-                	} else {
-                		timerText = d + "일 " + h + "시간 " + m + "분 " + s + "초 후";
-                	}
-                	document.getElementById("timer").innerText = timerText;
-    				if (gap <= 600000) { // 10분 이하부터 최고가 블라인드 
-    					document.getElementById("blind").innerText = "블라인드";
-    					document.getElementById("blindBid").classList.remove("d-none");
-    					document.getElementById("topBidder").classList.add("d-none");
-    					if(document.getElementById("insertBid")) {
-        					document.getElementById("insertBid").remove();    						
-    					}
-    				}
-				}
-            }
 
-          	if(this.closingBid <= this.maxBid) { // 페이지 접속 시점에 이미 낙찰되었을 경우
-          		closeAuction();
-          		refresh();
-          	}
-			
-          	// 타이머 실행
-          	this.closedTime = new Date(this.closedTime);
-            const interval = setInterval(() => timer(this.closedTime), 250);
-            timer(this.closedTime);
-          	
-            this.closeBidModal();
-            this.comma();
-            
-            
-        },
-        beforeDestroy() {
-            document.getElementById("biddingModal").removeEventListener("hidden.bs.modal", this.closeBidModal);
-        },
-    });
-    app.mount("#app");
-</script>
+
 		<style scoped="">
 .carousel-item img {
 	object-fit: cover;

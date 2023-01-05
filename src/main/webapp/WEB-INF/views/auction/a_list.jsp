@@ -10,6 +10,16 @@
 <!-- 헤더 -->	
 <%@ include file="../include/header.jsp" %>
 <%@ include file="../include/css.jsp" %>
+<script type="text/javascript">
+	function getDate(x,y) {
+		var date1 = new Date(x).getTime();
+		var date2 = new Date(y).getTime();
+		
+		document.write("남은 "+(date1-date2)/(1000*60*60*24)+"일");
+	}
+	
+</script>
+
 </head>
 <body>
 <br><br><br><br><br><br>
@@ -93,12 +103,7 @@
 										현재 <fmt:formatNumber value="${avo.auction_bid }"/>원
 									</span>
 									<span class="stext-105 cl3">
-<%-- 										<fmt:parseDate var="auction_date" value="${avo.auction_date}" pattern="yyyyMMdd HHmmssS" /> --%>
-<%-- 										<fmt:parseDate var="auction_cdate" value="${avo.auction_cdate }" pattern="yyyyMMdd HHmmssS"/> --%>
-<%-- 										<fmt:parseNumber value="${auction_date.time/(1000*60*60*24) }" integerOnly="true" var="aDate" scope="request"/> --%>
-<%-- 										<fmt:parseNumber value="${auction_cdate.time/(1000*60*60*24) }" integerOnly="true" var="cDate" scope="request"/> --%>
-<%-- 										남은 <fmt:formatDate value="${cDate-aDate }" pattern="yyyyMMdd"/>일 --%>
-											마감  <fmt:formatDate value="${avo.auction_cdate }" pattern="yyyy-MM-dd"/>
+										 <script>getDate('${avo.auction_cdate.toString().substring(0,10)}','${avo.auction_date.toString().substring(0,10)}');</script>
 									</span>
 								</div>
 								
