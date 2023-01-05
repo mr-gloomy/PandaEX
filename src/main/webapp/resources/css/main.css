@@ -4704,5 +4704,170 @@ input.num-product::-webkit-outer-spin-button, input.num-product::-webkit-inner-s
 	display: flex;
 	
 }
+
+/* 결제페이지 */
+
+.pay_section {
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+	top : 82.5px;
+	min-height: 1000px;
+	position: relative;
+	
+}
+
+@media(max-width:991px) { .pay_section { top: auto; } }
+		  
+
+
+
+.pay_body{
+	width: auto;
+}
+.pay_body .body-1 p{
+	text-align: center;
+    font-weight: bold;
+    font-size: 22px;
+}
+.pay_body .body-1 .body-1-1{
+	    margin-left: -65px;
+}
+.pay_body .body-2{
+	display: flex;
+}
+.pay_body .body-2{
+	height: 100px;
+	border-bottom: 2px solid rgba(190, 190, 190, 0.8);
+}
+.pay_body .body-2 .body-2-1 .body-2-1-1 .item_image{
+	width: 80px;
+    height: 80px;
+    margin: 0px 10px 0 10px;
+}
+.pay_body .body-2 .body-2-2 .body-2-2-1{
+	font-weight: 500;
+    font-size: 20px;
+}
+.pay_body .body-2 .body-2-2 .body-2-2-2{
+	color: #6a6464;
+    font-size: 16px;
+    font-weight: 500;
+}
+.pay_body .body-3{
+	margin-top: 15px;
+}
+.pay_body .body-3 .body-3-1{
+	font-size: 20px;
+    font-weight: 600;
+}
+.pay_body .body-3 .address {
+	width: 350px;
+    height: 40px;
+    border-radius: 5px;
+	border: 1px solid rgb(170 170 170 / 80%);
+	margin-bottom: 5px;
+	padding-left : 10px;
+}
+.pay_body .body-3 .address-search{
+	position: absolute;
+    margin: -40px 0px 0px 270px;
+    z-index: 1;
+    border-radius: 5px;
+    height: 30px;
+    background: rgb(187 187 187 / 50%);
+    padding: 0 5px 0 5px;
+}
+.pay_body .body-3 .detail-address{
+	border: 1px solid rgb(170 170 170 / 80%);
+	width: 350px;
+    height: 40px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    padding-left : 10px;
+}
+.pay_body .body-3 .post-message{
+	border: 1px solid rgb(170 170 170 / 80%);
+	width: 350px;
+    height: 40px;
+    border-radius: 5px;
+    padding-left : 10px;
+}
+.pay_body .body-3 img{
+	width: 30px;
+	height: 30px;
+	position: absolute;
+    margin: -35px 0 0 315px;
+    z-index: 1;
+}
+.pay_body .body-3 .massage-option-sel {
+	width: 220px;
+    margin-left: 130px;
+    position: absolute;
+    border-radius: 0 0 5px 5px;
+    border: 1px solid rgb(170 170 170 / 80%);
+    opacity: 0; /*임시*/
+}
+.pay_body .body-3 .massage-option-sel .sel-1,
+.pay_body .body-3 .massage-option-sel .sel-2,
+.pay_body .body-3 .massage-option-sel .sel-3,
+.pay_body .body-3 .massage-option-sel .sel-4,
+.pay_body .body-3 .massage-option-sel .sel-5{
+	border-bottom: 1px solid rgb(170 170 170 / 80%);
+	
+}
+.pay_body .body-3 .massage-option-sel .sel-1:hover,
+.pay_body .body-3 .massage-option-sel .sel-2:hover,
+.pay_body .body-3 .massage-option-sel .sel-3:hover,
+.pay_body .body-3 .massage-option-sel .sel-4:hover,
+.pay_body .body-3 .massage-option-sel .sel-5:hover,
+.pay_body .body-3 .massage-option-sel .sel-6:hover{
+	background: red;
+}
+.pay_body .body-4{
+	margin-top:15px;
+}
+.pay_body .body-4 .body-4-1{
+	font-size: 20px;
+    font-weight: 600;
+}
+.pay_body .body-4 .coin-posion{
+	position: absolute;
+    margin: -25px 0 0 215px;
+    font-size: 12px;
+}
+.pay_body .body-4 .panda-coin {
+	border: 1px solid rgb(170 170 170 / 80%);
+    width: 350px;
+    height: 40px;
+    border-radius: 5px;
+    padding-left: 10px;
+}
+.pay_body .body-4 .coinwon{
+	position: absolute;
+    margin: -30px 0 0 310px;
+}
+.pay_body .body-5 .pay-price{
+	font-size: 20px;
+    font-weight: 600;
+    margin-top:15px;
+}
+.pay_body .body-5 .body-5-1{
+	display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+input[type=number] {
+    -moz-appearance: textfield;
+}
 /* 추가 - 김태홍  손대면 안됍니다!!!!*/
 /*////////////////////////////////////////////////////////*/

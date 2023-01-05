@@ -26,7 +26,7 @@
 		
 		var cur_session='${user_id}';
 		
-		var cur_time = new Date().getTime();
+		
 		
 		var webSocket = {
 			init: function(param) {
@@ -34,11 +34,13 @@
 				this._initSocket();
 			},
 			sendChat: function() {
-				this._sendMessage('${user_id}','12','sadf','${param.bang_id}', 'CMD_MSG_SEND', cur_time, $('#message').val());
+				var cur_time = new Date().getTime();
+				this._sendMessage('${user_id}','12','${param.u}','${param.bang_id}', 'CMD_MSG_SEND', cur_time, $('#message').val());
 				$('#message').val('');
 			},
 			sendEnter: function() {
-				this._sendMessage('${user_id}','12','sadf','${param.bang_id}', 'CMD_ENTER', cur_time, $('#message').val());
+				var cur_time = new Date().getTime();
+				this._sendMessage('${user_id}','12','${param.u}','${param.bang_id}', 'CMD_ENTER', cur_time, $('#message').val());
 				$('#message').val('');
 			},
 			receiveMessage: function(msgData) {
@@ -49,7 +51,7 @@
 					var time_hour = (msg_time.getHours()>12)?"오후 "+(msg_time.getHours()-12):"오전 "+msg_time.getHours();
 					
 					if(msgData.send_id != cur_session) {
-						$('#divChatData').append("<div class='direct-chat-msg'><div class='direct-chat-info clearfix'><span class='direct-chat-name pull-left'>"+msgData.sell_id+"</span><span class='direct-chat-timestamp pull-right'>"+time_hour+" : "+msg_time.getMinutes()+"</span></div><div class='direct-chat-text'>"+msgData.msg+"</div></div>");
+						$('#divChatData').append("<div class='direct-chat-msg'><div class='direct-chat-info clearfix'><span class='direct-chat-name pull-left'>"+msgData.send_id+"</span><span class='direct-chat-timestamp pull-right'>"+time_hour+" : "+msg_time.getMinutes()+"</span></div><div class='direct-chat-text'>"+msgData.msg+"</div></div>");
 // 						$('#divChatData').scrollTop($('#divChatData')[0].scrollHeight);
 					}
 					else {

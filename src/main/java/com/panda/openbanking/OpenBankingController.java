@@ -59,7 +59,7 @@ public class OpenBankingController {
 		//정보를 들고  bank_main.jsp 이동
 		model.addAttribute("responseTokenVO", responseTokenVO);
 		
-		return "bank_main";
+		return "account/bank_main";
 	}
 
 	// 사용자 정보 조회
@@ -109,13 +109,12 @@ public class OpenBankingController {
 			model.addAttribute("withdrawOK", withdrawOK);
 			model.addAttribute("access_token", withdrawRequestVO.getAccess_token());
 			System.out.println("결과@@@@@@@@@@@@@ : " + withdrawOK);
-			// return "account/withdraw";
-			return "account/deposit";
+			 return "account/withdraw";
 		}
 		
 		//입금이체
 		@RequestMapping(value = "/deposit", method = RequestMethod.POST)
-		public @ResponseBody DepositResponseVO getDeposit(@RequestBody DepositRequestVO depositRequestVO,Model model)
+		public String  getDeposit(DepositRequestVO depositRequestVO,Model model)
 				throws Exception {
 			// Service 객체의 findAccount() 메서드를 호출하여 사용자 정보 조회
 			// => 파라미터 : AccountSearchRequestVO, 리턴타입 AccountSearchResponseVO
@@ -126,12 +125,10 @@ public class OpenBankingController {
 			System.out.println("@#@#@@#@#@#@@#갔다옴");
 			//System.out.println("##########################" + depositOK);
 			// Model 객체에 AccountSearchResponseVO 객체와 엑세스토큰 저장
-			model.addAttribute("withdrawOK", depositOK);
+			model.addAttribute("depositOK", depositOK);
 			model.addAttribute("access_token", depositRequestVO.getAccess_token());
 			System.out.println("결과###############" + depositOK);
-			// return "account/withdraw";
 			
-			
-			return depositOK;
+			return "account/deposit";
 		}
 }
