@@ -14,9 +14,14 @@ public interface MemberDAO {
 			//회원조회
 			public MemberVO getMember(String user_id)throws Exception;
 
-			public KakaoVO findkakao(HashMap<String, Object> userInfo)throws Exception;
+			public HashMap<String, Object> findkakao(HashMap<String, Object> userInfo)throws Exception;
 
 			public void kakaoinsert(HashMap<String, Object> userInfo)throws Exception;
 			
+			
+			//이메일인증~
+			int updateMailKey(MemberVO vo) throws Exception;
+			int updateMailAuth(MemberVO vo) throws Exception;
+			int emailAuthFail(String id) throws Exception;
 			
 }

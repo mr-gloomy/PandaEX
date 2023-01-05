@@ -1,6 +1,7 @@
 package com.panda.controller;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 
@@ -28,8 +29,7 @@ public class MainPageController {
 	
 	// http://localhost:8080/main/index
 	@RequestMapping(value = "/index",method = RequestMethod.GET)
-	public void indexGET() {
-		
+	public void indexGET(HttpSession session) {
 		logger.debug(" 메인페이지 GET() 호출123123 ");
 		
 	}

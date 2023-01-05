@@ -61,11 +61,10 @@ public class ChattingHandler extends TextWebSocketHandler {
 			map.put("receive_id", mapReceive.get("receive_id"));
 			
 			String bang_id = service.getRoom(map);
-			logger.info(bang_id);
 			
 			if (bang_id!=null) {
 				List msgs = service.getMsg(bang_id);
-				logger.info(msgs.toString());
+				
 				for (int i=0;i<msgs.size();i++) {
 					String msg = (String)msgs.get(i);
 					session.sendMessage(new TextMessage(msg));
@@ -82,12 +81,12 @@ public class ChattingHandler extends TextWebSocketHandler {
 				WebSocketSession sess = (WebSocketSession) mapSessionList.get("session");
 				
 				if (bang_id.equals(mapReceive.get("bang_id"))) {
-					Map<String, String> mapToSend = new HashMap<String, String>();
+					Map<String, Object> mapToSend = new HashMap<String, Object>();
 					mapToSend.put("send_id",id);
 					mapToSend.put("bang_id", bang_id);
 					mapToSend.put("cmd", "CMD_MSG_SEND");
 					mapToSend.put("msg", (String)mapReceive.get("msg"));
-//					mapToSend.put("msg_date",mapReceive.get("cur_time"));
+					mapToSend.put("msg_date",mapReceive.get("time"));
 					
 					String jsonStr = objectMapper.writeValueAsString(mapToSend);
 					sess.sendMessage(new TextMessage(jsonStr));
@@ -97,10 +96,11 @@ public class ChattingHandler extends TextWebSocketHandler {
 					chatMap.put("bang_id", mapReceive.get("bang_id"));
 					chatMap.put("goods_no", Integer.parseInt(mapReceive.get("goods_no")));
 					chatMap.put("message", jsonStr);
-//					chatMap.put("msg_date", Long.parseLong(mapReceive.get("cur_time")));
+					chatMap.put("msg_date", mapReceive.get("time"));
 					service.recordMsg(chatMap);
 					
-					logger.info(jsonStr);
+					logger.info(chatMap.toString());
+					logger.info("str : "+jsonStr);
 				}
 			}
 			break;

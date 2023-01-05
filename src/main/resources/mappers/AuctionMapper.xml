@@ -28,7 +28,13 @@
 		where auction_no = #{auction_no}
 	</select>
 	
-	
+	<!-- 사용자 정보 조회 -->
+   	<select id="getUser" resultType="AuctionVO">
+      SELECT A.*, B.* 
+      FROM auction A join user B 
+      on A.user_no = B.user_no
+      where A.user_no = #{user_no};
+   	</select>	
 	
 	
 	

@@ -1,0 +1,33 @@
+@charset "UTF-8";
+.pagination {
+    white-space: nowrap; 
+
+    overflow: hidden;
+}
+.pagination > a {
+    color: #3B7DDD;
+    text-decoration: none;
+    border-radius: 0.2rem;
+	background-color: white;
+	
+	border: solid 1px #d6d6d6;
+
+    display: inline-block;
+    min-width: 2em;
+    padding: 0.25em;
+
+    text-align: center;
+}
+
+.pagination > a.active {
+	border-radius: 0.2rem;
+	background-color: #3B7DDD;
+    color: white;
+    border: solid 1px #3B7DDD;
+}
+
+.pagination > a:hover {
+	background-color: #3B7DDD;
+	border: solid 1px #3B7DDD;
+	color: white; 
+}

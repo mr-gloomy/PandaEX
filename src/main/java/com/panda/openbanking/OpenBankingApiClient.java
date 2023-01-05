@@ -178,7 +178,6 @@ public class OpenBankingApiClient {
 																		// httpHeaders
 //		HttpEntity<String> param=
 //				new HttpEntity<String>(setHeaderAccessToken(accountSearchRequestVO.getAccess_token()));
-		
 		String requestUrl = "https://testapi.openbanking.or.kr/v2.0/transfer/withdraw/fin_num";
 //		https://openapi.openbanking.or.kr/v2.0/transfer/withdraw/fin_num
 			

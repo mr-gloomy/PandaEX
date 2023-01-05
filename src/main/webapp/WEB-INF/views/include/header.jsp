@@ -25,6 +25,104 @@
 	</script>
 
 
+	<script type="text/javascript">
+        $(document).ready(function(){
+        	
+        	$("#user_id").keyup(function(){
+        		//alert("이벤트!");
+        		//키보드 입력시마다, 입력된 아이디 정보가 사용가능한지 확인(DB)
+        		
+        		//$("#userIDdiv").append("@");
+        		//$("#userIDdiv").text("@");
+        		//$("#userIDdiv").html("<h2> @ </h2>");
+        		
+        		//alert($("#userid").val());
+        	
+	        		// 문제 없을때(5~10자리 일때)
+	        		// 해당 아이디 정보가,디비에 있는지 체크
+	        		// GET 방식 - /members/ckID + 데이터
+	        		$.ajax({
+	        			type:"GET",
+	        			url:"/members/ckID",
+	        			data:{userid:$("#user_id").val()},
+	        			success:function(){
+	        				//alert("성공");
+	        				if(data == "OK"){
+	        	        		$("#userIDdiv").html("<font color='blue'> 정상적인 아이디 사용입니다 </font>");
+	        				}else{
+	        	        		$("#userIDdiv").html("<font color='green'> 이미 사용중인 아이디입니다 </font>");
+
+	        			
+	        		});
+	        		
+	        		$("#userIDdiv").html("<font color='blue'> 정상적인 아이디 사용입니다 </font>");
+        		}
+        		
+        	
+        });    
+     </script>
+<script>	
+	$(document).ready(function(){
+		// 저장된 쿠키값을 가져와서 ID 칸에 넣어준다. 없으면 공백으로 들어감.
+	    var key = getCookie("key");
+	    $("#id").val(key); 
+	     
+	    // 그 전에 ID를 저장해서 처음 페이지 로딩 시, 입력 칸에 저장된 ID가 표시된 상태라면,
+	    if($("#id").val() != ""){ 
+	        $("chk_id").attr("checked", true); // ID 저장하기를 체크 상태로 두기.
+	    }
+	     
+	    $("#chk_id").change(function(){ // 체크박스에 변화가 있다면,
+	        if($("#chk_id").is(":checked")){ // ID 저장하기 체크했을 때,
+	            setCookie("key", $("#id").val(), 7); // 7일 동안 쿠키 보관
+	        }else{ // ID 저장하기 체크 해제 시,
+	            deleteCookie("key");
+	        }
+	    });
+	     
+	    // ID 저장하기를 체크한 상태에서 ID를 입력하는 경우, 이럴 때도 쿠키 저장.
+	    $("#id").keyup(function(){ // ID 입력 칸에 ID를 입력할 때,
+	        if($("#chk_id").is(":checked")){ // ID 저장하기를 체크한 상태라면,
+	            setCookie("key", $("#id").val(), 7); // 7일 동안 쿠키 보관
+	        }
+	    });
+
+	// 쿠키 저장하기 
+	// setCookie => saveid함수에서 넘겨준 시간이 현재시간과 비교해서 쿠키를 생성하고 지워주는 역할
+	function setCookie(cookieName, value, exdays) {
+		var exdate = new Date();
+		exdate.setDate(exdate.getDate() + exdays);
+		var cookieValue = escape(value)
+				+ ((exdays == null) ? "" : "; expires=" + exdate.toGMTString());
+		document.cookie = cookieName + "=" + cookieValue;
+	}
+
+	// 쿠키 삭제
+	function deleteCookie(cookieName) {
+		var expireDate = new Date();
+		expireDate.setDate(expireDate.getDate() - 1);
+		document.cookie = cookieName + "= " + "; expires="
+				+ expireDate.toGMTString();
+	}
+     
+	// 쿠키 가져오기
+	function getCookie(cookieName) {
+		cookieName = cookieName + '=';
+		var cookieData = document.cookie;
+		var start = cookieData.indexOf(cookieName);
+		var cookieValue = '';
+		if (start != -1) { // 쿠키가 존재하면
+			start += cookieName.length;
+			var end = cookieData.indexOf(';', start);
+			if (end == -1) // 쿠키 값의 마지막 위치 인덱스 번호 설정 
+				end = cookieData.length;
+                console.log("end위치  : " + end);
+			cookieValue = cookieData.substring(start, end);
+		}
+		return unescape(cookieValue);
+	}
+</script>
+
 
 
 
@@ -110,7 +208,7 @@
 							</c:if>
 							<c:if test="${user_id != null}">
 								<p>
-									<span>${sessionScope.user_id}/${sessionScope.user_nick }</span> 님 환영합니다
+									<span>${sessionScope.user_id}</span> 님 환영합니다
 								</p>
 								<ul>
 									<li><a class="my" href="#">내 정보<img class="right"
@@ -127,6 +225,11 @@
 									
 								</div>
 							</c:if>
+							
+							
+							 
+							 
+							 <!-- 관리자  -->
 							<c:if test="${user_id ne '' and adminchk lt '1'}">
 								<p style="margin-bottom: 5px;">
 									<span class="login-admin">${admin }</span> 님 환영합니다
@@ -280,26 +383,26 @@
 			<img src="/resources/images/icons/division-line.png">
 			<p>Social Login</p>
 			<img src="/resources/images/icons/division-line.png">
-		</div>
+		
 			 
-			 <a class="p-2" href="https://kauth.kakao.com/oauth/authorize?client_id=d2adbec5b44fdcc0559d1e3ca898739e&redirect_uri=http://localhost:8080/main/index&response_type=code">
+			 <a class="p-2" href="https://kauth.kakao.com/oauth/authorize?client_id=d2adbec5b44fdcc0559d1e3ca898739e&redirect_uri=http://localhost:8080/member/kakaoLogin&response_type=code">
 			 
-			<img src="/resources/images/icons/kakao_login_large_wide.png"" style="width:268pt;height:50pt;margin:auto;"><br><br>
+			<img src="/resources/images/icons/kakao_login_large_wide.png" style="width:268pt;height:50pt;margin:auto;"><br><br>
 			 </a>
-			 
+			 </div>
 			 
 			 
 			 
 		<div class="modal-join">
 		<form action="/member/insert" method="post">
 			<div class="join-text">
-				<input id="user-id-join" type="text" placeholder="아이디" maxlength="10" autocomplete="off" name="user_id">
+				<input id="user-id-join" type="text" placeholder="아이디" maxlength="10" autocomplete="on" name="user_id" required>
 				<div id="tooltip" class="idtooltip">아이디는 영어,숫자 5~10글자, 한글,특수문자 사용불가</div>
 				<input id="user-pw-join" type="password" placeholder="비밀번호"maxlength="15"
 				onkeypress="chkCapsLock2(event)" onclick="chkCapsLock2(event)"
-				onblur="chkCapsLock3(event)" autocomplete="new-password" name="user_pw">
+				onblur="chkCapsLock3(event)" autocomplete="new-password" name="user_pw" required>
 				<img class="capsl" src ="/resources/images/icons/capslock.png" alt="캡스락">
-				<div id="tooltip" class="pwtooltip">비밀번호는 영어대/소문자, 숫자, 특수기호 포함 8~15글자, 한글사용 불가</div>
+				<div id="tooltip" class="pwtooltip">첫 글자 대/소문자, 숫자, 특수기호 포함 8~15글자, 한글사용 불가</div>
 				<div class="passlv">
 					<div class="passlv-info">비밀번호 안전도 :</div>
 					<div class="lv-info"></div>
@@ -308,9 +411,9 @@
 					<input type="text" readonly class="lv3" tabindex="-1">
 					<!-- 비밀번호는 영어대/소문자,숫자,특수기호 8~15글자, 한글사용불가 -->
 				</div>
-				<input id="user-name-join" type="text" placeholder="이름입력" maxlength="6" autocomplete="off" name="user_name">
+				<input id="user-name-join" type="text" placeholder="이름입력" maxlength="6" autocomplete="off" name="user_name" required>
 				<div id="tooltip" class="nametooltip">본명을 입력해주세요</div>
-				<input id="user-nick-join" type="text" placeholder="닉네임" maxlength="10" autocomplete="off" name="user_nick">
+				<input id="user-nick-join" type="text" placeholder="닉네임" maxlength="10" autocomplete="off" name="user_nick" required>
 				<div id="tooltip" class="nicktooltip" >사용하실 닉네임을 입력해주세요.</div>
 				<div class="tellsel">
 					<div id="tel">
@@ -322,21 +425,21 @@
 								<div class="lgu">LGU+</div>
 							</div>
 					</div>
-					<input id="user-tel-join" class="telephone" type="tel" placeholder="핸드폰번호"
-						maxlength="13" autocomplete="off" name="user_tel"> <input type="button"
-						class="tel-certification" value="문자전송" tabindex="-1">
-				</div>
-				<div id="tooltip" class="teltooltip">핸드폰번호를 입력하세요.</div>
+					<input id="user-tel-join" class="telephone" type="tel" placeholder="전화번호"
+						maxlength="13" autocomplete="off" name="user_tel" required> 
+											</div>
+				<br>
+				
 				<div id="telephone-certification">
-					<input class="telephone-certification" type="tel"
-						placeholder="인증번호" maxlength="6"> <input type="button"
-						id="tel-certification" value="인증확인" tabindex="-1">
 					<input type="hidden" class="sucess-certification" value="" memo="인증완료 시 밸류값저장(0/1)" tabindex="-1">
+					<input type="email"
+						placeholder="이메일 주소!" name="user_email" required> 
+						
 				</div>
 				<div class="mylocation">우리동네 조회하기</div>
 				<div class="findloca"> <!-- 배열로 넣기  -->
-					<input type="text" id="si" readonly tabindex="-1" name="addr[0]"> 
-					<input type="text" id="gu" readonly tabindex="-1" name="addr[1]"> 
+					<input type="text" id="si" readonly tabindex="-1" name="user_area"> 
+					<input type="text" id="gu" readonly tabindex="-1" name="user_addr"> 
 					<img src="/resources/images/icons/placeholder.png" id="findlocation">
 				</div>
 				<div class="locationfind-false">&nbsp;</div>
@@ -353,44 +456,6 @@
 			</form>
 		</div>	
 		
-		<script type="text/javascript">
-        $(document).ready(function(){
-        	
-        	$("#user_id").keyup(function(){
-        		//alert("이벤트!");
-        		//키보드 입력시마다, 입력된 아이디 정보가 사용가능한지 확인(DB)
-        		
-        		//$("#userIDdiv").append("@");
-        		//$("#userIDdiv").text("@");
-        		//$("#userIDdiv").html("<h2> @ </h2>");
-        		
-        		//alert($("#userid").val());
-        	
-	        		// 문제 없을때(5~10자리 일때)
-	        		// 해당 아이디 정보가,디비에 있는지 체크
-	        		// GET 방식 - /members/ckID + 데이터
-	        		$.ajax({
-	        			type:"GET",
-	        			url:"/members/ckID",
-	        			data:{userid:$("#user_id").val()},
-	        			success:function(){
-	        				//alert("성공");
-	        				if(data == "OK"){
-	        	        		$("#userIDdiv").html("<font color='blue'> 정상적인 아이디 사용입니다 </font>");
-	        				}else{
-	        	        		$("#userIDdiv").html("<font color='green'> 이미 사용중인 아이디입니다 </font>");
-
-	        			
-	        		});
-	        		
-	        		$("#userIDdiv").html("<font color='blue'> 정상적인 아이디 사용입니다 </font>");
-        		}
-        		
-        	
-        });    
-     </script>
-     
-     
      
 		<div class="modal-findid">
 			<div class="findid-input">

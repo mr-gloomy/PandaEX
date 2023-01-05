@@ -62,6 +62,14 @@ public class AuctionDAOImpl implements AuctionDAO{
 		
 		return avo;
 	}
+
+	// 사용자 정보 조회
+	@Override
+	public AuctionVO getUser(Integer user_no) throws Exception {
+		mylog.debug("getUser(Integer user_no) 호출");
+		AuctionVO avo1 = sqlSession.selectOne(NAMESPACE + ".getUser", user_no);
+		return avo1;
+	}
 	
 	
 	

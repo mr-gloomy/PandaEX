@@ -347,42 +347,42 @@
       });
       $('.modal-body').css("height", "500px");
    });
-	/* 채팅봇 */
-	var bot = $('.chat-bot');
-	$(bot).on('click', function() {
-		ht.open();
-	});
-	/* 로그인 모달창 제어 */
-	$('.usermodal').click(function() {
-		$('html').css({
-			'overflow' : 'hidden'
-		});
-		$(".login-modal").css("display", "flex");
-		$(".back-joinpage").hide();
-		$(".modal-join").hide();
-		$('.modal-text').fadeIn();
-		$('.login-submit').fadeIn();
-		$('.find').fadeIn();
-		$('.join').fadeIn();
-		$('.social-login').fadeIn();
-		$('.kakaologin').fadeIn();
-		$('.modal-top').text("PANDA LOGIN");
-		$('.modal-body').css("height", "500px");
-		$('.modal-findid').fadeOut();
-		$('.modal-findpw').fadeOut();
-		event.preventDefault();
-		event.stopPropagation();
-		return false;
-		
-	});
-	$('.modalhide').on('click', function() {
-		$('.login-modal').css("display", "none");
-		$('#element').off('scroll touchmove mousewheel');
-		$('html').css({
-			'overflow' : 'visible'
-		});
-		$('.modal-body').css("height", "500px");
-	});
+   /* 채팅봇 */
+   var bot = $('.chat-bot');
+   $(bot).on('click', function() {
+      ht.open();
+   });
+   /* 로그인 모달창 제어 */
+   $('.usermodal').click(function() {
+      $('html').css({
+         'overflow' : 'hidden'
+      });
+      $(".login-modal").css("display", "flex");
+      $(".back-joinpage").hide();
+      $(".modal-join").hide();
+      $('.modal-text').fadeIn();
+      $('.login-submit').fadeIn();
+      $('.find').fadeIn();
+      $('.join').fadeIn();
+      $('.social-login').fadeIn();
+      $('.kakaologin').fadeIn();
+      $('.modal-top').text("PANDA LOGIN");
+      $('.modal-body').css("height", "500px");
+      $('.modal-findid').fadeOut();
+      $('.modal-findpw').fadeOut();
+      event.preventDefault();
+      event.stopPropagation();
+      return false;
+      
+   });
+   $('.modalhide').on('click', function() {
+      $('.login-modal').css("display", "none");
+      $('#element').off('scroll touchmove mousewheel');
+      $('html').css({
+         'overflow' : 'visible'
+      });
+      $('.modal-body').css("height", "500px");
+   });
 
 })(jQuery);
 /* 로그인창 캡스락 알림 */
@@ -848,7 +848,7 @@ $('#user-pw-join').on("blur keyup", function() {
    var lv2 = $(".lv2");
    var lv3 = $(".lv3");
    var lvinfo = $(".lv-info");
-   var nouse = "비밀번호는 영어대/소문자, 숫자, 특수기호 포함 8~15글자, 한글사용 불가";
+   var nouse = "비밀번호는 첫글자는 대문자! 소문자, 숫자, 특수기호 포함 8~15글자, 한글사용 불가";
    var reg = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
    var use = "사용가능한 비밀번호입니다.";
    $(this).val($(this).val().replace(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g, ''));

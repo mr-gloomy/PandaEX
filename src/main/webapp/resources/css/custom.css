@@ -1,0 +1,233 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'yg-jalnan';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* 커스텀 스타일 */
+
+#login-bg {
+	object-fit: cover;
+    width: 100%;
+    height: 850px;
+}
+
+.chatbotArea {
+	width: 70px;
+	height: 70px;
+	position: fixed;
+	bottom: 10%;
+	right: 10%;
+	z-index: 3000;
+}
+
+.text-start {
+	text-align: left;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.fs-large {
+	font-size: 1.5em;
+}
+
+pre {
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 1rem;
+}
+
+.navbar-brand img {
+    width: 127px;
+}
+
+nav form {
+    width: 400px;
+}
+
+nav .fa-magnifying-glass {
+    top: 12px;
+    right: 25px;
+}
+
+nav .profile {
+	object-fit: cover;
+	width: 40px;
+	height: 40px;  
+}
+
+footer p {
+    font-size: 0.8em;
+}
+
+footer li {
+    font-size: 0.9em;
+}
+
+.gps {
+    border-radius: 50px;
+}
+
+.gps .col {
+    border-radius: 0 50px 50px 0;
+}
+
+.gps span {
+    color: #F9FFB4;
+}
+
+.gps .btn {
+    bottom: 12%;
+    right: 2%;
+    z-index: 2;
+}
+
+.card-img-top {
+    height: 14rem;
+    object-fit: cover;
+}
+
+.card-img-custom {
+    border-radius: 0.5rem;
+    border: 1px solid rgba(0, 0, 0, .1);
+}
+
+.card-img-overlay {
+	text-align: right;
+}
+	
+#deadline {
+	font-size: 0.8em;
+	border-radius: 0 0.5rem 0 0.5em;
+}
+
+.category-img {
+    border-radius: 50%;
+    width: 59px;
+    border: 1px solid rgba(0, 0, 0, .1);	
+}
+
+.category-name {
+	font-size: 0.8em;
+}
+	
+.category-link:hover {
+	text-decoration: none;
+}
+
+.category-btn {
+	cursor: pointer;
+}
+
+.category-btn:first-child {
+	text-align: right;
+	max-width: 6%;
+}
+
+pre {
+    white-space: pre-wrap;
+}
+
+.fs-small {
+	font-size: 0.9em;
+}
+
+/* 부트스트랩 스타일 변경 */
+
+.fw-bold {
+    font-weight: bold;
+}
+
+input::-ms-clear,
+input::-ms-reveal {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+input::-webkit-search-decoration,
+input::-webkit-search-cancel-button,
+input::-webkit-search-results-button,
+input::-webkit-search-results-decoration {
+    display: none;
+}
+
+.form-check {
+    display: block;
+    min-height: 1.5rem;
+    padding-left: 1.5em;
+    margin-bottom: 0.125rem;
+}
+
+.form-check .form-check-input {
+    float: left;
+    margin-left: -1.5em;
+    margin-top: 0.3em;
+}
+
+.form-check-input {
+    width: 1em;
+    height: 1em;
+    margin-top: 0.25em;
+    vertical-align: top;
+    background-color: #fff;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-print-color-adjust: exact;
+    color-adjust: exact;
+}
+
+.form-check-input[type=checkbox] {
+    border-radius: 0.25em;
+}
+
+.form-check-input[type=radio] {
+    border-radius: 50%;
+}
+
+.form-check-input:active {
+    filter: brightness(90%);
+}
+
+.form-check-input:focus {
+    border-color: rgba(245, 48, 62, 1);
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(245, 48, 62, 0.25);
+}
+
+.form-check-input:checked {
+    background-color: #f5303e;
+    border-color: #f5303e;
+}
+
+.form-check-input:checked[type=checkbox] {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10l3 3l6-6'/%3e%3c/svg%3e");
+}
+
+.form-check-input:checked[type=radio] {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2' fill='%23fff'/%3e%3c/svg%3e");
+}
+
+.form-check-input[type=checkbox]:indeterminate {
+    background-color: #f5303e;
+    border-color: #f5303e;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10h8'/%3e%3c/svg%3e");
+}
+
+.form-check-inline {
+    display: inline-block;
+    margin-right: 1rem;
+}
+
+[v-cloak] {
+	display: none !important;
+}
