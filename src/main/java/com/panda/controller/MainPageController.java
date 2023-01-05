@@ -35,7 +35,7 @@ public class MainPageController {
 	}
 	
 	@GetMapping("/chat")
-	public String chat(Model model,ChatVO vo,String bang_id) throws Exception{
+	public String chat(Model model,ChatVO vo,String bang_id, String u) throws Exception{
 		
 		if (vo!=null) {
 			bang_id = service.getRoom(vo);
@@ -48,6 +48,7 @@ public class MainPageController {
             }
 		}
 		model.addAttribute("bang_id",bang_id);
+		model.addAttribute("u",u);
 		return "/addon/chat";
 	}
 	
