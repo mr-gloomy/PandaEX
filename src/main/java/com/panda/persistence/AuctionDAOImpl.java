@@ -1,6 +1,7 @@
 package com.panda.persistence;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -69,6 +70,11 @@ public class AuctionDAOImpl implements AuctionDAO{
 		mylog.debug("getUser(Integer user_no) 호출");
 		AuctionVO avo1 = sqlSession.selectOne(NAMESPACE + ".getUser", user_no);
 		return avo1;
+	}
+
+	@Override
+	public List<Map<String, Object>> getAuctions(String category) throws Exception {
+		return sqlSession.selectList(NAMESPACE+".getAuctions",category);
 	}
 	
 	

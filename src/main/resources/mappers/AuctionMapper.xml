@@ -36,7 +36,9 @@
       where A.user_no = #{user_no};
    	</select>	
 	
-	
+	<select id="getAuctions" resultType="Map">
+		select * from auction where auction_category=#{category}
+	</select>
 	
 	
 	

@@ -1,6 +1,7 @@
 package com.panda.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,6 +53,11 @@ public class AuctionServiceImpl implements AuctionService {
 	public AuctionVO getUser(Integer user_no) throws Exception {
 		mylog.debug("getUser(Integer user_no) 호출");
 		return adao.getUser(user_no);
+	}
+
+	@Override
+	public List<Map<String, Object>> getAuctions(String category) throws Exception {
+		return adao.getAuctions(category);
 	}
 	
 	
