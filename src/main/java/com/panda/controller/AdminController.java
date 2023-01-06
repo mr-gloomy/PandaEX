@@ -39,8 +39,9 @@ public class AdminController {
 		mylog.debug(" mainGET() 호출 ");
 	}
 	
-	// 공지사항 게시판 작성페이지 GET
 	
+	
+	// 공지사항 게시판 작성페이지 GET
 	// http://localhost:8080/admin/boardRegist
 	@RequestMapping(value = "/boardRegist",method = RequestMethod.GET)
 	public void boardRegistGET()throws Exception{

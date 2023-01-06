@@ -8,10 +8,9 @@
 	
 	<!-- 상품 등록(user_nick 빠짐) -->
 	<insert id="createGoods">
-		insert into goods(goods_category,goods_title,goods_condition,goods_price,goods_discount,goods_detail,goods_refund,goods_like,file1)
-		values(#{goods_category},#{goods_title},#{goods_condition},#{goods_price},#{goods_discount},#{goods_detail},#{goods_refund},#{goods_like},#{file1})
+		insert into goods(goods_category,goods_title,goods_condition,goods_price,goods_discount,goods_detail,goods_refund,goods_trade,uploadFile)
+		values(#{goods_category},#{goods_title},#{goods_condition},#{goods_price},#{goods_discount},#{goods_detail},#{goods_refund},#{goods_trade},#{uploadFile})
 	</insert> 
-	
 	
 	<!-- 상품 목록(all) -->
 	<select resultType="GoodsVO"  id="listAll">
@@ -20,8 +19,8 @@
 		
 	<!-- 글 조회수 1증가 -->
  	<update id="updateViewcnt">
- 		update goods set goods_viewcount = goods_viewcount+1
- 		where goods_no = #{goods_no} 
+ 		update goods set viewcount = viewcount+1
+ 		where goods_no=#{goods_no} 
  	</update>
  	
  	<!-- 글번호(goods_no) 글정보 모두 조회 -->
@@ -31,15 +30,21 @@
  	
  	<!-- 글정보 수정 -->
  	<update id="updateGoods">
- 		update goods set #{goods_category},#{goods_title},#{goods_condition},#{goods_price},#{goods_discount},#{goods_detail},#{goods_refund},#{goods_like},#{file1}
+ 		update goods set goods_category=#{goods_category},goods_title=#{goods_title},goods_condition=#{goods_condition},goods_price=#{goods_price},
+ 		goods_discount=#{goods_discount},goods_detail=#{goods_detail},goods_refund=#{goods_refund},uploadFile=#{uploadFile}
  		where goods_no=#{goods_no}
  	</update>
  	
  	<!-- 글정보 삭제 -->
- 	<delete id="deleteGoods">
+ 	<delete id="removeGoods">
  		delete from goods where goods_no = #{goods_no }
  	</delete>
 	
-	
+
+	<!-- 게시판 글전체 개수 -->
+   <select id="totalcount" resultType="int">
+        select count(goods_no) from goods_no  
+   </select>
+
 
 </mapper>
