@@ -19,7 +19,7 @@
 		
 	<!-- 글 조회수 1증가 -->
  	<update id="updateViewcnt">
- 		update goods set viewcount = viewcount+1
+ 		update goods set viewcount = viewcount+1 
  		where goods_no=#{goods_no} 
  	</update>
  	

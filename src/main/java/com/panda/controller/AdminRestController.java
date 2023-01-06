@@ -19,8 +19,8 @@ import com.panda.domain.PageVO;
 import com.panda.service.BoardService;
 
 
-@RestController
-@RequestMapping(value = "/admins")
+//@RestController
+//@RequestMapping(value = "/admins")
 public class AdminRestController {
 	
 	
