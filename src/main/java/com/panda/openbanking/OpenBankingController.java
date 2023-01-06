@@ -110,14 +110,14 @@ public class OpenBankingController {
 			WithdrawResponseVO withdrawOK = openBankingService.getwithdraw(withdrawRequestVO);
 			
 			resultRequestVO.setAccess_token(withdrawRequestVO.getAccess_token());
-			resultRequestVO.setCheck_type("1");
-			resultRequestVO.setTran_dtime("20230106023000");
+			resultRequestVO.setCheck_type("1"); // 출금 : 1
+			resultRequestVO.setTran_dtime("20230106093000"); // 요청일시
 			resultRequestVO.setReq_cnt("1");
 
-			resultVO.setTran_no("1");
-			resultVO.setOrg_bank_tran_id(withdrawRequestVO.getBank_tran_id());
-			resultVO.setOrg_bank_tran_date(withdrawRequestVO.getTran_dtime());
-			resultVO.setOrg_tran_amt(withdrawRequestVO.getTran_amt());
+			resultVO.setTran_no("1"); 
+			resultVO.setOrg_bank_tran_id("F000000001ABCDE12345");
+			resultVO.setOrg_bank_tran_date("20190820000000");  // 원거래 거래일자
+			resultVO.setOrg_tran_amt("1000");
 			
 			ResultResponseVO withdrawResultOK = openBankingService.getResult(resultRequestVO, resultVO);
 
@@ -143,14 +143,14 @@ public class OpenBankingController {
 			System.out.println("@#@#@@#@#@#@@#갔다옴");
 			
 			resultRequestVO.setAccess_token(depositRequestVO.getAccess_token());
-			resultRequestVO.setCheck_type("1");
+			resultRequestVO.setCheck_type("2"); // 입금 : 2
 			resultRequestVO.setTran_dtime("20230106023000"); // 요청일시
 			resultRequestVO.setReq_cnt("1");
 
-			resultVO.setTran_no(depositVO.getTran_no());
-			resultVO.setOrg_bank_tran_id(depositVO.getBank_tran_id());
-			resultVO.setOrg_bank_tran_date(depositRequestVO.getTran_dtime()); // 원거래 거래일자
-			resultVO.setOrg_tran_amt(depositVO.getTran_amt());
+			resultVO.setTran_no("1"); 
+			resultVO.setOrg_bank_tran_id("F000000001ABCDE12345");
+			resultVO.setOrg_bank_tran_date("20190820000000");  // 원거래 거래일자
+			resultVO.setOrg_tran_amt("1000");
 			
 			ResultResponseVO depositResultOK = openBankingService.getResult(resultRequestVO, resultVO);
 
