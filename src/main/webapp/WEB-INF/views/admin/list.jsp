@@ -390,6 +390,7 @@
 					},error:function(data){
 						alert('에러');
 						console.log(data);
+						
 					}
 					
 				});

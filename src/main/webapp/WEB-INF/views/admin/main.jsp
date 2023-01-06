@@ -90,6 +90,13 @@
 	
 	
 	
+	<h2>회원관리</h2>
+	
+	
+	
+	
+	
+	
 	<!-- 푸터 -->
 <jsp:include page="../include/footer.jsp"/>
 	
