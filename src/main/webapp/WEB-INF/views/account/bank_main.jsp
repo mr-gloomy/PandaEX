@@ -61,7 +61,7 @@
 <!-- 		<input type="hidden" name="req_client_bank_code" value="004"> -->
 <!-- 		<input type="hidden" name="req_client_account_num" value="1101230000678"> -->
 		<input type="hidden" name="req_client_fintech_use_num" value="120220239188941217478246">
-		<input type="hidden" name="req_client_num" value="HONGGILDONG1234">
+		<input type="hidden" name="req_client_num" value="hyucky1234">
 		<input type="hidden" name="transfer_purpose" value="TR"> <!-- transfer_purpose 이체 용도 안내 송금:TR-->
 <!-- 		<input type="hidden" name="req_client_account_num" value="7777777777777777"> -->
 <!-- 		<input type="hidden" name="sub_frnc_name" value="하위가맹점"> -->

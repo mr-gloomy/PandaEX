@@ -10,9 +10,16 @@ public class RequestTokenVO { // 응답 메시지
 	private String client_secret;
 	private String redirect_uri;
 	private String grant_type;
+	private String register_info;
 	
 	
 	
+	public String getRegister_info() {
+		return register_info;
+	}
+	public void setRegister_info(String register_info) {
+		this.register_info = register_info;
+	}
 	public String getClient_id() {
 		return client_id;
 	}
@@ -60,6 +67,12 @@ public class RequestTokenVO { // 응답 메시지
 	}
 	public void setState(String state) {
 		this.state = state;
+	}
+	@Override
+	public String toString() {
+		return "RequestTokenVO [code=" + code + ", scope=" + scope + ", client_info=" + client_info + ", state=" + state
+				+ ", client_id=" + client_id + ", client_secret=" + client_secret + ", redirect_uri=" + redirect_uri
+				+ ", grant_type=" + grant_type + ", register_info=" + register_info + "]";
 	}
 	
 	
