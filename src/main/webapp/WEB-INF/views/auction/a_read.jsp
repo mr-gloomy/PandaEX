@@ -57,6 +57,7 @@ function CountDownTimer(dt, id) {
 	<br>
 	<br>
 	<br>
+<%-- 	${avooo } --%>
 <%-- 		${avo } --%>
 <%-- 		${avo1 } --%>
 
@@ -101,7 +102,7 @@ function CountDownTimer(dt, id) {
 				<span class="text-muted mr-3">카테고리</span><span
 					class="text-muted mr-3">&gt;</span><a
 					href=""><span
-					class="text-muted">${avo.auction_category}</span></a>
+					class="text-muted">${avooo.auction_category}</span></a>
 			</div>
 			<div class="row mt-4 py-4 border-bottom border-top">
 				<div class="col-5 p-0">
@@ -124,16 +125,16 @@ function CountDownTimer(dt, id) {
 				</div>
 				<div class="col ml-5 pl-3 pr-0 d-flex flex-column">
 					<div class="row pr-1 mb-3">
-						<h3 class="fw-bold">${avo.auction_title }</h3>
+						<h3 class="fw-bold">${avooo.auction_title }</h3>
 					</div>
 					<div class="row mb-3 mr-5">
 						<div class="col-3 p-0 text-muted">
-							<i class="fa-solid fa-gavel pr-2"></i><span id="count">${avo.auction_cnt }</span> 건
+							<i class="fa-solid fa-gavel pr-2"></i><span id="count">${avooo.auction_cnt }</span> 건
 						</div>
 						<div class="col text-muted p-0">
 							<i class="fa-solid fa-clock pr-2"></i> 
-								<fmt:formatDate value="${avo.auction_cdate }" pattern="yyyy-MM-dd HH:mm:ss"/> 마감 
-								<script>CountDownTimer('${avo.auction_cdate }','timer')</script>
+								<fmt:formatDate value="${avooo.auction_cdate }" pattern="yyyy-MM-dd HH:mm:ss"/> 마감 
+								<script>CountDownTimer('${avooo.auction_cdate }','timer')</script>
 								(<span id="timer"></span>)
 						</div>
 					</div>
@@ -146,7 +147,7 @@ function CountDownTimer(dt, id) {
 						<div class="col p-0">
 							<h3 class="text-primary fw-bold">
 								<span id="openingBid" class="comma">
-								<fmt:formatNumber value="${avo.auction_price }"/>
+								<fmt:formatNumber value="${avooo.auction_price }"/>
 								</span> 원
 							</h3>
 							<h3 class="text-primary fw-bold" id="blind"
@@ -162,7 +163,7 @@ function CountDownTimer(dt, id) {
 						<div class="col p-0">
 							<h3 class="text-info fw-bold">
 								<span id="closingBid" class="comma">
-								<fmt:formatNumber value="${avo.auction_bid }"/>
+								<fmt:formatNumber value="${avooo.auction_bid }"/>
 								</span> 원
 							</h3>
 						</div>
@@ -219,13 +220,13 @@ function CountDownTimer(dt, id) {
 						<nav aria-label="breadcrumb">
 							<ol class="breadcrumb">
 								<li class="breadcrumb-item active">물품 상태 : <span
-									class="text-primary pl-1">${avo.auction_condition }</span></li>
+									class="text-primary pl-1">${avooo.auction_condition }</span></li>
 							</ol>
 						</nav>
 					</div>
 					<div class="row">
 						<p class="text-muted pr-4">
-							${avo.auction_detail }
+							${avooo.auction_detail }
 						</p>
 					</div>
 				</div>
@@ -239,8 +240,8 @@ function CountDownTimer(dt, id) {
 								src="/resources/image/default_attachment.jpg">
 						</div>
 						<div class="col ml-4">
-							<h6 class="row fw-bold mb-2">${avo1.user_nick }</h6>
-							<h6 class="row text-muted">${avo1.user_area } ${avo1.user_addr }</h6>
+							<h6 class="row fw-bold mb-2">${avooo.user_nick }</h6>
+							<h6 class="row text-muted">${avooo.user_area } ${avooo.user_addr }</h6>
 						</div>
 					</div>
 					<div class="row ml-3 py-3 border-bottom">
@@ -253,7 +254,7 @@ function CountDownTimer(dt, id) {
 					</div>
 					<div class="row ml-3 pt-3 pb-2">
 						<div class="text-muted">가입일 : 
-						<fmt:formatDate value="${avo1.user_regdate }" pattern="yyyy-MM-dd"/></div>
+						<fmt:formatDate value="${avooo.user_regdate }" pattern="yyyy-MM-dd"/></div>
 					</div>
 					<div class="row ml-3">
 						<div class="text-muted">누적 제재 : 4회</div>

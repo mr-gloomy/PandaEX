@@ -91,12 +91,16 @@ public class AuctionController {
 		}
 		
 		// 서비스 -> DAO (특정 글번호에 해당하는 정보 가져오기)
-		AuctionVO avo = service.getAuction(auction_no);
-		AuctionVO avo1 = service.getUser(user_no);
+//		AuctionVO avo = service.getAuction(auction_no);
+//		AuctionVO avo1 = service.getUser(user_no);
+		AuctionVO vo = new AuctionVO();
+		vo.setAuction_no(auction_no);
+		vo.setUser_no(user_no);
+		//service.getAuctions(vo);
 		
 		// 연결된 뷰페이지로 정보 전달
-		model.addAttribute("avo", avo);
-		model.addAttribute("avo1", avo1);
+		model.addAttribute("avooo", service.getAuctions(vo));
+//		model.addAttribute("avo1", avo1);
 	}   
 	
 	
