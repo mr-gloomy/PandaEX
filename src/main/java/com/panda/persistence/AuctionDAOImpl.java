@@ -1,5 +1,6 @@
 package com.panda.persistence;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -55,27 +56,48 @@ public class AuctionDAOImpl implements AuctionDAO{
 	}
 
 	// 경매번호 사용한 정보 조회
-	@Override
-	public AuctionVO getAuction(Integer auction_no) throws Exception {
-		mylog.debug("getAuction(Integer auction_no) 호출");
-		
-		AuctionVO avo = sqlSession.selectOne(NAMESPACE + ".getAuction", auction_no);
-		
-		return avo;
-	}
+	 @Override 
+	 public AuctionVO getAuction(Integer auction_no) throws Exception {
+		 mylog.debug("getAuction(Integer auction_no) 호출");
+	
+		 AuctionVO avo = sqlSession.selectOne(NAMESPACE + ".getAuction", auction_no);
+	 
+		 return avo; 
+	 }
+	
 
 	// 사용자 정보 조회
-	@Override
+	@Override 
 	public AuctionVO getUser(Integer user_no) throws Exception {
-		mylog.debug("getUser(Integer user_no) 호출");
-		AuctionVO avo1 = sqlSession.selectOne(NAMESPACE + ".getUser", user_no);
-		return avo1;
+		mylog.debug("getUser(Integer user_no) 호출"); 
+		AuctionVO avo1 = sqlSession.selectOne(NAMESPACE + ".getUser", user_no); 
+		return avo1; 
 	}
 
+	
+	// 경매번호, 회원번호 정보 조회 
 	@Override
-	public List<Map<String, Object>> getAuctions(String category) throws Exception {
-		return sqlSession.selectList(NAMESPACE+".getAuctions",category);
+	public Map getAuctions(AuctionVO vo) throws Exception {
+		mylog.debug("dao auctions : "+sqlSession.selectList(NAMESPACE+".getAuctions",vo));
+		return sqlSession.selectOne(NAMESPACE+".getAuctions",vo);
 	}
+	
+
+	// 경매 상품 글 수정
+	@Override
+	public Integer updateAuction(AuctionVO avo) throws Exception {
+		mylog.debug("updateAuction(AuctionVO avo) 호출");
+		return sqlSession.update(NAMESPACE+"./updateAuction", avo);
+	}
+
+	
+	// 경매 상품 글 삭제
+	@Override
+	public Integer removeAuction(Integer auction_no) throws Exception {
+		mylog.debug("removeAuction(Integer auction_no) 호출");
+		return sqlSession.delete(NAMESPACE+".removeAuction", auction_no);
+	}
+
 	
 	
 	

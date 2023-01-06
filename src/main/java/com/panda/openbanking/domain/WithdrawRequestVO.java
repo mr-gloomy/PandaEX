@@ -32,8 +32,9 @@ public class WithdrawRequestVO {
 	public String getBank_tran_id() {
 		return "M202202391U"+ (int)((Math.random()+1)*100000000);
 	}
-	public void setBank_tran_id() {
-		this.bank_tran_id = "M202202391U"+ (Math.random()+1)*100000000;
+	public void setBank_tran_id(
+			String bank_tran_id) {
+		this.bank_tran_id = bank_tran_id;
 	}
 	public String getAccess_token() {
 		return access_token;

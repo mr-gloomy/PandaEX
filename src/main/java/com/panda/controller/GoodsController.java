@@ -1,16 +1,23 @@
 package com.panda.controller;
 
 import java.io.File;
-
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -23,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.panda.domain.GoodsVO;
@@ -43,12 +51,14 @@ public class GoodsController {
 	
 	// http://localhost:8080/goods/regist
 	// http://localhost:8080/goods/list
+	// http://localhost:8080/goods/modify?goods_no=61
 	
 	// 상품 글쓰기 GET
 	@RequestMapping(value = "/regist", method = RequestMethod.GET)
 	public void registGET() throws Exception {
 		mylog.debug(" /goods/regist(GET) 호출 -> 페이지 이동 ");		
 	}
+	
 	
 	// 파일 년/월/일 폴더생성
 	private String getFolder() {
@@ -76,8 +86,7 @@ public class GoodsController {
 
 		return false;
 	}
-
-			
+	
 	
 	// 상품 글쓰기 POST
 	@RequestMapping(value = "/regist", method = RequestMethod.POST)
@@ -135,7 +144,8 @@ public class GoodsController {
 				mylog.error(e.getMessage());
 			} 
 			
-		} // end for
+		} // end
+		
 		
 		// 3. 서비스 -> DAO 접근 (mapper)
 		service.insertGoods(vo);
@@ -148,9 +158,10 @@ public class GoodsController {
 	}
 	
 	
+	
 	// 상품목록(All)
 	@RequestMapping(value = "/list",method = RequestMethod.GET)
-	public void listGET(HttpSession session,Model model,@ModelAttribute("result") String result) throws Exception {
+	public void listGET(HttpSession session , Model model,@ModelAttribute("result") String result) throws Exception {
 		mylog.debug(" /Goods/list 호출 -> DB정보 가져와서 출력 ");
 		
 		// 전달받은 정보 x
@@ -170,21 +181,21 @@ public class GoodsController {
 	
 	// 게시판 본문보기
 	@RequestMapping(value = "/read",method = RequestMethod.GET)
-	public void readGET(Model model,@RequestParam("goods_no") int goods_no, HttpSession session) throws Exception{
+	public void readGET(Model model, @RequestParam("goods_no") int goods_no, HttpSession session) throws Exception{
 		// 전달정보 (goods_no) 
 		mylog.debug("전달정보 (goods_no): " + goods_no);
 		
 		// 세션객체 
 		boolean isUpdateCheck = (boolean) session.getAttribute("updateCheck");
-		mylog.debug("조회수 증가 상태 : "+isUpdateCheck);
+		mylog.debug("조회수 증가 상태 : " + isUpdateCheck);
 		
-		if(isUpdateCheck) { //true
+		if(isUpdateCheck) {
 			// 서비스 -> DAO 동작 호출
 			service.updateViewcnt(goods_no);
 			mylog.debug(" 조회수 1증가 ");
 			
 			// 상태 변경(true -> false);
-			session.setAttribute("updateCheck", !isUpdateCheck);			
+			session.setAttribute("updateCheck", !isUpdateCheck);
 		}
 		
 		// 서비스 -> DAO (특정 글번호에 해당하는 정보 가져오기)
@@ -193,52 +204,42 @@ public class GoodsController {
 		model.addAttribute("vo", vo);
 		
 	}
-//		//수정 GET
-//		@RequestMapping(value = "/modify", method = RequestMethod.GET)
-//		public void modifyGET(int bno, Model model) throws Exception {
-//			// 파라미터 저장(bno)
-//			
-//			// 서비스 - DAO(글 조회)
-//			
-//			// model 객체 사용 - view 페이지로 정보 전달
-//			model.addAttribute("vo",service.getBoard(bno));
-//			// /board/modify.jsp 페이지 이동
-//		}
-//	
-//		//수정 POST
-//		@RequestMapping(value = "/modify",method = RequestMethod.POST)
-//		public String modifyPOST(BoardVO vo,RedirectAttributes rttr) throws Exception {
-//			// 전달된 정보(수정할 정보)저장
-//			mylog.debug(vo + "");
-//			
-//			// 서비스 - DAO : 정보 수정 메서드 호출
-//			Integer result = service.updateBoard(vo);
-//			
-//			if(result > 0 ) {
-//				// 수정완료 - 정보전달
-//				rttr.addAttribute("result",",modOK");
-//			}
-//			
-//			// 페이지 이동(/board/list)
-//			
-//			return "redirect:/board/list";
-//		}
-//	
-//	
-//		// 글 삭제하기
-//		@RequestMapping(value = "/remove" , method = RequestMethod.POST)
-//		public String removePOST(int bno,RedirectAttributes rttr) throws Exception {
-//			// 전달정보 저장(bno)
-//			mylog.debug(bno + "");
-//			
-//			// 서비스 - DAO : 게시판 글 삭제 메서드 호출
-//			service.removeBoard(bno);
-//			
-//			// "삭제완료" 정보를 list 페이지로 전달
-//			rttr.addAttribute("result", "delOK" );
-//			// 게시판 리스트로 이동(/board/list)
-//			
-//			return "redirect:/board/list";
-//		}
-//	
+	
+	//수정 GET
+	@RequestMapping(value = "/modify", method = RequestMethod.GET)
+	public void modifyGET(int goods_no, Model model) throws Exception {
+		// 파라미터 저장(goods_no)
+		// 서비스 - DAO(글 조회)
+		// model 객체 사용 - view 페이지로 정보 전달
+		model.addAttribute("vo", service.getGoods(goods_no));
+		
+		
+	}
+
+	//수정 POST
+	@RequestMapping(value = "/modify",method = RequestMethod.POST)
+	public String modifyPOST(GoodsVO vo) throws Exception {
+		// 전달된 정보(수정할 정보)저장
+		mylog.debug(vo + "");
+		
+		// 서비스 - DAO : 정보 수정 메서드 
+		service.updateGoods(vo);
+		
+		// 페이지 이동(/goods/list)
+		return "redirect:/goods/list";
+	}
+
+	// 글 삭제하기
+	@RequestMapping(value = "/remove" , method = RequestMethod.POST)
+	public String removePOST(int goods_no) throws Exception {
+		// 전달정보 저장(goods_no)
+		mylog.debug(goods_no + "");
+		
+		// 서비스 - DAO : 게시판 글 삭제 메서드 호출
+		service.removeGoods(goods_no);
+		
+		// 게시판 리스트로 이동(/goods/list)
+		return "redirect:/goods/list";
+	}
+
 }

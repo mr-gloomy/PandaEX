@@ -16,7 +16,28 @@
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <!-- JS -->
+<script>
+$(document).ready(function(){
+	// 상품명 글자수제한
+	$("#searchKeyword").keyup(function(e) {
+		//alert("@@@@@@@@@@@@@@@@@@@@");
+	    console.log("키업!");
+		var content = $(this).val();
+		$("#textLengthCheck").val("(" + content.length + "/ 30)"); //실시간 글자수 카운팅
+		if (content.length > 30) {
+			alert("최대 30자까지 입력 가능합니다.");
+			$(this).val(content.substring(0, 30));
+			$('#textLengthCheck').html("(30 / 최대 30자)");
+		}
+	});
+	
+	$("#resetB").click(function() {
+		$(".note-editable").empty();
+	});
 
+});
+
+</script>
 
 <!--  CSS -->
 <style type="text/css">
@@ -58,35 +79,91 @@
 </style>
 </head>
 <body class="animsition">
-<!-- 상품찜 -->
-<input type="hidden" name="goods_like" value="off">
-<!-- 판매현황 -->
-<input type="hidden" name="goods_trade" value="0">
-<!-- 0:등록, 1:예약 2:완료 -->
-<!-- 작성자 -->
-<input type="hidden" name="${sessionScope.user_id}" value="user_id">
 
 <!-- 본문 -->
 <div class="container">
 	<div>
 		<form method="post" enctype="multipart/form-data">
+			<!-- 판매현황 -->
+			<input type="text" name="goods_trade" value="판매중">
+			<!-- 작성자 -->
+			<input type="hidden" name="${sessionScope.user_id}" value="user_id">
+				
 			<div class="card">
 				<div class="card-body">
 					<div>
 						<div class="col-sm">
-							<h2>상품등록</h2><hr>
+							<h2>중고상품 등록</h2><hr>
 						</div>
 					</div>
 					<div class="row py-4 border-bottom">
 						<div class="col-sm-2">
-							<label class="form-label">이미지 (<span class="text-success">{{ fileCount }}</span>/3 </label>
+							<label class="form-label">이미지 <span class="text-success"></label>
 						</div>
 						<div class="col-sm d-flex">
-							<label class="btn btn-outline-success pt-5" id="add_file" v-show="attachmentCount < 4"> 
-								<i class="fa-solid fa-camera fa-2x"></i><br> 
-								   사진 추가 
-								<input class="form-control d-none" type="file" id="file1" accept=".png, .jpg, .gif" multiple="multiple"/>
-							</label>
+<!-- 							<div class="uploadDiv"> -->
+<!-- 								<label class="btn btn-outline-success pt-5" >  -->
+<!-- 									<i class="fa-solid fa-camera fa-2x"></i><br>  -->
+<!-- 									   사진 추가  -->
+<!-- 									<input class="form-control d-none" type="file" name="uploadFile" accept=".png, .jpg, .gif" multiple> -->
+<!-- 								</label> -->
+<!-- 							</div> -->
+							<input type="file" name="uploadFile" multiple="multiple">
+							
+							<script type="text/javascript">
+							$(document).ready(function(){
+								
+								var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
+								var maxSize = 5242880; //5MB
+
+								function checkExtension(fileName, fileSize) {
+
+									if (fileSize >= maxSize) {
+										alert("파일 사이즈 초과");
+										return false;
+									}
+
+									if (regex.test(fileName)) {
+										alert("해당 종류의 파일은 업로드할 수 없습니다.");
+										return false;
+									}
+									return true;
+								}
+
+
+								$("#uploadBtn").on("click", function(e) {
+
+									var formData = new FormData();
+									var inputFile = $("input[name='uploadFile']");
+									var files = inputFile[0].files;
+
+									console.log(files);
+
+									for (var i = 0; i < files.length; i++) {
+
+										if (!checkExtension(files[i].name, files[i].size)) {
+											return false;
+										}
+
+										formData.append("uploadFile", files[i]);
+
+									}
+							
+									 $.ajax({
+										 url: '/regist',
+										 processData: false,
+										 contentType: false,
+										 data: formData,
+										 type: 'POST',
+										 success : function(result) {
+												console.log(result);
+												showUploadedFile(result);
+										 }
+									 }); //$.ajax
+								
+								});  
+							}); 
+							</script>
 						</div>
 					</div>
 					<div class="row py-4 border-bottom">
@@ -108,9 +185,11 @@
 							<label for="goods_title" class="form-label">상품명</label>
 						</div>
 						<div class="col-sm">
-							<input type="text" class="form-control" name="goods_title" placeholder="상품명을 입력해주세요" maxlength="30" />
+							<input type="text" class="form-control" name="goods_title" id="searchKeyword" placeholder="상품명을 입력해주세요" maxlength="30" />
 							<div class="text-right mt-1">
-								<span class="text-success">{{ titleCount }}</span> / 30
+								<span class="text-success">
+									<input type="text" id="textLengthCheck" style="display: inline-block; text-align: right;">
+								</span>
 							</div>
 						</div>
 					</div>
@@ -121,13 +200,14 @@
 						<div class="col-sm">
 							<select class="form-control" id="goods_category" name="goods_category">
 								<option selected>카테고리를 입력하세요</option>
-								<option value=".machine">전자기기</option>
-								<option value=".beauty">의류/뷰티/잡화</option>
-								<option value=".kitchen">생활가전/주방</option>
-								<option value=".interior">인테리어/가구</option>
-								<option value=".book">도서/티켓/교환권</option>
-								<option value=".food">식품</option>
-								<option value=".etc">기타 중고물품</option>
+								<option value="전자기기">전자기기</option>
+								<option value="의류">의류</option>
+								<option value="생활가전">생활가전</option>
+								<option value="인테리어">인테리어</option>
+								<option value="도서">도서</option>
+								<option value="교환권">교환권</option>
+								<option value="식품">식품</option>
+								<option value="기타중고물품">기타중고물품</option>
 							</select>
 						</div>
 					</div>
@@ -188,7 +268,7 @@
 					</div>
 					<div class="row py-4 border-bottom">
 						<div class="col-sm-2">
-							<label class="form-label">가격</label>
+							<label class="form-label">판매가격</label>
 						</div>
 						<div class="col-sm">
 							<input type="number" class="form-control" name="goods_price" placeholder="숫자만 입력하세요" maxlength="9" />
@@ -201,9 +281,6 @@
 						</div>
 						<div class="col-sm">
 							<textarea id="summernote" name="goods_detail" rows="5" maxlength="1000"></textarea>
-							<div class="text-right mt-1">
-								<span class="text-success">{{ detailCount }}</span> / 1000
-							</div>
 							<script>
 							 $('#summernote').summernote({
 			    			        tabsize: 2,
@@ -222,7 +299,7 @@
 						</div>
 					</div>
 					<div class="G_btn" align="center">
-						<button type="submit" class="btn btn-success py-2 px-3">작성완료</button>
+						<button type="submit" class="btn btn-success py-2 px-3" id="uploadBtn">작성완료</button>
 						<button type="reset" class="btn btn-success py-2 px-3">초기화</button>
 						<button onclick="href='/goods/list';" class="btn btn-success py-2 px-3">목록이동</button>
 					</div>

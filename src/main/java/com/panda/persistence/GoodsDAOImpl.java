@@ -55,7 +55,7 @@ public class GoodsDAOImpl implements GoodsDAO{
 		
 	}
 
-	// 글번호(goods_no) 정보 조회
+	// 상품번호(goods_no) 정보 조회
 	@Override
 	public GoodsVO getGoods(Integer goods_no) throws Exception {
 		mylog.debug("getBoard(Integer goods_no) 호출");
@@ -64,6 +64,22 @@ public class GoodsDAOImpl implements GoodsDAO{
 		
 		return vo;
 	}
+	
+	// 상품 글수정
+	@Override
+	public Integer updateGoods(GoodsVO vo) throws Exception {
+		mylog.debug(" updateGoods(GoodsVO vo) ");
+		
+		return sqlSession.update(NAMESPACE + ".updateGoods", vo);
+	}
+	
+	// 상품 글삭제
+	@Override
+	public void removeGoods(Integer goods_no) throws Exception {
+		sqlSession.delete(NAMESPACE + ".removeGoods", goods_no);
+	}
+	
+	
 	
 	
 	

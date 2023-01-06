@@ -17,18 +17,11 @@ public class GoodsVO {
 	private String goods_discount;	//상품할인여부(0:가능,1:불가능)
 	private Timestamp goods_date;	//상품등록일
 	private String goods_refund;	//상품환불여부
-	private String goods_like;		//상품 찜
 	private String goods_trade; 	//상품상태
 	private String goods_detail;	//상품상세설명
-	private MultipartFile file1;	//이미지
-	private MultipartFile file2;	//이미지
-	private MultipartFile file3;	//이미지
+	private String uploadFile;		//이미지
 	private String thumbnail; 		//이미지썸네일 
 
-	
-	private String titleCount;		//상품명
-	private String detailCount;		//상품상세설명
-	private int fileCount;//이미지	
 	private int viewcount;			//상품조회수
 
 }
