@@ -116,7 +116,7 @@ public class OpenBankingController {
 
 			resultVO.setTran_no("1"); 
 			resultVO.setOrg_bank_tran_id("F000000001ABCDE12345");
-			resultVO.setOrg_bank_tran_date("20190820000000");  // 원거래 거래일자
+			resultVO.setOrg_bank_tran_date("20190820");  // 원거래 거래일자
 			resultVO.setOrg_tran_amt("1000");
 			
 			ResultResponseVO withdrawResultOK = openBankingService.getResult(resultRequestVO, resultVO);

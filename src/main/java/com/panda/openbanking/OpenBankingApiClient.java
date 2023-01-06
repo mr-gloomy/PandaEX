@@ -153,7 +153,7 @@ public class OpenBankingApiClient {
 //		 Content-Type  application/json; charset=UTF-8
 		// WithdrawRequestVO => 저장
 //		requestTokenVO.setClient_id(client_id);
-		mylog.debug(withdrawRequestVO.toString());
+		mylog.debug("$$$$$$$$$$$$$$$$$$$$$$"+withdrawRequestVO.toString());
 //		withdrawRequestVO.setBank_tran_id(bank_tran_id);;
 		
 		
