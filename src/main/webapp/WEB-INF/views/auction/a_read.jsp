@@ -21,6 +21,24 @@
 <link rel="stylesheet" type="text/css" href="/resources/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/resources/css/custom.css">
 <script type="text/javascript">
+
+$(function(){
+	$('#refreshP').on('click',function(){
+		var aNo = '${param.action_no}';
+		
+		$.ajax({
+			url:"/auction/refreshP/"+aNo,
+			type:"get",
+			contentType:"application/json; charset:UTF-8",
+			success:function(data) {
+				$('#closingBid').html();
+			}
+		});
+		
+	});
+});
+
+
 function CountDownTimer(dt, id) {
      var end = new Date(dt);
      var _second = 1000;
@@ -183,7 +201,7 @@ function CountDownTimer(dt, id) {
 					</div>
 					<div class="row mt-auto mb-3 pl-5 d-flex justify-content-end">
 						<div id="refresh" class="col-3 text-muted p-0 pointer">
-							<span class="pl-5"><i id="rotate"
+							<span class="pl-5" id="refreshP"><i id="rotate"
 								class="fa-solid fa-arrow-rotate-left"></i> 새로고침</span>
 						</div>
 						<div class="col-3 p-0 pl-2 mr-2 text-muted pointer"

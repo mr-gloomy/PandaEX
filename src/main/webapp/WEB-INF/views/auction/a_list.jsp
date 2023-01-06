@@ -62,7 +62,7 @@
 		var date1 = new Date(x).getTime();
 		var date2 = new Date(y).getTime();
 		
-		return ("남은 "+(date1-date2)/(1000*60*60*24)+"일");
+		document.write("남은 "+(date1-date2)/(1000*60*60*24)+"일");
 	}
 	
 </script>
