@@ -29,19 +29,35 @@
 	</select>
 	
 	<!-- 사용자 정보 조회 -->
-   	<select id="getUser" resultType="AuctionVO">
+	<select id="getUser" resultType="AuctionVO">
       SELECT A.*, B.* 
       FROM auction A join user B 
       on A.user_no = B.user_no
-      where A.user_no = #{user_no};
-   	</select>	
+      where A.user_no = #{user_no}
+   	</select>
+   	
+   	<!-- 경매번호, 회원번호 사용한 글정보 조회 -->
+<!--    	<select id="getAuctions" resultType="Map"> -->
+<!--    		select A.*, B.* -->
+<!--    		from auction A join user B -->
+<!--    		on A.user_no = B.user_no -->
+<!--    		where A.auction_no = #{auction_no} -->
+<!--    		and B.user_no = #{user_no} -->
+<!--    	</select> -->
 	
-	<select id="getAuctions" resultType="Map">
-		select * from auction where auction_category=#{category}
-	</select>
+	<!-- 경매번호 사용한 글정보 수정 -->
+	<update id="updateAuction">
+		update auction
+		set auction_category=#{auction_category},auction_title=#{auction_title},
+			auction_price=#{auction_price},auction_detail=#{auction_detail}
+		where auction_no=#{auction_no}
+	</update>
 	
-	
-	
+	<!-- 경매번호 사용한 글 삭제 -->
+	<delete id="removeAuction">
+		delete from auction
+		where auction_no = #{auction_no}
+	</delete>
 	
 
 </mapper>

@@ -128,13 +128,14 @@
 							<div class="col-sm">
 								<select class="form-control" id="auction_category" name="auction_category">
 									<option selected>카테고리를 입력하세요</option>
-									<option value=".machine">전자기기</option>
-									<option value=".beauty">의류/뷰티/잡화</option>
-									<option value=".kitchen">생활가전/주방</option>
-									<option value=".interior">인테리어/가구</option>
-									<option value=".book">도서/티켓/교환권</option>
-									<option value=".food">식품</option>
-									<option value=".etc">기타 중고물품</option>
+									<option value="전자기기">전자기기</option>
+									<option value="의류">의류</option>
+									<option value="생활가전">생활가전</option>
+									<option value="인테리어">인테리어</option>
+									<option value="도서">도서</option>
+									<option value="교환권">교환권</option>
+									<option value="식품">식품</option>
+									<option value="기타중고물품">기타중고물품</option>
 								</select>
 							</div>
 						</div>

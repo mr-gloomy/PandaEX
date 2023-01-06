@@ -1,5 +1,6 @@
 package com.panda.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -9,7 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -71,7 +71,7 @@ public class AuctionController {
    
     // http://localhost:8080/auction/a_read?auction_no=1&user_no=1
 	// 기부경매 상품 상세페이지
-	@GetMapping(value = "/a_read")
+    @GetMapping(value = "/a_read")
 	public void a_readGET(@RequestParam("auction_no") int auction_no, 
 						  @RequestParam("user_no") int user_no, 
 						  HttpSession session, Model model) throws Exception{
@@ -101,7 +101,7 @@ public class AuctionController {
 	
 	
 	// http://localhost:8080/auction/a_modify?auction_no=1
-	// 수정 GET
+	// 기부경매 상품 글 수정 GET
 	@GetMapping(value = "/a_modify")
 	public void a_modifyGET(Model model, @ModelAttribute("auction_no") int auction_no) throws Exception{
 		// model 객체 사용 - view 페이지로 정보 전달
@@ -109,38 +109,36 @@ public class AuctionController {
 	}
 	
    
-    // 수정 POST
-//	@PostMapping(value = "/a_modify")
-//	public String a_modifyPOST(AuctionVO avo, RedirectAttributes rttr) throws Exception {
-//		// 전달된 정보(수정할 정보) 저장
-//		mylog.debug(avo+"");
+    // 기부경매 상품 글 수정 POST
+	@PostMapping(value = "/a_modify")
+	public String a_modifyPOST(AuctionVO avo, RedirectAttributes rttr) throws Exception {
+		// 전달된 정보(수정할 정보) 저장
+		mylog.debug(avo+"");
 		
 		// 서비스 - DAO : 정보 수정 메서드 호출
-//		Integer result = service.updateAuction(avo);
-//		
-//		if (result > 0) {
-//			// "수정완료" - 정보 전달
-//			rttr.addFlashAttribute("result", "modOK");
-//		}
-//		
-//		// 페이지 이동
-//		return "redirect:/auction/a_list";
-//	}
+		Integer result = service.updateAuction(avo);
+		
+		if (result > 0) {
+			// "수정완료" - 정보 전달
+			rttr.addFlashAttribute("result", "modOK");
+		}
+		
+		// 페이지 이동
+		return "redirect:/auction/a_list";
+	}
 	
 	
+	// 기부경매 상품 글 삭제
+	@PostMapping(value="/a_remove")
+	public String removePOST(@ModelAttribute("auction_no") int auction_no, RedirectAttributes rddr) throws Exception {
+		Integer result = service.removeAuction(auction_no);
+		
+		if(result > 0) {
+			rddr.addFlashAttribute("result", "removeOK");
+		}
+		
+		// 페이지 이동
+		return "redirect:/auction/a_list";
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	}
 }

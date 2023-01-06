@@ -25,10 +25,10 @@ public class AuctionRestController {
 	@Inject
 	AuctionService service;
 	
-	@GetMapping("/list/{category}")
-	public List<Map<String, Object>> getList(@PathVariable String category) throws Exception{
-		mylog.info("list 카테고리 호출 "+category);
-		return service.getAuctions(category);
-	}
+//	@GetMapping("/list/{category}")
+//	public List<Map<String, Object>> getList(@PathVariable String category) throws Exception{
+//		mylog.info("list 카테고리 호출 "+category);
+//		return service.getAuctions(category);
+//	}
 	
 }

@@ -1,5 +1,6 @@
 package com.panda.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -54,11 +55,29 @@ public class AuctionServiceImpl implements AuctionService {
 		mylog.debug("getUser(Integer user_no) 호출");
 		return adao.getUser(user_no);
 	}
-
+	
+	// 경매번호, 회원번호 정보 조회 
+//	@Override
+//	public List<Map<String, Object>> getAuctions(AuctionVO vo) throws Exception {
+//		mylog.debug("service auctions : "+vo);
+//		return adao.getAuctions(vo);
+//	}
+	
+	// 경매 상품 글 수정
 	@Override
-	public List<Map<String, Object>> getAuctions(String category) throws Exception {
-		return adao.getAuctions(category);
+	public Integer updateAuction(AuctionVO avo) throws Exception {
+		mylog.debug("updateAuction(AuctionVO avo) 호출");
+		return adao.updateAuction(avo);
 	}
+
+	
+	//경매 상품 글 삭제
+	@Override
+	public Integer removeAuction(Integer auction_no) throws Exception {
+		mylog.debug("removeAuction(Integer auction_no) 호출");
+		return adao.removeAuction(auction_no);
+	}
+	
 	
 	
 	
