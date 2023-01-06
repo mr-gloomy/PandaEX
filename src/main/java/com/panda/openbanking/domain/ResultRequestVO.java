@@ -12,7 +12,7 @@ public class ResultRequestVO {
 	private String check_type; // 1:출금이체, 2:입금이체
 	private String tran_dtime; //요청일시 14자리
 	private String req_cnt; //입금요청건수 1
-	private List<ResultVO> req_list; //입금요청목록
+	private List<Map<String, Object>> req_list; //입금요청목록
 	
 
 }

@@ -250,7 +250,7 @@ public class OpenBankingApiClient {
 		return restTemplate.exchange(requestUrl, HttpMethod.POST, param, DepositResponseVO.class).getBody();
 	}
 
-	public ResultResponseVO result(ResultRequestVO resultRequestVO,ResultVO resultVO) {
+	public ResultResponseVO result(ResultRequestVO resultRequestVO) {
 		/// REST 방식 요청에 필요한 객체 생성
 		restTemplate = new RestTemplate();
 		httpHeaders = new HttpHeaders();
@@ -258,28 +258,29 @@ public class OpenBankingApiClient {
 		
 		mylog.debug(resultRequestVO.toString());
 		
+//		List<ResultVO> req_list = new ArrayList<ResultVO>();
+//		req_list.add(resultVO);
+		
 		MultiValueMap<String, Object> parameters // MultiValueMap<이름, 값>
 		=new LinkedMultiValueMap<String, Object>();
 //		Map<String, Object> parameters = new HashMap<String, Object>();
 		parameters.add("check_type", resultRequestVO.getCheck_type());
 		parameters.add("tran_dtime", resultRequestVO.getTran_dtime());
 		parameters.add("req_cnt", resultRequestVO.getReq_cnt());
-		parameters.add("req_list", resultRequestVO.getReq_cnt());
-		
-		MultiValueMap<String, Object> parameters2 // MultiValueMap<이름, 값>
-		=new LinkedMultiValueMap<String, Object>();
-//		Map<String, String> parameters2 = new HashMap<String, String>();
-		parameters2.add("tran_no", resultVO.getTran_no());
-		parameters2.add("org_bank_tran_id", resultVO.getOrg_bank_tran_id());
-		parameters2.add("org_bank_tran_date", resultVO.getOrg_bank_tran_date());
-		parameters2.add("org_tran_amt", resultVO.getOrg_tran_amt());
-		
-		List<Map> req_list = new ArrayList<Map>();
-		req_list.add(parameters2);
-		//depositRequestVO.setReq_list(req_list);
-		
-		parameters.add("req_list", req_list);
-		System.out.println("저장parameters###############################"+parameters);
+		parameters.add("req_list", resultRequestVO.getReq_list());
+//		
+//		MultiValueMap<String, Object> parameters2 // MultiValueMap<이름, 값>
+//		=new LinkedMultiValueMap<String, Object>();
+////		Map<String, String> parameters2 = new HashMap<String, String>();
+//		parameters2.add("tran_no", resultVO.getTran_no());
+//		parameters2.add("org_bank_tran_id", resultVO.getOrg_bank_tran_id());
+//		parameters2.add("org_bank_tran_date", resultVO.getOrg_bank_tran_date());
+//		parameters2.add("org_tran_amt", resultVO.getOrg_tran_amt());
+//		req_list.add(parameters2);
+//		//depositRequestVO.setReq_list(req_list);
+//		
+//		parameters.add("req_list", req_list);
+//		System.out.println("저장parameters###############################"+parameters);
 		
 //		httpHeaders,parameters 담아서 감 =>HttpEntity
 	HttpEntity<MultiValueMap<String, Object>> param=
