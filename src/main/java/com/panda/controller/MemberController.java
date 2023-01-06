@@ -1,7 +1,9 @@
 package com.panda.controller;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -79,29 +81,30 @@ public class MemberController {
 	
 	
 	
-		// GET 방식 - /members/ckID + 데이터
-		// 아이디 정보를 전달받아서 서비스에서 해당아이디가 중복인지 여부판단
-		@RequestMapping(value = "/ckID",method = RequestMethod.GET )
-		public String checkID(MemberVO vo,
-				 @ModelAttribute("user_id") String user_id) throws Exception{
-			mylog.debug(" checkID() 호출 ");
-			mylog.debug(vo+"");
-			mylog.debug(user_id+"");
-			
-			
-			MemberVO checkVO = service.getMember(user_id);
-			mylog.debug(checkVO+"");
-			
-			if(checkVO ==null) {
-				//디비에 정보가 없음 -> 해당 아이디 사용 가능 
-				return "OK";
-						
-			}else {
-				//디비에 정보가 있음 -> 해당 아이디를 사용 x 
-				return "NO";
-			}
-		}
+//		// GET 방식 - /members/ckID + 데이터
+//		// 아이디 정보를 전달받아서 서비스에서 해당아이디가 중복인지 여부판단
+//		@RequestMapping(value = "/ckID",method = RequestMethod.GET )
+//		public String checkID(MemberVO vo,
+//				 @ModelAttribute("user_id") String user_id) throws Exception{
+//			mylog.debug(" checkID() 호출 ");
+//			mylog.debug(vo+"");
+//			mylog.debug(user_id+"");
+//			
+//			
+//			MemberVO checkVO = service.getMember(user_id);
+//			mylog.debug(checkVO+"");
+//			
+//			if(checkVO ==null) {
+//				//디비에 정보가 없음 -> 해당 아이디 사용 가능 
+//				return "OK";
+//						
+//			}else {
+//				//디비에 정보가 있음 -> 해당 아이디를 사용 x 
+//				return "NO";
+//			}
+//		}
 		
+
 	//로그인 post
 	@PostMapping(value="/login")
 	public String loginPOST(String user_id, MemberVO vo, HttpServletRequest request, Model model) throws Exception{
@@ -173,7 +176,18 @@ public class MemberController {
 			
 			return "main/index";
 	    	}
-	    
+//		@RequestMapping(value="/kakaoLogout")
+//		public String access(HttpSession session) throws IOException {
+//			
+//			String access_token = (String)session.getAttribute("access_token");
+//			Map<String, String> map = new HashMap<String, String>();
+//			map.put("Authorization", "Bearer "+ access_token);
+//			
+//			String result = conn.HttpPostConnection("https://kapi.kakao.com/v1/user/logout", map).toString();
+//			System.out.println(result);
+//			
+//			return "redirect:/";
+//		}
 		
 	
 	//로그아웃
@@ -183,5 +197,8 @@ public class MemberController {
 		return "/main/index";
 	}
 	
+	
+	
+	//아이디 찾기 
 	
 }
