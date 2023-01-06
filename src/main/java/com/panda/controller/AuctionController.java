@@ -79,8 +79,12 @@ public class AuctionController {
 		mylog.debug("전달정보 : " + auction_no);
 		mylog.debug("전달정보 : " + user_no);
 		
+		boolean isUpdateCheck=false;
+		
 		// 세션객체
-		boolean isUpdateCheck = (boolean) session.getAttribute("updateCheck");
+		if(session.getAttribute("updateCheck")!=null) {
+			isUpdateCheck = (boolean) session.getAttribute("updateCheck");
+		}
 		mylog.debug("조회수 증가 상태 : " + isUpdateCheck);
 
 		if (isUpdateCheck) { // true

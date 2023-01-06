@@ -24,14 +24,15 @@
 
 $(function(){
 	$('#refreshP').on('click',function(){
-		var aNo = '${param.action_no}';
+		var aNo = '${param.auction_no}';
 		
 		$.ajax({
-			url:"/auction/refreshP/"+aNo,
+			url:"/auctions/refreshP/"+aNo,
 			type:"get",
 			contentType:"application/json; charset:UTF-8",
 			success:function(data) {
-				$('#closingBid').html();
+				var a = String(data.auction_bid).replace(/(.)(?=(\d{3})+$)/g,'$1,');
+				$('#closingBid').html(a);
 			}
 		});
 		
@@ -176,7 +177,7 @@ function CountDownTimer(dt, id) {
 					</div>
 					<div class="row mr-5">
 						<div class="col-3 p-0 d-flex align-items-end">
-							<h5 class="fw-bold">즉시 낙찰가</h5>
+							<h5 class="fw-bold">현재 입찰가</h5>
 						</div>
 						<div class="col p-0">
 							<h3 class="text-info fw-bold">
