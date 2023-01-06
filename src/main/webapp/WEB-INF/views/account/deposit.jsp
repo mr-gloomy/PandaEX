@@ -14,6 +14,8 @@
 	
 	${depositOK }
 	
+	<hr><hr>
+	${depositResultOK }
 	
 	
 </body>

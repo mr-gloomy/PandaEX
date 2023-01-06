@@ -11,11 +11,58 @@
 <%@ include file="../include/header.jsp" %>
 <%@ include file="../include/css.jsp" %>
 <script type="text/javascript">
+	
+	$(function(){
+		 $("button[name='button']").click(function(){
+		        var kind = $(this).val();       //버튼이 클릭 되었을 시, 개별 버튼의 값이 kind 변수에 담겨집니다.
+		        $.ajax({
+		            url : "/good/list/"+kind,
+		            type : "get",
+		            contentType:"application/json; charset:UTF-8",
+		            success : function(data){
+		                $('#auctions').empty(); // 성공 시, body부분에 data라는 html 문장들을 다 적용시킵니다.
+		                $(data).each(function(index,item) {
+		                $('#auctions').append("<div class='col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women' style='position: absolute; left: 0%; top: 0px;'>"
+						+"<div class='block2'>"
+						+"<div class='block2-pic hov-img0'>"
+						+"<img src='/resources/images/product-15.jpg' alt='IMG-PRODUCT'>"
+						+"</div>"
+						+"<div class='block2-txt flex-w flex-t p-t-14'>"
+						+"<div class='block2-txt-child1 flex-col-l'>"
+						+"<a href='/auction/a_read?auction_no=${avo.auction_no }&user_no=${avo.user_no}' class='stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6'>"
+						+"${avo.auction_title }"
+						+"</a>"
+						+"<span class='stext-105 cl3'>"
+						+"현재 <fmt:formatNumber value='${avo.auction_bid }'/>원"
+						+"</span>"
+						+"<span class='stext-105 cl3'>"
+						+getDate('${avo.auction_cdate.toString().substring(0,10)}','${avo.auction_date.toString().substring(0,10)}')
+						+"</span>"
+						+"</div>"
+						+"<div class='block2-txt-child2 flex-r p-t-3'>"
+						+"<a href='#' class='btn-addwish-b2 dis-block pos-relative js-addwish-b2'>"
+						+"<img class='icon-heart1 dis-block trans-04' src='/resources/images/icons/icon-heart-01.png' alt='ICON'>"
+						+"<img class='icon-heart2 dis-block trans-04 ab-t-l' src='/resources/images/icons/icon-heart-02.png' alt='ICON'>"
+						+"</a>"
+						+"</div>"
+						+"</div>"
+						+"</div>"
+					+"</div>");
+		                });
+		            },
+		            error : function(data){
+		                alert('error');
+		            }//error
+		        })//ajax
+		    });
+		
+	});
+	
 	function getDate(x,y) {
 		var date1 = new Date(x).getTime();
 		var date2 = new Date(y).getTime();
 		
-		document.write("남은 "+(date1-date2)/(1000*60*60*24)+"일");
+		return ("남은 "+(date1-date2)/(1000*60*60*24)+"일");
 	}
 	
 </script>
@@ -30,21 +77,21 @@
 	<div class="flex-w flex-sb-m p-b-52">
 		<div class="flex-w flex-l-m filter-tope-group m-tb-10">
 					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1"
-						    data-filter="*">All</button>
+						    data-filter="*" name="button" value="all">All</button>
 					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
-						    data-filter=".machine">전자기기</button>
+						    data-filter=".machine" name="button" value="machine">전자기기</button>
 					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
-						    data-filter=".beauty">의류/뷰티/잡화</button>
+						    data-filter=".beauty" name="button" value="beauty">의류/뷰티/잡화</button>
 					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
-						    data-filter=".kitchen">생활가전/주방</button>
+						    data-filter=".kitchen" name="button" value="kitchen">생활가전/주방</button>
 					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
-						    data-filter=".interior">인테리어/가구</button>
+						    data-filter=".interior" name="button" value="interior">인테리어/가구</button>
 					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
-						    data-filter=".book">도서/티켓/교환권</button>
+						    data-filter=".book" name="button" value="book">도서/티켓/교환권</button>
 					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
-						    data-filter=".food">식품</button>
+						    data-filter=".food" name="button" value="food">식품</button>
 					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
-						    data-filter=".etc">기타 중고물품</button>
+						    data-filter=".etc" name="button" value="etc">기타 중고물품</button>
 		</div>
 	
 		<div class="flex-w flex-c-m m-tb-10">
@@ -84,7 +131,7 @@
 		</div>
 	</div>
 	
-	<div class="row isotope-grid" style="position: relative; height: 4141.62px;">
+	<div id="auctions" class="row isotope-grid" style="position: relative; height: 4141.62px;">
 				<c:forEach var="avo" items="${auctionList }">
 					<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women" style="position: absolute; left: 0%; top: 0px;">
 						<!-- Block2 -->

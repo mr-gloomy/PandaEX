@@ -18,9 +18,9 @@
 </head>
 <body>
 
-	<%--임시변수  --%>
+	<%--임시변수 나중에 지우고 쓰세요~   --%>
 	<c:set var="user_coin" value="12312" />
-	<c:set var="itemprice" value="10000" />
+	<c:set var="itemprice" value="25000" />
 	<c:set var="itemname" value="내사랑 따듯한 유자차" />
 	<c:set var="fareper" value="100" />
 	<c:set var="safefare" value="${itemprice div fareper}" />
@@ -40,9 +40,7 @@
 	<fmt:formatNumber var="totals" value="${total }" type="number"
 		maxFractionDigits="0" />
 
-
-
-	<%--임시변수  --%>
+	<%--임시변수 나중에 지우고 쓰세요~  --%>
 
 
 	<section class="pay_section">
@@ -54,7 +52,7 @@
 			<div class="body-2">
 				<ul class="body-2-1">
 					<li class="body-2-1-1"><img
-						src="/resources/images/icons/PANDA.png" class="item_image"></li>
+						src="/resources/images/icons/myloveuza.jpg" class="item_image"></li>
 				</ul>
 				<ul class="body-2-2">
 					<li><i class="body-2-2-1">${itemprices }원</i></li>
@@ -79,34 +77,38 @@
 				</div>
 			</div>
 			<div class="body-4">
-				<span><p class="body-4-1">판다코인</p>
-					<p class="coin-posion">내 보유코인 : ${user_coins }코인</p></span> 
-				<input type="number" class="panda-coin" value="" step="100" placeholder="0">
+				<p class="body-4-1">판다코인</p>
+					<p class="coin-posion">내 보유코인 : ${user_coins }코인</p> 
+				<input type="number" class="panda-coin" value="" step="100" placeholder="0" >
 				<div class="coinwon">코인</div>
 			</div>
 			<div class="body-5">
 				<p class="pay-price">결제금액</p>
 				<div class="body-5-1">
-					<div class="pay_name">
-						<div>상품금액</div>
+					<div class="pay-name">
+						<div class="body-5-1-1">상품금액</div>
 						<div>안전 결제 수수료</div>
 						<div>배송비</div>
 						<div>판다코인 차감</div>
 					</div>
 					<div class="pay_price">
-						<div>${itemprices }원</div>
+						<div class="body-5-1-2">${itemprices }원</div>
 						<div>${safefares }원</div>
 						<div>${postprices }원</div>
 						<div>
-							<input type="number" readonly value="0" class="coinprice">원
+							<input type="text" readonly value="0원" class="coinprice">
+<!-- 							<p class="coinwon2">원</p> -->
 						</div>
 					</div>
 				</div>
 				<div class="body-5-2">
-					<div>총 결제금액</div>
-					<div>${totals}원</div>
+					<div class="body-5-2-1">총 결제금액</div>
+					<div class="body-5-2-2"><i>${totals}원</i></div>
 				</div>
+				<div class="fareinfo">안전결제 수수료 : 결제금액의 1%</div>
 			</div>
+			<div class="body-6"></div>
+			
 		</div>
 
 	</section>

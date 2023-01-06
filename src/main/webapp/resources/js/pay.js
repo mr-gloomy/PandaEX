@@ -18,7 +18,7 @@ $(function(){
 		if(userhavecoin == ""){
 			$('.coinprice').attr('value',"0원");
 		}else{
-		$('.coinprice').attr('value',userhavecoin);
+		$('.coinprice').attr('value',userhavecoin+"원");
 		}
 
 	})

@@ -1,6 +1,7 @@
 package com.panda.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.panda.domain.AuctionVO;
 
@@ -21,5 +22,5 @@ public interface AuctionService {
 	// 사용자 정보 조회
 	public AuctionVO getUser(Integer user_no) throws Exception;
 	
-	
+	public List<Map<String, Object>> getAuctions(String category) throws Exception;
 }

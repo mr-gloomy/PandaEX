@@ -30,6 +30,11 @@ public interface MemberService {
 		//회원조회
 		public MemberVO getMember(String user_id) throws Exception;
 
+		//닉네임 조회
+		public MemberVO getNick(String user_nick) throws Exception;
+		
+		
+		
 		public HashMap<String,Object> getUserInfo(String access_Token)throws Exception;
 
 	
@@ -37,5 +42,7 @@ public interface MemberService {
 		int updateMailKey(MemberVO vo) throws Exception;
 		int updateMailAuth(MemberVO vo) throws Exception;
 		int emailAuthFail(String user_id) throws Exception;
+
+		
 
 }

@@ -13,7 +13,9 @@
 	<h3>출금 API </h3>
 	
 	${withdrawOK }
+	<hr> <hr>
 	
+	${withdrawResultOK }
 	
 	
 </body>
