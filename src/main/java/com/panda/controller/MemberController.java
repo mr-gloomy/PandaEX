@@ -169,6 +169,7 @@ public class MemberController {
 			// 위 코드는 session객체에 담긴 정보를 초기화 하는 코드.
 			session.setAttribute("user_id", userInfo.get("k_name"));
 			session.setAttribute("user_email", userInfo.get("k_email"));
+			session.setAttribute("kakao", "1");
 			// 위 2개의 코드는 닉네임과 이메일을 session객체에 담는 코드
 			// jsp에서 ${sessionScope.kakaoN} 이런 형식으로 사용할 수 있다.
 		    
