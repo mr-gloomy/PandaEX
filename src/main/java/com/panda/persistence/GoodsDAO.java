@@ -7,7 +7,7 @@ import com.panda.domain.GoodsVO;
 public interface GoodsDAO {
 	
 	// 상품 글쓰기
-	public void createGoods(GoodsVO gvo) throws Exception;
+	public void createGoods(GoodsVO vo) throws Exception;
 	
 	// 상품목록(All)
 	public List<GoodsVO> getGoodsListAll() throws Exception;
@@ -18,10 +18,12 @@ public interface GoodsDAO {
 	// 상품 상세페이지
 	public GoodsVO getGoods(Integer goods_no) throws Exception;
 	
-//	// 상품 글 수정
-//  Integer updateGoods(GoodsVO gvo) throws Exception;
-//	
-//	// 상품 글 삭제
-//	public Integer removeGoods(Integer goods_no) throws Exception;
+	// 상품 글 수정
+	public Integer updateGoods(GoodsVO vo) throws Exception;
 
+  	// 상품 글 삭제
+	public void removeGoods(Integer goods_no) throws Exception;
+	
+	
+	
 }

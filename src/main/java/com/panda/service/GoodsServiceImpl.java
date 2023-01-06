@@ -42,7 +42,7 @@ public class GoodsServiceImpl  implements GoodsService {
 	public void updateViewcnt(Integer goods_no) throws Exception {
 		mylog.debug(" updateViewcnt(Integer goods_no) - DAO 호출( 조회수 1증가 ) ");
 		
-		dao.updateViewcnt(goods_no);	
+		dao.updateViewcnt(goods_no);
 	}
 	
 	// 글번호(goods_no) 정보 조회
@@ -50,6 +50,18 @@ public class GoodsServiceImpl  implements GoodsService {
 	public GoodsVO getGoods(Integer goods_no) throws Exception {
 		mylog.debug("getGoods(Integer goods_no) 호출");
 		return dao.getGoods(goods_no);
+	}
+
+	@Override
+	public Integer updateGoods(GoodsVO vo) throws Exception {
+		mylog.debug(" updateGoods(GoodsVO vo) ");
+		return dao.updateGoods(vo);
+	}
+
+	@Override
+	public void removeGoods(Integer goods_no) throws Exception {
+		 dao.removeGoods(goods_no);
+		
 	}
 
 	
