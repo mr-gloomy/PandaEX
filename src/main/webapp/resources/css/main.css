@@ -4712,7 +4712,7 @@ input.num-product::-webkit-outer-spin-button, input.num-product::-webkit-inner-s
     flex-direction: column;
     align-items: center;
     top: 100px;
-    min-height: 800px;
+    min-height: 1250px;
     position: relative;
 	
 }
@@ -4805,8 +4805,12 @@ input.num-product::-webkit-outer-spin-button, input.num-product::-webkit-inner-s
     margin-left: 130px;
     position: absolute;
     border-radius: 0 0 5px 5px;
-    border: 1px solid rgb(170 170 170 / 80%);
-    opacity: 0; /*임시*/
+    border-right: 1px solid rgb(170 170 170 / 80%);
+    border-left: 1px solid rgb(170 170 170 / 80%);
+    border-bottom: 1px solid rgb(170 170 170 / 80%);
+    visibility :hidden;
+    background: white;
+    z-index: 5;
 }
 .pay_body .body-3 .massage-option-sel .sel-1,
 .pay_body .body-3 .massage-option-sel .sel-2,
@@ -4814,7 +4818,6 @@ input.num-product::-webkit-outer-spin-button, input.num-product::-webkit-inner-s
 .pay_body .body-3 .massage-option-sel .sel-4,
 .pay_body .body-3 .massage-option-sel .sel-5{
 	border-bottom: 1px solid rgb(170 170 170 / 80%);
-	
 }
 .pay_body .body-3 .massage-option-sel .sel-1:hover,
 .pay_body .body-3 .massage-option-sel .sel-2:hover,
@@ -4822,7 +4825,7 @@ input.num-product::-webkit-outer-spin-button, input.num-product::-webkit-inner-s
 .pay_body .body-3 .massage-option-sel .sel-4:hover,
 .pay_body .body-3 .massage-option-sel .sel-5:hover,
 .pay_body .body-3 .massage-option-sel .sel-6:hover{
-	background: red;
+	background: #7575753b;
 }
 .pay_body .body-4{
 	margin-top:15px;
@@ -4897,6 +4900,106 @@ input.num-product::-webkit-outer-spin-button, input.num-product::-webkit-inner-s
 .pay_body .body-5 .fareinfo{
 	font-size: 10px;
     margin-top: 12px;
+}
+
+.pay_body .body-6 .body-6-1{
+	font-size: 20px;
+    font-weight: 600;
+    margin-top: 15px;
+}
+.pay_body .body-6 .body-6-2 .easy-pay-1{
+	position: absolute;
+    margin: -16px 0 0 20px;
+}
+.pay_body .body-6 .body-6-2 .easy-pay{
+	margin-top: 5px;
+	accent-color: #605c5cd9;
+}
+.pay_body .body-6 .body-6-2 .easy-pay-1-1{
+	display: flex;
+    border: 1px solid rgb(170 170 170 / 80%);
+    border-radius: 5px;
+    margin-top: 5px;
+    align-items: center;
+}
+.pay_body .body-6 .body-6-2 .easy-pay-1-1 .easy-pay-img img{
+	width: 90px;
+    height: 90px;
+    margin: 0px 0 0 20px;
+}
+.pay_body .body-6 .body-6-2 .easy-pay-1-1 .easy-pay-info div {
+	text-align: right;
+}
+.pay_body .body-6 .body-6-2 .easy-pay-1-1 .easy-pay-info input[type="button"] {
+	background: rgb(187 187 187 / 50%);
+    margin: 0 0 0 40px;
+} 
+.pay_body .body-6 .body-6-2 .easy-pay-1-1 .easy-pay-info .easy-pay-division{
+	margin-top : 10px;
+}
+.pay_body .body-6 .body-6-2 .easy-pay-1-1 .easy-pay-info{
+	margin: 5px 0 5px 0;
+}
+.pay_body .body-6 .body-6-2 .other-pay{
+	margin-top : 10px;
+	accent-color: #605c5cd9;
+}
+.pay_body .body-6 .body-6-2 .other-pay-1{
+	position: absolute;
+    margin: -16px 0 0 20px;
+}
+.pay_body .body-6 .other-pay-sel{
+	border: 1px solid rgb(170 170 170 / 80%);
+    width: 350px;
+    height: 40px;
+    border-radius: 5px;
+    padding-left: 10px;
+    margin-top: 5px;
+}
+.pay_body .body-6 .other-pay-selsup{
+	position: absolute;
+    margin: -30px 0 0 310px;
+}
+.pay_body .body-6 .body-6-2 .other-pay-cookie-1{
+    position: absolute;
+    margin: -16px 0 0 15px;
+}
+.pay_body .body-6 .body-6-2 .other-pay-cookie{
+	accent-color: #605c5cd9;
+}
+.pay_body .body-7 .pay-terms{
+    -ms-transform: scale(2);
+    -moz-transform: scale(2);
+    -webkit-transform: scale(2);
+    -o-transform: scale(2);
+    padding: 10px;
+    margin: 20px 0 0 -25px;
+    accent-color: #605c5cd9;
+}
+.pay_body .body-7 .pay-terms-info {
+	width: 350px;
+	position: absolute;
+    margin: -20px 0 0 0;
+    font-size: 20px;
+    line-height: 25px;
+}
+.pay_body .body-7 .pay-terms-detail{
+	margin-top: 25px;
+    text-decoration: underline;
+    color: rgb(77 77 230);
+    font-weight: bold;
+}
+.pay_body .pay-submit {
+    width: 380px;
+    height: 45px;
+    color: white;
+    background: rgba(90, 90, 90, 1);
+    opacity: 0.8;
+    position: absolute;
+    margin: 10px 0 0 -30px;
+    font-size: 20px;
+    letter-spacing: 10px;
+    accent-color: #605c5cd9;
 }
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
