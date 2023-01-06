@@ -22,7 +22,7 @@
 	</select>
 	
 	<!-- 글목록 카테고리별 -->
-	<select id="listcate" resultType="BoardVO">
+		<select id="listcate" resultType="BoardVO">
  		 <![CDATA[
 			select * from board 
 			where bno>0 and category=#{category}
@@ -30,6 +30,7 @@
 			limit #{pageStart},#{perPageNum}
 			]]>
 	</select>
+	
 
 	<!-- 조회수 증가 -->
 	<update id="cnt">

@@ -54,8 +54,8 @@ public class OpenBankingService {
 	}
 		
 	// 이체결과조회 API(출금)
-	public ResultResponseVO getResult(ResultRequestVO resultRequestVO,ResultVO resultVO) throws Exception {
-		return openBankingApiClient.result(resultRequestVO,resultVO);
+	public ResultResponseVO getResult(ResultRequestVO resultRequestVO) throws Exception {
+		return openBankingApiClient.result(resultRequestVO);
 	}
 	
 //	// 이체결과조회 API(입금)
