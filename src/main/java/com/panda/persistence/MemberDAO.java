@@ -27,6 +27,7 @@ public interface MemberDAO {
 			int updateMailAuth(MemberVO vo) throws Exception;
 			int emailAuthFail(String id) throws Exception;
 
+
 			
 			
 }
