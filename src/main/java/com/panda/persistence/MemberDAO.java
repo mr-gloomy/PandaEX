@@ -28,5 +28,6 @@ public interface MemberDAO {
 			int updateMailAuth(MemberVO vo) throws Exception;
 			int emailAuthFail(String id) throws Exception;
 			public void insertRep(ReportVO vo) throws Exception;
+
 			
 }

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -52,7 +53,9 @@ public class KakaoPayServiceImpl implements KakaoPayService{
 		//header
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Authorization", authorization);
-		headers.add("Content-type", contentType);
+//		headers.add("Content-type", contentType);
+		headers.add("Accept", MediaType.APPLICATION_JSON_UTF8_VALUE);
+        headers.add("Content-Type", MediaType.APPLICATION_FORM_URLENCODED_VALUE + ";charset=UTF-8");
 		
 		//body
 		MultiValueMap<String, String> body = new LinkedMultiValueMap<String, String>();
@@ -74,7 +77,7 @@ public class KakaoPayServiceImpl implements KakaoPayService{
 		body.add("cancel_url", prefix+"/cancel");
 		body.add("fail_url", prefix+"/fail");
 		
-		HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(body, headers);
+		HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<MultiValueMap<String, String>>(body, headers);
 		
 		URI uri = new URI(urlPrefix + "/ready");
 		
@@ -84,7 +87,8 @@ public class KakaoPayServiceImpl implements KakaoPayService{
 		mylog.debug(" entity : " + entity);
 		
 		KakaoPayReadyResponseVO responseVO = 
-				template.postForObject(uri, entity, KakaoPayReadyResponseVO.class);
+				template.exchange(uri,HttpMethod.POST, entity, KakaoPayReadyResponseVO.class).getBody();
+//		template.postForObject(uri, entity, KakaoPayReadyResponseVO.class);
 //		return restTemplate.exchange(requestUrl, 
 //				HttpMethod.POST,param,ResponseTokenVO.class).getBody();
 		
