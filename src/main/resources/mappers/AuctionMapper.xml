@@ -37,13 +37,13 @@
    	</select>
    	
    	<!-- 경매번호, 회원번호 사용한 글정보 조회 -->
-<!--    	<select id="getAuctions" resultType="Map"> -->
-<!--    		select A.*, B.* -->
-<!--    		from auction A join user B -->
-<!--    		on A.user_no = B.user_no -->
-<!--    		where A.auction_no = #{auction_no} -->
-<!--    		and B.user_no = #{user_no} -->
-<!--    	</select> -->
+   	<select id="getAuctions" resultType="Map">
+   		select A.*, B.*
+   		from auction A join user B
+   		on A.user_no = B.user_no
+   		where A.auction_no = #{auction_no}
+   		and B.user_no = #{user_no}
+   	</select>
 	
 	<!-- 경매번호 사용한 글정보 수정 -->
 	<update id="updateAuction">

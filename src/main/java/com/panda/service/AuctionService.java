@@ -24,7 +24,7 @@ public interface AuctionService {
 	public AuctionVO getUser(Integer user_no) throws Exception;
 	
 	// 경매번호, 회원번호 정보 조회 
-	//public List<Map<String, Object>> getAuctions(AuctionVO vo) throws Exception;
+	public Map getAuctions(AuctionVO vo) throws Exception;
 	
 	// 경매 상품 글 수정
 	public Integer updateAuction(AuctionVO avo) throws Exception;

@@ -76,12 +76,12 @@ public class AuctionDAOImpl implements AuctionDAO{
 
 	
 	// 경매번호, 회원번호 정보 조회 
-//	@Override
-//	public List<Map<String, Object>> getAuctions(AuctionVO vo) throws Exception {
-//		mylog.debug("dao auctions : "+vo);
-//		return sqlSession.selectList(NAMESPACE+".getAuctions",vo);
-//	}
-//	
+	@Override
+	public Map getAuctions(AuctionVO vo) throws Exception {
+		mylog.debug("dao auctions : "+sqlSession.selectList(NAMESPACE+".getAuctions",vo));
+		return sqlSession.selectOne(NAMESPACE+".getAuctions",vo);
+	}
+	
 
 	// 경매 상품 글 수정
 	@Override
