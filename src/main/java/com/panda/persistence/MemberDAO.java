@@ -26,8 +26,11 @@ public interface MemberDAO {
 			//이메일인증~
 			int updateMailKey(MemberVO vo) throws Exception;
 			int updateMailAuth(MemberVO vo) throws Exception;
-			int emailAuthFail(String id) throws Exception;
-			public void insertRep(ReportVO vo) throws Exception;
+			int emailAuthFail(String user_id) throws Exception;
 
+			// 아이디 찾기
+			public MemberVO findId(MemberVO vo) throws Exception;
+			
+			public void insertRep(ReportVO vo) throws Exception;
 			
 }

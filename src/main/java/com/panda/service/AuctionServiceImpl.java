@@ -1,6 +1,5 @@
 package com.panda.service;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.panda.domain.AuctionVO;
+import com.panda.domain.Criteria;
 import com.panda.persistence.AuctionDAO;
 
 @Service
@@ -76,6 +76,27 @@ public class AuctionServiceImpl implements AuctionService {
 	public Integer removeAuction(Integer auction_no) throws Exception {
 		mylog.debug("removeAuction(Integer auction_no) 호출");
 		return adao.removeAuction(auction_no);
+	}
+
+	
+	// 경매 상품 찜 업데이트
+	@Override
+	public Integer updateLike(AuctionVO avo) throws Exception {
+		return adao.updateLike(avo);
+	}
+
+	
+	// 페이징 처리 구현된 리스트 조회
+	@Override
+	public List<AuctionVO> getListPage(Criteria cri) throws Exception {
+		return adao.getListPage(cri);
+	}
+
+	
+	// 글 전체 개수
+	@Override
+	public int totalCnt() throws Exception {
+		return adao.totalCnt();
 	}
 	
 	

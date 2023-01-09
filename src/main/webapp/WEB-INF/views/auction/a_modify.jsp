@@ -85,6 +85,10 @@
 <input type="hidden" name="${sessionScope.user_id}" value="user_id">
 
 <!-- 본문 -->
+
+<%-- ${acmap } --%>
+
+
 <form method="post" enctype="multipart/form-data">
 	<div class="container">
 		<div>
@@ -95,7 +99,7 @@
 								<h2>경매상품 수정</h2><hr>
 							</div>
 						</div>
-						<input type="hidden" name="auction_no" value="${avo.auction_no }">
+						<input type="hidden" name="auction_no" value="${acmap.auction_no }">
 						<div class="row py-4 border-bottom">
 							<div class="col-sm-2">
 								<label class="form-label">이미지 (<span class="text-success">{{ fileCount }}</span>/3 </label>
@@ -128,7 +132,7 @@
 							</div>
 							<div class="col-sm">
 								<select class="form-control" id="auction_category" name="auction_category">
-									<option selected>카테고리를 입력하세요</option>
+									<option selected>${acmap.auction_category }</option>
 									<option value="전자기기">전자기기</option>
 									<option value="의류">의류</option>
 									<option value="생활가전">생활가전</option>
@@ -145,7 +149,7 @@
 								<label for="auction_title" class="form-label">상품명</label>
 							</div>
 							<div class="col-sm">
-								<input type="text" class="form-control" id="searchKeyword" name="auction_title" value="${avo.auction_title }" 
+								<input type="text" class="form-control" id="searchKeyword" name="auction_title" value="${acmap.auction_title }" 
 								placeholder="상품명을 입력해주세요" maxlength="30" />
 								<div class="text-right mt-1">
 									<span class="text-success">
@@ -159,7 +163,7 @@
 								<label class="form-label">가격</label>
 							</div>
 							<div class="col-sm">
-								<input type="number" class="form-control" name="auction_price" value="${avo.auction_price }"
+								<input type="number" class="form-control" name="auction_price" value="${acmap.auction_price }"
 								placeholder="숫자만 입력하세요" maxlength="9" />
 							</div>
 							<div class="col-sm align-self-center">원</div>
@@ -169,7 +173,7 @@
 								<label class="form-label">상품소개</label>
 							</div>
 							<div class="col-sm">
-								<textarea id="summernote" name="auction_detail" rows="5" maxlength="1000">${avo.auction_detail }</textarea>
+								<textarea id="summernote" name="auction_detail" rows="5" maxlength="1000">${acmap.auction_detail }</textarea>
 								<div class="text-right mt-1">
 									<span class="text-success"></span>
 								</div>

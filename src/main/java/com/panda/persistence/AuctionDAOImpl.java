@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.panda.domain.AuctionVO;
+import com.panda.domain.Criteria;
 import com.panda.domain.GoodsVO;
 
 @Repository
@@ -87,7 +88,7 @@ public class AuctionDAOImpl implements AuctionDAO{
 	@Override
 	public Integer updateAuction(AuctionVO avo) throws Exception {
 		mylog.debug("updateAuction(AuctionVO avo) 호출");
-		return sqlSession.update(NAMESPACE+"./updateAuction", avo);
+		return sqlSession.update(NAMESPACE+".updateAuction", avo);
 	}
 
 	
@@ -96,6 +97,39 @@ public class AuctionDAOImpl implements AuctionDAO{
 	public Integer removeAuction(Integer auction_no) throws Exception {
 		mylog.debug("removeAuction(Integer auction_no) 호출");
 		return sqlSession.delete(NAMESPACE+".removeAuction", auction_no);
+	}
+
+	
+	// 경매 상품 찜 업데이트
+	@Override
+	public Integer updateLike(AuctionVO avo) throws Exception {
+		mylog.debug("updateLike(avo)");
+		return sqlSession.update(NAMESPACE+".updateLike", avo);
+	}
+
+	
+	// 페이징 처리 구현된 리스트 조회
+	@Override
+	public List<AuctionVO> getListPage(Integer page) throws Exception {
+		//페이지 정보 계산
+		if(page<0) {
+			page=1;
+		}
+		page = (page-1)*10;
+		return sqlSession.selectList(NAMESPACE+".listPage", page);
+	}
+
+	@Override
+	public List<AuctionVO> getListPage(Criteria cri) throws Exception {
+		mylog.debug("getListPage(Criteria cri) 페이징 처리");
+		return sqlSession.selectList(NAMESPACE+".listPage2", cri);
+	}
+
+	
+	// 전체 게시판 글 개수
+	@Override
+	public int totalCnt() throws Exception {
+		return sqlSession.selectOne(NAMESPACE+".countAuction");
 	}
 
 	
