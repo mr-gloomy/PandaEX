@@ -2,6 +2,7 @@ package com.panda.controller;
 
 import java.util.List;
 
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -24,7 +25,6 @@ import com.panda.domain.Criteria;
 import com.panda.domain.PageVO;
 import com.panda.service.AuctionService;
 
-import jdk.internal.org.jline.utils.Log;
 
 @Controller
 @RequestMapping(value="/auction/*")

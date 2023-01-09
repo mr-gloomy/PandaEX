@@ -35,6 +35,7 @@ $(function(){
 			success:function(data) {
 				var a = String(data.auction_bid).replace(/(.)(?=(\d{3})+$)/g,'$1,');
 				$('#closingBid').html(a);
+				$('#count').html(data.auction_cnt);
 			}
 		});
 		
