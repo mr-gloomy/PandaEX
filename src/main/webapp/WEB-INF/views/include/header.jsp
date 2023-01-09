@@ -443,21 +443,25 @@
      
 		<div class="modal-findid">
 			<div class="findid-input">
-				
-				<input type="radio" class="custom-control-input" id="search_1" name="search_total" onclick="search_check(1)" checked="checked">
-				<input type="text" id="findid-id" placeholder="가입하신 이름을 입력해주세요." maxlength="6" autocomplete="off">
-				<input type="text" id="findid-nick" placeholder="사용중인 닉네임을 입력해주세요." maxlength="10" autocomplete="off">
+				<!--전화번호 uq걸기 -->
+					<form action="/member/findId" method="post" id="find">
+				<input type="text" id="findid-id" placeholder="가입하신 이름을 입력해주세요."  autocomplete="off" name="user_name">
+				<input type="text" id="findid-nick" placeholder="가입하신 전화번호 입력해주세요." autocomplete="off" name="user_tel">
 				<div class="error-text">&nbsp;</div>
-				<input id="search-id" type="button" value="아이디 찾기">
+				<input id="search-id" type="submit" value="아이디 찾기">
+				</form>
 			</div>
 		</div>
 		
 		<div class="modal-findpw">
 			<div class="findpw-input">
-				<input type="text" id="findpw-pw" placeholder="사용중인 아이디를 입력해주세요." maxlength="6" autocomplete="off">
-				<input type="text" id="findpw-tel" placeholder="가입하신 전화번호 입력해주세요." maxlength="10" autocomplete="off">
+			
+					<form action="/member/findPw" method="post" id="findpw">
+				<input type="text" id="findpw-pw" placeholder="사용중인 아이디를 입력해주세요." name="user_id"  autocomplete="off">
+				<input type="text" id="findpw-tel" placeholder="가입하신 이메일을 입력해주세요." name='user_email"'  autocomplete="off">
 				<div class="error-text">&nbsp;</div>
-				<input id="search-pw" type="button" value="비밀번호찾기">
+				<input id="search-pw" type="submit" value="비밀번호찾기">
+				</form>
 			</div>
 		</div>
 	</div>
@@ -528,3 +532,24 @@
         	
         });    
      </script>
+     
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#find').submit(function(){
+			// alert("성공!");
+			if($('#findid-id').val() == ''){
+				alert("이름을 입력하세요.");
+				return false;
+			}
+			
+			if($('#findid-nick').val() == ''){
+				alert("휴대폰 번호를 입력하세요.");
+				return false;
+			}
+			
+		});
+		
+		
+	});
+	
+</script>
