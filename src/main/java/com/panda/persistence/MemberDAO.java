@@ -3,6 +3,7 @@ package com.panda.persistence;
 import java.util.HashMap;
 
 import com.panda.domain.MemberVO;
+import com.panda.domain.ReportVO;
 
 public interface MemberDAO {
 			//회원가입 처리
@@ -25,8 +26,12 @@ public interface MemberDAO {
 			//이메일인증~
 			int updateMailKey(MemberVO vo) throws Exception;
 			int updateMailAuth(MemberVO vo) throws Exception;
-			int emailAuthFail(String id) throws Exception;
+			int emailAuthFail(String user_id) throws Exception;
 
+			// 아이디 찾기
+			public MemberVO findId(MemberVO vo) throws Exception;
+			
+			public void insertRep(ReportVO vo) throws Exception;
 			
 			
 }

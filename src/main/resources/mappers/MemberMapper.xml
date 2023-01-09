@@ -4,7 +4,12 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.panda.mapper.MemberMapper">
-
+	
+	<insert id="insertRep">
+		insert into report (goods_no,u_id,rep_subject,rep_reason,rep_sort,rep_u_id) 
+		values (#{goods_no},#{u_id},#{rep_subject},#{rep_reason},#{rep_sort},#{rep_u_id})
+	</insert>
+	
 	<insert id="insert" >
        insert into user(user_id,user_pw,user_nick,user_email,user_tel,user_name,user_addr,user_temp,user_area)
        values (#{user_id},#{user_pw},#{user_nick},#{user_email},#{user_tel},#{user_name},#{user_addr},#{user_temp},#{user_area})
@@ -44,18 +49,19 @@
 	
 	
 	
+	<!-- 아이디 찾기 -->
 	<select id="findId" resultType="MemberVO">
-		select user_id 
-		from user 
-		where user_name=#{user_name} and user_phone=#{user_tel}
+		select user_id
+		from user
+		where user_name=#{user_name} and user_tel=#{user_tel}
 	</select>
 	
-	<select id="findPw" resultType="MemberVO">
-		select user_pw 
-		from user 
-		where user_id=#{user_id} and user_phone=#{user_tel}
-	</select>
+	<!-- 회원 임시 비밀번호-->
+	<update id="searchPassword" parameterType="Map">
+		update user set user_pw = #{param3} where user_id = #{param1} and user_email = #{param2}
+	</update>
 	
+	<!-- 비밀번호 재설정 -->
 	<update id="updatePw">
 		update user 
 		set user_pw=#{user_pw} 

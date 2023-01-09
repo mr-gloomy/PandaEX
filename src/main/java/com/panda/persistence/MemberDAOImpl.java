@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.panda.domain.MemberVO;
+import com.panda.domain.ReportVO;
 
 @Repository
 public class MemberDAOImpl implements MemberDAO{
@@ -80,9 +81,25 @@ public class MemberDAOImpl implements MemberDAO{
 		}
 
 		@Override
-		public int emailAuthFail(String id) throws Exception {
-		    return sqlSession.selectOne(NAMESPACE + ".emailAuthFail", id);
+		public int emailAuthFail(String user_id) throws Exception {
+		    return sqlSession.selectOne(NAMESPACE + ".emailAuthFail", user_id);
 		}
+		
+		// 아이디 찾기
+		@Override
+		public MemberVO findId(MemberVO vo) throws Exception {
+			return sqlSession.selectOne(NAMESPACE+".findId", vo);
+		}
+
+
+		
+
+		@Override
+		public void insertRep(ReportVO vo) throws Exception {
+			sqlSession.insert(NAMESPACE+".insertRep",vo);
+		}
+		
+		
 		
 	}
 	

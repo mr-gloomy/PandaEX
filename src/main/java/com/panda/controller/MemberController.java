@@ -3,7 +3,6 @@ package com.panda.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
-import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -22,8 +21,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.panda.domain.KakaoVO;
 import com.panda.domain.MemberVO;
+import com.panda.domain.ReportVO;
 import com.panda.service.MemberService;
 
 @Controller
@@ -177,18 +176,6 @@ public class MemberController {
 			
 			return "main/index";
 	    	}
-//		@RequestMapping(value="/kakaoLogout")
-//		public String access(HttpSession session) throws IOException {
-//			
-//			String access_token = (String)session.getAttribute("access_token");
-//			Map<String, String> map = new HashMap<String, String>();
-//			map.put("Authorization", "Bearer "+ access_token);
-//			
-//			String result = conn.HttpPostConnection("https://kapi.kakao.com/v1/user/logout", map).toString();
-//			System.out.println(result);
-//			
-//			return "redirect:/";
-//		}
 		
 	
 	//로그아웃
@@ -198,8 +185,63 @@ public class MemberController {
 		return "/main/index";
 	}
 	
+	@PostMapping("/report")
+	public void reportUser(ReportVO vo, HttpServletResponse response) throws Exception {
+		
+		service.insertRep(vo);
+		
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out=response.getWriter();
+		out.println("<script>");
+		out.println("alert('신고 완료!');");
+		out.println("history.back()");
+		out.println("</script>");
+		out.close();
+		
+	}
 	
-	
-	//아이디 찾기 
+	// 아이디 찾기
+		@RequestMapping(value="/findId",method=RequestMethod.GET)
+		public String findIdGET() throws Exception {
+			mylog.info("findIdGET() 호출");
+					
+			return "member/searchID";
+		}
+				
+		@RequestMapping(value="/findId",method=RequestMethod.POST)
+		public String findIdPOST(MemberVO vo, Model model) throws Exception {
+			mylog.info("findIdPOST(MemberVO vo, Model model) 호출");
+					
+			MemberVO findIdVo = service.findId(vo);
+			// System.out.println(findIdVo.getUser_id());
+					
+			if(findIdVo == null) {
+				model.addAttribute("check",1);
+					return "/member/findError";
+			}else {
+				model.addAttribute("check", 0);
+				model.addAttribute("id", findIdVo.getUser_id());
+				return "/member/searchID";
+			}
+					
+		}
+				
+		// 아이디 결과
+		@RequestMapping(value="/resultId", method=RequestMethod.GET)
+		public String resultIdGET(HttpServletRequest request,Model model, @RequestParam(required=false,value="user_name") String user_name, @RequestParam(required=false,value="user_tel") String user_tel, MemberVO vo) throws Exception{
+					
+			vo.setUser_name(user_name);
+			vo.setUser_tel(user_tel);
+			MemberVO findId = service.findId(vo);
+					
+					
+			model.addAttribute("searchVO", findId);
+					
+					
+			return "member/searchID";
+		}
+				
+		
+
 	
 }
