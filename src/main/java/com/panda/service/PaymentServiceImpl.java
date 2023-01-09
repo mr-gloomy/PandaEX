@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +20,7 @@ import com.panda.paymentvo.PaymentInsertVO;
 import com.panda.paymentvo.PaymentSuccessVO;
 import com.panda.paymentvo.PurchaseVO;
 import com.panda.paymentvo.SuccessfulBidDto;
+import com.panda.persistence.AuctionDAOImpl;
 
 @Service
 public class PaymentServiceImpl implements PaymentService{
@@ -25,19 +28,24 @@ public class PaymentServiceImpl implements PaymentService{
 	@Autowired
 	private SqlSession sqlSession;
 	
+	// mapper NAMESPACE 
+		private static final String NAMESPACE = "com.panda.mapper.PaymentMapper";
 	
-	@Transactional
+		private static final Logger mylog = LoggerFactory.getLogger(PaymentServiceImpl.class);
+		
 	@Override
 	public void insert(int paymentNo, KakaoPayApproveResponseVO responseVO, PurchaseVO purchaseVO) {
+		mylog.debug("insert(int paymentNo, KakaoPayApproveResponseVO responseVO, PurchaseVO purchaseVO) -> mapper 동작 호출");
 		PaymentInsertVO vo = PaymentInsertVO.builder()
 			.paymentNo(paymentNo)
 			.memberNo(Integer.parseInt(responseVO.getPartner_user_id()))
 			.paymentTid(responseVO.getTid())
 			.paymentPrice(purchaseVO.getChargeMoney())
 			.build();
-		
-		sqlSession.insert("payment.insert", vo);
-		sqlSession.update("payment.charge", vo);
+		mylog.debug("vo : "+vo);
+		sqlSession.insert(NAMESPACE+".insert", vo);
+		sqlSession.update(NAMESPACE+".charge", vo);
+		mylog.debug("payment insert 완료 -> 서비스");
 	}
 	@Override
 	public PaymentInsertVO selectOne(int paymentNo) {
