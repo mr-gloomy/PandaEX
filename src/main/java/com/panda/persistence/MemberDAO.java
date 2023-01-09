@@ -33,5 +33,4 @@ public interface MemberDAO {
 			
 			public void insertRep(ReportVO vo) throws Exception;
 			
-			
 }

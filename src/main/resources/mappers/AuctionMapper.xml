@@ -59,5 +59,45 @@
 		where auction_no = #{auction_no}
 	</delete>
 	
+	<!-- 경매 상품 찜 업데이트 -->
+	<update id="updateLike">
+		update auction
+  	    set auction_like = CASE WHEN #{auction_like}='0' THEN (select auction_like
+  	                                                             from (select auction_like+1 auction_like 
+  	    														         from auction 
+  	    														        where auction_no = #{auction_no}) a)
+					            ELSE (select a.auction_like from (select auction_like-1 as auction_like 
+					            									from auction 
+					            								   where auction_no = #{auction_no}) a)
+				           END
+ 		where auction_no = #{auction_no}
+	</update>
+	
+	<!-- 페이징처리 게시판 목록 -->
+	<select id="listPage" resultType="AuctionVO">
+		<![CDATA[
+			select * from auction
+			where auction_no>0
+			order by auction_no desc, auction_date desc
+			limit #{page},10
+		]]>
+	</select>
 
+	<!-- 페이징처리 게시판 목록 -->
+	<select id="listPage2" resultType="AuctionVO">
+	  <![CDATA[
+		select * from auction
+		where auction_no>0
+		order by auction_no desc, auction_date desc
+		limit #{pageStart},#{perPageNum}
+		]]>
+	</select>
+
+	<!-- 게시판 글 전체 개수 -->
+	<select id="countAuction" resultType="int">
+		select count(auction_date) 
+		from auction
+	</select>
+	
+	
 </mapper>

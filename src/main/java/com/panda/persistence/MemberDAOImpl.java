@@ -84,6 +84,13 @@ public class MemberDAOImpl implements MemberDAO{
 		public int emailAuthFail(String user_id) throws Exception {
 		    return sqlSession.selectOne(NAMESPACE + ".emailAuthFail", user_id);
 		}
+
+		@Override
+		public void insertRep(ReportVO vo) throws Exception {
+			sqlSession.insert(NAMESPACE+".insertRep",vo);
+		}
+		
+		
 		
 		// 아이디 찾기
 		@Override
@@ -94,10 +101,6 @@ public class MemberDAOImpl implements MemberDAO{
 
 		
 
-		@Override
-		public void insertRep(ReportVO vo) throws Exception {
-			sqlSession.insert(NAMESPACE+".insertRep",vo);
-		}
 		
 		
 		

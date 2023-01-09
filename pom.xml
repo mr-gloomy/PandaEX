@@ -70,6 +70,34 @@
     <artifactId>gson</artifactId>
     <version>2.9.0</version>
 </dependency>
+
+	<!-- 
+			OpenAPI를 만들기 위한 Swagger 의존성
+			- 3.x부터는 Spring-boot 의존성으로 한번에 추가하는 것을 권장
+			- 2.x는 core와 ui를 따로 추가한다
+				- io.springfox.springfox-swagger-ui: 문서화 시켜주는 화면 제작 도구
+				- io.springfox.springfox-swagger2: 컨트롤러 분석도구
+			- 처리를 위해서는 jackson-databind 의존성을 추가로 넣어야한다 (현재 추가되어있음)
+		
+		 -->
+		<dependency>
+		    <groupId>io.springfox</groupId>
+		    <artifactId>springfox-swagger-ui</artifactId>
+		    <version>2.9.2</version>
+		</dependency>
+
+		<dependency>
+		    <groupId>io.springfox</groupId>
+		    <artifactId>springfox-swagger2</artifactId>
+		    <version>2.9.2</version>
+		</dependency>	
+		
+		<!-- 웹소켓 의존성 추가. -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-websocket</artifactId>
+		    <version>${org.springframework-version}</version>
+		</dependency>
             
       <!-- AspectJ -->
       <dependency>

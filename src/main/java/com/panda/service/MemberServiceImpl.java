@@ -230,7 +230,6 @@ public class MemberServiceImpl implements MemberService {
 	public int emailAuthFail(String user_id) throws Exception {
 	    return dao.emailAuthFail(user_id);
 	}
-	
 
 	@Override
 	public void insertRep(ReportVO vo) throws Exception {

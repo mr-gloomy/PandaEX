@@ -20,8 +20,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
 <link rel="stylesheet" type="text/css" href="/resources/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/resources/css/custom.css">
+
 <script type="text/javascript">
 
+// 새로고침
 $(function(){
 	$('#refreshP').on('click',function(){
 		var aNo = '${param.auction_no}';
@@ -39,7 +41,7 @@ $(function(){
 	});
 });
 
-
+// 타이머
 function CountDownTimer(dt, id) {
      var end = new Date(dt);
      var _second = 1000;
@@ -211,10 +213,11 @@ function CountDownTimer(dt, id) {
 							<i class="fa-solid fa-land-mine-on pl-3 pr-2"></i> 신고하기
 						</div>
 					</div>
+					
 					<div class="row">
 						<div class="col p-0">
 							<a class="btn btn-info btn-lg btn-block py-3"
-								href="/auctionara/chat" role="button"><i
+								href="" role="button"><i
 								class="fa-solid fa-comments-dollar pr-2"></i> 1:1 채팅 관리 </a>
 							<!--v-if-->
 						</div>
@@ -228,6 +231,7 @@ function CountDownTimer(dt, id) {
 							<!--v-if-->
 						</div>
 					</div>
+					
 				</div>
 			</div>
 			<div class="row mt-4">
@@ -447,9 +451,30 @@ function CountDownTimer(dt, id) {
 				</div>
 			</div>
 		</div>
-
-
-
+		
+		<!-- for modal -->
+		<div class="modal fade" id="reportModal" aria-hidden="true" aria-labelledby="reportModalLable" tabindex="-1">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="reportModalLable">&#129402; 경매 신고하기</h5>
+						<button type="button" class="btn-close close" data-bs-dismiss="modal">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+		        		경매 신고 이유를 알려주세요!
+		        		<input type="text" class="form-control mt-2" v-model="reportReason" autocomplete="off" maxlength="100" />
+		                <div class="text-right mt-1"><span class="text-primary">{{ reportCount }}</span> / 100</div>
+<!-- 		                <div class="text-right mt-1"><span class="text-primary">{{ reportCount }}</span> / 100</div> -->
+		      		</div>
+		            <div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">돌아가기</button>
+		                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" :disabled="reportReason == ''" @click="report">신고하기</button>
+		            </div>      		
+		    	</div>
+		  	</div>
+		</div>
 
 		<style scoped="">
 .carousel-item img {
