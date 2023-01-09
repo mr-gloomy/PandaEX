@@ -1,7 +1,9 @@
 package com.panda.controller;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.panda.domain.KakaoVO;
 import com.panda.domain.MemberVO;
+import com.panda.domain.ReportVO;
 import com.panda.service.MemberService;
 
 @Controller
@@ -79,29 +82,30 @@ public class MemberController {
 	
 	
 	
-		// GET 방식 - /members/ckID + 데이터
-		// 아이디 정보를 전달받아서 서비스에서 해당아이디가 중복인지 여부판단
-		@RequestMapping(value = "/ckID",method = RequestMethod.GET )
-		public String checkID(MemberVO vo,
-				 @ModelAttribute("user_id") String user_id) throws Exception{
-			mylog.debug(" checkID() 호출 ");
-			mylog.debug(vo+"");
-			mylog.debug(user_id+"");
-			
-			
-			MemberVO checkVO = service.getMember(user_id);
-			mylog.debug(checkVO+"");
-			
-			if(checkVO ==null) {
-				//디비에 정보가 없음 -> 해당 아이디 사용 가능 
-				return "OK";
-						
-			}else {
-				//디비에 정보가 있음 -> 해당 아이디를 사용 x 
-				return "NO";
-			}
-		}
+//		// GET 방식 - /members/ckID + 데이터
+//		// 아이디 정보를 전달받아서 서비스에서 해당아이디가 중복인지 여부판단
+//		@RequestMapping(value = "/ckID",method = RequestMethod.GET )
+//		public String checkID(MemberVO vo,
+//				 @ModelAttribute("user_id") String user_id) throws Exception{
+//			mylog.debug(" checkID() 호출 ");
+//			mylog.debug(vo+"");
+//			mylog.debug(user_id+"");
+//			
+//			
+//			MemberVO checkVO = service.getMember(user_id);
+//			mylog.debug(checkVO+"");
+//			
+//			if(checkVO ==null) {
+//				//디비에 정보가 없음 -> 해당 아이디 사용 가능 
+//				return "OK";
+//						
+//			}else {
+//				//디비에 정보가 있음 -> 해당 아이디를 사용 x 
+//				return "NO";
+//			}
+//		}
 		
+
 	//로그인 post
 	@PostMapping(value="/login")
 	public String loginPOST(String user_id, MemberVO vo, HttpServletRequest request, Model model) throws Exception{
@@ -166,6 +170,7 @@ public class MemberController {
 			// 위 코드는 session객체에 담긴 정보를 초기화 하는 코드.
 			session.setAttribute("user_id", userInfo.get("k_name"));
 			session.setAttribute("user_email", userInfo.get("k_email"));
+			session.setAttribute("kakao", "1");
 			// 위 2개의 코드는 닉네임과 이메일을 session객체에 담는 코드
 			// jsp에서 ${sessionScope.kakaoN} 이런 형식으로 사용할 수 있다.
 		    
@@ -173,7 +178,18 @@ public class MemberController {
 			
 			return "main/index";
 	    	}
-	    
+//		@RequestMapping(value="/kakaoLogout")
+//		public String access(HttpSession session) throws IOException {
+//			
+//			String access_token = (String)session.getAttribute("access_token");
+//			Map<String, String> map = new HashMap<String, String>();
+//			map.put("Authorization", "Bearer "+ access_token);
+//			
+//			String result = conn.HttpPostConnection("https://kapi.kakao.com/v1/user/logout", map).toString();
+//			System.out.println(result);
+//			
+//			return "redirect:/";
+//		}
 		
 	
 	//로그아웃
@@ -183,5 +199,20 @@ public class MemberController {
 		return "/main/index";
 	}
 	
+	@PostMapping("/report")
+	public void reportUser(ReportVO vo, HttpServletResponse response) throws Exception {
+		
+		service.insertRep(vo);
+		
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out=response.getWriter();
+		out.println("<script>");
+		out.println("alert('신고 완료!');");
+		out.println("history.back()");
+		out.println("</script>");
+		out.close();
+		
+	}
+	//아이디 찾기 
 	
 }

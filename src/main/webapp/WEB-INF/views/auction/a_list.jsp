@@ -10,9 +10,10 @@
 <!-- 헤더 -->	
 <%@ include file="../include/header.jsp" %>
 <%@ include file="../include/css.jsp" %>
+
 <script type="text/javascript">
 	
-	$(function(){
+	/* $(function(){
 		 $("button[name='button']").click(function(){
 		        var kind = $(this).val();       //버튼이 클릭 되었을 시, 개별 버튼의 값이 kind 변수에 담겨집니다.
 		        $.ajax({
@@ -57,12 +58,12 @@
 		    });
 		
 	});
-	
+	 */
 	function getDate(x,y) {
 		var date1 = new Date(x).getTime();
 		var date2 = new Date(y).getTime();
 		
-		return ("남은 "+(date1-date2)/(1000*60*60*24)+"일");
+		document.write("남은 "+(date1-date2)/(1000*60*60*24)+"일");
 	}
 	
 </script>
@@ -75,24 +76,17 @@
 <section class="bg0 p-t-75 p-b-120" style="align-content:center;">	
 	<div class="container">
 	<div class="flex-w flex-sb-m p-b-52">
-		<div class="flex-w flex-l-m filter-tope-group m-tb-10">
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1"
-						    data-filter="*" name="button" value="all">All</button>
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
-						    data-filter=".machine" name="button" value="machine">전자기기</button>
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
-						    data-filter=".beauty" name="button" value="beauty">의류/뷰티/잡화</button>
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
-						    data-filter=".kitchen" name="button" value="kitchen">생활가전/주방</button>
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
-						    data-filter=".interior" name="button" value="interior">인테리어/가구</button>
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
-						    data-filter=".book" name="button" value="book">도서/티켓/교환권</button>
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
-						    data-filter=".food" name="button" value="food">식품</button>
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
-						    data-filter=".etc" name="button" value="etc">기타 중고물품</button>
-		</div>
+	<div class="filter-tope-group" align="center" style="margin-top: 0px;">
+		<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*"><b>All</b></button>
+		<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".전자기기"><b>전자기기</b></button>
+		<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".의류"><b>의류</b></button>
+		<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".생활가전"><b>생활가전</b></button>
+		<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".인테리어"><b>인테리어</b></button>
+		<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".도서"><b>도서</b></button>
+		<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".교환권"><b>교환권</b></button>
+		<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".식품"><b>식품</b></button>
+		<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".기타중고물품"><b>기타 중고물품</b></button>
+	</div>
 	
 		<div class="flex-w flex-c-m m-tb-10">
 			<div class="col ml-2 pr-2">
@@ -108,7 +102,7 @@
                     <option value="1">입찰가&#8593;순</option>
                     <option value="2">입찰가&#8595;순</option>
                     <option value="3">마감 임박순</option>
-                    <option value="4">우수 판매자순</option>
+                    <option value="4">조회수순</option>
                 </select>
             </div>
 	
@@ -133,7 +127,7 @@
 	
 	<div id="auctions" class="row isotope-grid" style="position: relative; height: 4141.62px;">
 				<c:forEach var="avo" items="${auctionList }">
-					<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women" style="position: absolute; left: 0%; top: 0px;">
+					<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item ${avo.auction_category}" style="position: absolute; left: 0%; top: 0px;">
 						<!-- Block2 -->
 						<div class="block2">
 							<div class="block2-pic hov-img0">
@@ -142,15 +136,19 @@
 	
 							<div class="block2-txt flex-w flex-t p-t-14">
 								<div class="block2-txt-child1 flex-col-l ">
-									<a href="/auction/a_read?auction_no=${avo.auction_no }&user_no=${avo.user_no}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									<a href="/auction/a_read?auction_no=${avo.auction_no }&user_no=${avo.user_no}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6" 
+									style="font-weight:bold; font-size:17px; color:darkslategray;">
 										${avo.auction_title }
 									</a>
 	
-									<span class="stext-105 cl3">
-										현재 <fmt:formatNumber value="${avo.auction_bid }"/>원
+									<span class="stext-105 cl3" style="font-size:17px; color:darkslategray;">
+										현재 <span style="color:#28a745;"><fmt:formatNumber value="${avo.auction_bid }"/></span>원
 									</span>
 									<span class="stext-105 cl3">
 										 <script>getDate('${avo.auction_cdate.toString().substring(0,10)}','${avo.auction_date.toString().substring(0,10)}');</script>
+									</span>
+									<span class="stext-105 cl3" style="color:gray; font-size:13px;">
+										조회수 ${avo.auction_viewcount }회
 									</span>
 								</div>
 								

@@ -11,12 +11,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.panda.domain.AuctionVO;
 import com.panda.persistence.AuctionDAOImpl;
 import com.panda.service.AuctionService;
 
 import lombok.extern.log4j.Log4j;
 
-@RequestMapping("/good")
+@RequestMapping("/auctions")
 @RestController
 public class AuctionRestController {
 	
@@ -25,10 +26,10 @@ public class AuctionRestController {
 	@Inject
 	AuctionService service;
 	
-	@GetMapping("/list/{category}")
-	public List<Map<String, Object>> getList(@PathVariable String category) throws Exception{
-		mylog.info("list 카테고리 호출 "+category);
-		return service.getAuctions(category);
+	@GetMapping("/refreshP/{a_no}")
+	public AuctionVO getList(@PathVariable int a_no) throws Exception{
+		mylog.info("list 카테고리 호출 ");
+		return service.getAuction(a_no);
 	}
 	
 }

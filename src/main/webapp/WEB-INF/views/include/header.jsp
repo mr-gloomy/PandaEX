@@ -182,10 +182,18 @@
 								<div class="user-modify">
 									<input type="button" onclick="mo()" class="modify" value="정보수정">
 								</div>
+								
+								<c:if test="${kakao==null}">
+								<!-- 로그아웃 -->
 								<div class="user-logout">
 									<input type="button" onclick="location.href='/member/logout';" value="로그아웃">
-									
 								</div>
+								</c:if>
+								<c:if test="${kakao!=null}">
+								<div class="user-logout">
+									<input type="button" onclick="location.href='https://kauth.kakao.com/oauth/logout?client_id=d2adbec5b44fdcc0559d1e3ca898739e&logout_redirect_uri=http://localhost:8080/member/logout'" value="로그아웃">
+								</div>
+								</c:if>
 							</c:if>
 							
 							
@@ -435,12 +443,15 @@
      
 		<div class="modal-findid">
 			<div class="findid-input">
+				
+				<input type="radio" class="custom-control-input" id="search_1" name="search_total" onclick="search_check(1)" checked="checked">
 				<input type="text" id="findid-id" placeholder="가입하신 이름을 입력해주세요." maxlength="6" autocomplete="off">
 				<input type="text" id="findid-nick" placeholder="사용중인 닉네임을 입력해주세요." maxlength="10" autocomplete="off">
 				<div class="error-text">&nbsp;</div>
 				<input id="search-id" type="button" value="아이디 찾기">
 			</div>
 		</div>
+		
 		<div class="modal-findpw">
 			<div class="findpw-input">
 				<input type="text" id="findpw-pw" placeholder="사용중인 아이디를 입력해주세요." maxlength="6" autocomplete="off">

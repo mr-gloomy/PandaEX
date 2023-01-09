@@ -23,6 +23,9 @@
 	<logger name="com.panda.service">
 		<level value="debug" />
 	</logger>
+	<logger name="com.panda.paymentvo">
+	<level value="debug" />
+	</logger>
 	
 	<!-- 3rdparty Loggers -->
 	<logger name="org.springframework.core">
