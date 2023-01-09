@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.panda.domain.MemberVO;
+import com.panda.domain.ReportVO;
 
 @Repository
 public class MemberDAOImpl implements MemberDAO{
@@ -83,6 +84,13 @@ public class MemberDAOImpl implements MemberDAO{
 		public int emailAuthFail(String id) throws Exception {
 		    return sqlSession.selectOne(NAMESPACE + ".emailAuthFail", id);
 		}
+
+		@Override
+		public void insertRep(ReportVO vo) throws Exception {
+			sqlSession.insert(NAMESPACE+".insertRep",vo);
+		}
+		
+		
 		
 	}
 	

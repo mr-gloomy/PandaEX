@@ -186,7 +186,11 @@ public class GoodsController {
 		mylog.debug("전달정보 (goods_no): " + goods_no);
 		
 		// 세션객체 
-		boolean isUpdateCheck = (boolean) session.getAttribute("updateCheck");
+		boolean isUpdateCheck = false;
+		
+		if (session.getAttribute("updateCheck")!=null) {
+			isUpdateCheck = (boolean) session.getAttribute("updateCheck");
+		}
 		mylog.debug("조회수 증가 상태 : " + isUpdateCheck);
 		
 		if(isUpdateCheck) {

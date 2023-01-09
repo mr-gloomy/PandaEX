@@ -22,6 +22,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.panda.domain.KakaoVO;
 import com.panda.domain.MemberVO;
+import com.panda.domain.ReportVO;
 import com.panda.mail.MailHandler;
 import com.panda.mail.TempKey;
 import com.panda.persistence.MemberDAO;
@@ -228,14 +229,10 @@ public class MemberServiceImpl implements MemberService {
 	public int emailAuthFail(String user_id) throws Exception {
 	    return dao.emailAuthFail(user_id);
 	}
-	
 
-
-	
-	
-
-
-
-
+	@Override
+	public void insertRep(ReportVO vo) throws Exception {
+		dao.insertRep(vo);
+	}
 
 }

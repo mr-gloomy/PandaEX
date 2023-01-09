@@ -134,7 +134,7 @@ public class OpenBankingController {
 			map.put("tran_no","1");
 			map.put("org_bank_tran_id",withdrawRequestVO.getBank_tran_id());
 			map.put("org_bank_tran_date","20230101");
-			map.put("org_bank_tran_date","20230101");
+			map.put("org_tran_amt","1000");
 			// list에 정보 map을 추가
 			req_list.add(map);
 			
