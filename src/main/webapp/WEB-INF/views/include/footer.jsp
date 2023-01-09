@@ -307,6 +307,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <!--===============================================================================================-->
 	<script src="/resources/vendor/bootstrap/js/popper.js"></script>
 	<script src="/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <!--===============================================================================================-->
 	<script src="/resources/vendor/select2/select2.min.js"></script>
 	<script>
@@ -353,15 +354,51 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 		$('.js-addwish-b2').each(function(){
 			var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
+			
 			$(this).on('click', function(){
-				swal(nameProduct, "is added to wishlist !", "success");
-
-				$(this).addClass('js-addedwish-b2');
-				$(this).off('click');
+				
+				var auction_like;
+				var auction_no; 
+				var that = $(this);
+				
+				// 1. this로 현재 찜여부 확인하기
+				if($(this).hasClass("js-addedwish-b2")) {
+					auction_like = "1";	// 찜해제
+				} else {
+					auction_like = "0";	// 찜
+				}
+				
+				// 2. this로 선택한 경매품의 auction_id 가져오기
+				auction_no = $(this)[0].parentElement.id;
+				
+				// TODO user_no 받아와서 세팅하기
+				var params = {"auction_no": auction_no, 
+							  "auction_like":auction_like,
+							  "user_no":"1"}
+				
+				$.ajax({
+					type: "POST",
+					url: "/auction/a_list/{auction_no}",
+					data: params,
+					success: function() {
+						if(that.hasClass("js-addedwish-b2")) {
+							// 찜해제
+							that.removeClass('js-addedwish-b2');
+							swal(nameProduct, "is removed to wishlist !", "success");
+						} else {
+							// 찜
+							that.addClass('js-addedwish-b2');
+							swal(nameProduct, "is added to wishlist !", "success");
+						}
+					}
+					
+				});
+				
+// 				$(this).off('click');
 			});
 		});
 
-		$('.js-addwish-detail').each(function(){
+		/* $('.js-addwish-detail').each(function(){
 			var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
 
 			$(this).on('click', function(){
@@ -370,7 +407,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 				$(this).addClass('js-addedwish-detail');
 				$(this).off('click');
 			});
-		});
+		}); */
 
 		/*---------------------------------------------*/
 
