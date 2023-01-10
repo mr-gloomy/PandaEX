@@ -24,9 +24,10 @@ var ht = new Happytalk({
 
 
 <body>
-
+<c:set var="user" value="${memberVO }"/>
 	<%-- <h1>${sessionScope.user_id }</h1> --%>
-
+	<br><br><br><br><br><br><br><br><br><br><br><br><br>
+${user }
 	<div class="container" style="margin-top: 100px; height: auto; width: 1000px;">
 		<ul class="myp_side">
 			<li class="side_name">마이페이지</li>
@@ -41,11 +42,11 @@ var ht = new Happytalk({
 				<div class="myp_img">
 					<img src="/resources/images/icons/man1.png">
 				</div>
-				<div class="myp_name">${sessionScope.user_id }</div>
+				<div class="myp_name">${user.user_name }</div>
 			</div>
 			<div class="myp_shop_info">
 				<div class="myp_shop_1">
-					<div class="myp_shop_name">${sessionScope.user_id }님의 상점</div>
+					<div class="myp_shop_name">${user.user_nick }님의 상점</div>
 
 				</div>
 				<div class="shop_grade_po">
@@ -57,7 +58,7 @@ var ht = new Happytalk({
 				<div class="myp_shop_2">
 					<img src="/resources/images/icons/store.png" class="shop_icons">
 					<p style="margin-right: 5px;">상점오픈일 :</p>
-					<strong>10일전</strong> <img src="/resources/images/icons/visit.png"
+					<strong>${user.user_regdate }</strong> <img src="/resources/images/icons/visit.png"
 						class="shop_icon">
 					<p style="margin-right: 5px;">상점방문수 :</p>
 					<strong>100명</strong> <img src="/resources/images/icons/sell.png"
