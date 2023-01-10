@@ -17,7 +17,7 @@ public interface MemberDAO {
 			//닉네임조회
 			public MemberVO getNick(String user_nick) throws Exception;
 			
-			
+			//카카오로그인
 			public HashMap<String, Object> findkakao(HashMap<String, Object> userInfo)throws Exception;
 
 			public void kakaoinsert(HashMap<String, Object> userInfo)throws Exception;
@@ -46,5 +46,9 @@ public interface MemberDAO {
 			
 			// 마이 페이지 - 회원 탈퇴 
 			public void exit(MemberVO memberVO) throws Exception;
+
+			// 비밀번호 변경
+			public int updatePw(MemberVO vo) throws Exception;
+
 			
 }

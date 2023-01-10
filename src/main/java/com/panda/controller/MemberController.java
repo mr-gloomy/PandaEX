@@ -3,8 +3,10 @@ package com.panda.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.Random;
 
 import javax.inject.Inject;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -12,14 +14,18 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.panda.domain.MemberVO;
 import com.panda.domain.ReportVO;
@@ -39,7 +45,7 @@ public class MemberController {
 
 	@Autowired
 	private HttpSession session;
-	
+	HttpServletResponse response;
 	
 	//http://localhost:8080/main/index
 	
@@ -79,29 +85,6 @@ public class MemberController {
 	}
 	
 	
-	
-//		// GET 방식 - /members/ckID + 데이터
-//		// 아이디 정보를 전달받아서 서비스에서 해당아이디가 중복인지 여부판단
-//		@RequestMapping(value = "/ckID",method = RequestMethod.GET )
-//		public String checkID(MemberVO vo,
-//				 @ModelAttribute("user_id") String user_id) throws Exception{
-//			mylog.debug(" checkID() 호출 ");
-//			mylog.debug(vo+"");
-//			mylog.debug(user_id+"");
-//			
-//			
-//			MemberVO checkVO = service.getMember(user_id);
-//			mylog.debug(checkVO+"");
-//			
-//			if(checkVO ==null) {
-//				//디비에 정보가 없음 -> 해당 아이디 사용 가능 
-//				return "OK";
-//						
-//			}else {
-//				//디비에 정보가 있음 -> 해당 아이디를 사용 x 
-//				return "NO";
-//			}
-//		}
 		
 
 	//로그인 post
@@ -135,6 +118,9 @@ public class MemberController {
 
 		}else {
 			//return "redirect:/member/login";
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out=response.getWriter();
+			out.println("로그인 실패 삐빅");
 			resultURI = "redirect:/main/index";
 		}
 		
@@ -242,6 +228,75 @@ public class MemberController {
 		}
 				
 		
+		/* 비밀번호 찾기 */
+		@RequestMapping(value = "/findpw", method = RequestMethod.GET)
+		public String findPwGET() throws Exception{
+			mylog.info("findPwGET() 호출");
+			
+			return "main/index";
+		}
 
-	
+		@RequestMapping(value = "/findpw", method = RequestMethod.POST)
+		public String findPwPOST(@ModelAttribute MemberVO vo, HttpServletResponse response) throws Exception{
+			mylog.info("findPwPOST() 호출");
+			service.findPw(response, vo);
+			
+			return "main/index";
+		}
+		
+		@GetMapping("/pwUpdate")
+		public String pwUpdate(MemberVO vo,String user_no)throws Exception{
+			vo.setUser_no(user_no);
+
+		    return "/member/pwUpdate";
+		}
+		
+//		//pw-change 요청
+//		@GetMapping("/pw-change")
+//		public ModelAndView pwChange() {
+//			return new ModelAndView ("member/pw-change");
+//		}
+//		//비밀번호 확인 처리 요청
+//		@PostMapping("/checkPw")
+//		public String checkPw(@RequestBody String pw, HttpSession session) throws Exception {
+//			
+//			mylog.info("비밀번호 확인 요청 발생");
+//			
+//			String result = null;
+//			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+//			
+//			MemberVO dbUser = (MemberVO)session.getAttribute("login");
+//			mylog.info("DB 회원의 비밀번호 : " + dbUser.getUser_pw());
+//			mylog.info("폼에서 받아온 비밀번호 : " + pw);
+//			
+//			if(encoder.matches(pw, dbUser.getUser_pw())) {
+//				result = "pwConfirmOK";
+//			} else {
+//				result = "pwConfirmNO";
+//			}
+//			
+//			return result;
+//			
+//		}
+//		
+//		//비밀번호 변경 요청
+//		@PostMapping("/pw-change")
+//		public String pwChange(@RequestBody UsersVO user, HttpSession session) throws Exception {
+//			
+//			logger.info("비밀번호 변경 요청 발생!!!");
+//			
+//			//비밀번호 변경
+//			usersService.modifyPw(user);
+//			
+//			//비밀번호 변경 성공시 로그인 세션 객체 다시 담음
+//			LoginVO modifyUser = new LoginVO();
+//			modifyUser.setEmail(user.getEmail());
+//			
+//			UsersVO mUser = usersService.login(modifyUser);
+//			logger.info("회원정보 불러오기 : " + mUser);
+//			session.setAttribute("login", mUser);
+//			
+//			return "changeSuccess";
+//		}
 }
+		
