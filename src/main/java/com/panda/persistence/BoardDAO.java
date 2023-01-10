@@ -1,6 +1,7 @@
 package com.panda.persistence;
 
 import java.util.List;
+import java.util.Map;
 
 import com.panda.domain.BoardVO;
 import com.panda.domain.Criteria;
@@ -29,5 +30,5 @@ public interface BoardDAO {
 	public Integer totalCnt()throws Exception;
 	
 	// 글 목록조회 카테고리
-	public List<BoardVO> getBoardCate(Criteria cri, String category);
+	public List<BoardVO> getBoardCate(Map<String, Object> map);
 }

@@ -1,8 +1,11 @@
 package com.panda.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.panda.domain.BoardVO;
@@ -32,7 +36,7 @@ public class AdminController {
 		= LoggerFactory.getLogger(AdminController.class);
 	
 	
-	// 어드민 메인페이지
+	// 어드민 메인페이지 
 	// http://localhost:8080/admin/index
 	@RequestMapping(value = "/index")
 	public void mainGET(HttpSession session)throws Exception{
@@ -71,7 +75,10 @@ public class AdminController {
 	@RequestMapping(value = "/list",method = RequestMethod.GET)
 	public void listGET(Criteria cri,Model model,HttpSession session)throws Exception {
 		
+		
 		mylog.debug(" listGET() 호출 ");
+		
+		
 		
 //		mylog.debug(" 글쓰기 결과 (result) : "+result);
 		
@@ -83,6 +90,8 @@ public class AdminController {
 		PageVO pvo = new PageVO();
 		
 		pvo.setCri(cri);
+		
+		
 		mylog.debug(" totalCnt : "+service.totalCnt());
 		pvo.setTotalCount(service.totalCnt()); // 작성되어있는 글 전체 개수
 		
@@ -91,6 +100,47 @@ public class AdminController {
 		model.addAttribute("boardList", boardList);
 		
 		}
+	// 공지사항 게시판 list POST (페이징처리+카테고리)
+	// http://localhost:8080/admin/list
+	@RequestMapping(value = "/list",method = RequestMethod.POST)
+	public String listPOST(HttpServletRequest request,
+			Criteria cri,Model model,HttpSession session)throws Exception {
+		
+		mylog.debug(" listPOST() 호출 ! "); 
+		
+		
+		   String category = request.getParameter("category");
+	       if(category.equals("all")) {
+	    	   return "redirect:/admin/list";
+	       }
+	        Map<String, Object> map = new HashMap<String, Object>();
+	        map.put("cri", cri);
+	        map.put("category", category);
+		
+	        // 카테고리 전달하는 리스트
+	        List<BoardVO> boardList =  service.getBoardCate(map);
+		
+//		mylog.debug(" 글쓰기 결과 (result) : "+result);
+		
+		session.setAttribute("updateCheck", true);
+		
+		
+		// 페이징처리 하단부 정보 준비 -> view페이지 전달
+		PageVO pvo = new PageVO();
+		
+		pvo.setCri(cri);
+		
+		
+		mylog.debug(" totalCnt : "+service.totalCnt());
+		pvo.setTotalCount(service.totalCnt()); // 작성되어있는 글 전체 개수
+		
+		
+		model.addAttribute("pvo", pvo);
+		model.addAttribute("boardList", boardList);
+		
+		return "/admin/list";
+		}
+	
 		
 	// 게시판 본문보기 GET
 	// http://localhost:8080/admin/content
@@ -161,6 +211,17 @@ public class AdminController {
 		}
 		
 		return "redirect:/admin/list";
+	}
+	
+	// 회원목록 불러오기 GET
+	@RequestMapping(value = "/memberList",method = RequestMethod.GET)
+	public void mListGET()throws Exception{
+		
+		mylog.debug(" mListGET()  호출 ");
+		
+		
+		
+		
 	}
 	
 }

@@ -13,17 +13,8 @@
 </head>
 <body>
 	<!-- 헤더 -->
-	<jsp:include page="../include/header.jsp" />
-	<!-- css -->
-	<jsp:include page="../include/css.jsp" />
-	<!-- remote -->
-	<jsp:include page="../addon/remote.jsp" />
+	<%@ include file="/WEB-INF/views/admin/include/header.jsp"%>
 
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
 
 
 	<div class="flex-w flex-sb-m p-b-52">
@@ -34,158 +25,22 @@
 			
 				<button
 					class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1"
-					name="button" value="all" id="btnA">전체</button>
+					name="category" value="all" id="btnA">전체</button>
 	
 				<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
-					name="button" value="notice" id="btnN">공지사항</button>
+					name="category" value="notice" id="btnN">공지사항</button>
 	
 				<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
-					name="button" value="event" id="btnE">이벤트</button>
+					name="category" value="event" id="btnE">이벤트</button>
 	
 				<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
-					name="button" value="donate" id="btnD">기부문의</button>
+					name="category" value="donate" id="btnD">기부문의</button>
 				
 			</form>
 
 
 		</div>
 
-		<div class="flex-w flex-c-m m-tb-10">
-			<div
-				class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-filter">
-				<i
-					class="icon-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-filter-list"></i>
-				<i
-					class="icon-close-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
-				Filter
-			</div>
-
-			<div
-				class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 js-show-search">
-				<i class="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search"></i>
-				<i
-					class="icon-close-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
-				Search
-			</div>
-		</div>
-
-		<!-- Search product -->
-		<div class="dis-none panel-search w-full p-t-10 p-b-15">
-			<div class="bor8 dis-flex p-l-15">
-				<button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
-					<i class="zmdi zmdi-search"></i>
-				</button>
-
-				<input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text"
-					name="search-product" placeholder="Search">
-			</div>
-		</div>
-
-		<!-- Filter -->
-		<div class="dis-none panel-filter w-full p-t-10">
-			<div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
-				<div class="filter-col1 p-r-15 p-b-27">
-					<div class="mtext-102 cl2 p-b-15">Sort By</div>
-
-					<ul>
-						<li class="p-b-6"><a href="#"
-							class="filter-link stext-106 trans-04"> Default </a></li>
-
-						<li class="p-b-6"><a href="#"
-							class="filter-link stext-106 trans-04"> Popularity </a></li>
-
-						<li class="p-b-6"><a href="#"
-							class="filter-link stext-106 trans-04"> Average rating </a></li>
-
-						<li class="p-b-6"><a href="#"
-							class="filter-link stext-106 trans-04 filter-link-active">
-								Newness </a></li>
-
-						<li class="p-b-6"><a href="#"
-							class="filter-link stext-106 trans-04"> Price: Low to High </a></li>
-
-						<li class="p-b-6"><a href="#"
-							class="filter-link stext-106 trans-04"> Price: High to Low </a></li>
-					</ul>
-				</div>
-
-				<div class="filter-col2 p-r-15 p-b-27">
-					<div class="mtext-102 cl2 p-b-15">Price</div>
-
-					<ul>
-						<li class="p-b-6"><a href="#"
-							class="filter-link stext-106 trans-04 filter-link-active">
-								All </a></li>
-
-						<li class="p-b-6"><a href="#"
-							class="filter-link stext-106 trans-04"> $0.00 - $50.00 </a></li>
-
-						<li class="p-b-6"><a href="#"
-							class="filter-link stext-106 trans-04"> $50.00 - $100.00 </a></li>
-
-						<li class="p-b-6"><a href="#"
-							class="filter-link stext-106 trans-04"> $100.00 - $150.00 </a></li>
-
-						<li class="p-b-6"><a href="#"
-							class="filter-link stext-106 trans-04"> $150.00 - $200.00 </a></li>
-
-						<li class="p-b-6"><a href="#"
-							class="filter-link stext-106 trans-04"> $200.00+ </a></li>
-					</ul>
-				</div>
-
-				<div class="filter-col3 p-r-15 p-b-27">
-					<div class="mtext-102 cl2 p-b-15">Color</div>
-
-					<ul>
-						<li class="p-b-6"><span class="fs-15 lh-12 m-r-6"
-							style="color: #222;"> <i class="zmdi zmdi-circle"></i>
-						</span> <a href="#" class="filter-link stext-106 trans-04"> Black </a></li>
-
-						<li class="p-b-6"><span class="fs-15 lh-12 m-r-6"
-							style="color: #4272d7;"> <i class="zmdi zmdi-circle"></i>
-						</span> <a href="#"
-							class="filter-link stext-106 trans-04 filter-link-active">
-								Blue </a></li>
-
-						<li class="p-b-6"><span class="fs-15 lh-12 m-r-6"
-							style="color: #b3b3b3;"> <i class="zmdi zmdi-circle"></i>
-						</span> <a href="#" class="filter-link stext-106 trans-04"> Grey </a></li>
-
-						<li class="p-b-6"><span class="fs-15 lh-12 m-r-6"
-							style="color: #00ad5f;"> <i class="zmdi zmdi-circle"></i>
-						</span> <a href="#" class="filter-link stext-106 trans-04"> Green </a></li>
-
-						<li class="p-b-6"><span class="fs-15 lh-12 m-r-6"
-							style="color: #fa4251;"> <i class="zmdi zmdi-circle"></i>
-						</span> <a href="#" class="filter-link stext-106 trans-04"> Red </a></li>
-
-						<li class="p-b-6"><span class="fs-15 lh-12 m-r-6"
-							style="color: #aaa;"> <i class="zmdi zmdi-circle-o"></i>
-						</span> <a href="#" class="filter-link stext-106 trans-04"> White </a></li>
-					</ul>
-				</div>
-
-				<div class="filter-col4 p-b-27">
-					<div class="mtext-102 cl2 p-b-15">Tags</div>
-
-					<div class="flex-w p-t-4 m-r--5">
-						<a href="#"
-							class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-							Fashion </a> <a href="#"
-							class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-							Lifestyle </a> <a href="#"
-							class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-							Denim </a> <a href="#"
-							class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-							Streetstyle </a> <a href="#"
-							class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-							Crafts </a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 
 
 	<!-- 테이블 시작 -->
@@ -194,9 +49,9 @@
 			<h3 class="box-title">통합게시판</h3>
 		</div>
 
-		<button
+	<!-- 	<button
 			class="flex-c-m stext-101 cl0 size-121 bg3 bor1 hov-btn3 p-lr-15 trans-04 pointer"
-			onclick="location.href='/admin/boardRegist';">글쓰기</button>
+			onclick="location.href='/admin/boardRegist';">글쓰기</button> -->
 
 		<div class="box-body">
 			<div id="example1_wrapper"
@@ -204,12 +59,14 @@
 				<div class="row">
 					<div class="col-sm-6">
 						<div class="dataTables_length" id="example1_length">
-							<label>Show <select name="example1_length"
-								aria-controls="example1" class="form-control input-sm"><option
-										value="10">10</option>
-									<option value="25">25</option>
-									<option value="50">50</option>
-									<option value="100">100</option></select> entries
+							<label> 글 표시갯수
+							<select name="example1_length" id="perpageNum"
+								aria-controls="example1" class="form-control input-sm"
+								onchange="chageLangSelect()">
+								<option value="10">10</option>
+								<option value="25">25</option>
+								<option value="50">50</option>
+								<option value="100">100</option></select> 
 							</label>
 						</div>
 					</div>
@@ -324,7 +181,9 @@
 				<c:forEach var="i" begin="${pvo.startPage }" end="${pvo.endPage }"
 					step="1">
 
-					<li><a href="/admin/list?page=${i }">${i }</a></li>
+					 <li
+                <c:out value="${i==pvo.cri.page? 'class=active':''  }" /> 
+                ><a href="/admin/list?page=${i }">${i }</a></li>
 
 				</c:forEach>
 
@@ -341,8 +200,6 @@
 
 
 
-	<!-- 푸터 -->
-	<jsp:include page="../include/footer.jsp" />
 <script
 	src="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.16/dist/sweetalert2.all.min.js"></script>
 <script type="text/javascript">
@@ -384,24 +241,48 @@
 		
 		var formObj=$("form[role='form']");
 		
-		$("#btnA").on('click', function() {
-			
-			formObj.attr("action","/admin/list");			
-			formObj.attr("method","get");
-			formObj.submit();
-			
-		});
-		
-		
-		
-	});
-	/* 	$(document).ready(function() {
 			$("#btnA").on('click', function() {
-				console.log($("#btnA").val());
-				$.ajax({
-					type:"get",
+				console.log(formObj);
+				formObj.attr("action","/admin/list");			
+				formObj.attr("method","post");
+				formObj.submit();
+				
+			});
+			$("#btnN").on('click', function() {
+				console.log(formObj);
+				formObj.attr("action","/admin/list");			
+				formObj.attr("method","post");
+				formObj.submit();
+				
+			});
+			$("#btnE").on('click', function() {
+				console.log(formObj);
+				formObj.attr("action","/admin/list");			
+				formObj.attr("method","post");
+				formObj.submit();
+				
+			});
+			$("#btnD").on('click', function() {
+				console.log(formObj);
+				formObj.attr("action","/admin/list");			
+				formObj.attr("method","post");
+				formObj.submit();
+				
+			});
+			
+			
+			
+			
+			
+		
+	
+	
+			/* $("#perpageNum").change(function(){
+// 			  console.log($(this).val()); //value값 가져오기
+			  $.ajax({
+				  	type:"post",
 					url:"/admins/list",
-					data:{category:$("#btnA").val()},
+					data:{"perpageNum" : $(this).val()},
 					success:function(data){
 						alert('성공');
 						console.log(data);
@@ -412,17 +293,15 @@
 						console.log(data);
 						
 					}
-					
-				});
-				
-			});
-
+				  
+			  });
 		}); */
+	});
 	</script>
 
 
 
 
-
+<%@ include file="/WEB-INF/views/admin/include/footer.jsp"%>
 </body>
 </html>

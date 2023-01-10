@@ -302,8 +302,8 @@
                 <i class="fa fa-dashboard"></i> <span>게시판 관리</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="/board/regist"><i class="fa fa-circle-o"></i> 글쓰기 </a></li>
-                <li><a href="/board/list"><i class="fa fa-circle-o"></i> 게시판 리스트</a></li>
+                <li><a href="/admin/boardRegist"><i class="fa fa-circle-o"></i> 글쓰기 </a></li>
+                <li><a href="/admin/list"><i class="fa fa-circle-o"></i> 게시판 리스트</a></li>
               </ul>
             </li>
             <li class="treeview">
@@ -313,10 +313,10 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="../charts/chartjs.html"><i class="fa fa-circle-o"></i> ChartJS</a></li>
-                <li><a href="../charts/morris.html"><i class="fa fa-circle-o"></i> Morris</a></li>
-                <li><a href="../charts/flot.html"><i class="fa fa-circle-o"></i> Flot</a></li>
-                <li><a href="../charts/inline.html"><i class="fa fa-circle-o"></i> Inline charts</a></li>
+                <li><a href="/admin/memberList"><i class="fa fa-circle-o"></i> 회원목록 </a></li>
+                <li><a href="../charts/morris.html"><i class="fa fa-circle-o"></i> </a></li>
+                <li><a href="../charts/flot.html"><i class="fa fa-circle-o"></i> </a></li>
+                <li><a href="../charts/inline.html"><i class="fa fa-circle-o"></i> </a></li>
               </ul>
             </li>
             <li class="treeview">
