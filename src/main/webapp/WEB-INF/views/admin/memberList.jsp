@@ -2,21 +2,8 @@
 	pageEncoding="UTF-8"%>
 
 <!-- 헤더 -->
-<jsp:include page="/WEB-INF/views/admin/include/header.jsp" />
-
-<form name="theForm" id="theForm" action="" method="post">
-
-	제목 : <input type="text" name="title"> <br> 내용 :
-	<textarea rows="3" placeholder="Enter..." name="content"></textarea>
-	<br> 작성자 : <input type="text" name="writer"> <br>
-	카테고리 : <select name="category" id="id_select">
-		<option value selected disabled hidden>카테고리를 선택하세요</option>
-		<option value="notice">공지사항</option>
-		<option value="event">이벤트</option>
-		<option value="donate">기부문의</option>
-	</select> <br> <input type="submit" class="" value="글쓰기">
-</form>
-<button type="button" class="" onclick="location.href='/admin/list';">글목록</button>
+	<%@ include file="/WEB-INF/views/admin/include/header.jsp"%>
+	
 
 
 
@@ -29,14 +16,11 @@
 			</div>
 		</div>
 	</div>
-	
-	
-	
 	<div class="row p-2 mt-2">
 		<table class="table table-hover">
 			<thead>
 				<tr>
-					<th>회원 번호</th>
+					<th>아이디</th>
 					<th>닉네임</th>
 					<th>이메일</th>
 					<th>회원 등급</th>
@@ -45,9 +29,9 @@
 			</thead>
 			<tbody>
 					<tr>
-						<td>164</td>
-						<td>테스터</td>
-						<td>fluto7@hanmail.net</td>								
+						<td></td>
+						<td></td>
+						<td></td>								
 						<td style="color:black;">일반회원</td>
 						<td><a href="/auctionara/admin/member/detail/164">상세보기</a></td>
 					</tr>
