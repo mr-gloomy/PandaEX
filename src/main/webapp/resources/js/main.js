@@ -158,7 +158,6 @@
             filter : filterValue
          });
       });
-
    });
 
    // init Isotope

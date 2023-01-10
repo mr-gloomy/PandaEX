@@ -58,7 +58,7 @@ public class GoodsDAOImpl implements GoodsDAO{
 	// 상품번호(goods_no) 정보 조회
 	@Override
 	public GoodsVO getGoods(Integer goods_no) throws Exception {
-		mylog.debug("getBoard(Integer goods_no) 호출");
+		mylog.debug("getGoods(Integer goods_no) 호출");
 		
 		GoodsVO vo = sqlSession.selectOne(NAMESPACE + ".getGoods", goods_no);
 		
