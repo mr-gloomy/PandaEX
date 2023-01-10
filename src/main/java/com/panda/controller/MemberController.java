@@ -25,7 +25,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.panda.domain.AuctionVO;
 import com.panda.domain.MemberVO;
@@ -269,59 +271,29 @@ public class MemberController {
 			return "main/index";
 		}
 		
+		
+//		비밀번호 변경 view
 		@GetMapping("/pwUpdate")
-		public String pwUpdate(MemberVO vo,String user_no)throws Exception{
-			vo.setUser_no(user_no);
+		public void pwUpdate(MemberVO vo)throws Exception{
 
-		    return "/member/pwUpdate";
 		}
 		
-//		//pw-change 요청
-//		@GetMapping("/pw-change")
-//		public ModelAndView pwChange() {
-//			return new ModelAndView ("member/pw-change");
-//		}
-//		//비밀번호 확인 처리 요청
-//		@PostMapping("/checkPw")
-//		public String checkPw(@RequestBody String pw, HttpSession session) throws Exception {
-//			
-//			mylog.info("비밀번호 확인 요청 발생");
-//			
-//			String result = null;
-//			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-//			
-//			MemberVO dbUser = (MemberVO)session.getAttribute("login");
-//			mylog.info("DB 회원의 비밀번호 : " + dbUser.getUser_pw());
-//			mylog.info("폼에서 받아온 비밀번호 : " + pw);
-//			
-//			if(encoder.matches(pw, dbUser.getUser_pw())) {
-//				result = "pwConfirmOK";
-//			} else {
-//				result = "pwConfirmNO";
-//			}
-//			
-//			return result;
-//			
-//		}
-//		
-//		//비밀번호 변경 요청
-//		@PostMapping("/pw-change")
-//		public String pwChange(@RequestBody UsersVO user, HttpSession session) throws Exception {
-//			
-//			logger.info("비밀번호 변경 요청 발생!!!");
-//			
-//			//비밀번호 변경
-//			usersService.modifyPw(user);
-//			
-//			//비밀번호 변경 성공시 로그인 세션 객체 다시 담음
-//			LoginVO modifyUser = new LoginVO();
-//			modifyUser.setEmail(user.getEmail());
-//			
-//			UsersVO mUser = usersService.login(modifyUser);
-//			logger.info("회원정보 불러오기 : " + mUser);
-//			session.setAttribute("login", mUser);
-//			
-//			return "changeSuccess";
-//		}
+		@PostMapping("/pwUpdate")
+		public String pwUpdateP(MemberVO vo, RedirectAttributes rttr)throws Exception{
+			rttr.addFlashAttribute("msg", "정보 수정이 완료되었습니다. 다시 로그인해주세요.");
+			service.updatePw(vo);
+			return "/main/index";
+		}
+		
+		@RequestMapping(value="/pwCheck" , method=RequestMethod.POST)
+		@ResponseBody
+		public int pwCheck(MemberVO vo) throws Exception{
+			String user_pw = service.pwCheck(vo.getUser_id());
+			if(vo == null || !vo.getUser_pw().equals(user_pw)) {
+				return 0;
+			}
+			return 1;
+		}
+		
 }
 		

@@ -297,15 +297,24 @@ public class MemberServiceImpl implements MemberService {
 			        sendMail.setText(
 			                "<h1>PANDA 비밀번호 찾기</h1><br>" + vo.getUser_pw() + 
 			                		
-			                "<br> 비밀번호 바꾸러 가기! " +
+			                "<br> 비밀번호 바꾸러 가기! click! " +
 			                "<br><a href='http://localhost:8080/member/pwUpdate?user_no=" + vo.getUser_no() + 
-			                "' target='_blank'>비밀번호 바꾸기 링크 클릭</a>");
+			                "' target='_blank'>마이페이지에서 변경해주세요....</a>");
 			        sendMail.setFrom("leweeewel@gmail.com", "Panda 판다");
 			        sendMail.setTo(vo.getUser_email());
 			        sendMail.send();
 					}
 
-					
+				
+				@Override
+				public String pwCheck(String user_id)throws Exception{
+					return dao.pwCheck(user_id);
+				}
+				
+				@Override
+				public void updatePw(MemberVO vo)throws Exception{
+					dao.updatePw(vo);
+				}
 
 		
 		

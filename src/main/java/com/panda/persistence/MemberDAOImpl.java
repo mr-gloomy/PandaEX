@@ -106,10 +106,13 @@ public class MemberDAOImpl implements MemberDAO{
 		//비밀번호변경
 		@Override
 		public int updatePw(MemberVO vo) throws Exception {
-			return sqlSession.update(NAMESPACE +".updatePw", vo);
+			return sqlSession.update(NAMESPACE +".pwUpdate", vo);
 		}
 		
-		
+		@Override
+		public String pwCheck(String user_id)throws Exception{
+			return sqlSession.selectOne(NAMESPACE+".pwCheck", user_id);
+		}
 		
 		
 		
