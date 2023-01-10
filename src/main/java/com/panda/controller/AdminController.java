@@ -214,6 +214,7 @@ public class AdminController {
 	}
 	
 	// 회원목록 불러오기 GET
+	// http://localhost:8080/admin/memberList
 	@RequestMapping(value = "/memberList",method = RequestMethod.GET)
 	public void mListGET()throws Exception{
 		
