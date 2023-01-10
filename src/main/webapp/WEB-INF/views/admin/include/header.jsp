@@ -291,13 +291,8 @@
         <section class="sidebar">
           <!-- Sidebar user panel -->
           <div class="user-panel">
-            <div class="pull-left image">
-              <img src="/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
-            </div>
             <div class="pull-left info">
-              <p>Alexander Pierce</p>
 
-              <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
           </div>
           <!-- sidebar menu: : style can be found in sidebar.less -->
@@ -311,15 +306,10 @@
                 <li><a href="/board/list"><i class="fa fa-circle-o"></i> 게시판 리스트</a></li>
               </ul>
             </li>
-            <li>
-              <a href="../widgets.html">
-                <i class="fa fa-th"></i> <span>Widgets</span> <small class="label pull-right bg-green">new</small>
-              </a>
-            </li>
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-pie-chart"></i>
-                <span>Charts</span>
+                <span>회원관리</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
@@ -332,7 +322,7 @@
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-laptop"></i>
-                <span>UI Elements</span>
+                <span>기부관</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
@@ -429,10 +419,6 @@
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <h1>
-            General Form Elements
-            <small>Preview</small>
-          </h1>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
             <li><a href="#">Forms</a></li>
