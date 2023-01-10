@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.panda.domain.AuctionVO;
 import com.panda.domain.Criteria;
+import com.panda.domain.SearchVO;
 
 public interface AuctionDAO {
 	
@@ -12,7 +13,7 @@ public interface AuctionDAO {
 	public void createAuction(AuctionVO avo) throws Exception;
 	
 	// 경매 상품 전체 목록
-	public List<AuctionVO> getAuctionListAll() throws Exception;
+	public List<AuctionVO> getAuctionListAll(SearchVO vo) throws Exception;
 	
 	// 경매 상품 조회수 1증가
 	public void updateViewcnt(Integer auction_no) throws Exception;
@@ -30,7 +31,7 @@ public interface AuctionDAO {
 	public Integer updateAuction(AuctionVO avo) throws Exception;
 	
 	// 경매 상품 글 삭제
-	public Integer removeAuction(Integer auction_no) throws Exception;
+	public Integer removeAuction(AuctionVO avo) throws Exception;
 	
 	// 경매 상품 찜 업데이트
 	public Integer updateLike(AuctionVO avo) throws Exception;
@@ -41,6 +42,9 @@ public interface AuctionDAO {
 	
 	// 전체 게시판 글 개수
 	public int totalCnt() throws Exception;
+	
+	// 입찰하기
+	public Integer updateBid(AuctionVO avo) throws Exception;
 	
 	
 	

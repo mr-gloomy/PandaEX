@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.panda.domain.AuctionVO;
 import com.panda.domain.Criteria;
+import com.panda.domain.SearchVO;
 import com.panda.persistence.AuctionDAO;
 
 @Service
@@ -30,9 +31,9 @@ public class AuctionServiceImpl implements AuctionService {
 
 	// 경매 상품 전체 목록
 	@Override
-	public List<AuctionVO> getAuctionListAll() throws Exception {
+	public List<AuctionVO> getAuctionListAll(SearchVO vo) throws Exception {
 		mylog.debug(".getAuctionListAll() - DAO 호출");
-		return adao.getAuctionListAll();
+		return adao.getAuctionListAll(vo);
 	}
 
 	// 경매 상품 조회수 1증가
@@ -73,9 +74,9 @@ public class AuctionServiceImpl implements AuctionService {
 	
 	//경매 상품 글 삭제
 	@Override
-	public Integer removeAuction(Integer auction_no) throws Exception {
-		mylog.debug("removeAuction(Integer auction_no) 호출");
-		return adao.removeAuction(auction_no);
+	public Integer removeAuction(AuctionVO avo) throws Exception {
+		mylog.debug("removeAuction(AuctionVO avo) 호출");
+		return adao.removeAuction(avo);
 	}
 
 	
@@ -98,10 +99,14 @@ public class AuctionServiceImpl implements AuctionService {
 	public int totalCnt() throws Exception {
 		return adao.totalCnt();
 	}
+
 	
-	
-	
-	
+	// 입찰하기
+	@Override
+	public Integer updateBid(AuctionVO avo) throws Exception {
+		mylog.debug("service : updatebid 실행 @@@@");
+		return adao.updateBid(avo);
+	}
 	
 	
 	

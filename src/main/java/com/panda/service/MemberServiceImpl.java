@@ -5,12 +5,14 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -245,24 +247,67 @@ public class MemberServiceImpl implements MemberService {
 			return dao.findId(vo);
 		}
 
+		
+		
+		
+		
+		
+		
+		//비밀번호 찾기
+		@Override
+		public void findPw(HttpServletResponse response, MemberVO vo) throws Exception {
+			response.setContentType("text/html;charset=utf-8");
+			String user_email = "";
+			
+			PrintWriter out = response.getWriter();
+			// 가입된 아이디가 없으면
+//			if(dao.getMember(vo.getUser_id()) == null) {
+//				out.print("등록되지 않은 아이디입니다.");
+//				out.close();
+			
+			// 가입된 이메일이 아니면
+//			else if(!vo.getUser_email().equals(user_email)) {
+//				out.print("등록되지 않은 이메일입니다.");
+//				out.close();
+//			}else {
+			
+				// 임시 비밀번호 생성
+				String pw = "";
+				for (int i = 0; i < 12; i++) {
+					pw += (char) ((Math.random() * 26) + 97);
+				}
+				vo.setUser_pw(pw);
+				// 비밀번호 변경
+				dao.updatePw(vo);
+				// 비밀번호 변경 메일 발송
+				sendEmail(vo, "findpw");
+
+				out.print("이메일로 임시 비밀번호를 발송하였습니다.");
+				out.close();
+//			}
+		}
+		
+		//비밀번호 찾기 이메일발송
+				@Override
+				public void sendEmail(MemberVO vo, String div) throws Exception {
+
+			        //비밀번호 찾기 버튼을 누르면 인증을 위한 이메일 발송
+			        MailHandler sendMail = new MailHandler(mailSender);
+			        sendMail.setSubject("[PANDA 비밀번호 찾기 메일 입니다.]"); //메일제목
+			        sendMail.setText(
+			                "<h1>PANDA 비밀번호 찾기</h1><br>" + vo.getUser_pw() + 
+			                		
+			                "<br> 비밀번호 바꾸러 가기! " +
+			                "<br><a href='http://localhost:8080/member/pwUpdate?user_no=" + vo.getUser_no() + 
+			                "' target='_blank'>비밀번호 바꾸기 링크 클릭</a>");
+			        sendMail.setFrom("leweeewel@gmail.com", "Panda 판다");
+			        sendMail.setTo(vo.getUser_email());
+			        sendMail.send();
+					}
+
+					
 
 		
-		//비밀번호 찾기 이메일 발송
-//		@Override
-//		public void findPw(String user_id, String user_email,MemberVO vo) throws Exception {
-//				
-//		        MailHandler sendMail = new MailHandler(mailSender);
-//		        sendMail.setSubject("[PANDA  비밀번호 재 설정 링크 입니다.]"); //메일제목
-//		        sendMail.setText(
-//		                "<h1>PANDA 비밀번호 재 설정</h1>" +
-//		                "<br>PANDA에 오신것을 환영합니다!" +
-//		                "<br>아래 [비밀번호 설정 링르]를 눌러주세요." +
-//		                "<br><a href='http://localhost:8080/member/findPw?user_no=" + vo.getUser_no() +
-//		                "' target='_blank'>이메일 인증 확인</a>");
-//		        sendMail.setFrom("leweeewel@gmail.com", "Panda 판다");
-//		        sendMail.setTo(vo.getUser_email());
-//		        sendMail.send();
-//		}
-
+		
 
 }

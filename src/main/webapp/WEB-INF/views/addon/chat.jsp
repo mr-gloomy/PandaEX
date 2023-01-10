@@ -31,14 +31,7 @@
 	<script src="bootstrap-modal-wrapper-factory.min.js"></script>
 	
 	<script type="text/javascript">
-	
-	$(function(){
-		$("#testBtn").on("click", function(){
-		    BootstrapModalWrapperFactory.showMessage("Delfault Message to show to user");
-		});
 
-	});
-	
 		var cur_session='${user_id}';
 		
 		var webSocket = {
@@ -215,7 +208,7 @@ Count Dracula
       <div class="modal-body">
       <form action="/member/report" method="post" id="frm">
       	<input type="hidden" name="rep_u_id" value="${param.u }">
-      	<input type="hidden" name="goods_no" value="${goods.goods_no }">
+      	<input type="hidden" name="goods_no" value="${param.g }">
       	<input type="hidden" name="u_id" value="${user_id }">
         <input type="text" name="rep_subject" placeholder="신고 제목" style="width:100%;"><br><br>
         <select name="rep_sort" style="width:100%;">

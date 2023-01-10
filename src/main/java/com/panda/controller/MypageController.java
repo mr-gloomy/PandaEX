@@ -1,5 +1,6 @@
 package com.panda.controller;
 
+<<<<<<< HEAD
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
@@ -50,6 +51,62 @@ public class MypageController {
 	
 	// 마이 페이지 - 정보  
 	@RequestMapping(value = "/info", method = RequestMethod.GET)
+=======
+import java.util.List;
+import java.util.Map;
+
+import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.panda.domain.LikeVO;
+import com.panda.domain.MemberVO;
+import com.panda.service.MyPageService;
+
+@Controller
+@RequestMapping("/mypage/*")
+public class MypageController {
+	
+	@Inject
+	private MyPageService myservice;
+	
+	private static final Logger mylog = LoggerFactory.getLogger(MypageController.class);
+	
+	// http://localhost:8080/mypage/main
+	
+	// 마이 페이지 - 메인 
+	@RequestMapping(value = "/main", method = RequestMethod.GET)
+	public String mainGET(HttpSession session, Model model, MemberVO memberVO) throws Exception {
+//		 로그인 제어	
+		String user_id = (String) session.getAttribute("user_id");
+		mylog.debug(user_id);
+		
+		if(user_id == null) {
+			return "/main/index";
+		}
+		
+		memberVO.setUser_id(user_id);
+		memberVO = myservice.getMembers(memberVO);
+		
+		model.addAttribute("memberVO", memberVO);
+		
+		mylog.debug("마이페이지 이동!");
+
+		return "/mypage/main";
+	}
+	
+	// 마이 페이지 - 정보  
+	@RequestMapping(value = "info", method = RequestMethod.GET)
+>>>>>>> branch 'master' of https://github.com/mr-gloomy/PandaEX.git
 	public void infoGet(HttpSession session, Model model, MemberVO memberVO) throws Exception {
 		String user_id = (String) session.getAttribute("user_id");
 		

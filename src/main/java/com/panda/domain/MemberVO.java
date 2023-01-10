@@ -20,5 +20,7 @@ public class MemberVO {
 	private String user_area;
 	private int mail_auth;
 	private String mail_key;
+	private int user_visit;
+	private int user_grade;
 	
 }

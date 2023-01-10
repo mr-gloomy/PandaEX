@@ -36,12 +36,17 @@ public class PaymentServiceImpl implements PaymentService{
 	@Override
 	public void insert(int paymentNo, KakaoPayApproveResponseVO responseVO, PurchaseVO purchaseVO) {
 		mylog.debug("insert(int paymentNo, KakaoPayApproveResponseVO responseVO, PurchaseVO purchaseVO) -> mapper 동작 호출");
-		PaymentInsertVO vo = PaymentInsertVO.builder()
-			.paymentNo(paymentNo)
-			.memberNo(Integer.parseInt(responseVO.getPartner_user_id()))
-			.paymentTid(responseVO.getTid())
-			.paymentPrice(purchaseVO.getChargeMoney())
-			.build();
+		PaymentInsertVO vo = new PaymentInsertVO();
+//			.paymentNo(paymentNo)
+//			.memberNo(Integer.parseInt(responseVO.getPartner_user_id()))
+//			.paymentTid(responseVO.getTid())
+//			.paymentPrice(purchaseVO.getChargeMoney())
+//			.build();
+			vo.setPaymentNo(paymentNo);
+			vo.setMemberNo(Integer.parseInt(responseVO.getPartner_user_id()));
+			vo.setPaymentTid(responseVO.getTid());
+			vo.setPaymentPrice(purchaseVO.getChargeMoney());
+			
 		mylog.debug("vo : "+vo);
 		sqlSession.insert(NAMESPACE+".insert", vo);
 		sqlSession.update(NAMESPACE+".charge", vo);
