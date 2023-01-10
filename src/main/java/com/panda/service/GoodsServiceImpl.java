@@ -51,13 +51,15 @@ public class GoodsServiceImpl  implements GoodsService {
 		mylog.debug("getGoods(Integer goods_no) 호출");
 		return dao.getGoods(goods_no);
 	}
-
+	
+	// 수정
 	@Override
 	public Integer updateGoods(GoodsVO vo) throws Exception {
 		mylog.debug(" updateGoods(GoodsVO vo) ");
 		return dao.updateGoods(vo);
 	}
 
+	// 삭제
 	@Override
 	public void removeGoods(Integer goods_no) throws Exception {
 		 dao.removeGoods(goods_no);

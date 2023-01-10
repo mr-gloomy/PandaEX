@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 import com.panda.domain.AuctionVO;
 import com.panda.domain.Criteria;
 import com.panda.domain.GoodsVO;
+import com.panda.domain.SearchVO;
 
 @Repository
 public class AuctionDAOImpl implements AuctionDAO{
@@ -38,10 +39,10 @@ public class AuctionDAOImpl implements AuctionDAO{
 
 	// 경매 상품 전체 목록
 	@Override
-	public List<AuctionVO> getAuctionListAll() throws Exception {
+	public List<AuctionVO> getAuctionListAll(SearchVO vo) throws Exception {
 		mylog.debug("getAuctionListAll() -> sqlSession-mapper 호출");
 		
-		List<AuctionVO> auctionList = sqlSession.selectList(NAMESPACE+".alistAll");
+		List<AuctionVO> auctionList = sqlSession.selectList(NAMESPACE+".alistAll",vo);
 		
 		mylog.debug("경매 상품 전체 개수 : " + auctionList.size() + "");
 		

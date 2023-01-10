@@ -1,6 +1,7 @@
 package com.panda.domain;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,7 +22,14 @@ public class GoodsVO {
 	private String goods_detail;	//상품상세설명
 	private String uploadFile;		//이미지
 	private String thumbnail; 		//이미지썸네일 
-
 	private int viewcount;			//상품조회수
+	
+	// 판매자 정보 추가
+	private Integer user_no;			//회원번호
+    private String user_nick;			//회원 닉네임
+    private String user_area;			//회원주소(시)
+    private String user_addr;			//회원주소(구)
+    private Timestamp user_regdate;		//회원등록일
+	
 
 }

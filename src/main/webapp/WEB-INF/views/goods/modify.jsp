@@ -63,7 +63,6 @@
 <!-- 0:등록, 1:예약 2:완료 -->
 <!-- 작성자 -->
 <input type="hidden" name="${sessionScope.user_id}" value="user_id">
-
 <!-- 본문 -->
 <div class="container">
 	<div>

@@ -36,7 +36,6 @@ $(document).ready(function(){
 	});
 
 });
-
 </script>
 
 <!--  CSS -->
@@ -76,6 +75,9 @@ $(document).ready(function(){
 .form-control:focus {
   border-color: #28a745;
 }
+.select_img {
+	margin-top: 20px;
+}
 </style>
 </head>
 <body class="animsition">
@@ -83,11 +85,14 @@ $(document).ready(function(){
 <!-- 본문 -->
 <div class="container">
 	<div>
-		<form method="post" enctype="multipart/form-data">
+		<form method="post" id="form" enctype="multipart/form-data">
 			<!-- 판매현황 -->
 			<input type="text" name="goods_trade" value="판매중">
 			<!-- 작성자 -->
-			<input type="hidden" name="${sessionScope.user_id}" value="user_id">
+<%-- 			<input type="hidden" name="${sessionScope.user_id}" value="user_id"> --%>
+			<!-- 주소 -->
+<!-- 			<input type="hidden" name="user_addr" value="user_addr"> -->
+<!-- 			<input type="hidden" name="user_area" value="user_area"> -->
 				
 			<div class="card">
 				<div class="card-body">
@@ -101,71 +106,32 @@ $(document).ready(function(){
 							<label class="form-label">이미지 <span class="text-success"></label>
 						</div>
 						<div class="col-sm d-flex">
-<!-- 							<div class="uploadDiv"> -->
-<!-- 								<label class="btn btn-outline-success pt-5" >  -->
-<!-- 									<i class="fa-solid fa-camera fa-2x"></i><br>  -->
-<!-- 									   사진 추가  -->
-<!-- 									<input class="form-control d-none" type="file" name="uploadFile" accept=".png, .jpg, .gif" multiple> -->
-<!-- 								</label> -->
-<!-- 							</div> -->
-							<input type="file" name="uploadFile" multiple="multiple">
-							
-							<script type="text/javascript">
-							$(document).ready(function(){
-								
-								var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
-								var maxSize = 5242880; //5MB
-
-								function checkExtension(fileName, fileSize) {
-
-									if (fileSize >= maxSize) {
-										alert("파일 사이즈 초과");
-										return false;
-									}
-
-									if (regex.test(fileName)) {
-										alert("해당 종류의 파일은 업로드할 수 없습니다.");
-										return false;
-									}
-									return true;
-								}
-
-
-								$("#uploadBtn").on("click", function(e) {
-
-									var formData = new FormData();
-									var inputFile = $("input[name='uploadFile']");
-									var files = inputFile[0].files;
-
-									console.log(files);
-
-									for (var i = 0; i < files.length; i++) {
-
-										if (!checkExtension(files[i].name, files[i].size)) {
-											return false;
-										}
-
-										formData.append("uploadFile", files[i]);
-
-									}
-							
-									 $.ajax({
-										 url: '/regist',
-										 processData: false,
-										 contentType: false,
-										 data: formData,
-										 type: 'POST',
-										 success : function(result) {
-												console.log(result);
-												showUploadedFile(result);
-										 }
-									 }); //$.ajax
-								
-								});  
-							}); 
-							</script>
+							<div class="inputArea">
+							 <label for="gdsImg"></label>
+							 <input type="file" id="uploadFile" name="file" accept=".jpg,.png,.jpeg"/>
+							 <div class="select_img"><img src="" /></div>
+							 
+							 <!-- 등록할 사진 보여주기 -->
+							 <script>
+							  $("#uploadFile").change(function(){
+							   if(this.files && this.files[0]) {
+							    var reader = new FileReader;
+							    reader.onload = function(data) {
+							     $(".select_img img").attr("src", data.target.result).width(150);        
+							    }
+							    reader.readAsDataURL(this.files[0]);
+							   }
+							  });
+							 </script>
+							</div>
 						</div>
 					</div>
+					이미지 실제경로 : <%=request.getRealPath("/") %>
+					
+					** 현재 프로젝트는 개발자의 컴퓨터에서 로컬로 실행됩니다. 이 프로젝트가 완성되어 서버에 업로드하여
+					실행된다면 저 경로가 아닌 새로운 경로를 확인해야합니다.
+					
+					
 					<div class="row py-4 border-bottom">
 						<div class="col-sm-2">
 							<label for="goods_title" class="form-label"></label>
@@ -271,7 +237,7 @@ $(document).ready(function(){
 							<label class="form-label">판매가격</label>
 						</div>
 						<div class="col-sm">
-							<input type="number" class="form-control" name="goods_price" placeholder="숫자만 입력하세요" maxlength="9" />
+							<input type="number" class="form-control" name="goods_price" placeholder="숫자만 입력하세요" />
 						</div>
 						<div class="col-sm align-self-center">원</div>
 					</div>
@@ -299,7 +265,7 @@ $(document).ready(function(){
 						</div>
 					</div>
 					<div class="G_btn" align="center">
-						<button type="submit" class="btn btn-success py-2 px-3" id="uploadBtn">작성완료</button>
+						<button type="submit" class="btn btn-success py-2 px-3">작성완료</button>
 						<button type="reset" class="btn btn-success py-2 px-3">초기화</button>
 						<button onclick="href='/goods/list';" class="btn btn-success py-2 px-3">목록이동</button>
 					</div>

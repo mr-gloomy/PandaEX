@@ -12,6 +12,30 @@
 <%@ include file="../include/css.jsp" %>
 
 <script type="text/javascript">
+	$(function() {
+		
+		$("#sort").val($("#a_sort").val()).prop("selected", true);
+		
+		$("#searchA").keydown(function(keyNum){
+			if(keyNum.keyCode == 13){ 
+				var keyword = $("#searchA").val();
+				var sort = $("#sort").val();
+				location.href='/auction/a_list?k='+keyword+'&s='+sort;
+			}
+		})
+		
+		$('#sort').change(function() {
+			var sort = $("#sort").val();
+			var keyword = $("#searchA").val();
+			location.href='/auction/a_list?s='+sort;
+			if (keyword!="") {
+				location.href='/auction/a_list?k='+keyword+'&s='+sort;
+			}
+		});
+		
+	});
+	
+	
 	function getDate(x,y) {
 		var date1 = new Date(x).getTime();
 		var date2 = new Date(y).getTime();
@@ -25,7 +49,7 @@
 <body>
 <br><br><br><br><br><br>
 	
-
+<input type="hidden" value="${param.s}" name="a_sort" id="a_sort">
 <section class="bg0 p-t-75 p-b-120" style="align-content:center;">	
 	<div class="container">
 	<div class="flex-w flex-sb-m p-b-52">
@@ -42,16 +66,15 @@
 	</div>
 	
 		<div class="flex-w flex-c-m m-tb-10">
-			<div class="col ml-2 pr-2">
-                <select class="form-select form-select-sm border-0 text-muted" v-model.number="filter" @change="updateList">
-                    <option value="0" v-if="${addressCount}">전체</option>
-                    <option value="1">주소1</option>
-                    <option value="2" v-if="${addressCount}">주소2</option>
-                </select>
-            </div>
+<!-- 			<div class="col ml-2 pr-2"> -->
+<!--                 <select class="form-select form-select-sm border-0 text-muted" v-model.number="filter" @change="updateList"> -->
+<%--                     <option value="0" v-if="${addressCount}">전체</option> --%>
+<!--                     <option value="1">주소1</option> -->
+<%--                     <option value="2" v-if="${addressCount}">주소2</option> --%>
+<!--                 </select> -->
+<!--             </div> -->
             <div class="col pl-0 mr-5">
-                <select class="form-select form-select-sm border-0 text-muted" id="flag" 
-                		v-model.number="sort" @change="updateList">
+                <select class="form-select form-select-sm border-0 text-muted" id="sort">
                     <option value="0">최신 등록순</option>
                     <option value="1">입찰가&#8593;순</option>
                     <option value="2">입찰가&#8595;순</option>
@@ -73,8 +96,7 @@
 				<button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
 					<i class="zmdi zmdi-search"></i>
 				</button>
-	
-				<input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder="Search">
+				<input class="mtext-107 cl2 size-114 plh2 p-r-15" id="searchA" type="text" name="search-product" placeholder="Search" value="${param.k }">
 			</div>	
 		</div>
 	</div>
@@ -100,7 +122,7 @@
 										현재 <span style="color:#28a745;"><fmt:formatNumber value="${avo.auction_bid }"/></span>원
 									</span>
 									<span class="stext-105 cl3">
-										 <script>getDate('${avo.auction_cdate.toString().substring(0,10)}','${avo.auction_date.toString().substring(0,10)}');</script>
+										 <script>getDate('${avo.auction_cdate.toString().substring(0,10)}','${avo.auction_date.toString().substring(0,10)}')</script>
 									</span>
 									<span class="stext-105 cl3" style="color:gray; font-size:13px;">
 										조회수 ${avo.auction_viewcount }회

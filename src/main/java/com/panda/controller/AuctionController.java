@@ -23,6 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.panda.domain.AuctionVO;
 import com.panda.domain.Criteria;
 import com.panda.domain.PageVO;
+import com.panda.domain.SearchVO;
 import com.panda.service.AuctionService;
 
 
@@ -62,15 +63,12 @@ public class AuctionController {
    // http://localhost:8080/auction/a_list
    // 기부경매 전체 상품 목록
    @RequestMapping(value = "/a_list", method=RequestMethod.GET)
-   public void a_listGET(HttpSession session,Model model,@ModelAttribute("result") String result) throws Exception {
+   public void a_listGET(HttpSession session,Model model, SearchVO vo) throws Exception {
 	  mylog.debug("/auction/a_list(GET) 호출 -> DB정보 가져와서 출력 "); 
-	  mylog.debug("전달정보 : "+result);
 	  
 	  session.setAttribute("updateCheck", true);
 	  
-	  List<AuctionVO> auctionList = service.getAuctionListAll();
-	  
-	  model.addAttribute("auctionList", auctionList);
+	  model.addAttribute("auctionList", service.getAuctionListAll(vo));
    }
    
    
@@ -207,9 +205,5 @@ public class AuctionController {
 		
 		return "/auction/a_list";
 	}
-	
-	
-	
-	
 	
 }
