@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.panda.domain.AuctionVO;
 import com.panda.domain.Criteria;
+import com.panda.domain.SearchVO;
 
 public interface AuctionService {
 	
@@ -13,7 +14,7 @@ public interface AuctionService {
 	public void insertAuction(AuctionVO avo) throws Exception;
 	
 	// 경매 상품 전체 목록 
-	public List<AuctionVO> getAuctionListAll() throws Exception;
+	public List<AuctionVO> getAuctionListAll(SearchVO vo) throws Exception;
 	
 	// 경매 상품 조회수 1증가
 	public void updateViewcnt(Integer auction_no) throws Exception;

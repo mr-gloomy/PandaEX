@@ -31,14 +31,7 @@
 	<script src="bootstrap-modal-wrapper-factory.min.js"></script>
 	
 	<script type="text/javascript">
-	
-	$(function(){
-		$("#testBtn").on("click", function(){
-		    BootstrapModalWrapperFactory.showMessage("Delfault Message to show to user");
-		});
 
-	});
-	
 		var cur_session='${user_id}';
 		
 		var webSocket = {
