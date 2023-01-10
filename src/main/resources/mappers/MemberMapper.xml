@@ -88,5 +88,30 @@
     select count(*) from user where user_id=#{user_id} and mail_auth=1
 	</select>
 	
+	<!-- 로그인한 회원의 정보 불러오기 -->
+	<select id="getMembers" resultType="MemberVO">
+		select * from user where user_id=#{user_id}
+	</select>
+	
+	<!-- 정보 수정 -->
+	<update id="modify">
+		update user
+		set user_nick=#{user_name}, user_tel=#{user_tel}, user_email=#{user_email}
+		where user_id=#{user_id}
+	</update>
+	
+	<!-- 비밀번호 체크 -->
+	<select id="passCheck" resultType="Integer">
+		select count(*) FROM user
+		where user_id = #{user_id}
+		  and user_pw = #{user_pw}
+	</select>
+	
+	<!-- 회원 탈퇴 -->
+	<delete id="exit">
+		delete from user
+		where user_id=#{user_id} and user_pw=#{user_pw}
+	</delete>
+	
 	
 </mapper>
