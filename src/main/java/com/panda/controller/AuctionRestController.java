@@ -32,4 +32,9 @@ public class AuctionRestController {
 		return service.getAuction(a_no);
 	}
 	
+	@GetMapping("/searchA/{keyword}")
+	public AuctionVO getList(@PathVariable String keyword) throws Exception{
+		mylog.info("list 카테고리 호출 ");
+		return null;
+	}
 }

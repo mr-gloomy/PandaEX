@@ -99,5 +99,8 @@
 		from auction
 	</select>
 	
+	<select id="searchA" resultType="Map">
+		SELECT * FROM auction where auction_title like concat('%',#{keyword},'%');
+	</select>
 	
 </mapper>
