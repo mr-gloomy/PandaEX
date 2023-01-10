@@ -195,6 +195,7 @@ public class MemberController {
 		
 		service.insertRep(vo);
 		
+		
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out=response.getWriter();
 		out.println("<script>");
