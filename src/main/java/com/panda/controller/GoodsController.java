@@ -2,20 +2,15 @@ package com.panda.controller;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.OutputStream;
-import java.nio.file.Files;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -31,23 +26,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.panda.domain.GoodsVO;
 import com.panda.service.GoodsService;
-
-import net.coobird.thumbnailator.Thumbnailator;
 
 @Controller
 @RequestMapping("/goods/*")
 public class GoodsController {
 	
 	// 객체 로거 생성
-	private static final Logger mylog = LoggerFactory.getLogger(GoodsController.class);
+	private static final Logger mylog = LoggerFactory.getLogger(GoodsController.class);	
 	
 	// 서비스 객체-주입
 	@Inject
 	private GoodsService service;
+	
+	@Resource(name="uploadPath")
+	private String uploadPath;
 	
 	// http://localhost:8080/goods/regist
 	// http://localhost:8080/goods/list
@@ -59,108 +55,44 @@ public class GoodsController {
 		mylog.debug(" /goods/regist(GET) 호출 -> 페이지 이동 ");		
 	}
 	
-	
-	// 파일 년/월/일 폴더생성
-	private String getFolder() {
-
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
-		Date date = new Date();
-
-		String str = sdf.format(date);
-
-		return str.replace("-", File.separator);
-	}
-	
-	// 이미지 파일 판단
-	private boolean checkImageType(File file) {
-
-		try {
-			String contentType = Files.probeContentType(file.toPath());
-
-			return contentType.startsWith("image");
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		return false;
-	}
-	
-	
 	// 상품 글쓰기 POST
 	@RequestMapping(value = "/regist", method = RequestMethod.POST)
-	public String registPOST(GoodsVO vo, MultipartFile[] uploadFile) throws Exception {
+	public String registPOST(GoodsVO vo, MultipartFile file) throws Exception{
 		mylog.debug(" /goods/regist(POST) 호출 ");	
 		mylog.debug(" GET방식의 데이터 전달 -> DB 저장 -> 페이지 이동 ");
 		// 0. 한글처리 (필터)
 		// 1. 전달된 정보 저장 
 		mylog.debug(vo.toString());
 		
-		// 2. 이미지 파일 첨부
-		String uploadFolder = "C:\\upload";
-		
-	    File uploadPath = new File(uploadFolder, getFolder());
-        mylog.info("업로드 경로 : " + uploadPath);
-        
-        // 업로드 날짜별로 폴더 생성
-	    if (uploadPath.exists() == false) {
-	    	uploadPath.mkdirs();
-	    }
-	    
-	    // 파일 업로드
-		for (MultipartFile multipartFile : uploadFile) {
+		// 2. 이미지 업로드
+		String imgUploadPath = uploadPath + File.separator + "imgUpload";
+		String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+		String fileName = null;
 
-			mylog.info("-------------------------------------");
-			mylog.info("파일명: " + multipartFile.getOriginalFilename());
-			mylog.info("파일크기: " + multipartFile.getSize());
+		if(file != null) {
 			
-			String uploadFileName =  multipartFile.getOriginalFilename();
-			
-			uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\") + 1);
-			mylog.info("업로드 파일명 : " + uploadFileName);
-			
-			// 파일명 중복방지 - 고유값 파일명 생성
-			UUID uuid = UUID.randomUUID(); 
-			uploadFileName = uuid.toString() + "_" + uploadFileName; 
-			
-
-			File saveFile = new File(uploadPath, uploadFileName);
-			
-			try {
-				
-				multipartFile.transferTo(saveFile);
-				
-				// 이미지 파일 확인
-				 if (checkImageType(saveFile)) {
-				
-					 FileOutputStream thumbnail = new FileOutputStream(new File(uploadPath, "s_" + uploadFileName));
-					
-					 Thumbnailator.createThumbnail(multipartFile.getInputStream(), thumbnail, 100,100);
-					
-					 thumbnail.close();
-				 }
-			} catch (Exception e) {
-				mylog.error(e.getMessage());
-			} 
-			
-		} // end
+			fileName =  UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath); 
 		
+		} else {
+			
+			fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
+		}
+
+		vo.setUploadFile(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+		vo.setThumbnail(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
 		
 		// 3. 서비스 -> DAO 접근 (mapper)
 		service.insertGoods(vo);
-			
-		mylog.debug(" 글쓰기 완료 ");
-			
+		
+		mylog.debug(" 게시판 글쓰기 완료 ");
 		// 4. 페이지로 이동(list페이지)
-			
+		
+		
 		return "redirect:/goods/list";
 	}
-	
-	
-	
+		
 	// 상품목록(All)
-	@RequestMapping(value = "/list",method = RequestMethod.GET)
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public void listGET(HttpSession session , Model model,@ModelAttribute("result") String result) throws Exception {
 		mylog.debug(" /Goods/list 호출 -> DB정보 가져와서 출력 ");
 		

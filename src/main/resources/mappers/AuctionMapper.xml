@@ -13,7 +13,25 @@
 	
 	<!-- 경매 상품 전체 목록 -->
 	<select id="alistAll" resultType="AuctionVO">
-		select * from auction
+		select * from auction 
+		<if test="k!=null">
+			where auction_title like concat('%',#{k},'%')
+		</if>
+		<if test="s==0">
+			order by auction_date desc
+		</if>
+		<if test="s==1">
+			order by auction_bid desc
+		</if>
+		<if test="s==2">
+			order by auction_bid asc
+		</if>
+		<if test="s==3">
+			order by auction_cdate asc
+		</if>
+		<if test="s==4">
+			order by auction_viewcount desc
+		</if>
 	</select>
 	
 	<!-- 경매 상품 조회수 1증가 -->
@@ -98,6 +116,5 @@
 		select count(auction_date) 
 		from auction
 	</select>
-	
 	
 </mapper>

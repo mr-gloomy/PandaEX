@@ -8,8 +8,8 @@
 	
 	<!-- 상품 등록(user_nick 빠짐) -->
 	<insert id="createGoods">
-		insert into goods(goods_category,goods_title,goods_condition,goods_price,goods_discount,goods_detail,goods_refund,goods_trade,uploadFile)
-		values(#{goods_category},#{goods_title},#{goods_condition},#{goods_price},#{goods_discount},#{goods_detail},#{goods_refund},#{goods_trade},#{uploadFile})
+		insert into goods(goods_category,goods_title,goods_condition,goods_price,goods_discount,goods_detail,goods_refund,goods_trade,uploadFile,thumbnail)
+		values(#{goods_category},#{goods_title},#{goods_condition},#{goods_price},#{goods_discount},#{goods_detail},#{goods_refund},#{goods_trade},#{uploadFile},#{thumbnail})
 	</insert> 
 	
 	<!-- 상품 목록(all) -->
