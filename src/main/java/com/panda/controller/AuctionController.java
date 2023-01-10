@@ -77,8 +77,8 @@ public class AuctionController {
     // http://localhost:8080/auction/a_read?auction_no=1&user_no=1
 	// 기부경매 상품 상세페이지
     @GetMapping(value = "/a_read")
-	public void a_readGET(@RequestParam("auction_no") int auction_no, 
-						  @RequestParam("user_no") int user_no, 
+	public void a_readGET(@ModelAttribute("auction_no") int auction_no, 
+						  @ModelAttribute("user_no") int user_no, 
 						  HttpSession session, Model model) throws Exception{
 		
 		mylog.debug("전달정보 : " + auction_no);
@@ -145,8 +145,9 @@ public class AuctionController {
 	
 	// 기부경매 상품 글 삭제
 	@PostMapping(value="/a_remove")
-	public String removePOST(@ModelAttribute("auction_no") int auction_no, RedirectAttributes rddr) throws Exception {
-		Integer result = service.removeAuction(auction_no);
+	public String removePOST(AuctionVO avo, RedirectAttributes rddr) throws Exception {
+		//mylog.debug("@@@@@@@@@@" + avo);
+		Integer result = service.removeAuction(avo);
 		
 		if(result > 0) {
 			rddr.addFlashAttribute("result", "removeOK");
@@ -207,6 +208,23 @@ public class AuctionController {
 		
 		return "/auction/a_list";
 	}
+	
+	
+	// 입찰하기
+	@PostMapping(value = "/a_bid")
+	public String bidPOST(AuctionVO avo, RedirectAttributes rbbr) throws Exception {
+		mylog.debug("@@@@@@@@@@@"+avo);
+		
+		Integer result = service.updateBid(avo);
+		
+		if(result>0) {
+			rbbr.addFlashAttribute("result", "bidUpdateOK");
+			rbbr.addFlashAttribute("auction_no", avo.getAuction_no());
+			rbbr.addFlashAttribute("user_no", avo.getUser_no());
+		}
+		return "redirect:/auction/a_read";
+	}
+	
 	
 	
 	

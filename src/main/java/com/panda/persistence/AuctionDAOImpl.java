@@ -94,9 +94,9 @@ public class AuctionDAOImpl implements AuctionDAO{
 	
 	// 경매 상품 글 삭제
 	@Override
-	public Integer removeAuction(Integer auction_no) throws Exception {
-		mylog.debug("removeAuction(Integer auction_no) 호출");
-		return sqlSession.delete(NAMESPACE+".removeAuction", auction_no);
+	public Integer removeAuction(AuctionVO avo) throws Exception {
+		mylog.debug("removeAuction(AuctionVO avo) 호출");
+		return sqlSession.delete(NAMESPACE+".removeAuction", avo);
 	}
 
 	
@@ -133,10 +133,13 @@ public class AuctionDAOImpl implements AuctionDAO{
 	}
 
 	
-	
-	
+	// 입찰하기
+	@Override
+	public Integer updateBid(AuctionVO avo) throws Exception {
+		mylog.debug("updateBid(AuctionVO avo) 호출");
+		return sqlSession.update(NAMESPACE+".updateBid", avo);
+	}
 
 	
 	
-
 }

@@ -30,7 +30,7 @@ public interface AuctionDAO {
 	public Integer updateAuction(AuctionVO avo) throws Exception;
 	
 	// 경매 상품 글 삭제
-	public Integer removeAuction(Integer auction_no) throws Exception;
+	public Integer removeAuction(AuctionVO avo) throws Exception;
 	
 	// 경매 상품 찜 업데이트
 	public Integer updateLike(AuctionVO avo) throws Exception;
@@ -41,6 +41,9 @@ public interface AuctionDAO {
 	
 	// 전체 게시판 글 개수
 	public int totalCnt() throws Exception;
+	
+	// 입찰하기
+	public Integer updateBid(AuctionVO avo) throws Exception;
 	
 	
 	
