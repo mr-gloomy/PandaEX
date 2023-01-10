@@ -5,7 +5,7 @@
 <!Doctype html>
 <html>
 <!-- Header -->
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <header>
 
 
@@ -456,11 +456,11 @@
 		<div class="modal-findpw">
 			<div class="findpw-input">
 			
-					<form action="/member/findPw" method="post" id="findpw">
+					<form action="/member/findpw" method="post" id="findpw">
 				<input type="text" id="findpw-pw" placeholder="사용중인 아이디를 입력해주세요." name="user_id"  autocomplete="off">
-				<input type="text" id="findpw-tel" placeholder="가입하신 이메일을 입력해주세요." name='user_email"'  autocomplete="off">
+				<input type="text" id="findpw-tel" placeholder="가입하신 이메일을 입력해주세요." name="user_email"  autocomplete="off">
 				<div class="error-text">&nbsp;</div>
-				<input id="search-pw" type="submit" value="비밀번호찾기">
+				<input id="search-pw" type="submit" value="비밀번호 찾기">
 				</form>
 			</div>
 		</div>
@@ -533,6 +533,25 @@
         });    
      </script>
      
+     
+     
+<script type="text/javascript">
+	$(function(){
+		$("#search-pw").click(function(){
+			$.ajax({
+				url : "/member/findpw",
+				type : "POST",
+				data : {
+					id : $("#findpw-pw").val(),
+					email : $("#findpw-tel").val()
+				},
+				success : function(result) {
+					alert(result);
+				},
+			})
+		});
+	})
+</script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('#find').submit(function(){
@@ -544,6 +563,47 @@
 			
 			if($('#findid-nick').val() == ''){
 				alert("휴대폰 번호를 입력하세요.");
+				return false;
+			}
+			
+		});
+		
+		
+	});
+	
+</script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#search-pw').submit(function(){
+			// alert("성공!");
+			if($('#findpw-pw').val() == ''){
+				alert("사용중인 아이디를 입력하세요.");
+				return false;
+			}
+			
+			if($('#findpw-tel').val() == ''){
+				alert("휴대폰 번호를 입력하세요.");
+				return false;
+			}
+			
+		});
+		
+		
+	});
+	
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#login').submit(function(){
+			// alert("성공!");
+			if($('#user_id').val() == ''){
+				alert("아이디를 입력하세요.");
+				return false;
+			}
+			
+			if($('#user_pw').val() == ''){
+				alert("비밀번호를 입력하세요.");
 				return false;
 			}
 			
