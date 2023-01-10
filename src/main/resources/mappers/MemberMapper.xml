@@ -6,8 +6,8 @@
 <mapper namespace="com.panda.mapper.MemberMapper">
 	
 	<insert id="insertRep">
-		insert into report (goods_no,u_id,rep_subject,rep_reason,rep_sort,rep_u_id) 
-		values (#{goods_no},#{u_id},#{rep_subject},#{rep_reason},#{rep_sort},#{rep_u_id})
+		insert into report (goods_no,auction_no,u_id,rep_subject,rep_reason,rep_sort,rep_u_id) 
+		values (#{goods_no},#{auction_no},#{u_id},#{rep_subject},#{rep_reason},#{rep_sort},#{rep_u_id})
 	</insert>
 	
 	<insert id="insert" >

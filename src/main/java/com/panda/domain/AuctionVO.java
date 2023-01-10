@@ -22,6 +22,7 @@ public class AuctionVO {
    private Integer auction_trade;      	//경매상태(0:거래전,1:거래중,2:거래후)
    private Integer user_no;				//회원번호
    
+   private String user_id;			//회원아이디
    private String user_nick;			//회원닉네임
    private String user_area;			//회원주소(시)
    private String user_addr;			//회원주소(구)

@@ -210,7 +210,7 @@ function CountDownTimer(dt, id) {
 								class="fa-solid fa-arrow-rotate-left"></i> 새로고침</span>
 						</div>
 						<div class="col-3 p-0 pl-2 mr-2 text-muted pointer"
-							data-bs-toggle="modal" data-bs-target="#reportModal">
+							data-toggle="modal" data-target="#myModal">
 							<i class="fa-solid fa-land-mine-on pl-3 pr-2"></i> 신고하기
 						</div>
 					</div>
@@ -355,34 +355,7 @@ function CountDownTimer(dt, id) {
 					</div>
 				</div>
 			</div>
-			<div class="modal fade" id="reportModal"
-				aria-labelledby="reportModalLable" tabindex="-1" aria-hidden="true"
-				style="display: none;">
-				<div class="modal-dialog modal-dialog-centered">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="reportModalLable">🥺 경매 신고하기</h5>
-							<button type="button" class="btn-close close"
-								data-bs-dismiss="modal">
-								<span aria-hidden="true">×</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							경매 신고 이유를 알려주세요! <input type="text" class="form-control mt-2"
-								autocomplete="off" maxlength="100">
-							<div class="text-right mt-1">
-								<span class="text-primary">0</span> / 100
-							</div>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary"
-								data-bs-dismiss="modal">돌아가기</button>
-							<button type="button" class="btn btn-primary"
-								data-bs-dismiss="modal" disabled="">신고하기</button>
-						</div>
-					</div>
-				</div>
-			</div>
+
 			<div class="modal fade" id="stopAuctionModal" aria-hidden="true"
 				aria-labelledby="stopAuctionModalLable" tabindex="-1"
 				style="display: none;">
@@ -453,30 +426,42 @@ function CountDownTimer(dt, id) {
 			</div>
 		</div>
 		
-		<!-- for modal -->
-		<div class="modal fade" id="reportModal" aria-hidden="true" aria-labelledby="reportModalLable" tabindex="-1">
-			<div class="modal-dialog modal-dialog-centered">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="reportModalLable">&#129402; 경매 신고하기</h5>
-						<button type="button" class="btn-close close" data-bs-dismiss="modal">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-		        		경매 신고 이유를 알려주세요!
-		        		<input type="text" class="form-control mt-2" v-model="reportReason" autocomplete="off" maxlength="100" />
-		                <div class="text-right mt-1"><span class="text-primary">{{ reportCount }}</span> / 100</div>
-<!-- 		                <div class="text-right mt-1"><span class="text-primary">{{ reportCount }}</span> / 100</div> -->
-		      		</div>
-		            <div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">돌아가기</button>
-		                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" :disabled="reportReason == ''" @click="report">신고하기</button>
-		            </div>      		
-		    	</div>
-		  	</div>
-		</div>
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content" style="width:80%;">
 
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">신고하기</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+      <form action="/member/reportA" method="post" id="frm">
+      	<input type="hidden" name="user_no" value="${param.user_no }">
+      	<input type="hidden" name="auction_no" value="${param.auction_no }">
+      	<input type="hidden" name="u_id" value="${user_id }">
+        <input type="text" name="rep_subject" placeholder="신고 제목" style="width:100%;"><br><br>
+        <select name="rep_sort" style="width:100%;">
+        	<option selected>신고 분류</option>
+        	<option value="1">욕설</option>
+        	<option value="2">거래에 문제가 있었어요!</option>
+        	<option value="3">기타</option>
+        </select><br><br>
+        <textarea rows="10" cols="10" style="width:100%;" name="rep_reason" placeholder="신고 사유"></textarea>
+        </form>
+      </div>
+		
+      <!-- Modal footer -->
+      <div class="modal-footer">
+      	<a href="#" class="btn btn-primary" onclick="document.getElementById('frm').submit();">신고하기</a>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
 		<style scoped="">
 .carousel-item img {
 	object-fit: cover;

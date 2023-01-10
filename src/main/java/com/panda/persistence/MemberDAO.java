@@ -31,6 +31,7 @@ public interface MemberDAO {
 			// 아이디 찾기
 			public MemberVO findId(MemberVO vo) throws Exception;
 			
+			// 신고 관련
 			public void insertRep(ReportVO vo) throws Exception;
 			
 			// 마이 페이지 - 메인 

@@ -8,6 +8,7 @@ import lombok.Data;
 public class ReportVO {
 	private int rep_no;
 	private int goods_no;
+	private int auction_no;
 	private String u_id;
 	private String rep_subject;
 	private String rep_reason;

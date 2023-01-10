@@ -21,8 +21,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.panda.domain.AuctionVO;
 import com.panda.domain.MemberVO;
 import com.panda.domain.ReportVO;
+import com.panda.service.AuctionService;
 import com.panda.service.MemberService;
 
 @Controller
@@ -36,7 +38,10 @@ public class MemberController {
 	
 	@Inject
 	private MemberService service;
-
+	
+	@Inject
+	private AuctionService aService;
+	
 	@Autowired
 	private HttpSession session;
 	
@@ -187,6 +192,25 @@ public class MemberController {
 	
 	@PostMapping("/report")
 	public void reportUser(ReportVO vo, HttpServletResponse response) throws Exception {
+		
+		service.insertRep(vo);
+		
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out=response.getWriter();
+		out.println("<script>");
+		out.println("alert('신고 완료!');");
+		out.println("history.back()");
+		out.println("</script>");
+		out.close();
+		
+	}
+	
+	@PostMapping("/reportA")
+	public void reportUserA(ReportVO vo, HttpServletResponse response,int user_no) throws Exception {
+		
+		AuctionVO mVo = aService.getUser(user_no);
+		
+		vo.setRep_u_id(mVo.getUser_id());
 		
 		service.insertRep(vo);
 		
