@@ -33,10 +33,10 @@
 	</select>
 	
 	
- 	<select id="getMemberList" resultType="MemberVO">
- 	 select * from user
- 	 where user_id != #{user_id} 	
- 	</select>
+<!--  	<select id="getMemberList" resultType="MemberVO"> -->
+<!--  	 select * from user -->
+<!--  	 where user_id != #{user_id} 	 -->
+<!--  	</select> -->
  	
 	<select id="findKakao" resultType="HashMap">
 		select * from kakao_user where k_name=#{nickname} and k_email=#{email}
@@ -61,11 +61,9 @@
 		update user set user_pw = #{param3} where user_id = #{param1} and user_email = #{param2}
 	</update>
 	
-	<!-- 비밀번호 재설정 -->
-	<update id="updatePw">
-		update user 
-		set user_pw=#{user_pw} 
-		where user_id=#{user_id}
+	<!-- 비밀번호 변경 -->
+	<update id="updatePw" >
+		update user set user_pw = #{user_pw} where user_id = #{user_id}
 	</update>
 	
 	
@@ -87,6 +85,10 @@
 	<select id="emailAuthFail" parameterType="String" resultType="int">
     select count(*) from user where user_id=#{user_id} and mail_auth=1
 	</select>
+	
+	
+	
+	
 	
 	<!-- 로그인한 회원의 정보 불러오기 -->
 	<select id="getMembers" resultType="MemberVO">

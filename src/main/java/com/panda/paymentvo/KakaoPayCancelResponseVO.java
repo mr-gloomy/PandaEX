@@ -1,6 +1,6 @@
 package com.panda.paymentvo;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,7 +20,7 @@ public class KakaoPayCancelResponseVO {
 	private AmountVO approved_cancel_amount, canceled_amount, cancel_available_amount;//취소 금액 정보
 	private String item_name;//상품 이름
 	private String item_code;//상품 코드
-	private Date created_at, approved_at, canceled_at; //결제 시간 정보
+	private Timestamp created_at, approved_at, canceled_at; //결제 시간 정보
 	private String payload;//취소 요청시 추가로 전달한 데이터
 	
 }

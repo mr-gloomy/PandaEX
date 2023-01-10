@@ -161,8 +161,8 @@ public class PayController {
 		//주어진 정보를 토대로 승인(approve) 요청을 보낸다
 		requestVO.setPg_token(pg_token);
 		KakaoPayApproveResponseVO responseVO = kakaoPayService.approve(requestVO);
-		mylog.debug("Controller(/approve) requestVO: " + requestVO);
-		mylog.debug("Controller(/approve) responseVO: " + responseVO);
+		mylog.debug(" requestVO: " + requestVO);
+		mylog.debug(" responseVO: " + responseVO);
 		paymentService.insert(paymentNo, responseVO, purchaseVO);
 		
 //		return "redirect:/pay/finish";
