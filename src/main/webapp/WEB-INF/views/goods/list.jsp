@@ -59,7 +59,7 @@
   <div class="row">
      <div class="col-8 py-4 px-5 " style="background-color: #ecc84a; border-color: #ecc84a; border-radius: 40px 0px 0px 40px/ 40px 0px 0px 40px;" >
     	<h5 class="text-white mt-1"> 내가 선택한 위치는  </h5>
-        <h5 class="text-white"><span class="text-white"><b>{ ** 위치값 넣어주기  ** }</b></span> 입니다</h5>
+        <h5 class="text-white"><span class="text-white"><b>${vo.user_addr }, ${vo.user_area }</b></span> 입니다</h5>
     </div>
     <div class="col py-4 px-3 bg-light" style="border-radius: 0px 40px 40px 0px/ 0px 40px 40px 0px;">
     	<a href="#" class="btn btn-info" role="button" style="background-color: #ecc84a; border-color: #ecc84a; margin-left: 180px; margin-top: 30px"> 
@@ -87,8 +87,7 @@
 	<div class="row mb-4 mt-5">
 	    <div class="col-9 mr-5">
 	        <h2 class="fw-bold"><b>중고상품</b></h2>
-	      
-	    </div>
+ 	    </div>
 	    <div class="col pl-0" align="right">
 	        <select class="form-select form-select-sm border-0 text-muted">
 	            <option value="0">최신순</option>
@@ -113,8 +112,7 @@
 				<c:if test="${num < size}">
 					<c:set var="vo" value="${GoodsList[num]}" />
 					<div class="card rounded border-0 mb-4 px-2 isotope-item ${vo.goods_category}" style="width: 300px; height: 380px;">
-						<img src="/resources/image/login_bg.jpg" class="rounded float-start" >
-<%-- 						<img src="/resources/upload/${vo.thumbnail }" class="rounded" alt="사진없음">  ************************ --%>
+						<img src="${vo.thumbnail }" class="rounded" alt="사진없음">
 						<div class="block2-txt flex-w flex-t p-t-14">
 							<div class="block2-txt-child1 flex-col-l ">
 								<a href="/goods/read?goods_no=${vo.goods_no}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
