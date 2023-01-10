@@ -7,7 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data@NoArgsConstructor@AllArgsConstructor@Builder
+@Data
 public class PaymentInsertVO {
 	private int paymentNo, memberNo, paymentPrice;
 	private Timestamp paymentTime;

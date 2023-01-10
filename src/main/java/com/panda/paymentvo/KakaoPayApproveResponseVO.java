@@ -1,5 +1,6 @@
 package com.panda.paymentvo;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 import lombok.AllArgsConstructor;
@@ -21,7 +22,7 @@ public class KakaoPayApproveResponseVO {
 	private String item_name;//상품 이름
 	private String item_code;//상품 코드
 	private int quantity;//상품 수량
-	private Date created_at;//결제 준비 요청 시각
-	private Date approved_at;//결제 승인 시각
+	private Timestamp created_at;//결제 준비 요청 시각
+	private Timestamp approved_at;//결제 승인 시각
 	private String payload;//결제 요청 시 전달된 요청 데이터
 }

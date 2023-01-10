@@ -9,6 +9,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletResponse;
+
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.panda.domain.KakaoVO;
@@ -46,10 +48,19 @@ public interface MemberService {
 
 		// 아이디 찾기
 		public MemberVO findId(MemberVO vo) throws Exception;
-//
-//		//비밀번호 찾
-//		public void findPw(String user_id, String user_email, MemberVO vo) throws Exception;
+	
+		
+		
+		//비밀번호 이메일발송
+		public void sendEmail(MemberVO vo, String div) throws Exception;
 
+		//비밀번호 찾기
+		public void findPw(HttpServletResponse resp, MemberVO vo) throws Exception;
+		
+		
+		
 		public void insertRep(ReportVO vo) throws Exception;
+
+		
 
 }

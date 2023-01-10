@@ -34,7 +34,7 @@ public class MypageController {
 	// 마이 페이지 - 메인 
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String mainGET(HttpSession session, Model model, MemberVO memberVO) throws Exception {
-		// 로그인 제어	
+//		 로그인 제어	
 		String user_id = (String) session.getAttribute("user_id");
 		mylog.debug(user_id);
 		
