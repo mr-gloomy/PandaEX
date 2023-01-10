@@ -12,6 +12,16 @@
 <%@ include file="../include/css.jsp" %>
 
 <script type="text/javascript">
+	$(function() {
+		$("#searchA").keydown(function(keyNum){
+			if(keyNum.keyCode == 13){ 
+				var keyword = $("#searchA").val();
+				location.href='/auction/searchA?keyword='+keyword;
+				
+			}
+		})
+	});
+	
 	function getDate(x,y) {
 		var date1 = new Date(x).getTime();
 		var date2 = new Date(y).getTime();
@@ -73,8 +83,8 @@
 				<button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
 					<i class="zmdi zmdi-search"></i>
 				</button>
-	
-				<input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder="Search">
+				
+				<input class="mtext-107 cl2 size-114 plh2 p-r-15" id="searchA" type="text" name="search-product" placeholder="Search">
 			</div>	
 		</div>
 	</div>
