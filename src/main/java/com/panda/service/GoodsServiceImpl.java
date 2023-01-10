@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.panda.domain.GoodsVO;
+import com.panda.domain.SearchVO;
 import com.panda.persistence.GoodsDAO;
 
 @Service
@@ -31,10 +32,10 @@ public class GoodsServiceImpl  implements GoodsService {
 
 	// 상품목록(All)
 	@Override
-	public List<GoodsVO> getGoodsListAll() throws Exception {
+	public List<GoodsVO> getGoodsListAll(SearchVO vo) throws Exception {
 		mylog.debug(" getGoodsListAll() - DAO 호출(결과 리턴받기)");
 		
-		return dao.getGoodsListAll();
+		return dao.getGoodsListAll(vo);
 	}
 
 	// 상품 목록 조회수 1증가 

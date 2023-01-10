@@ -266,6 +266,8 @@ public class MemberController {
 		@RequestMapping(value = "/findpw", method = RequestMethod.POST)
 		public String findPwPOST(@ModelAttribute MemberVO vo, HttpServletResponse response) throws Exception{
 			mylog.info("findPwPOST() 호출");
+			MemberVO vo2 = service.getMember(vo.getUser_id());
+			vo.setUser_no(vo2.getUser_no());
 			service.findPw(response, vo);
 			
 			return "main/index";
@@ -279,21 +281,45 @@ public class MemberController {
 		}
 		
 		@PostMapping("/pwUpdate")
-		public String pwUpdateP(MemberVO vo, RedirectAttributes rttr)throws Exception{
+		public String pwUpdateP(MemberVO vo, RedirectAttributes rttr,HttpServletResponse response,String pw2)throws Exception{
+			mylog.info("pwUpdate 왔음");
 			rttr.addFlashAttribute("msg", "정보 수정이 완료되었습니다. 다시 로그인해주세요.");
-			service.updatePw(vo);
+			if (service.pwCheck(vo.getUser_no())!=null) {
+				if (vo.getUser_pw().equals(service.pwCheck(vo.getUser_no()))) {
+					vo.setUser_pw(pw2);
+					service.updatePw(vo);
+				}
+				else {
+					response.setContentType("text/html; charset=UTF-8");
+					PrintWriter out=response.getWriter();
+					out.println("<script>");
+					out.println("alert('회원정보 없음!');");
+					out.println("history.back()");
+					out.println("</script>");
+					out.close();
+				}
+			}
+//			else {
+//				response.setContentType("text/html; charset=UTF-8");
+//				PrintWriter out=response.getWriter();
+//				out.println("<script>");
+//				out.println("alert('잘못된 임시 비밀번호입니다!');");
+//				out.println("history.back()");
+//				out.println("</script>");
+//				out.close();
+//			}
 			return "/main/index";
 		}
 		
-		@RequestMapping(value="/pwCheck" , method=RequestMethod.POST)
-		@ResponseBody
-		public int pwCheck(MemberVO vo) throws Exception{
-			String user_pw = service.pwCheck(vo.getUser_id());
-			if(vo == null || !vo.getUser_pw().equals(user_pw)) {
-				return 0;
-			}
-			return 1;
-		}
+//		@RequestMapping(value="/pwCheck" , method=RequestMethod.POST)
+//		@ResponseBody
+//		public int pwCheck(MemberVO vo) throws Exception{
+//			String user_pw = service.pwCheck(vo.getUser_id());
+//			if(vo == null || !vo.getUser_pw().equals(user_pw)) {
+//				return 0;
+//			}
+//			return 1;
+//		}
 		
 }
 		

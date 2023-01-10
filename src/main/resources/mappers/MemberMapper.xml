@@ -83,7 +83,7 @@
 	
 	<!-- 비밀번호 변경 & 재발급 링크에서 변경  -->
 	<select id="pwCheck" resultType="String">
-	select user_pw from user where user_id = #{user_id}
+	select user_pw from user where user_no = #{user_no}
 	</select>
 
 <!-- 비밀번호 변경 -->

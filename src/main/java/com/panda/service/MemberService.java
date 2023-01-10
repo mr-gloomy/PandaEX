@@ -57,7 +57,7 @@ public interface MemberService {
 		//비밀번호 찾기
 		public void findPw(HttpServletResponse resp, MemberVO vo) throws Exception;
 		
-		public String pwCheck(String user_id)throws Exception;
+		public String pwCheck(int user_no)throws Exception;
 		public void updatePw(MemberVO vo)throws Exception;
 		
 		

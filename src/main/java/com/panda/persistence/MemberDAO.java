@@ -51,6 +51,7 @@ public interface MemberDAO {
 			// 비밀번호 변경
 			public int updatePw(MemberVO vo) throws Exception;
 
-			public String pwCheck(String memberId)throws Exception;
+			public String pwCheck(int user_no)throws Exception;
 			
+			public int updatePwF(MemberVO vo) throws Exception;
 }

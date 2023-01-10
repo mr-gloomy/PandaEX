@@ -68,7 +68,7 @@
                     <input type="password" id="memberPw1" class="form-control form-control-inline text-center" placeholder="새 비밀번호" />
                 </div>
                 <div class="form-group">
-                    <input type="password" id="memberPw2" class="form-control form-control-inline text-center" placeholder="새 비밀번호 확인" />
+                    <input type="password" name="pw2" id="memberPw2" class="form-control form-control-inline text-center" placeholder="새 비밀번호 확인" />
                 </div>
                 <button type="submit" id="pwUpdate" name="pwUpdate" class="btn btn-primary">비밀번호 변경</button> 
                 

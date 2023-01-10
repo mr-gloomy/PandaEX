@@ -110,8 +110,13 @@ public class MemberDAOImpl implements MemberDAO{
 		}
 		
 		@Override
-		public String pwCheck(String user_id)throws Exception{
-			return sqlSession.selectOne(NAMESPACE+".pwCheck", user_id);
+		public int updatePwF(MemberVO vo) throws Exception {
+			return sqlSession.update(NAMESPACE +".updatePw", vo);
+		}
+		
+		@Override
+		public String pwCheck(int user_no)throws Exception{
+			return sqlSession.selectOne(NAMESPACE+".pwCheck", user_no);
 		}
 		
 		

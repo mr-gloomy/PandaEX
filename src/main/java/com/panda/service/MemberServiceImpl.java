@@ -278,7 +278,7 @@ public class MemberServiceImpl implements MemberService {
 				}
 				vo.setUser_pw(pw);
 				// 비밀번호 변경
-				dao.updatePw(vo);
+				dao.updatePwF(vo);
 				// 비밀번호 변경 메일 발송
 				sendEmail(vo, "findpw");
 
@@ -307,8 +307,8 @@ public class MemberServiceImpl implements MemberService {
 
 				
 				@Override
-				public String pwCheck(String user_id)throws Exception{
-					return dao.pwCheck(user_id);
+				public String pwCheck(int user_no)throws Exception{
+					return dao.pwCheck(user_no);
 				}
 				
 				@Override

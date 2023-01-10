@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.panda.domain.GoodsVO;
+import com.panda.domain.SearchVO;
 
 @Repository
 public class GoodsDAOImpl implements GoodsDAO{
@@ -36,14 +37,10 @@ public class GoodsDAOImpl implements GoodsDAO{
 
 	// 상품목록(All)
 	@Override
-	public List<GoodsVO> getGoodsListAll() throws Exception {
+	public List<GoodsVO> getGoodsListAll(SearchVO vo) throws Exception {
 		mylog.debug("getGoodsListAll() -> sqlSession mapper 호출 ");
 		
-		List<GoodsVO> GoodsList = sqlSession.selectList(NAMESPACE +".listAll");
-
-		mylog.debug("게시판 글 개수 : " + GoodsList.size() + "");
-		
-		return GoodsList;
+		return sqlSession.selectList(NAMESPACE +".listAll",vo);
 	}
 
 	// 상품 목록 조회수 1증가 
