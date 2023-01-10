@@ -33,4 +33,18 @@ public interface MemberDAO {
 			
 			public void insertRep(ReportVO vo) throws Exception;
 			
+			// 마이 페이지 - 메인 
+			public MemberVO getMembers(String user_id);
+			
+			public MemberVO getMembers(MemberVO vo) throws Exception;
+			
+			// 마이 페이지 - 정보 수정 
+			public void modify(MemberVO memberVO) throws Exception;
+			
+			// 마이 페이지 - 정보 수정 - 비밀번호 확인 
+			public Integer passCheck(MemberVO memberVO) throws Exception;
+			
+			// 마이 페이지 - 회원 탈퇴 
+			public void exit(MemberVO memberVO) throws Exception;
+			
 }

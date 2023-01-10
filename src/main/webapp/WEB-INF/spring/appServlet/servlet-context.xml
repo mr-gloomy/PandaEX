@@ -38,9 +38,20 @@
 		<websocket:sockjs websocket-enabled="true"/>
 	</websocket:handlers>
 	
-   <!-- 일반 파일 업로드 경로 -->
-   <beans:bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver">
-   </beans:bean>
-	
-	
+   <!-- 파일업로드 설정 -->
+    <resources mapping="/imgUpload/**" location="/resources/imgUpload/" />
+	<beans:bean id="multipartResolver"
+	            class="org.springframework.web.multipart.commons.CommonsMultipartResolver" >
+	            <beans:property name="maxUploadSize" value="52428800"/>
+	            <beans:property name="maxInMemorySize" value="1000000"/>
+	            <beans:property name="defaultEncoding" value="UTF-8"/>	
+	</beans:bean>
+
+	<!-- 업로드 패스 설정(컴퓨터별 새로설정 - 서버 저장이 아니면 방법이 없다..?) -->
+	<beans:bean class="java.lang.String" id="uploadPath">
+		<beans:constructor-arg
+			value="D:\final_project\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\PandaEX\resources" />
+	</beans:bean>
+
+
 </beans:beans>
