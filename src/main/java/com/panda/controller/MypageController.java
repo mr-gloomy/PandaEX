@@ -1,8 +1,5 @@
 package com.panda.controller;
 
-import java.util.List;
-import java.util.Map;
-
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
@@ -16,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.panda.domain.LikeVO;
 import com.panda.domain.MemberVO;
 import com.panda.service.MyPageService;
 
@@ -53,7 +49,7 @@ public class MypageController {
 	}
 	
 	// 마이 페이지 - 정보  
-	@RequestMapping(value = "info", method = RequestMethod.GET)
+	@RequestMapping(value = "/info", method = RequestMethod.GET)
 	public void infoGet(HttpSession session, Model model, MemberVO memberVO) throws Exception {
 		String user_id = (String) session.getAttribute("user_id");
 		
