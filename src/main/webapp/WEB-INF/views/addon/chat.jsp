@@ -65,24 +65,19 @@
 					
 					if(msgData.send_id != cur_session) {
 						$('#divChatData').append("<div class='direct-chat-msg'><div class='direct-chat-info clearfix'><span class='direct-chat-name pull-left'>"+msgData.send_id+"</span><span class='direct-chat-timestamp pull-right'>"+time_hour+" : "+msg_time.getMinutes()+"</span></div><div class='direct-chat-text'>"+msgData.msg+"</div></div>");
-// 						$('#divChatData').scrollTop($('#divChatData')[0].scrollHeight);
 					}
 					else {
 						$('#divChatData').append("<div class='direct-chat-msg right'><div class='direct-chat-info clearfix'><span class='direct-chat-name pull-right'>"+msgData.send_id+"</span><span class='direct-chat-timestamp pull-left'>"+time_hour+" : "+msg_time.getMinutes()+"</span></div><img class='direct-chat-img' src='../dist/img/user3-128x128.jpg' alt='Message User Image'><div class='direct-chat-text'>"+msgData.msg+"</div></div>");
-// 						$('#divChatData').scrollTop($('#divChatData')[0].scrollHeight);
 					}
 				}
-				
 				// 입장
 				else if(msgData.cmd == 'CMD_ENTER') {
 					$('#divChatData').append('<div>' + msgData.msg + '</div>');
 				}
-				
 				// 퇴장
 				else if(msgData.cmd == 'CMD_EXIT') {					
 					$('#divChatData').append('<div>' + msgData.msg + '</div>');
 				}
-				
 			},
 			closeMessage: function(str) {
 				$('#divChatData').append('<div>' + '연결 끊김 : ' + str + '</div>');
@@ -196,9 +191,9 @@ Count Dracula
 
 <div class="box-footer">
 <div class="input-group">
-<input type="text" id="message" size="110" class="form-control" onkeypress="if(event.keyCode==13){webSocket.sendChat();}">
+	<input type="text" id="message" size="110" class="form-control" onkeypress="if(event.keyCode==13){webSocket.sendChat();}">
 <span class="input-group-btn">
-<button type="button" id="btnSend" class="btn btn-success btn-flat" onclick="webSocket.sendChat()" >채팅 전송</button>
+	<button type="button" id="btnSend" class="btn btn-success btn-flat" onclick="webSocket.sendChat()" >채팅 전송</button>
 </span>
 </div>
 </div>
