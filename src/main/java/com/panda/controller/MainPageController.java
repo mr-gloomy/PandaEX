@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.panda.domain.ChatVO;
 import com.panda.service.ChatService;
+import com.panda.service.GoodsService;
 
 
 @Controller
@@ -22,6 +23,9 @@ public class MainPageController {
 	
 	@Inject
 	ChatService service;
+	
+	@Inject
+	GoodsService gService;
 	
 	private static final Logger logger
 				= LoggerFactory.getLogger(MainPageController.class);
@@ -35,7 +39,13 @@ public class MainPageController {
 	}
 	
 	@GetMapping("/chat")
-	public String chat(Model model,ChatVO vo,String bang_id, String u) throws Exception{
+	public String chat(Model model,HttpSession session,String bang_id, String u,int g) throws Exception{
+		
+		ChatVO vo = new ChatVO();
+		if ((String)session.getAttribute("user_id")!=null) {
+			vo.setSend_id((String)session.getAttribute("user_id"));
+		}
+		vo.setReceive_id(u);
 		
 		if (vo!=null) {
 			bang_id = service.getRoom(vo);
@@ -46,9 +56,11 @@ public class MainPageController {
                 char upperCh = (char)((int)(Math.random()*25) + 97);
                 bang_id += upperCh;
             }
-		}
+		} 
 		model.addAttribute("bang_id",bang_id);
 		model.addAttribute("u",u);
+		model.addAttribute("goods", gService.getGoods(g));
+		
 		return "/addon/chat";
 	}
 	

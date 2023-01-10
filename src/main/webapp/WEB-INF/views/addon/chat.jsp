@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,8 +23,22 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins 
          folder instead of downloading all of them to reduce the load. -->
     <link href="/resources/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css"/>
+	
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"></script>
+	<script src="bootstrap-modal-wrapper-factory.min.js"></script>
+	
 	<script type="text/javascript">
-		
+	
+	$(function(){
+		$("#testBtn").on("click", function(){
+		    BootstrapModalWrapperFactory.showMessage("Delfault Message to show to user");
+		});
+
+	});
+	
 		var cur_session='${user_id}';
 		
 		var webSocket = {
@@ -123,7 +138,32 @@
 <div class="box-body">
 
 <div style="height:81vh;" class="direct-chat-messages">
-<div id="divChatData"></div>
+<div id="divChatData">
+<div class="col-md-4" style="padding-right: 0px; padding-left: 0px;">
+
+<div class="box box-widget widget-user-2">
+
+<div class="widget-user-header" style="background-color: #00a65a;">
+<div class="widget-user-image">
+<img class="img-circle" width="30" height="30" src="../resources/image/emoji_6.png">
+<span style="font-size: 17px">${goods.goods_title }</span>
+</div>
+
+<h3 class="widget-user-username" style="margin-top:4px; margin-bottom:4px;">
+<fmt:formatNumber value="${goods.goods_price }"/>원</h3>
+<h5 class="widget-user-desc"><b>${goods.goods_trade}</b></h5>
+</div>
+ <div class="box-footer no-padding">
+	<ul class="nav nav-stacked">
+	<li><a style="display: inline;" href="/goods/read?goods_no=${goods.goods_no}" target="_blank">상품 보기</a>
+	<a style="display: inline;" data-toggle="modal" data-target="#myModal">신고하기</a></li>      
+</ul>
+</div>
+</div>
+
+</div>
+
+</div>
 </div>
 
 
@@ -160,7 +200,46 @@ Count Dracula
 
 </div>
 
+	
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content" style="width:80%;">
 
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">신고하기</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+      <form action="/member/report" method="post" id="frm">
+      	<input type="hidden" name="rep_u_id" value="${param.u }">
+      	<input type="hidden" name="goods_no" value="${goods.goods_no }">
+      	<input type="hidden" name="u_id" value="${user_id }">
+        <input type="text" name="rep_subject" placeholder="신고 제목" style="width:100%;"><br><br>
+        <select name="rep_sort" style="width:100%;">
+        	<option selected>신고 분류</option>
+        	<option value="1">욕설</option>
+        	<option value="2">거래에 문제가 있었어요!</option>
+        	<option value="3">기타</option>
+        </select><br><br>
+        <textarea rows="10" cols="10" style="width:100%;" name="rep_reason" placeholder="신고 사유"></textarea>
+        </form>
+      </div>
+		
+      <!-- Modal footer -->
+      <div class="modal-footer">
+      	<a href="#" class="btn btn-primary" onclick="document.getElementById('frm').submit();">신고하기</a>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+	
+		
 
 </body>
 </html>

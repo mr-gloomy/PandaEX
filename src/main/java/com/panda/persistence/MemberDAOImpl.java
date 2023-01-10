@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.panda.domain.MemberVO;
+import com.panda.domain.ReportVO;
 
 @Repository
 public class MemberDAOImpl implements MemberDAO{
@@ -80,9 +81,57 @@ public class MemberDAOImpl implements MemberDAO{
 		}
 
 		@Override
-		public int emailAuthFail(String id) throws Exception {
-		    return sqlSession.selectOne(NAMESPACE + ".emailAuthFail", id);
+		public int emailAuthFail(String user_id) throws Exception {
+		    return sqlSession.selectOne(NAMESPACE + ".emailAuthFail", user_id);
 		}
+
+		@Override
+		public void insertRep(ReportVO vo) throws Exception {
+			sqlSession.insert(NAMESPACE+".insertRep",vo);
+		}
+		
+		
+		
+		// 아이디 찾기
+		@Override
+		public MemberVO findId(MemberVO vo) throws Exception {
+			return sqlSession.selectOne(NAMESPACE+".findId", vo);
+		}
+		
+		@Override
+		public MemberVO getMembers(String user_id) {
+			return sqlSession.selectOne(NAMESPACE + ".getMember", user_id);
+		}
+		
+		// 마이 페이지 
+		@Override
+		public MemberVO getMembers(MemberVO memberVO) throws Exception {
+			return sqlSession.selectOne(NAMESPACE + ".getMembers", memberVO);
+		}
+		
+		// 마이 페이지 - 정보 수정 
+		@Override
+		public void modify(MemberVO memberVO) throws Exception {
+			sqlSession.update(NAMESPACE + ".modify", memberVO);
+		}
+		
+		// 마이 페이지 - 정보 수정 - 비밀번호 확인 
+		@Override
+		public Integer passCheck(MemberVO memberVO) throws Exception {
+			return sqlSession.selectOne(NAMESPACE + ".passCheck", memberVO);
+		}
+
+		// 마이 페이지 - 회원 탈퇴 
+		@Override
+		public void exit(MemberVO memberVO) throws Exception {
+			sqlSession.delete(NAMESPACE + ".exit", memberVO);
+		}
+
+
+		
+
+		
+		
 		
 	}
 	

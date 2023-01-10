@@ -10,6 +10,7 @@ import java.net.URL;
 import java.util.HashMap;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +23,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.panda.domain.KakaoVO;
 import com.panda.domain.MemberVO;
+import com.panda.domain.ReportVO;
 import com.panda.mail.MailHandler;
 import com.panda.mail.TempKey;
 import com.panda.persistence.MemberDAO;
@@ -228,14 +230,39 @@ public class MemberServiceImpl implements MemberService {
 	public int emailAuthFail(String user_id) throws Exception {
 	    return dao.emailAuthFail(user_id);
 	}
+
+	@Override
+	public void insertRep(ReportVO vo) throws Exception {
+		dao.insertRep(vo);
+	}
+
 	
+	// 아이디 찾기
+		@Override
+		public MemberVO findId(MemberVO vo) throws Exception {
+			mylog.info("findId(MemberVO vo) 호출");
+			
+			return dao.findId(vo);
+		}
 
 
-	
-	
-
-
-
+		
+		//비밀번호 찾기 이메일 발송
+//		@Override
+//		public void findPw(String user_id, String user_email,MemberVO vo) throws Exception {
+//				
+//		        MailHandler sendMail = new MailHandler(mailSender);
+//		        sendMail.setSubject("[PANDA  비밀번호 재 설정 링크 입니다.]"); //메일제목
+//		        sendMail.setText(
+//		                "<h1>PANDA 비밀번호 재 설정</h1>" +
+//		                "<br>PANDA에 오신것을 환영합니다!" +
+//		                "<br>아래 [비밀번호 설정 링르]를 눌러주세요." +
+//		                "<br><a href='http://localhost:8080/member/findPw?user_no=" + vo.getUser_no() +
+//		                "' target='_blank'>이메일 인증 확인</a>");
+//		        sendMail.setFrom("leweeewel@gmail.com", "Panda 판다");
+//		        sendMail.setTo(vo.getUser_email());
+//		        sendMail.send();
+//		}
 
 
 }

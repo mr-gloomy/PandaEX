@@ -2,24 +2,29 @@ package com.panda.controller;
 
 import java.util.List;
 
+
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.panda.domain.AuctionVO;
+import com.panda.domain.Criteria;
+import com.panda.domain.PageVO;
 import com.panda.service.AuctionService;
+
 
 @Controller
 @RequestMapping(value="/auction/*")
@@ -71,7 +76,7 @@ public class AuctionController {
    
     // http://localhost:8080/auction/a_read?auction_no=1&user_no=1
 	// 기부경매 상품 상세페이지
-	@GetMapping(value = "/a_read")
+    @GetMapping(value = "/a_read")
 	public void a_readGET(@RequestParam("auction_no") int auction_no, 
 						  @RequestParam("user_no") int user_no, 
 						  HttpSession session, Model model) throws Exception{
@@ -79,8 +84,12 @@ public class AuctionController {
 		mylog.debug("전달정보 : " + auction_no);
 		mylog.debug("전달정보 : " + user_no);
 		
+		boolean isUpdateCheck=false;
+		
 		// 세션객체
-		boolean isUpdateCheck = (boolean) session.getAttribute("updateCheck");
+		if(session.getAttribute("updateCheck")!=null) {
+			isUpdateCheck = (boolean) session.getAttribute("updateCheck");
+		}
 		mylog.debug("조회수 증가 상태 : " + isUpdateCheck);
 
 		if (isUpdateCheck) { // true
@@ -91,53 +100,113 @@ public class AuctionController {
 		}
 		
 		// 서비스 -> DAO (특정 글번호에 해당하는 정보 가져오기)
-		AuctionVO avo = service.getAuction(auction_no);
-		AuctionVO avo1 = service.getUser(user_no);
+//		AuctionVO avo = service.getAuction(auction_no);
+//		AuctionVO avo1 = service.getUser(user_no);
+		AuctionVO vo = new AuctionVO();
+		vo.setAuction_no(auction_no);
+		vo.setUser_no(user_no);
+		//service.getAuctions(vo);
 		
 		// 연결된 뷰페이지로 정보 전달
-		model.addAttribute("avo", avo);
-		model.addAttribute("avo1", avo1);
+		model.addAttribute("avooo", service.getAuctions(vo));
+//		model.addAttribute("avo1", avo1);
 	}   
 	
+    // http://localhost:8080/auction/a_modify
+	// http://localhost:8080/auction/a_modify?auction_no=1&user_no=1
+    // 기부경매 상품 글 수정 GET
+ 	@GetMapping(value = "/a_modify")
+ 	public void a_modifyGET(Model model, AuctionVO vo) throws Exception{
+ 		// model 객체 사용 - view 페이지로 정보 전달
+ 		mylog.debug(vo+"");
+ 		
+ 		model.addAttribute("acmap",service.getAuctions(vo));
+ 	}
+ 	
+    
+     // 기부경매 상품 글 수정 POST
+ 	@PostMapping(value = "/a_modify")
+ 	public String a_modifyPOST(AuctionVO avo, RedirectAttributes rttr) throws Exception {
+ 		// 전달된 정보(수정할 정보) 저장
+ 		mylog.debug(avo+"");
+ 		
+ 		// 서비스 - DAO : 정보 수정 메서드 호출
+ 		Integer result = service.updateAuction(avo);
+ 		
+ 		if (result > 0) {
+ 			// "수정완료" - 정보 전달
+ 			rttr.addFlashAttribute("result", "modOK");
+ 		}
+ 		
+ 		// 페이지 이동
+ 		return "redirect:/auction/a_list";
+ 	}
+
 	
-	// http://localhost:8080/auction/a_modify?auction_no=1
-	// 수정 GET
-	@GetMapping(value = "/a_modify")
-	public void a_modifyGET(Model model, @ModelAttribute("auction_no") int auction_no) throws Exception{
-		// model 객체 사용 - view 페이지로 정보 전달
-		model.addAttribute(service.getAuction(auction_no));
+	// 기부경매 상품 글 삭제
+	@PostMapping(value="/a_remove")
+	public String removePOST(@ModelAttribute("auction_no") int auction_no, RedirectAttributes rddr) throws Exception {
+		Integer result = service.removeAuction(auction_no);
+		
+		if(result > 0) {
+			rddr.addFlashAttribute("result", "removeOK");
+		}
+		
+		// 페이지 이동
+		return "redirect:/auction/a_list";
 	}
 	
-   
-    // 수정 POST
-//	@PostMapping(value = "/a_modify")
-//	public String a_modifyPOST(AuctionVO avo, RedirectAttributes rttr) throws Exception {
-//		// 전달된 정보(수정할 정보) 저장
-//		mylog.debug(avo+"");
+	
+	// 기부경매 상품 찜 업데이트
+	@PostMapping(value="/a_list/{auction_no}")
+	@ResponseBody
+	public int updateLikePOST(@RequestParam("auction_no") int auction_no, 
+							  @RequestParam("auction_like") int auction_like,
+							  @RequestParam("user_no") int user_no, 
+							  HttpSession session, Model model) throws Exception {
+		//mylog.debug("@@@@@@@@@@@@");
+		mylog.debug("auction_no : " + auction_no);
 		
-		// 서비스 - DAO : 정보 수정 메서드 호출
-//		Integer result = service.updateAuction(avo);
-//		
-//		if (result > 0) {
-//			// "수정완료" - 정보 전달
-//			rttr.addFlashAttribute("result", "modOK");
-//		}
-//		
-//		// 페이지 이동
-//		return "redirect:/auction/a_list";
-//	}
+		AuctionVO avo = new AuctionVO();
+		
+		avo.setAuction_no(auction_no);
+		avo.setUser_no(user_no);
+		avo.setAuction_like(auction_like);
+		
+//		Integer result = service.updateLike(avo);
+		
+//		model.addAttribute(service.updateLike(avo));
+		return service.updateLike(avo);
+	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	// http://localhost:8080/auction/listPage
+	// http://localhost:8080/auction/listPage?page=2
+	// http://localhost:8080/auction/listPage?perPageNum=20
+	// http://localhost:8080/auction/listPage?page=3&perPageNum=20
+	// 페이징 처리
+	@RequestMapping(value = "/listPage", method = RequestMethod.GET)
+	public String listPageGET(Criteria cri, HttpSession session, Model model, @ModelAttribute("result") String result) throws Exception {
+		
+		mylog.debug("/auction/listPage 호출");
+		
+		//글 조회수 체크 정보
+		session.setAttribute("updateCheck", true);
+		
+		List<AuctionVO> auctionList = service.getListPage(cri);
+		
+		// 페이징 처리 하단부 정보 준비 -> view 페이지로 전달
+		PageVO pvo = new PageVO();
+		pvo.setCri(cri);
+		
+		mylog.debug("totalCnt : "+service.totalCnt());
+		pvo.setTotalCount(service.totalCnt());
+		
+		model.addAttribute("pvo", pvo);
+		model.addAttribute("auctionList", auctionList);
+		
+		return "/auction/a_list";
+	}
 	
 	
 	

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.panda.domain.AuctionVO;
+import com.panda.domain.Criteria;
 import com.panda.persistence.AuctionDAO;
 
 @Service
@@ -54,11 +55,50 @@ public class AuctionServiceImpl implements AuctionService {
 		mylog.debug("getUser(Integer user_no) 호출");
 		return adao.getUser(user_no);
 	}
-
+	
+	// 경매번호, 회원번호 정보 조회 
 	@Override
-	public List<Map<String, Object>> getAuctions(String category) throws Exception {
-		return adao.getAuctions(category);
+	public Map getAuctions(AuctionVO vo) throws Exception {
+		mylog.debug("service auctions : "+vo);
+		return adao.getAuctions(vo);
 	}
+	
+	// 경매 상품 글 수정
+	@Override
+	public Integer updateAuction(AuctionVO avo) throws Exception {
+		mylog.debug("updateAuction(AuctionVO avo) 호출");
+		return adao.updateAuction(avo);
+	}
+
+	
+	//경매 상품 글 삭제
+	@Override
+	public Integer removeAuction(Integer auction_no) throws Exception {
+		mylog.debug("removeAuction(Integer auction_no) 호출");
+		return adao.removeAuction(auction_no);
+	}
+
+	
+	// 경매 상품 찜 업데이트
+	@Override
+	public Integer updateLike(AuctionVO avo) throws Exception {
+		return adao.updateLike(avo);
+	}
+
+	
+	// 페이징 처리 구현된 리스트 조회
+	@Override
+	public List<AuctionVO> getListPage(Criteria cri) throws Exception {
+		return adao.getListPage(cri);
+	}
+
+	
+	// 글 전체 개수
+	@Override
+	public int totalCnt() throws Exception {
+		return adao.totalCnt();
+	}
+	
 	
 	
 	

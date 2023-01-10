@@ -33,8 +33,8 @@ public class AdminController {
 	
 	
 	// 어드민 메인페이지
-	// http://localhost:8080/admin/main
-	@RequestMapping(value = "/main")
+	// http://localhost:8080/admin/index
+	@RequestMapping(value = "/index")
 	public void mainGET(HttpSession session)throws Exception{
 		mylog.debug(" mainGET() 호출 ");
 	}

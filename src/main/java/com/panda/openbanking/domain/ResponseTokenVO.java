@@ -13,6 +13,9 @@ public class ResponseTokenVO {
 	public String getBank_tran_id() {
 		return "M202202391U"+ (int)((Math.random()+1)*100000000);
 	}
+//	public String getBank_tran_id() {
+//		return bank_tran_id;
+//	}
 	public void setBank_tran_id(String bank_tran_id) {
 		this.bank_tran_id = bank_tran_id;
 	}

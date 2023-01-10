@@ -10,59 +10,13 @@
 <!-- 헤더 -->	
 <%@ include file="../include/header.jsp" %>
 <%@ include file="../include/css.jsp" %>
+
 <script type="text/javascript">
-	
-	$(function(){
-		 $("button[name='button']").click(function(){
-		        var kind = $(this).val();       //버튼이 클릭 되었을 시, 개별 버튼의 값이 kind 변수에 담겨집니다.
-		        $.ajax({
-		            url : "/good/list/"+kind,
-		            type : "get",
-		            contentType:"application/json; charset:UTF-8",
-		            success : function(data){
-		                $('#auctions').empty(); // 성공 시, body부분에 data라는 html 문장들을 다 적용시킵니다.
-		                $(data).each(function(index,item) {
-		                $('#auctions').append("<div class='col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women' style='position: absolute; left: 0%; top: 0px;'>"
-						+"<div class='block2'>"
-						+"<div class='block2-pic hov-img0'>"
-						+"<img src='/resources/images/product-15.jpg' alt='IMG-PRODUCT'>"
-						+"</div>"
-						+"<div class='block2-txt flex-w flex-t p-t-14'>"
-						+"<div class='block2-txt-child1 flex-col-l'>"
-						+"<a href='/auction/a_read?auction_no=${avo.auction_no }&user_no=${avo.user_no}' class='stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6'>"
-						+"${avo.auction_title }"
-						+"</a>"
-						+"<span class='stext-105 cl3'>"
-						+"현재 <fmt:formatNumber value='${avo.auction_bid }'/>원"
-						+"</span>"
-						+"<span class='stext-105 cl3'>"
-						+getDate('${avo.auction_cdate.toString().substring(0,10)}','${avo.auction_date.toString().substring(0,10)}')
-						+"</span>"
-						+"</div>"
-						+"<div class='block2-txt-child2 flex-r p-t-3'>"
-						+"<a href='#' class='btn-addwish-b2 dis-block pos-relative js-addwish-b2'>"
-						+"<img class='icon-heart1 dis-block trans-04' src='/resources/images/icons/icon-heart-01.png' alt='ICON'>"
-						+"<img class='icon-heart2 dis-block trans-04 ab-t-l' src='/resources/images/icons/icon-heart-02.png' alt='ICON'>"
-						+"</a>"
-						+"</div>"
-						+"</div>"
-						+"</div>"
-					+"</div>");
-		                });
-		            },
-		            error : function(data){
-		                alert('error');
-		            }//error
-		        })//ajax
-		    });
-		
-	});
-	
 	function getDate(x,y) {
 		var date1 = new Date(x).getTime();
 		var date2 = new Date(y).getTime();
 		
-		return ("남은 "+(date1-date2)/(1000*60*60*24)+"일");
+		document.write("남은 "+(date1-date2)/(1000*60*60*24)+"일");
 	}
 	
 </script>
@@ -75,24 +29,17 @@
 <section class="bg0 p-t-75 p-b-120" style="align-content:center;">	
 	<div class="container">
 	<div class="flex-w flex-sb-m p-b-52">
-		<div class="flex-w flex-l-m filter-tope-group m-tb-10">
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1"
-						    data-filter="*" name="button" value="all">All</button>
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
-						    data-filter=".machine" name="button" value="machine">전자기기</button>
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
-						    data-filter=".beauty" name="button" value="beauty">의류/뷰티/잡화</button>
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
-						    data-filter=".kitchen" name="button" value="kitchen">생활가전/주방</button>
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
-						    data-filter=".interior" name="button" value="interior">인테리어/가구</button>
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
-						    data-filter=".book" name="button" value="book">도서/티켓/교환권</button>
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
-						    data-filter=".food" name="button" value="food">식품</button>
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
-						    data-filter=".etc" name="button" value="etc">기타 중고물품</button>
-		</div>
+	<div class="filter-tope-group" align="center" style="margin-top: 0px;">
+		<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*"><b>All</b></button>
+		<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".전자기기"><b>전자기기</b></button>
+		<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".의류"><b>의류</b></button>
+		<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".생활가전"><b>생활가전</b></button>
+		<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".인테리어"><b>인테리어</b></button>
+		<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".도서"><b>도서</b></button>
+		<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".교환권"><b>교환권</b></button>
+		<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".식품"><b>식품</b></button>
+		<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".기타중고물품"><b>기타 중고물품</b></button>
+	</div>
 	
 		<div class="flex-w flex-c-m m-tb-10">
 			<div class="col ml-2 pr-2">
@@ -103,12 +50,13 @@
                 </select>
             </div>
             <div class="col pl-0 mr-5">
-                <select class="form-select form-select-sm border-0 text-muted" v-model.number="sort" @change="updateList">
+                <select class="form-select form-select-sm border-0 text-muted" id="flag" 
+                		v-model.number="sort" @change="updateList">
                     <option value="0">최신 등록순</option>
                     <option value="1">입찰가&#8593;순</option>
                     <option value="2">입찰가&#8595;순</option>
                     <option value="3">마감 임박순</option>
-                    <option value="4">우수 판매자순</option>
+                    <option value="4">조회수순</option>
                 </select>
             </div>
 	
@@ -133,29 +81,34 @@
 	
 	<div id="auctions" class="row isotope-grid" style="position: relative; height: 4141.62px;">
 				<c:forEach var="avo" items="${auctionList }">
-					<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women" style="position: absolute; left: 0%; top: 0px;">
+					<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item ${avo.auction_category}" style="position: absolute; left: 0%; top: 0px;">
 						<!-- Block2 -->
 						<div class="block2">
 							<div class="block2-pic hov-img0">
-								<img src="/resources/images/product-15.jpg" alt="IMG-PRODUCT">
+								<a href="/auction/a_read?auction_no=${avo.auction_no }&user_no=${avo.user_no}">
+								<img src="/resources/images/product-15.jpg" alt="IMG-PRODUCT"></a>
 							</div>
 	
 							<div class="block2-txt flex-w flex-t p-t-14">
 								<div class="block2-txt-child1 flex-col-l ">
-									<a href="/auction/a_read?auction_no=${avo.auction_no }&user_no=${avo.user_no}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									<a href="/auction/a_read?auction_no=${avo.auction_no }&user_no=${avo.user_no}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6" 
+									style="font-weight:bold; font-size:17px; color:darkslategray;">
 										${avo.auction_title }
 									</a>
 	
-									<span class="stext-105 cl3">
-										현재 <fmt:formatNumber value="${avo.auction_bid }"/>원
+									<span class="stext-105 cl3" style="font-size:17px; color:darkslategray;">
+										현재 <span style="color:#28a745;"><fmt:formatNumber value="${avo.auction_bid }"/></span>원
 									</span>
 									<span class="stext-105 cl3">
 										 <script>getDate('${avo.auction_cdate.toString().substring(0,10)}','${avo.auction_date.toString().substring(0,10)}');</script>
 									</span>
+									<span class="stext-105 cl3" style="color:gray; font-size:13px;">
+										조회수 ${avo.auction_viewcount }회
+									</span>
 								</div>
 								
 	
-								<div class="block2-txt-child2 flex-r p-t-3">
+								<div class="block2-txt-child2 flex-r p-t-3" id="${avo.auction_no}">
 									<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
 										<img class="icon-heart1 dis-block trans-04" src="/resources/images/icons/icon-heart-01.png" alt="ICON">
 										<img class="icon-heart2 dis-block trans-04 ab-t-l" src="/resources/images/icons/icon-heart-02.png" alt="ICON">
@@ -165,8 +118,26 @@
 						</div>
 					</div>
 	
-				  </c:forEach>
-				</div>
+				</c:forEach>
+	</div>
+	</div>
+	
+	<div class="box-footer clearfix">
+		<ul class="pagination pagination-sm no-margin pull-right">
+			<c:if test="${pvo.prev }">
+				<li><a href="/auction/listPage?page=${pvo.startPage-1}">«</a></li>
+			</c:if>
+			
+			<c:forEach var="idx" begin="${pvo.startPage }" end="${pvo.endPage }">
+				<li 
+					<c:out value="${idx==pvo.cri.page?'class=active':'' }"/>
+				><a href="/auction/listPage?page=${idx }">${idx }</a></li>
+			</c:forEach>
+			
+			<c:if test="${pvo.next }">
+				<li><a href="/auction/listPage?page=${pvo.endPage+1}">»</a></li>
+			</c:if>	
+		</ul>
 	</div>	
 </section>
 			
@@ -175,8 +146,22 @@
 		if(result == 'creatOK') {
 			alert("상품등록완료");
 		}
+		if (result == 'modOK') {
+			alert(" 글 수정 완료! ")
+		}
+		if (result == 'removeOK') {
+			alert(" 글 삭제 완료! ")
+		}
 	</script>
 	
+	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script>
+		$("#flag").val("0").prop("selected",true);
+		$("#flag").val("1").prop("selected",true);
+		$("#flag").val("2").prop("selected",true);
+		$("#flag").val("3").prop("selected",true);
+		$("#flag").val("4").prop("selected",true);
+	</script> -->
 			
 <br><br><br><br><br><br>
 <!--   푸터 -->

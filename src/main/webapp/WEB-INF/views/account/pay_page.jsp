@@ -64,7 +64,7 @@
 				<input type="text" readonly class="address" value="" placeholder="주소를 검색해주세요."> 
 				<input type="button" class="address-search" value="주소검색"> 
 				<input type="text" class="detail-address" placeholder="세부주소를 입력해주세요."> 
-				<input type="text" class="post-message" placeholder="배송 시 요청사항(선택)">
+				<input type="text" class="post-message" placeholder="배송 시 요청사항(선택)" value="">
 				<img class="message-option" src="/resources/images/icons/updown.png">
 				<div class="massage-option-sel">
 				<!-- 4809 투명도 제거하기 -->
@@ -97,7 +97,6 @@
 						<div>${postprices }원</div>
 						<div>
 							<input type="text" readonly value="0원" class="coinprice">
-<!-- 							<p class="coinwon2">원</p> -->
 						</div>
 					</div>
 				</div>
@@ -107,7 +106,32 @@
 				</div>
 				<div class="fareinfo">안전결제 수수료 : 결제금액의 1%</div>
 			</div>
-			<div class="body-6"></div>
+			<div class="body-6">
+				<p class="body-6-1">결제 수단</p>
+				<div class="body-6-2">
+					<input type="radio" class="easy-pay" name="pay" checked> <i class="easy-pay-1">PANDA 간편결제</i>
+					<div class="easy-pay-1-1">
+						<div class="easy-pay-img"><img src="/resources/images/icons/pay.png"></div>
+						<div class="easy-pay-info">
+							<div>카드 / 계좌 결제 시</div>
+							<div>판다코인 최대 0.5% / 1% 적립</div>
+							<div class="easy-pay-division">NH농협 계좌로 5만원 이상 결제 시</div>
+							<div>2000P 추가 적립(월 1회)</div>
+							<div><input type="button" value="카드/계좌 등록하고 혜택받기"></div>
+						</div>
+					</div>
+					<input type="radio" class="other-pay" name="pay" > <i class="other-pay-1">다른 결제 수단</i>
+					<input type="text" readonly class="other-pay-sel" placeholder="결제수단을 등록해주세요">
+					<input type="button" class="other-pay-selsup" value="등록">
+					<input type="checkbox" class="other-pay-cookie"><p class="other-pay-cookie-1">결제수단을 다음에도 사용</p>
+				</div>
+				<div class="body-7">
+					<input type="checkbox" class="pay-terms">
+					<p class="pay-terms-info">개인정보 제 3자 제공동의와 결제대행 서비스 이용약관에 동의합니다.</p>
+					<p class="pay-terms-detail">자세히보기</p>
+				</div>
+				<input type="button" value="결제하기" class="pay-submit">
+			</div>
 			
 		</div>
 

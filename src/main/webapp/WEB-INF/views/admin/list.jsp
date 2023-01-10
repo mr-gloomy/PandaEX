@@ -28,20 +28,25 @@
 
 	<div class="flex-w flex-sb-m p-b-52">
 		<div class="flex-w flex-l-m filter-tope-group m-tb-10">
+		
+		
+			<form role="form">
+			
+				<button
+					class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1"
+					name="button" value="all" id="btnA">전체</button>
+	
+				<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
+					name="button" value="notice" id="btnN">공지사항</button>
+	
+				<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
+					name="button" value="event" id="btnE">이벤트</button>
+	
+				<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
+					name="button" value="donate" id="btnD">기부문의</button>
+				
+			</form>
 
-
-			<button
-				class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1"
-				name="button" value="all" id="btnA">전체</button>
-
-			<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
-				name="button" value="notice" id="btnN">공지사항</button>
-
-			<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
-				name="button" value="event" id="btnE">이벤트</button>
-
-			<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
-				name="button" value="donate" id="btnD">기부문의</button>
 
 		</div>
 
@@ -375,13 +380,28 @@
 </script>
 
 <script type="text/javascript">
-		$(document).ready(function() {
-			$('button[name=button]').on('click', function() {
-				var cate = $("button[name=button]").val();
+	$(document).ready(function(){
+		
+		var formObj=$("form[role='form']");
+		
+		$("#btnA").on('click', function() {
+			
+			formObj.attr("action","/admin/list");			
+			formObj.attr("method","get");
+			formObj.submit();
+			
+		});
+		
+		
+		
+	});
+	/* 	$(document).ready(function() {
+			$("#btnA").on('click', function() {
+				console.log($("#btnA").val());
 				$.ajax({
 					type:"get",
 					url:"/admins/list",
-					data:{category:cate},
+					data:{category:$("#btnA").val()},
 					success:function(data){
 						alert('성공');
 						console.log(data);
@@ -397,7 +417,7 @@
 				
 			});
 
-		});
+		}); */
 	</script>
 
 

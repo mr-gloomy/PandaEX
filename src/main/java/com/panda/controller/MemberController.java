@@ -1,5 +1,6 @@
 package com.panda.controller;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 
@@ -20,8 +21,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.panda.domain.KakaoVO;
 import com.panda.domain.MemberVO;
+import com.panda.domain.ReportVO;
 import com.panda.service.MemberService;
 
 @Controller
@@ -79,29 +80,30 @@ public class MemberController {
 	
 	
 	
-		// GET 방식 - /members/ckID + 데이터
-		// 아이디 정보를 전달받아서 서비스에서 해당아이디가 중복인지 여부판단
-		@RequestMapping(value = "/ckID",method = RequestMethod.GET )
-		public String checkID(MemberVO vo,
-				 @ModelAttribute("user_id") String user_id) throws Exception{
-			mylog.debug(" checkID() 호출 ");
-			mylog.debug(vo+"");
-			mylog.debug(user_id+"");
-			
-			
-			MemberVO checkVO = service.getMember(user_id);
-			mylog.debug(checkVO+"");
-			
-			if(checkVO ==null) {
-				//디비에 정보가 없음 -> 해당 아이디 사용 가능 
-				return "OK";
-						
-			}else {
-				//디비에 정보가 있음 -> 해당 아이디를 사용 x 
-				return "NO";
-			}
-		}
+//		// GET 방식 - /members/ckID + 데이터
+//		// 아이디 정보를 전달받아서 서비스에서 해당아이디가 중복인지 여부판단
+//		@RequestMapping(value = "/ckID",method = RequestMethod.GET )
+//		public String checkID(MemberVO vo,
+//				 @ModelAttribute("user_id") String user_id) throws Exception{
+//			mylog.debug(" checkID() 호출 ");
+//			mylog.debug(vo+"");
+//			mylog.debug(user_id+"");
+//			
+//			
+//			MemberVO checkVO = service.getMember(user_id);
+//			mylog.debug(checkVO+"");
+//			
+//			if(checkVO ==null) {
+//				//디비에 정보가 없음 -> 해당 아이디 사용 가능 
+//				return "OK";
+//						
+//			}else {
+//				//디비에 정보가 있음 -> 해당 아이디를 사용 x 
+//				return "NO";
+//			}
+//		}
 		
+
 	//로그인 post
 	@PostMapping(value="/login")
 	public String loginPOST(String user_id, MemberVO vo, HttpServletRequest request, Model model) throws Exception{
@@ -166,6 +168,7 @@ public class MemberController {
 			// 위 코드는 session객체에 담긴 정보를 초기화 하는 코드.
 			session.setAttribute("user_id", userInfo.get("k_name"));
 			session.setAttribute("user_email", userInfo.get("k_email"));
+			session.setAttribute("kakao", "1");
 			// 위 2개의 코드는 닉네임과 이메일을 session객체에 담는 코드
 			// jsp에서 ${sessionScope.kakaoN} 이런 형식으로 사용할 수 있다.
 		    
@@ -173,7 +176,6 @@ public class MemberController {
 			
 			return "main/index";
 	    	}
-	    
 		
 	
 	//로그아웃
@@ -183,5 +185,63 @@ public class MemberController {
 		return "/main/index";
 	}
 	
+	@PostMapping("/report")
+	public void reportUser(ReportVO vo, HttpServletResponse response) throws Exception {
+		
+		service.insertRep(vo);
+		
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out=response.getWriter();
+		out.println("<script>");
+		out.println("alert('신고 완료!');");
+		out.println("history.back()");
+		out.println("</script>");
+		out.close();
+		
+	}
+	
+	// 아이디 찾기
+		@RequestMapping(value="/findId",method=RequestMethod.GET)
+		public String findIdGET() throws Exception {
+			mylog.info("findIdGET() 호출");
+					
+			return "member/searchID";
+		}
+				
+		@RequestMapping(value="/findId",method=RequestMethod.POST)
+		public String findIdPOST(MemberVO vo, Model model) throws Exception {
+			mylog.info("findIdPOST(MemberVO vo, Model model) 호출");
+					
+			MemberVO findIdVo = service.findId(vo);
+			// System.out.println(findIdVo.getUser_id());
+					
+			if(findIdVo == null) {
+				model.addAttribute("check",1);
+					return "/member/findError";
+			}else {
+				model.addAttribute("check", 0);
+				model.addAttribute("id", findIdVo.getUser_id());
+				return "/member/searchID";
+			}
+					
+		}
+				
+		// 아이디 결과
+		@RequestMapping(value="/resultId", method=RequestMethod.GET)
+		public String resultIdGET(HttpServletRequest request,Model model, @RequestParam(required=false,value="user_name") String user_name, @RequestParam(required=false,value="user_tel") String user_tel, MemberVO vo) throws Exception{
+					
+			vo.setUser_name(user_name);
+			vo.setUser_tel(user_tel);
+			MemberVO findId = service.findId(vo);
+					
+					
+			model.addAttribute("searchVO", findId);
+					
+					
+			return "member/searchID";
+		}
+				
+		
+
 	
 }

@@ -13,6 +13,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.panda.domain.KakaoVO;
 import com.panda.domain.MemberVO;
+import com.panda.domain.ReportVO;
 
 
 public interface MemberService {
@@ -43,6 +44,12 @@ public interface MemberService {
 		int updateMailAuth(MemberVO vo) throws Exception;
 		int emailAuthFail(String user_id) throws Exception;
 
-		
+		// 아이디 찾기
+		public MemberVO findId(MemberVO vo) throws Exception;
+//
+//		//비밀번호 찾
+//		public void findPw(String user_id, String user_email, MemberVO vo) throws Exception;
+
+		public void insertRep(ReportVO vo) throws Exception;
 
 }
