@@ -73,12 +73,7 @@ function CountDownTimer(dt, id) {
 
 </head>
 <body>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
+	<br><br><br><br><br><br>
 <%-- 	${avooo } --%>
 <%-- 		${avo } --%>
 <%-- 		${avo1 } --%>
@@ -197,7 +192,7 @@ function CountDownTimer(dt, id) {
 						</div>
 					</div>
 					
-					<c:if test="${sessionScope.user_id eq avooo.user_id }">
+					<c:if test="${sessionScope.user_id eq avooo.user_id || sessionScope.user_id eq 'admin' }">
 					<div class="row">
 						<div class="col p-0">
 							<a class="btn btn-info btn-lg btn-block py-3"
@@ -214,11 +209,11 @@ function CountDownTimer(dt, id) {
 					</div>
 					</c:if>
 					
-					<c:if test="${sessionScope.user_id ne avooo.user_id }">
+					<c:if test="${sessionScope.user_id ne avooo.user_id && sessionScope.user_id ne 'admin'}">
 					<div class="row">
 						<div class="col p-0">
 							<a class="btn btn-info btn-lg btn-block py-3"
-								href="" role="button"><i
+								onclick="window.open('/main/chat?u=${avooo.user_id}&a=${param.auction_no}','chat01','width=600,height=600')" href="#" role="button"><i
 								class="fa-solid fa-comments-dollar pr-2"></i> 1:1 채팅하기  </a>
 						</div>
 						<div class="col">
@@ -440,30 +435,7 @@ function CountDownTimer(dt, id) {
 <div class="modal" id="myModal">
   <div class="modal-dialog">
     <div class="modal-content" style="width:80%;">
-
-<script type="text/javascript">
-	$(document).ready(function(){
-		var formObj = $("form[role='form']");
-		console.log("formObj : "+formObj);
-		
-		//경매취소(삭제) 버튼
-		$("#sysy").click(function(){
-			formObj.attr("action", "/auction/a_remove");
-			formObj.submit();
-		});
-		
-		//입찰하기 버튼
-		$("#updateBid").click(function(){
-			formObj.attr("action", "/auction/a_bid");
-			formObj.submit();
-		});
-	});
-</script>
-
-
-
-<style scoped="">
-      <!-- Modal Header -->
+<!-- Modal Header -->
       <div class="modal-header">
         <h4 class="modal-title">신고하기</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -495,7 +467,29 @@ function CountDownTimer(dt, id) {
     </div>
   </div>
 </div>
-		<style scoped="">
+<script type="text/javascript">
+	$(document).ready(function(){
+		var formObj = $("form[role='form']");
+		console.log("formObj : "+formObj);
+		
+		//경매취소(삭제) 버튼
+		$("#sysy").click(function(){
+			formObj.attr("action", "/auction/a_remove");
+			formObj.submit();
+		});
+		
+		//입찰하기 버튼
+		$("#updateBid").click(function(){
+			formObj.attr("action", "/auction/a_bid");
+			formObj.submit();
+		});
+	});
+</script>
+
+
+
+      
+<style scoped="">
 .carousel-item img {
 	object-fit: cover;
 	height: 26em;

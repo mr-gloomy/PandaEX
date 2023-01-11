@@ -36,13 +36,6 @@ public interface AuctionDAO {
 	// 경매 상품 찜 업데이트
 	public Integer updateLike(AuctionVO avo) throws Exception;
 	
-	// 페이징 처리 구현된 리스트 조회
-	public List<AuctionVO> getListPage(Integer page) throws Exception;
-	public List<AuctionVO> getListPage(Criteria cri) throws Exception;
-	
-	// 전체 게시판 글 개수
-	public int totalCnt() throws Exception;
-	
 	// 입찰하기
 	public Integer updateBid(AuctionVO avo) throws Exception;
 	

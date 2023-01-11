@@ -107,32 +107,7 @@ public class AuctionDAOImpl implements AuctionDAO{
 		mylog.debug("updateLike(avo)");
 		return sqlSession.update(NAMESPACE+".updateLike", avo);
 	}
-
 	
-	// 페이징 처리 구현된 리스트 조회
-	@Override
-	public List<AuctionVO> getListPage(Integer page) throws Exception {
-		//페이지 정보 계산
-		if(page<0) {
-			page=1;
-		}
-		page = (page-1)*10;
-		return sqlSession.selectList(NAMESPACE+".listPage", page);
-	}
-
-	@Override
-	public List<AuctionVO> getListPage(Criteria cri) throws Exception {
-		mylog.debug("getListPage(Criteria cri) 페이징 처리");
-		return sqlSession.selectList(NAMESPACE+".listPage2", cri);
-	}
-
-	
-	// 전체 게시판 글 개수
-	@Override
-	public int totalCnt() throws Exception {
-		return sqlSession.selectOne(NAMESPACE+".countAuction");
-	}
-
 	
 	// 입찰하기
 	@Override

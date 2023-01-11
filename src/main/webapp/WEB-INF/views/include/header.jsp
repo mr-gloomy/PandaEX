@@ -96,16 +96,16 @@
 			<nav class="limiter-menu-desktop container">
 
 				<!-- Logo desktop -->
-				<a href="index.html" class="logo"> <img
+				<a href="/main/index" class="logo"> <img
 					src="/resources/images/icons/PANDA.png" alt="IMG-LOGO"> <span
-					class="maintext">PANDA</span>
+					class="maintext" onclick="javascript:location.href='/main/index'">PANDA</span>
 				</a>
 
 				<!-- Menu desktop -->
 				<div class="menu-desktop" style="padding-top: 13px;">
 					<ul class="main-menu">
-						<li class="active-menu"><a href="index.html">중고거래</a></li>
-						<li><a href="#">기부하기</a></li>
+						<li class="active-menu"><a href="/goods/list?s=0">중고거래</a></li>
+						<li><a href="/auction/a_list?s=0">기부하기</a></li>
 					</ul>
 				</div>
 
@@ -174,8 +174,14 @@
 									<span>${sessionScope.user_id}</span> 님 환영합니다
 								</p>
 								<ul>
-									<li><a class="my" href="#">내 정보<img class="right"
+									<c:if test="${!user_id.equals('admin') }">
+									<li><a class="my" href="/myinfo/myinfo">내 정보<img class="right"
 											src="/resources/images/icons/right-arrow.png"></a></li>
+									</c:if>
+									<c:if test="${user_id.equals('admin') }">
+									<li><a class="my" href="/admin/index">관리자페이지<img class="right"
+											src="/resources/images/icons/right-arrow.png"></a></li>
+									</c:if>
 									<li><a class="my" href="#">내 상점<img class="right"
 											src="/resources/images/icons/right-arrow.png"></a></li>
 								</ul>

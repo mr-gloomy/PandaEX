@@ -1,8 +1,9 @@
 package com.panda.controller;
 
+import java.io.File;
 import java.util.List;
 
-
+import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.panda.domain.AuctionVO;
@@ -36,6 +38,9 @@ public class AuctionController {
    @Inject
    private AuctionService service;
    
+   @Resource(name="uploadPath")
+   private String uploadPath;
+   
    //http://localhost:8080/auction/a_regist
    // 기부경매 상품 등록하기 GET
    @RequestMapping(value = "/a_regist", method = RequestMethod.GET)
@@ -46,7 +51,7 @@ public class AuctionController {
    
    // 기부경매 상품 등록하기 POST
    @RequestMapping(value = "/a_regist", method = RequestMethod.POST)
-   public String a_registPOST(AuctionVO avo, RedirectAttributes rttr) throws Exception {
+   public String a_registPOST(AuctionVO avo, MultipartFile file, RedirectAttributes rttr) throws Exception {
 	   mylog.debug("/auction/a_regist(POST) 호출");
 	   
 	   mylog.debug(avo.toString());
@@ -56,9 +61,25 @@ public class AuctionController {
 	   
 	   rttr.addFlashAttribute("result", "creatOK");
 	   
+	   //이미지 업로드
+	   String imgUploadPath = uploadPath + File.separator + "imgUpload";
+	   String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+	   String fileName = null;
+	   
+	   if(file != null) {
+			fileName =  UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath); 
+		} else {
+			fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
+		}
+
+		avo.setAuction_file(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+		avo.setAuction_image(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
+	   
+		service.insertAuction(avo);
+		
 	   return "redirect:/auction/a_list";
    }
-      
+   
    
    // http://localhost:8080/auction/a_list
    // 기부경매 전체 상품 목록
@@ -69,6 +90,8 @@ public class AuctionController {
 	  session.setAttribute("updateCheck", true);
 	  
 	  model.addAttribute("auctionList", service.getAuctionListAll(vo));
+	  
+	  
    }
    
    
@@ -177,36 +200,7 @@ public class AuctionController {
 //		model.addAttribute(service.updateLike(avo));
 		return service.updateLike(avo);
 	}
-	
-	
-	// http://localhost:8080/auction/listPage
-	// http://localhost:8080/auction/listPage?page=2
-	// http://localhost:8080/auction/listPage?perPageNum=20
-	// http://localhost:8080/auction/listPage?page=3&perPageNum=20
-	// 페이징 처리
-	@RequestMapping(value = "/listPage", method = RequestMethod.GET)
-	public String listPageGET(Criteria cri, HttpSession session, Model model, @ModelAttribute("result") String result) throws Exception {
-		
-		mylog.debug("/auction/listPage 호출");
-		
-		//글 조회수 체크 정보
-		session.setAttribute("updateCheck", true);
-		
-		List<AuctionVO> auctionList = service.getListPage(cri);
-		
-		// 페이징 처리 하단부 정보 준비 -> view 페이지로 전달
-		PageVO pvo = new PageVO();
-		pvo.setCri(cri);
-		
-		mylog.debug("totalCnt : "+service.totalCnt());
-		pvo.setTotalCount(service.totalCnt());
-		
-		model.addAttribute("pvo", pvo);
-		model.addAttribute("auctionList", auctionList);
-		
-		return "/auction/a_list";
-	}
-	
+
 	
 	// 입찰하기
 	@PostMapping(value = "/a_bid")

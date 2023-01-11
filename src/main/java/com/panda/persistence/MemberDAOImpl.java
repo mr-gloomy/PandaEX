@@ -1,6 +1,7 @@
 package com.panda.persistence;
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -145,6 +146,12 @@ public class MemberDAOImpl implements MemberDAO{
 		@Override
 		public void exit(MemberVO memberVO) throws Exception {
 			sqlSession.delete(NAMESPACE + ".exit", memberVO);
+		}
+
+		@Override
+		public List<MemberVO> getMemList(String id) throws Exception {
+			
+			return sqlSession.selectList(NAMESPACE+".getMemberList", id);
 		}
 
 

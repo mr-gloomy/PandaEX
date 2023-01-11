@@ -5129,6 +5129,7 @@ input[type=number] {
 }
 .myp_side .side_auction:hover,
 .myp_side .side_modify:hover,
+.myp_side .side_info:hover,
 .myp_side .side_pointcharge:hover,
 .myp_side .side_pointhistory:hover,
 .myp_side .side_drop:hover{
@@ -5138,9 +5139,18 @@ background: rgb(0 0 0 / 20%);
 	font-size: 20px;
     font-weight: bold;
 }
+.mypactive {
+	color: #2db32d;
+}
 
-
-
+.hide002,
+.hide003,
+.hide004,
+.hide005,
+.hide006{
+	height: 1000px;
+	display: none;
+}
 .remote1 {
 	width: 50px;
 	min-height: 120px;
@@ -5190,6 +5200,13 @@ background: rgb(0 0 0 / 20%);
 	width: 25px;
 	height: 25px;
 	margin-left: 13px;
+}
+.hide002,
+.hide003,
+.hide004,
+.hide005,
+.hide006{
+	display: none;
 }
 /* 추가 - 김태홍  손대면 안됍니다!!!!*/
 /*////////////////////////////////////////////////////////*/
