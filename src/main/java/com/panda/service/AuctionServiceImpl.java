@@ -87,24 +87,9 @@ public class AuctionServiceImpl implements AuctionService {
 	}
 
 	
-	// 페이징 처리 구현된 리스트 조회
-	@Override
-	public List<AuctionVO> getListPage(Criteria cri) throws Exception {
-		return adao.getListPage(cri);
-	}
-
-	
-	// 글 전체 개수
-	@Override
-	public int totalCnt() throws Exception {
-		return adao.totalCnt();
-	}
-
-	
 	// 입찰하기
 	@Override
 	public Integer updateBid(AuctionVO avo) throws Exception {
-		mylog.debug("service : updatebid 실행 @@@@");
 		return adao.updateBid(avo);
 	}
 	

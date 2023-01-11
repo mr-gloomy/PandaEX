@@ -89,7 +89,6 @@
 
 <!-- 본문 -->
 <form method="post" enctype="multipart/form-data">
-<%-- 	<input type="hidden" name="auction_date" value="${auction_date}"> --%>
 	
 	<div class="container">
 		<div>
