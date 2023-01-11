@@ -45,30 +45,6 @@
 		document.write("남은 "+(date1-date2)/(1000*60*60*24)+"일");
 	}
 </script>
-
-<script>
-	var pdate = $('.panda-date1');
-	$(function() {
-
-		function clock() {
-// 			const date = new Date();
-// 			const year = date.getFullYear();
-// 			const month = date.getMonth();
-// 			$(pdate).text(year + '년' + month + '월');
-
-			const h = date.getHours().toString().padStart(2, '0');
-			const min = date.getMinutes().toString().padStart(2, '0');
-			$(clockt).text(h + ':' + min);
-		}
-
-		function init() {
-			clock();
-			setInterval(clock, 1000);
-		}
-		init();
-	});
-</script>
-
 </head>
 <body>
 <br><br><br><br><br><br>
@@ -78,11 +54,12 @@
 	<div class="container">
 		<div class="box" style="padding:35px; width:100%; text-align:center; border:1px solid #e4e4e4; box-sizing:border-box; margin-bottom:45px;">
 			<div>
-			<div class="panda-date1">ddd</div>
 				<span style="display:block; margin-bottom:30px; font-size:48px; font-weight:bold;">
 					<img src="/resources/images/icons/icon_concentrated.png">해피판다</span>
-				<p style="font-size:20px; color:#666;"><span class="panda-date"></span>해피판다를 통해<br>
-					<span style="color:#28a745; font-weight:bold;">N</span>분이<br> 
+						<c:set var="today" value="<%=new Date()%>" />
+  					 	<fmt:formatDate var="today1" pattern="yyyy년 MM월" value="${today }"/>
+				<p style="font-size:20px; color:#666;"><span class="panda-date" style="font-weight:bold;">${today1 }</span><br> 해피판다를 통해<br>
+					<span style="color:#28a745; font-weight:bold;">N</span>분이 
 					<span style="color:#28a745; font-weight:bold;">N</span>원의 마음을<br> 모아주셨습니다.</p>
 			</div>
 		</div>

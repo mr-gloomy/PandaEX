@@ -60,7 +60,7 @@ public class AuctionServiceImpl implements AuctionService {
 	// 경매번호, 회원번호 정보 조회 
 	@Override
 	public Map getAuctions(AuctionVO vo) throws Exception {
-		mylog.debug("service auctions : "+vo);
+		mylog.debug("getAuctions : "+vo);
 		return adao.getAuctions(vo);
 	}
 	
