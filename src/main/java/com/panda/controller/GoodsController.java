@@ -20,9 +20,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -114,9 +116,11 @@ public class GoodsController {
 	
 	// 게시판 본문보기
 	@RequestMapping(value = "/read",method = RequestMethod.GET)
-	public void readGET(Model model, @RequestParam("goods_no") int goods_no, HttpSession session) throws Exception{
+	public void readGET(@ModelAttribute("goods_no") int goods_no, 
+							@ModelAttribute("user_no") int user_no, Model model, HttpSession session) throws Exception{
 		// 전달정보 (goods_no) 
 		mylog.debug("전달정보 (goods_no): " + goods_no);
+		mylog.debug("전달정보 (user_no): " + user_no);
 		
 		// 세션객체 
 		boolean isUpdateCheck = false;
@@ -136,9 +140,12 @@ public class GoodsController {
 		}
 		
 		// 서비스 -> DAO (특정 글번호에 해당하는 정보 가져오기)
-		GoodsVO vo = service.getGoods(goods_no);
+		GoodsVO vo = new GoodsVO();
+		vo.setGoods_no(goods_no);
+		vo.setUser_no(user_no);
+				
 		// 연결된 뷰페이지로 정보 전달(model)	
-		model.addAttribute("vo", vo);
+		model.addAttribute("vo", service.getGoods2(vo));
 		
 	}
 	
@@ -177,6 +184,25 @@ public class GoodsController {
 		
 		// 게시판 리스트로 이동(/goods/list)
 		return "redirect:/goods/list";
+	}
+	
+	// 상품 찜
+	@PostMapping(value="/list/{goods_no}")
+	@ResponseBody
+	public int updateLikePOST(@RequestParam("goods_no") int goods_no, 
+							  @RequestParam("goods_like") int goods_like,
+							  @RequestParam("user_no") int user_no, 
+							  HttpSession session, Model model) throws Exception {
+
+		mylog.debug("goods_no : " + goods_no);
+		
+		GoodsVO vo = new GoodsVO();
+		
+		vo.setGoods_no(goods_no);
+		vo.setUser_no(user_no);
+		vo.setGoods_like(goods_like);
+		
+		return service.updateLike(vo);
 	}
 
 }

@@ -89,11 +89,11 @@ $(document).ready(function(){
 			<!-- 판매현황 -->
 			<input type="text" name="goods_trade" value="판매중">
 			<!-- 작성자 -->
-<%-- 			<input type="hidden" name="${sessionScope.user_id}" value="user_id"> --%>
-			<!-- 주소 -->
-<!-- 			<input type="hidden" name="user_addr" value="user_addr"> -->
-<!-- 			<input type="hidden" name="user_area" value="user_area"> -->
-				
+<%-- 			<input type="hidden" name="${sessionScope.user_no}" value="user_no"> --%>
+<%-- 			<input type="hidden" name="${sessionScope.user_nick}" value="user_nick"> --%>
+<%-- 			<input type="hidden" name="${sessionScope.user_addr}" value="user_addr"> --%>
+<%-- 			<input type="hidden" name="${sessionScope.user_area}" value="user_area"> --%>
+			
 			<div class="card">
 				<div class="card-body">
 					<div>

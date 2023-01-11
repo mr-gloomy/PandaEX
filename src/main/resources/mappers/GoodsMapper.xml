@@ -8,8 +8,10 @@
 	
 	<!-- 상품 등록(user_nick 빠짐) -->
 	<insert id="createGoods">
-		insert into goods(goods_category,goods_title,goods_condition,goods_price,goods_discount,goods_detail,goods_refund,goods_trade,uploadFile,thumbnail)
-		values(#{goods_category},#{goods_title},#{goods_condition},#{goods_price},#{goods_discount},#{goods_detail},#{goods_refund},#{goods_trade},#{uploadFile},#{thumbnail})
+		insert into goods(goods_category,goods_title,goods_condition,goods_price,goods_discount,goods_detail,goods_refund,
+						  goods_trade,uploadFile,thumbnail)
+		values(#{goods_category},#{goods_title},#{goods_condition},#{goods_price},#{goods_discount},#{goods_detail},#{goods_refund},
+			   #{goods_trade},#{uploadFile},#{thumbnail})
 	</insert> 
 	
 	<!-- 상품 목록(all) -->
@@ -48,10 +50,27 @@
  		select * from goods where goods_no = #{goods_no}
  	</select>
  	
+ 	<!-- 사용자 정보 조회 -->
+	<select id="getUser" resultType="goodsVO">
+      select A.*, B.* 
+        from goods A join user B 
+          on A.user_no = B.user_no
+       where A.user_no = #{user_no}
+   	</select>
+   	
+   	<!-- 상품번호, 회원번호 사용한 글정보 조회 -->
+   	<select id="getGoods2" resultType="Map">
+   		select A.*, B.*
+   		  from goods A join user B
+   		    on A.user_no = B.user_no
+   		 where A.goods_no = #{goods_no}
+   		   and B.user_no = #{user_no}
+   	</select>
+ 	
  	<!-- 글정보 수정 -->
  	<update id="updateGoods">
  		update goods set goods_category=#{goods_category},goods_title=#{goods_title},goods_condition=#{goods_condition},goods_price=#{goods_price},
- 		goods_discount=#{goods_discount},goods_detail=#{goods_detail},goods_refund=#{goods_refund},uploadFile=#{uploadFile}
+ 						 goods_discount=#{goods_discount},goods_detail=#{goods_detail},goods_refund=#{goods_refund},goods_trade=#{goods_trade}
  		where goods_no=#{goods_no}
  	</update>
  	
@@ -65,6 +84,20 @@
    <select id="totalcount" resultType="int">
         select count(goods_no) from goods_no  
    </select>
-
+   
+   <!-- 경매 상품 찜 업데이트 -->
+	<update id="updateLike">
+	 update goods
+ 	 set goods_like = CASE WHEN #{goods_like}='0' THEN (select goods_like
+	                                                    from (select goods_like+1 goods_like 
+	    													  from goods 
+	    												      where goods_no = #{goods_no}) g)
+			         	 ELSE (select g.goods_like from (select goods_like-1 as goods_like 
+			            									   from goods 
+			            								      where goods_no = #{goods_no}) g)
+	 		                    END
+	where goods_no = #{goods_no}
+	</update>	
+	
 
 </mapper>
