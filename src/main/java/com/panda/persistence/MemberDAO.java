@@ -1,6 +1,7 @@
 package com.panda.persistence;
 
 import java.util.HashMap;
+import java.util.List;
 
 import com.panda.domain.MemberVO;
 import com.panda.domain.ReportVO;
@@ -22,6 +23,9 @@ public interface MemberDAO {
 
 			public void kakaoinsert(HashMap<String, Object> userInfo)throws Exception;
 			
+			// * 관리자용
+			//   전체회원 목록 조회
+			public List<MemberVO> getMemList(String id)throws Exception;
 			
 			//이메일인증~
 			int updateMailKey(MemberVO vo) throws Exception;
@@ -54,4 +58,7 @@ public interface MemberDAO {
 			public String pwCheck(int user_no)throws Exception;
 			
 			public int updatePwF(MemberVO vo) throws Exception;
+			
+			
+			
 }

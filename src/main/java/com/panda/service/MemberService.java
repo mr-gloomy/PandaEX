@@ -8,6 +8,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -48,6 +49,11 @@ public interface MemberService {
 
 		// 아이디 찾기
 		public MemberVO findId(MemberVO vo) throws Exception;
+		
+		
+		// * 관리자용
+		//   전체회원 목록 조회
+		public List<MemberVO> getMemList(String id)throws Exception;
 	
 		
 		

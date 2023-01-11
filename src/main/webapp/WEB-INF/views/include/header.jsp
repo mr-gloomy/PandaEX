@@ -174,8 +174,14 @@
 									<span>${sessionScope.user_id}</span> 님 환영합니다
 								</p>
 								<ul>
-									<li><a class="my" href="#">내 정보<img class="right"
+									<c:if test="${!user_id.equals('admin') }">
+									<li><a class="my" href="/myinfo/myinfo">내 정보<img class="right"
 											src="/resources/images/icons/right-arrow.png"></a></li>
+									</c:if>
+									<c:if test="${user_id.equals('admin') }">
+									<li><a class="my" href="/admin/index">관리자페이지<img class="right"
+											src="/resources/images/icons/right-arrow.png"></a></li>
+									</c:if>
 									<li><a class="my" href="#">내 상점<img class="right"
 											src="/resources/images/icons/right-arrow.png"></a></li>
 								</ul>
