@@ -1,6 +1,7 @@
 package com.panda.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -65,6 +66,13 @@ public class BoardServiceImpl implements BoardService {
 		
 		return dao.totalCnt();
 	}
+
+	@Override
+	public List<BoardVO> getBoardCate(Map<String, Object> map) throws Exception {
+		
+		return dao.getBoardCate(map);
+	}
+
 
 //	@Override
 //	public List<BoardVO> getBoardCate(Criteria cri, String category) {

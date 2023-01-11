@@ -1,6 +1,7 @@
 package com.panda.persistence;
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -103,6 +104,26 @@ public class MemberDAOImpl implements MemberDAO{
 			return sqlSession.selectOne(NAMESPACE + ".getMember", user_id);
 		}
 		
+		//비밀번호변경
+		@Override
+		public int updatePw(MemberVO vo) throws Exception {
+			return sqlSession.update(NAMESPACE +".pwUpdate", vo);
+		}
+		
+		@Override
+		public int updatePwF(MemberVO vo) throws Exception {
+			return sqlSession.update(NAMESPACE +".updatePw", vo);
+		}
+		
+		@Override
+		public String pwCheck(int user_no)throws Exception{
+			return sqlSession.selectOne(NAMESPACE+".pwCheck", user_no);
+		}
+		
+		
+		
+		
+		
 		// 마이 페이지 
 		@Override
 		public MemberVO getMembers(MemberVO memberVO) throws Exception {
@@ -125,6 +146,12 @@ public class MemberDAOImpl implements MemberDAO{
 		@Override
 		public void exit(MemberVO memberVO) throws Exception {
 			sqlSession.delete(NAMESPACE + ".exit", memberVO);
+		}
+
+		@Override
+		public List<MemberVO> getMemList(String id) throws Exception {
+			
+			return sqlSession.selectList(NAMESPACE+".getMemberList", id);
 		}
 
 

@@ -7,33 +7,27 @@
 	src="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.16/dist/sweetalert2.all.min.js"></script>
 
 <!-- 헤더 -->
-<jsp:include page="../include/header.jsp" />
-<!-- css -->
-<jsp:include page="../include/css.jsp" />
-<!-- remote -->
-<jsp:include page="../addon/remote.jsp" />
+<%@ include file="/WEB-INF/views/admin/include/header.jsp"%>
 
-
-<br>
-<br>
-<br>
-<br>
-<br>
-<%-- 	${cvo } --%>
 <!-- 글 내용 vo -->
 
 <!-- 제목창 윗부분 -->
-<p></p>
-<p class="stext-115 cl6 size-213 p-t-18">글 작성일 : ${cvo.regdate }</p>
 
 
+	<p class="stext-115 cl6 size-213 p-t-18">글 작성일 : ${cvo.regdate }</p>
 <!-- 글 내용 -->
 <div class="box box-warning">
 	<div class="box-header with-border">
-		<h3 class="box-title">공지사항</h3>
-		<div>
-		조회수 : ${cvo.viewcnt }
-		</div>
+		<h3 class="box-title">
+			<c:choose>
+				<c:when test="${cvo.category.equals('notice') }">공지사항</c:when>
+				<c:when test="${cvo.category.equals('event') }">이벤트</c:when>
+				<c:when test="${cvo.category.equals('donate') }">기부문의</c:when>
+			</c:choose>
+		</h3>
+		<div>조회수 : ${cvo.viewcnt }</div>
+		
+	
 	</div>
 
 	<div class="box-body">
@@ -52,7 +46,9 @@
 
 			<div class="form-group">
 				<label>내용</label>
-				<textarea class="form-control" rows="3" readonly>${cvo.content }</textarea>
+				  <textarea class="form-control" rows="5" name="content"
+				   style="width: 1469px; height: 287px;" readonly>${cvo.content }</textarea>
+				
 			</div>
 
 
@@ -63,8 +59,6 @@
 			<button type="submit" class="btn btn-block btn-success btn-lg"
 				id="btnR">삭제</button>
 			<!-- 본인글만 가능 -->
-
-
 			<button type="button" class="btn btn-block btn-success btn-lg"
 				id="btnL">목록</button>
 
@@ -166,5 +160,5 @@
 
 
 <!-- 푸터 -->
-<jsp:include page="../include/footer.jsp" />
+<%@ include file="/WEB-INF/views/admin/include/footer.jsp"%>
 

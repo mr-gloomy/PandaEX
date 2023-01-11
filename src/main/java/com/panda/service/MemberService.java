@@ -8,6 +8,9 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
@@ -46,10 +49,28 @@ public interface MemberService {
 
 		// 아이디 찾기
 		public MemberVO findId(MemberVO vo) throws Exception;
-//
-//		//비밀번호 찾
-//		public void findPw(String user_id, String user_email, MemberVO vo) throws Exception;
+		
+		
+		// * 관리자용
+		//   전체회원 목록 조회
+		public List<MemberVO> getMemList(String id)throws Exception;
+	
+		
+		
+		//비밀번호 이메일발송
+		public void sendEmail(MemberVO vo, String div) throws Exception;
 
+		//비밀번호 찾기
+		public void findPw(HttpServletResponse resp, MemberVO vo) throws Exception;
+		
+		public String pwCheck(int user_no)throws Exception;
+		public void updatePw(MemberVO vo)throws Exception;
+		
+		
 		public void insertRep(ReportVO vo) throws Exception;
+
+
+
+		
 
 }

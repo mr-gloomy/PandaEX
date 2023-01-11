@@ -3,6 +3,7 @@ package com.panda.persistence;
 import java.util.List;
 
 import com.panda.domain.GoodsVO;
+import com.panda.domain.SearchVO;
 
 public interface GoodsDAO {
 	
@@ -10,7 +11,7 @@ public interface GoodsDAO {
 	public void createGoods(GoodsVO vo) throws Exception;
 	
 	// 상품목록(All)
-	public List<GoodsVO> getGoodsListAll() throws Exception;
+	public List<GoodsVO> getGoodsListAll(SearchVO vo) throws Exception;
 	
 	// 상품 목록 조회수 1증가 
 	public void updateViewcnt(Integer goods_no) throws Exception;

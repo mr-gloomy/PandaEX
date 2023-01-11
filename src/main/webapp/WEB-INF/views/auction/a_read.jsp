@@ -82,11 +82,13 @@ function CountDownTimer(dt, id) {
 <%-- 	${avooo } --%>
 <%-- 		${avo } --%>
 <%-- 		${avo1 } --%>
-
+<%-- ${avooo.auction_no } --%>
 	<!-- 수정,삭제_경매번호 전달-->
 	<form role="form" method="post">
-		<input type="hidden" name="auction_no" value="${avo.auction_no }">
-		<input type="hidden" name="user_no" value="${avo1.user_no }">
+		<input type="hidden" name="auction_no" value="${avooo.auction_no }" > 
+		<input type="hidden" name="user_no" value="${avooo.user_no }">
+		<input type="hidden" name="auction_bid" value="${avooo.auction_bid }">
+		<input type="hidden" name="auction_cnt" value="${avooo.auction_cnt }">
 	</form>
 
 
@@ -99,26 +101,6 @@ function CountDownTimer(dt, id) {
  -->
 
 	<div class="container">
-		<!-- <script type="text/javascript">
-			$(document).ready(function(){
-			var formObj = $("form[role='form']");
-			console.log(formObj);
-			
-			//수정버튼
-			$(".btn-danger").click(function(){
-				formObj.attr("action","/auction/a_modify");
-				formObj.attr("method","get");
-				formObj.submit();
-			});
-			
-			//목록버튼
-			$(".btn-success").click(function(){
-				location.href="/auction/a_list";
-			});
-			});
-		</script> -->
-
-
 		<div class="container-fluid" id="app" data-v-app="">
 			<div class="row pt-5">
 				<span class="text-muted mr-3">카테고리</span><span
@@ -210,17 +192,17 @@ function CountDownTimer(dt, id) {
 								class="fa-solid fa-arrow-rotate-left"></i> 새로고침</span>
 						</div>
 						<div class="col-3 p-0 pl-2 mr-2 text-muted pointer"
-							data-bs-toggle="modal" data-bs-target="#reportModal">
+							data-toggle="modal" data-target="#myModal">
 							<i class="fa-solid fa-land-mine-on pl-3 pr-2"></i> 신고하기
 						</div>
 					</div>
 					
+					<c:if test="${sessionScope.user_id eq avooo.user_id }">
 					<div class="row">
 						<div class="col p-0">
 							<a class="btn btn-info btn-lg btn-block py-3"
-								href="" role="button"><i
-								class="fa-solid fa-comments-dollar pr-2"></i> 1:1 채팅 관리 </a>
-							<!--v-if-->
+								href="/auction/a_modify?auction_no=${avooo.auction_no }&user_no=${avooo.user_no}" role="button"><i
+								class="fa-solid fa-comments-dollar pr-2"></i> 경매 수정 </a>
 						</div>
 						<div class="col">
 							<button type="button"
@@ -228,10 +210,24 @@ function CountDownTimer(dt, id) {
 								data-bs-toggle="modal" data-bs-target="#cancelAuctionModal">
 								<i class="fa-solid fa-ban pr-2"></i> 경매 취소
 							</button>
-							<!--v-if-->
-							<!--v-if-->
 						</div>
 					</div>
+					</c:if>
+					
+					<c:if test="${sessionScope.user_id ne avooo.user_id }">
+					<div class="row">
+						<div class="col p-0">
+							<a class="btn btn-info btn-lg btn-block py-3"
+								href="" role="button"><i
+								class="fa-solid fa-comments-dollar pr-2"></i> 1:1 채팅하기  </a>
+						</div>
+						<div class="col">
+							<button type="button" class="btn btn-primary btn-lg btn-block py-3" id="startBidding" data-bs-toggle="modal" data-bs-target="#biddingModal">
+			                    <i class="fa-solid fa-gavel pr-2"></i> 입찰하기
+			                </button>
+		                </div>
+		             </div>  
+						</c:if>
 					
 				</div>
 			</div>
@@ -297,6 +293,8 @@ function CountDownTimer(dt, id) {
 					</div>
 				</div>
 			</div>
+			
+			
 			<div class="modal fade" id="biddingModal" tabindex="-1"
 				aria-labelledby="biddingModalLabel" aria-hidden="true">
 				<div class="modal-dialog modal-dialog-centered">
@@ -317,8 +315,8 @@ function CountDownTimer(dt, id) {
 										<label for="inputBid"> 입찰 가격을 입력해주세요 ( 입찰 단위 : <span
 											class="comma text-primary">1,000</span> 원 )
 										</label><input type="number" class="form-control" id="inputBid"
-											autocomplete="off" max="999999900"><small
-											class="form-text text-info pl-1">일만오천원</small>
+											autocomplete="off" max="999999900">
+											<small class="form-text text-info pl-1"></small>
 										<div class="invalid-feedback">최고 입찰가보다 높고, 입찰 단위에 부합하는
 											금액만 가능합니다.</div>
 									</div>
@@ -327,19 +325,18 @@ function CountDownTimer(dt, id) {
 							</div>
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary">입찰 단위만큼
-								올리기</button>
-							<button type="button" class="btn btn-info"
-								data-bs-dismiss="modal">즉시 낙찰하기</button>
-							<button type="button" class="btn btn-primary" id="insertBid"
+							<button type="button" class="btn btn-secondary"
+								data-bs-dismiss="modal">돌아가기</button>
+							<button type="button" class="btn btn-primary" id="updateBid"
 								data-bs-dismiss="modal">입찰하기</button>
-							<button type="button" class="btn btn-primary d-none"
-								id="blindBid" data-bs-dismiss="modal">입찰하기</button>
+<!-- 							<button type="button" class="btn btn-primary d-none" -->
+<!-- 								id="blindBid" data-bs-dismiss="modal">입찰하기</button> -->
 						</div>
-						<!--v-if-->
 					</div>
 				</div>
 			</div>
+			
+			
 			<div class="modal fade" id="failBiddingModal" aria-hidden="true"
 				aria-labelledby="failBiddingModalLable" tabindex="-1">
 				<div class="modal-dialog modal-dialog-centered">
@@ -383,6 +380,8 @@ function CountDownTimer(dt, id) {
 					</div>
 				</div>
 			</div>
+
+
 			<div class="modal fade" id="stopAuctionModal" aria-hidden="true"
 				aria-labelledby="stopAuctionModalLable" tabindex="-1"
 				style="display: none;">
@@ -429,54 +428,73 @@ function CountDownTimer(dt, id) {
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary"
 								data-bs-dismiss="modal">아니오</button>
-							<button type="button" class="btn btn-primary"
+							<button type="button" class="btn btn-primary" id="sysy" 
 								data-bs-dismiss="modal">예</button>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="modal fade" id="failCancleModal" aria-hidden="true"
-				aria-labelledby="failCancleModalLable" tabindex="-1">
-				<div class="modal-dialog modal-dialog-centered">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="failCancleModalLable">🥺 경매
-								취소/중지 실패</h5>
-							<button type="button" class="btn-close close"
-								data-bs-dismiss="modal">
-								<span aria-hidden="true">×</span>
-							</button>
-						</div>
-						<div class="modal-body">이미 낙찰된 경매이므로 경매를 취소하거나 중지할 수 없습니다.</div>
-					</div>
-				</div>
-			</div>
 		</div>
-		
-		<!-- for modal -->
-		<div class="modal fade" id="reportModal" aria-hidden="true" aria-labelledby="reportModalLable" tabindex="-1">
-			<div class="modal-dialog modal-dialog-centered">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="reportModalLable">&#129402; 경매 신고하기</h5>
-						<button type="button" class="btn-close close" data-bs-dismiss="modal">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-		        		경매 신고 이유를 알려주세요!
-		        		<input type="text" class="form-control mt-2" v-model="reportReason" autocomplete="off" maxlength="100" />
-		                <div class="text-right mt-1"><span class="text-primary">{{ reportCount }}</span> / 100</div>
-<!-- 		                <div class="text-right mt-1"><span class="text-primary">{{ reportCount }}</span> / 100</div> -->
-		      		</div>
-		            <div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">돌아가기</button>
-		                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" :disabled="reportReason == ''" @click="report">신고하기</button>
-		            </div>      		
-		    	</div>
-		  	</div>
-		</div>
+	</div>	
+	
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content" style="width:80%;">
 
+<script type="text/javascript">
+	$(document).ready(function(){
+		var formObj = $("form[role='form']");
+		console.log("formObj : "+formObj);
+		
+		//경매취소(삭제) 버튼
+		$("#sysy").click(function(){
+			formObj.attr("action", "/auction/a_remove");
+			formObj.submit();
+		});
+		
+		//입찰하기 버튼
+		$("#updateBid").click(function(){
+			formObj.attr("action", "/auction/a_bid");
+			formObj.submit();
+		});
+	});
+</script>
+
+
+
+<style scoped="">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">신고하기</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+      <form action="/member/reportA" method="post" id="frm">
+      	<input type="hidden" name="user_no" value="${param.user_no }">
+      	<input type="hidden" name="auction_no" value="${param.auction_no }">
+      	<input type="hidden" name="u_id" value="${user_id }">
+        <input type="text" name="rep_subject" placeholder="신고 제목" style="width:100%;"><br><br>
+        <select name="rep_sort" style="width:100%;">
+        	<option selected>신고 분류</option>
+        	<option value="1">욕설</option>
+        	<option value="2">거래에 문제가 있었어요!</option>
+        	<option value="3">기타</option>
+        </select><br><br>
+        <textarea rows="10" cols="10" style="width:100%;" name="rep_reason" placeholder="신고 사유"></textarea>
+        </form>
+      </div>
+		
+      <!-- Modal footer -->
+      <div class="modal-footer">
+      	<a href="#" class="btn btn-primary" onclick="document.getElementById('frm').submit();">신고하기</a>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
 		<style scoped="">
 .carousel-item img {
 	object-fit: cover;
@@ -541,6 +559,9 @@ to {
 
 
 	</div>
+	</div>
+	</div>
+	
 <br><br><br><br><br><br>
 <!--   푸터 -->
 <%@ include file="../include/footer.jsp"%>

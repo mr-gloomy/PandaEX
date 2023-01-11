@@ -7,8 +7,8 @@
 	
 	<!-- 경매 상품 등록 -->
 	<insert id="createAuction">
-		insert into auction (auction_category,auction_title,auction_price,auction_detail)
-		values (#{auction_category},#{auction_title},#{auction_price},#{auction_detail})
+		insert into auction (auction_category,auction_title,auction_price,auction_detail,auction_file,auction_image)
+		values (#{auction_category},#{auction_title},#{auction_price},#{auction_detail},#{auction_file},#{auction_image})
 	</insert>
 	
 	<!-- 경매 상품 전체 목록 -->
@@ -27,7 +27,7 @@
 			order by auction_bid asc
 		</if>
 		<if test="s==3">
-			order by auction_cdate asc
+			order by auction_cdate desc
 		</if>
 		<if test="s==4">
 			order by auction_viewcount desc
@@ -36,68 +36,69 @@
 	
 	<!-- 경매 상품 조회수 1증가 -->
 	<update id="updateViewcnt">
-		update auction set auction_viewcount = auction_viewcount+1 
-		where auction_no = #{auction_no}
+		update auction 
+		   set auction_viewcount = auction_viewcount+1 
+		 where auction_no = #{auction_no}
 	</update>
 	
 	<!-- 경매번호 사용한 글정보 조회  -->
 	<select id="getAuction" resultType="AuctionVO">
 		select * from auction 
-		where auction_no = #{auction_no}
+		 where auction_no = #{auction_no}
 	</select>
 	
 	<!-- 사용자 정보 조회 -->
 	<select id="getUser" resultType="AuctionVO">
-      SELECT A.*, B.* 
-      FROM auction A join user B 
-      on A.user_no = B.user_no
-      where A.user_no = #{user_no}
+      select A.*, B.* 
+        from auction A join user B 
+          on A.user_no = B.user_no
+       where A.user_no = #{user_no}
    	</select>
    	
    	<!-- 경매번호, 회원번호 사용한 글정보 조회 -->
    	<select id="getAuctions" resultType="Map">
    		select A.*, B.*
-   		from auction A join user B
-   		on A.user_no = B.user_no
-   		where A.auction_no = #{auction_no}
-   		and B.user_no = #{user_no}
+   		  from auction A join user B
+   		    on A.user_no = B.user_no
+   		 where A.auction_no = #{auction_no}
+   		   and B.user_no = #{user_no}
    	</select>
 	
 	<!-- 경매번호 사용한 글정보 수정 -->
 	<update id="updateAuction">
 		update auction
-		set auction_category=#{auction_category},auction_title=#{auction_title},
-			auction_price=#{auction_price},auction_detail=#{auction_detail}
-		where auction_no=#{auction_no}
+		   set auction_category=#{auction_category},auction_title=#{auction_title},
+			   auction_price=#{auction_price},auction_detail=#{auction_detail}
+		 where auction_no=#{auction_no}
 	</update>
 	
 	<!-- 경매번호 사용한 글 삭제 -->
 	<delete id="removeAuction">
 		delete from auction
-		where auction_no = #{auction_no}
+		 where auction_no = #{auction_no}
 	</delete>
 	
 	<!-- 경매 상품 찜 업데이트 -->
 	<update id="updateLike">
 		update auction
-  	    set auction_like = CASE WHEN #{auction_like}='0' THEN (select auction_like
-  	                                                             from (select auction_like+1 auction_like 
-  	    														         from auction 
-  	    														        where auction_no = #{auction_no}) a)
-					            ELSE (select a.auction_like from (select auction_like-1 as auction_like 
-					            									from auction 
-					            								   where auction_no = #{auction_no}) a)
-				           END
- 		where auction_no = #{auction_no}
+  	       set auction_like = CASE WHEN #{auction_like}='0' THEN (select auction_like
+  	                                                                from (select auction_like+1 auction_like 
+  	    														            from auction 
+  	    														           where auction_no = #{auction_no}) a)
+					               ELSE (select a.auction_like from (select auction_like-1 as auction_like 
+					            									   from auction 
+					            								      where auction_no = #{auction_no}) a)
+		 		                    END
+ 		 where auction_no = #{auction_no}
 	</update>
 	
 	<!-- 페이징처리 게시판 목록 -->
 	<select id="listPage" resultType="AuctionVO">
 		<![CDATA[
 			select * from auction
-			where auction_no>0
-			order by auction_no desc, auction_date desc
-			limit #{page},10
+			 where auction_no>0
+		  order by auction_no desc, auction_date desc
+			       limit #{page},10
 		]]>
 	</select>
 
@@ -105,16 +106,25 @@
 	<select id="listPage2" resultType="AuctionVO">
 	  <![CDATA[
 		select * from auction
-		where auction_no>0
-		order by auction_no desc, auction_date desc
-		limit #{pageStart},#{perPageNum}
+		 where auction_no>0
+      order by auction_no desc, auction_date desc
+		       limit #{pageStart},#{perPageNum}
 		]]>
 	</select>
 
 	<!-- 게시판 글 전체 개수 -->
 	<select id="countAuction" resultType="int">
 		select count(auction_date) 
-		from auction
+		  from auction
 	</select>
+	
+	<!-- 입찰하기 -->
+	<update id="updateBid" parameterType="com.panda.domain.AuctionVO">
+		update auction
+		   set auction_bid=#{auction_bid}, 
+		       auction_cnt=#{auction_cnt}+1
+		 where auction_no=#{auction_no} 
+	</update>
+	
 	
 </mapper>

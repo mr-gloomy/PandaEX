@@ -14,13 +14,13 @@
                 <!-- text input -->
                 <div class="form-group">
                   <label>제목 </label>
-                  <input type="text" class="form-control" placeholder="Enter ..." name="title">
+                  <input type="text" class="form-control" name="title">
                 </div>
 
                 <!-- textarea -->
                 <div class="form-group">
                   <label>글 내용 </label>
-                  <textarea class="form-control" rows="3" placeholder="Enter ..." name="content"></textarea>
+                 <textarea class="form-control" rows="5" name="content" style="width: 1469px; height: 287px;"></textarea>
                 </div>
 
                 <!-- select -->

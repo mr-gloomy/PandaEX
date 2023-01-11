@@ -1,6 +1,5 @@
 package com.panda.service;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +29,7 @@ public interface BoardService {
 	public Integer totalCnt()throws Exception;
 	
 	// 글 목록조회(카테고리)
-//	public HashMap<String, String> getBoardCate(Criteria cri, String category);
+	public List<BoardVO> getBoardCate(Map<String, Object> map)throws Exception;
 	
 	
 }

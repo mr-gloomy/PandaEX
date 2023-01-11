@@ -74,9 +74,9 @@ public class AuctionServiceImpl implements AuctionService {
 	
 	//경매 상품 글 삭제
 	@Override
-	public Integer removeAuction(Integer auction_no) throws Exception {
-		mylog.debug("removeAuction(Integer auction_no) 호출");
-		return adao.removeAuction(auction_no);
+	public Integer removeAuction(AuctionVO avo) throws Exception {
+		mylog.debug("removeAuction(AuctionVO avo) 호출");
+		return adao.removeAuction(avo);
 	}
 
 	
@@ -99,10 +99,14 @@ public class AuctionServiceImpl implements AuctionService {
 	public int totalCnt() throws Exception {
 		return adao.totalCnt();
 	}
+
 	
-	
-	
-	
+	// 입찰하기
+	@Override
+	public Integer updateBid(AuctionVO avo) throws Exception {
+		mylog.debug("service : updatebid 실행 @@@@");
+		return adao.updateBid(avo);
+	}
 	
 	
 	

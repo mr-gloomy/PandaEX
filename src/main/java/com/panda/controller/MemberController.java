@@ -3,8 +3,10 @@ package com.panda.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.Random;
 
 import javax.inject.Inject;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -12,17 +14,25 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.panda.domain.AuctionVO;
 import com.panda.domain.MemberVO;
 import com.panda.domain.ReportVO;
+import com.panda.service.AuctionService;
 import com.panda.service.MemberService;
 
 @Controller
@@ -36,10 +46,13 @@ public class MemberController {
 	
 	@Inject
 	private MemberService service;
-
+	
+	@Inject
+	private AuctionService aService;
+	
 	@Autowired
 	private HttpSession session;
-	
+	HttpServletResponse response;
 	
 	//http://localhost:8080/main/index
 	
@@ -79,29 +92,6 @@ public class MemberController {
 	}
 	
 	
-	
-//		// GET 방식 - /members/ckID + 데이터
-//		// 아이디 정보를 전달받아서 서비스에서 해당아이디가 중복인지 여부판단
-//		@RequestMapping(value = "/ckID",method = RequestMethod.GET )
-//		public String checkID(MemberVO vo,
-//				 @ModelAttribute("user_id") String user_id) throws Exception{
-//			mylog.debug(" checkID() 호출 ");
-//			mylog.debug(vo+"");
-//			mylog.debug(user_id+"");
-//			
-//			
-//			MemberVO checkVO = service.getMember(user_id);
-//			mylog.debug(checkVO+"");
-//			
-//			if(checkVO ==null) {
-//				//디비에 정보가 없음 -> 해당 아이디 사용 가능 
-//				return "OK";
-//						
-//			}else {
-//				//디비에 정보가 있음 -> 해당 아이디를 사용 x 
-//				return "NO";
-//			}
-//		}
 		
 
 	//로그인 post
@@ -135,6 +125,9 @@ public class MemberController {
 
 		}else {
 			//return "redirect:/member/login";
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out=response.getWriter();
+			out.println("로그인 실패 삐빅");
 			resultURI = "redirect:/main/index";
 		}
 		
@@ -190,6 +183,26 @@ public class MemberController {
 		
 		service.insertRep(vo);
 		
+		
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out=response.getWriter();
+		out.println("<script>");
+		out.println("alert('신고 완료!');");
+		out.println("history.back()");
+		out.println("</script>");
+		out.close();
+		
+	}
+	
+	@PostMapping("/reportA")
+	public void reportUserA(ReportVO vo, HttpServletResponse response,int user_no) throws Exception {
+		
+		AuctionVO mVo = aService.getUser(user_no);
+		
+		vo.setRep_u_id(mVo.getUser_id());
+		
+		service.insertRep(vo);
+		
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out=response.getWriter();
 		out.println("<script>");
@@ -242,6 +255,71 @@ public class MemberController {
 		}
 				
 		
+		/* 비밀번호 찾기 */
+		@RequestMapping(value = "/findpw", method = RequestMethod.GET)
+		public String findPwGET() throws Exception{
+			mylog.info("findPwGET() 호출");
+			
+			return "main/index";
+		}
 
-	
+		@RequestMapping(value = "/findpw", method = RequestMethod.POST)
+		public String findPwPOST(@ModelAttribute MemberVO vo, HttpServletResponse response) throws Exception{
+			mylog.info("findPwPOST() 호출");
+			MemberVO vo2 = service.getMember(vo.getUser_id());
+			vo.setUser_no(vo2.getUser_no());
+			service.findPw(response, vo);
+			
+			return "main/index";
+		}
+		
+		
+//		비밀번호 변경 view
+		@GetMapping("/pwUpdate")
+		public void pwUpdate(MemberVO vo)throws Exception{
+
+		}
+		
+		@PostMapping("/pwUpdate")
+		public String pwUpdateP(MemberVO vo, RedirectAttributes rttr,HttpServletResponse response,String pw2)throws Exception{
+			mylog.info("pwUpdate 왔음");
+			rttr.addFlashAttribute("msg", "정보 수정이 완료되었습니다. 다시 로그인해주세요.");
+			if (service.pwCheck(vo.getUser_no())!=null) {
+				if (vo.getUser_pw().equals(service.pwCheck(vo.getUser_no()))) {
+					vo.setUser_pw(pw2);
+					service.updatePw(vo);
+				}
+				else {
+					response.setContentType("text/html; charset=UTF-8");
+					PrintWriter out=response.getWriter();
+					out.println("<script>");
+					out.println("alert('회원정보 없음!');");
+					out.println("history.back()");
+					out.println("</script>");
+					out.close();
+				}
+			}
+//			else {
+//				response.setContentType("text/html; charset=UTF-8");
+//				PrintWriter out=response.getWriter();
+//				out.println("<script>");
+//				out.println("alert('잘못된 임시 비밀번호입니다!');");
+//				out.println("history.back()");
+//				out.println("</script>");
+//				out.close();
+//			}
+			return "/main/index";
+		}
+		
+//		@RequestMapping(value="/pwCheck" , method=RequestMethod.POST)
+//		@ResponseBody
+//		public int pwCheck(MemberVO vo) throws Exception{
+//			String user_pw = service.pwCheck(vo.getUser_id());
+//			if(vo == null || !vo.getUser_pw().equals(user_pw)) {
+//				return 0;
+//			}
+//			return 1;
+//		}
+		
 }
+		

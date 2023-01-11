@@ -13,8 +13,28 @@
 	</insert> 
 	
 	<!-- 상품 목록(all) -->
-	<select resultType="GoodsVO"  id="listAll">
-		select * from goods
+	<select resultType="GoodsVO" id="listAll">
+		select * from goods 
+		<if test="k!=null">
+			where goods_title like concat('%',#{k},'%')
+			and user_addr=#{l}
+		</if>
+		<if test="k==null and l!=null">
+			where user_addr=#{l}
+		</if>
+		<if test="s==0">
+			order by goods_date desc
+		</if>
+		<if test="s==1">
+			order by goods_price desc
+		</if>
+		<if test="s==2">
+			order by goods_price asc
+		</if>
+		<if test="s==3">
+			order by viewcount desc
+		</if>
+		
 	</select>
 		
 	<!-- 글 조회수 1증가 -->

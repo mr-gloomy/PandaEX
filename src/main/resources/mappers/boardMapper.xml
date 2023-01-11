@@ -22,12 +22,12 @@
 	</select>
 	
 	<!-- 글목록 카테고리별 -->
-		<select id="listcate" resultType="BoardVO">
+		<select id="listcate" parameterType="map" resultType="BoardVO">
  		 <![CDATA[
 			select * from board 
 			where bno>0 and category=#{category}
 			order by bno desc, regdate desc
-			limit #{pageStart},#{perPageNum}
+			limit #{cri.pageStart},#{cri.perPageNum}
 			]]>
 	</select>
 	
@@ -61,5 +61,6 @@
 	<select id="countBoard" resultType="int">
 		select count(bno) from board
 	</select>
+	
 
 </mapper>

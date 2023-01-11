@@ -1,8 +1,9 @@
 package com.panda.controller;
 
+import java.io.File;
 import java.util.List;
 
-
+import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.panda.domain.AuctionVO;
@@ -36,6 +38,9 @@ public class AuctionController {
    @Inject
    private AuctionService service;
    
+   @Resource(name="uploadPath")
+   private String uploadPath;
+   
    //http://localhost:8080/auction/a_regist
    // 기부경매 상품 등록하기 GET
    @RequestMapping(value = "/a_regist", method = RequestMethod.GET)
@@ -46,7 +51,7 @@ public class AuctionController {
    
    // 기부경매 상품 등록하기 POST
    @RequestMapping(value = "/a_regist", method = RequestMethod.POST)
-   public String a_registPOST(AuctionVO avo, RedirectAttributes rttr) throws Exception {
+   public String a_registPOST(AuctionVO avo, MultipartFile file, RedirectAttributes rttr) throws Exception {
 	   mylog.debug("/auction/a_regist(POST) 호출");
 	   
 	   mylog.debug(avo.toString());
@@ -56,6 +61,22 @@ public class AuctionController {
 	   
 	   rttr.addFlashAttribute("result", "creatOK");
 	   
+	   //이미지 업로드
+	   String imgUploadPath = uploadPath + File.separator + "imgUpload";
+	   String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+	   String fileName = null;
+	   
+	   if(file != null) {
+			fileName =  UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath); 
+		} else {
+			fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
+		}
+
+		avo.setAuction_file(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+		avo.setAuction_image(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
+	   
+		service.insertAuction(avo);
+		
 	   return "redirect:/auction/a_list";
    }
       
@@ -75,8 +96,8 @@ public class AuctionController {
     // http://localhost:8080/auction/a_read?auction_no=1&user_no=1
 	// 기부경매 상품 상세페이지
     @GetMapping(value = "/a_read")
-	public void a_readGET(@RequestParam("auction_no") int auction_no, 
-						  @RequestParam("user_no") int user_no, 
+	public void a_readGET(@ModelAttribute("auction_no") int auction_no, 
+						  @ModelAttribute("user_no") int user_no, 
 						  HttpSession session, Model model) throws Exception{
 		
 		mylog.debug("전달정보 : " + auction_no);
@@ -143,8 +164,9 @@ public class AuctionController {
 	
 	// 기부경매 상품 글 삭제
 	@PostMapping(value="/a_remove")
-	public String removePOST(@ModelAttribute("auction_no") int auction_no, RedirectAttributes rddr) throws Exception {
-		Integer result = service.removeAuction(auction_no);
+	public String removePOST(AuctionVO avo, RedirectAttributes rddr) throws Exception {
+		//mylog.debug("@@@@@@@@@@" + avo);
+		Integer result = service.removeAuction(avo);
 		
 		if(result > 0) {
 			rddr.addFlashAttribute("result", "removeOK");
@@ -180,8 +202,6 @@ public class AuctionController {
 	
 	// http://localhost:8080/auction/listPage
 	// http://localhost:8080/auction/listPage?page=2
-	// http://localhost:8080/auction/listPage?perPageNum=20
-	// http://localhost:8080/auction/listPage?page=3&perPageNum=20
 	// 페이징 처리
 	@RequestMapping(value = "/listPage", method = RequestMethod.GET)
 	public String listPageGET(Criteria cri, HttpSession session, Model model, @ModelAttribute("result") String result) throws Exception {
@@ -205,5 +225,23 @@ public class AuctionController {
 		
 		return "/auction/a_list";
 	}
+	
+	
+	// 입찰하기
+	@PostMapping(value = "/a_bid")
+	public String bidPOST(AuctionVO avo, RedirectAttributes rbbr) throws Exception {
+		mylog.debug("@@@@@@@@@@@"+avo);
+		
+		Integer result = service.updateBid(avo);
+		
+		if(result>0) {
+			rbbr.addFlashAttribute("result", "bidUpdateOK");
+			rbbr.addFlashAttribute("auction_no", avo.getAuction_no());
+			rbbr.addFlashAttribute("user_no", avo.getUser_no());
+		}
+		return "redirect:/auction/a_read";
+	}
+	
+	
 	
 }

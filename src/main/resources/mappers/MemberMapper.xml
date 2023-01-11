@@ -6,8 +6,8 @@
 <mapper namespace="com.panda.mapper.MemberMapper">
 	
 	<insert id="insertRep">
-		insert into report (goods_no,u_id,rep_subject,rep_reason,rep_sort,rep_u_id) 
-		values (#{goods_no},#{u_id},#{rep_subject},#{rep_reason},#{rep_sort},#{rep_u_id})
+		insert into report (goods_no,auction_no,u_id,rep_subject,rep_reason,rep_sort,rep_u_id) 
+		values (#{goods_no},#{auction_no},#{u_id},#{rep_subject},#{rep_reason},#{rep_sort},#{rep_u_id})
 	</insert>
 	
 	<insert id="insert" >
@@ -48,7 +48,6 @@
 	</insert>
 	
 	
-	
 	<!-- 아이디 찾기 -->
 	<select id="findId" resultType="MemberVO">
 		select user_id
@@ -56,24 +55,17 @@
 		where user_name=#{user_name} and user_tel=#{user_tel}
 	</select>
 	
-	<!-- 회원 임시 비밀번호-->
-	<update id="searchPassword" parameterType="Map">
-		update user set user_pw = #{param3} where user_id = #{param1} and user_email = #{param2}
-	</update>
-	
-	<!-- 비밀번호 재설정 -->
-	<update id="updatePw">
-		update user 
-		set user_pw=#{user_pw} 
-		where user_id=#{user_id}
-	</update>
+	<!--  회원 임시 비밀번호-->
+<!-- 	<update id="searchPassword" parameterType="Map"> -->
+<!-- 		update user set user_pw = #{param3} where user_id = #{param1} and user_email = #{param2} -->
+<!-- 	</update> -->
 	
 	
-	<select id="pwCheck" resultType="int">
-		select count(*)
-		from user
-		where user_id=#{user_id} and user_pw=#{user_pw}
-	</select>
+<!-- 	<select id="pwCheck" resultType="int"> -->
+<!-- 		select count(*) -->
+<!-- 		from user -->
+<!-- 		where user_id=#{user_id} and user_pw=#{user_pw} -->
+<!-- 	</select> -->
 
 
 	<update id="updateMailKey" parameterType="MemberVO">
@@ -87,6 +79,27 @@
 	<select id="emailAuthFail" parameterType="String" resultType="int">
     select count(*) from user where user_id=#{user_id} and mail_auth=1
 	</select>
+	
+	
+	<!-- 비밀번호 변경 & 재발급 링크에서 변경  -->
+	<select id="pwCheck" resultType="String">
+	select user_pw from user where user_no = #{user_no}
+	</select>
+
+<!-- 비밀번호 변경 -->
+	<update id="updatePw" >
+		update user set user_pw = #{user_pw} where user_id = #{user_id}
+	</update>
+	
+	<update id="pwUpdate" >
+		update user set user_pw = #{user_pw} where user_no = #{user_no}
+	</update>
+	
+	
+	
+	
+	
+	
 	
 	<!-- 로그인한 회원의 정보 불러오기 -->
 	<select id="getMembers" resultType="MemberVO">
