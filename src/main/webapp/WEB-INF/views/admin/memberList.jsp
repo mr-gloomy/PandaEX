@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 헤더 -->
 	<%@ include file="/WEB-INF/views/admin/include/header.jsp"%>
 	
@@ -28,13 +28,22 @@
 				</tr>
 			</thead>
 			<tbody>
+					<c:forEach var="mvo" items="${memberList }" step="1">
 					<tr>
-						<td></td>
-						<td></td>
-						<td></td>								
-						<td style="color:black;">일반회원</td>
-						<td><a href="/auctionara/admin/member/detail/164">상세보기</a></td>
+						<td>${mvo.user_id }</td>
+						<td>${mvo.user_nick }</td>
+						<td>${mvo.user_email }</td>	
+							<c:choose>		
+								<c:when test="${mvo.user_black == '0' }">				
+							<td style="color:black;">일반회원</td>
+								</c:when>
+								<c:when test="${mvo.user_black == '1' }">				
+							<td style="color:red;">블랙회원</td>
+								</c:when>
+							</c:choose>
+						<td><a href="/admin/memberDetail">상세보기</a></td>
 					</tr>
+					</c:forEach>
 			</tbody>
 		</table>
 		<div class="p-2 mt-2 text-center pagination">

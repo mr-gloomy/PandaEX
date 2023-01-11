@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -314,6 +315,13 @@ public class MemberServiceImpl implements MemberService {
 				@Override
 				public void updatePw(MemberVO vo)throws Exception{
 					dao.updatePw(vo);
+				}
+				
+				
+				//   전체회원 목록 조회
+				@Override
+				public List<MemberVO> getMemList(String id) throws Exception {
+					return dao.getMemList(id);
 				}
 
 		
