@@ -6,6 +6,7 @@
 <html lang="en">
 <head>
 <title>PANDA</title>
+<link rel="shortcut icon" type="image/x-icon" href="/resources/images/icons/PANDA.png">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 헤더 -->
@@ -194,7 +195,7 @@ $(function() {
 		<h7>총 게시글 수 : ${GoodsList.size()}</h7>
 	    <div class="col pl-0 mr-5">
                <select class="form-select form-select-sm border-0 text-muted" id="sort">
-                   <option value="0" selected="selected">최신 등록순</option>
+                   <option value="0">최신 등록순</option>
                    <option value="1">가격&#8593;순</option>
                    <option value="2">가격&#8595;순</option>
                    <option value="3">조회순</option>

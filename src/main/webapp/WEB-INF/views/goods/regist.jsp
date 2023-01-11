@@ -4,6 +4,7 @@
 <html lang="en">
 <head>
 <title>PANDA</title>
+<link rel="shortcut icon" type="image/x-icon" href="/resources/images/icons/PANDA.png">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 헤더 -->

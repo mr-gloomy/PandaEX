@@ -95,7 +95,7 @@ public class GoodsController {
 		// 4. 페이지로 이동(list페이지)
 		
 		
-		return "redirect:/goods/list";
+		return "redirect:/goods/list?s=0";
 	}
 		
 	// 상품목록(All)
@@ -170,7 +170,7 @@ public class GoodsController {
 		service.updateGoods(vo);
 		
 		// 페이지 이동(/goods/list)
-		return "redirect:/goods/list";
+		return "redirect:/goods/list?s=0";
 	}
 
 	// 글 삭제하기
@@ -183,7 +183,7 @@ public class GoodsController {
 		service.removeGoods(goods_no);
 		
 		// 게시판 리스트로 이동(/goods/list)
-		return "redirect:/goods/list";
+		return "redirect:/goods/list?s=0";
 	}
 	
 	// 상품 찜
