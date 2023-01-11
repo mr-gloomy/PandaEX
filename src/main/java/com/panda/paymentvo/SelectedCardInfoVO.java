@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data  @NoArgsConstructor @AllArgsConstructor @Builder
+@Data  
 public class SelectedCardInfoVO {
 	private String card_bin;//카드BIN
 	private int install_month;//할부 개월 수

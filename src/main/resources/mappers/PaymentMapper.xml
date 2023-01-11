@@ -20,22 +20,22 @@
 		values (#{paymentNo}, #{memberNo}, #{paymentTid}, #{paymentPrice}, 1)
 	</insert>
 	
-<!-- 	<update id="charge" parameterType="PaymentInsertVO"> -->
-<!-- 		update member set member_holding_points = member_holding_points + #{paymentPrice} where member_no = #{memberNo} -->
-<!-- 	</update> -->
+	<update id="charge" >
+		update user set user_pandapay = user_pandapay + #{paymentPrice} where user_no = #{memberNo}
+	</update>
 	
 <!-- 	<insert id="monthlyCharge"> -->
 		
 <!-- 	</insert> -->
 	
-<!-- 	<select id="one" parameterType="int" resultType="PaymentInsertVO"> -->
-<!-- 		select * from payment where payment_no = #{paymentNo} -->
-<!-- 	</select> -->
+	<select id="one" resultType="PaymentInsertVO">
+		select * from payment where payment_no = #{paymentNo}
+	</select>
 	
-<!-- 	<select id="success" parameterType="int" resultType="PaymentSuccessVO"> -->
-<!-- 		select p.payment_price, m.member_holding_points from payment p, member m -->
-<!-- 			where m.member_no = p.member_no and p.payment_no = #{paymentNo} -->
-<!-- 	</select> -->
+	<select id="success"  resultType="PaymentSuccessVO">
+		select p.payment_price, u.user_pandapay from payment p, user u 
+			where u.user_no = p.member_no and p.payment_no = #{paymentNo}
+	</select>
 	
 <!-- 	<select id="allList" parameterType="Map" resultType="PaymentInsertVO"> -->
 <!-- 		select * from ( -->
