@@ -7,8 +7,8 @@
 	
 	<!-- 경매 상품 등록 -->
 	<insert id="createAuction">
-		insert into auction (auction_category,auction_title,auction_price,auction_detail,auction_file,auction_image)
-		values (#{auction_category},#{auction_title},#{auction_price},#{auction_detail},#{auction_file},#{auction_image})
+		insert into auction (auction_category,auction_title,auction_price,auction_detail,auction_file,auction_image,auction_condition)
+		values (#{auction_category},#{auction_title},#{auction_price},#{auction_detail},#{auction_file},#{auction_image},#{auction_condition})
 	</insert>
 	
 	<!-- 경매 상품 전체 목록 -->
@@ -90,33 +90,7 @@
 					            								      where auction_no = #{auction_no}) a)
 		 		                    END
  		 where auction_no = #{auction_no}
-	</update>
-	
-	<!-- 페이징처리 게시판 목록 -->
-	<select id="listPage" resultType="AuctionVO">
-		<![CDATA[
-			select * from auction
-			 where auction_no>0
-		  order by auction_no desc, auction_date desc
-			       limit #{page},10
-		]]>
-	</select>
-
-	<!-- 페이징처리 게시판 목록 -->
-	<select id="listPage2" resultType="AuctionVO">
-	  <![CDATA[
-		select * from auction
-		 where auction_no>0
-      order by auction_no desc, auction_date desc
-		       limit #{pageStart},#{perPageNum}
-		]]>
-	</select>
-
-	<!-- 게시판 글 전체 개수 -->
-	<select id="countAuction" resultType="int">
-		select count(auction_date) 
-		  from auction
-	</select>
+	</update>	
 	
 	<!-- 입찰하기 -->
 	<update id="updateBid" parameterType="com.panda.domain.AuctionVO">

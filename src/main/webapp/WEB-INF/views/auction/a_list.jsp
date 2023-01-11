@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@page import="java.util.Date"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,6 +12,7 @@
 <%@ include file="../include/header.jsp" %>
 <%@ include file="../include/css.jsp" %>
 
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
 	$(function() {
 		
@@ -42,7 +44,29 @@
 		
 		document.write("남은 "+(date1-date2)/(1000*60*60*24)+"일");
 	}
-	
+</script>
+
+<script>
+	var pdate = $('.panda-date1');
+	$(function() {
+
+		function clock() {
+// 			const date = new Date();
+// 			const year = date.getFullYear();
+// 			const month = date.getMonth();
+// 			$(pdate).text(year + '년' + month + '월');
+
+			const h = date.getHours().toString().padStart(2, '0');
+			const min = date.getMinutes().toString().padStart(2, '0');
+			$(clockt).text(h + ':' + min);
+		}
+
+		function init() {
+			clock();
+			setInterval(clock, 1000);
+		}
+		init();
+	});
 </script>
 
 </head>
@@ -50,8 +74,18 @@
 <br><br><br><br><br><br>
 	
 <input type="hidden" value="${param.s}" name="a_sort" id="a_sort">
-<section class="bg0 p-t-75 p-b-120" style="align-content:center;">	
+<section class="bg0 p-t-75 p-b-120" style="align-content:center;">
 	<div class="container">
+		<div class="box" style="padding:35px; width:100%; text-align:center; border:1px solid #e4e4e4; box-sizing:border-box; margin-bottom:45px;">
+			<div>
+			<div class="panda-date1">ddd</div>
+				<span style="display:block; margin-bottom:30px; font-size:48px; font-weight:bold;">
+					<img src="/resources/images/icons/icon_concentrated.png">해피판다</span>
+				<p style="font-size:20px; color:#666;"><span class="panda-date"></span>해피판다를 통해<br>
+					<span style="color:#28a745; font-weight:bold;">N</span>분이<br> 
+					<span style="color:#28a745; font-weight:bold;">N</span>원의 마음을<br> 모아주셨습니다.</p>
+			</div>
+		</div>
 	<div class="flex-w flex-sb-m p-b-52">
 	<div class="filter-tope-group" align="center" style="margin-top: 0px;">
 		<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*"><b>All</b></button>
@@ -66,16 +100,9 @@
 	</div>
 	
 		<div class="flex-w flex-c-m m-tb-10">
-<!-- 			<div class="col ml-2 pr-2"> -->
-<!--                 <select class="form-select form-select-sm border-0 text-muted" v-model.number="filter" @change="updateList"> -->
-<%--                     <option value="0" v-if="${addressCount}">전체</option> --%>
-<!--                     <option value="1">주소1</option> -->
-<%--                     <option value="2" v-if="${addressCount}">주소2</option> --%>
-<!--                 </select> -->
-<!--             </div> -->
             <div class="col pl-0 mr-5">
                 <select class="form-select form-select-sm border-0 text-muted" id="sort">
-                    <option value="0">최신 등록순</option>
+                    <option value="0" selected>최신 등록순</option>
                     <option value="1">입찰가&#8593;순</option>
                     <option value="2">입찰가&#8595;순</option>
                     <option value="3">마감 임박순</option>
@@ -119,7 +146,7 @@
 									</a>
 	
 									<span class="stext-105 cl3" style="font-size:17px; color:darkslategray;">
-										현재 <span style="color:#28a745;"><fmt:formatNumber value="${avo.auction_bid }"/></span>원
+										현재 <span style="color:#28a745;"><fmt:formatNumber value="${avo.auction_price }"/></span>원
 									</span>
 									<span class="stext-105 cl3">
 										 <script>getDate('${avo.auction_cdate.toString().substring(0,10)}','${avo.auction_date.toString().substring(0,10)}')</script>
@@ -143,24 +170,6 @@
 				</c:forEach>
 	</div>
 	</div>
-	
-	<div class="box-footer clearfix">
-		<ul class="pagination pagination-sm no-margin pull-right">
-			<c:if test="${pvo.prev }">
-				<li><a href="/auction/listPage?page=${pvo.startPage-1}">«</a></li>
-			</c:if>
-			
-			<c:forEach var="idx" begin="${pvo.startPage }" end="${pvo.endPage }">
-				<li 
-					<c:out value="${idx==pvo.cri.page?'class=active':'' }"/>
-				><a href="/auction/listPage?page=${idx }">${idx }</a></li>
-			</c:forEach>
-			
-			<c:if test="${pvo.next }">
-				<li><a href="/auction/listPage?page=${pvo.endPage+1}">»</a></li>
-			</c:if>	
-		</ul>
-	</div>	
 </section>
 			
 	<script type="text/javascript">

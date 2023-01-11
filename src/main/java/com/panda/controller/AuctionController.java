@@ -198,34 +198,7 @@ public class AuctionController {
 //		model.addAttribute(service.updateLike(avo));
 		return service.updateLike(avo);
 	}
-	
-	
-	// http://localhost:8080/auction/listPage
-	// http://localhost:8080/auction/listPage?page=2
-	// 페이징 처리
-	@RequestMapping(value = "/listPage", method = RequestMethod.GET)
-	public String listPageGET(Criteria cri, HttpSession session, Model model, @ModelAttribute("result") String result) throws Exception {
-		
-		mylog.debug("/auction/listPage 호출");
-		
-		//글 조회수 체크 정보
-		session.setAttribute("updateCheck", true);
-		
-		List<AuctionVO> auctionList = service.getListPage(cri);
-		
-		// 페이징 처리 하단부 정보 준비 -> view 페이지로 전달
-		PageVO pvo = new PageVO();
-		pvo.setCri(cri);
-		
-		mylog.debug("totalCnt : "+service.totalCnt());
-		pvo.setTotalCount(service.totalCnt());
-		
-		model.addAttribute("pvo", pvo);
-		model.addAttribute("auctionList", auctionList);
-		
-		return "/auction/a_list";
-	}
-	
+
 	
 	// 입찰하기
 	@PostMapping(value = "/a_bid")

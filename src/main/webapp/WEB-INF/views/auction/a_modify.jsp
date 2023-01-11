@@ -169,6 +169,34 @@
 							<div class="col-sm align-self-center">원</div>
 						</div>
 						<div class="row py-4 border-bottom">
+						<div class="col-sm-2">
+							<label class="form-label">상품상태</label>
+						</div>
+						<div class="col-sm-10">
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="radio" name="auction_condition" value="상" 
+										<c:if test="${acmap.auction_condition == '상'}">
+										checked									
+										</c:if>
+										><label class="form-check-label" for="inlineRadio1">상</label>
+									</div>
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="radio" name="auction_condition" value="중"
+										<c:if test="${acmap.auction_condition == '중'}">
+										checked									
+										</c:if>
+										><label class="form-check-label" for="inlineRadio2">중</label>
+									</div>
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="radio" name="auction_condition" value="하"
+										<c:if test="${acmap.auction_condition == '하'}">
+										checked									
+										</c:if>
+										><label class="form-check-label" for="inlineRadio3">하</label>
+									</div>
+						</div>
+					</div>
+						<div class="row py-4 border-bottom">
 							<div class="col-sm-2">
 								<label class="form-label">상품소개</label>
 							</div>

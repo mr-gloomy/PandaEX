@@ -272,10 +272,6 @@
 
 <script>
 
-
-
-
-
 	// 좌측상단 시간:분 실시간 업데이트
 	var clockt = $('.chat-clock');
 	$(function() {
