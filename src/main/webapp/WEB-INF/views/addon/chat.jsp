@@ -41,12 +41,12 @@
 			},
 			sendChat: function() {
 				var cur_time = new Date().getTime();
-				this._sendMessage('${user_id}','12','${param.u}','${param.bang_id}', 'CMD_MSG_SEND', cur_time, $('#message').val());
+				this._sendMessage('${user_id}','${param.g}','${param.a}','${param.u}','${bang_id}', 'CMD_MSG_SEND', cur_time, $('#message').val());
 				$('#message').val('');
 			},
 			sendEnter: function() {
 				var cur_time = new Date().getTime();
-				this._sendMessage('${user_id}','12','${param.u}','${param.bang_id}', 'CMD_ENTER', cur_time, $('#message').val());
+				this._sendMessage('${user_id}','${param.g}','${param.a}','${param.u}','${bang_id}', 'CMD_ENTER', cur_time, $('#message').val());
 				$('#message').val('');
 			},
 			receiveMessage: function(msgData) {
@@ -90,10 +90,11 @@
 					webSocket.closeMessage(JSON.parse(evt.data));
 				}
 			},
-			_sendMessage: function(send_id, goods_no ,receive_id ,bang_id ,cmd,time ,msg) {
+			_sendMessage: function(send_id, goods_no ,auction_no,receive_id ,bang_id ,cmd,time ,msg) {
 				var msgData = {
 						send_id : send_id,
 						goods_no : goods_no,
+						auction_no : auction_no,
 						receive_id : receive_id,
 						bang_id : bang_id,
 						cmd : cmd,
@@ -134,6 +135,7 @@
 <div id="divChatData">
 <div class="col-md-4" style="padding-right: 0px; padding-left: 0px;">
 
+<c:if test='${goods!=null }'>
 <div class="box box-widget widget-user-2">
 
 <div class="widget-user-header" style="background-color: #00a65a;">
@@ -153,6 +155,29 @@
 </ul>
 </div>
 </div>
+</c:if>
+<c:if test='${auctions!=null }'>
+<div class="box box-widget widget-user-2">
+
+<div class="widget-user-header" style="background-color: #00a65a;">
+<div class="widget-user-image">
+<img class="img-circle" width="30" height="30" src="../resources/image/emoji_6.png">
+<span style="font-size: 17px">${auctions.auction_title }</span>
+</div>
+
+<h3 class="widget-user-username" style="margin-top:4px; margin-bottom:4px;">
+<fmt:formatNumber value="${auctions.auction_bid }"/>원</h3>
+<%-- <h5 class="widget-user-desc"><b>${goods.goods_trade}</b></h5> --%>
+</div>
+ <div class="box-footer no-padding">
+	<ul class="nav nav-stacked">
+	<li><a style="display: inline;" href="/auction/a_read?auction_no=${auctions.auction_no}&user_no=${auctions.user_no}" target="_blank">상품 보기</a>
+	<a style="display: inline;" data-toggle="modal" data-target="#myModal">신고하기</a></li>      
+</ul>
+</div>
+</div>
+</c:if>
+
 
 </div>
 
@@ -208,7 +233,12 @@ Count Dracula
       <div class="modal-body">
       <form action="/member/report" method="post" id="frm">
       	<input type="hidden" name="rep_u_id" value="${param.u }">
+      	<c:if test='${param.g!=null }'>
       	<input type="hidden" name="goods_no" value="${param.g }">
+      	</c:if>
+      	<c:if test='${param.a!=null }'>
+      	<input type="hidden" name="auction_no" value="${param.a }">
+      	</c:if>
       	<input type="hidden" name="u_id" value="${user_id }">
         <input type="text" name="rep_subject" placeholder="신고 제목" style="width:100%;"><br><br>
         <select name="rep_sort" style="width:100%;">

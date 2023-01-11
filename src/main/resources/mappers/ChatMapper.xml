@@ -20,6 +20,6 @@
 	</select>
 	
 	<insert id="recordMsg">
-		insert into chat (send_id,receive_id,bang_id,message,goods_no,msg_date) values(#{send_id},#{receive_id},#{bang_id},#{message},#{goods_no},#{msg_date})
+		insert into chat (send_id,receive_id,bang_id,message,goods_no,msg_date,auction_no) values(#{send_id},#{receive_id},#{bang_id},#{message},#{goods_no},#{msg_date},#{auction_no})
 	</insert> 
 </mapper>

@@ -11,4 +11,8 @@ public class ChatVO {
 	private	String bang_id;
 	private	String message;
 	private	int goods_no;
+	private	int auction_no;
+	private	int g;
+	private	String u;
+	private	int a;
 }

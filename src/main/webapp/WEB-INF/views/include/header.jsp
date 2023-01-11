@@ -96,9 +96,9 @@
 			<nav class="limiter-menu-desktop container">
 
 				<!-- Logo desktop -->
-				<a href="index.html" class="logo"> <img
+				<a href="/main/index" class="logo"> <img
 					src="/resources/images/icons/PANDA.png" alt="IMG-LOGO"> <span
-					class="maintext">PANDA</span>
+					class="maintext" onclick="javascript:location.href='/main/index'">PANDA</span>
 				</a>
 
 				<!-- Menu desktop -->
