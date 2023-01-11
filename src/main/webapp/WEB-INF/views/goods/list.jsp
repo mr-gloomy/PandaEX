@@ -149,7 +149,7 @@ $(function() {
     	<h5 class="text-white"><span class="text-white" id="locationH"><b>${param.l }, ${param.ll }</b></span> 입니다</h5>	
     	</c:if>
     	<c:if test="${param.l==null and user_id!=null}">
-        <h5 class="text-white"><span class="text-white" id="locationH"><b>${vo.user_addr }, ${vo.user_area }</b></span> 입니다</h5>
+        <h5 class="text-white"><span class="text-white" id="locationH"><b>${vo.user_area },${vo.user_addr }</b></span> 입니다</h5>
         </c:if>
         <c:if test="${user_id==null}">
         <h5 class="text-white"><span class="text-white" id="locationH"><b>로그인하시면 확인하실 수 있습니다.</b></span></h5>
