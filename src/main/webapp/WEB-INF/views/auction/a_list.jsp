@@ -48,7 +48,6 @@
 </head>
 <body>
 <br><br><br><br><br><br>
-	
 <input type="hidden" value="${param.s}" name="a_sort" id="a_sort">
 <section class="bg0 p-t-75 p-b-120" style="align-content:center;">
 	<div class="container">
@@ -79,7 +78,7 @@
 		<div class="flex-w flex-c-m m-tb-10">
             <div class="col pl-0 mr-5">
                 <select class="form-select form-select-sm border-0 text-muted" id="sort">
-                    <option value="0" selected>최신 등록순</option>
+                    <option value="0">최신 등록순</option>
                     <option value="1">입찰가&#8593;순</option>
                     <option value="2">입찰가&#8595;순</option>
                     <option value="3">마감 임박순</option>

@@ -90,6 +90,8 @@ public class AuctionController {
 	  session.setAttribute("updateCheck", true);
 	  
 	  model.addAttribute("auctionList", service.getAuctionListAll(vo));
+	  
+	  
    }
    
    
