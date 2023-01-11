@@ -1,8 +1,11 @@
 package com.panda.controller;
 
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +18,7 @@ import com.panda.service.MyPageService;
 @RequestMapping(value = "/myinfo/*")
 public class MyInfoContoroller {
 
+	
 	@Inject
 	private MyPageService myservice;
 	
@@ -27,6 +31,9 @@ public class MyInfoContoroller {
 		if(user_id == null) {
 			return "/main/index";
 		}
+		
+		
+		
 		
 		memberVO.setUser_id(user_id);
 		memberVO = myservice.getMembers(memberVO);

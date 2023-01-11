@@ -79,7 +79,7 @@ public class AuctionController {
 		
 	   return "redirect:/auction/a_list";
    }
-      
+   
    
    // http://localhost:8080/auction/a_list
    // 기부경매 전체 상품 목록

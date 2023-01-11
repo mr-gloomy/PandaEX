@@ -73,12 +73,7 @@ function CountDownTimer(dt, id) {
 
 </head>
 <body>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
+	<br><br><br><br><br><br>
 <%-- 	${avooo } --%>
 <%-- 		${avo } --%>
 <%-- 		${avo1 } --%>
@@ -197,7 +192,7 @@ function CountDownTimer(dt, id) {
 						</div>
 					</div>
 					
-					<c:if test="${sessionScope.user_id eq avooo.user_id }">
+					<c:if test="${sessionScope.user_id eq avooo.user_id || sessionScope.user_id eq 'admin' }">
 					<div class="row">
 						<div class="col p-0">
 							<a class="btn btn-info btn-lg btn-block py-3"
@@ -214,7 +209,7 @@ function CountDownTimer(dt, id) {
 					</div>
 					</c:if>
 					
-					<c:if test="${sessionScope.user_id ne avooo.user_id }">
+					<c:if test="${sessionScope.user_id ne avooo.user_id && sessionScope.user_id ne 'admin'}">
 					<div class="row">
 						<div class="col p-0">
 							<a class="btn btn-info btn-lg btn-block py-3"
