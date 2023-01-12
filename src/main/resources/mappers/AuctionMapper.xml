@@ -7,8 +7,8 @@
 	
 	<!-- 경매 상품 등록 -->
 	<insert id="createAuction">
-		insert into auction (auction_category,auction_title,auction_price,auction_detail,auction_file,auction_image,auction_condition)
-		values (#{auction_category},#{auction_title},#{auction_price},#{auction_detail},#{auction_file},#{auction_image},#{auction_condition})
+		insert into auction (auction_category,auction_title,auction_price,auction_detail,uploadFile,thumbnail,auction_condition,user_no)
+		values (#{auction_category},#{auction_title},#{auction_price},#{auction_detail},#{uploadFile},#{thumbnail},#{auction_condition},#{user_no})
 	</insert>
 	
 	<!-- 경매 상품 전체 목록 -->

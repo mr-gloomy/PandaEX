@@ -64,10 +64,14 @@ public class GoodsController {
 	
 	// 상품 글쓰기 POST
 	@RequestMapping(value = "/regist", method = RequestMethod.POST)
-	public String registPOST(GoodsVO vo, MultipartFile file) throws Exception{
+	public String registPOST(GoodsVO vo, MultipartFile file, HttpSession session) throws Exception{
+		
 		mylog.debug(" /goods/regist(POST) 호출 ");	
 		mylog.debug(" GET방식의 데이터 전달 -> DB 저장 -> 페이지 이동 ");
 		// 0. 한글처리 (필터)
+		
+		String user_no = (String)session.getAttribute("user_no");
+
 		// 1. 전달된 정보 저장 
 		mylog.debug(vo.toString());
 		
