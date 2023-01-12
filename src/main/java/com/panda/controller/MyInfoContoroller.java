@@ -2,6 +2,7 @@ package com.panda.controller;
 
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.panda.domain.MemberVO;
 import com.panda.service.MyPageService;
@@ -41,6 +44,14 @@ public class MyInfoContoroller {
 		model.addAttribute("memberVO", memberVO);
 		
 
+		return "/myinfo/myinfo";
+	}
+
+	@RequestMapping(value="/update", method = RequestMethod.POST)
+	public String mypupdate(Model model,MemberVO vo) throws Exception{
+
+		vo = myservice.getMembers(vo);
+		model.addAttribute("memberVO", vo);
 		return "/myinfo/myinfo";
 	}
 }

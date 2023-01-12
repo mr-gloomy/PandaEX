@@ -324,6 +324,7 @@ public class MemberServiceImpl implements MemberService {
 					return dao.getMemList(id);
 				}
 
+
 		
 		
 

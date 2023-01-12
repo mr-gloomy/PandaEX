@@ -218,17 +218,17 @@
 						<li>변경할 비밀번호</li>
 						<li>비밀번호 재확인</li>
 					</ul>
-					<form action="" method="post" id="" name="">
+					<form action="/myinfo/update" method="post">
 					<ul class="mbody-2">
 						<li><input type="text" value="${user.user_name }" readonly></li>
 						<li><input type="text" value="${user.user_id }" readonly></li>
 						<li><input type="text" class="nickmo" name="user_nick" value="${user.user_nick }" maxlength="10"></li>
 						<li><input type="text" value="${user.user_tel }" readonly></li>
 						<li><input type="text" name="user_password" value="${user.user_email }" readonly></li>
-						<li><input type="password" value="" placeholder="변경할 비밀번호" maxlength="20"></li>
-						<li><input type="password" value="" placeholder="비밀번호 재확인" maxlength="20"></li>
+						<li><input type="password" name="user_pw" value="${user.user_pw }" placeholder="변경할 비밀번호" maxlength="20"></li>
+						<li><input type="password" class="user_pwchk" value="${user.user_pw }" placeholder="비밀번호 재확인" maxlength="20"></li>
 					</ul>
-					 <button type="submit" id="" name="" class="">내정보 변경</button> 
+					 <button type="submit" class="info-modify" >내정보 변경</button> 
 					</form>
 				</div>
 			</div>

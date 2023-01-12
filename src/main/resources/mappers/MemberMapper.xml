@@ -96,9 +96,12 @@
 	</update>
 	
 	
+	<!-- 닉네임,패스워드변경 -->
 	
-	
-	
+	  <update id="updatemyp">
+    update user set user_nick=#{user_nick}, user_pw=#{user_pw} 
+    where user_id = #{user_id}  
+  	</update>
 	
 	
 	<!-- 로그인한 회원의 정보 불러오기 -->
