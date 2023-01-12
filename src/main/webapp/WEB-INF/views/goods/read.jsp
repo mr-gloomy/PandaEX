@@ -23,6 +23,23 @@
 <link rel="icon" href="/resources/image/favicon.ico">
 <!-- Noto Sans 폰트 -->
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+<script type="text/javascript">
+$(function() {
+	$(".loginControl").click(function(e){
+		var targetObjectId = $(e.target)[0].id;
+		var userId = '<%=(String)session.getAttribute("user_id")%>';
+		if(userId == null || userId == "null") {
+			$(".usermodal").trigger("click");
+		} else {
+			if("chat" == targetObjectId) {
+				window.open('/main/chat?u=${vo.user_id}&g=${param.goods_no}','chat01','width=600,height=600');
+			} else if("startBidding" == targetObjectId) {
+    			$("#biddingModal").modal("show");
+			}
+			}
+		});
+});
+</script>
 </head>
 <body>
 	<br><br><br>
@@ -117,13 +134,13 @@
 					</div>
 					<div class="row">
 						<div class="col">
-							<button type="button" class="btn btn-warning btn-lg btn-block py-3" style="color: white;"> 
+							<button type="button" class="btn btn-warning btn-lg btn-block py-3 loginControl" style="color: white;"> 
 								<i class="fa-sharp fa-solid fa-paper-plane"></i> 판다페이 결제하기
 							</button>
 						</div>
 						<div class="col p-0">
-							<a class="btn btn-success btn-lg btn-block py-3"
-								href="/addon/chat" role="button"><i
+							<a class="btn btn-success btn-lg btn-block py-3 loginControl"
+								href="#" role="button" id="chat"><i
 								class="fa-solid fa-comments-dollar pr-2"></i> 1:1 채팅하기  </a>
 						</div>
 					</div>
