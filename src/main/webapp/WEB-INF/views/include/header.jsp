@@ -182,7 +182,7 @@
 											src="/resources/images/icons/right-arrow.png"></a></li>
 									</c:if>
 									<c:if test="${user_id.equals('admin') }">
-									<li><a class="my" href="/admin/index">관리자페이지<img class="right"
+									<li><a class="my" href="/admin/memberList">관리자페이지<img class="right"
 											src="/resources/images/icons/right-arrow.png"></a></li>
 									</c:if>
 									<li><a class="my" href="#">내 상점<img class="right"
