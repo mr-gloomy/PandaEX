@@ -320,7 +320,6 @@ function CountDownTimer(dt, id) {
 				</div>
 			</div>
 			
-			
 			<div class="modal fade" id="failBiddingModal" aria-hidden="true"
 				aria-labelledby="failBiddingModalLable" tabindex="-1">
 				<div class="modal-dialog modal-dialog-centered">

@@ -50,7 +50,7 @@
 	<!-- 업로드 패스 설정(컴퓨터별 새로설정 - 서버 저장이 아니면 방법이 없다..?) -->
 	<beans:bean class="java.lang.String" id="uploadPath">
 		<beans:constructor-arg
-			value="D:\final_project\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\PandaEX\resources" />
+			value="C:\spring\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Panda\resources" />
 	</beans:bean>
 
 

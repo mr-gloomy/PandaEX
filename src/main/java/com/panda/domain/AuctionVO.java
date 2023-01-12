@@ -15,6 +15,7 @@ public class AuctionVO {
    private String auction_condition;	//경매상품상태(상,중,하)
    private Integer auction_price;		//경매기본가격
    private Integer auction_bid;			//경매입찰금액
+   private Integer auction_bidok;		//경매낙찰여부(0:낙찰x, 1:낙찰o)
    private Integer auction_cnt;			//경매입찰횟수
    private Timestamp auction_date;		//경매등록일
    private Timestamp auction_cdate;		//경매마감일

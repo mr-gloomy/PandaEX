@@ -111,7 +111,7 @@
 						<div class="block2">
 							<div class="block2-pic hov-img0">
 								<a href="/auction/a_read?auction_no=${avo.auction_no }&user_no=${avo.user_no}">
-								<img src="${avo.thumbnail }" alt="IMG-PRODUCT"></a>
+								<img src="${avo.thumbnail }" alt="IMG-PRODUCT" style="width: 280px; height: 250px;"></a>
 							</div>
 	
 							<div class="block2-txt flex-w flex-t p-t-14">
@@ -161,15 +161,6 @@
 		}
 	</script>
 	
-	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<script>
-		$("#flag").val("0").prop("selected",true);
-		$("#flag").val("1").prop("selected",true);
-		$("#flag").val("2").prop("selected",true);
-		$("#flag").val("3").prop("selected",true);
-		$("#flag").val("4").prop("selected",true);
-	</script> -->
-			
 <br><br><br><br><br><br>
 <!--   푸터 -->
 <%@ include file="../include/footer.jsp" %>			
