@@ -120,10 +120,10 @@
 							<div><input type="button" value="카드/계좌 등록하고 혜택받기"></div>
 						</div>
 					</div>
-					<input type="radio" class="other-pay" name="pay" > <i class="other-pay-1">다른 결제 수단</i>
-					<input type="text" readonly class="other-pay-sel" placeholder="결제수단을 등록해주세요">
-					<input type="button" class="other-pay-selsup" value="등록">
-					<input type="checkbox" class="other-pay-cookie"><p class="other-pay-cookie-1">결제수단을 다음에도 사용</p>
+<!-- 					<input type="radio" class="other-pay" name="pay" > <i class="other-pay-1">다른 결제 수단</i> -->
+<!-- 					<input type="text" readonly class="other-pay-sel" placeholder="결제수단을 등록해주세요"> -->
+<!-- 					<input type="button" class="other-pay-selsup" value="등록"> -->
+<!-- 					<input type="checkbox" class="other-pay-cookie"><p class="other-pay-cookie-1">결제수단을 다음에도 사용</p> -->
 				</div>
 				<div class="body-7">
 					<input type="checkbox" class="pay-terms">

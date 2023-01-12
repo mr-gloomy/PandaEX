@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -60,6 +61,12 @@ public class PayController {
 		return "payment/paymentReady";
 	}
 	
+	// http://localhost:8080/payment/pay_page
+	@RequestMapping(value = "/pay_page",method = RequestMethod.GET)
+	public void pay_page() throws Exception {
+		
+	}
+	
 	@PostMapping("/charge")
 	public String pay1Purchase(
 				@ModelAttribute PurchaseVO purchaseVO, HttpSession session
@@ -67,7 +74,8 @@ public class PayController {
 		
 		//결제 준비(ready) 요청을 진행
 //		int paymentNo = paymentDao.paymentSequence();
-		int paymentNo = 1213143333;
+		int paymentNo = (int)((Math.random()+1)*100000000);
+//		int paymentNo = 1213143335;
 		KakaoPayReadyRequestVO requestVO = 
 									KakaoPayReadyRequestVO.builder()
 //												.partner_order_id(String.valueOf(paymentNo))
@@ -113,7 +121,7 @@ public class PayController {
 		
 		PurchaseVO purchaseVO = (PurchaseVO) session.getAttribute("purchase");
 		
-		int paymentNo = (int) session.getAttribute("paymentNo");
+		int paymentNo = (int)session.getAttribute("paymentNo");
 		
 		//주어진 정보를 토대로 승인(approve) 요청을 보낸다
 		requestVO.setPg_token(pg_token);

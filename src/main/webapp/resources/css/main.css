@@ -5051,6 +5051,7 @@ input[type=number] {
 	width: 490px;
 	overflow: hidden;
 	font-size: 15px;
+	resize: none;
 }
 .shop_icons,
 .shop_icon{

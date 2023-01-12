@@ -11,12 +11,26 @@ $(function(){
 		$('.chat').css('display','flex');
 		$('.chat-list').fadeIn(400);
 		$('.option-list').fadeOut(10);
+		$('.signal').css('visibility','visible');
+		$('.wi-fi').css('visibility','visible');
+		$('.off').css('visibility','visible');
+		$('.off1').css('visibility','visible');
+		$('.chatting').css('visibility','visible');
+		$('.option').css('visibility','visible');
+		$('.chat-name').css('visibility','visible');
 	})
 	$('.panda-header-chaticon').on('click',function(){
 		$('.chat').css('display','flex');
 		$('.chat').delay(100).slideDown(400);
 		$('.chat-list').fadeIn(400);
 		$('.option-list').fadeOut(100);
+		$('.wi-fi').css('visibility','visible');
+		$('.signal').css('visibility','visible');
+		$('.off').css('visibility','visible');
+		$('.off1').css('visibility','visible');
+		$('.chatting').css('visibility','visible');
+		$('.option').css('visibility','visible');
+		$('.chat-name').css('visibility','visible');
 	})
 	$('.chatting').on('click',function(){
 		$('.menu-name').text("채팅");

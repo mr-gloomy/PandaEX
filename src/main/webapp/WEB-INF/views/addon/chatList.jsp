@@ -10,13 +10,13 @@
 	<div class="chat-body">
 		<div class="chat-top">
 			<div class="chat-clock"></div>
-			<p class="chat-name">Panda Chat</p>
-			<img src="/resources/images/icons/signal.png" class="signal"> <img
-				src="/resources/images/icons/wi-fi.png" class="wi-fi">
+			<p class="chat-name" style="visibility: hidden;">Panda Chat</p>
+			<img src="/resources/images/icons/signal.png" class="signal" style="visibility: hidden;">
+			<img src="/resources/images/icons/wi-fi.png" class="wi-fi" style="visibility: hidden;">
 		</div>
 		<div class="chat-menu">
-			<img src="/resources/images/icons/chatting.png" class="chatting">
-			<img src="/resources/images/icons/option.png" class="option">
+			<img src="/resources/images/icons/chatting.png" class="chatting" style="visibility: hidden;">
+			<img src="/resources/images/icons/option.png" class="option" style="visibility: hidden;">
 		</div>
 		<div class="menu-name">채팅</div>
 		<div class="addv1">
@@ -259,8 +259,8 @@
 
 	</div>
 	<div class="chat-footer">
-		<img src="/resources/images/icons/off1.png" class="off">
-		<div class="off1"></div>
+		<img src="/resources/images/icons/off1.png" class="off" style="visibility: hidden;">
+		<div class="off1" style="visibility: hidden;"></div>
 	</div>
 
 
