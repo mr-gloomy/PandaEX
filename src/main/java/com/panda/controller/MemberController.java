@@ -110,7 +110,7 @@ public class MemberController {
 		String resultURI="";
 		if(loginStatus) {
 			//return "redirect:/member/main";
-			resultURI = "redirect:"+ exUrl;
+			resultURI = "redirect:/"+ exUrl.replace("!rep!","&");
 			session.setAttribute("user_id", vo.getUser_id());
 		}else {
 			//return "redirect:/member/login";
