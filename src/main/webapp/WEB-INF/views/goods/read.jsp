@@ -42,7 +42,7 @@
 						</ol>
 						<div class="carousel-inner">
 							<div class="carousel-item active">
-								<img src="${vo.thumbnail }" class="d-block w-100">
+								<img src="${vo.thumbnail } alt="사진없음">
 							</div>
 						</div>
 					</div>

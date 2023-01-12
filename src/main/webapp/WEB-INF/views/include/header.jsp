@@ -104,7 +104,7 @@
 				<!-- Menu desktop -->
 				<div class="menu-desktop" style="padding-top: 13px;">
 					<ul class="main-menu">
-						<li class="active-menu"><a href="/goods/list?s=0">중고거래</a></li>
+						<li><a href="/goods/list?s=0">중고거래</a></li>
 						<li><a href="/auction/a_list?s=0">기부하기</a></li>
 					</ul>
 				</div>
@@ -127,8 +127,8 @@
 					</div>
 					<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11" id="moveToMyShop"
 						style="padding-bottom: 10px; padding-right: 0px;">
-						<button memo="my shop 이동"> <img class="panda-header-shop"
-							src="/resources/images/icons/panda-shop.png" alt="panda-shop">
+						<button memo="my shop 이동"> 
+						<img class="panda-header-shop" src="/resources/images/icons/panda-shop.png" alt="panda-shop">
 						</button>
 <!-- 						<a href="#" memo="my shop 이동"> <img class="panda-header-shop" -->
 <!-- 							src="/resources/images/icons/panda-shop.png" alt="panda-shop"> -->
@@ -142,7 +142,7 @@
 							src="/resources/images/icons/panda-user.png" alt="panda-user">
 						</a>
 					</div>
-					<div class="hoversup"></div>
+					<div class="hoversup" style="width:70px;"></div>
 					<div class="category">
 						<div class="user-sel-images">
 								<c:if test="${user_id eq ''}">
