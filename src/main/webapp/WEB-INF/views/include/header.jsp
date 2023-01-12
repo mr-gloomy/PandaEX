@@ -21,7 +21,18 @@
 		function lo() {
 			alert('로그아웃할래요');
 		}
-		
+		 function doLogout() {
+		    	var cur = window.location.href;
+		   		var cur2 = cur.substring(22);
+		    	alert(cur2.replace('&','!rep!'));
+		    	location.href="/member/logout?exUrl="+cur2.replace('&','!rep!');
+		 }
+		 function doLogin() {
+		    	var cur = window.location.href;
+		   		var cur2 = cur.substring(22);
+		    	alert(cur2.replace('&','!rep!'));
+		    	location.href="/member/login?exUrl="+cur2.replace('&','!rep!');
+		 }
 	</script>
 
 <script>	
@@ -49,7 +60,12 @@
 	            setCookie("key", $("#id").val(), 7); // 7일 동안 쿠키 보관
 	        }
 	    });
-
+	   
+	   
+	    	
+// 	    		var cur=window.location.href;
+// 	    		location.href="/member/logout?exUrl="+cur;
+	
 	// 쿠키 저장하기 
 	// setCookie => saveid함수에서 넘겨준 시간이 현재시간과 비교해서 쿠키를 생성하고 지워주는 역할
 	function setCookie(cookieName, value, exdays) {
@@ -195,7 +211,10 @@
 								<c:if test="${kakao==null}">
 								<!-- 로그아웃 -->
 								<div class="user-logout">
-							<input type="button" onclick="location.href='/member/logout?exUrl=<%=request.getRequestURI().substring(14,request.getRequestURI().indexOf(".jsp")) %>'; " value="로그아웃">
+<%-- 						<input type="button" onclick="location.href='/member/logout?exUrl=<%=request.getRequestURI().substring(14,request.getRequestURI().indexOf(".jsp")) %>'; " value="로그아웃"> --%>
+								<%=request.getRequestURL() %>
+							<input type="button" onclick="doLogout()" value="로그아웃">
+<%-- 							<input type="button" onclick="location.href='/member/logout?exUrl=<%=request.getHeader("referer") %>'; " value="로그아웃"> --%>
 							
 								</div>
 								</c:if>
@@ -316,8 +335,11 @@
 			class="modalhide">
 		<img src="/resources/images/icons/back.png" alt="IMG-back"
 		class="back-joinpage">
+						
+<%-- 		<form action="/member/login?exUrl=<%=request.getRequestURI().substring(14,request.getRequestURI().indexOf(".jsp")) %>" method="post" id="login"> --%>
 			
-			<form action="/member/login" method="post" id="login">
+			<form onsubmit="doLogin()" method="post" id="login">
+			<input type="hidden" id="exUrl">
 		<div class="modal-text">
 			<img src="/resources/images/icons/user.png" alt="id입력"
 				class="userimg">
@@ -347,7 +369,7 @@
 			</div>
 		</div>
 		<div class="login-submit">
-			<input type="submit" value="로그인" >
+			<input type="submit" value="">
 			<!-- 로그인 실패 시, ajax 로 얼럿 뜨게 만들기(페이지 이동 막기) -->
 		</div>
 				</form>
@@ -619,7 +641,7 @@
 </script>
 
 <script type="text/javascript">
-$(document).reaedy(function(){
+$(document).ready(function(){
 $('#login').submit(function(){
 	// alert("성공!");
 	if($('#user_id').val() == ''){

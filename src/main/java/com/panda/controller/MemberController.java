@@ -88,7 +88,7 @@ public class MemberController {
 
 	//로그인 post
 	@PostMapping(value="/login")
-	public String loginPOST(String user_id, MemberVO vo, HttpServletRequest request, Model model,HttpServletResponse response) throws Exception{
+	public String loginPOST(String user_id, MemberVO vo, HttpServletRequest request, Model model,HttpServletResponse response,@RequestParam("exUrl") String exUrl ) throws Exception{
 		HttpSession session =request.getSession();	
 		mylog.debug("loginPOST() 호출");
 		
@@ -110,7 +110,7 @@ public class MemberController {
 		String resultURI="";
 		if(loginStatus) {
 			//return "redirect:/member/main";
-			resultURI = "redirect:/main/index";
+			resultURI = "redirect:"+ exUrl;
 			session.setAttribute("user_id", vo.getUser_id());
 		}else {
 			//return "redirect:/member/login";
@@ -165,20 +165,22 @@ public class MemberController {
 	
 	//로그아웃
 	@GetMapping("/logout")
-	public String logout(HttpSession session,@RequestParam("exUrl") String exUrl ) throws Exception {
+	public String logout(HttpSession session,String exUrl) throws Exception {
 		session.invalidate();
 		
-		
-		//mylog.info(req.getContextPath());
-		//response.setHeader("Refesh","1; url="+req.getContextPath());
-		
+//		//mylog.info(req.getContextPath());
+//		//response.setHeader("Refesh","1; url="+req.getContextPath());
+//		
 //		response.setContentType("text/html; charset=UTF-8");
 //		PrintWriter out=response.getWriter();
 //		out.println("<script>");
 //		out.println("history.back();");
 //		out.println("</script>");
 //		out.close();
-		return "redirect:"+exUrl;
+		
+		mylog.info(exUrl);
+		
+		return "redirect:/"+exUrl.replace("!rep!","&");
 	}
 	
 	@PostMapping("/report")
