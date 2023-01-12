@@ -34,10 +34,9 @@
 		value="${user.user_visit }" />
 
 
-
 	<div class="container"
 		style="margin-top: 100px; height: auto; width: 1000px;">
-		<ul class="myp_side">
+		<ul class="myp_side" style="border: 1px solid rgb(0 0 0 / 5%);">
 			<li class="side_name" style="border-bottom:0px;">마이페이지</li>
 			<li class="side_info mypactive">내 정보</li>
 			<li class="side_auction">내 경매</li>
@@ -95,8 +94,7 @@
 
 					</div>
 					<div class="myp_shop_3">
-						<textarea rows="6" cols="200" maxlength="200"></textarea>
-						<input type="button" value="상점소개수정">
+						<textarea rows="6" cols="200" maxlength="200" style="overflow: hidden;"></textarea>
 					</div>
 				</div>
 
@@ -200,9 +198,183 @@
 		</div>
 		<!-- 001 hide -->
 		<div class="hide002">내 경매</div>
-		<div class="hide003">내 정보 수정</div>
-		<div class="hide004">포인트 충전</div>
-		<div class="hide005">포인트 충전 내역</div>
+		<div class="hide003">
+		
+		내 정보 수정
+		${user }
+		<input type="">
+		</div>
+		<div class="hide004">
+			<div class="row flex-fill d-flex flex-column" >
+				<div class="col justify-content-center">
+
+					<div class="row fw-bold mt-4 pt-2 justify-content-center">
+						<h3 class="text-center">${user.user_nick }님의
+							현재 보유 포인트는 <span class="text-info text-center"> <fmt:formatNumber
+									value="${user.user_pandapay }" pattern="#,###" /> P
+							</span> 입니다.
+						</h3>
+					</div>
+					<div class="row justify-content-center text-muted mt-1">충전은
+						결제 즉시 진행되며 1주일 이내에 포인트를 사용하지 않은 상태라면 결제 취소가 가능합니다.</div>
+				</div>
+
+				<div class="row justify-content-center mt-4 pt-2">
+					<div class="col-9" style="margin-top:120px;">
+						<hr>
+						<form action="/payment/charge" method="post">
+
+							<div class="row text-start">
+								<div class="col-3">
+									<label> <input type="radio" name="chargeMoney"
+										value="2000" v-model="chargingMoney"> 2,000원
+									</label>
+								</div>
+								<div class="col-3">
+									<label> <input type="radio" name="chargeMoney"
+										value="5000" v-model="chargingMoney"> 5,000원
+									</label>
+								</div>
+								<div class="col-3">
+									<label> <input type="radio" name="chargeMoney"
+										value="10000" v-model="chargingMoney"> 10,000원
+									</label>
+								</div>
+								<div class="col-3">
+									<label> <input type="radio" name="chargeMoney"
+										value="20000" v-model="chargingMoney"> 20,000원
+									</label>
+								</div>
+							</div>
+							<div class="row text-start">
+								<div class="col-3">
+									<label> <input type="radio" name="chargeMoney"
+										value="30000" v-model="chargingMoney"> 30,000원
+									</label>
+								</div>
+								<div class="col-3">
+									<label> <input type="radio" name="chargeMoney"
+										value="50000" v-model="chargingMoney"> 50,000원
+									</label>
+								</div>
+								<div class="col-3">
+									<label> <input type="radio" name="chargeMoney"
+										value="70000" v-model="chargingMoney"> 70,000원
+									</label>
+								</div>
+								<div class="col-3">
+									<label> <input type="radio" name="chargeMoney"
+										value="100000" v-model="chargingMoney"> 100,000원
+									</label>
+								</div>
+							</div>
+							<div class="row text-start">
+								<div class="col-3">
+									<label> <input type="radio" name="chargeMoney"
+										value="200000" v-model="chargingMoney"> 200,000원
+									</label>
+								</div>
+								<div class="col-3">
+									<label> <input type="radio" name="chargeMoney"
+										value="300000" v-model="chargingMoney"> 300,000원
+									</label>
+								</div>
+								<div class="col-3">
+									<label> <input type="radio" name="chargeMoney"
+										value="500000" v-model="chargingMoney"> 500,000원
+									</label>
+								</div>
+								<div class="col-3">
+									<label> <input type="radio" name="chargeMoney"
+										value="1000000" v-model="chargingMoney"> 1,000,000원
+									</label>
+								</div>
+							</div>
+							<hr>
+							<div class="d-grid gap-2 mt-1">
+								<input type="submit" value="충전하기"
+									class="btn btn-primary btn-block" :disabled="!moneySelected()">
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="hide005">
+			포인트 충전 내역
+			<div class="row flex-fill d-flex flex-column">
+				<div class="col-7">
+					<div class="row my-4 pt-2">
+						<div class="col-6">
+							<h4 class="fw-bold">내 포인트 충전 내역</h4>
+						</div>
+						<div class="col pt-1 pr-0">
+							<select class="form-select form-select-sm border-0 text-muted"
+								v-model.number="filter" @change="updateList">
+								<option value="0">전체</option>
+								<option value="1">취소 가능</option>
+							</select>
+						</div>
+						<div class="col pt-1 pl-0">
+							<select class="form-select form-select-sm border-0 text-muted"
+								v-model.number="sort" @change="updateList">
+								<option value="0">최신순</option>
+								<option value="1">오래된 순</option>
+								<option value="2">충전 포인트↑순</option>
+								<option value="3">충전 포인트↓순</option>
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<table class="table table-hover border-bottom">
+							<thead>
+								<tr>
+									<th scope="col" class="col-2">결제일시</th>
+									<th scope="col" class="col-2">충전 금액</th>
+									<th scope="col" class="col-1">취소하기</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr v-for="(payment, index) in list" :key="index">
+									<td class="text-muted fs-small">{{
+										dateFormat(payment.paymentTime) }}</td>
+									<td class="fw-bold fs-small"><span
+										class="text-dark text-truncate">{{
+											comma(payment.paymentPrice) }}p</span></td>
+									<td class="fs-small fw-bold"><a
+										:href="'${root}/payment/refund/' + payment.paymentNo"
+										v-if="payment.refund != ''"><span class="text-primary">{{
+												payment.refund }}</span></a></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="row justify-content-center mt-4">
+						<nav>
+							<ul class="pagination">
+								<li class="page-item" :class="{'disabled': pageList == 0}">
+									<a class="page-link" href="#" @click="prev"> <span
+										aria-hidden="true">&laquo;</span>
+								</a>
+								</li>
+								<li class="page-item" v-for="pageItem in totalPage"
+									:key="pageItem" :class="{'active': pageItem == page}"
+									v-show="parseInt((pageItem - 1) / 10) == pageList"><a
+									class="page-link" href="#" @click="pagination(pageItem)">{{
+										pageItem }}</a></li>
+								<li class="page-item"
+									:class="{'disabled': parseInt((totalPage - 1) / 10) == pageList}">
+									<a class="page-link" href="#" @click="next"> <span
+										aria-hidden="true">&raquo;</span>
+								</a>
+								</li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</div>
+
+		</div>
 		<div class="hide006">회원탈퇴</div>
 	</div>
 

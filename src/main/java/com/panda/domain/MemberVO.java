@@ -22,5 +22,6 @@ public class MemberVO {
 	private String mail_key;
 	private int user_visit;
 	private int user_grade;
+	private int user_pandapay;
 	
 }
