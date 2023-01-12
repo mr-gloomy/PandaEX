@@ -212,7 +212,6 @@
 								<!-- 로그아웃 -->
 								<div class="user-logout">
 <%-- 						<input type="button" onclick="location.href='/member/logout?exUrl=<%=request.getRequestURI().substring(14,request.getRequestURI().indexOf(".jsp")) %>'; " value="로그아웃"> --%>
-								<%=request.getRequestURL() %>
 							<input type="button" onclick="doLogout()" value="로그아웃">
 <%-- 							<input type="button" onclick="location.href='/member/logout?exUrl=<%=request.getHeader("referer") %>'; " value="로그아웃"> --%>
 							
