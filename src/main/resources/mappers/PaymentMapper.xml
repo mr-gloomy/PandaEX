@@ -28,11 +28,11 @@
 		
 <!-- 	</insert> -->
 	
-	<select id="one" resultType="PaymentInsertVO">
+	<select id="one" resultType="com.panda.paymentvo.PaymentInsertVO">
 		select * from payment where payment_no = #{paymentNo}
 	</select>
 	
-	<select id="success"  resultType="PaymentSuccessVO">
+	<select id="success"  resultType="com.panda.paymentvo.PaymentSuccessVO">
 		select p.payment_price, u.user_pandapay from payment p, user u 
 			where u.user_no = p.member_no and p.payment_no = #{paymentNo}
 	</select>
