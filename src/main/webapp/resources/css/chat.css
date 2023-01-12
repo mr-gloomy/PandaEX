@@ -56,6 +56,7 @@
     height: 40px;
     opacity: 0.4;
     z-index: 1001;
+    visibility: hidden;
 }
 .chat .chat-footer .off1{
     position: absolute;
@@ -78,12 +79,14 @@
 	width: 18px;
     height: 18px;
     position: absolute;
+    visibility: hidden;
 }
 .chat .chat-body .chat-top .signal{
 	width: 15px;
     height: 15px;
     margin-left: 150px;
     position: absolute;
+    visibility: hidden;
 }
 .chat .chat-body .chat-menu{
 	display: flex;
@@ -97,6 +100,7 @@
     height: 27px;
     margin-top: 10px;
     opacity: 0.7;
+    visibility: hidden;
 }
 .chat .chat-body .chat-menu .chatting:hover,
 .chat .chat-body .chat-menu .option:hover{
