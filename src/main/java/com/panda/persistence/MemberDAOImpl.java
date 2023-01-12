@@ -154,11 +154,11 @@ public class MemberDAOImpl implements MemberDAO{
 			return sqlSession.selectList(NAMESPACE+".getMemberList", id);
 		}
 
-		@Override
-		public Integer mypupdate(MemberVO vo) throws Exception {
-			
-			return sqlSession.update(NAMESPACE+".updatemyp", vo);
-		}
+//		@Override
+//		public Integer mypupdate(MemberVO vo) throws Exception {
+//			
+//			return sqlSession.update(NAMESPACE+".updatemyp", vo);
+//		}
 
 
 		

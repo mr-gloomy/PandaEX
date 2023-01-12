@@ -59,6 +59,6 @@ public interface MemberDAO {
 			
 			public int updatePwF(MemberVO vo) throws Exception;
 			
-			public Integer mypupdate(MemberVO vo) throws Exception;
+//			public Integer mypupdate(MemberVO vo) throws Exception;
 			
 }

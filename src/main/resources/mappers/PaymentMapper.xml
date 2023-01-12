@@ -79,7 +79,7 @@
 <!-- 	 	) where rn between #{begin} and #{end}									 -->
 <!-- 	</select> -->
 
-	<select id="refundList" resultType="PaymentInsertVO">
+	<select id="refundList" resultType="com.panda.paymentvo.PaymentInsertVO">
 		select p.payment_price, p.payment_time, p.payment_no from payment p, user u 
        		where u.user_no = #{memberNo} 
         and 
@@ -94,7 +94,7 @@
 		update payment set payment_status = 0 where payment_no=#{paymentNo}
 	</update>
 	
-	<update  id="refundMember" parameterType="PaymentInsertVO">
+	<update  id="refundMember" parameterType="com.panda.paymentvo.PaymentInsertVO">
 		update user set user_pandapay =  user_pandapay - #{paymentPrice} where user_no = #{memberNo}
 	</update>
 	
