@@ -94,7 +94,6 @@ public class AuctionController {
 	  
 	  model.addAttribute("auctionList", service.getAuctionListAll(vo));
 	  
-	  
    }
    
    
