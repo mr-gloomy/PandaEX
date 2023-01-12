@@ -24,14 +24,14 @@
 		 function doLogout() {
 		    	var cur = window.location.href;
 		   		var cur2 = cur.substring(22);
-		    	alert(cur2.replace('&','!rep!'));
 		    	location.href="/member/logout?exUrl="+cur2.replace('&','!rep!');
 		 }
 		 function doLogin() {
 		    	var cur = window.location.href;
 		   		var cur2 = cur.substring(22);
-		    	alert(cur2.replace('&','!rep!'));
-		    	location.href="/member/login?exUrl="+cur2.replace('&','!rep!');
+		   		var theForm = document.getElementById('login');
+		   		theForm.action="/member/login?exUrl="+cur2.replace('&','!rep!');
+		   		theForm.submit();
 		 }
 	</script>
 
@@ -339,7 +339,7 @@
 <%-- 		<form action="/member/login?exUrl=<%=request.getRequestURI().substring(14,request.getRequestURI().indexOf(".jsp")) %>" method="post" id="login"> --%>
 			
 			<form onsubmit="doLogin()" method="post" id="login">
-			<input type="hidden" id="exUrl">
+<!-- 			<input type="hidden" id="exUrl"> -->
 		<div class="modal-text">
 			<img src="/resources/images/icons/user.png" alt="id입력"
 				class="userimg">
