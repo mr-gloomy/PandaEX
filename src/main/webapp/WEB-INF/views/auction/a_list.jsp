@@ -111,7 +111,7 @@
 						<div class="block2">
 							<div class="block2-pic hov-img0">
 								<a href="/auction/a_read?auction_no=${avo.auction_no }&user_no=${avo.user_no}">
-								<img src="/resources/images/product-15.jpg" alt="IMG-PRODUCT"></a>
+								<img src="${avo.thumbnail }" alt="IMG-PRODUCT"></a>
 							</div>
 	
 							<div class="block2-txt flex-w flex-t p-t-14">

@@ -7,8 +7,8 @@ import lombok.Data;
 @Data
 public class AuctionVO {
    private Integer auction_no;         	//경매번호
-   private String auction_file;			//경매이미지(파일)
-   private String auction_image;		//경매이미지(썸네일)
+   private String uploadFile;			//경매이미지(파일)
+   private String thumbnail;			//경매이미지(썸네일)
    private String auction_category;		//경매카테고리
    private String auction_title;		//경매상품명
    private String auction_detail;		//경매상세설명

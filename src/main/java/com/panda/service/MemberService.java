@@ -71,7 +71,7 @@ public interface MemberService {
 		public void insertRep(ReportVO vo) throws Exception;
 
 
-
+		
 		
 
 }

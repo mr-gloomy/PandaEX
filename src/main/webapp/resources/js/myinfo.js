@@ -163,4 +163,6 @@ $(function(){
 		$(hide5).css('display','none');
 		$(hide3).css('display','none');
 	});
+
 });
+
