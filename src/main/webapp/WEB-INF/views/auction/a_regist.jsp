@@ -85,11 +85,11 @@
 <input type="hidden" name="auction_trade" value="0">
 <!-- 0:등록, 1:예약 2:완료 -->
 <!-- 작성자 -->
-<input type="hidden" name="${sessionScope.user_id}" value="user_id">
+
 
 <!-- 본문 -->
 <form method="post" enctype="multipart/form-data">
-	
+<input type="hidden" name="${sessionScope.user_no}" value="user_no">
 	<div class="container">
 		<div>
 				<div class="card">
@@ -124,11 +124,11 @@
 								</div>
 							</div>
 						</div>
-<%-- 						이미지 실제경로 : <%=request.getRealPath("/") %> --%>
+						이미지 실제경로 : <%=request.getRealPath("/") %>
 						
 						<div class="row py-4 border-bottom">
 							<div class="col-sm-2">
-								<label for="goods_title" class="form-label"></label>
+								<label for="auction_title" class="form-label"></label>
 							</div>
 							<div class="col-sm">
 								<br>* 상품 이미지는 640x640에 최적화 되어 있습니다. 

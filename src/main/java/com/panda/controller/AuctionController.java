@@ -25,9 +25,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.panda.domain.AuctionVO;
 import com.panda.domain.Criteria;
+import com.panda.domain.MemberVO;
 import com.panda.domain.PageVO;
 import com.panda.domain.SearchVO;
 import com.panda.service.AuctionService;
+import com.panda.service.MemberService;
 
 
 @Controller
@@ -35,6 +37,9 @@ import com.panda.service.AuctionService;
 public class AuctionController {
    
    private static final Logger mylog = LoggerFactory.getLogger(AuctionController.class);
+   
+   @Inject
+   private MemberService mService;
    
    @Inject
    private AuctionService service;
@@ -54,15 +59,22 @@ public class AuctionController {
    
    // 기부경매 상품 등록하기 POST
    @RequestMapping(value = "/a_regist", method = RequestMethod.POST)
-   public String a_registPOST(AuctionVO avo, MultipartFile file, RedirectAttributes rttr) throws Exception {
+   public String a_registPOST(AuctionVO avo, MultipartFile file, RedirectAttributes rttr,HttpSession session) throws Exception {
 	   mylog.debug("/auction/a_regist(POST) 호출");
 	   
+	   String user_id = (String)session.getAttribute("user_id");
+	   
 	   mylog.debug(avo.toString());
+	   MemberVO vo = mService.getMember(user_id);
+	   mylog.info(vo.toString());
+	   avo.setUser_no(vo.getUser_no());
 	   
 	   service.insertAuction(avo);
 	   mylog.debug("경매 상품 등록 완료");
 	   
 	   rttr.addFlashAttribute("result", "creatOK");
+	   
+	   
 	   
 	   //이미지 업로드
 	   String imgUploadPath = uploadPath + File.separator + "imgUpload";
@@ -75,8 +87,8 @@ public class AuctionController {
 			fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
 		}
 
-		avo.setAuction_file(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
-		avo.setAuction_image(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
+		avo.setUploadFile(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+		avo.setThumbnail(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
 	   
 		service.insertAuction(avo);
 		
