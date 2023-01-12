@@ -32,11 +32,7 @@
 		where user_id=#{user_id} and user_pw=#{user_pw}	
 	</select>
 	
-	
- 	<select id="getMemberList" resultType="MemberVO">
- 	 select * from user
- 	 where user_id != #{user_id} 	
- 	</select>
+
  	
 	<select id="findKakao" resultType="HashMap">
 		select * from kakao_user where k_name=#{nickname} and k_email=#{email}
@@ -96,15 +92,31 @@
 	</update>
 	
 	
+	<!-- 닉네임,패스워드변경 -->
+	
+<!-- 	  <update id="updatemyp"> -->
+<!--     update user set user_nick=#{user_nick}, user_pw=#{user_pw}  -->
+<!--     where user_id = #{user_id}   -->
+<!--   	</update> -->
 	
 	
 	
 	
 	
-	<!-- 로그인한 회원의 정보 불러오기 -->
+	
+	<!-- 관리자용 회원조회 -->
 	<select id="getMembers" resultType="MemberVO">
-		select * from user where user_id=#{user_id}
+		select * from user where user_no=#{user_no}
 	</select>
+		
+ 	<select id="getMemberList" resultType="MemberVO">
+ 	 select * from user
+ 	 where user_id != #{user_id} 	
+ 	</select>
+	<!-- 관리자용 회원조회 -->
+	
+	
+	
 	
 	<!-- 정보 수정 -->
 	<update id="modify">

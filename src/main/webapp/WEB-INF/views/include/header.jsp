@@ -143,8 +143,8 @@
 					</div>
 					<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11" id="moveToMyShop"
 						style="padding-bottom: 10px; padding-right: 0px;">
-						<button memo="my shop 이동"> <img class="panda-header-shop"
-							src="/resources/images/icons/panda-shop.png" alt="panda-shop">
+						<button memo="my shop 이동"> 
+						<img class="panda-header-shop" src="/resources/images/icons/panda-shop.png" alt="panda-shop">
 						</button>
 <!-- 						<a href="#" memo="my shop 이동"> <img class="panda-header-shop" -->
 <!-- 							src="/resources/images/icons/panda-shop.png" alt="panda-shop"> -->
@@ -158,7 +158,7 @@
 							src="/resources/images/icons/panda-user.png" alt="panda-user">
 						</a>
 					</div>
-					<div class="hoversup"></div>
+					<div class="hoversup" style="width:70px;"></div>
 					<div class="category">
 						<div class="user-sel-images">
 								<c:if test="${user_id eq ''}">
@@ -198,7 +198,7 @@
 											src="/resources/images/icons/right-arrow.png"></a></li>
 									</c:if>
 									<c:if test="${user_id.equals('admin') }">
-									<li><a class="my" href="/admin/index">관리자페이지<img class="right"
+									<li><a class="my" href="/admin/memberList">관리자페이지<img class="right"
 											src="/resources/images/icons/right-arrow.png"></a></li>
 									</c:if>
 									<li><a class="my" href="#">내 상점<img class="right"

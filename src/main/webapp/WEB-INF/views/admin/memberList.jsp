@@ -41,7 +41,7 @@
 							<td style="color:red;">블랙회원</td>
 								</c:when>
 							</c:choose>
-						<td><a href="/admin/memberDetail">상세보기</a></td>
+						<td><a href="/admin/memberDetail?user_no=${mvo.user_no }">상세보기</a></td>
 					</tr>
 					</c:forEach>
 			</tbody>
@@ -55,7 +55,7 @@
 		
 		<div class="row p-2 mt-2">
 			<!-- 검색창 -->
-			<form action="list" method="get">
+			<form action="" method="get">
 				<div class="row justify-content-md-center">
 					<div class="col-2">
 						<select name="type" class="form-select">
