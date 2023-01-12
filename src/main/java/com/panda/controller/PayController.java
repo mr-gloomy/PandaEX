@@ -67,7 +67,8 @@ public class PayController {
 		
 		//결제 준비(ready) 요청을 진행
 //		int paymentNo = paymentDao.paymentSequence();
-		int paymentNo = 1213143333;
+		int paymentNo = (int)((Math.random()+1)*100000000);
+//		int paymentNo = 1213143335;
 		KakaoPayReadyRequestVO requestVO = 
 									KakaoPayReadyRequestVO.builder()
 //												.partner_order_id(String.valueOf(paymentNo))
@@ -113,7 +114,7 @@ public class PayController {
 		
 		PurchaseVO purchaseVO = (PurchaseVO) session.getAttribute("purchase");
 		
-		int paymentNo = (int) session.getAttribute("paymentNo");
+		int paymentNo = (int)session.getAttribute("paymentNo");
 		
 		//주어진 정보를 토대로 승인(approve) 요청을 보낸다
 		requestVO.setPg_token(pg_token);

@@ -12,8 +12,10 @@
 <!-- 	</select> -->
 	
 <!-- 	<select id="sequence" resultType="int"> -->
-<!-- 		select payment_seq.nextval from dual -->
+<!-- 		select payment_no+1 from payment where payment_no = #{paymentNo} -->
 <!-- 	</select> -->
+	
+
 	
 	<insert id="insert">
 		insert into payment(payment_no, member_no, payment_tid, payment_price, payment_status)
