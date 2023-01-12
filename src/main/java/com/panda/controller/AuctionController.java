@@ -1,6 +1,7 @@
 package com.panda.controller;
 
 import java.io.File;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -45,7 +46,9 @@ public class AuctionController {
    // 기부경매 상품 등록하기 GET
    @RequestMapping(value = "/a_regist", method = RequestMethod.GET)
    public void a_registGET() throws Exception {
+	   
 	   mylog.debug("/auction/a_regist(GET) 호출 -> 페이지 이동");
+//	   return "redirect:/auction/a_regist";
    }
    
    
@@ -90,7 +93,6 @@ public class AuctionController {
 	  session.setAttribute("updateCheck", true);
 	  
 	  model.addAttribute("auctionList", service.getAuctionListAll(vo));
-	  
 	  
    }
    

@@ -9,7 +9,8 @@ import lombok.NoArgsConstructor;
 
 @Data
 public class PaymentInsertVO {
-	private int paymentNo, memberNo, paymentPrice;
+	private int memberNo, paymentPrice;
+	private int paymentNo;
 	private Timestamp paymentTime;
 	private String paymentTid, paymentStatus;
 	
