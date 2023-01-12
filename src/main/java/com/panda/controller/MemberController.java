@@ -112,9 +112,6 @@ public class MemberController {
 			//return "redirect:/member/main";
 			resultURI = "redirect:/main/index";
 			session.setAttribute("user_id", vo.getUser_id());
-			session.setAttribute("user_name", vo.getUser_name()); 
-			session.setAttribute("user_nick", vo.getUser_nick());
-
 		}else {
 			//return "redirect:/member/login";
 			response.setContentType("text/html; charset=UTF-8");
