@@ -198,11 +198,40 @@
 		</div>
 		<!-- 001 hide -->
 		<div class="hide002">내 경매</div>
-		<div class="hide003">
+		<div class="hide003" style="height: 500px;">
 		
-		내 정보 수정
-		${user }
-		<input type="">
+		<p class="mtop-1">나의 정보 수정</p>
+		<strong class="mtop-2">${user.user_name }님의 PANDA 회원개인정보 입니다.
+		<br>개인정보를 제3자에게 공유,대여등을 금지합니다.</strong>
+
+			<div class="myp-modify">
+				<div class="modify-top">
+					<p class="mtop-3">회원 정보</p>
+				</div>
+				<div class="modify-body">
+					<ul class="mbody-1">
+						<li>이름</li>
+						<li>아이디</li>
+						<li>닉네임</li>
+						<li>휴대전화</li>
+						<li>이메일</li>
+						<li>변경할 비밀번호</li>
+						<li>비밀번호 재확인</li>
+					</ul>
+					<form action="" method="post" id="" name="">
+					<ul class="mbody-2">
+						<li><input type="text" value="${user.user_name }" readonly></li>
+						<li><input type="text" value="${user.user_id }" readonly></li>
+						<li><input type="text" class="nickmo" name="user_nick" value="${user.user_nick }" maxlength="10"></li>
+						<li><input type="text" value="${user.user_tel }" readonly></li>
+						<li><input type="text" name="user_password" value="${user.user_email }" readonly></li>
+						<li><input type="password" value="" placeholder="변경할 비밀번호" maxlength="20"></li>
+						<li><input type="password" value="" placeholder="비밀번호 재확인" maxlength="20"></li>
+					</ul>
+					 <button type="submit" id="" name="" class="">내정보 변경</button> 
+					</form>
+				</div>
+			</div>
 		</div>
 		<div class="hide004">
 			<div class="row flex-fill d-flex flex-column" >
