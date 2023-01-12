@@ -4,7 +4,6 @@ import java.sql.Timestamp;
 
 import lombok.Data;
 
-@Data
 public class ReportVO {
 	private int rep_no;
 	private int goods_no;

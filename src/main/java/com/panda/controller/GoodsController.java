@@ -31,6 +31,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.panda.domain.GoodsVO;
+import com.panda.domain.MemberVO;
 import com.panda.domain.SearchVO;
 import com.panda.service.GoodsService;
 import com.panda.service.MemberService;
@@ -107,15 +108,15 @@ public class GoodsController {
 	public void listGET(HttpSession session , Model model,SearchVO vo) throws Exception {
 		mylog.debug(" /Goods/list 호출 -> DB정보 가져와서 출력 ");
 		
-		// 전달받은 정보 x
 		
+		// 전달받은 정보 x
 		// 세션객체 - 글 조회수 증가 체크정보
 		session.setAttribute("updateCheck", true);		
 		
 		// 연결되어 있는 뷰페이지로 정보 전달 (Model 객체)
 		model.addAttribute("GoodsList", service.getGoodsListAll(vo));
 		model.addAttribute("vo",mService.getMember((String)session.getAttribute("user_id")));
-		// 페이지 이동(/goods/list.jsp)		
+		// 페이지 이동(/goods/list.jsp)
 	}
 	
 	// 게시판 본문보기

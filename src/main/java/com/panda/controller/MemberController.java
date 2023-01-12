@@ -198,25 +198,6 @@ public class MemberController {
 		
 	}
 	
-	@PostMapping("/reportA")
-	public void reportUserA(ReportVO vo, HttpServletResponse response,int user_no) throws Exception {
-		
-		AuctionVO mVo = aService.getUser(user_no);
-		
-		vo.setRep_u_id(mVo.getUser_id());
-		
-		service.insertRep(vo);
-		
-		response.setContentType("text/html; charset=UTF-8");
-		PrintWriter out=response.getWriter();
-		out.println("<script>");
-		out.println("alert('신고 완료!');");
-		out.println("history.back()");
-		out.println("</script>");
-		out.close();
-		
-	}
-	
 	// 아이디 찾기
 		@RequestMapping(value="/findId",method=RequestMethod.GET)
 		public String findIdGET() throws Exception {

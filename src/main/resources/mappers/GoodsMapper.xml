@@ -17,11 +17,13 @@
 	<!-- 상품 목록(all) -->
 	<select resultType="GoodsVO" id="listAll">
 		select * from goods 
-		<if test="k!=null">
+		<if test="k!=null and k!=''">
 			where goods_title like concat('%',#{k},'%')
+			<if test="l!=null and l!=''">
 			and user_addr=#{l}
+			</if>
 		</if>
-		<if test="k==null and l!=null">
+		<if test="k=='' and l!=null">
 			where user_addr=#{l}
 		</if>
 		<if test="s==0">
