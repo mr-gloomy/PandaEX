@@ -5,6 +5,7 @@
 <html lang="en">
 <head>
 <title>PANDA</title>
+<link rel="shortcut icon" type="image/x-icon" href="/resources/images/icons/PANDA.png">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 헤더 -->
@@ -71,22 +72,22 @@
 				<div class="card-body">
 					<div>
 						<div class="col-sm">
-							<h2>중고상품 수정</h2><hr>
+							<h2>중고상품 수정하기</h2><hr>
 						</div>
 					</div>
 					<input type="hidden" name="goods_no" value=${vo.goods_no }>
 					
 					<div class="row py-4 border-bottom">
 						<div class="col-sm-2">
-							<label class="form-label">이미지 (<span class="text-success">{{ fileCount }}</span>/3 </label>
+							<label class="form-label">이미지</label>
 						</div>
 						<div class="col-sm d-flex">
-							<label class="btn btn-outline-success pt-5" id="add_file"> 
-								<i class="fa-solid fa-camera fa-2x"></i><br> 
-								   사진 추가 
-								<input class="form-control d-none" type="file" id="file1" accept=".png, .jpg, .gif" multiple="multiple"/>
-							</label>
-						</div>
+							<div class="inputArea">
+							 <label for="gdsImg"></label>
+							 <input type="file" id="${vo.thumbnail}" name="${vo.thumbnail}" accept=".jpg,.png,.jpeg" readonly="readonly">
+							 <div class="select_img"><img src="" /></div>
+							</div>
+						</div>					
 					</div>
 					<div class="row py-4 border-bottom">
 						<div class="col-sm-2">
@@ -108,10 +109,7 @@
 						</div>
 						<div class="col-sm">
 							<input type="text" class="form-control" name="goods_title" value="${vo.goods_title }"
-								   placeholder="상품명을 입력해주세요" maxlength="30" />
-							<div class="text-right mt-1">
-								<span class="text-success">{{ titleCount }}</span> / 30
-							</div>
+								   placeholder="상품명을 입력해주세요" maxlength="30" id="searchKeyword"/>
 						</div>
 					</div>
 					<div class="row py-4 border-bottom">
@@ -210,6 +208,36 @@
 					</div>
 					<div class="row py-4 border-bottom">
 						<div class="col-sm-2">
+							<label class="form-label">거래상태</label>
+						</div>
+						<div class="col-sm">
+							<div class="col-sm-10">
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="radio" name="goods_trade" value="판매중"
+									<c:if test="${vo.goods_trade == '판매중'}">
+									checked									
+									</c:if>
+									><label class="form-check-label" for="inlineRadio1">판매중</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="radio" name="goods_trade" value="예약중"
+									<c:if test="${vo.goods_trade == '예약중'}">
+									checked									
+									</c:if>
+									><label class="form-check-label" for="inlineRadio2">예약중</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="radio" name="goods_trade" value="판매완료"
+									<c:if test="${vo.goods_trade == '판매완료'}">
+									checked									
+									</c:if>
+									><label class="form-check-label" for="inlineRadio3">판매완료</label>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row py-4 border-bottom">
+						<div class="col-sm-2">
 							<label class="form-label">가격</label>
 						</div>
 						<div class="col-sm">
@@ -224,9 +252,6 @@
 						</div>
 						<div class="col-sm">
 							<textarea id="summernote" name="goods_detail" rows="5" maxlength="1000" >${vo.goods_detail }</textarea>
-							<div class="text-right mt-1">
-								<span class="text-success">{{ detailCount }}</span> / 1000
-							</div>
 							<script>
 							 $('#summernote').summernote({
 			    			        tabsize: 2,
@@ -246,7 +271,8 @@
 					</div>
 					<div class="G_btn" align="center">
 						<button type="submit" class="btn btn-success py-2 px-3">수정완료</button>
-						<button onclick="href='/goods/list';" class="btn btn-success py-2 px-3">수정취소</button>
+						<button onclick="history.back();" class="btn btn-success py-2 px-3">수정취소</button>
+						<button onclick="location.href='/goods/remove?goods_no=${vo.goods_no}';" class="btn btn-success py-2 px-3">삭제하기</button>
 					</div>
 				</div>
 			</div>

@@ -94,7 +94,15 @@ public class ChattingHandler extends TextWebSocketHandler {
 					chatMap.put("send_id", id);
 					chatMap.put("receive_id", mapReceive.get("receive_id"));
 					chatMap.put("bang_id", mapReceive.get("bang_id"));
-					chatMap.put("goods_no", Integer.parseInt(mapReceive.get("goods_no")));
+					logger.info("ddddddddddddddddddddddddddddddd1");
+					if (mapReceive.get("goods_no")!="") {
+						chatMap.put("goods_no", Integer.parseInt(mapReceive.get("goods_no")));
+					}
+					
+					if (mapReceive.get("auction_no")!="") {
+						chatMap.put("auction_no", Integer.parseInt(mapReceive.get("auction_no")));
+					}
+					logger.info("ddddddddddddddddddddddddddddddd2");
 					chatMap.put("message", jsonStr);
 					chatMap.put("msg_date", mapReceive.get("time"));
 					service.recordMsg(chatMap);

@@ -331,4 +331,11 @@ public class AdminController {
 		return resultURI;
 	}
 	
+	@RequestMapping(value = "/memberDetail", method = RequestMethod.GET)
+	public void memberDetailGET()throws Exception{
+		
+		
+		
+	}
+	
 }

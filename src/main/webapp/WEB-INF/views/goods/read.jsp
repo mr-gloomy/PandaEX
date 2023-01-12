@@ -6,6 +6,7 @@
 <html lang="en">
 <head>
 <title>PANDA</title>
+<link rel="shortcut icon" type="image/x-icon" href="/resources/images/icons/PANDA.png">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 헤더 -->
@@ -14,6 +15,7 @@
 
 <!-- CSS -->
 <link rel="stylesheet" type="text/css" href="/resources/css/reset.css">
+<script src="https://kit.fontawesome.com/b57f99e8ff.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
 <link rel="stylesheet" type="text/css" href="/resources/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/resources/css/custom.css">
@@ -75,7 +77,7 @@
 							<h5 class="fw-bold">판매가격</h5>
 						</div>
 						<div class="col p-0">
-							<h3 class="text-info fw-bold">
+							<h3 class="text-success fw-bold">
 								<span class="comma">
 									<fmt:formatNumber value="${vo.goods_price }" pattern="#,###"/>
 								</span> 원
@@ -114,17 +116,15 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="col p-0">
-							<a class="btn btn-info btn-lg btn-block py-3"
-								href="/auctionara/chat" role="button"><i
-								class="fa-solid fa-comments-dollar pr-2"></i> 1:1 채팅하기  </a>
-						</div>
 						<div class="col">
-							<button type="button"
-								class="btn btn-success btn-lg btn-block py-3"
-								data-bs-toggle="modal" data-bs-target="#cancelAuctionModal">
-								<i class="fa-solid fa-ban pr-2"></i> 바로구매
+							<button type="button" class="btn btn-warning btn-lg btn-block py-3" style="color: white;"> 
+								<i class="fa-sharp fa-solid fa-paper-plane"></i> 판다페이 결제하기
 							</button>
+						</div>
+						<div class="col p-0">
+							<a class="btn btn-success btn-lg btn-block py-3"
+								href="/addon/chat" role="button"><i
+								class="fa-solid fa-comments-dollar pr-2"></i> 1:1 채팅하기  </a>
 						</div>
 					</div>
 				</div>
@@ -150,14 +150,6 @@
 							${vo.goods_detail }
 						</nav>
 					</div>
-					<div class="row mb-3">
-						<h5 class="fw-bold">첨부파일</h5>
-					</div>
-					<div class="row">
-					    <c:forEach var="fileName" items="${map.fileList }">
-					        <h3><a href="/download?fileName=${fileName }">${fileName }</a></h3>
-					    </c:forEach>
-					</div>
 				</div>
 				<div class="col">
 					<div class="row ml-3 mb-3">
@@ -169,8 +161,8 @@
 								src="/resources/image/default_attachment.jpg">
 						</div>
 						<div class="col ml-4">
-							<h6 class="row fw-bold mb-2">${avooo.user_nick }</h6>
-							<h6 class="row text-muted">${avooo.user_area } ${avooo.user_addr }</h6>
+							<h6 class="row fw-bold mb-2">${vo.user_nick }</h6>
+							<h6 class="row text-muted">${vo.user_area } ${vo.user_addr }</h6>
 						</div>
 					</div>
 					<div class="row ml-3 py-3 border-bottom">
@@ -183,97 +175,32 @@
 					</div>
 					<div class="row ml-3 pt-3 pb-2">
 						<div class="text-muted">가입일 : 
-						<fmt:formatDate value="${avooo.user_regdate }" pattern="yyyy-MM-dd"/></div>
+						<fmt:formatDate value="${vo.user_regdate }" pattern="yyyy-MM-dd"/></div>
 					</div>
 					<div class="row ml-3">
 						<div class="text-muted">누적 제재 : 4회</div>
+					</div><hr>
+					<div class="" align="right">
+						<a href="/goods/modify?goods_no=${vo.goods_no}"> 수정하기 </a>&nbsp;&nbsp;&nbsp;
+						<a href="/goods/remove?goods_no=${vo.goods_no}" > 삭제하기 </a>
 					</div>
 				</div>
 			</div>
-			<div class="modal fade" id="modal465" tabindex="-1"
-				aria-hidden="true">
-				<div class="photo-modal-wrap">
-					<div
-						class="modal-dialog modal-dialog-centered border-0 photo-modal">
-						<div class="modal-content">
-							<img src="/auctionara/attachment/download?attachmentNo=465"
-								class="img-fluid img-thumbnail">
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="modal fade" id="biddingModal" tabindex="-1"
-				aria-labelledby="biddingModalLabel" aria-hidden="true">
-				<div class="modal-dialog modal-dialog-centered">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="biddingModalLabel">
-								<i class="fa-solid fa-gavel pr-2"></i>입찰하기
-							</h5>
-							<button type="button" class="btn-close close"
-								data-bs-dismiss="modal">
-								<span aria-hidden="true">×</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							<div class="row">
-								<div class="col-10">
-									<div class="form-group pl-2">
-										<label for="inputBid"> 입찰 가격을 입력해주세요 ( 입찰 단위 : <span
-											class="comma text-success">1,000</span> 원 )
-										</label><input type="number" class="form-control" id="inputBid"
-											autocomplete="off" max="999999900"><small
-											class="form-text text-info pl-1">일만오천원</small>
-										<div class="invalid-feedback">최고 입찰가보다 높고, 입찰 단위에 부합하는
-											금액만 가능합니다.</div>
-									</div>
-								</div>
-								<div class="col align-self-center p-0">원</div>
-							</div>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary">입찰 단위만큼
-								올리기</button>
-							<button type="button" class="btn btn-info"
-								data-bs-dismiss="modal">즉시 낙찰하기</button>
-							<button type="button" class="btn btn-success" id="insertBid"
-								data-bs-dismiss="modal">입찰하기</button>
-							<button type="button" class="btn btn-success d-none"
-								id="blindBid" data-bs-dismiss="modal">입찰하기</button>
-						</div>
-						<!--v-if-->
-					</div>
-				</div>
-			</div>
-			<div class="modal fade" id="failBiddingModal" aria-hidden="true"
-				aria-labelledby="failBiddingModalLable" tabindex="-1">
-				<div class="modal-dialog modal-dialog-centered">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="failBiddingModalLable">😢 입찰 실패</h5>
-							<button type="button" class="btn-close close"
-								data-bs-dismiss="modal">
-								<span aria-hidden="true">×</span>
-							</button>
-						</div>
-						<div class="modal-body">누군가 이미 낙찰하여 경매가 종료되었습니다</div>
-					</div>
-				</div>
-			</div>
+			
 			<div class="modal fade" id="reportModal"
 				aria-labelledby="reportModalLable" tabindex="-1" aria-hidden="true"
 				style="display: none;">
 				<div class="modal-dialog modal-dialog-centered">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="reportModalLable">🥺 경매 신고하기</h5>
+							<h5 class="modal-title" id="reportModalLable">🥺 신고하기</h5>
 							<button type="button" class="btn-close close"
 								data-bs-dismiss="modal">
 								<span aria-hidden="true">×</span>
 							</button>
 						</div>
 						<div class="modal-body">
-							경매 신고 이유를 알려주세요! <input type="text" class="form-control mt-2"
+							신고 이유를 알려주세요! <input type="text" class="form-control mt-2"
 								autocomplete="off" maxlength="100">
 							<div class="text-right mt-1">
 								<span class="text-success">0</span> / 100
@@ -282,77 +209,9 @@
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary"
 								data-bs-dismiss="modal">돌아가기</button>
-							<button type="button" class="btn btn-success"
+							<button type="button" class="btn btn-secondary"
 								data-bs-dismiss="modal" disabled="">신고하기</button>
 						</div>
-					</div>
-				</div>
-			</div>
-			<div class="modal fade" id="stopAuctionModal" aria-hidden="true"
-				aria-labelledby="stopAuctionModalLable" tabindex="-1"
-				style="display: none;">
-				<div class="modal-dialog modal-dialog-centered">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="stopAuctionModalLable">
-								<i class="fa-solid fa-ban pr-2 text-success"></i> 경매 중지
-							</h5>
-							<button type="button" class="btn-close close"
-								data-bs-dismiss="modal">
-								<span aria-hidden="true">×</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							입찰자가 있는 경매를 중지하면 <span class="fw-bold text-success">사이트
-								이용에 관한 불이익</span>을 받게 됩니다. <br>
-							<br> 정말 경매를 중지하시겠습니까?
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary"
-								data-bs-dismiss="modal">아니오</button>
-							<button type="button" class="btn btn-success"
-								data-bs-dismiss="modal">예</button>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="modal fade" id="cancelAuctionModal"
-				aria-labelledby="cancelAuctionModalLable" tabindex="-1"
-				aria-hidden="true" style="display: none;">
-				<div class="modal-dialog modal-dialog-centered">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="cancelAuctionModalLable">
-								<i class="fa-solid fa-ban pr-2 text-success"></i> 경매 취소
-							</h5>
-							<button type="button" class="btn-close close"
-								data-bs-dismiss="modal">
-								<span aria-hidden="true">×</span>
-							</button>
-						</div>
-						<div class="modal-body">정말 경매를 취소하시겠습니까?</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary"
-								data-bs-dismiss="modal">아니오</button>
-							<button type="button" class="btn btn-success"
-								data-bs-dismiss="modal">예</button>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="modal fade" id="failCancleModal" aria-hidden="true"
-				aria-labelledby="failCancleModalLable" tabindex="-1">
-				<div class="modal-dialog modal-dialog-centered">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="failCancleModalLable">🥺 경매
-								취소/중지 실패</h5>
-							<button type="button" class="btn-close close"
-								data-bs-dismiss="modal">
-								<span aria-hidden="true">×</span>
-							</button>
-						</div>
-						<div class="modal-body">이미 낙찰된 경매이므로 경매를 취소하거나 중지할 수 없습니다.</div>
 					</div>
 				</div>
 			</div>
@@ -361,7 +220,7 @@
 
 
 
-		<style scoped="">
+<style>
 .carousel-item img {
 	object-fit: cover;
 	height: 26em;

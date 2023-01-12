@@ -20,9 +20,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -31,6 +33,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.panda.domain.GoodsVO;
 import com.panda.domain.SearchVO;
 import com.panda.service.GoodsService;
+import com.panda.service.MemberService;
 
 @Controller
 @RequestMapping("/goods/*")
@@ -42,6 +45,9 @@ public class GoodsController {
 	// 서비스 객체-주입
 	@Inject
 	private GoodsService service;
+	
+	@Inject
+	private MemberService mService;
 	
 	@Resource(name="uploadPath")
 	private String uploadPath;
@@ -89,31 +95,32 @@ public class GoodsController {
 		// 4. 페이지로 이동(list페이지)
 		
 		
-		return "redirect:/goods/list";
+		return "redirect:/goods/list?s=0";
 	}
 		
 	// 상품목록(All)
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public void listGET(HttpSession session , Model model,@ModelAttribute("result") String result,SearchVO vo) throws Exception {
+	public void listGET(HttpSession session , Model model,SearchVO vo) throws Exception {
 		mylog.debug(" /Goods/list 호출 -> DB정보 가져와서 출력 ");
 		
 		// 전달받은 정보 x
-		mylog.debug(" 전달정보 : " + result);
 		
 		// 세션객체 - 글 조회수 증가 체크정보
 		session.setAttribute("updateCheck", true);		
 		
 		// 연결되어 있는 뷰페이지로 정보 전달 (Model 객체)
 		model.addAttribute("GoodsList", service.getGoodsListAll(vo));
-		
+		model.addAttribute("vo",mService.getMember((String)session.getAttribute("user_id")));
 		// 페이지 이동(/goods/list.jsp)		
 	}
 	
 	// 게시판 본문보기
 	@RequestMapping(value = "/read",method = RequestMethod.GET)
-	public void readGET(Model model, @RequestParam("goods_no") int goods_no, HttpSession session) throws Exception{
+	public void readGET(@ModelAttribute("goods_no") int goods_no, 
+							@ModelAttribute("user_no") int user_no, Model model, HttpSession session) throws Exception{
 		// 전달정보 (goods_no) 
 		mylog.debug("전달정보 (goods_no): " + goods_no);
+		mylog.debug("전달정보 (user_no): " + user_no);
 		
 		// 세션객체 
 		boolean isUpdateCheck = false;
@@ -133,9 +140,12 @@ public class GoodsController {
 		}
 		
 		// 서비스 -> DAO (특정 글번호에 해당하는 정보 가져오기)
-		GoodsVO vo = service.getGoods(goods_no);
+		GoodsVO vo = new GoodsVO();
+		vo.setGoods_no(goods_no);
+		vo.setUser_no(user_no);
+				
 		// 연결된 뷰페이지로 정보 전달(model)	
-		model.addAttribute("vo", vo);
+		model.addAttribute("vo", service.getGoods2(vo));
 		
 	}
 	
@@ -160,7 +170,7 @@ public class GoodsController {
 		service.updateGoods(vo);
 		
 		// 페이지 이동(/goods/list)
-		return "redirect:/goods/list";
+		return "redirect:/goods/list?s=0";
 	}
 
 	// 글 삭제하기
@@ -173,7 +183,26 @@ public class GoodsController {
 		service.removeGoods(goods_no);
 		
 		// 게시판 리스트로 이동(/goods/list)
-		return "redirect:/goods/list";
+		return "redirect:/goods/list?s=0";
+	}
+	
+	// 상품 찜
+	@PostMapping(value="/list/{goods_no}")
+	@ResponseBody
+	public int updateLikePOST(@RequestParam("goods_no") int goods_no, 
+							  @RequestParam("goods_like") int goods_like,
+							  @RequestParam("user_no") int user_no, 
+							  HttpSession session, Model model) throws Exception {
+
+		mylog.debug("goods_no : " + goods_no);
+		
+		GoodsVO vo = new GoodsVO();
+		
+		vo.setGoods_no(goods_no);
+		vo.setUser_no(user_no);
+		vo.setGoods_like(goods_like);
+		
+		return service.updateLike(vo);
 	}
 
 }

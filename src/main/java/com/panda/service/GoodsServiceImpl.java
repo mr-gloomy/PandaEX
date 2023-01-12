@@ -1,6 +1,7 @@
 package com.panda.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,22 +51,50 @@ public class GoodsServiceImpl  implements GoodsService {
 	@Override
 	public GoodsVO getGoods(Integer goods_no) throws Exception {
 		mylog.debug("getGoods(Integer goods_no) 호출");
+		
 		return dao.getGoods(goods_no);
 	}
 	
-	// 수정
+	// 사용자 정보 조회
+	@Override
+	public GoodsVO getUser(Integer user_no) throws Exception {
+		mylog.debug("getUser(Integer user_no) 호출");
+		
+		return dao.getUser(user_no);
+	}
+	
+	// 상품번호, 회원번호 정보 조회 
+	@Override
+	public Map getGoods2(GoodsVO vo) throws Exception {
+		mylog.debug("getGoods2 : " + vo);
+		
+		return dao.getGoods2(vo);
+	}
+	
+	// 상품 수정
 	@Override
 	public Integer updateGoods(GoodsVO vo) throws Exception {
 		mylog.debug(" updateGoods(GoodsVO vo) ");
+		
 		return dao.updateGoods(vo);
 	}
 
-	// 삭제
+	// 상품 삭제
 	@Override
-	public void removeGoods(Integer goods_no) throws Exception {
-		 dao.removeGoods(goods_no);
+	public Integer removeGoods(Integer goods_no) throws Exception {
+		mylog.debug(" removeGoods(Integer goods_no) 호출");
 		
+		return dao.removeGoods(goods_no);
 	}
+	
+	// 상품 찜
+	@Override
+	public Integer updateLike(GoodsVO vo) throws Exception {
+
+		return dao.updateLike(vo);
+	}
+	
+	
 
 	
 	

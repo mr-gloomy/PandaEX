@@ -96,8 +96,7 @@ public class MemberController {
 
 	//로그인 post
 	@PostMapping(value="/login")
-	public String loginPOST(String user_id, MemberVO vo, HttpServletRequest request, Model model) throws Exception{
-		HttpSession session =request.getSession();	
+	public String loginPOST(String user_id, MemberVO vo, HttpServletResponse response, Model model) throws Exception{
 		mylog.debug("loginPOST() 호출");
 		
 		//전달 정보 저장(user_id,user_pw)
@@ -127,7 +126,9 @@ public class MemberController {
 			//return "redirect:/member/login";
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out=response.getWriter();
-			out.println("로그인 실패 삐빅");
+			out.println("<script>");
+			out.println("alert('로그인 실패 삐빅')");
+			out.println("</script>");
 			resultURI = "redirect:/main/index";
 		}
 		
@@ -308,7 +309,7 @@ public class MemberController {
 //				out.println("</script>");
 //				out.close();
 //			}
-			return "/main/index";
+			return "redirect:/main/index";
 		}
 		
 //		@RequestMapping(value="/pwCheck" , method=RequestMethod.POST)

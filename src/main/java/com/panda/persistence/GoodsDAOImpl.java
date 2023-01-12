@@ -2,6 +2,8 @@ package com.panda.persistence;
 
 import java.util.List;
 
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -62,19 +64,48 @@ public class GoodsDAOImpl implements GoodsDAO{
 		return vo;
 	}
 	
+	// 사용자 정보 조회
+	@Override
+	public GoodsVO getUser(Integer user_no) throws Exception {
+		mylog.debug("getUser(Integer user_no) 호출");
+		
+		GoodsVO vo = sqlSession.selectOne(NAMESPACE + ".getUser", user_no); 
+		
+		return vo; 
+	}
+	
+	// 상품번호, 회원번호 정보 조회 
+	@Override
+	public Map getGoods2(GoodsVO vo) throws Exception {
+		mylog.debug("dao Goods : " + sqlSession.selectList(NAMESPACE+".getGoods2",vo));
+		
+		return sqlSession.selectOne(NAMESPACE + ".getGoods2",vo);
+	}
+	
 	// 상품 글수정
 	@Override
 	public Integer updateGoods(GoodsVO vo) throws Exception {
-		mylog.debug(" updateGoods(GoodsVO vo) ");
+		mylog.debug(" updateGoods(GoodsVO vo) 호출");
 		
 		return sqlSession.update(NAMESPACE + ".updateGoods", vo);
 	}
 	
 	// 상품 글삭제
 	@Override
-	public void removeGoods(Integer goods_no) throws Exception {
-		sqlSession.delete(NAMESPACE + ".removeGoods", goods_no);
+	public Integer removeGoods(Integer goods_no) throws Exception {
+		mylog.debug("removeGoods(Integer goods_no) 호출");
+		
+		return sqlSession.delete(NAMESPACE+".removeGoods", goods_no);
 	}
+	
+	// 상품 찜 
+	@Override
+	public Integer updateLike(GoodsVO vo) throws Exception {
+		mylog.debug("updateLike(vo) 호출");
+		
+		return sqlSession.update(NAMESPACE + ".updateLike", vo);
+	}
+	
 	
 	
 	

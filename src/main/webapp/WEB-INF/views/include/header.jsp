@@ -96,16 +96,16 @@
 			<nav class="limiter-menu-desktop container">
 
 				<!-- Logo desktop -->
-				<a href="index.html" class="logo"> <img
+				<a href="/main/index" class="logo"> <img
 					src="/resources/images/icons/PANDA.png" alt="IMG-LOGO"> <span
-					class="maintext">PANDA</span>
+					class="maintext" onclick="javascript:location.href='/main/index'">PANDA</span>
 				</a>
 
 				<!-- Menu desktop -->
 				<div class="menu-desktop" style="padding-top: 13px;">
 					<ul class="main-menu">
-						<li class="active-menu"><a href="index.html">중고거래</a></li>
-						<li><a href="#">기부하기</a></li>
+						<li class="active-menu"><a href="/goods/list?s=0">중고거래</a></li>
+						<li><a href="/auction/a_list?s=0">기부하기</a></li>
 					</ul>
 				</div>
 

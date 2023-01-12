@@ -35,7 +35,7 @@
 		  </li>
 		</ul>
 	</div>
-	
+	${success }
 	<div class="row flex-fill d-flex flex-column">
 		<h4 class="row fw-bold my-4 pt-2">포인트 충전</h4>
 		
@@ -44,7 +44,7 @@
 		</div>
 	
 		<div class="row fw-bold mt-1 pt-2 justify-content-center">
-			<span class="text-center text-muted">현재 보유 포인트는 ${success.memberHoldingPoints } P 입니다.</span>
+			<span class="text-center text-muted">현재 보유 포인트는 ${success.user_pandaPay } P 입니다.</span>
 		</div>
 	</div>
 	

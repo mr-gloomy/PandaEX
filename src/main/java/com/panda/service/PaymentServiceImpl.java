@@ -21,115 +21,102 @@ import com.panda.paymentvo.PaymentSuccessVO;
 import com.panda.paymentvo.PurchaseVO;
 import com.panda.paymentvo.SuccessfulBidDto;
 import com.panda.persistence.AuctionDAOImpl;
+import com.panda.persistence.PaymentDAO;
 
 @Service
 public class PaymentServiceImpl implements PaymentService{
 	
 	@Autowired
-	private SqlSession sqlSession;
-	
-	// mapper NAMESPACE 
-		private static final String NAMESPACE = "com.panda.mapper.PaymentMapper";
+	private PaymentDAO dao;
 	
 		private static final Logger mylog = LoggerFactory.getLogger(PaymentServiceImpl.class);
 		
 	@Override
-	public void insert(int paymentNo, KakaoPayApproveResponseVO responseVO, PurchaseVO purchaseVO) {
-		mylog.debug("insert(int paymentNo, KakaoPayApproveResponseVO responseVO, PurchaseVO purchaseVO) -> mapper 동작 호출");
-		PaymentInsertVO vo = new PaymentInsertVO();
-//			.paymentNo(paymentNo)
-//			.memberNo(Integer.parseInt(responseVO.getPartner_user_id()))
-//			.paymentTid(responseVO.getTid())
-//			.paymentPrice(purchaseVO.getChargeMoney())
-//			.build();
-			vo.setPaymentNo(paymentNo);
-			vo.setMemberNo(Integer.parseInt(responseVO.getPartner_user_id()));
-			vo.setPaymentTid(responseVO.getTid());
-			vo.setPaymentPrice(purchaseVO.getChargeMoney());
-			
+	public void insert(PaymentInsertVO vo) throws Exception {
+		mylog.debug(" Service : insert 동작 호출");
 		mylog.debug("vo : "+vo);
-		sqlSession.insert(NAMESPACE+".insert", vo);
-		sqlSession.update(NAMESPACE+".charge", vo);
+		dao.insert(vo);
+		dao.update(vo);
 		mylog.debug("payment insert 완료 -> 서비스");
 	}
 	@Override
-	public PaymentInsertVO selectOne(int paymentNo) {
-		return sqlSession.selectOne("payment.one", paymentNo);
+	public PaymentInsertVO selectOne(int paymentNo) throws Exception{
+		PaymentInsertVO ivo = dao.selectOne(paymentNo);
+		return ivo;
 	}
 	@Override
-	public PaymentSuccessVO successOne(int paymentNo) {
-		return sqlSession.selectOne("payment.success", paymentNo);
-	}
-	@Override
-	public List<PaymentInsertVO> allList(int memberNo, int page, int filter, int sort) {
-		Map<String, Object> info = new HashMap<>();
-		info.put("memberNo", memberNo);
-		info.put("begin", (page * 10) - (10 - 1)); // 10개씩 불러오기
-		info.put("end", page * 10);
-		info.put("filter", filter);
-		info.put("sort", sort);
-		return sqlSession.selectList("payment.allList", info);
-	}
-	@Override
-	public List<PaymentInsertVO> refundList(int memberNo) {
-		return sqlSession.selectList("payment.refundList", memberNo);
-	}
-	@Override
-	@Transactional
-	public void refund(int paymentNo) {
-		sqlSession.update("payment.refund", paymentNo);
-		PaymentInsertVO vo = sqlSession.selectOne("payment.one", paymentNo);
-		sqlSession.update("payment.refundMember", vo);
+	public PaymentSuccessVO successOne(int paymentNo) throws Exception {
+		mylog.debug("paymentNo : "+paymentNo);
+		
+		return dao.successOne(paymentNo);
 	}
 //	@Override
-//	@Transactional
-//	public boolean cashingRequest(CashingPointsVO vo) {
-//		int cashingSeq = sqlSession.selectOne("payment.cashingSequence");
-//		MemberVO memberDto = sqlSession.selectOne("member.one", vo.getMemberNo());
-//		if(memberDto.getMemberHoldingPoints()>=vo.getCashingMoney()) {
-//			vo.setCashingType("0");
-//			vo.setCashingNo(cashingSeq);
-//			if(memberDto.getMemberHoldingPoints()==vo.getCashingMoney()) {
-//				vo.setCashingType("1");
-//			}
-//			sqlSession.insert("payment.cashingInsert", vo);
-//			boolean success = memberDto.getMemberHoldingPoints() >= vo.getCashingMoney();
-//			return success;
-//		}else {
-//			return false;
-//		}
-//	}
-	@Override
-	public List<CashingListVO> cashingList(int memberNo, int page, int filter, int sort) {
-		Map<String, Object> info = new HashMap<>();
-		info.put("memberNo", memberNo);
-		info.put("begin", (page * 10) - (10 - 1)); // 10개씩 불러오기
-		info.put("end", page * 10);
-		info.put("filter", filter);
-		info.put("sort", sort);		
-		return sqlSession.selectList("payment.cashingList", info);
-	}
-	@Override
-	public boolean cashingRequest(CashingPointsVO vo) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	@Override
-	public boolean enoughPoint(int memberNo, int auctionNo) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	@Override
-	public void pointPaying(int memberNo, int auctionNo) {
-		// TODO Auto-generated method stub
+//	public List<PaymentInsertVO> allList(Map<String, Object> info) {
 		
-	}
-	@Override
-	public SuccessfulBidDto bidSelect(int auctionNo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
+//		dao.allList(memberNo, page, filter, sort)
+//		
+//		return sqlSession.selectList("payment.allList", info);
+//	}
+//	@Override
+//	public List<PaymentInsertVO> refundList(int memberNo) {
+//		return sqlSession.selectList("payment.refundList", memberNo);
+//	}
+//	@Override
+//	@Transactional
+//	public void refund(int paymentNo) {
+//		sqlSession.update("payment.refund", paymentNo);
+//		PaymentInsertVO vo = sqlSession.selectOne("payment.one", paymentNo);
+//		sqlSession.update("payment.refundMember", vo);
+//	}
+////	@Override
+////	@Transactional
+////	public boolean cashingRequest(CashingPointsVO vo) {
+////		int cashingSeq = sqlSession.selectOne("payment.cashingSequence");
+////		MemberVO memberDto = sqlSession.selectOne("member.one", vo.getMemberNo());
+////		if(memberDto.getMemberHoldingPoints()>=vo.getCashingMoney()) {
+////			vo.setCashingType("0");
+////			vo.setCashingNo(cashingSeq);
+////			if(memberDto.getMemberHoldingPoints()==vo.getCashingMoney()) {
+////				vo.setCashingType("1");
+////			}
+////			sqlSession.insert("payment.cashingInsert", vo);
+////			boolean success = memberDto.getMemberHoldingPoints() >= vo.getCashingMoney();
+////			return success;
+////		}else {
+////			return false;
+////		}
+////	}
+//	@Override
+//	public List<CashingListVO> cashingList(int memberNo, int page, int filter, int sort) {
+//		Map<String, Object> info = new HashMap<>();
+//		info.put("memberNo", memberNo);
+//		info.put("begin", (page * 10) - (10 - 1)); // 10개씩 불러오기
+//		info.put("end", page * 10);
+//		info.put("filter", filter);
+//		info.put("sort", sort);		
+//		return sqlSession.selectList("payment.cashingList", info);
+//	}
+//	@Override
+//	public boolean cashingRequest(CashingPointsVO vo) {
+//		// TODO Auto-generated method stub
+//		return false;
+//	}
+//	@Override
+//	public boolean enoughPoint(int memberNo, int auctionNo) {
+//		// TODO Auto-generated method stub
+//		return false;
+//	}
+//	@Override
+//	public void pointPaying(int memberNo, int auctionNo) {
+//		// TODO Auto-generated method stub
+//		
+//	}
+//	@Override
+//	public SuccessfulBidDto bidSelect(int auctionNo) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//	
 //	@Override
 //	@Transactional
 //	public boolean enoughPoint(int memberNo, int auctionNo) {
