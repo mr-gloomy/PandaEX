@@ -84,16 +84,8 @@ function CountDownTimer(dt, id) {
 		<input type="hidden" name="user_no" value="${avooo.user_no }">
 		<input type="hidden" name="auction_bid" value="${avooo.auction_bid }">
 		<input type="hidden" name="auction_cnt" value="${avooo.auction_cnt }">
+		<input type="hidden" name="auction_price" value="${avooo.auction_price }">
 	</form>
-
-
-<!-- <button type="submit" class="btn btn-danger"
-	style="width: 200px;">수정</button>
-<button type="submit" class="btn btn-warning"
-	style="width: 200px;">삭제</button>
-<button type="submit" class="btn btn-success"
-	style="width: 200px;">목록</button>
- -->
 
 	<div class="container">
 		<div class="container-fluid" id="app" data-v-app="">
@@ -115,11 +107,8 @@ function CountDownTimer(dt, id) {
 							<div class="carousel-item active">
 								<img src="/resources/images/gallery-04.jpg"
 									class="d-block w-100">
-								<!--v-if-->
 							</div>
 						</div>
-						<!--v-if-->
-						<!--v-if-->
 					</div>
 				</div>
 				<div class="col ml-5 pl-3 pr-0 d-flex flex-column">
@@ -212,12 +201,11 @@ function CountDownTimer(dt, id) {
 					<c:if test="${sessionScope.user_id ne avooo.user_id && sessionScope.user_id ne 'admin'}">
 					<div class="row">
 						<div class="col p-0">
-							<a class="btn btn-info btn-lg btn-block py-3"
-								href="" role="button"><i
-								class="fa-solid fa-comments-dollar pr-2"></i> 1:1 채팅하기  </a>
+							<a class="btn btn-info btn-lg btn-block py-3 loginControl" role="button" id="chat">
+								<i class="fa-solid fa-comments-dollar pr-2 " ></i> 1:1 채팅하기  </a>
 						</div>
 						<div class="col">
-							<button type="button" class="btn btn-primary btn-lg btn-block py-3" id="startBidding" data-bs-toggle="modal" data-bs-target="#biddingModal">
+							<button type="button" class="btn btn-primary btn-lg btn-block py-3 loginControl"  id="startBidding" >
 			                    <i class="fa-solid fa-gavel pr-2"></i> 입찰하기
 			                </button>
 		                </div>
@@ -324,8 +312,6 @@ function CountDownTimer(dt, id) {
 								data-bs-dismiss="modal">돌아가기</button>
 							<button type="button" class="btn btn-primary" id="updateBid"
 								data-bs-dismiss="modal">입찰하기</button>
-<!-- 							<button type="button" class="btn btn-primary d-none" -->
-<!-- 								id="blindBid" data-bs-dismiss="modal">입찰하기</button> -->
 						</div>
 					</div>
 				</div>
@@ -449,9 +435,48 @@ function CountDownTimer(dt, id) {
 		
 		//입찰하기 버튼
 		$("#updateBid").click(function(){
-			formObj.attr("action", "/auction/a_bid");
-			formObj.submit();
+			var auction_bid = $("input[name=auction_bid]").val();
+			var auction_bid_new = $("#inputBid").val(); 
+			var auction_price = $("input[name=auction_price]").val();
+			var flag = false;
+			
+			if(parseInt(auction_bid) == 0) {
+				if(parseInt(auction_price) < parseInt(auction_bid_new)) {
+		 			flag = true;
+				}
+			} else {
+				if(parseInt(auction_bid) < parseInt(auction_bid_new)) {
+		 			flag = true;
+				}
+			}
+			
+			if(flag) {
+				formObj.attr("action", "/auction/a_bid");
+				$("input[name=auction_bid]").val(auction_bid_new);
+	 			formObj.submit();
+			} else {
+				alert("금액오류");
+	 			$("#inputBid").val("");
+			}
+			
 		});
+		
+		//로그인제어
+		$(".loginControl").click(function(e){
+			var targetObjectId = $(e.target)[0].id;
+    		var userId = '<%=(String)session.getAttribute("user_id")%>';
+    		
+    		if(userId == null || userId == "null") {
+    			$(".usermodal").trigger("click");
+    		} else {
+    			if("chat" == targetObjectId) {
+   					// TODO 채팅기능 추가
+   					console.log("채팅하기");
+    			} else if("startBidding" == targetObjectId) {
+	    			$("#biddingModal").modal("show");
+    			}
+   			}
+   		});
 	});
 </script>
 
