@@ -125,11 +125,14 @@
 							alt="panda-chat-hover">
 						</a>
 					</div>
-					<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11"
+					<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11" id="moveToMyShop"
 						style="padding-bottom: 10px; padding-right: 0px;">
-						<a href="#" memo="my shop 이동"> <img class="panda-header-shop"
+						<button memo="my shop 이동"> <img class="panda-header-shop"
 							src="/resources/images/icons/panda-shop.png" alt="panda-shop">
-						</a>
+						</button>
+<!-- 						<a href="#" memo="my shop 이동"> <img class="panda-header-shop" -->
+<!-- 							src="/resources/images/icons/panda-shop.png" alt="panda-shop"> -->
+<!-- 						</a> -->
 					</div>
 
 
@@ -535,6 +538,18 @@
         		}
         		
         	});
+        	
+        	// a_regist 페이지 이동 (로그인제어)
+         	$("#moveToMyShop").click(function(){
+        		var userId = '<%=(String)session.getAttribute("user_id")%>';
+        		
+        		if(userId == null || userId == "null") {
+        			$(".usermodal").trigger("click");
+        		} else {
+        			window.location.replace('/auction/a_regist');
+       			}
+       		});
+        	
         	
         });    
      </script>
