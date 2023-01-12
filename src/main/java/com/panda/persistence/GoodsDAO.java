@@ -32,7 +32,7 @@ public interface GoodsDAO {
   	// 상품 글 삭제
 	public Integer removeGoods(Integer goods_no) throws Exception;
 	
-	// 경매 상품 찜 업데이트
+	// 상품 찜
 	public Integer updateLike(GoodsVO vo) throws Exception;
 	
 	

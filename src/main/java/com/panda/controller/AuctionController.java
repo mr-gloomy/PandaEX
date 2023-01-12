@@ -69,7 +69,6 @@ public class AuctionController {
 	   mylog.info(vo.toString());
 	   avo.setUser_no(vo.getUser_no());
 	   
-	   service.insertAuction(avo);
 	   mylog.debug("경매 상품 등록 완료");
 	   
 	   rttr.addFlashAttribute("result", "creatOK");
@@ -83,6 +82,8 @@ public class AuctionController {
 	   
 	   if(file != null) {
 			fileName =  UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath); 
+			   mylog.debug("@@@@33333333333333333333333333333@");
+
 		} else {
 			fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
 		}
