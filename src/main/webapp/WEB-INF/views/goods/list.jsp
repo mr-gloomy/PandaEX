@@ -58,6 +58,19 @@
 .wrap-menu-desktop {
 	top:0px;
 }
+/* .bor4 { */
+/*     border: 1px solid #28a745; */
+/*     border-radius: 3px; */
+/* } */
+.hov-btn3:hover {
+    border-color: #28a745;
+    background-color: #28a745;
+    color: #fff;
+}
+.btn-warning {
+    color: #ffffff;
+    background-color: #ffc107;
+    border-color: #ffc107;
 </style>
 <script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2c915430ac4edcd6aa694ae234c0de27"></script>

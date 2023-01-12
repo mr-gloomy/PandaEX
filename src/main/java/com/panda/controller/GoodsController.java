@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.panda.domain.GoodsVO;
@@ -65,14 +66,22 @@ public class GoodsController {
 	
 	// 상품 글쓰기 POST
 	@RequestMapping(value = "/regist", method = RequestMethod.POST)
-	public String registPOST(GoodsVO vo, MultipartFile file, HttpSession session) throws Exception{
+	public String registPOST(GoodsVO vo, MultipartFile file, HttpSession session, RedirectAttributes rttr) throws Exception{
 		
 		mylog.debug(" /goods/regist(POST) 호출 ");	
 		mylog.debug(" GET방식의 데이터 전달 -> DB 저장 -> 페이지 이동 ");
-		// 0. 한글처리 (필터)
 		
-		String user_no = (String)session.getAttribute("user_no");
-
+		String user_id = (String)session.getAttribute("user_id");
+		
+		MemberVO mvo = mService.getMember(user_id);
+		
+		mylog.debug(vo.toString());
+		vo.setUser_no(mvo.getUser_no());
+		vo.setUser_nick(mvo.getUser_nick());
+		vo.setUser_addr(mvo.getUser_addr());
+		vo.setUser_area(mvo.getUser_area());
+		
+		rttr.addFlashAttribute("result", "creatOK");
 		// 1. 전달된 정보 저장 
 		mylog.debug(vo.toString());
 		

@@ -123,27 +123,40 @@ $(function() {
 					</div>
 					<!-- button -->
 					<div class="row mt-auto mb-3 pl-5 d-flex justify-content-end">
-						<div id="refresh" class="col-3 text-muted p-0 pointer">
-							<span class="pl-5" id="refreshP">
-								<i id="rotate" class="fa-solid fa-arrow-rotate-left"></i> 새로고침</span>
-						</div>
 						<div class="col-3 p-0 pl-2 mr-2 text-muted pointer"
 							data-bs-toggle="modal" data-bs-target="#reportModal">
 							<i class="fa-solid fa-land-mine-on pl-3 pr-2"></i> 신고하기
 						</div>
 					</div>
-					<div class="row">
-						<div class="col">
-							<button type="button" class="btn btn-warning btn-lg btn-block py-3 loginControl" style="color: white;"> 
-								<i class="fa-sharp fa-solid fa-paper-plane"></i> 판다페이 결제하기
-							</button>
+					<c:if test="${sessionScope.user_id eq vo.user_id || sessionScope.user_id eq 'admin' }">
+						<div class="row">
+							<div class="col p-0">
+								<a class="btn btn-warning  btn-lg btn-block py-3"
+									href="/goods/modify?goods_no=${vo.goods_no}" role="button">
+									<i class="fa-sharp fa-solid fa-paper-plane"></i> 수정하기 </a>
+							</div>
+							<div class="col">
+								<a type="button" class="btn btn-success btn-lg btn-block py-3"
+								   href="/goods/remove?goods_no=${vo.goods_no}">
+								   <i class="fa-solid fa-ban pr-2"></i> 삭제하기 </a>
+							</div>
 						</div>
-						<div class="col p-0">
-							<a class="btn btn-success btn-lg btn-block py-3 loginControl"
-								href="#" role="button" id="chat"><i
-								class="fa-solid fa-comments-dollar pr-2"></i> 1:1 채팅하기  </a>
-						</div>
-					</div>
+					</c:if>
+					<c:if test="${sessionScope.user_id ne vo.user_id && sessionScope.user_id ne 'admin'}">
+						<div class="row">
+							<div class="col p-0">
+								<a class="btn btn-warning btn-lg btn-block py-3 loginControl" 
+									href="/payment/pay_page?goods_no=${vo.goods_no }" role="button">
+									<i class="fa-sharp fa-solid fa-paper-plane"></i> 판다페이 결제하기 </a>
+							</div>
+							<div class="col">
+								<a type="button" class="btn btn-success btn-lg btn-block py-3 loginControl"  
+								   id="chat" >
+				                   <i class="fa-solid fa-gavel pr-2"></i> 1:1 채팅하기
+				                </a>
+			                </div>
+			             </div>  
+					</c:if>
 				</div>
 			</div>
 			<div class="row mt-4">
@@ -197,13 +210,9 @@ $(function() {
 					<div class="row ml-3">
 						<div class="text-muted">누적 제재 : 4회</div>
 					</div><hr>
-					<div class="" align="right">
-						<a href="/goods/modify?goods_no=${vo.goods_no}"> 수정하기 </a>&nbsp;&nbsp;&nbsp;
-						<a href="/goods/remove?goods_no=${vo.goods_no}" > 삭제하기 </a>
-					</div>
 				</div>
 			</div>
-			
+			<!-- 신고하기 모달창 -->
 			<div class="modal fade" id="reportModal"
 				aria-labelledby="reportModalLable" tabindex="-1" aria-hidden="true"
 				style="display: none;">
@@ -233,73 +242,76 @@ $(function() {
 				</div>
 			</div>
 		</div>
-
-
-
-
+		
+		<script type="text/javascript">
+		$(document).ready(function(){
+			var formObj = $("form[role='form']");
+			console.log("formObj : "+formObj);
+			
+			//로그인제어
+			$(".loginControl").click(function(e){
+				var targetObjectId = $(e.target)[0].id;
+	    		var userId = '<%=(String)session.getAttribute("user_id")%>';
+	    		if(userId == null || userId == "null") {
+	    			$(".usermodal").trigger("click");
+	    		} else {
+	    			if("chat" == targetObjectId) {
+	    				window.open('/main/chat?u=${vo.user_id}&a=${param.goods_no}','chat01','width=600,height=600');
+	    			} else if("startBidding" == targetObjectId) {
+		    			$("#biddingModal").modal("show");
+	    			}
+	   			}
+	   		});
+		});
+		</script>
 <style>
 .carousel-item img {
 	object-fit: cover;
 	height: 26em;
 	border-radius: 1rem;
 }
-
 .carousel-item {
 	transition: transform .1s ease;
 }
-
 .carousel-caption {
 	right: 5%;
 	bottom: 0;
 	text-align: right;
 }
-
 .text-warning {
 	font-size: 0.5em;
 	vertical-align: middle;
 }
-
 @
 keyframes rotate {from { transform:rotate(0deg);
 	
 }
-
 to {
 	transform: rotate(360deg);
 }
-
 }
 .rotate {
 	animation: rotate 0.5s ease-out;
 }
-
 .modal.fade .modal-dialog {
 	transition: transform .1s ease-out;
 }
-
 .photo-modal-wrap {
 	width: fit-content;
 	height: 100%;
 	margin: 0 auto;
 	max-width: 70%;
 }
-
 .photo-modal {
 	width: 100%;
 	max-width: 100%;
 }
-
 #profile {
 	object-fit: cover;
 	width: 50px;
 	height: 50px;
 }
 </style>
-
-
-
-
-
 	</div>
 <br><br><br><br><br><br>
 <!--   푸터 -->
