@@ -21,7 +21,18 @@
 		function lo() {
 			alert('로그아웃할래요');
 		}
-		
+		 function doLogout() {
+		    	var cur = window.location.href;
+		   		var cur2 = cur.substring(22);
+		    	alert(cur2.replace('&','!rep!'));
+		    	location.href="/member/logout?exUrl="+cur2.replace('&','!rep!');
+		 }
+		 function doLogin() {
+		    	var cur = window.location.href;
+		   		var cur2 = cur.substring(22);
+		    	alert(cur2.replace('&','!rep!'));
+		    	location.href="/member/login?exUrl="+cur2.replace('&','!rep!');
+		 }
 	</script>
 
 <script>	
@@ -49,7 +60,12 @@
 	            setCookie("key", $("#id").val(), 7); // 7일 동안 쿠키 보관
 	        }
 	    });
-
+	   
+	   
+	    	
+// 	    		var cur=window.location.href;
+// 	    		location.href="/member/logout?exUrl="+cur;
+	
 	// 쿠키 저장하기 
 	// setCookie => saveid함수에서 넘겨준 시간이 현재시간과 비교해서 쿠키를 생성하고 지워주는 역할
 	function setCookie(cookieName, value, exdays) {
@@ -127,8 +143,8 @@
 					</div>
 					<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11" id="moveToMyShop"
 						style="padding-bottom: 10px; padding-right: 0px;">
-						<button memo="my shop 이동"> <img class="panda-header-shop"
-							src="/resources/images/icons/panda-shop.png" alt="panda-shop">
+						<button memo="my shop 이동"> 
+						<img class="panda-header-shop" src="/resources/images/icons/panda-shop.png" alt="panda-shop">
 						</button>
 <!-- 						<a href="#" memo="my shop 이동"> <img class="panda-header-shop" -->
 <!-- 							src="/resources/images/icons/panda-shop.png" alt="panda-shop"> -->
@@ -142,7 +158,7 @@
 							src="/resources/images/icons/panda-user.png" alt="panda-user">
 						</a>
 					</div>
-					<div class="hoversup"></div>
+					<div class="hoversup" style="width:70px;"></div>
 					<div class="category">
 						<div class="user-sel-images">
 								<c:if test="${user_id eq ''}">
@@ -182,7 +198,7 @@
 											src="/resources/images/icons/right-arrow.png"></a></li>
 									</c:if>
 									<c:if test="${user_id.equals('admin') }">
-									<li><a class="my" href="/admin/index">관리자페이지<img class="right"
+									<li><a class="my" href="/admin/memberList">관리자페이지<img class="right"
 											src="/resources/images/icons/right-arrow.png"></a></li>
 									</c:if>
 									<li><a class="my" href="#">내 상점<img class="right"
@@ -195,7 +211,11 @@
 								<c:if test="${kakao==null}">
 								<!-- 로그아웃 -->
 								<div class="user-logout">
-									<input type="button" onclick="location.href='/member/logout';" value="로그아웃">
+<%-- 						<input type="button" onclick="location.href='/member/logout?exUrl=<%=request.getRequestURI().substring(14,request.getRequestURI().indexOf(".jsp")) %>'; " value="로그아웃"> --%>
+								<%=request.getRequestURL() %>
+							<input type="button" onclick="doLogout()" value="로그아웃">
+<%-- 							<input type="button" onclick="location.href='/member/logout?exUrl=<%=request.getHeader("referer") %>'; " value="로그아웃"> --%>
+							
 								</div>
 								</c:if>
 								<c:if test="${kakao!=null}">
@@ -315,8 +335,11 @@
 			class="modalhide">
 		<img src="/resources/images/icons/back.png" alt="IMG-back"
 		class="back-joinpage">
+						
+<%-- 		<form action="/member/login?exUrl=<%=request.getRequestURI().substring(14,request.getRequestURI().indexOf(".jsp")) %>" method="post" id="login"> --%>
 			
-			<form action="/member/login" method="post" id="login">
+			<form onsubmit="doLogin()" method="post" id="login">
+			<input type="hidden" id="exUrl">
 		<div class="modal-text">
 			<img src="/resources/images/icons/user.png" alt="id입력"
 				class="userimg">
@@ -346,7 +369,7 @@
 			</div>
 		</div>
 		<div class="login-submit">
-			<input type="submit" value="로그인" >
+			<input type="submit" value="">
 			<!-- 로그인 실패 시, ajax 로 얼럿 뜨게 만들기(페이지 이동 막기) -->
 		</div>
 				</form>
@@ -467,7 +490,7 @@
 			
 					<form action="/member/findpw" method="post" id="findpw">
 				<input type="text" id="findpw-pw" placeholder="사용중인 아이디를 입력해주세요." name="user_id"  autocomplete="off">
-				<input type="text" id="findpw-tel" placeholder="가입하신 이메일을 입력해주세요." name="user_email"  autocomplete="off">
+				<input type="email" id="findpw-tel" placeholder="가입하신 이메일을 입력해주세요." name="user_email"  autocomplete="off">
 				<div class="error-text">&nbsp;</div>
 				<input id="search-pw" type="submit" value="비밀번호 찾기">
 				</form>
@@ -551,28 +574,32 @@
        		});
         	
         	
+        	//비번체크였나
+        	$("#search-pw").click(function(){
+    			$.ajax({
+    				url : "/member/findpw",
+    				type : "POST",
+    				data : {
+    					id : $("#findpw-pw").val(),
+    					email : $("#findpw-tel").val()
+    				},
+    				success : function(result) {
+    					alert(result);
+    				},
+    			})
+    		});
+        	
+        	
+        	
         });    
      </script>
      
      
-     
-<script type="text/javascript">
-	$(function(){
-		$("#search-pw").click(function(){
-			$.ajax({
-				url : "/member/findpw",
-				type : "POST",
-				data : {
-					id : $("#findpw-pw").val(),
-					email : $("#findpw-tel").val()
-				},
-				success : function(result) {
-					alert(result);
-				},
-			})
-		});
-	})
-</script>
+
+
+
+
+
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('#find').submit(function(){
@@ -609,28 +636,24 @@
 			
 		});
 		
-		
 	});
 	
 </script>
 
 <script type="text/javascript">
-	$(document).ready(function(){
-		$('#login').submit(function(){
-			// alert("성공!");
-			if($('#user_id').val() == ''){
-				alert("아이디를 입력하세요.");
-				return false;
-			}
-			
-			if($('#user_pw').val() == ''){
-				alert("비밀번호를 입력하세요.");
-				return false;
-			}
-			
-		});
-		
-		
-	});
+$(document).ready(function(){
+$('#login').submit(function(){
+	// alert("성공!");
+	if($('#user_id').val() == ''){
+		alert("아이디를 입력하세요.");
+		return false;
+	}
 	
+	if($('#user_pw').val() == ''){
+		alert("비밀번호를 입력하세요.");
+		return false;
+	}
+	});
+});
 </script>
+

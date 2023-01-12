@@ -1,12 +1,9 @@
 package com.panda.controller;
 
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
-import java.util.Random;
 
 import javax.inject.Inject;
-import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -14,19 +11,14 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.MailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.panda.domain.AuctionVO;
@@ -52,7 +44,7 @@ public class MemberController {
 	
 	@Autowired
 	private HttpSession session;
-	HttpServletResponse response;
+	
 	
 	//http://localhost:8080/main/index
 	
@@ -96,7 +88,8 @@ public class MemberController {
 
 	//로그인 post
 	@PostMapping(value="/login")
-	public String loginPOST(String user_id, MemberVO vo, HttpServletResponse response, Model model) throws Exception{
+	public String loginPOST(String user_id, MemberVO vo, HttpServletRequest request, Model model,HttpServletResponse response,@RequestParam("exUrl") String exUrl ) throws Exception{
+		HttpSession session =request.getSession();	
 		mylog.debug("loginPOST() 호출");
 		
 		//전달 정보 저장(user_id,user_pw)
@@ -117,16 +110,17 @@ public class MemberController {
 		String resultURI="";
 		if(loginStatus) {
 			//return "redirect:/member/main";
-			resultURI = "redirect:/main/index";
+			resultURI = "redirect:"+ exUrl;
 			session.setAttribute("user_id", vo.getUser_id());
 		}else {
 			//return "redirect:/member/login";
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out=response.getWriter();
 			out.println("<script>");
-			out.println("alert('로그인 실패 삐빅')");
+			out.println("alert('로그인 실패 삐빅');");
+			out.println("history.back();");
 			out.println("</script>");
-			resultURI = "redirect:/main/index";
+			out.close();
 		}
 		
 		return resultURI;
@@ -171,16 +165,28 @@ public class MemberController {
 	
 	//로그아웃
 	@GetMapping("/logout")
-	public String logout(HttpSession session) throws Exception {
+	public String logout(HttpSession session,String exUrl) throws Exception {
 		session.invalidate();
-		return "/main/index";
+		
+//		//mylog.info(req.getContextPath());
+//		//response.setHeader("Refesh","1; url="+req.getContextPath());
+//		
+//		response.setContentType("text/html; charset=UTF-8");
+//		PrintWriter out=response.getWriter();
+//		out.println("<script>");
+//		out.println("history.back();");
+//		out.println("</script>");
+//		out.close();
+		
+		mylog.info(exUrl);
+		
+		return "redirect:/"+exUrl.replace("!rep!","&");
 	}
 	
 	@PostMapping("/report")
 	public void reportUser(ReportVO vo, HttpServletResponse response) throws Exception {
 		
 		service.insertRep(vo);
-		
 		
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out=response.getWriter();
@@ -292,7 +298,7 @@ public class MemberController {
 					PrintWriter out=response.getWriter();
 					out.println("<script>");
 					out.println("alert('회원정보 없음!');");
-					out.println("history.back()");
+					out.println("history.back();");
 					out.println("</script>");
 					out.close();
 				}
@@ -306,18 +312,9 @@ public class MemberController {
 //				out.println("</script>");
 //				out.close();
 //			}
-			return "redirect:/main/index";
+			return "/main/index";
 		}
 		
-//		@RequestMapping(value="/pwCheck" , method=RequestMethod.POST)
-//		@ResponseBody
-//		public int pwCheck(MemberVO vo) throws Exception{
-//			String user_pw = service.pwCheck(vo.getUser_id());
-//			if(vo == null || !vo.getUser_pw().equals(user_pw)) {
-//				return 0;
-//			}
-//			return 1;
-//		}
 		
 }
 		

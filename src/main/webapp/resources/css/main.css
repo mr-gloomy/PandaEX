@@ -3860,7 +3860,7 @@ input.num-product::-webkit-outer-spin-button, input.num-product::-webkit-inner-s
 	top: 10%;
 	left: 39%;
 	height: 500px;
-	width: 400px;
+	width: 700px;
 	padding: 25px;
 	background: white;
 	border-radius: 25px;
@@ -5208,6 +5208,61 @@ background: rgb(0 0 0 / 20%);
 .hide005,
 .hide006{
 	display: none;
+}
+.myp-modify .modify-body{
+    display: flex;
+}
+.mtop-1{
+    font-size: 30px;
+    color: rgb(60 150 240 / 70%);
+
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.mtop-2{
+    color: rgb(0 0 0 / 65%);
+}
+.myp-modify .modify-top .mtop-3{
+	margin-top: 30px;
+    font-size: 25px;
+    font-weight: bold;
+    color: rgb(65 65 65 / 70%);
+    border-bottom: 2px double #8d8787;
+    width: 425px;
+    margin-bottom: 10px;
+}
+.myp-modify .modify-body .mbody-1 li{
+	margin-left: 10px;
+    border-right: 1.5px double #8d8787;
+    margin-bottom: 13px;
+    padding-right: 25px;
+    height: 25px;
+    font-size: 18px;
+}
+.myp-modify .modify-body .mbody-2 li{
+    margin-bottom: 13px;
+    padding-left: 30px;
+    height: 25px;
+    font-size: 18px;
+}
+.myp-modify .modify-body .mbody-2 input[type=text]{
+    font-family: Arial, sans-serif;
+    color: rgb(60 60 60);
+}
+.myp-modify .modify-body .mbody-2 input[type=password],
+.myp-modify .modify-body .mbody-2 .nickmo{
+ border: 2px double #000000a6;
+}
+.info-modify{
+	width: 150px;
+    height: 40px;
+    color: white;
+    background: rgba(90, 90, 90, 1);
+    opacity: 0.8;
+    margin-left: 102px;
+}
+.info-modify:hover{
+	opacity: 1;
 }
 /* 추가 - 김태홍  손대면 안됍니다!!!!*/
 /*////////////////////////////////////////////////////////*/

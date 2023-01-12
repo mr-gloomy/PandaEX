@@ -982,6 +982,8 @@ $('.kt').on('click',function(){
 $('.lgu').on('click',function(){
    $(".select").attr('value','LGU+');   
 });
+
+
 //* 로그인테스트 */
 //$('.submit').on('click', function() {
 //   var login1 = {"user_id:":$("#user_id").val(),"pw":$("#user_pw").val()}
