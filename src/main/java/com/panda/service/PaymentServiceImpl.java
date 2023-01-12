@@ -37,7 +37,7 @@ public class PaymentServiceImpl implements PaymentService{
 		mylog.debug("vo : "+vo);
 		dao.insert(vo);
 		dao.update(vo);
-		mylog.debug("payment insert 완료 -> 서비스");
+		mylog.debug("payment insert/charge 완료 -> 서비스");
 	}
 	@Override
 	public PaymentInsertVO selectOne(int paymentNo) throws Exception{
@@ -50,6 +50,14 @@ public class PaymentServiceImpl implements PaymentService{
 		
 		return dao.successOne(paymentNo);
 	}
+	@Override
+	public void paying(int user_no) throws Exception {
+		mylog.debug(" Service : insert 동작 호출");
+		dao.paying(user_no);
+	}
+	
+	
+	
 //	@Override
 //	public List<PaymentInsertVO> allList(Map<String, Object> info) {
 		

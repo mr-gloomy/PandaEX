@@ -24,6 +24,8 @@ public interface PaymentDAO {
 	
 	public PaymentSuccessVO successOne(int paymentNo) throws Exception;
 	
+	public void paying(int user_no) throws Exception;
+	
 	public List<PaymentInsertVO> allList(int memberNo, int page, int filter, int sort) throws Exception;
 	public List<PaymentInsertVO> refundList(int memberNo) throws Exception;
 	public void refund(int paymentNo) throws Exception;

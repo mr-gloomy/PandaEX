@@ -39,6 +39,10 @@
 			where u.user_no = p.member_no and p.payment_no = #{paymentNo}
 	</select>
 	
+	<update id="paying" >
+		update user set user_pandapay = user_pandapay - #{goods_price} where user_id = #{user_id}
+	</update>
+	
 <!-- 	<select id="allList" parameterType="Map" resultType="PaymentInsertVO"> -->
 <!-- 		select * from ( -->
 <!-- 	 		select rownum rn, TMP.*, count(*) over() payment_count from (		 -->

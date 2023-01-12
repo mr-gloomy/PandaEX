@@ -16,6 +16,7 @@ public interface PaymentService {
 	void insert(PaymentInsertVO vo) throws Exception;
 	PaymentInsertVO selectOne(int paymentNo) throws Exception;
 	PaymentSuccessVO successOne(int paymentNo) throws Exception;
+	public void paying(int user_no) throws Exception;
 //	List<PaymentInsertVO> allList(Map<String, Object> info) throws Exception;
 //	List<PaymentInsertVO> refundList(int memberNo) throws Exception;
 //	void refund(int paymentNo) throws Exception;

@@ -58,13 +58,7 @@ public class PayController {
 	
 	@GetMapping("/kakao")
 	public String kakaoPay() {
-		return "payment/paymentReady";
-	}
-	
-	// http://localhost:8080/payment/pay_page
-	@RequestMapping(value = "/pay_page",method = RequestMethod.GET)
-	public void pay_page() throws Exception {
-		
+		return "/payment/paymentReady";
 	}
 	
 	// http://localhost:8080/payment/list
@@ -140,7 +134,7 @@ public class PayController {
 		vo.setPaymentTid(responseVO.getTid());
 		vo.setPaymentPrice(purchaseVO.getChargeMoney());
 		paymentService.insert(vo);
-		
+		mylog.debug( "vo :  " + vo);
 //		return "redirect:/pay/finish";
 		return "redirect:finish";
 	}
@@ -152,7 +146,8 @@ public class PayController {
 		PaymentSuccessVO pvo = paymentService.successOne(paymentNo);
 		mylog.debug("pvo : " + pvo);
 		model.addAttribute("success", pvo);
-		return "payment/finish";
+		mylog.debug("pvo 를 success란 이름으로 가지고 payment/finish.jsp로 이동");
+		return "/payment/finish";
 	}
 	
 	@GetMapping("/cancel")
@@ -170,6 +165,38 @@ public class PayController {
 		session.removeAttribute("paymentNo");
 		return "payment/fail";
 	}
+	
+	@RequestMapping(value = "/pay_page",method = RequestMethod.GET)
+	public void pay_page() throws Exception{
+		mylog.debug("/payment/pay_page(GET) 호출 -> 페이지 이동 ");
+		MemberVO uvo = new MemberVO();
+	}
+	
+	@PostMapping("/paying")
+	public void paying(HttpSession session, @ModelAttribute int user_no) throws Exception {
+//								@PathVariable int goods_no
+		String user_id = (String)session.getAttribute("user_id");
+		mylog.debug("paying controller");
+		mylog.debug("user_id : " + user_id);
+		paymentService.paying(user_no);
+		
+		
+	}
+//	@GetMapping("/paying/{auctionNo}")
+//	public String paying(HttpSession session, @PathVariable int auctionNo) {
+//		mylog.debug("======1=====");
+//		int memberNo = (int)session.getAttribute("whoLogin");
+//		boolean enoughPoint = paymentService.enoughPoint(memberNo, auctionNo);
+//		mylog.debug("======2=====");
+//		if(enoughPoint) {
+//			paymentService.pointPaying(memberNo, auctionNo);
+//			mylog.debug("======3=====");
+//			return "payment/auctionFinish";
+//		}else {
+//			mylog.debug("======4=====");
+//			return"redirect:/payment/paymentReady/"+auctionNo;
+//		}
+//	}
 
 	@GetMapping("/refund/{paymentNo}")
 	public String refund(HttpSession session, @PathVariable int paymentNo) throws Exception {
@@ -210,21 +237,7 @@ public class PayController {
 //		return "payment/cashingFail";
 //	}
 //
-//	@GetMapping("/paying/{auctionNo}")
-//	public String paying(HttpSession session, @PathVariable int auctionNo) {
-//		mylog.debug("======1=====");
-//		int memberNo = (int)session.getAttribute("whoLogin");
-//		boolean enoughPoint = paymentService.enoughPoint(memberNo, auctionNo);
-//		mylog.debug("======2=====");
-//		if(enoughPoint) {
-//			paymentService.pointPaying(memberNo, auctionNo);
-//			mylog.debug("======3=====");
-//			return "payment/auctionFinish";
-//		}else {
-//			mylog.debug("======4=====");
-//			return"redirect:/payment/paymentReady/"+auctionNo;
-//		}
-//	}
+
 //	@GetMapping("/paymentReady/{auctionNo}")
 //	public String paymentReadyAuction(HttpSession session, Model model ,@PathVariable int auctionNo) {
 //		int memberNo = (int)session.getAttribute("whoLogin");

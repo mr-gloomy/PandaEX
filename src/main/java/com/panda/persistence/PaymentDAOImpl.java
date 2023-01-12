@@ -64,6 +64,13 @@ public class PaymentDAOImpl implements PaymentDAO{
 
 		return pvo;
 	}
+	
+	@Override
+	public void paying(int user_no) throws Exception {
+		mylog.debug(" DAO : paying 동작 호출");
+		sqlSession.selectOne(NAMESPACE+".paying", user_no);
+	}
+	
 	@Override
 	public List<PaymentInsertVO> allList(int memberNo, int page, int filter, int sort) throws Exception {
 		Map<String, Object> info = new HashMap<>();
