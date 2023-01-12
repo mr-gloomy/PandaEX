@@ -2,9 +2,12 @@
     pageEncoding="UTF-8"%>
     
     <!DOCTYPE html>
-<head>
+
 
 <jsp:include page="/WEB-INF/views/admin/include/header.jsp" />
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js"></script>
+<script type="text/javascript"></script>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>AdminLTE 2 | 404 Page not found</title>
@@ -31,7 +34,7 @@
 
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-</head>
+
 <body class="hold-transition skin-blue sidebar-mini">
 <!-- <div class="wrapper"> -->
 
@@ -89,19 +92,26 @@
   <!-- /.content-wrapper -->
 
 <!-- </div> -->
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js"></script>
 
-<script type="text/javascript">
+
+
+
+
+
+
+
+
+<script>
 		$(document).ready(function(){
 		
-			$("#pwUpdate").on("click", function(){
+			$("#.pwUpdate").on("click", function(){
 				if($("#memberPw").val==""){
 					alert("현재 비밀번호를 입력해주세요");
 					$("#memberPw").focus();
 					return false
 				}
 				if($("#memberPw1").val==""){
-					alert("변경비밀번호을를 입력해주세요");
+					alert("변경비밀번호를 입력해주세요");
 					$("#memberPw1").focus();
 					return false
 				}
