@@ -123,6 +123,8 @@ public class AdminController {
 			
 			resultURI = "redirect:/main/index";
 			
+			return resultURI;
+			
 		}
 		
 		
@@ -332,10 +334,20 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value = "/memberDetail", method = RequestMethod.GET)
-	public void memberDetailGET()throws Exception{
+	public String memberDetailGET(MemberVO mVO,Model model)throws Exception{
+		String id = (String)session.getAttribute("user_id");
+		resultURI="";
+		if(id == null || !id.equals("admin")) {
+			resultURI = "redirect:/main/index";
+		}
 		
+		model.addAttribute("uvo", mService.getMembers(mVO));
 		
+		mylog.debug(" 회원정보 : "+mService.getMembers(mVO).toString());
 		
+		resultURI = "/admin/memberDetail";
+		
+		return resultURI;
 	}
 	
 }

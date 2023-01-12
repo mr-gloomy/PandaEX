@@ -41,6 +41,7 @@ public interface MemberDAO {
 			// 마이 페이지 - 메인 
 			public MemberVO getMembers(String user_id);
 			
+			// 관리자용 회원조회
 			public MemberVO getMembers(MemberVO vo) throws Exception;
 			
 			// 마이 페이지 - 정보 수정 

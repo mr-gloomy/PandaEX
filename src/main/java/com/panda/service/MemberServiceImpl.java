@@ -323,6 +323,11 @@ public class MemberServiceImpl implements MemberService {
 				public List<MemberVO> getMemList(String id) throws Exception {
 					return dao.getMemList(id);
 				}
+				// 관리자용 회원정보 조회
+				@Override
+				public MemberVO getMembers(MemberVO mVO) throws Exception {
+					return dao.getMembers(mVO);
+				}
 
 		
 		

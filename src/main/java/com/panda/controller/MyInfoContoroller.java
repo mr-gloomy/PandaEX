@@ -29,7 +29,7 @@ public class MyInfoContoroller {
 		String user_id = (String) session.getAttribute("user_id");
 		
 		if(user_id == null) {
-			return "/main/index";
+			return "redirect:/main/index";
 		}
 		
 		
