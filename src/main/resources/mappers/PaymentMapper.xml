@@ -79,24 +79,24 @@
 <!-- 	 	) where rn between #{begin} and #{end}									 -->
 <!-- 	</select> -->
 
-<!-- 	<select id="refundList" parameterType="int" resultType="PaymentInsertVO"> -->
-<!-- 		select p.payment_price, p.payment_time, p.payment_no from payment p, member m  -->
-<!--        		where m.member_no = #{memberNo}  -->
-<!--         and  -->
-<!--         	to_char(p.payment_time, 'YYYYMMDD')>sysdate-7 -->
-<!--         and -->
-<!--         	p.payment_status = 1 -->
-<!--         and -->
-<!--         	m.member_holding_points >= p.payment_price -->
-<!-- 	</select> -->
+	<select id="refundList" resultType="PaymentInsertVO">
+		select p.payment_price, p.payment_time, p.payment_no from payment p, user u 
+       		where u.user_no = #{memberNo} 
+        and 
+        	to_char(p.payment_time, 'YYYYMMDD')>sysdate-7
+        and
+        	p.payment_status = 1
+        and
+        	u.user_pandapay >= p.payment_price
+	</select>
 
-<!-- 	<update id="refund" parameterType="int"> -->
-<!-- 		update payment set payment_status = 0 where payment_no=#{paymentNo} -->
-<!-- 	</update> -->
+	<update id="refund">
+		update payment set payment_status = 0 where payment_no=#{paymentNo}
+	</update>
 	
-<!-- 	<update  id="refundMember" parameterType="PaymentInsertVO"> -->
-<!-- 		update member set member_holding_points = member_holding_points - #{paymentPrice} where member_no = #{memberNo} -->
-<!-- 	</update> -->
+	<update  id="refundMember" parameterType="PaymentInsertVO">
+		update user set user_pandapay =  user_pandapay - #{paymentPrice} where user_no = #{memberNo}
+	</update>
 	
 <!-- 	<select id="cashingSequence" resultType="int"> -->
 <!-- 		select cashing_points_seq.nextval from dual -->

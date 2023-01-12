@@ -67,6 +67,12 @@ public class PayController {
 		
 	}
 	
+	// http://localhost:8080/payment/list
+	@RequestMapping(value = "/list",method = RequestMethod.GET)
+	public void list() throws Exception {
+		
+	}
+	
 	@PostMapping("/charge")
 	public String pay1Purchase(
 				@ModelAttribute PurchaseVO purchaseVO, HttpSession session
@@ -148,41 +154,41 @@ public class PayController {
 		model.addAttribute("success", pvo);
 		return "payment/finish";
 	}
-//	
-//	@GetMapping("/cancel")
-//	public String payCancel(HttpSession session) {
-//		session.removeAttribute("pay");
-//		session.removeAttribute("purchase");
-//		session.removeAttribute("paymentNo");
-//		return "payment/cancel";
-//	}
-//	
-//	@GetMapping("/fail")
-//	public String payFail(HttpSession session) {
-//		session.removeAttribute("pay");
-//		session.removeAttribute("purchase");
-//		session.removeAttribute("paymentNo");
-//		return "payment/fail";
-//	}
-//
-//	@GetMapping("/refund/{paymentNo}")
-//	public String refund(HttpSession session, @PathVariable int paymentNo) throws Exception {
-//		int memberNo = (int)session.getAttribute("whoLogin");
-//		
-//		PaymentInsertVO paymentInsertVO = paymentService.selectOne(paymentNo);
-//		
-//		//카카오페이에 취소 요청
-//		KakaoPayCancelRequestVO requestVO = KakaoPayCancelRequestVO.builder()
-//																					.tid(paymentInsertVO.getPaymentTid())
-//																					.cancel_amount(paymentInsertVO.getPaymentPrice())
-//																					.build();
-//		KakaoPayCancelResponseVO responseVO = kakaoPayService.cancel(requestVO);
-//		
+	
+	@GetMapping("/cancel")
+	public String payCancel(HttpSession session) {
+		session.removeAttribute("pay");
+		session.removeAttribute("purchase");
+		session.removeAttribute("paymentNo");
+		return "payment/cancel";
+	}
+	
+	@GetMapping("/fail")
+	public String payFail(HttpSession session) {
+		session.removeAttribute("pay");
+		session.removeAttribute("purchase");
+		session.removeAttribute("paymentNo");
+		return "payment/fail";
+	}
+
+	@GetMapping("/refund/{paymentNo}")
+	public String refund(HttpSession session, @PathVariable int paymentNo) throws Exception {
+		int memberNo = (int)session.getAttribute("whoLogin");
+		
+		PaymentInsertVO paymentInsertVO = paymentService.selectOne(paymentNo);
+		
+		//카카오페이에 취소 요청
+		KakaoPayCancelRequestVO requestVO = KakaoPayCancelRequestVO.builder()
+																					.tid(paymentInsertVO.getPaymentTid())
+																					.cancel_amount(paymentInsertVO.getPaymentPrice())
+																					.build();
+		KakaoPayCancelResponseVO responseVO = kakaoPayService.cancel(requestVO);
+		
 //		paymentService.refund(paymentNo);
-//		
-//		return "redirect:/payment/list";
-//	}
-//
+		
+		return "redirect:/payment/list";
+	}
+
 //	@PostMapping("/cashingRequest")
 //	public String cashingRequest(HttpSession session,
 //			@ModelAttribute CashingPointsVO cashingPointsVO) {
@@ -219,7 +225,7 @@ public class PayController {
 //			return"redirect:/payment/paymentReady/"+auctionNo;
 //		}
 //	}
-////	@GetMapping("/paymentReady/{auctionNo}")
+//	@GetMapping("/paymentReady/{auctionNo}")
 //	public String paymentReadyAuction(HttpSession session, Model model ,@PathVariable int auctionNo) {
 //		int memberNo = (int)session.getAttribute("whoLogin");
 //		model.addAttribute("memberDto", memberDAO.selectOne(memberNo));
