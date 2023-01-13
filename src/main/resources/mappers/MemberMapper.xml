@@ -24,7 +24,10 @@
  	  select * from user
  	  where user_nick = #{user_nick} 
  	</select>
- 	
+ 	 	<select id="getMembera" resultType="MemberVO">
+ 	  select * from user 
+ 	  where user_id=#{user_id} and user_pw = #{user_pw} 	
+ 	</select>
  	
  	
 	<select id="login" resultType="MemberVO">
@@ -146,7 +149,7 @@
 	<!-- 회원 탈퇴 -->
 	<delete id="exit">
 		delete from user
-		where user_id=#{user_id} and user_pw=#{user_pw}
+		where user_id=#{user_id}
 	</delete>
 	
 	

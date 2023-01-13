@@ -5276,5 +5276,60 @@ background: rgb(0 0 0 / 20%);
 .info-modify:hover{
 	opacity: 1;
 }
+.pwerr{
+    font-size: 13px;
+    position: absolute;
+    margin: -24px 0 0 230px;
+    color: red;
+    opacity: 0;
+}
+.hide006 .delep {
+	font-size: 30px;
+    color: rgb(60 150 240 / 70%);
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.hide006 .deletep1 .user_pwmo{
+    border: 2px solid #7c7c7b;
+    padding-left: 10px;
+    border-radius: 5px;
+    width: 250px;
+    height: 40px;
+}
+.hide006 .deletep1 .mypass{
+    font-size: 20px;
+    color: rgb(0 0 0 / 65%);
+    font-weight: 600;
+}
+.hide006 .deletep1 .mypeu{
+	font-size: 20px;
+    color: rgb(0 0 0 / 65%);	
+    font-weight: 600;
+    border-bottom: 2px double #8d8787;
+    width: 350px;
+    margin-bottom: 15px;
+}
+
+.radiopo{
+	position: absolute;
+    margin: -30px 0 0 30px;
+    font-size: 15px;
+}
+.deletep1 input[type=radio]{
+	width: 20px;
+	height: 20px;
+	margin-bottom: 10px;
+	
+}
+.sibals{
+	width: 150px;
+    height: 40px;
+    color: white;
+    background: rgba(90, 90, 90, 1);
+    opacity: 0.8;
+}
+.sibals:hover{
+	opacity: 1;
+}
 /* 추가 - 김태홍  손대면 안됍니다!!!!*/
 /*////////////////////////////////////////////////////////*/

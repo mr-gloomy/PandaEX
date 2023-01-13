@@ -8,6 +8,11 @@ $(function(){
 		$('.option-list').fadeOut(400);
 	})
 	$('.panda-header-chaticon-hover').on('click',function(){
+		var id = $('#idVal').val();
+		
+		if(id == null || id == "") {
+			$(".usermodal").trigger("click");
+		} else {
 		$('.chat').css('display','flex');
 		$('.chat-list').fadeIn(400);
 		$('.option-list').fadeOut(10);
@@ -18,6 +23,7 @@ $(function(){
 		$('.chatting').css('visibility','visible');
 		$('.option').css('visibility','visible');
 		$('.chat-name').css('visibility','visible');
+		}
 	})
 	$('.panda-header-chaticon').on('click',function(){
 		$('.chat').css('display','flex');
@@ -78,9 +84,7 @@ $(function(){
 // 채팅창 목록 불러오기
 $(function(){
 	$('#chatOpen').on('click',function(){
-		
 		var id = $('#idVal').val();
-		
 		$.ajax({
 			url:'/chat/getRooms/'+id,
 			type:'get',

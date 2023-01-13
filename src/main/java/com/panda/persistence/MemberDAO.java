@@ -65,4 +65,5 @@ public interface MemberDAO {
 			// 일반회원 <-> 블랙회원 전환
 			public void changeblack(MemberVO mvo)throws Exception;
 			
+			public MemberVO getMembera(MemberVO vo);
 }

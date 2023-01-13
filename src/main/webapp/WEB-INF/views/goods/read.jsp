@@ -150,7 +150,9 @@ $(function() {
 									<i class="fa-sharp fa-solid fa-paper-plane"></i> 판다페이 결제하기 </a>
 							</div>
 							<div class="col">
-								<a type="button" class="btn btn-success btn-lg btn-block py-3 loginControl"  
+								<a type="button" class=
+								
+								"btn btn-success btn-lg btn-block py-3 loginControl"  
 								   id="chat" >
 				                   <i class="fa-solid fa-gavel pr-2"></i> 1:1 채팅하기
 				                </a>
