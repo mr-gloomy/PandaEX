@@ -31,10 +31,14 @@
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
 }
-.stext-104 {
-    font-family: fangsong;
-    font-size: 20px;
-    line-height: 2;
+.stext-104 { /* 상품명 말줄임표 넣기*/
+	width: 275px;
+	font-family: sans-serif;
+	font-size: 18px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	
 }
 .stext-105 {
     font-family: ui-monospace;
@@ -67,7 +71,6 @@
     background-color: #28a745;
     color: #fff;
 }
-
 </style>
 <script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2c915430ac4edcd6aa694ae234c0de27"></script>
