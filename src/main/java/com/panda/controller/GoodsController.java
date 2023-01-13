@@ -81,7 +81,6 @@ public class GoodsController {
 		vo.setUser_addr(mvo.getUser_addr());
 		vo.setUser_area(mvo.getUser_area());
 		
-		rttr.addFlashAttribute("result", "상품등록 완료!");
 		// 1. 전달된 정보 저장 
 		mylog.debug(vo.toString());
 		
@@ -105,7 +104,9 @@ public class GoodsController {
 		// 3. 서비스 -> DAO 접근 (mapper)
 		service.insertGoods(vo);
 		
-		mylog.debug(" 게시판 글쓰기 완료 ");
+		mylog.debug(" 글쓰기 완료 ");
+		rttr.addFlashAttribute("result", "creatOK");
+
 		// 4. 페이지로 이동(list페이지)
 		
 		
@@ -114,7 +115,8 @@ public class GoodsController {
 		
 	// 상품목록(All)
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public void listGET(HttpSession session , Model model,SearchVO vo) throws Exception {
+	public void listGET(HttpSession session , Model model,SearchVO vo,
+						@ModelAttribute("result") String result) throws Exception {
 		mylog.debug(" /Goods/list 호출 -> DB정보 가져와서 출력 ");
 		
 		
@@ -128,7 +130,7 @@ public class GoodsController {
 		// 페이지 이동(/goods/list.jsp)
 	}
 	
-	// 게시판 본문보기
+	// 상품 상세페이지
 	@RequestMapping(value = "/read",method = RequestMethod.GET)
 	public void readGET(@ModelAttribute("goods_no") int goods_no, 
 							@ModelAttribute("user_no") int user_no, Model model, HttpSession session) throws Exception{
@@ -185,7 +187,7 @@ public class GoodsController {
 		
 		if (result > 0) {
  			// "수정완료" - 정보 전달
- 			rttr.addFlashAttribute("result", "글이 수정되었습니다!");
+ 			rttr.addFlashAttribute("result", "modOK");
  		}
 		
 		// 페이지 이동(/goods/list)
@@ -202,7 +204,7 @@ public class GoodsController {
 		Integer result = service.removeGoods(goods_no);
 		
 		if(result > 0) {
-			rttr.addFlashAttribute("result", "해당 글이 삭제되었습니다!");
+			rttr.addFlashAttribute("result", "removeOK");
 		}
 		
 		// 게시판 리스트로 이동(/goods/list)

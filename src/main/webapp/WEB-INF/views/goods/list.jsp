@@ -156,11 +156,6 @@ $(function() {
 </script>
 </head>
 <body>
-
-${result }
-request : ${requestScope.result }
-	session : ${sessionScope.result }
-	param : ${param.result } 
 <!-- 위치 -->
 <input type="hidden" value="${param.s}" name="g_sort" id="g_sort">
 <input type="hidden" value="${user_id}" id="us">
@@ -241,6 +236,10 @@ request : ${requestScope.result }
 	<c:set var="col" value="4" />
 	<c:set var="row" value="${ Math.ceil(size/col) }" />
 	<c:set var="num" value="0" />
+	result : ${result }
+	request : ${requestScope.result }
+	session : ${sessionScope.result }
+	param : ${param.result } 
 	
 	<div class="row isotope-grid">	
 		<c:forEach begin="1" end="${row }" step="1">
@@ -284,12 +283,10 @@ request : ${requestScope.result }
 </div>
 <!-- 상품목록 -->
  <script type="text/javascript">
-	//alert('${result}');
-	// EL표현식 -> JS사용 전달 가능(DB데이터도 사용가능)
 	var result = '${result}';
 	
 	if(result == 'createOK'){
-		alert('글쓰기 완료!');
+		alert('상품 글쓰기 완료!');
 	}
 	
 	if(result == 'modOK'){
