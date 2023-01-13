@@ -20,8 +20,11 @@
 
 	<%--임시변수 나중에 지우고 쓰세요~   --%>
 	<c:set var="user_coin" value="12312" />
+<%-- 	<c:set var="user_pandapay" value="${user.user_pandapay" /> --%>
 	<c:set var="itemprice" value="25000" />
+<%-- 	<c:set var="goods_price" value="${goods.goods_price" /> --%>
 	<c:set var="itemname" value="내사랑 따듯한 유자차" />
+<%-- 	<c:set var="goods_title" value="${goods.goods_title" /> --%>
 	<c:set var="fareper" value="100" />
 	<c:set var="safefare" value="${itemprice div fareper}" />
 	<!-- safefare = 안전거래 수수료 상품금액 1%입니다. 
@@ -42,9 +45,15 @@
 
 	<%--임시변수 나중에 지우고 쓰세요~  --%>
 
-
+	${goods_no }
+	${goods_price }
+	${mvo }
 	<section class="pay_section">
+		<form action="/payment/pay_page" method="post" id="form">
 		<div class="pay_body">
+		<input type="hidden" name="${goods_no }" value="goods_no">
+		<input type="hidden" name="${goods_price }" value="goods_price">
+		<input type="hidden" name="${mvo }" value="mvo">
 			<div class="body-1">
 				<p class="body-1-1">택배거래,</p>
 				<p>안전거래로 구매</p>
@@ -55,8 +64,8 @@
 						src="/resources/images/icons/myloveuza.jpg" class="item_image"></li>
 				</ul>
 				<ul class="body-2-2">
-					<li><i class="body-2-2-1">${itemprices }원</i></li>
-					<li><p class="body-2-2-2">${itemname }</p></li>
+					<li><i class="body-2-2-1" id="goods_price">${itemprices }원</i></li>
+					<li><p class="body-2-2-2" id="goods_title">${itemname }</p></li>
 				</ul>
 			</div>
 			<div class="body-3">
@@ -113,11 +122,11 @@
 					<div class="easy-pay-1-1">
 						<div class="easy-pay-img"><img src="/resources/images/icons/pay.png"></div>
 						<div class="easy-pay-info">
-							<div>카드 / 계좌 결제 시</div>
+							<div>카카오페이로 판다페이 충전 시</div>
 							<div>판다코인 최대 0.5% / 1% 적립</div>
-							<div class="easy-pay-division">NH농협 계좌로 5만원 이상 결제 시</div>
-							<div>2000P 추가 적립(월 1회)</div>
-							<div><input type="button" value="카드/계좌 등록하고 혜택받기"></div>
+							<div class="easy-pay-division">카카오페이로 최초 충전 시</div>
+							<div>2000P 추가 적립</div>
+							<div><input type="button" value="카카오페이로 판다페이 충전하고 혜택받기"></div>
 						</div>
 					</div>
 <!-- 					<input type="radio" class="other-pay" name="pay" > <i class="other-pay-1">다른 결제 수단</i> -->
@@ -130,11 +139,17 @@
 					<p class="pay-terms-info">개인정보 제 3자 제공동의와 결제대행 서비스 이용약관에 동의합니다.</p>
 					<p class="pay-terms-detail">자세히보기</p>
 				</div>
-				<input type="button" value="결제하기" class="pay-submit">
+				<div class="G_btn" align="center">
+<!-- 					<input type="submit" value="결제하기" class="pay-submit" > -->
+					<input type="submit" value="결제하기" class="btn btn-success py-2 px-3" >
+					<button type="reset" class="btn btn-success py-2 px-3">초기화</button>
+					<button onclick="href='/goods/list';" class="btn btn-success py-2 px-3">목록이동</button>
+<!-- 				<button type="submit" class="btn btn-success py-2 px-3">작성완료</button> -->
+				</div>
 			</div>
 			
 		</div>
-
+	</form>
 	</section>
 
 

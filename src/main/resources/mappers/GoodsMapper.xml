@@ -9,9 +9,9 @@
 	<!-- 상품 등록(user_nick 빠짐) -->
 	<insert id="createGoods">
 		insert into goods(goods_category,goods_title,goods_condition,goods_price,goods_discount,goods_detail,goods_refund,
-						  goods_trade,uploadFile,thumbnail)
+						  goods_trade,uploadFile,thumbnail,user_no,user_nick,user_addr,user_area)
 		values(#{goods_category},#{goods_title},#{goods_condition},#{goods_price},#{goods_discount},#{goods_detail},#{goods_refund},
-			   #{goods_trade},#{uploadFile},#{thumbnail})
+			   #{goods_trade},#{uploadFile},#{thumbnail},#{user_no},#{user_nick},#{user_addr},#{user_area})
 	</insert> 
 	
 	<!-- 상품 목록(all) -->

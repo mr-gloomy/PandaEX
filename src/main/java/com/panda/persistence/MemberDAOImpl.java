@@ -100,7 +100,7 @@ public class MemberDAOImpl implements MemberDAO{
 		}
 		
 		@Override
-		public MemberVO getMembers(String user_id) {
+		public MemberVO getMemberss(String user_id) {
 			return sqlSession.selectOne(NAMESPACE + ".getMember", user_id);
 		}
 		
@@ -127,7 +127,7 @@ public class MemberDAOImpl implements MemberDAO{
 		// 마이 페이지 
 		@Override
 		public MemberVO getMembers(MemberVO memberVO) throws Exception {
-			return sqlSession.selectOne(NAMESPACE + ".getMembers", memberVO);
+			return sqlSession.selectOne(NAMESPACE + ".getMember", memberVO);
 		}
 		
 		// 마이 페이지 - 정보 수정 

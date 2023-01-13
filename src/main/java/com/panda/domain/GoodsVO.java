@@ -27,9 +27,9 @@ public class GoodsVO {
 	
 	// 판매자 정보 추가
 	private Integer user_no;			//회원번호
-    private String user_nick;			//회원 닉네임
+	private String user_nick;			//회원닉네임
     private String user_area;			//회원주소(시)
     private String user_addr;			//회원주소(구)
-    private String user_regdate;	
+    private String user_regdate;		//회원등록일
 
 }

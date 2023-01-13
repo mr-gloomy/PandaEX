@@ -17,7 +17,7 @@ public class MyPageServiceImpl implements MyPageService {
 
 	@Override
 	public MemberVO getMembers(String user_id) {
-		return memberDAO.getMembers(user_id);
+		return memberDAO.getMemberss(user_id);
 	}
 
 	@Override

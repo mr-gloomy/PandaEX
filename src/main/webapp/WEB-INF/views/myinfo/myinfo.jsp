@@ -19,10 +19,10 @@
 		siteName : 'PANDA',
 		categoryId : '155093',
 		divisionId : '155094',
-
 	});
 </script>
 <script src="/resources/js/myinfo.js"></script>
+
 </head>
 
 
@@ -41,6 +41,7 @@
 			<li class="side_info mypactive">내 정보</li>
 			<li class="side_auction">내 경매</li>
 			<li class="side_modify">내 정보 수정</li>
+			<li class="side_orderlist">내 주문 목록</li>
 			<li class="side_pointcharge">포인트 충전</li>
 			<li class="side_pointhistory">포인트 충전 내역</li>
 			<li class="side_drop">회원탈퇴</li>
@@ -49,7 +50,7 @@
 			<div class="myp_info">
 				<div class="myp_user">
 					<div class="myp_img">
-						<img src="/resources/images/icons/man1.png">
+						<img src="/resources/images/icons/dd.jpg" style="width:150px;height:150px; border-radius: 50%;background: #ffffff85;">
 					</div>
 					<div class="myp_name">${user.user_name }</div>
 				</div>
@@ -218,20 +219,23 @@
 						<li>변경할 비밀번호</li>
 						<li>비밀번호 재확인</li>
 					</ul>
-					<form action="/myinfo/update" method="post">
+					<form action="/myinfo/update" method="POST">
 					<ul class="mbody-2">
-						<li><input type="text" value="${user.user_name }" readonly></li>
-						<li><input type="text" value="${user.user_id }" readonly></li>
-						<li><input type="text" class="nickmo" name="user_nick" value="${user.user_nick }" maxlength="10"></li>
-						<li><input type="text" value="${user.user_tel }" readonly></li>
-						<li><input type="text" name="user_password" value="${user.user_email }" readonly></li>
-						<li><input type="password" name="user_pw" value="${user.user_pw }" placeholder="변경할 비밀번호" maxlength="20"></li>
+						<li><input type="text" value="${user.user_name }" name="user_name" ></li>
+						<li><input type="text" value="${user.user_id }" name="user_id" readonly></li>
+						<li><input type="text" id="mypnick" class="nickmo" name="user_nick" value="${user.user_nick }" maxlength="10"></li>
+						<li><input type="text" value="${user.user_tel }" name="user_tel"></li>
+						<li><input type="text" value="${user.user_email }" readonly></li>
+						<li><input type="password" id="myppw" name="user_pw" value="${user.user_pw }" placeholder="변경할 비밀번호" maxlength="20"></li>
 						<li><input type="password" class="user_pwchk" value="${user.user_pw }" placeholder="비밀번호 재확인" maxlength="20"></li>
 					</ul>
-					 <button type="submit" class="info-modify" >내정보 변경</button> 
+					 <button type="submit" id="update" class="info-modify" >내정보 변경</button> 
 					</form>
 				</div>
 			</div>
+		</div>
+		<div class="hide007">
+		주문목록
 		</div>
 		<div class="hide004">
 			<div class="row flex-fill d-flex flex-column" >

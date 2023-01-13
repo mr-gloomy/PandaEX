@@ -2,7 +2,6 @@ package com.panda.controller;
 
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -11,8 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.panda.domain.MemberVO;
 import com.panda.service.MyPageService;
@@ -20,6 +17,9 @@ import com.panda.service.MyPageService;
 @Controller
 @RequestMapping(value = "/myinfo/*")
 public class MyInfoContoroller {
+	
+	
+	private static final Logger mylog = LoggerFactory.getLogger(MyInfoContoroller.class);
 
 	
 	@Inject
@@ -46,12 +46,15 @@ public class MyInfoContoroller {
 
 		return "/myinfo/myinfo";
 	}
+	
+	@RequestMapping(value = "/update", method=RequestMethod.POST)
+	public String updatemyp(MemberVO memberVO) throws Exception{
 
-	@RequestMapping(value="/update", method = RequestMethod.POST)
-	public String mypupdate(Model model,MemberVO vo) throws Exception{
+		myservice.modify(memberVO);
+		mylog.debug(" updatemyp() 호출 수정후 정보 : "+myservice.getMembers(memberVO)); 
+			
+		return "redirect:/myinfo/myinfo";
 
-		vo = myservice.getMembers(vo);
-		model.addAttribute("memberVO", vo);
-		return "/myinfo/myinfo";
 	}
+
 }

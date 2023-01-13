@@ -5024,9 +5024,9 @@ input[type=number] {
 }
 .myp_info .myp_user {
 /* 	background-size: 350px; */
-/*     background-repeat: no-repeat; */
-/*     background-image: url(/resources/images/icons/mypagetitle.png); */
-	background : rgb(90,90,90);
+    background-repeat: no-repeat;
+    background-image: url(/resources/images/infoback.jpg);
+/* 	background : rgb(90,90,90); */
     min-width: 250px;
 	height: 300px;
 	display: flex;
@@ -5056,6 +5056,13 @@ input[type=number] {
 	overflow: hidden;
 	font-size: 15px;
 	resize: none;
+}
+.myp_name{
+	position: absolute;
+    margin-top: 175px;
+    font-size: 20px;
+    color: #3a3a3a;
+    font-weight: 600;
 }
 .shop_icons,
 .shop_icon{
@@ -5152,7 +5159,8 @@ background: rgb(0 0 0 / 20%);
 .hide003,
 .hide004,
 .hide005,
-.hide006{
+.hide006,
+.hide007{
 	height: 1000px;
 	display: none;
 }

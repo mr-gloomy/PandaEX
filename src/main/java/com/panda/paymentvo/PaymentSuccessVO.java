@@ -4,5 +4,5 @@ import lombok.Data;
 
 @Data
 public class PaymentSuccessVO {
-	private int paymentPrice, user_pandaPay;
+	private int payment_price, user_pandaPay;
 }

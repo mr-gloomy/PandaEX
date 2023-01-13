@@ -1,8 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>PANDA</title>
+<!-- 헤더 -->	 
 <%@ include file="../include/header.jsp" %>
+<%@ include file="../include/css.jsp"%>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js"></script>
 
+</head>
+<body>
+<br><br><br><br><br><br>
 <div class="container d-flex" id="app">
 	<div class="row col-3 mt-3">
 		<ul class="nav flex-column text-center">
@@ -49,5 +61,10 @@
 	</div>
 	
 </div>
+    
 
-<%@ include file="../include/footer.jsp" %>
+			
+<!--   푸터 -->
+<%@ include file="../include/footer.jsp" %>			
+</body>
+</html>
