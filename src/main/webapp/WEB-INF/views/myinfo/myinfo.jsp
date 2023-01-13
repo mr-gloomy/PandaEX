@@ -19,7 +19,6 @@
 		siteName : 'PANDA',
 		categoryId : '155093',
 		divisionId : '155094',
-
 	});
 </script>
 <script src="/resources/js/myinfo.js"></script>
