@@ -25,7 +25,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 <script type="text/javascript">
 $(function() {
-	$(".loginControl").click(function(e){
+	$(".loginControl2").click(function(e){
 		var targetObjectId = $(e.target)[0].id;
 		var userId = '<%=(String)session.getAttribute("user_id")%>';
 		if(userId == null || userId == "null") {
@@ -145,12 +145,12 @@ $(function() {
 					<c:if test="${sessionScope.user_id ne vo.user_id && sessionScope.user_id ne 'admin'}">
 						<div class="row">
 							<div class="col p-0">
-								<a class="btn btn-warning btn-lg btn-block py-3 loginControl" 
+								<a class="btn btn-warning btn-lg btn-block py-3 loginControl2" 
 									href="/payment/pay_page?goods_no=${vo.goods_no }&goods_price=${vo.goods_price }" role="button">
 									<i class="fa-sharp fa-solid fa-paper-plane"></i> 판다페이 결제하기 </a>
 							</div>
 							<div class="col">
-								<a type="button" class="btn btn-success btn-lg btn-block py-3 loginControl"  
+								<a type="button" class="btn btn-success btn-lg btn-block py-3 loginControl2"  
 								   id="chat" >
 				                   <i class="fa-solid fa-gavel pr-2"></i> 1:1 채팅하기
 				                </a>
