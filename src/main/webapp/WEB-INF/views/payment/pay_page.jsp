@@ -51,9 +51,9 @@
 	<section class="pay_section">
 		<form action="/payment/pay_page" method="post" id="form">
 		<div class="pay_body">
-		<input type="hidden" name="${goods_no }" value="goods_no">
-		<input type="hidden" name="${goods_price }" value="goods_price">
-		<input type="hidden" name="${mvo }" value="mvo">
+		<input type="hidden" value="${goods_no }" name="goods_no">
+		<input type="hidden" value="${goods_price }" name="goods_price">
+		<input type="hidden" value="${mvo }" name="mvo">
 			<div class="body-1">
 				<p class="body-1-1">택배거래,</p>
 				<p>안전거래로 구매</p>

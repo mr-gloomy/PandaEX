@@ -102,7 +102,7 @@
 	
 	<!-- 낙찰확인 -->
 	<select id="finishBid" resultType="Map">
-		select count(1) as auction_bid_cnt
+	   select count(1) as auction_bid_cnt
      		, sum(auction_bid) as auction_bid_sum
  		 from auction
 		where auction_bidok=1
