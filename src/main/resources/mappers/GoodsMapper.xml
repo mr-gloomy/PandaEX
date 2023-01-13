@@ -20,11 +20,11 @@
 		<if test="k!=null and k!=''">
 			where goods_title like concat('%',#{k},'%')
 			<if test="l!=null and l!=''">
-			and user_addr=#{l}
+			and user_area=#{l}
 			</if>
 		</if>
 		<if test="k=='' and l!=null">
-			where user_addr=#{l}
+			where user_area=#{l}
 		</if>
 		<if test="s==0">
 			order by goods_date desc
