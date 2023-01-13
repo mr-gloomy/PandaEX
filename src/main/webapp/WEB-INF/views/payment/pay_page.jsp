@@ -49,10 +49,11 @@
 	${goods_price }
 	${mvo }
 	<section class="pay_section">
-		<form action="/payment/paying" method="post" id="form">
+		<form action="/payment/pay_page" method="post" id="form">
 		<div class="pay_body">
-		<input type="hidden" name="${sessionScope.user_no}" value="user_no">
-<%-- 		<input type="hidden" name="${sessionScope.goods_no}" value="goods_no"> --%>
+		<input type="hidden" name="${goods_no }" value="goods_no">
+		<input type="hidden" name="${goods_price }" value="goods_price">
+		<input type="hidden" name="${mvo }" value="mvo">
 			<div class="body-1">
 				<p class="body-1-1">택배거래,</p>
 				<p>안전거래로 구매</p>
