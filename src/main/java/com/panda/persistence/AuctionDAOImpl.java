@@ -117,5 +117,13 @@ public class AuctionDAOImpl implements AuctionDAO{
 	}
 
 	
+	// 낙찰확인
+	@Override
+	public Map finishBid() throws Exception {
+		return sqlSession.selectOne(NAMESPACE+".finishBid");
+	}
+
+	
+	
 	
 }

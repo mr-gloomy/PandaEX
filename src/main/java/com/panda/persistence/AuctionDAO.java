@@ -39,6 +39,7 @@ public interface AuctionDAO {
 	// 입찰하기
 	public Integer updateBid(AuctionVO avo) throws Exception;
 	
-	
+	// 낙찰확인
+	public Map finishBid() throws Exception;
 	
 }
