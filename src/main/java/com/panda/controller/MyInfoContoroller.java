@@ -64,9 +64,9 @@ public class MyInfoContoroller {
 		session.invalidate();
 		myservice.exit(memberVO);;
 		mylog.debug(" deletemyp() 삭제~"); 
-			
 
-		return "main/index";
+
+		return "redirect:/main/index";
 	}
 
 }

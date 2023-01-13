@@ -431,6 +431,7 @@
 			<div class="deletep2" style="display: none;">
 			<form id="modimodi" action="/myinfo/delete" method="POST">
 			<input type="hidden" name="user_id" value="${user.user_id }">
+			<p>고객님의 소중한 개인정보는 탈퇴즉시 파기됩니다.</p>
 			<button type="submit" class="delebtn">탈퇴하겠습니다.
 			</button>
 			</form>
