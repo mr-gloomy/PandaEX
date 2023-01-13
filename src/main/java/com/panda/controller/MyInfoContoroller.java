@@ -39,19 +39,14 @@ public class MyInfoContoroller {
 		
 		
 		memberVO.setUser_id(user_id);
-		memberVO = myservice.getMemberss(memberVO);
+		memberVO = myservice.getMembers(memberVO);
 		
 		model.addAttribute("memberVO", memberVO);
 		
 
 		return "/myinfo/myinfo";
 	}
+	
+	
 
-//	@RequestMapping(value="/update", method = RequestMethod.POST)
-//	public String modify(Model model,MemberVO vo) throws Exception{
-//
-//		vo = myservice.getMembers(vo);
-//		model.addAttribute("memberVO", vo);
-//		return "/myinfo/myinfo";
-//	}
 }

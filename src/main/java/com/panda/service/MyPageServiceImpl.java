@@ -21,7 +21,7 @@ public class MyPageServiceImpl implements MyPageService {
 	}
 
 	@Override
-	public MemberVO getMemberss(MemberVO memberVO) throws Exception {
+	public MemberVO getMembers(MemberVO memberVO) throws Exception {
 		return memberDAO.getMembers(memberVO);
 	}
 	

@@ -10,7 +10,7 @@ public interface MyPageService {
 		public MemberVO getMembers(String user_id);
 		
 		// 마이 페이지 - 메인 
-		public MemberVO getMemberss(MemberVO memberVO) throws Exception;
+		public MemberVO getMembers(MemberVO memberVO) throws Exception;
 		
 		// 정보 수정 
 		public void modify(MemberVO memberVO) throws Exception;
