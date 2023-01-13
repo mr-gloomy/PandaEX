@@ -182,18 +182,22 @@ public class PayController {
 		// /payment/pay_page.jsp 페이지 이동
 	}
 	
-	@PostMapping("/pay_page")
-	public void pay_page(HttpSession session, @ModelAttribute MemberVO mvo, @ModelAttribute Integer goods_no, @ModelAttribute int goods_price) throws Exception {
-//								@PathVariable int goods_no
-		mylog.debug("/payment/pay_page(POST) 호출 -> 페이지 이동 ");
+	@GetMapping("/buying")
+	//@ResponseBody
+	public String buying(HttpSession session,@RequestParam int goods_price, 
+			@RequestParam int goods_no ,@RequestParam int user_no)  throws Exception {
+//								@PathVariable int goods_no @ModelAttribute("goods_no")
+		mylog.debug("/payment/buying(GET) 호출 -> Service 실행 ");
 		String user_id = (String)session.getAttribute("user_id");
-		mylog.debug("paying controller");
-		mylog.debug("mvo : " + mvo);
+//		mylog.debug("mvo : " + mvo);
+		mylog.debug("user_no : " + user_no);
 		mylog.debug("goods_no : " + goods_no);
 		mylog.debug("goods_price : " + goods_price);
 		mylog.debug("user_id : " + user_id);
-//		paymentService.paying(user_no);
+		paymentService.buyer(user_no, goods_no);
+		paymentService.seller(goods_no);
 		
+		return "/main/index";
 		
 	}
 //	@GetMapping("/paying/{auctionNo}")

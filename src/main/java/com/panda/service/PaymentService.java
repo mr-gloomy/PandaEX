@@ -20,7 +20,10 @@ public interface PaymentService {
 	// 사용자 정보 조회
 	public MemberVO getUser(String user_id) throws Exception;
 	
-	public void paying(int user_no) throws Exception;
+	public void buyer(int user_no, int goods_no) throws Exception;
+	
+	public void seller(int goods_no) throws Exception;
+	
 //	List<PaymentInsertVO> allList(Map<String, Object> info) throws Exception;
 //	List<PaymentInsertVO> refundList(int memberNo) throws Exception;
 //	void refund(int paymentNo) throws Exception;
