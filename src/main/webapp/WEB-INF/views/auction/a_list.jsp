@@ -56,10 +56,10 @@
 				<span style="display:block; margin-bottom:30px; font-size:48px; font-weight:bold;">
 					<img src="/resources/images/icons/icon_concentrated.png">해피판다</span>
 						<c:set var="today" value="<%=new Date()%>" />
-  					 	<fmt:formatDate var="today1" pattern="yyyy년 MM월" value="${today }"/>
+<%--   					 	<fmt:formatDate var="today1" pattern="yyyy년 MM월" value="${today }"/> --%>
 				<p style="font-size:20px; color:#666;"><span class="panda-date" style="font-weight:bold;">${today1 }</span><br> 해피판다를 통해<br>
-					<span style="color:#28a745; font-weight:bold;">N</span>분이 
-					<span style="color:#28a745; font-weight:bold;">N</span>원의 마음을<br> 모아주셨습니다.</p>
+					<span style="color:#28a745; font-weight:bold;">${finishBidInfo.auction_bid_cnt }</span>분이 
+					<span style="color:#28a745; font-weight:bold;">${finishBidInfo.auction_bid_sum }</span>원의 마음을<br> 모아주셨습니다.</p>
 			</div>
 		</div>
 	<div class="flex-w flex-sb-m p-b-52">

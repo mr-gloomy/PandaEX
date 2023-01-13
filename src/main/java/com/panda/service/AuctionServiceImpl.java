@@ -92,6 +92,13 @@ public class AuctionServiceImpl implements AuctionService {
 	public Integer updateBid(AuctionVO avo) throws Exception {
 		return adao.updateBid(avo);
 	}
+
+	
+	// 낙찰확인
+	@Override
+	public Map finishBid() throws Exception {
+		return adao.finishBid();
+	}
 	
 	
 	
