@@ -59,7 +59,7 @@ $(function() {
 						</ol>
 						<div class="carousel-inner">
 							<div class="carousel-item active">
-								<img src="${vo.thumbnail } alt="사진없음">
+								<img src="${vo.uploadFile }" alt="사진없음">
 							</div>
 						</div>
 					</div>

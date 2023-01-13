@@ -279,7 +279,7 @@ function fun1() {
 		document.fr.uploadFile.focus();
 		return;
 	}
-	if(document.fr.searchKeyword.value==""){
+	if(document.fr.goods_title.value==""){
 		alert("상품명을 입력하세요");
 		document.fr.searchKeyword.focus();
 		return;
