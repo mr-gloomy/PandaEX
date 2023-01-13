@@ -3886,24 +3886,27 @@ input.num-product::-webkit-outer-spin-button, input.num-product::-webkit-inner-s
 
 .login-modal .modal-body .modal-text .id {
 	background-color: rgb(197 197 197/ 70%);
-	width: 350px;
-	height: 40px;
-	border-radius: 5px;
-	padding-left: 35px;
-	margin-bottom: 10px;
-	opacity: 0.6;
-	cursor: text;
+    width: 550px;
+    height: 40px;
+    border-radius: 5px;
+    padding-left: 15px;
+    margin-bottom: 10px;
+    opacity: 0.6;
+    cursor: text;
+    margin-top: 17px;
+    margin-left: 50px;
 }
 
 .login-modal .modal-body .modal-text .pass {
 	background-color: rgb(197 197 197/ 70%);
-	width: 350px;
-	height: 40px;
-	border-radius: 5px;
-	padding-left: 35px;
-	margin-bottom: 10px;
-	opacity: 0.6;
-	cursor: text;
+    width: 550px;
+    height: 40px;
+    border-radius: 5px;
+    padding-left: 15px;
+    margin-bottom: 30px;
+    opacity: 0.6;
+    cursor: text;
+    margin-left: 50px;
 }
 
 .login-modal .modal-body .modal-text img {
@@ -4083,6 +4086,7 @@ input.num-product::-webkit-outer-spin-button, input.num-product::-webkit-inner-s
 	height: auto;
 	top: 111px;
 	background: white;
+	margin-left:130px;
 }
 
 .login-modal .modal-body .modal-join .join-text {
