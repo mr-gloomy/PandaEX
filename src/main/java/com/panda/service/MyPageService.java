@@ -21,4 +21,6 @@ public interface MyPageService {
 		// 회원 탈퇴  
 		public void exit(MemberVO memberVO) throws Exception;
 //		public Integer mypupdate(MemberVO vo) throws Exception; 
+		
+		public MemberVO getMembera(MemberVO memberVO);
 }

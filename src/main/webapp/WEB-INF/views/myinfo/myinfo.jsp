@@ -85,10 +85,12 @@
 					<div class="myp_shop_2">
 						<img src="/resources/images/icons/store.png" class="shop_icons">
 						<p style="margin-right: 5px;">상점오픈일 :</p>
-						<strong>${open }</strong> <img
-							src="/resources/images/icons/visit.png" class="shop_icon">
-						<p style="margin-right: 5px;">상점방문수 :</p>
-						<strong>${visit }명</strong> <img
+						<strong>${open }</strong> 
+<!-- 						<img -->
+<!-- 							src="/resources/images/icons/visit.png" class="shop_icon"> -->
+<!-- 						<p style="margin-right: 5px;">상점방문수 :</p> -->
+<%-- 						<strong>${visit }명</strong>  --%>
+						<img
 							src="/resources/images/icons/sell.png" class="shop_icon">
 						<p style="margin-right: 5px;">상품판매수 :</p>
 						<strong style="margin-right: 10px;">??개</strong>
@@ -219,17 +221,17 @@
 						<li>변경할 비밀번호</li>
 						<li>비밀번호 재확인</li>
 					</ul>
-					<form action="/myinfo/update" method="POST">
+					<form id="modimodi" action="/myinfo/update" method="POST">
 					<ul class="mbody-2">
-						<li><input type="text" value="${user.user_name }" name="user_name" ></li>
+						<li><input type="text" id="namemo" class="nickmo" value="${user.user_name }" name="user_name" maxlength="7"></li>
 						<li><input type="text" value="${user.user_id }" name="user_id" readonly></li>
 						<li><input type="text" id="mypnick" class="nickmo" name="user_nick" value="${user.user_nick }" maxlength="10"></li>
-						<li><input type="text" value="${user.user_tel }" name="user_tel"></li>
+						<li><input type="text" id="myptel" class="nickmo" value="${user.user_tel }" maxlength="13" name="user_tel"></li>
 						<li><input type="text" value="${user.user_email }" readonly></li>
 						<li><input type="password" id="myppw" name="user_pw" value="${user.user_pw }" placeholder="변경할 비밀번호" maxlength="20"></li>
-						<li><input type="password" class="user_pwchk" value="${user.user_pw }" placeholder="비밀번호 재확인" maxlength="20"></li>
+						<li><input type="password" class="user_pwchk" value="${user.user_pw }" placeholder="비밀번호 재확인" maxlength="20"><div class="pwerr">비밀번호가 일치하지 않습니다.</div></li>
 					</ul>
-					 <button type="submit" id="update" class="info-modify" >내정보 변경</button> 
+					 <button type="button" id="update" class="info-modify" >내정보 변경</button> 
 					</form>
 				</div>
 			</div>
@@ -237,7 +239,7 @@
 		<div class="hide007">
 		주문목록
 		</div>
-		<div class="hide004">
+		<div class="hide004" style="height: 500px;">
 			<div class="row flex-fill d-flex flex-column" >
 				<div class="col justify-content-center">
 
@@ -333,7 +335,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="hide005">
+		<div class="hide005" style="height: 500px;">
 			포인트 충전 내역
 			<div class="row flex-fill d-flex flex-column">
 				<div class="col-7">
@@ -408,7 +410,33 @@
 			</div>
 
 		</div>
-		<div class="hide006">회원탈퇴</div>
+		<div class="hide006">
+			<div class="delep">회원탈퇴</div>
+			<br>
+			<div class="deletep1">
+				<p class="mypass">본인 비밀번호 입력</p>
+				<input type="password" class="user_pwmo" name="user_pw"
+					placeholder="Password" style="margin-bottom:25px;">
+				<div class="pwerror"></div>
+				<input type="hidden" class="pwcksd" value="${user.user_id }">
+				<p class="mypeu">회원탈퇴사유</p> 
+				
+				<input type="radio" name="eu"><p class="radiopo">재 가입을 위해서</p>
+				<input type="radio" name="eu"><p class="radiopo">시스템 장애(속도저하, 잦은 에러 등)</p> 
+				<input type="radio" name="eu"><p class="radiopo">사용자수 부족 </p>
+				<input type="radio" name="eu"><p class="radiopo">개인정보(통신 및 신용정보)의 누출 우려</p> 
+				<input type="radio" name="eu"><p class="radiopo">기타</p>
+				<input type="button" class="sibals" value="탈퇴하기">
+			</div>
+			<div class="deletep2" style="display: none;">
+			<form id="modimodi" action="/myinfo/delete" method="POST">
+			<input type="hidden" name="user_id" value="${user.user_id }">
+			<button type="submit" class="delebtn">탈퇴하겠습니다.
+			</button>
+			</form>
+			</div>
+
+		</div>
 	</div>
 
 
