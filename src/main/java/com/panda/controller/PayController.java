@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.common.util.concurrent.Service;
 import com.panda.domain.MemberVO;
 import com.panda.paymentvo.CashingListVO;
 import com.panda.paymentvo.CashingPointsVO;
@@ -167,14 +168,24 @@ public class PayController {
 	}
 	
 	@RequestMapping(value = "/pay_page",method = RequestMethod.GET)
-	public void pay_page() throws Exception{
+	public void pay_page(@RequestParam Integer goods_no,@RequestParam int goods_price,HttpSession session,Model model) throws Exception{
 		mylog.debug("/payment/pay_page(GET) 호출 -> 페이지 이동 ");
-		MemberVO uvo = new MemberVO();
+		mylog.debug("goods_no : " + goods_no);
+		mylog.debug("goods_price : " + goods_price);
+		String user_id = (String)session.getAttribute("user_id");
+		MemberVO mvo = paymentService.getUser(user_id);
+		mylog.debug("user_no : " +mvo.getUser_no());
+		model.addAttribute("goods_no", goods_no);
+		model.addAttribute("goods_price", goods_price);
+		model.addAttribute("mvo", mvo);
+		
+		// /payment/pay_page.jsp 페이지 이동
 	}
 	
-	@PostMapping("/paying")
-	public void paying(HttpSession session, @ModelAttribute int user_no) throws Exception {
+	@PostMapping("/pay_page")
+	public void pay_page(HttpSession session, @ModelAttribute int user_no) throws Exception {
 //								@PathVariable int goods_no
+		mylog.debug("/payment/pay_page(POST) 호출 -> 페이지 이동 ");
 		String user_id = (String)session.getAttribute("user_id");
 		mylog.debug("paying controller");
 		mylog.debug("user_id : " + user_id);

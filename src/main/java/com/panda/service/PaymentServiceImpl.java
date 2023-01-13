@@ -50,6 +50,15 @@ public class PaymentServiceImpl implements PaymentService{
 		
 		return dao.successOne(paymentNo);
 	}
+	
+	
+	@Override
+	public MemberVO getUser(String user_id) throws Exception {
+		mylog.debug("user_id : "+user_id);
+		
+		return dao.getUser(user_id);
+	}
+	
 	@Override
 	public void paying(int user_no) throws Exception {
 		mylog.debug(" Service : insert 동작 호출");
