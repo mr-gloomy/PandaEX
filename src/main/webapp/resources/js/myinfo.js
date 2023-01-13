@@ -96,6 +96,12 @@ $(function(){
 		$(hide4).css('display','none');
 		$(hide5).css('display','none');
 		$(hide6).css('display','none');
+		$('.delep').text("회원탈퇴");
+		$('.deletep2').css('display','none');
+		$('.deletep1').css('display','block');
+		$('.user_pwmo').val("");
+		$('.pwerror').text("");
+		$('.user_pwmo').css('margin-bottom','25px');
 	});
 	$(side2).on('click',function(){
 		$(side2).addClass('mypactive');
@@ -112,6 +118,12 @@ $(function(){
 		$(hide4).css('display','none');
 		$(hide5).css('display','none');
 		$(hide6).css('display','none');
+		$('.delep').text("회원탈퇴");
+		$('.deletep2').css('display','none');
+		$('.deletep1').css('display','block');
+		$('.user_pwmo').val("");
+		$('.pwerror').text("");
+		$('.user_pwmo').css('margin-bottom','25px');
 	});
 	$(side3).on('click',function(){
 		$(side3).addClass('mypactive');
@@ -128,6 +140,12 @@ $(function(){
 		$(hide4).css('display','none');
 		$(hide5).css('display','none');
 		$(hide6).css('display','none');
+		$('.delep').text("회원탈퇴");
+		$('.deletep2').css('display','none');
+		$('.deletep1').css('display','block');
+		$('.user_pwmo').val("");
+		$('.pwerror').text("");
+		$('.user_pwmo').css('margin-bottom','25px');
 	});
 	$(side4).on('click',function(){
 		$(side4).addClass('mypactive');
@@ -144,6 +162,12 @@ $(function(){
 		$(hide3).css('display','none');
 		$(hide5).css('display','none');
 		$(hide6).css('display','none');
+		$('.delep').text("회원탈퇴");
+		$('.deletep2').css('display','none');
+		$('.deletep1').css('display','block');
+		$('.user_pwmo').val("");
+		$('.pwerror').text("");
+		$('.user_pwmo').css('margin-bottom','25px');
 	});
 	$(side5).on('click',function(){
 		$(side5).addClass('mypactive');
@@ -160,6 +184,12 @@ $(function(){
 		$(hide3).css('display','none');
 		$(hide4).css('display','none');
 		$(hide6).css('display','none');
+		$('.delep').text("회원탈퇴");
+		$('.deletep2').css('display','none');
+		$('.deletep1').css('display','block');
+		$('.user_pwmo').val("");
+		$('.pwerror').text("");
+		$('.user_pwmo').css('margin-bottom','25px');
 	});
 	$(side6).on('click',function(){
 		$(side6).addClass('mypactive');
@@ -185,6 +215,12 @@ $(function(){
 		$(side4).removeClass('mypactive');
 		$(side5).removeClass('mypactive');
 		$(side6).removeClass('mypactive');
+		$('.delep').text("회원탈퇴");
+		$('.deletep2').css('display','none');
+		$('.deletep1').css('display','block');
+		$('.user_pwmo').val("");
+		$('.pwerror').text("");
+		$('.user_pwmo').css('margin-bottom','25px');
 		$(hide1).css('display','none');
 		$(hide2).css('display','none');
 		$(hide3).css('display','none');
@@ -193,5 +229,50 @@ $(function(){
 		$(hide5).css('display','none');
 		$(hide6).css('display','none');
 	});
-});
 
+	$('.info-modify').on('click',function(){
+		if($('#myppw').val() != $('.user_pwchk').val()){
+			$('.user_pwchk').focus();
+			$('.pwerr').css('opacity','1');
+		} else {
+			$("#modimodi").submit();
+		}
+	});
+	$('#namemo').on("keyup", function() {
+		   $(this).val($(this).val().replace(/[^ㄱ-힣]/g, ''));
+	});
+	$('#mypnick').on("keyup",function() {
+        $(this).val($(this).val().replace(/[^a-zA-Z0-9ㄱ-힣]/g, ''));
+	});
+	$(document).on("keyup","#myptel",function() { 
+		   $(this).val( $(this).val().replace(/[^0-9]/g, "").replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/,"$1-$2-$3").replace("--", "-") );
+		});
+	
+
+	$('.sibals').on("click", function() {
+		$.ajax({
+			type : "GET",
+			url : "/myp/ckpw",
+			data : {user_pw : $(".user_pwmo").val(),
+				user_id:$('.pwcksd').val()},
+				contentType:"application/json; charset:UTF-8",
+			success : function(data) {
+				if (data == "OK") {		
+					$('.deletep2').css('display','block');
+					$('.deletep1').css('display','none');
+					$('.delep').text("정말 탈퇴하시겠습니까?");
+				} else {
+					$('.user_pwmo').focus();
+					$('.user_pwmo').css('margin-bottom','0px');
+					$('.pwerror').text("패스워드가 일치하지 않습니다.");
+					$('.pwerror').css('color','red');
+				}
+			}
+		});
+		
+	});
+
+	$('.delebtn').on('click',function(){
+		alert("탈퇴가 완료되었습니다.");
+	});
+});

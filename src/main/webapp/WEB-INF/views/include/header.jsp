@@ -368,7 +368,7 @@
 			</div>
 		</div>
 		<div class="login-submit">
-			<input type="submit" value="">
+			<input type="submit" value="L o g i n">
 			<!-- 로그인 실패 시, ajax 로 얼럿 뜨게 만들기(페이지 이동 막기) -->
 		</div>
 				</form>
@@ -385,9 +385,9 @@
 		
 		<!-- 카카오 로그인 -->
 		<div class="social-login">
-			<img src="/resources/images/icons/division-line.png">
-			<p>Social Login</p>
-			<img src="/resources/images/icons/division-line.png">
+<!-- 			<img src="/resources/images/icons/division-line.png"> -->
+<!-- 			<p>Social Login</p> -->
+<!-- 			<img src="/resources/images/icons/division-line.png"> -->
 		
 			 
 			 <a class="p-2" href="https://kauth.kakao.com/oauth/authorize?client_id=d2adbec5b44fdcc0559d1e3ca898739e&redirect_uri=http://localhost:8080/member/kakaoLogin&response_type=code">
@@ -621,7 +621,7 @@
 </script>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$('#search-pw').submit(function(){
+		$('#findpw').submit(function(){
 			// alert("성공!");
 			if($('#findpw-pw').val() == ''){
 				alert("사용중인 아이디를 입력하세요.");
@@ -629,7 +629,7 @@
 			}
 			
 			if($('#findpw-tel').val() == ''){
-				alert("휴대폰 번호를 입력하세요.");
+				alert("이메일을 입력하세요.");
 				return false;
 			}
 			
