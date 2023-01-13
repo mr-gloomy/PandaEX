@@ -3,6 +3,7 @@ package com.panda.service;
 import java.util.List;
 
 import com.panda.domain.MemberVO;
+import com.panda.paymentvo.PaymentInsertVO;
 
 public interface MyPageService {
 	
@@ -23,4 +24,8 @@ public interface MyPageService {
 //		public Integer mypupdate(MemberVO vo) throws Exception; 
 		
 		public MemberVO getMembera(MemberVO memberVO);
+		
+		// userid 이용해서 payment 테이블 가져오기 
+		public List<PaymentInsertVO> getUserPay(String user_id) throws Exception;
+		
 }

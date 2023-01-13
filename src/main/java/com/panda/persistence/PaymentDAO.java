@@ -33,6 +33,8 @@ public interface PaymentDAO {
 	
 	public void seller(int goods_no) throws Exception;
 	
+	public List<PaymentInsertVO> getUserPay(String user_id) throws Exception;
+	
 	public List<PaymentInsertVO> allList(int memberNo, int page, int filter, int sort) throws Exception;
 	public List<PaymentInsertVO> refundList(int memberNo) throws Exception;
 	public void refund(int paymentNo) throws Exception;

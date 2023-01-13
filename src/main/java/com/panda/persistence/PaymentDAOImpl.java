@@ -98,6 +98,13 @@ public class PaymentDAOImpl implements PaymentDAO{
 		info.put("sort", sort);
 		return sqlSession.selectList(NAMESPACE+".allList", info);
 	}
+	
+	
+	@Override
+	public List<PaymentInsertVO> getUserPay(String user_id) throws Exception {
+		mylog.debug("getUserPay List<PaymentInsertVO>");
+		return sqlSession.selectList(NAMESPACE+".getUserPay", user_id);
+	}
 	@Override
 	public List<PaymentInsertVO> refundList(int memberNo) throws Exception {
 		// TODO Auto-generated method stub

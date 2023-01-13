@@ -343,22 +343,6 @@
 						<div class="col-6">
 							<h4 class="fw-bold">내 포인트 충전 내역</h4>
 						</div>
-						<div class="col pt-1 pr-0">
-							<select class="form-select form-select-sm border-0 text-muted"
-								v-model.number="filter" @change="updateList">
-								<option value="0">전체</option>
-								<option value="1">취소 가능</option>
-							</select>
-						</div>
-						<div class="col pt-1 pl-0">
-							<select class="form-select form-select-sm border-0 text-muted"
-								v-model.number="sort" @change="updateList">
-								<option value="0">최신순</option>
-								<option value="1">오래된 순</option>
-								<option value="2">충전 포인트↑순</option>
-								<option value="3">충전 포인트↓순</option>
-							</select>
-						</div>
 					</div>
 					<div class="row">
 						<table class="table table-hover border-bottom">
@@ -366,45 +350,20 @@
 								<tr>
 									<th scope="col" class="col-2">결제일시</th>
 									<th scope="col" class="col-2">충전 금액</th>
-									<th scope="col" class="col-1">취소하기</th>
 								</tr>
 							</thead>
 							<tbody>
+							<c:forEach var="pvo" items="${pList }">
 								<tr v-for="(payment, index) in list" :key="index">
 									<td class="text-muted fs-small">{{
-										dateFormat(payment.paymentTime) }}</td>
+										dateFormat(payment.payment_time) }}</td>
 									<td class="fw-bold fs-small"><span
 										class="text-dark text-truncate">{{
-											comma(payment.paymentPrice) }}p</span></td>
-									<td class="fs-small fw-bold"><a
-										:href="'${root}/payment/refund/' + payment.paymentNo"
-										v-if="payment.refund != ''"><span class="text-primary">{{
-												payment.refund }}</span></a></td>
+											comma(payment.payment_price) }}</span></td>
 								</tr>
+							</c:forEach>
 							</tbody>
 						</table>
-					</div>
-					<div class="row justify-content-center mt-4">
-						<nav>
-							<ul class="pagination">
-								<li class="page-item" :class="{'disabled': pageList == 0}">
-									<a class="page-link" href="#" @click="prev"> <span
-										aria-hidden="true">&laquo;</span>
-								</a>
-								</li>
-								<li class="page-item" v-for="pageItem in totalPage"
-									:key="pageItem" :class="{'active': pageItem == page}"
-									v-show="parseInt((pageItem - 1) / 10) == pageList"><a
-									class="page-link" href="#" @click="pagination(pageItem)">{{
-										pageItem }}</a></li>
-								<li class="page-item"
-									:class="{'disabled': parseInt((totalPage - 1) / 10) == pageList}">
-									<a class="page-link" href="#" @click="next"> <span
-										aria-hidden="true">&raquo;</span>
-								</a>
-								</li>
-							</ul>
-						</nav>
 					</div>
 				</div>
 			</div>

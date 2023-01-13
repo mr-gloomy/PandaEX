@@ -4,16 +4,25 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.panda.domain.MemberVO;
+import com.panda.paymentvo.PaymentInsertVO;
 import com.panda.persistence.MemberDAO;
+import com.panda.persistence.PaymentDAO;
 
 @Service
 public class MyPageServiceImpl implements MyPageService {
 	
+	private static final Logger mylog = LoggerFactory.getLogger(MyPageServiceImpl.class);
+	
 	@Inject
 	private MemberDAO memberDAO;
+	
+	@Inject
+	private PaymentDAO paymentDAO;
 
 	@Override
 	public MemberVO getMembers(String user_id) {
@@ -49,5 +58,12 @@ public class MyPageServiceImpl implements MyPageService {
 		return memberDAO.getMembera(memberVO);
 	}
 
+	@Override
+	public List<PaymentInsertVO> getUserPay(String user_id) throws Exception {
+		mylog.debug("getUserPay List<PaymentInsertVO>");
+		return paymentDAO.getUserPay(user_id);
+	}
+
+	
 
 }

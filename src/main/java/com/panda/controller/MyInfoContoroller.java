@@ -1,6 +1,8 @@
 package com.panda.controller;
 
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.panda.domain.MemberVO;
+import com.panda.paymentvo.PaymentInsertVO;
 import com.panda.service.MyPageService;
 
 @Controller
@@ -29,7 +32,7 @@ public class MyInfoContoroller {
 	
 	// http://localhost:8080/myinfo/myinfo
 	@RequestMapping(value = "/myinfo", method = RequestMethod.GET)
-	public String mainGET(HttpSession session, Model model, MemberVO memberVO) throws Exception {
+	public String mainGET(HttpSession session, Model model, MemberVO memberVO,@RequestBody List<PaymentInsertVO> pList) throws Exception {
 //		 로그인 제어	
 		String user_id = (String) session.getAttribute("user_id");
 		
@@ -44,6 +47,10 @@ public class MyInfoContoroller {
 		memberVO = myservice.getMembers(memberVO);
 		
 		model.addAttribute("memberVO", memberVO);
+		
+		pList = myservice.getUserPay(user_id);
+		model.addAttribute("pList",pList);
+		
 		
 
 		return "/myinfo/myinfo";

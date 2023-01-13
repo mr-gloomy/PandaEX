@@ -51,6 +51,15 @@
 		 where user_id = #{user_id}
 	</select>
 	
+		<!-- user_id 사용한 payment 조회  -->
+	<select id="getUserPay" resultType="com.panda.paymentvo.PaymentInsertVO">
+		 select a.* 
+			  from payment a
+			 inner join user b
+			   on a.member_no = b.user_no
+			 where b.user_id = #{user_id};
+	</select>
+	
 	<!-- 상품번호, 회원번호 사용한 글정보 조회 -->
 <!--    	<select id="getGoods" resultType="Map"> -->
 <!--    		select A.*, B.* -->
