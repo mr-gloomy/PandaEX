@@ -116,6 +116,17 @@
  	 select * from user
  	 where user_id != #{user_id} 	
  	</select>
+ 	
+ 	<update id="changeblack" >
+ 		update user set 
+ 		<if test="user_black == 0">
+ 		user_black = 1 
+ 		</if>
+ 		<if test="user_black == 1">
+ 		user_black = 0 
+ 		</if>
+ 		where user_no=#{user_no}
+ 	</update>
 	<!-- 관리자용 회원조회 -->
 	
 	

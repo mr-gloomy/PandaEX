@@ -359,6 +359,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 				
 				var auction_like;
 				var auction_no; 
+				var user_no;
 				var that = $(this);
 				
 				// 1. this로 현재 찜여부 확인하기
@@ -374,7 +375,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 				// TODO user_no 받아와서 세팅하기
 				var params = {"auction_no": auction_no, 
 							  "auction_like":auction_like,
-							  "user_no":"1"}
+							  "user_no":'1'}
 				
 				$.ajax({
 					type: "POST",

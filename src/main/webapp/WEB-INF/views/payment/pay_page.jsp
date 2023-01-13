@@ -58,6 +58,9 @@
 	<section class="pay_section">
 <%-- 		<form action="/payment/buying?goods_no=${goods_no }&user_no=${mvo.user_no }&goods_price=${good_price }" method="get"> --%>
 		<div class="pay_body">
+		<input type="hidden" value="${goods_no }" name="goods_no">
+		<input type="hidden" value="${goods_price }" name="goods_price">
+		<input type="hidden" value="${mvo }" name="mvo">
 			<div class="body-1">
 				<p class="body-1-1">택배거래,</p>
 				<p>안전거래로 구매</p>

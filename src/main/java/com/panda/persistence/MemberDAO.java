@@ -60,5 +60,10 @@ public interface MemberDAO {
 			
 			public int updatePwF(MemberVO vo) throws Exception;
 			
+//			public Integer mypupdate(MemberVO vo) throws Exception;
+			
+			// 일반회원 <-> 블랙회원 전환
+			public void changeblack(MemberVO mvo)throws Exception;
+			
 			public MemberVO getMembera(MemberVO vo);
 }
