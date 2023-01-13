@@ -193,7 +193,7 @@ public class GoodsController {
 	}
 
 	// 글 삭제하기
-	@RequestMapping(value = "/remove" , method = RequestMethod.POST)
+	@RequestMapping(value = "/remove" , method = RequestMethod.GET)
 	public String removePOST(int goods_no, RedirectAttributes rttr) throws Exception {
 		// 전달정보 저장(goods_no)
 		mylog.debug(goods_no + "");
@@ -227,5 +227,6 @@ public class GoodsController {
 		
 		return service.updateLike(vo);
 	}
+	
 
 }
