@@ -45,7 +45,9 @@
 
 	<%--임시변수 나중에 지우고 쓰세요~  --%>
 
-	${sessionScope.user_no}
+	${goods_no }
+	${goods_price }
+	${mvo }
 	<section class="pay_section">
 		<form action="/payment/paying" method="post" id="form">
 		<div class="pay_body">

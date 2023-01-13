@@ -39,9 +39,33 @@
 			where u.user_no = p.member_no and p.payment_no = #{paymentNo}
 	</select>
 	
+	<!-- 상품번호 사용한 상품정보 조회  -->
+	<select id="getGood" resultType="GoodsVO">
+		select * from goods 
+		 where goods_no = #{goods_no}
+	</select>
+	
+	<!-- user_id 사용한 유저정보 조회  -->
+	<select id="getUser" resultType="MemberVO">
+		select * from user 
+		 where user_id = #{user_id}
+	</select>
+	
+	<!-- 상품번호, 회원번호 사용한 글정보 조회 -->
+<!--    	<select id="getGoods" resultType="Map"> -->
+<!--    		select A.*, B.* -->
+<!--    		  from goods A join user B -->
+<!--    		    on A.user_no = B.user_no -->
+<!--    		 where A.auction_no = #{auction_no} -->
+<!--    		   and B.user_no = #{user_no} -->
+<!--    	</select> -->
+	
+	
 	<update id="paying" >
 		update user set user_pandapay = user_pandapay - #{goods_price} where user_id = #{user_id}
 	</update>
+	
+	
 	
 <!-- 	<select id="allList" parameterType="Map" resultType="PaymentInsertVO"> -->
 <!-- 		select * from ( -->

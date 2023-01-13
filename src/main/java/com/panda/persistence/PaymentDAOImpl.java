@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.panda.domain.MemberVO;
 import com.panda.paymentvo.CashingListVO;
 import com.panda.paymentvo.CashingPointsVO;
 import com.panda.paymentvo.KakaoPayApproveResponseVO;
@@ -65,6 +66,12 @@ public class PaymentDAOImpl implements PaymentDAO{
 		return pvo;
 	}
 	
+	@Override
+	public MemberVO getUser(String user_id) throws Exception {
+		MemberVO mvo = sqlSession.selectOne(NAMESPACE + ".getUser", user_id);
+		
+		return mvo;
+	}
 	@Override
 	public void paying(int user_no) throws Exception {
 		mylog.debug(" DAO : paying 동작 호출");
