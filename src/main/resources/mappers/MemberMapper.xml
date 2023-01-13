@@ -121,7 +121,7 @@
 	<!-- 정보 수정 -->
 	<update id="modify">
 		update user
-		set user_nick=#{user_name}, user_tel=#{user_tel}, user_email=#{user_email}
+		set user_nick=#{user_nick}, user_pw=#{user_pw}
 		where user_id=#{user_id}
 	</update>
 	
