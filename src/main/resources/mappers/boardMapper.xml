@@ -62,5 +62,6 @@
 		select count(bno) from board
 	</select>
 	
+	
 
 </mapper>
