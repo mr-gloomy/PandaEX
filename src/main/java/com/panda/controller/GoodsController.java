@@ -226,6 +226,7 @@ public class GoodsController {
 		vo.setGoods_like(goods_like);
 		
 		return service.updateLike(vo);
+		
 	}
 	
 

@@ -110,8 +110,7 @@ function CountDownTimer(dt, id) {
 						</ol>
 						<div class="carousel-inner">
 							<div class="carousel-item active">
-								<img src="/resources/images/gallery-04.jpg"
-									class="d-block w-100">
+								<img src="${avooo.uploadFile }" class="d-block w-100">
 							</div>
 						</div>
 					</div>

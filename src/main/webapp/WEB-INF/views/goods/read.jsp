@@ -268,9 +268,10 @@ $(function() {
 		</script>
 <style>
 .carousel-item img {
-	object-fit: cover;
-	height: 26em;
-	border-radius: 1rem;
+    object-fit: cover;
+    height: 100%;
+    border-radius: 1rem;
+    width: 100%;
 }
 .carousel-item {
 	transition: transform .1s ease;

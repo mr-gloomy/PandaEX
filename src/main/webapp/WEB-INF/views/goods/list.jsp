@@ -31,7 +31,7 @@
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
 }
-.stext-104 { /* 상품명 말줄임표 넣기*/
+.stext-104 { /* 상품명 말줄임표 넣ㄱ*/
 	width: 275px;
 	font-family: sans-serif;
 	font-size: 18px;
@@ -156,6 +156,11 @@ $(function() {
 </script>
 </head>
 <body>
+
+${result }
+request : ${requestScope.result }
+	session : ${sessionScope.result }
+	param : ${param.result } 
 <!-- 위치 -->
 <input type="hidden" value="${param.s}" name="g_sort" id="g_sort">
 <input type="hidden" value="${user_id}" id="us">

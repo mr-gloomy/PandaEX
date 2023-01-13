@@ -106,24 +106,11 @@
 							</div>
 							<div class="col-sm d-flex">
 								<div class="inputArea">
-							 <label for="gdsImg"></label>
-							 <input type="file" id="uploadFile" name="file" accept=".jpg,.png,.jpeg"/>
-							 <div class="select_img"><img src="" /></div>
-							 
-							 <!-- 등록할 사진 보여주기 -->
-							 <script>
-							  $("#uploadFile").change(function(){
-							   if(this.files && this.files[0]) {
-							    var reader = new FileReader;
-							    reader.onload = function(data) {
-							     $(".select_img img").attr("src", data.target.result).width(150);        
-							    }
-							    reader.readAsDataURL(this.files[0]);
-							   }
-							  });
-							 </script>
-								</div>
+									 <label for="gdsImg"></label>
+									 <img src="${vo.thumbnail }" alt="사진없음" style="width: 200px; height: 200px; ">
+								 <div class="select_img"><img src="" /></div>
 							</div>
+						</div>		
 						</div>
 						이미지 실제경로 : <%=request.getRealPath("/") %>
 						<div class="row py-4 border-bottom">
