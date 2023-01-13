@@ -183,13 +183,16 @@ public class PayController {
 	}
 	
 	@PostMapping("/pay_page")
-	public void pay_page(HttpSession session, @ModelAttribute int user_no) throws Exception {
+	public void pay_page(HttpSession session, @ModelAttribute MemberVO mvo, @ModelAttribute Integer goods_no, @ModelAttribute int goods_price) throws Exception {
 //								@PathVariable int goods_no
 		mylog.debug("/payment/pay_page(POST) 호출 -> 페이지 이동 ");
 		String user_id = (String)session.getAttribute("user_id");
 		mylog.debug("paying controller");
+		mylog.debug("mvo : " + mvo);
+		mylog.debug("goods_no : " + goods_no);
+		mylog.debug("goods_price : " + goods_price);
 		mylog.debug("user_id : " + user_id);
-		paymentService.paying(user_no);
+//		paymentService.paying(user_no);
 		
 		
 	}
