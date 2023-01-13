@@ -39,7 +39,7 @@ public class MyInfoContoroller {
 		
 		
 		memberVO.setUser_id(user_id);
-		memberVO = myservice.getMembers(memberVO);
+		memberVO = myservice.getMemberss(memberVO);
 		
 		model.addAttribute("memberVO", memberVO);
 		
@@ -47,11 +47,11 @@ public class MyInfoContoroller {
 		return "/myinfo/myinfo";
 	}
 
-	@RequestMapping(value="/update", method = RequestMethod.POST)
-	public String mypupdate(Model model,MemberVO vo) throws Exception{
-
-		vo = myservice.getMembers(vo);
-		model.addAttribute("memberVO", vo);
-		return "/myinfo/myinfo";
-	}
+//	@RequestMapping(value="/update", method = RequestMethod.POST)
+//	public String modify(Model model,MemberVO vo) throws Exception{
+//
+//		vo = myservice.getMembers(vo);
+//		model.addAttribute("memberVO", vo);
+//		return "/myinfo/myinfo";
+//	}
 }

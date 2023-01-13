@@ -41,6 +41,7 @@
 			<li class="side_info mypactive">내 정보</li>
 			<li class="side_auction">내 경매</li>
 			<li class="side_modify">내 정보 수정</li>
+			<li class="side_orderlist">내 주문 목록</li>
 			<li class="side_pointcharge">포인트 충전</li>
 			<li class="side_pointhistory">포인트 충전 내역</li>
 			<li class="side_drop">회원탈퇴</li>
@@ -49,7 +50,7 @@
 			<div class="myp_info">
 				<div class="myp_user">
 					<div class="myp_img">
-						<img src="/resources/images/icons/man1.png">
+						<img src="/resources/images/icons/dd.jpg" style="width:150px;height:150px; border-radius: 50%;background: #ffffff85;">
 					</div>
 					<div class="myp_name">${user.user_name }</div>
 				</div>
@@ -232,6 +233,9 @@
 					</form>
 				</div>
 			</div>
+		</div>
+		<div class="hide007">
+		주문목록
 		</div>
 		<div class="hide004">
 			<div class="row flex-fill d-flex flex-column" >

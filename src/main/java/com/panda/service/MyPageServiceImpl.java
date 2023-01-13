@@ -17,11 +17,11 @@ public class MyPageServiceImpl implements MyPageService {
 
 	@Override
 	public MemberVO getMembers(String user_id) {
-		return memberDAO.getMembers(user_id);
+		return memberDAO.getMemberss(user_id);
 	}
 
 	@Override
-	public MemberVO getMembers(MemberVO memberVO) throws Exception {
+	public MemberVO getMemberss(MemberVO memberVO) throws Exception {
 		return memberDAO.getMembers(memberVO);
 	}
 	

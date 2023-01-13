@@ -73,12 +73,14 @@ $(function(){
 	var hide4 = $('.hide004');
 	var hide5 = $('.hide005');
 	var hide6 = $('.hide006');
+	var hide7 = $('.hide007');
 	var side1 = $('.side_info');
 	var side2 = $('.side_auction');
 	var side3 = $('.side_modify');
 	var side4 = $('.side_pointcharge');
 	var side5 = $('.side_pointhistory');
 	var side6 = $('.side_drop');
+	var side7 = $('.side_orderlist');
 	$(side1).on('click',function(){
 		$(side1).addClass('mypactive');
 		$(side2).removeClass('mypactive');
@@ -86,6 +88,8 @@ $(function(){
 		$(side4).removeClass('mypactive');
 		$(side5).removeClass('mypactive');
 		$(side6).removeClass('mypactive');
+		$(side7).removeClass('mypactive');
+		$(hide7).css('display','none');
 		$(hide1).css('display','block');
 		$(hide2).css('display','none');
 		$(hide3).css('display','none');
@@ -100,6 +104,8 @@ $(function(){
 		$(side4).removeClass('mypactive');
 		$(side5).removeClass('mypactive');
 		$(side6).removeClass('mypactive');
+		$(side7).removeClass('mypactive');
+		$(hide7).css('display','none');
 		$(hide1).css('display','none');
 		$(hide2).css('display','block');
 		$(hide3).css('display','none');
@@ -114,6 +120,8 @@ $(function(){
 		$(side4).removeClass('mypactive');
 		$(side5).removeClass('mypactive');
 		$(side6).removeClass('mypactive');
+		$(side7).removeClass('mypactive');
+		$(hide7).css('display','none');
 		$(hide1).css('display','none');
 		$(hide2).css('display','none');
 		$(hide3).css('display','block');
@@ -128,6 +136,8 @@ $(function(){
 		$(side3).removeClass('mypactive');
 		$(side5).removeClass('mypactive');
 		$(side6).removeClass('mypactive');
+		$(side7).removeClass('mypactive');
+		$(hide7).css('display','none');
 		$(hide1).css('display','none');
 		$(hide2).css('display','none');
 		$(hide4).css('display','block');
@@ -142,6 +152,8 @@ $(function(){
 		$(side3).removeClass('mypactive');
 		$(side4).removeClass('mypactive');
 		$(side6).removeClass('mypactive');
+		$(side7).removeClass('mypactive');
+		$(hide7).css('display','none');
 		$(hide1).css('display','none');
 		$(hide2).css('display','none');
 		$(hide5).css('display','block');
@@ -156,6 +168,8 @@ $(function(){
 		$(side3).removeClass('mypactive');
 		$(side4).removeClass('mypactive');
 		$(side5).removeClass('mypactive');
+		$(side7).removeClass('mypactive');
+		$(hide7).css('display','none');
 		$(hide1).css('display','none');
 		$(hide2).css('display','none');
 		$(hide6).css('display','block');
@@ -163,6 +177,21 @@ $(function(){
 		$(hide5).css('display','none');
 		$(hide3).css('display','none');
 	});
-
+	$(side7).on('click',function(){
+		$(side7).addClass('mypactive');
+		$(side1).removeClass('mypactive');
+		$(side2).removeClass('mypactive');
+		$(side3).removeClass('mypactive');
+		$(side4).removeClass('mypactive');
+		$(side5).removeClass('mypactive');
+		$(side6).removeClass('mypactive');
+		$(hide1).css('display','none');
+		$(hide2).css('display','none');
+		$(hide3).css('display','none');
+		$(hide7).css('display','block');
+		$(hide4).css('display','none');
+		$(hide5).css('display','none');
+		$(hide6).css('display','none');
+	});
 });
 
