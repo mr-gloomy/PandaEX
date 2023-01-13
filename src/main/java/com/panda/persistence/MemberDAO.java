@@ -39,7 +39,7 @@ public interface MemberDAO {
 			public void insertRep(ReportVO vo) throws Exception;
 			
 			// 마이 페이지 - 메인 
-			public MemberVO getMembers(String user_id);
+			public MemberVO getMemberss(String user_id);
 			
 			// 관리자용 회원조회
 			public MemberVO getMembers(MemberVO vo) throws Exception;

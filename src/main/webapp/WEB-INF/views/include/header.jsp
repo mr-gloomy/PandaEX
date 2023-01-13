@@ -194,7 +194,7 @@
 								</p>
 								<ul>
 									<c:if test="${!user_id.equals('admin') }">
-									<li><a class="my" href="/myinfo/myinfo">내 정보<img class="right"
+									<li><a class="my" href="/myinfo/myinfo?user_id=${user_id }">내 정보<img class="right"
 											src="/resources/images/icons/right-arrow.png"></a></li>
 									</c:if>
 									<c:if test="${user_id.equals('admin') }">
