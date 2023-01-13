@@ -359,11 +359,22 @@ public class AdminController {
 		
 		model.addAttribute("uvo", mService.getMembers(mVO));
 		
-		mylog.debug(" 회원정보 : "+mService.getMembers(mVO).toString());
+//		mylog.debug(" 회원정보 : "+mService.getMembers(mVO).toString());
 		
 		resultURI = "/admin/memberDetail";
 		
 		return resultURI;
 	}
+	
+	// 일반회원 <-> 블랙회원 전환
+	@RequestMapping(value = "/changeblack",method = RequestMethod.POST)
+	public String changeblack(MemberVO mvo)throws Exception{
+		mylog.debug(" changeblack() 호출 ");
+		
+		mService.changeblack(mvo);
+		
+		return "redirect:/admin/memberDetail?user_no="+mvo.getUser_no();
+	}
+	
 	
 }

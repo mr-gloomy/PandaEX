@@ -59,7 +59,7 @@ $(function() {
 						</ol>
 						<div class="carousel-inner">
 							<div class="carousel-item active">
-								<img src="${vo.thumbnail } alt="사진없음">
+								<img src="${vo.uploadFile }" alt="사진없음">
 							</div>
 						</div>
 					</div>
@@ -150,7 +150,9 @@ $(function() {
 									<i class="fa-sharp fa-solid fa-paper-plane"></i> 판다페이 결제하기 </a>
 							</div>
 							<div class="col">
-								<a type="button" class="btn btn-success btn-lg btn-block py-3 loginControl"  
+								<a type="button" class=
+								
+								"btn btn-success btn-lg btn-block py-3 loginControl"  
 								   id="chat" >
 				                   <i class="fa-solid fa-gavel pr-2"></i> 1:1 채팅하기
 				                </a>

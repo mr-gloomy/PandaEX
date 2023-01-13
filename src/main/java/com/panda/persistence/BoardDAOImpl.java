@@ -86,6 +86,8 @@ public class BoardDAOImpl implements BoardDAO {
 		return sqlSession.selectList(NAMESPACE+".listcate", map);
 	}
 
+
+
 //	@Override
 //	public Map<K, V> getBoardCate(Criteria cri, String category) {
 //		

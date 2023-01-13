@@ -2,17 +2,16 @@ package com.panda.controller;
 
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.panda.domain.MemberVO;
 import com.panda.service.MyPageService;
@@ -20,6 +19,9 @@ import com.panda.service.MyPageService;
 @Controller
 @RequestMapping(value = "/myinfo/*")
 public class MyInfoContoroller {
+	
+	
+	private static final Logger mylog = LoggerFactory.getLogger(MyInfoContoroller.class);
 
 	
 	@Inject
@@ -39,19 +41,32 @@ public class MyInfoContoroller {
 		
 		
 		memberVO.setUser_id(user_id);
-		memberVO = myservice.getMemberss(memberVO);
+		memberVO = myservice.getMembers(memberVO);
 		
 		model.addAttribute("memberVO", memberVO);
 		
 
 		return "/myinfo/myinfo";
 	}
+	
+	@RequestMapping(value = "/update", method=RequestMethod.POST)
+	public String updatemyp(MemberVO memberVO) throws Exception{
 
-//	@RequestMapping(value="/update", method = RequestMethod.POST)
-//	public String modify(Model model,MemberVO vo) throws Exception{
-//
-//		vo = myservice.getMembers(vo);
-//		model.addAttribute("memberVO", vo);
-//		return "/myinfo/myinfo";
-//	}
+		myservice.modify(memberVO);
+		mylog.debug(" updatemyp() 호출 수정후 정보 : "+myservice.getMembers(memberVO)); 
+			
+		return "redirect:/myinfo/myinfo";
+
+	}
+	
+	@RequestMapping(value = "/delete", method=RequestMethod.POST)
+	public String deletemyp(HttpSession session, MemberVO memberVO) throws Exception{
+		session.invalidate();
+		myservice.exit(memberVO);;
+		mylog.debug(" deletemyp() 삭제~"); 
+
+
+		return "redirect:/main/index";
+	}
+
 }

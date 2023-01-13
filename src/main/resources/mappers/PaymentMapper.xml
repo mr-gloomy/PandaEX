@@ -60,12 +60,31 @@
 <!--    		   and B.user_no = #{user_no} -->
 <!--    	</select> -->
 	
-	
-	<update id="paying" >
-		update user set user_pandapay = user_pandapay - #{goods_price} where user_id = #{user_id}
+<!--  결제 시 구매자 pandapay 금액 - goods 금액 -->
+	<update id="buyer" >
+		update user
+	   set user_pandapay = (select t1.user_pandapay
+	                          from (select (b.user_pandapay - a.goods_price) as user_pandapay
+	                          from goods a
+	                            , user b
+	                         where a.goods_no = #{goods_no}
+	                           and b.user_no = #{user_no}) t1)
+	 where user_no = #{user_no}
+	;
 	</update>
 	
-	
+	<!-- 결제 시 판매자 pandapay 금액 + goods 금액 -->
+	<update id="seller" >
+	update user
+	   set user_pandapay = (select t1.user_pandapay
+	                          from (select (b.user_pandapay + a.goods_price) as user_pandapay
+	                          from goods a
+	                         inner join user b
+	                           on a.user_no = b.user_no
+	                         where a.goods_no = #{goods_no}) t1)
+	 where user_no = (select x.user_no from (select user_no from goods where goods_no = #{goods_no}) x)
+	;	
+	</update>
 	
 <!-- 	<select id="allList" parameterType="Map" resultType="PaymentInsertVO"> -->
 <!-- 		select * from ( -->

@@ -1,20 +1,10 @@
 package com.panda.service;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
-import com.panda.domain.KakaoVO;
 import com.panda.domain.MemberVO;
 import com.panda.domain.ReportVO;
 
@@ -71,7 +61,8 @@ public interface MemberService {
 		public void insertRep(ReportVO vo) throws Exception;
 
 
-		
+		// 일반회원 <-> 블랙회원
+		public void changeblack(MemberVO mvo)throws Exception;
 		
 
 }

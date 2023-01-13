@@ -21,7 +21,7 @@ public class MyPageServiceImpl implements MyPageService {
 	}
 
 	@Override
-	public MemberVO getMemberss(MemberVO memberVO) throws Exception {
+	public MemberVO getMembers(MemberVO memberVO) throws Exception {
 		return memberDAO.getMembers(memberVO);
 	}
 	
@@ -42,10 +42,12 @@ public class MyPageServiceImpl implements MyPageService {
 	public void exit(MemberVO memberVO) throws Exception {
 		memberDAO.exit(memberVO);
 	}
-//	@Override
-//	public Integer mypupdate(MemberVO vo) throws Exception {
-//		
-//		return memberDAO.mypupdate(vo);
-//	}
+
+	@Override
+	public MemberVO getMembera(MemberVO memberVO) {
+		
+		return memberDAO.getMembera(memberVO);
+	}
+
 
 }

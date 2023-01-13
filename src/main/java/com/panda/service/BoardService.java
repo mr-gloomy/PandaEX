@@ -31,5 +31,7 @@ public interface BoardService {
 	// 글 목록조회(카테고리)
 	public List<BoardVO> getBoardCate(Map<String, Object> map)throws Exception;
 	
+
+	
 	
 }

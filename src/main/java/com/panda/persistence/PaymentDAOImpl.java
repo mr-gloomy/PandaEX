@@ -73,11 +73,21 @@ public class PaymentDAOImpl implements PaymentDAO{
 		return mvo;
 	}
 	@Override
-	public void paying(int user_no) throws Exception {
-		mylog.debug(" DAO : paying 동작 호출");
-		sqlSession.selectOne(NAMESPACE+".paying", user_no);
+	public void buyer(int user_no, int goods_no) throws Exception {
+		mylog.debug(" DAO : 결제 시 구매자 pandapay 금액 - goods 금액");
+		Map info = new HashMap();
+		info.put("user_no", user_no);
+		info.put("goods_no", goods_no);
+		sqlSession.selectOne(NAMESPACE+".buyer", info);
 	}
 	
+	
+	@Override
+	public void seller(int goods_no) throws Exception {
+		mylog.debug(" DAO : 결제 시 판매자 pandapay 금액 + goods 금액");
+		sqlSession.selectOne(NAMESPACE+".seller", goods_no);
+		
+	}
 	@Override
 	public List<PaymentInsertVO> allList(int memberNo, int page, int filter, int sort) throws Exception {
 		Map<String, Object> info = new HashMap<>();

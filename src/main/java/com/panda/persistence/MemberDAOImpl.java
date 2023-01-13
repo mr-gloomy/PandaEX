@@ -127,7 +127,7 @@ public class MemberDAOImpl implements MemberDAO{
 		// 마이 페이지 
 		@Override
 		public MemberVO getMembers(MemberVO memberVO) throws Exception {
-			return sqlSession.selectOne(NAMESPACE + ".getMember", memberVO);
+			return sqlSession.selectOne(NAMESPACE + ".getMembers", memberVO);
 		}
 		
 		// 마이 페이지 - 정보 수정 
@@ -154,14 +154,18 @@ public class MemberDAOImpl implements MemberDAO{
 			return sqlSession.selectList(NAMESPACE+".getMemberList", id);
 		}
 
-//		@Override
-//		public Integer mypupdate(MemberVO vo) throws Exception {
-//			
-//			return sqlSession.update(NAMESPACE+".updatemyp", vo);
-//		}
+		@Override
+		public MemberVO getMembera(MemberVO vo) {
+			
+			return sqlSession.selectOne(NAMESPACE + ".getMembera",vo);
+		}
 
 
-		
+		@Override
+		public void changeblack(MemberVO mvo) throws Exception {
+			
+			sqlSession.update(NAMESPACE+".changeblack",mvo);
+		}
 
 		
 		
