@@ -81,7 +81,7 @@ public class GoodsController {
 		vo.setUser_addr(mvo.getUser_addr());
 		vo.setUser_area(mvo.getUser_area());
 		
-		rttr.addFlashAttribute("result", "creatOK");
+		rttr.addFlashAttribute("result", "상품등록 완료!");
 		// 1. 전달된 정보 저장 
 		mylog.debug(vo.toString());
 		
@@ -176,12 +176,17 @@ public class GoodsController {
 
 	//수정 POST
 	@RequestMapping(value = "/modify",method = RequestMethod.POST)
-	public String modifyPOST(GoodsVO vo) throws Exception {
+	public String modifyPOST(GoodsVO vo, RedirectAttributes rttr) throws Exception {
 		// 전달된 정보(수정할 정보)저장
 		mylog.debug(vo + "");
 		
 		// 서비스 - DAO : 정보 수정 메서드 
-		service.updateGoods(vo);
+		Integer result = service.updateGoods(vo);
+		
+		if (result > 0) {
+ 			// "수정완료" - 정보 전달
+ 			rttr.addFlashAttribute("result", "글이 수정되었습니다!");
+ 		}
 		
 		// 페이지 이동(/goods/list)
 		return "redirect:/goods/list?s=0";
@@ -189,12 +194,16 @@ public class GoodsController {
 
 	// 글 삭제하기
 	@RequestMapping(value = "/remove" , method = RequestMethod.POST)
-	public String removePOST(int goods_no) throws Exception {
+	public String removePOST(int goods_no, RedirectAttributes rttr) throws Exception {
 		// 전달정보 저장(goods_no)
 		mylog.debug(goods_no + "");
 		
 		// 서비스 - DAO : 게시판 글 삭제 메서드 호출
-		service.removeGoods(goods_no);
+		Integer result = service.removeGoods(goods_no);
+		
+		if(result > 0) {
+			rttr.addFlashAttribute("result", "해당 글이 삭제되었습니다!");
+		}
 		
 		// 게시판 리스트로 이동(/goods/list)
 		return "redirect:/goods/list?s=0";

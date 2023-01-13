@@ -67,10 +67,7 @@
     background-color: #28a745;
     color: #fff;
 }
-.btn-warning {
-    color: #ffffff;
-    background-color: #ffc107;
-    border-color: #ffc107;
+
 </style>
 <script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2c915430ac4edcd6aa694ae234c0de27"></script>
@@ -278,6 +275,25 @@ $(function() {
 	</div>
 </div>
 <!-- 상품목록 -->
+ <script type="text/javascript">
+	//alert('${result}');
+	// EL표현식 -> JS사용 전달 가능(DB데이터도 사용가능)
+	var result = '${result}';
+	
+	if(result == 'createOK'){
+		alert('글쓰기 완료!');
+	}
+	
+	if(result == 'modOK'){
+		alert('글 수정 완료!');
+	}
+	
+	if(result == 'delOK'){
+		alert('글 삭제 완료!');
+	}
+	
+</script>
+
 
 
 <!-- 푸터 -->

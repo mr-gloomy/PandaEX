@@ -311,6 +311,11 @@ to {
 	width: 50px;
 	height: 50px;
 }
+.btn-warning {
+    color: #ffffff;
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
 </style>
 	</div>
 <br><br><br><br><br><br>
