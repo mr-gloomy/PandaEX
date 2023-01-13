@@ -31,11 +31,11 @@
 		 fareper 100당 1% 입니다.
 	-->
 	<c:set var="postprice" value="2500" />
-	<c:set var="total" value="${itemprice + postprice + safefare - coin }" />
-	<fmt:formatNumber var="user_coins" value="${user_coin }" type="number"
+	<c:set var="total" value="${goods_price + postprice + safefare }" />
+	<fmt:formatNumber var="user_pandapay" value="${mvo.user_pandapay }" type="number"
 		maxFractionDigits="0" />
-	<fmt:formatNumber var="itemprices" value="${itemprice }" type="number"
-		maxFractionDigits="0" />
+	<fmt:formatNumber var="good_price" value="${goods_price }" type="number"
+		maxFractionDigits="0" /> 
 	<fmt:formatNumber var="safefares" value="${safefare }" type="number"
 		maxFractionDigits="0" />
 	<fmt:formatNumber var="postprices" value="${postprice }" type="number"
@@ -47,13 +47,17 @@
 
 	${goods_no }
 	${goods_price }
-	${mvo }
+	${good_price }
+	${mvo.user_no }
+<!-- 	<form role="form" method="post"> -->
+<%-- 		<input type="hidden" name="goods_no" value="${goods_no }"> --%>
+<%-- 		<input type="hidden" name="goods_price" value="${goods_price }"> --%>
+<%-- 		<input type="hidden" name="user_no" value="${mvo.user_no }"> --%>
+<!-- 	</form> -->
+	
 	<section class="pay_section">
-		<form action="/payment/pay_page" method="post" id="form">
+<%-- 		<form action="/payment/buying?goods_no=${goods_no }&user_no=${mvo.user_no }&goods_price=${good_price }" method="get"> --%>
 		<div class="pay_body">
-		<input type="hidden" name="${goods_no }" value="goods_no">
-		<input type="hidden" name="${goods_price }" value="goods_price">
-		<input type="hidden" name="${mvo }" value="mvo">
 			<div class="body-1">
 				<p class="body-1-1">택배거래,</p>
 				<p>안전거래로 구매</p>
@@ -64,7 +68,7 @@
 						src="/resources/images/icons/myloveuza.jpg" class="item_image"></li>
 				</ul>
 				<ul class="body-2-2">
-					<li><i class="body-2-2-1" id="goods_price">${itemprices }원</i></li>
+					<li><i class="body-2-2-1" id="good_price">${good_price }원</i></li>
 					<li><p class="body-2-2-2" id="goods_title">${itemname }</p></li>
 				</ul>
 			</div>
@@ -87,7 +91,7 @@
 			</div>
 			<div class="body-4">
 				<p class="body-4-1">판다코인</p>
-					<p class="coin-posion">내 보유코인 : ${user_coins }코인</p> 
+					<p class="coin-posion">내 보유코인 : ${user_pandapay }코인</p> 
 				<input type="number" class="panda-coin" value="" step="100" placeholder="0" >
 				<div class="coinwon">코인</div>
 			</div>
@@ -101,17 +105,29 @@
 						<div>판다코인 차감</div>
 					</div>
 					<div class="pay_price">
-						<div class="body-5-1-2">${itemprices }원</div>
+						<div class="body-5-1-2">${good_price }원</div>
 						<div>${safefares }원</div>
 						<div>${postprices }원</div>
+						<c:if test="${good_price<=user_pandapay }">
 						<div>
-							<input type="text" readonly value="0원" class="coinprice">
+							<input type="text" readonly value="${total }" class="coinprice">
 						</div>
+						</c:if>
 					</div>
 				</div>
 				<div class="body-5-2">
 					<div class="body-5-2-1">총 결제금액</div>
-					<div class="body-5-2-2"><i>${totals}원</i></div>
+					<c:if test="${good_price<=user_pandapay }">
+						<div>
+							<div class="body-5-2-2"><i>0원</i></div>
+						</div>
+					</c:if>
+					<c:if test="${good_price>user_pandapay }">
+						<div>
+							<div class="body-5-2-2"><i>판다페이가 부족합니다.</i></div>
+						</div>
+					</c:if>
+					
 				</div>
 				<div class="fareinfo">안전결제 수수료 : 결제금액의 1%</div>
 			</div>
@@ -126,7 +142,8 @@
 							<div>판다코인 최대 0.5% / 1% 적립</div>
 							<div class="easy-pay-division">카카오페이로 최초 충전 시</div>
 							<div>2000P 추가 적립</div>
-							<div><input type="button" value="카카오페이로 판다페이 충전하고 혜택받기"></div>
+							<div><input type="button" value="카카오페이로 판다페이 충전하고 혜택받기"
+									onclick="location.href='/myinfo/myinfo'"></div>
 						</div>
 					</div>
 <!-- 					<input type="radio" class="other-pay" name="pay" > <i class="other-pay-1">다른 결제 수단</i> -->
@@ -135,24 +152,41 @@
 <!-- 					<input type="checkbox" class="other-pay-cookie"><p class="other-pay-cookie-1">결제수단을 다음에도 사용</p> -->
 				</div>
 				<div class="body-7">
-					<input type="checkbox" class="pay-terms">
+					<input type="checkbox" class="pay-terms" id="checkbox">
 					<p class="pay-terms-info">개인정보 제 3자 제공동의와 결제대행 서비스 이용약관에 동의합니다.</p>
 					<p class="pay-terms-detail">자세히보기</p>
 				</div>
 				<div class="G_btn" align="center">
 <!-- 					<input type="submit" value="결제하기" class="pay-submit" > -->
-					<input type="submit" value="결제하기" class="btn btn-success py-2 px-3" >
+<!-- 					<input type="submit" value="판다페이 결제하기" class="btn btn-success py-2 px-3" > -->
+					<a class="btn btn-success py-2 px-3" 
+							href="/payment/buying?goods_no=${goods_no }&user_no=${mvo.user_no }&goods_price=${goods_price }" role="button">
+						 판다페이 결제하기 </a>
 					<button type="reset" class="btn btn-success py-2 px-3">초기화</button>
-					<button onclick="href='/goods/list';" class="btn btn-success py-2 px-3">목록이동</button>
+					<input type="button" value="뒤로가기" onclick="goBack();" class="btn btn-success py-2 px-3">
 <!-- 				<button type="submit" class="btn btn-success py-2 px-3">작성완료</button> -->
 				</div>
 			</div>
-			
+<!-- 			<a class="btn btn-warning btn-lg btn-block py-3 loginControl"  -->
+<%-- 			href="/payment/pay_page?goods_no=${vo.goods_no }&goods_price=${vo.goods_price }" role="button"> --%>
+<!-- 			<i class="fa-sharp fa-solid fa-paper-plane"></i> 판다페이 결제하기 </a> -->
 		</div>
-	</form>
+<!-- 	</form> -->
 	</section>
 
-
+<script type="text/javascript">
+	function goBack(){
+		window.history.back();
+		
+	}
+    
+</script>	
+<script>
+    if($("input:checkbox[id='checkbox']").is(":checked") != true){
+        alert('약관동의에 체크해 주세요');
+        return;
+    }
+</script>
 
 
 	<jsp:include page="../include/footer.jsp" />

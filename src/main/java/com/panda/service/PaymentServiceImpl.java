@@ -60,9 +60,15 @@ public class PaymentServiceImpl implements PaymentService{
 	}
 	
 	@Override
-	public void paying(int user_no) throws Exception {
-		mylog.debug(" Service : insert 동작 호출");
-		dao.paying(user_no);
+	public void buyer(int user_no, int goods_no) throws Exception {
+		mylog.debug(" Service : 결제 시 구매자 pandapay 금액 - goods 금액");
+		dao.buyer(user_no,goods_no);
+	}
+	
+	@Override
+	public void seller(int goods_no) throws Exception {
+		mylog.debug(" Service : 결제 시 판매자 pandapay 금액 + goods 금액");
+		dao.seller(goods_no);
 	}
 	
 	
