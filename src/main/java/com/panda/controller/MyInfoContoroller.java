@@ -46,10 +46,10 @@ public class MyInfoContoroller {
 		
 		
 		memberVO.setUser_id(user_id);
-		memberVO = myservice.getMembers(memberVO);
+		memberVO = myservice.getMemberss(memberVO);
 		
 		model.addAttribute("memberVO", memberVO);
-		
+		mylog.debug(" 마이페이지 정보나와라~ : "+myservice.getMemberss(memberVO)); 
 		List<PaymentInsertVO> pList = new ArrayList<PaymentInsertVO>();
 		pList = myservice.getUserPay(user_id);
 		model.addAttribute("pList",pList);
@@ -63,7 +63,7 @@ public class MyInfoContoroller {
 	public String updatemyp(MemberVO memberVO) throws Exception{
 
 		myservice.modify(memberVO);
-		mylog.debug(" updatemyp() 호출 수정후 정보 : "+myservice.getMembers(memberVO)); 
+		mylog.debug(" updatemyp() 호출 수정후 정보 : "+myservice.getMemberss(memberVO)); 
 			
 		return "redirect:/myinfo/myinfo";
 

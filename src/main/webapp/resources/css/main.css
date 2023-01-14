@@ -5161,7 +5161,7 @@ background: rgb(0 0 0 / 20%);
 .hide005,
 .hide006,
 .hide007{
-	height: 1000px;
+	min-height: 100px;
 	display: none;
 }
 .remote1 {

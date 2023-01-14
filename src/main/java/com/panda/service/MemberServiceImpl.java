@@ -326,7 +326,7 @@ public class MemberServiceImpl implements MemberService {
 				// 관리자용 회원정보 조회
 				@Override
 				public MemberVO getMembers(MemberVO mVO) throws Exception {
-					return dao.getMembers(mVO);
+					return dao.getMemberss(mVO);
 				}
 				// 관리자용 일반 <-> 블랙회원 전환
 				@Override

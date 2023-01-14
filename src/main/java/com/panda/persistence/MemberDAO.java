@@ -42,7 +42,7 @@ public interface MemberDAO {
 			public MemberVO getMemberss(String user_id);
 			
 			// 관리자용 회원조회
-			public MemberVO getMembers(MemberVO vo) throws Exception;
+			public MemberVO getMemberss(MemberVO vo) throws Exception;
 			
 			// 마이 페이지 - 정보 수정 
 			public void modify(MemberVO memberVO) throws Exception;

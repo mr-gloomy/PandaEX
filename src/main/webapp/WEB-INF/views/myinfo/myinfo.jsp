@@ -335,7 +335,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="hide005" style="height: 500px;">
+		<div class="hide005" style="min-height: 500px;margin-bottom: 50px;">
 			포인트 충전 내역
 			<div class="row flex-fill d-flex flex-column">
 				<div class="col-7">
@@ -356,10 +356,10 @@
 							<c:forEach var="pvo" items="${pList }">
 								<tr v-for="(payment, index) in list" :key="index">
 									<td class="text-muted fs-small">{{
-										dateFormat(payment.payment_time) }}</td>
+										dateFormat(pvo.payment_time) }}</td>
 									<td class="fw-bold fs-small"><span
 										class="text-dark text-truncate">{{
-											comma(payment.payment_price) }}</span></td>
+											comma(pvo.payment_price) }}</span></td>
 								</tr>
 							</c:forEach>
 							</tbody>

@@ -8,10 +8,10 @@ import com.panda.paymentvo.PaymentInsertVO;
 public interface MyPageService {
 	
 	// 회원 정보 가져오기
-		public MemberVO getMembers(String user_id);
+		public MemberVO getMemberss(String user_id);
 		
 		// 마이 페이지 - 메인 
-		public MemberVO getMembers(MemberVO memberVO) throws Exception;
+		public MemberVO getMemberss(MemberVO memberVO) throws Exception;
 		
 		// 정보 수정 
 		public void modify(MemberVO memberVO) throws Exception;
