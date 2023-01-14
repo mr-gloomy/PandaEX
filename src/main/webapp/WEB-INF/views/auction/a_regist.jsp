@@ -4,8 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="shortcut icon" type="image/x-icon" href="/resources/images/icons/PANDA.png">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Insert title here</title>
+<title>PANDA</title>
 <!-- 헤더 -->
 <%@ include file="../include/header.jsp"%>
 <%@ include file="../include/css.jsp"%>
@@ -88,7 +89,7 @@
 
 
 <!-- 본문 -->
-<form method="post" enctype="multipart/form-data">
+<form method="post" enctype="multipart/form-data" name="fr">
 <input type="hidden" name="${sessionScope.user_no}" value="user_no">
 	<div class="container">
 		<div>
@@ -96,7 +97,7 @@
 					<div class="card-body">
 						<div>
 							<div class="col-sm">
-								<h2>상품등록</h2><hr>
+								<h2>기부경매 상품등록</h2><hr>
 							</div>
 						</div>
 						<div class="row py-4 border-bottom">
@@ -124,7 +125,7 @@
 								</div>
 							</div>
 						</div>
-						이미지 실제경로 : <%=request.getRealPath("/") %>
+<%-- 						이미지 실제경로 : <%=request.getRealPath("/") %> --%>
 						
 						<div class="row py-4 border-bottom">
 							<div class="col-sm-2">
@@ -146,7 +147,7 @@
 							</div>
 							<div class="col-sm">
 								<select class="form-control" id="auction_category" name="auction_category">
-									<option selected>카테고리를 입력하세요</option>
+									<option value="" selected>카테고리를 입력하세요</option>
 									<option value="전자기기">전자기기</option>
 									<option value="의류">의류</option>
 									<option value="생활가전">생활가전</option>
@@ -230,9 +231,9 @@
 							</div>
 						</div>
 						<div class="G_btn" align="center">
-							<button type="submit" class="btn btn-success py-2 px-3">작성완료</button>
+							<button type="button" class="btn btn-success py-2 px-3" onclick="fun1()">작성완료</button>
 							<button type="reset" class="btn btn-success py-2 px-3" id="resetB">초기화</button>
-							<button onclick="href='/auction/a_list';" class="btn btn-success py-2 px-3">목록이동</button>
+							<button onclick="location.href='/auction/a_list';" class="btn btn-success py-2 px-3">목록이동</button>
 						</div>
 					</div>
 				</div>
@@ -240,40 +241,40 @@
 	</div>
 </form>
 <script type="text/javascript">
-	$(document).ready(function() {
-		//태그와 줄바꿈, 공백을 제거하고 텍스트 글자수만 가져옵니다.
-		function setContentsLength(str, index) {
-		    var status = false;
-		    var textCnt = 0; //총 글자수
-		    var maxCnt = 10; //최대 글자수
-		    var editorText = f_SkipTags_html(str); //에디터에서 태그를 삭제하고 내용만 가져오기
-		    editorText = editorText.replace(/\s/gi,""); //줄바꿈 제거
-		    editorText = editorText.replace(/&nbsp;/gi, ""); //공백제거
+function fun1() {
+	if(document.fr.uploadFile.value==""){
+		alert("사진파일을 첨부하세요");
+		document.fr.uploadFile.focus();
+		return;
+	}
+	if(document.fr.auction_category.value==""){
+		alert("카테고리를 선택하세요");
+		document.fr.auction_category.focus();
+		return;
+	}
+	if(document.fr.auction_title.value==""){
+		alert("상품명을 입력하세요");
+		document.fr.searchKeyword.focus();
+		return;
+	}
+	if(document.fr.auction_price.value==""){
+		alert("상품가격을 입력하세요");
+		document.fr.auction_price.focus();
+		return;
+	}
+	if(document.fr.auction_condition[0].checked==false && document.fr.auction_condition[1].checked==false
+	   && document.fr.auction_condition[2].checked==false){
+		alert("상품상태를 선택하세요");
+		return;
+	}
+	if(document.fr.auction_detail.value==""){
+		alert("내용을 입력하세요");
+		document.fr.auction_detail.focus();
+		return;
+	}
+	document.fr.submit();
+}
 
-	        textCnt = editorText.length;
-		    if(maxCnt > 0) {
-	        	if(textCnt > maxCnt) {
-	                status = true;
-	        	}
-		    }
-
-		    if(status) {
-	        	var msg = "등록오류 : 글자수는 최대 "+maxCnt+"까지 등록이 가능합니다. / 현재 글자수 : "+textCnt+"자";
-	        	console.log(msg);
-		    }
-		}
-		
-		//에디터 내용 텍스트 제거
-		function f_SkipTags_html(input) {
-			// 허용할 태그는 다음과 같이 소문자로 넘겨받습니다. (<a><b><c>)
-		    var tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi,
-		    commentsAndPhpTags = /<!--[\s\S]*?-->|<\?(?:php)?[\s\S]*?\?>/gi;
-		    return input.replace(commentsAndPhpTags, '').replace(tags, function ($0, $1) {
-		    });
-		}
-	});
-	
-	
 </script>
 <!--   푸터 -->
 <%@ include file="../include/footer.jsp"%>

@@ -116,18 +116,13 @@ $(function(){
 				        return `${Math.floor(betweenTimeDay / 365)}년전`;
 				 }	
 						
-						
-					var msg = JSON.parse(item.message);
-					
-					
-					
 					var chatlink = (item.receive_id!=id)? "window.open('/main/chat?bang_id="+item.bang_id+"&u="+item.receive_id+"&g="+item.goods_no+"','chat01','width=600,height=600')"
 							: "window.open('/main/chat?bang_id="+item.bang_id+"&u="+item.send_id+"','chat01','width=600,height=600')" ;
 					
 					$(".chat-position").append("<a onclick="+chatlink+"><div class='yes-chatroom'><c:choose><c:when test='${oppenent == '' }'>"
 								+"<img class='opponent-img src='/resources/images/icons/man.png'></c:when><c:when test='${oppenent != '' }'>"
 								+"<img class='opponent-img' src='${oppenent }'></c:when></c:choose><div class='nameandtext'><div class='oppname'>"+item.receive_id+"</div>"						
-								+"<div class='text'>"+msg.msg+"</div><div class='timeposition'>"
+								+"<div class='text'>"+item.message+"</div><div class='timeposition'>"
 								+"<div class='lasttime'>"+timeForToday(dataD)+"</div></div></div></div></a>");
 				});
 			}

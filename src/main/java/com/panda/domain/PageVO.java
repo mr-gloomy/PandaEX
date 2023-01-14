@@ -56,13 +56,6 @@ public class PageVO {
 		// next
 		next = (endPage * cri.getPerPageNum()) >= totalCount? false:true;
 		
-		System.out.println(" calcData() - 끝");
-		System.out.println(" endPage : "+endPage);
-		System.out.println(" startPage : "+startPage);
-		System.out.println(" prev : "+prev);
-		System.out.println(" next : "+next);
-		System.out.println(" totalCount : "+totalCount);
-		System.out.println(" tmpEndpage : "+tmpEndpage);
 		
 	}// calcData()
 	

@@ -24,7 +24,7 @@ public class ChatDAOImpl implements ChatDAO{
 	private final String mapper = "com.panda.mapper.ChatMapper";
 	
 	public List getRooms(String id) throws Exception{
-//		logger.info(sqlSession.selectList(mapper+".getRooms",id).toString());
+		logger.info(sqlSession.selectList(mapper+".getRooms",id).toString());
 		return sqlSession.selectList(mapper+".getRooms",id);
 	}
 	
@@ -38,11 +38,24 @@ public class ChatDAOImpl implements ChatDAO{
 		return sqlSession.selectOne(mapper+".getRoom",hm);
 	}
 	
-	public void recordMsg(Map<String, Object> hm) throws Exception{
-		sqlSession.insert(mapper+".recordMsg",hm);
+	public void recordMsg(ChatVO vo) throws Exception{
+		sqlSession.insert(mapper+".recordMsg",vo);
 	}
 	
-	public List getMsg(String bang_id) throws Exception{
+	public List<ChatVO> getMsg(String bang_id) throws Exception{
+		sqlSession.update(mapper+".sendUp",bang_id);
 		return sqlSession.selectList(mapper+".getRecord",bang_id);
 	}
+
+	@Override
+	public List<ChatVO> getNewMsg(ChatVO vo) throws Exception {
+		return sqlSession.selectList(mapper+".getNewMsg",vo);
+	}
+
+	@Override
+	public void sendUp(String bang_id) throws Exception {
+		sqlSession.update(mapper+".sendUp",bang_id);
+	}
+	
+	
 }

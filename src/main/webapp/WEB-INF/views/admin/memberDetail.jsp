@@ -2,19 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="/WEB-INF/views/admin/include/header.jsp"%>
-<script
-	src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js">
-	
-</script>
-
-<script type="text/javascript">
-	$(document).ready(function() {
-		$("").on("click", function() {
-
-		});
-	});
-</script>
-
 
 <div class="col-md-6">
 	<div class="box box-solid">

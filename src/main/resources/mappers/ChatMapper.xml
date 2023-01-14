@@ -15,11 +15,19 @@
 		select bang_id from chat where (send_id=#{send_id} or send_id=#{receive_id}) and (receive_id=#{send_id} or receive_id=#{receive_id}) limit 1
 	</select>
 	
-	<select id="getRecord" resultType="String">
-		select message from chat where bang_id=#{bang_id}
+	<select id="getRecord" resultType="ChatVO">
+		select * from chat where bang_id=#{bang_id}
 	</select>
 	
 	<insert id="recordMsg">
-		insert into chat (send_id,receive_id,bang_id,message,goods_no,msg_date,auction_no) values(#{send_id},#{receive_id},#{bang_id},#{message},#{goods_no},#{msg_date},#{auction_no})
-	</insert> 
+		insert into chat (send_id,receive_id,bang_id,message,goods_no,msg_date,auction_no,msg_isUp) values(#{send_id},#{receive_id},#{bang_id},#{message},#{goods_no},#{msg_date},#{auction_no},1)
+	</insert>
+	
+	<update id="sendUp">
+		update chat set msg_isUp=0 where bang_id=#{bang_id}
+	</update>
+	
+	<select id="getNewMsg" resultType="ChatVO">
+		select * from chat where bang_id=#{bang_id} and send_id=#{send_id} and msg_isUp=1
+	</select>
 </mapper>

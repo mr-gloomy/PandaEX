@@ -43,27 +43,6 @@ public class AdminController {
 		= LoggerFactory.getLogger(AdminController.class);
 	
 	
-	// 어드민 메인페이지 
-	// http://localhost:8080/admin/index
-	@RequestMapping(value = "/index")
-	public String mainGET()throws Exception{
-		mylog.debug(" mainGET() 호출 ");
-		String id = (String)session.getAttribute("user_id");
-		resultURI = "";
-		if(id == null || !id.equals("admin")) {
-			
-			resultURI = "redirect:/main/index";
-			
-			return resultURI;
-		}
-		
-		resultURI = "/admin/index";
-		
-		return resultURI;
-	}
-	
-	
-	
 	// 공지사항 게시판 작성페이지 GET
 	// http://localhost:8080/admin/boardRegist
 	@RequestMapping(value = "/boardRegist",method = RequestMethod.GET)
@@ -301,7 +280,7 @@ public class AdminController {
 		return resultURI;
 		}
 		
-		model.addAttribute("uvo", mService.getMembers(mVO));
+		model.addAttribute("uvo", mService.getMemberA(mVO));
 		
 //		mylog.debug(" 회원정보 : "+mService.getMembers(mVO).toString());
 		

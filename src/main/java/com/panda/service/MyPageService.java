@@ -24,7 +24,7 @@ public interface MyPageService {
 		public void exit(MemberVO memberVO) throws Exception;
 //		public Integer mypupdate(MemberVO vo) throws Exception; 
 		
-		public MemberVO getMembera(MemberVO memberVO);
+		public MemberVO getMembera(MemberVO memberVO)throws Exception;
 		
 		// userid 이용해서 payment 테이블 가져오기 
 		public List<PaymentDto> getUserPay(String user_id) throws Exception;
