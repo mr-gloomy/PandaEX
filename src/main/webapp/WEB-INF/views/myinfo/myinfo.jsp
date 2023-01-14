@@ -335,31 +335,31 @@
 				</div>
 			</div>
 		</div>
-		<div class="hide005" style="height: 500px;">
-			포인트 충전 내역
+		<div class="hide005" style="min-height: 500px;margin-bottom: 50px;">
+			
 			<div class="row flex-fill d-flex flex-column">
 				<div class="col-7">
 					<div class="row my-4 pt-2">
-						<div class="col-6">
-							<h4 class="fw-bold">내 포인트 충전 내역</h4>
-						</div>
+							<h4 > ${user.user_name }님의 포인트 충전 내역</h4>
 					</div>
 					<div class="row">
 						<table class="table table-hover border-bottom">
 							<thead>
 								<tr>
-									<th scope="col" class="col-2">결제일시</th>
+									<th scope="col" class="col-2">결제번호</th>
 									<th scope="col" class="col-2">충전 금액</th>
+									<th scope="col" class="col-2">결제일시</th>
 								</tr>
 							</thead>
 							<tbody>
 							<c:forEach var="pvo" items="${pList }">
-								<tr v-for="(payment, index) in list" :key="index">
-									<td class="text-muted fs-small">{{
-										dateFormat(payment.payment_time) }}</td>
+								<tr>
+								<td class="text-muted fs-small">${pvo.payment_no }</td>
 									<td class="fw-bold fs-small"><span
-										class="text-dark text-truncate">{{
-											comma(payment.payment_price) }}</span></td>
+										class="text-dark text-truncate">${
+											pvo.payment_price }</span></td>
+									<td class="text-muted fs-small">${
+									pvo.payment_time.toString().substring(0,pvo.payment_time.toString().length()-5) }</td>
 								</tr>
 							</c:forEach>
 							</tbody>

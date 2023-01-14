@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.panda.domain.GoodsVO;
 import com.panda.domain.MemberVO;
 import com.panda.paymentvo.CashingListVO;
 import com.panda.paymentvo.CashingPointsVO;
@@ -71,6 +72,13 @@ public class PaymentServiceImpl implements PaymentService{
 		dao.seller(goods_no);
 	}
 	
+	// 글번호(goods_no) 정보 조회
+	@Override
+	public GoodsVO getGoods(Integer goods_no) throws Exception {
+		mylog.debug("getGoods(Integer goods_no) 호출");
+		
+		return dao.getGoods(goods_no);
+	}
 	
 	
 //	@Override

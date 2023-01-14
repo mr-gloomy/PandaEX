@@ -126,8 +126,8 @@ public class MemberDAOImpl implements MemberDAO{
 		
 		// 마이 페이지 
 		@Override
-		public MemberVO getMembers(MemberVO memberVO) throws Exception {
-			return sqlSession.selectOne(NAMESPACE + ".getMembers", memberVO);
+		public MemberVO getMemberss(MemberVO memberVO) throws Exception {
+			return sqlSession.selectOne(NAMESPACE + ".getMember", memberVO);
 		}
 		
 		// 마이 페이지 - 정보 수정 

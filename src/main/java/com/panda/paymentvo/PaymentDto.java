@@ -7,10 +7,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 @Data
 public class PaymentDto {
-	private int paymentNo;
-	private String paymentTid;
-	private int paymentTotal;
-	private String paymentName;
-	private Timestamp paymentTime;
-	private String paymentStatus;
+	private int payment_no;
+	private String payment_tid;
+	private int payment_total;
+	private String payment_name;
+	private Timestamp payment_time;
+	private String payment_status;
+	private int member_no;
+	private int payment_price;
+
 }
