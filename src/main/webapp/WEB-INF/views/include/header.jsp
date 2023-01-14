@@ -9,10 +9,11 @@
 <header>
 
 
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js"></script>
-<jsp:include page="../addon/chatList.jsp"/>
-<script src="/resources/js/main.js"></script>
-<script src="/resources/js/chat.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js"></script>
+	<jsp:include page="../addon/chatList.jsp" />
+	<script src="/resources/js/main.js"></script>
+	<script src="/resources/js/chat.js"></script>
 	<!-- 임시 -->
 	<script>
 		function mo() {
@@ -23,19 +24,21 @@
 		}
 		 function doLogout() {
 		    	var cur = window.location.href;
-		   		var cur2 = cur.substring(22);
+		    	var origin = window.location.origin.toString();
+		   		var cur2 = cur.substring(origin.length+1);
 		    	location.href="/member/logout?exUrl="+cur2.replace('&','!rep!');
 		 }
 		 function doLogin() {
 		    	var cur = window.location.href;
-		   		var cur2 = cur.substring(22);
+		    	var origin = window.location.origin.toString();
+		   		var cur2 = cur.substring(origin.length+1);
 		   		var theForm = document.getElementById('login');
 		   		theForm.action="/member/login?exUrl="+cur2.replace('&','!rep!');
 		   		theForm.submit();
 		 }
 	</script>
 
-<script>	
+	<script>	
 	$(document).ready(function(){
 		// 저장된 쿠키값을 가져와서 ID 칸에 넣어준다. 없으면 공백으로 들어감.
 	    var key = getCookie("key");
@@ -132,25 +135,34 @@
 					<div
 						class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search"
 						style="padding-right: 0px;">
-						<a id="chatOpen">
-						 <input type="hidden" id="idVal" value="${user_id }">
-						 <img id="chat-on" class="panda-header-chaticon"
+						<a id="chatOpen"> <input type="hidden" id="idVal"
+							value="${user_id }"> <img id="chat-on"
+							class="panda-header-chaticon"
 							src="/resources/images/icons/Panda_Chat.png" alt="panda-chat">
 							<img class="panda-header-chaticon-hover"
 							src="/resources/images/icons/panda_chat_hover.gif"
 							alt="panda-chat-hover">
 						</a>
 					</div>
-					<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11" id="moveToMyShop"
+					<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11"
+						id="moveToMyShop"
 						style="padding-bottom: 10px; padding-right: 0px;">
-						<button memo="my shop 이동"> 
-						<img class="panda-header-shop" src="/resources/images/icons/panda-shop.png" alt="panda-shop">
-						</button>
-<!-- 						<a href="#" memo="my shop 이동"> <img class="panda-header-shop" -->
-<!-- 							src="/resources/images/icons/panda-shop.png" alt="panda-shop"> -->
-<!-- 						</a> -->
-					</div>
+						<img class="panda-header-shop"
+							src="/resources/images/icons/panda-shop.png" alt="panda-shop">
 
+
+
+						<!-- 						<a href="#" memo="my shop 이동"> <img class="panda-header-shop" -->
+						<!-- 							src="/resources/images/icons/panda-shop.png" alt="panda-shop"> -->
+						<!-- 						</a> -->
+						<c:if test="${sessionScope.user_id != null }">
+						<div class="shop-dropdown-sup"></div>
+						<div class="shop-dropdown">
+							<div><p class="junggogo" style="margin-bottom: 3px; color:black; opacity : 0.7;">중고상품등록</p></div>
+							<div><p class="gibugo" style="color:black; opacity : 0.7;">기부상품등록</p></div>
+						</div>
+						</c:if>
+					</div>
 
 					<div class="icon-header-item trans-04 p-l-22 p-r-11" id="usersel"
 						style="padding-bottom: 10px; padding-right: 15px; display: inline-block;">
@@ -158,90 +170,93 @@
 							src="/resources/images/icons/panda-user.png" alt="panda-user">
 						</a>
 					</div>
-					<div class="hoversup" style="width:70px;"></div>
+					<div class="hoversup" style="width: 70px;"></div>
 					<div class="category">
 						<div class="user-sel-images">
-								<c:if test="${user_id eq ''}">
-									<img class="bamboo" src="/resources/images/icons/bamboo.png"
-										style="margin-left: 166px;">
-								</c:if>
-								<c:if test="${user_id ne '' and adminchk lt '1' }">
-									<img class="bamboo" src="/resources/images/icons/bamboo.png"
-										style="height: 88px;">
-								</c:if>
+							<c:if test="${user_id eq ''}">
+								<img class="bamboo" src="/resources/images/icons/bamboo.png"
+									style="margin-left: 166px;">
+							</c:if>
+							<c:if test="${user_id ne '' and adminchk lt '1' }">
+								<img class="bamboo" src="/resources/images/icons/bamboo.png"
+									style="height: 88px;">
+							</c:if>
 						</div>
 
 						<!-- 로그인 시 -->
-						
-							<c:if test="${sessionScope.user_id == null }">
-								<p>
-									<strong>로그인</strong> 후 이용해주세요
-								</p>
-								<q>아이디가 없으시다면?<br> &nbsp;회원가입 후 이용해주세요!
-								</q>
-								<div class="user-modify">
-									<input type="button" class="usermodal" value="로그인"
-										style="width: 64.5px; margin-top: 7px;">
-								</div>
-								<div class="user-logout">
-									<input type="button" onclick="location.href='#'" id="user-join" class="logout"
-										value="회원가입" style="margin-top: 7px;">
-								</div>
-							</c:if>
-							<c:if test="${user_id != null}">
-								<p>
-									<span>${sessionScope.user_id}</span> 님 환영합니다
-								</p>
-								<ul>
-									<c:if test="${!user_id.equals('admin') }">
-									<li><a class="my" href="/myinfo/myinfo">내 정보<img class="right"
-											src="/resources/images/icons/right-arrow.png"></a></li>
-									</c:if>
-									<c:if test="${user_id.equals('admin') }">
-									<li><a class="my" href="/admin/memberList">관리자페이지<img class="right"
-											src="/resources/images/icons/right-arrow.png"></a></li>
-									</c:if>
-									<li><a class="my" href="#">내 상점<img class="right"
-											src="/resources/images/icons/right-arrow.png"></a></li>
-								</ul>
-								<div class="user-modify">
-									<input type="button" onclick="mo()" class="modify" value="정보수정">
-								</div>
-								
-								<c:if test="${kakao==null}">
+
+						<c:if test="${sessionScope.user_id == null }">
+							<p>
+								<strong>로그인</strong> 후 이용해주세요
+							</p>
+							<q>아이디가 없으시다면?<br> &nbsp;회원가입 후 이용해주세요!
+							</q>
+							<div class="user-modify">
+								<input type="button" class="usermodal" value="로그인"
+									style="width: 64.5px; margin-top: 7px;">
+							</div>
+							<div class="user-logout">
+								<input type="button" onclick="location.href='#'" id="user-join"
+									class="logout" value="회원가입" style="margin-top: 7px;">
+							</div>
+						</c:if>
+						<c:if test="${user_id != null}">
+							<p>
+								<span>${sessionScope.user_id}</span> 님 환영합니다
+							</p>
+							<ul>
+								<c:if test="${!user_id.equals('admin') }">
+									<li><a class="my"
+										href="/myinfo/myinfo?user_id=${user_id }">내 정보<img
+											class="right" src="/resources/images/icons/right-arrow.png"></a></li>
+								</c:if>
+								<c:if test="${user_id.equals('admin') }">
+									<li><a class="my" href="/admin/memberList">관리자페이지<img
+											class="right" src="/resources/images/icons/right-arrow.png"></a></li>
+								</c:if>
+								<li><a class="my" href="#">내 상점<img class="right"
+										src="/resources/images/icons/right-arrow.png"></a></li>
+							</ul>
+							<div class="user-modify">
+								<input type="button" onclick="mo()" class="modify" value="정보수정">
+							</div>
+
+							<c:if test="${kakao==null}">
 								<!-- 로그아웃 -->
 								<div class="user-logout">
-<%-- 						<input type="button" onclick="location.href='/member/logout?exUrl=<%=request.getRequestURI().substring(14,request.getRequestURI().indexOf(".jsp")) %>'; " value="로그아웃"> --%>
-							<input type="button" onclick="doLogout()" value="로그아웃">
-<%-- 							<input type="button" onclick="location.href='/member/logout?exUrl=<%=request.getHeader("referer") %>'; " value="로그아웃"> --%>
-							
+									<%-- 						<input type="button" onclick="location.href='/member/logout?exUrl=<%=request.getRequestURI().substring(14,request.getRequestURI().indexOf(".jsp")) %>'; " value="로그아웃"> --%>
+									<input type="button" onclick="doLogout()" value="로그아웃">
+									<%-- 							<input type="button" onclick="location.href='/member/logout?exUrl=<%=request.getHeader("referer") %>'; " value="로그아웃"> --%>
+
 								</div>
-								</c:if>
-								<c:if test="${kakao!=null}">
+							</c:if>
+							<c:if test="${kakao!=null}">
 								<div class="user-logout">
-									<input type="button" onclick="location.href='https://kauth.kakao.com/oauth/logout?client_id=d2adbec5b44fdcc0559d1e3ca898739e&logout_redirect_uri=http://localhost:8080/member/logout'" value="로그아웃">
-								</div>
-								</c:if>
-							</c:if>
-							
-							
-							 
-							 
-							 <!-- 관리자  -->
-							<c:if test="${user_id ne '' and adminchk lt '1'}">
-								<p style="margin-bottom: 5px;">
-									<span class="login-admin">${admin }</span> 님 환영합니다
-								</p>
-								<ul>
-									<li><a class="adminmenu" href="#">관리자 메뉴 이동<img
-											class="right" src="/resources/images/icons/right-arrow.png"></a></li>
-								</ul>
-								<div class="user-logout" style="margin-left: 40px;">
-									<input type="button" onclick=" location.href='/logout';" class="logout" value="로그아웃"
-										style="margin-top: 7px;">
-										
+									<input type="button"
+										onclick="location.href='https://kauth.kakao.com/oauth/logout?client_id=d2adbec5b44fdcc0559d1e3ca898739e&logout_redirect_uri=http://localhost:8080/member/logout'"
+										value="로그아웃">
 								</div>
 							</c:if>
+						</c:if>
+
+
+
+
+						<!-- 관리자  -->
+						<c:if test="${user_id ne '' and adminchk lt '1'}">
+							<p style="margin-bottom: 5px;">
+								<span class="login-admin">${admin }</span> 님 환영합니다
+							</p>
+							<ul>
+								<li><a class="adminmenu" href="#">관리자 메뉴 이동<img
+										class="right" src="/resources/images/icons/right-arrow.png"></a></li>
+							</ul>
+							<div class="user-logout" style="margin-left: 40px;">
+								<input type="button" onclick=" location.href='/logout';"
+									class="logout" value="로그아웃" style="margin-top: 7px;">
+
+							</div>
+						</c:if>
 						<!-- 로그인 시  -->
 
 
@@ -319,7 +334,7 @@
 
 <!-- sweet alert  -->
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
- 
+
 
 <!-- 로그인 모달창 -->
 <script
@@ -331,47 +346,49 @@
 		</div>
 		<div class="modal-top">PANDA LOGIN</div>
 		<img src="/resources/images/icons/close.png" alt="IMG-close"
-			class="modalhide">
-		<img src="/resources/images/icons/back.png" alt="IMG-back"
-		class="back-joinpage">
-						
-<%-- 		<form action="/member/login?exUrl=<%=request.getRequestURI().substring(14,request.getRequestURI().indexOf(".jsp")) %>" method="post" id="login"> --%>
-			
-			<form onsubmit="doLogin()" method="post" id="login">
-<!-- 			<input type="hidden" id="exUrl"> -->
-		<div class="modal-text">
-			<img src="/resources/images/icons/user.png" alt="id입력"
-				class="userimg">
-			<!-- 			<img src="/resources/images/icons/reset.png" alt="idreset" id="idreset" class="resetimg"> -->
-			
-			<input type="text" id="user_id" name="user_id" placeholder="PANDA ID"
-				maxlength="10" class="id" onkeypress="chkCapsLock(event)"
-				onclick="chkCapsLock(event)" onblur="chkCapsLock1(event)" autocomplete="off" class="id" > 
-				
-				<img src="/resources/images/icons/pass.png" alt="id입력" class="passimg">
-			<!-- 			<img src="/resources/images/icons/reset.png" alt="idreset" id="pwreset"class="resetimg"> -->
-			
-			
-			<input type="password" id="user_pw" name="user_pw"
-				placeholder="PANDA PW" maxlength="15" class="pass"
-				onkeypress="chkCapsLock(event)" onclick="chkCapsLock(event)"
-				onblur="chkCapsLock1(event)" autocomplete="new-password">
-				
-				
-			<div id="capslock"
-				style="font-size: 12px; margin: -2px 0 0 200px; color: darkblue; position: absolute;"></div>
-			<div class="check-box">
-				<label class="chk_id"><input type="checkbox" class="id_save">
-					<strong>아이디 저장</strong></label> <label class="show_pw"><input
-					type="checkbox" class="pw_show" onclick="chkCapsLock(event)"
-					onblur="chkCapsLock1(event)"> <strong>패스워드 보기</strong></label>
+			class="modalhide"> <img src="/resources/images/icons/back.png"
+			alt="IMG-back" class="back-joinpage">
+
+		<%-- 		<form action="/member/login?exUrl=<%=request.getRequestURI().substring(14,request.getRequestURI().indexOf(".jsp")) %>" method="post" id="login"> --%>
+
+		<form onsubmit="doLogin()" method="post" id="login">
+			<!-- 			<input type="hidden" id="exUrl"> -->
+			<div class="modal-text">
+				<img src="/resources/images/icons/user.png" alt="id입력"
+					class="userimg">
+				<!-- 			<img src="/resources/images/icons/reset.png" alt="idreset" id="idreset" class="resetimg"> -->
+
+				<input type="text" id="user_id" name="user_id"
+					placeholder="PANDA ID" maxlength="10" class="id"
+					onkeypress="chkCapsLock(event)" onclick="chkCapsLock(event)"
+					onblur="chkCapsLock1(event)" autocomplete="off" class="id">
+
+				<img src="/resources/images/icons/pass.png" alt="id입력"
+					class="passimg">
+				<!-- 			<img src="/resources/images/icons/reset.png" alt="idreset" id="pwreset"class="resetimg"> -->
+
+
+				<input type="password" id="user_pw" name="user_pw"
+					placeholder="PANDA PW" maxlength="15" class="pass"
+					onkeypress="chkCapsLock(event)" onclick="chkCapsLock(event)"
+					onblur="chkCapsLock1(event)" autocomplete="new-password">
+
+
+				<div id="capslock"
+					style="font-size: 12px; margin: -2px 0 0 200px; color: darkblue; position: absolute;"></div>
+				<div class="check-box">
+					<label class="chk_id"><input type="checkbox"
+						class="id_save"> <strong>아이디 저장</strong></label> <label
+						class="show_pw"><input type="checkbox" class="pw_show"
+						onclick="chkCapsLock(event)" onblur="chkCapsLock1(event)">
+						<strong>패스워드 보기</strong></label>
+				</div>
 			</div>
-		</div>
-		<div class="login-submit">
-			<input type="submit" value="">
-			<!-- 로그인 실패 시, ajax 로 얼럿 뜨게 만들기(페이지 이동 막기) -->
-		</div>
-				</form>
+			<div class="login-submit">
+				<input type="submit" value="L o g i n">
+				<!-- 로그인 실패 시, ajax 로 얼럿 뜨게 만들기(페이지 이동 막기) -->
+			</div>
+		</form>
 		<div class="find">
 			<div class="findid">아이디찾기</div>
 			<div class="division">│</div>
@@ -381,117 +398,137 @@
 			<a>계정이 없으신가요?</a>&nbsp;&nbsp;
 			<p id="onclick-join">회원가입</p>
 		</div>
-		
-		
+
+
 		<!-- 카카오 로그인 -->
 		<div class="social-login">
-			<img src="/resources/images/icons/division-line.png">
-			<p>Social Login</p>
-			<img src="/resources/images/icons/division-line.png">
-		
-			 
-			 <a class="p-2" href="https://kauth.kakao.com/oauth/authorize?client_id=d2adbec5b44fdcc0559d1e3ca898739e&redirect_uri=http://localhost:8080/member/kakaoLogin&response_type=code">
-			 
-			<img src="/resources/images/icons/kakao_login_large_wide.png" style="width:268pt;height:50pt;margin:auto;"><br><br>
-			 </a>
-			 </div>
-			 
-			 
-			 
+			<!-- 			<img src="/resources/images/icons/division-line.png"> -->
+			<!-- 			<p>Social Login</p> -->
+			<!-- 			<img src="/resources/images/icons/division-line.png"> -->
+
+
+			<a class="p-2"
+				href="https://kauth.kakao.com/oauth/authorize?client_id=d2adbec5b44fdcc0559d1e3ca898739e&redirect_uri=http://localhost:8080/member/kakaoLogin&response_type=code">
+
+				<img src="/resources/images/icons/kakao_login_large_wide.png"
+				style="width: 268pt; height: 50pt; margin: auto;"><br>
+			<br>
+			</a>
+		</div>
+
+
+
 		<div class="modal-join">
-		<form action="/member/insert" method="post">
-			<div class="join-text">
-				<input id="user-id-join" type="text" placeholder="아이디" maxlength="10" autocomplete="on" name="user_id" required>
-<!-- 				<div id="tooltip" class="idtooltip">아이디는 영어,숫자 5~10글자, 한글,특수문자 사용불가</div> -->
-				<br>
-				 <div id="userIDdiv"></div>
-				
-				
-				<input id="user-pw-join" type="password" placeholder="비밀번호"maxlength="15"
-				onkeypress="chkCapsLock2(event)" onclick="chkCapsLock2(event)"
-				onblur="chkCapsLock3(event)" autocomplete="new-password" name="user_pw" required>
-				<img class="capsl" src ="/resources/images/icons/capslock.png" alt="캡스락">
-				<div id="tooltip" class="pwtooltip">첫 글자 대/소문자, 숫자, 특수기호 포함 8~15글자, 한글사용 불가</div>
-				<div class="passlv">
-					<div class="passlv-info">비밀번호 안전도 :</div>
-					<div class="lv-info"></div>
-					<input type="text" readonly class="lv1" tabindex="-1" > 
-					<input type="text" readonly class="lv2" tabindex="-1"> 
-					<input type="text" readonly class="lv3" tabindex="-1">
-					<!-- 비밀번호는 영어대/소문자,숫자,특수기호 8~15글자, 한글사용불가 -->
-				</div>
-				<input id="user-name-join" type="text" placeholder="이름입력" maxlength="6" autocomplete="off" name="user_name" required>
-				<div id="tooltip" class="nametooltip">본명을 입력해주세요</div>
-				<input id="user-nick-join" type="text" placeholder="닉네임" maxlength="10" autocomplete="off" name="user_nick" required>
-				<div id="tooltip" class="nicktooltip" >사용하실 닉네임을 입력해주세요.</div>
-				<div id="userNickdiv"></div>
-				
-				<div class="tellsel">
-					<div id="tel">
-						<input class="select" type="text" value="통신사" readonly tabindex="-1"> <img
-							id="updown" src="/resources/images/icons/updown.png">
+			<form action="/member/insert" method="post">
+				<div class="join-text">
+					<input id="user-id-join" type="text" placeholder="아이디"
+						maxlength="10" autocomplete="on" name="user_id" required>
+					<!-- 				<div id="tooltip" class="idtooltip">아이디는 영어,숫자 5~10글자, 한글,특수문자 사용불가</div> -->
+					<br>
+					<div id="userIDdiv"></div>
+
+
+					<input id="user-pw-join" type="password" placeholder="비밀번호"
+						maxlength="15" onkeypress="chkCapsLock2(event)"
+						onclick="chkCapsLock2(event)" onblur="chkCapsLock3(event)"
+						autocomplete="new-password" name="user_pw" required> <img
+						class="capsl" src="/resources/images/icons/capslock.png" alt="캡스락">
+					<div id="tooltip" class="pwtooltip">첫 글자 대/소문자, 숫자, 특수기호 포함
+						8~15글자, 한글사용 불가</div>
+					<div class="passlv">
+						<div class="passlv-info">비밀번호 안전도 :</div>
+						<div class="lv-info"></div>
+						<input type="text" readonly class="lv1" tabindex="-1"> <input
+							type="text" readonly class="lv2" tabindex="-1"> <input
+							type="text" readonly class="lv3" tabindex="-1">
+						<!-- 비밀번호는 영어대/소문자,숫자,특수기호 8~15글자, 한글사용불가 -->
+					</div>
+					<input id="user-name-join" type="text" placeholder="이름입력"
+						maxlength="6" autocomplete="off" name="user_name" required>
+					<div id="tooltip" class="nametooltip">본명을 입력해주세요</div>
+					<input id="user-nick-join" type="text" placeholder="닉네임"
+						maxlength="10" autocomplete="off" name="user_nick" required>
+					<div id="tooltip" class="nicktooltip">사용하실 닉네임을 입력해주세요.</div>
+					<div id="userNickdiv"></div>
+
+					<div class="tellsel">
+						<div id="tel">
+							<input class="select" type="text" value="통신사" readonly
+								tabindex="-1"> <img id="updown"
+								src="/resources/images/icons/updown.png">
 							<div id="telecom">
 								<div class="skt">SKT</div>
 								<div class="kt">KT</div>
 								<div class="lgu">LGU+</div>
 							</div>
+						</div>
+						<input id="user-tel-join" class="telephone" type="tel"
+							placeholder="전화번호" maxlength="13" autocomplete="off"
+							name="user_tel" required>
 					</div>
-					<input id="user-tel-join" class="telephone" type="tel" placeholder="전화번호"
-						maxlength="13" autocomplete="off" name="user_tel" required> 
-											</div>
-				<br>
-				
-				<div id="telephone-certification">
-<!-- 					<input type="hidden" class="sucess-certification" value="" memo="인증완료 시 밸류값저장(0/1)" tabindex="-1"> -->
-					<input type="email"
-						placeholder="ex) abc@panda.com" name="user_email" required> 
-						
+					<br>
+
+					<div id="telephone-certification">
+						<!-- 					<input type="hidden" class="sucess-certification" value="" memo="인증완료 시 밸류값저장(0/1)" tabindex="-1"> -->
+						<input type="email" placeholder="ex) abc@panda.com"
+							name="user_email" required>
+
+					</div>
+					<div class="mylocation">우리동네 조회하기</div>
+					<div class="findloca">
+						<!-- 배열로 넣기  -->
+						<input type="text" id="si" readonly tabindex="-1" name="user_area">
+						<input type="text" id="gu" readonly tabindex="-1" name="user_addr">
+						<img src="/resources/images/icons/placeholder.png"
+							id="findlocation">
+					</div>
+					<div class="locationfind-false">&nbsp;</div>
+					<div class="terms">
+						<div class="terms-service">판다 서비스 이용 약관</div>
+						<input id="service-chk" type="checkbox" tabindex="-1">
+						<p>판다 이용약관, 개인정보 수집 및 이용 (선택), 위치기반서비스 이용약관에 모두 동의합니다.</p>
+						<input id="service-chk-val" value="0" type="hidden"
+							memo="survice-chk y/n" tabindex="-1">
+						<div class="terms-advertising">개인 정보 광고 활용 동의(선택)</div>
+						<input id="advertising-chk" type="checkbox" tabindex="-1">
+						<p>판다 서비스 이용 중 판다가 제공하는 고객맞춤 컨텐츠 추천 등 광고 정보를 수신합니다.</p>
+						<input id="advertising-chk-val" value="0" type="hidden"
+							memo="advertising-chk y/n" tabindex="-1">
+					</div>
+					<input type="submit" value="회원가입" class="member-join">
 				</div>
-				<div class="mylocation">우리동네 조회하기</div>
-				<div class="findloca"> <!-- 배열로 넣기  -->
-					<input type="text" id="si" readonly tabindex="-1" name="user_area"> 
-					<input type="text" id="gu" readonly tabindex="-1" name="user_addr"> 
-					<img src="/resources/images/icons/placeholder.png" id="findlocation">
-				</div>
-				<div class="locationfind-false">&nbsp;</div>
-				<div class="terms">
-					<div class="terms-service">판다 서비스 이용 약관</div>
-						<input id="service-chk" type="checkbox" tabindex="-1"><p>판다 이용약관, 개인정보 수집 및 이용 (선택), 위치기반서비스 이용약관에 모두 동의합니다.</p>
-						<input id="service-chk-val" value="0" type="hidden" memo="survice-chk y/n" tabindex="-1">
-					<div class="terms-advertising">개인 정보 광고 활용 동의(선택)</div>
-						<input id="advertising-chk" type="checkbox" tabindex="-1"><p>판다 서비스 이용 중 판다가 제공하는 고객맞춤 컨텐츠 추천 등 광고 정보를 수신합니다.</p>
-						<input id="advertising-chk-val" value="0" type="hidden" memo="advertising-chk y/n" tabindex="-1">
-				</div>
-				<input type="submit" value="회원가입" class="member-join">
-			</div>
 			</form>
-		</div>	
-		
-		
-     
-     
+		</div>
+
+
+
+
 		<!-- 아이디 비번  찾기-->
-     
+
 		<div class="modal-findid">
 			<div class="findid-input">
 				<!--전화번호 uq걸기 -->
-					<form action="/member/findId" method="post" id="find">
-				<input type="text" id="findid-id" placeholder="가입하신 이름을 입력해주세요."  autocomplete="off" name="user_name">
-				<input type="text" id="findid-nick" placeholder="가입하신 전화번호 입력해주세요." autocomplete="off" name="user_tel">
-				<div class="error-text">&nbsp;</div>
-				<input id="search-id" type="submit" value="아이디 찾기">
+				<form action="/member/findId" method="post" id="find">
+					<input type="text" id="findid-id" placeholder="가입하신 이름을 입력해주세요."
+						autocomplete="off" name="user_name"> <input type="text"
+						id="findid-nick" placeholder="가입하신 전화번호 입력해주세요."
+						autocomplete="off" name="user_tel">
+					<div class="error-text">&nbsp;</div>
+					<input id="search-id" type="submit" value="아이디 찾기">
 				</form>
 			</div>
 		</div>
-		
+
 		<div class="modal-findpw">
 			<div class="findpw-input">
-			
-					<form action="/member/findpw" method="post" id="findpw">
-				<input type="text" id="findpw-pw" placeholder="사용중인 아이디를 입력해주세요." name="user_id"  autocomplete="off">
-				<input type="email" id="findpw-tel" placeholder="가입하신 이메일을 입력해주세요." name="user_email"  autocomplete="off">
-				<div class="error-text">&nbsp;</div>
-				<input id="search-pw" type="submit" value="비밀번호 찾기">
+
+				<form action="/member/findpw" method="post" id="findpw">
+					<input type="text" id="findpw-pw" placeholder="사용중인 아이디를 입력해주세요."
+						name="user_id" autocomplete="off"> <input type="email"
+						id="findpw-tel" placeholder="가입하신 이메일을 입력해주세요." name="user_email"
+						autocomplete="off">
+					<div class="error-text">&nbsp;</div>
+					<input id="search-pw" type="submit" value="비밀번호 찾기">
 				</form>
 			</div>
 		</div>
@@ -563,7 +600,7 @@
         	
         	// a_regist 페이지 이동 (로그인제어)
          	$("#moveToMyShop").click(function(){
-        		var userId = '<%=(String)session.getAttribute("user_id")%>';
+        		var userId = '<%=(String) session.getAttribute("user_id")%>';
         		
         		if(userId == null || userId == "null") {
         			$(".usermodal").trigger("click");
@@ -573,27 +610,27 @@
        		});
         	
         	
-        	//비번체크였나
-        	$("#search-pw").click(function(){
-    			$.ajax({
-    				url : "/member/findpw",
-    				type : "POST",
-    				data : {
-    					id : $("#findpw-pw").val(),
-    					email : $("#findpw-tel").val()
-    				},
-    				success : function(result) {
-    					alert(result);
-    				},
-    			})
-    		});
+//         	비번체크였나
+//         	$("#search-pw").click(function(){
+//     			$.ajax({
+//     				url : "/member/findpw",
+//     				type : "POST",
+//     				data : {
+//     					id : $("#findpw-pw").val(),
+//     					email : $("#findpw-tel").val()
+//     				},
+//     				success : function(result) {
+//     					alert(result);
+//     				},
+//     			})
+//     		});
         	
         	
         	
         });    
      </script>
-     
-     
+
+
 
 
 
@@ -621,7 +658,7 @@
 </script>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$('#search-pw').submit(function(){
+		$('#findpw').submit(function(){
 			// alert("성공!");
 			if($('#findpw-pw').val() == ''){
 				alert("사용중인 아이디를 입력하세요.");
@@ -629,7 +666,7 @@
 			}
 			
 			if($('#findpw-tel').val() == ''){
-				alert("휴대폰 번호를 입력하세요.");
+				alert("이메일을 입력하세요.");
 				return false;
 			}
 			
@@ -655,4 +692,3 @@ $('#login').submit(function(){
 	});
 });
 </script>
-

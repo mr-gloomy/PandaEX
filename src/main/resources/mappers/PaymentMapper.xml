@@ -15,7 +15,10 @@
 <!-- 		select payment_no+1 from payment where payment_no = #{paymentNo} -->
 <!-- 	</select> -->
 	
-
+	<!-- 글번호(goods_no) 글정보 모두 조회 -->
+ 	<select id="getGoods" resultType="com.panda.domain.GoodsVO">
+ 		select * from goods where goods_no = #{goods_no}
+ 	</select>
 	
 	<insert id="insert">
 		insert into payment(payment_no, member_no, payment_tid, payment_price, payment_status)
@@ -38,6 +41,62 @@
 		select p.payment_price, u.user_pandapay from payment p, user u 
 			where u.user_no = p.member_no and p.payment_no = #{paymentNo}
 	</select>
+	
+	<!-- 상품번호 사용한 상품정보 조회  -->
+	<select id="getGood" resultType="GoodsVO">
+		select * from goods 
+		 where goods_no = #{goods_no}
+	</select>
+	
+	<!-- user_id 사용한 유저정보 조회  -->
+	<select id="getUser" resultType="MemberVO">
+		select * from user 
+		 where user_id = #{user_id}
+	</select>
+	
+		<!-- user_id 사용한 payment 조회  -->
+	<select id="getUserPay" resultType="com.panda.paymentvo.PaymentDto">
+		 select a.* 
+			  from payment a
+			 inner join user b
+			   on a.member_no = b.user_no
+			 where b.user_id = #{user_id};
+	</select>
+	
+	<!-- 상품번호, 회원번호 사용한 글정보 조회 -->
+<!--    	<select id="getGoods" resultType="Map"> -->
+<!--    		select A.*, B.* -->
+<!--    		  from goods A join user B -->
+<!--    		    on A.user_no = B.user_no -->
+<!--    		 where A.auction_no = #{auction_no} -->
+<!--    		   and B.user_no = #{user_no} -->
+<!--    	</select> -->
+	
+<!--  결제 시 구매자 pandapay 금액 - goods 금액 -->
+	<update id="buyer" >
+		update user
+	   set user_pandapay = (select t1.user_pandapay
+	                          from (select (b.user_pandapay - a.goods_price) as user_pandapay
+	                          from goods a
+	                            , user b
+	                         where a.goods_no = #{goods_no}
+	                           and b.user_no = #{user_no}) t1)
+	 where user_no = #{user_no}
+	;
+	</update>
+	
+	<!-- 결제 시 판매자 pandapay 금액 + goods 금액 -->
+	<update id="seller" >
+	update user
+	   set user_pandapay = (select t1.user_pandapay
+	                          from (select (b.user_pandapay + a.goods_price) as user_pandapay
+	                          from goods a
+	                         inner join user b
+	                           on a.user_no = b.user_no
+	                         where a.goods_no = #{goods_no}) t1)
+	 where user_no = (select x.user_no from (select user_no from goods where goods_no = #{goods_no}) x)
+	;	
+	</update>
 	
 <!-- 	<select id="allList" parameterType="Map" resultType="PaymentInsertVO"> -->
 <!-- 		select * from ( -->

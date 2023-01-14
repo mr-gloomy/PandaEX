@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.panda.domain.GoodsVO;
 import com.panda.domain.MemberVO;
 import com.panda.paymentvo.CashingListVO;
 import com.panda.paymentvo.CashingPointsVO;
@@ -37,7 +38,7 @@ public class PaymentServiceImpl implements PaymentService{
 		mylog.debug("vo : "+vo);
 		dao.insert(vo);
 		dao.update(vo);
-		mylog.debug("payment insert 완료 -> 서비스");
+		mylog.debug("payment insert/charge 완료 -> 서비스");
 	}
 	@Override
 	public PaymentInsertVO selectOne(int paymentNo) throws Exception{
@@ -50,6 +51,36 @@ public class PaymentServiceImpl implements PaymentService{
 		
 		return dao.successOne(paymentNo);
 	}
+	
+	
+	@Override
+	public MemberVO getUser(String user_id) throws Exception {
+		mylog.debug("user_id : "+user_id);
+		
+		return dao.getUser(user_id);
+	}
+	
+	@Override
+	public void buyer(int user_no, int goods_no) throws Exception {
+		mylog.debug(" Service : 결제 시 구매자 pandapay 금액 - goods 금액");
+		dao.buyer(user_no,goods_no);
+	}
+	
+	@Override
+	public void seller(int goods_no) throws Exception {
+		mylog.debug(" Service : 결제 시 판매자 pandapay 금액 + goods 금액");
+		dao.seller(goods_no);
+	}
+	
+	// 글번호(goods_no) 정보 조회
+	@Override
+	public GoodsVO getGoods(Integer goods_no) throws Exception {
+		mylog.debug("getGoods(Integer goods_no) 호출");
+		
+		return dao.getGoods(goods_no);
+	}
+	
+	
 //	@Override
 //	public List<PaymentInsertVO> allList(Map<String, Object> info) {
 		

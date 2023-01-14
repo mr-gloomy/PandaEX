@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -198,25 +199,6 @@ public class MemberController {
 		
 	}
 	
-	@PostMapping("/reportA")
-	public void reportUserA(ReportVO vo, HttpServletResponse response,int user_no) throws Exception {
-		
-		AuctionVO mVo = aService.getUser(user_no);
-		
-		vo.setRep_u_id(mVo.getUser_id());
-		
-		service.insertRep(vo);
-		
-		response.setContentType("text/html; charset=UTF-8");
-		PrintWriter out=response.getWriter();
-		out.println("<script>");
-		out.println("alert('신고 완료!');");
-		out.println("history.back()");
-		out.println("</script>");
-		out.close();
-		
-	}
-	
 	// 아이디 찾기
 		@RequestMapping(value="/findId",method=RequestMethod.GET)
 		public String findIdGET() throws Exception {
@@ -268,13 +250,24 @@ public class MemberController {
 		}
 
 		@RequestMapping(value = "/findpw", method = RequestMethod.POST)
-		public String findPwPOST(@ModelAttribute MemberVO vo, HttpServletResponse response) throws Exception{
+		public String findPwPOST(@ModelAttribute MemberVO vo, HttpServletResponse response, Model model) throws Exception{
 			mylog.info("findPwPOST() 호출");
-			MemberVO vo2 = service.getMember(vo.getUser_id());
-			vo.setUser_no(vo2.getUser_no());
-			service.findPw(response, vo);
+			MemberVO vo2 = null;
+			if (service.getMember(vo.getUser_id())!=null) {
+				vo2 = service.getMember(vo.getUser_id());
+			}
+			if(vo2 == null) {
+				model.addAttribute("check",1);
+					return "/member/findError";
+			}else {
+				model.addAttribute("check", 0);
+				vo.setUser_no(vo2.getUser_no());
+				service.findPw(response, vo);
+				return "main/index";
+			}
 			
-			return "main/index";
+			
+			
 		}
 		
 		

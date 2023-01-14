@@ -31,10 +31,14 @@
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
 }
-.stext-104 {
-    font-family: fangsong;
-    font-size: 20px;
-    line-height: 2;
+.stext-104 { /* 상품명 말줄임표 넣ㄱ*/
+	width: 275px;
+	font-family: sans-serif;
+	font-size: 18px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	
 }
 .stext-105 {
     font-family: ui-monospace;
@@ -58,6 +62,15 @@
 .wrap-menu-desktop {
 	top:0px;
 }
+/* .bor4 { */
+/*     border: 1px solid #28a745; */
+/*     border-radius: 3px; */
+/* } */
+.hov-btn3:hover {
+    border-color: #28a745;
+    background-color: #28a745;
+    color: #fff;
+}
 </style>
 <script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2c915430ac4edcd6aa694ae234c0de27"></script>
@@ -67,21 +80,27 @@ $(function() {
 	
 	$("#sort").val($("#g_sort").val()).prop("selected", true);
 	
+	var keyword = $("#searchA").val().trim();
+	var sort = $("#sort").val();
+	var si = $("#locationS").val();
+	var gu = $("#locationG").val();
+	var si2 = $("#locationS2").val();
+	var gu2 = $("#locationG2").val();
+	
+	if (si2!="" && si=="") {
+		location.href='/goods/list?k='+keyword+'&s='+sort+'&l='+si2+'&ll='+gu2;
+	}
+	
 	$("#searchA").keydown(function(keyNum){
-		if(keyNum.keyCode == 13){ 
-			var keyword = $("#searchA").val();
-			var sort = $("#sort").val();
-			location.href='/goods/list?k='+keyword+'&s='+sort;
+		if(keyNum.keyCode == 13){
+			keyword = $("#searchA").val().trim();
+			location.href='/goods/list?k='+keyword+'&s='+sort+'&l='+si+'&ll='+gu;
 		}
 	})
 	
 	$('#sort').change(function() {
-		var sort = $("#sort").val();
-		var keyword = $("#searchA").val();
-		location.href='/goods/list?s='+sort;
-		if (keyword!="") {
-			location.href='/goods/list?k='+keyword+'&s='+sort;
-		}
+		sort = $("#sort").val();
+		location.href='/goods/list?k='+keyword+'&s='+sort+'&l='+si+'&ll='+gu;
 	});
 	
 });
@@ -122,16 +141,8 @@ $(function() {
 	                     var keyword = $("#searchA").val();
 	         			 var sort = $("#sort").val();
 	                     $('#locationH').html(si+","+gu);
-	                     if (keyword!="" & sort!="") {
+	                     
 	                     location.href='/goods/list?k='+keyword+'&s='+sort+'&l='+si+'&ll='+gu;
-	                     }
-	                     else if (keyword!="") {
-	                    	 location.href='/goods/list?k='+keyword+'&l='+si+'&ll='+gu;
-	                     }
-	                     else if (sort!="") {
-	                    	 location.href='/goods/list?s='+sort+'&l='+si+'&ll='+gu;
-	                     }
-	                     location.href='/goods/list?l='+si+'&ll='+gu;
 	                  }
 	               });
 	            }   
@@ -148,14 +159,18 @@ $(function() {
 <!-- 위치 -->
 <input type="hidden" value="${param.s}" name="g_sort" id="g_sort">
 <input type="hidden" value="${user_id}" id="us">
+<input type="hidden" value="${param.l}" id="locationS">
+<input type="hidden" value="${param.ll}" id="locationG">
+<input type="hidden" value="${vo.user_area }" id="locationS2">
+<input type="hidden" value="${vo.user_addr }" id="locationG2">
 <div class="container">
   <div class="row">
      <div class="col-8 py-4 px-5 " style="background-color: #ecc84a; border-color: #ecc84a; border-radius: 40px 0px 0px 40px/ 40px 0px 0px 40px; margin-top: 80px;" >
     	<h5 class="text-white mt-1"> 내가 선택한 위치는  </h5>
-    	<c:if test="${param.l!=null}">
+    	<c:if test="${param.l!='' and param.l!=null}">
     	<h5 class="text-white"><span class="text-white" id="locationH"><b>${param.l }, ${param.ll }</b></span> 입니다</h5>	
     	</c:if>
-    	<c:if test="${param.l==null and user_id!=null}">
+    	<c:if test="${(param.l==null or param.l=='') and user_id!=null}">
         <h5 class="text-white"><span class="text-white" id="locationH"><b>${vo.user_area },${vo.user_addr }</b></span> 입니다</h5>
         </c:if>
         <c:if test="${user_id==null}">
@@ -221,6 +236,10 @@ $(function() {
 	<c:set var="col" value="4" />
 	<c:set var="row" value="${ Math.ceil(size/col) }" />
 	<c:set var="num" value="0" />
+	result : ${result }
+	request : ${requestScope.result }
+	session : ${sessionScope.result }
+	param : ${param.result } 
 	
 	<div class="row isotope-grid">	
 		<c:forEach begin="1" end="${row }" step="1">
@@ -263,6 +282,23 @@ $(function() {
 	</div>
 </div>
 <!-- 상품목록 -->
+ <script type="text/javascript">
+	var result = '${result}';
+	
+	if(result == 'createOK'){
+		alert('상품 글쓰기 완료!');
+	}
+	
+	if(result == 'modOK'){
+		alert('글 수정 완료!');
+	}
+	
+	if(result == 'delOK'){
+		alert('글 삭제 완료!');
+	}
+	
+</script>
+
 
 
 <!-- 푸터 -->

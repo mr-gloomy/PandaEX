@@ -13,6 +13,7 @@ public class PageVO {
 	private int totalCount;
 	private boolean prev;
 	private boolean next;
+	private int tmpEndpage;
 	
 	private Criteria cri;
 	
@@ -46,7 +47,7 @@ public class PageVO {
 		// totalCount(DB)
 		// endPage	(전체 글개수가 endPage만큼 없을경우)
 		// 글개수에 맞는 페이지수 계산
-		int tmpEndpage = (int)Math.ceil((totalCount/(double)cri.getPerPageNum()));
+		tmpEndpage = (int)Math.ceil((totalCount/(double)cri.getPerPageNum()));
 		
 		if(endPage > tmpEndpage) {
 			endPage = tmpEndpage;

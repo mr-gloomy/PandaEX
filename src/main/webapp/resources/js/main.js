@@ -982,8 +982,15 @@ $('.kt').on('click',function(){
 $('.lgu').on('click',function(){
    $(".select").attr('value','LGU+');   
 });
-
-
+$('.junggogo').on('click',function(){
+	location.href="/goods/regist"
+});
+$('.gibugo').on('click',function(){
+	location.href="/auction/a_regist"
+});
+//http://localhost:8080/goods/regist
+//http://localhost:8080/auction/a_regist
+	
 //* 로그인테스트 */
 //$('.submit').on('click', function() {
 //   var login1 = {"user_id:":$("#user_id").val(),"pw":$("#user_pw").val()}

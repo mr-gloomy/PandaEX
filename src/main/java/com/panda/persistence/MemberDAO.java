@@ -39,10 +39,10 @@ public interface MemberDAO {
 			public void insertRep(ReportVO vo) throws Exception;
 			
 			// 마이 페이지 - 메인 
-			public MemberVO getMembers(String user_id);
+			public MemberVO getMemberss(String user_id);
 			
 			// 관리자용 회원조회
-			public MemberVO getMembers(MemberVO vo) throws Exception;
+			public MemberVO getMemberss(MemberVO vo) throws Exception;
 			
 			// 마이 페이지 - 정보 수정 
 			public void modify(MemberVO memberVO) throws Exception;
@@ -62,4 +62,8 @@ public interface MemberDAO {
 			
 //			public Integer mypupdate(MemberVO vo) throws Exception;
 			
+			// 일반회원 <-> 블랙회원 전환
+			public void changeblack(MemberVO mvo)throws Exception;
+			
+			public MemberVO getMembera(MemberVO vo);
 }

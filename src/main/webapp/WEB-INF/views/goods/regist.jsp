@@ -86,15 +86,12 @@ $(document).ready(function(){
 <!-- 본문 -->
 <div class="container">
 	<div>
-		<form method="post" id="form" enctype="multipart/form-data">
+		<form method="post" id="form" enctype="multipart/form-data" name="fr">
 			<!-- 판매현황 -->
-			<input type="text" name="goods_trade" value="판매중">
+			<input type="hidden" name="goods_trade" value="판매중">
 			<!-- 작성자 -->
-<%-- 			<input type="hidden" name="${sessionScope.user_no}" value="user_no"> --%>
-<%-- 			<input type="hidden" name="${sessionScope.user_nick}" value="user_nick"> --%>
-<%-- 			<input type="hidden" name="${sessionScope.user_addr}" value="user_addr"> --%>
-<%-- 			<input type="hidden" name="${sessionScope.user_area}" value="user_area"> --%>
 			
+
 			<div class="card">
 				<div class="card-body">
 					<div>
@@ -118,7 +115,7 @@ $(document).ready(function(){
 							   if(this.files && this.files[0]) {
 							    var reader = new FileReader;
 							    reader.onload = function(data) {
-							     $(".select_img img").attr("src", data.target.result).width(150);        
+							     $(".select_img img").attr("src", data.target.result).width(300);        
 							    }
 							    reader.readAsDataURL(this.files[0]);
 							   }
@@ -127,10 +124,10 @@ $(document).ready(function(){
 							</div>
 						</div>
 					</div>
-					이미지 실제경로 : <%=request.getRealPath("/") %>
+<%-- 					이미지 실제경로 : <%=request.getRealPath("/") %> --%>
 					
-					** 현재 프로젝트는 개발자의 컴퓨터에서 로컬로 실행됩니다. 이 프로젝트가 완성되어 서버에 업로드하여
-					실행된다면 저 경로가 아닌 새로운 경로를 확인해야합니다.
+<!-- 					** 현재 프로젝트는 개발자의 컴퓨터에서 로컬로 실행됩니다. 이 프로젝트가 완성되어 서버에 업로드하여 -->
+<!-- 					실행된다면 저 경로가 아닌 새로운 경로를 확인해야합니다. -->
 					
 					
 					<div class="row py-4 border-bottom">
@@ -166,7 +163,7 @@ $(document).ready(function(){
 						</div>
 						<div class="col-sm">
 							<select class="form-control" id="goods_category" name="goods_category">
-								<option selected>카테고리를 입력하세요</option>
+								<option value="" selected>카테고리를 입력하세요</option>
 								<option value="전자기기">전자기기</option>
 								<option value="의류">의류</option>
 								<option value="생활가전">생활가전</option>
@@ -266,7 +263,7 @@ $(document).ready(function(){
 						</div>
 					</div>
 					<div class="G_btn" align="center">
-						<button type="submit" class="btn btn-success py-2 px-3">작성완료</button>
+						<button type="button" class="btn btn-success py-2 px-3" onclick="fun1()">작성완료</button>
 						<button type="reset" class="btn btn-success py-2 px-3">초기화</button>
 						<button onclick="href='/goods/list';" class="btn btn-success py-2 px-3">목록이동</button>
 					</div>
@@ -275,6 +272,52 @@ $(document).ready(function(){
 		</form>
 	</div>
 </div>
+<script type="text/javascript">
+function fun1() {
+	if(document.fr.uploadFile.value==""){
+		alert("사진파일을 첨부하세요");
+		document.fr.uploadFile.focus();
+		return;
+	}
+	if(document.fr.goods_title.value==""){
+		alert("상품명을 입력하세요");
+		document.fr.searchKeyword.focus();
+		return;
+	}
+	if(document.fr.goods_category.value==""){
+		alert("카테고리를 입력하세요");
+		document.fr.goods_category.focus();
+		return;
+	}
+	if(document.fr.goods_condition[0].checked==false && document.fr.goods_condition[1].checked==false
+	   && document.fr.goods_condition[2].checked==false){
+		alert("상품상태를 선택하세요");
+		return;
+	}
+	if(document.fr.goods_refund[0].checked==false && document.fr.goods_refund[1].checked==false){
+		alert("환불여부를 선택하세요");
+		return;
+	}
+	if(document.fr.goods_discount[0].checked==false && document.fr.goods_discount[1].checked==false){
+		alert("가격제안 여부를 선택하세요");
+		return;
+	}
+	if(document.fr.goods_price.value==""){
+		alert("상품가격을 입력하세요");
+		document.fr.goods_price.focus();
+		return;
+	}
+	if(document.fr.goods_detail.value==""){
+		alert("내용을 입력하세요");
+		document.fr.goods_detail.focus();
+		return;
+	}
+	// 폼태그 내용 서버에 전송
+	document.fr.submit();
+}
+
+</script>
+
 <!--   푸터 -->
 <%@ include file="../include/footer.jsp"%>
 </body>

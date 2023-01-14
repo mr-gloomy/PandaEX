@@ -4,25 +4,35 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.panda.domain.MemberVO;
+import com.panda.paymentvo.PaymentDto;
+import com.panda.paymentvo.PaymentInsertVO;
 import com.panda.persistence.MemberDAO;
+import com.panda.persistence.PaymentDAO;
 
 @Service
 public class MyPageServiceImpl implements MyPageService {
 	
+	private static final Logger mylog = LoggerFactory.getLogger(MyPageServiceImpl.class);
+	
 	@Inject
 	private MemberDAO memberDAO;
+	
+	@Inject
+	private PaymentDAO paymentDAO;
 
 	@Override
-	public MemberVO getMembers(String user_id) {
-		return memberDAO.getMembers(user_id);
+	public MemberVO getMemberss(String user_id) {
+		return memberDAO.getMemberss(user_id);
 	}
 
 	@Override
-	public MemberVO getMembers(MemberVO memberVO) throws Exception {
-		return memberDAO.getMembers(memberVO);
+	public MemberVO getMemberss(MemberVO memberVO) throws Exception {
+		return memberDAO.getMemberss(memberVO);
 	}
 	
 	// 정보 수정 
@@ -42,10 +52,19 @@ public class MyPageServiceImpl implements MyPageService {
 	public void exit(MemberVO memberVO) throws Exception {
 		memberDAO.exit(memberVO);
 	}
-//	@Override
-//	public Integer mypupdate(MemberVO vo) throws Exception {
-//		
-//		return memberDAO.mypupdate(vo);
-//	}
+
+	@Override
+	public MemberVO getMembera(MemberVO memberVO) {
+		
+		return memberDAO.getMembera(memberVO);
+	}
+
+	@Override
+	public List<PaymentDto> getUserPay(String user_id) throws Exception {
+		mylog.debug("getUserPay List<PaymentDto>");
+		return paymentDAO.getUserPay(user_id);
+	}
+
+	
 
 }

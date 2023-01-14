@@ -102,16 +102,17 @@
 						<input type="hidden" name="auction_no" value="${acmap.auction_no }">
 						<div class="row py-4 border-bottom">
 							<div class="col-sm-2">
-								<label class="form-label">이미지 (<span class="text-success">{{ fileCount }}</span>/3 </label>
+								<label class="form-label">이미지</label>
 							</div>
 							<div class="col-sm d-flex">
-								<label class="btn btn-outline-success pt-5" id="add_file" v-show="attachmentCount < 4"> 
-									<i class="fa-solid fa-camera fa-2x"></i><br> 
-									   사진 추가 
-									<input class="form-control d-none" type="file" id="file1" accept=".png, .jpg, .gif" multiple="multiple"/>
-								</label>
+								<div class="inputArea">
+									 <label for="gdsImg"></label>
+									 <img src="${vo.thumbnail }" alt="사진없음" style="width: 200px; height: 200px; ">
+								 <div class="select_img"><img src="" /></div>
 							</div>
+						</div>		
 						</div>
+						이미지 실제경로 : <%=request.getRealPath("/") %>
 						<div class="row py-4 border-bottom">
 							<div class="col-sm-2">
 								<label for="goods_title" class="form-label"></label>

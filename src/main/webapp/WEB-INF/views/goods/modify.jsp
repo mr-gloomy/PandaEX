@@ -67,7 +67,7 @@
 <!-- 본문 -->
 <div class="container">
 	<div>
-		<form method="post" enctype="multipart/form-data">
+		<form method="post" enctype="multipart/form-data" name="fr">
 			<div class="card">
 				<div class="card-body">
 					<div>
@@ -84,7 +84,7 @@
 						<div class="col-sm d-flex">
 							<div class="inputArea">
 							 <label for="gdsImg"></label>
-							 <input type="file" id="${vo.thumbnail}" name="${vo.thumbnail}" accept=".jpg,.png,.jpeg" readonly="readonly">
+							 <img src="${vo.thumbnail }" alt="사진없음" style="width: 200px; height: 200px; ">
 							 <div class="select_img"><img src="" /></div>
 							</div>
 						</div>					
@@ -118,7 +118,7 @@
 						</div>
 						<div class="col-sm">
 							<select class="form-control" id="goods_category" name="goods_category">
-								<option selected>카테고리를 다시 입력하세요</option>
+								<option value="" selected>카테고리를 다시 입력하세요</option>
 								<option value="전자기기">전자기기</option>
 								<option value="의류">의류</option>
 								<option value="생활가전">생활가전</option>
@@ -270,7 +270,7 @@
 						</div>
 					</div>
 					<div class="G_btn" align="center">
-						<button type="submit" class="btn btn-success py-2 px-3">수정완료</button>
+						<button type="button" class="btn btn-success py-2 px-3" onclick="fun1()">수정완료</button>
 						<button onclick="history.back();" class="btn btn-success py-2 px-3">수정취소</button>
 						<button onclick="location.href='/goods/remove?goods_no=${vo.goods_no}';" class="btn btn-success py-2 px-3">삭제하기</button>
 					</div>
@@ -279,6 +279,47 @@
 		</form>
 	</div>
 </div>
+<script type="text/javascript">
+function fun1() {
+	if(document.fr.searchKeyword.value==""){
+		alert("상품명을 입력하세요");
+		document.fr.goods_title.focus();
+		return;
+	}
+	if(document.fr.goods_category.value==""){
+		alert("카테고리를 입력하세요");
+		document.fr.goods_category.focus();
+		return;
+	}
+	if(document.fr.goods_condition[0].checked==false && document.fr.goods_condition[1].checked==false
+	   && document.fr.goods_condition[2].checked==false){
+		alert("상품상태를 선택하세요");
+		return;
+	}
+	if(document.fr.goods_refund[0].checked==false && document.fr.goods_refund[1].checked==false){
+		alert("환불여부를 선택하세요");
+		return;
+	}
+	if(document.fr.goods_discount[0].checked==false && document.fr.goods_discount[1].checked==false){
+		alert("가격제안 여부를 선택하세요");
+		return;
+	}
+	if(document.fr.goods_price.value==""){
+		alert("상품가격을 입력하세요");
+		document.fr.goods_price.focus();
+		return;
+	}
+	if(document.fr.goods_detail.value==""){
+		alert("내용을 입력하세요");
+		document.fr.goods_detail.focus();
+		return;
+	}
+	// 폼태그 내용 서버에 전송
+	document.fr.submit();
+}
+
+</script>
+
 <!--   푸터 -->
 <%@ include file="../include/footer.jsp"%>
 </body>

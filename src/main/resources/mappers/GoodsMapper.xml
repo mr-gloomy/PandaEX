@@ -9,20 +9,22 @@
 	<!-- 상품 등록(user_nick 빠짐) -->
 	<insert id="createGoods">
 		insert into goods(goods_category,goods_title,goods_condition,goods_price,goods_discount,goods_detail,goods_refund,
-						  goods_trade,uploadFile,thumbnail)
+						  goods_trade,uploadFile,thumbnail,user_no,user_nick,user_addr,user_area)
 		values(#{goods_category},#{goods_title},#{goods_condition},#{goods_price},#{goods_discount},#{goods_detail},#{goods_refund},
-			   #{goods_trade},#{uploadFile},#{thumbnail})
+			   #{goods_trade},#{uploadFile},#{thumbnail},#{user_no},#{user_nick},#{user_addr},#{user_area})
 	</insert> 
 	
 	<!-- 상품 목록(all) -->
 	<select resultType="GoodsVO" id="listAll">
 		select * from goods 
-		<if test="k!=null">
+		<if test="k!=null and k!=''">
 			where goods_title like concat('%',#{k},'%')
-			and user_addr=#{l}
+			<if test="l!=null and l!=''">
+			and user_area=#{l}
+			</if>
 		</if>
-		<if test="k==null and l!=null">
-			where user_addr=#{l}
+		<if test="k=='' and l!=null">
+			where user_area=#{l}
 		</if>
 		<if test="s==0">
 			order by goods_date desc

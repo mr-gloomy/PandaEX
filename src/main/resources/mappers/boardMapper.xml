@@ -11,23 +11,20 @@
 	</insert>
 
 	<!-- 글 목록 전체 -->
-	<!-- 페이징처리 -->
+	<!-- 페이징처리+카테고 -->
 	<select id="listAll" resultType="BoardVO">
  		 <![CDATA[
 			select * from board 
 			where bno>0 
+			]]>
+			<if test='p_category.equals("")'></if>
+			<if test='p_category.equals("all")'></if>
+			<if test='p_category.equals("notice")'>and category = #{p_category}</if>
+			<if test='p_category.equals("event")'>and category = #{p_category}</if>
+			<if test='p_category.equals("donate")'>and category = #{p_category}</if>
+			 <![CDATA[
 			order by bno desc, regdate desc
 			limit #{pageStart},#{perPageNum}
-			]]>
-	</select>
-	
-	<!-- 글목록 카테고리별 -->
-		<select id="listcate" parameterType="map" resultType="BoardVO">
- 		 <![CDATA[
-			select * from board 
-			where bno>0 and category=#{category}
-			order by bno desc, regdate desc
-			limit #{cri.pageStart},#{cri.perPageNum}
 			]]>
 	</select>
 	
@@ -61,6 +58,7 @@
 	<select id="countBoard" resultType="int">
 		select count(bno) from board
 	</select>
+	
 	
 
 </mapper>

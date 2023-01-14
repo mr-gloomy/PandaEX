@@ -69,6 +69,11 @@ function CountDownTimer(dt, id) {
      }
      timer = setInterval(showRemaining, 250);
  }
+ 
+ function afterRep() {
+	 var theForm = document.getElementById("frm");
+	 theForm.reset();
+ }
 </script>
 
 </head>
@@ -105,8 +110,7 @@ function CountDownTimer(dt, id) {
 						</ol>
 						<div class="carousel-inner">
 							<div class="carousel-item active">
-								<img src="/resources/images/gallery-04.jpg"
-									class="d-block w-100">
+								<img src="${avooo.uploadFile }" class="d-block w-100">
 							</div>
 						</div>
 					</div>
@@ -431,10 +435,11 @@ function CountDownTimer(dt, id) {
 
       <!-- Modal body -->
       <div class="modal-body">
-      <form action="/member/reportA" method="post" id="frm">
+      <form action="/member/report" method="post" id="frm" onsubmit="goReport()">
       	<input type="hidden" name="user_no" value="${param.user_no }">
       	<input type="hidden" name="auction_no" value="${param.auction_no }">
       	<input type="hidden" name="u_id" value="${user_id }">
+      	<input type="hidden" name="rep_u_id" value="${vo.user_id }">
         <input type="text" name="rep_subject" placeholder="신고 제목" style="width:100%;"><br><br>
         <select name="rep_sort" style="width:100%;">
         	<option selected>신고 분류</option>
@@ -449,7 +454,7 @@ function CountDownTimer(dt, id) {
       <!-- Modal footer -->
       <div class="modal-footer">
       	<a href="#" class="btn btn-primary" onclick="document.getElementById('frm').submit();">신고하기</a>
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="afterRep()">Close</button>
       </div>
 
     </div>

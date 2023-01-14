@@ -19,10 +19,10 @@
 		siteName : 'PANDA',
 		categoryId : '155093',
 		divisionId : '155094',
-
 	});
 </script>
 <script src="/resources/js/myinfo.js"></script>
+
 </head>
 
 
@@ -41,6 +41,7 @@
 			<li class="side_info mypactive">내 정보</li>
 			<li class="side_auction">내 경매</li>
 			<li class="side_modify">내 정보 수정</li>
+			<li class="side_orderlist">내 주문 목록</li>
 			<li class="side_pointcharge">포인트 충전</li>
 			<li class="side_pointhistory">포인트 충전 내역</li>
 			<li class="side_drop">회원탈퇴</li>
@@ -49,7 +50,7 @@
 			<div class="myp_info">
 				<div class="myp_user">
 					<div class="myp_img">
-						<img src="/resources/images/icons/man1.png">
+						<img src="/resources/images/icons/dd.jpg" style="width:150px;height:150px; border-radius: 50%;background: #ffffff85;">
 					</div>
 					<div class="myp_name">${user.user_name }</div>
 				</div>
@@ -84,10 +85,12 @@
 					<div class="myp_shop_2">
 						<img src="/resources/images/icons/store.png" class="shop_icons">
 						<p style="margin-right: 5px;">상점오픈일 :</p>
-						<strong>${open }</strong> <img
-							src="/resources/images/icons/visit.png" class="shop_icon">
-						<p style="margin-right: 5px;">상점방문수 :</p>
-						<strong>${visit }명</strong> <img
+						<strong>${open }</strong> 
+<!-- 						<img -->
+<!-- 							src="/resources/images/icons/visit.png" class="shop_icon"> -->
+<!-- 						<p style="margin-right: 5px;">상점방문수 :</p> -->
+<%-- 						<strong>${visit }명</strong>  --%>
+						<img
 							src="/resources/images/icons/sell.png" class="shop_icon">
 						<p style="margin-right: 5px;">상품판매수 :</p>
 						<strong style="margin-right: 10px;">??개</strong>
@@ -218,22 +221,25 @@
 						<li>변경할 비밀번호</li>
 						<li>비밀번호 재확인</li>
 					</ul>
-					<form action="/myinfo/update" method="post">
+					<form id="modimodi" action="/myinfo/update" method="POST">
 					<ul class="mbody-2">
-						<li><input type="text" value="${user.user_name }" readonly></li>
-						<li><input type="text" value="${user.user_id }" readonly></li>
-						<li><input type="text" class="nickmo" name="user_nick" value="${user.user_nick }" maxlength="10"></li>
-						<li><input type="text" value="${user.user_tel }" readonly></li>
-						<li><input type="text" name="user_password" value="${user.user_email }" readonly></li>
-						<li><input type="password" name="user_pw" value="${user.user_pw }" placeholder="변경할 비밀번호" maxlength="20"></li>
-						<li><input type="password" class="user_pwchk" value="${user.user_pw }" placeholder="비밀번호 재확인" maxlength="20"></li>
+						<li><input type="text" id="namemo" class="nickmo" value="${user.user_name }" name="user_name" maxlength="7"></li>
+						<li><input type="text" value="${user.user_id }" name="user_id" readonly></li>
+						<li><input type="text" id="mypnick" class="nickmo" name="user_nick" value="${user.user_nick }" maxlength="10"></li>
+						<li><input type="text" id="myptel" class="nickmo" value="${user.user_tel }" maxlength="13" name="user_tel"></li>
+						<li><input type="text" value="${user.user_email }" readonly></li>
+						<li><input type="password" id="myppw" name="user_pw" value="${user.user_pw }" placeholder="변경할 비밀번호" maxlength="20"></li>
+						<li><input type="password" class="user_pwchk" value="${user.user_pw }" placeholder="비밀번호 재확인" maxlength="20"><div class="pwerr">비밀번호가 일치하지 않습니다.</div></li>
 					</ul>
-					 <button type="submit" class="info-modify" >내정보 변경</button> 
+					 <button type="button" id="update" class="info-modify" >내정보 변경</button> 
 					</form>
 				</div>
 			</div>
 		</div>
-		<div class="hide004">
+		<div class="hide007">
+		주문목록
+		</div>
+		<div class="hide004" style="height: 500px;">
 			<div class="row flex-fill d-flex flex-column" >
 				<div class="col justify-content-center">
 
@@ -329,82 +335,68 @@
 				</div>
 			</div>
 		</div>
-		<div class="hide005">
-			포인트 충전 내역
+		<div class="hide005" style="min-height: 500px;margin-bottom: 50px;">
+			
 			<div class="row flex-fill d-flex flex-column">
 				<div class="col-7">
 					<div class="row my-4 pt-2">
-						<div class="col-6">
-							<h4 class="fw-bold">내 포인트 충전 내역</h4>
-						</div>
-						<div class="col pt-1 pr-0">
-							<select class="form-select form-select-sm border-0 text-muted"
-								v-model.number="filter" @change="updateList">
-								<option value="0">전체</option>
-								<option value="1">취소 가능</option>
-							</select>
-						</div>
-						<div class="col pt-1 pl-0">
-							<select class="form-select form-select-sm border-0 text-muted"
-								v-model.number="sort" @change="updateList">
-								<option value="0">최신순</option>
-								<option value="1">오래된 순</option>
-								<option value="2">충전 포인트↑순</option>
-								<option value="3">충전 포인트↓순</option>
-							</select>
-						</div>
+							<h4 > ${user.user_name }님의 포인트 충전 내역</h4>
 					</div>
 					<div class="row">
 						<table class="table table-hover border-bottom">
 							<thead>
 								<tr>
-									<th scope="col" class="col-2">결제일시</th>
+									<th scope="col" class="col-2">결제번호</th>
 									<th scope="col" class="col-2">충전 금액</th>
-									<th scope="col" class="col-1">취소하기</th>
+									<th scope="col" class="col-2">결제일시</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr v-for="(payment, index) in list" :key="index">
-									<td class="text-muted fs-small">{{
-										dateFormat(payment.paymentTime) }}</td>
+							<c:forEach var="pvo" items="${pList }">
+								<tr>
+								<td class="text-muted fs-small">${pvo.payment_no }</td>
 									<td class="fw-bold fs-small"><span
-										class="text-dark text-truncate">{{
-											comma(payment.paymentPrice) }}p</span></td>
-									<td class="fs-small fw-bold"><a
-										:href="'${root}/payment/refund/' + payment.paymentNo"
-										v-if="payment.refund != ''"><span class="text-primary">{{
-												payment.refund }}</span></a></td>
+										class="text-dark text-truncate">${
+											pvo.payment_price }</span></td>
+									<td class="text-muted fs-small">${
+									pvo.payment_time.toString().substring(0,pvo.payment_time.toString().length()-5) }</td>
 								</tr>
+							</c:forEach>
 							</tbody>
 						</table>
-					</div>
-					<div class="row justify-content-center mt-4">
-						<nav>
-							<ul class="pagination">
-								<li class="page-item" :class="{'disabled': pageList == 0}">
-									<a class="page-link" href="#" @click="prev"> <span
-										aria-hidden="true">&laquo;</span>
-								</a>
-								</li>
-								<li class="page-item" v-for="pageItem in totalPage"
-									:key="pageItem" :class="{'active': pageItem == page}"
-									v-show="parseInt((pageItem - 1) / 10) == pageList"><a
-									class="page-link" href="#" @click="pagination(pageItem)">{{
-										pageItem }}</a></li>
-								<li class="page-item"
-									:class="{'disabled': parseInt((totalPage - 1) / 10) == pageList}">
-									<a class="page-link" href="#" @click="next"> <span
-										aria-hidden="true">&raquo;</span>
-								</a>
-								</li>
-							</ul>
-						</nav>
 					</div>
 				</div>
 			</div>
 
 		</div>
-		<div class="hide006">회원탈퇴</div>
+		<div class="hide006">
+			<div class="delep">회원탈퇴</div>
+			<br>
+			<div class="deletep1">
+				<p class="mypass">본인 비밀번호 입력</p>
+				<input type="password" class="user_pwmo" name="user_pw"
+					placeholder="Password" style="margin-bottom:25px;">
+				<div class="pwerror"></div>
+				<input type="hidden" class="pwcksd" value="${user.user_id }">
+				<p class="mypeu">회원탈퇴사유</p> 
+				
+				<input type="radio" name="eu"><p class="radiopo">재 가입을 위해서</p>
+				<input type="radio" name="eu"><p class="radiopo">시스템 장애(속도저하, 잦은 에러 등)</p> 
+				<input type="radio" name="eu"><p class="radiopo">사용자수 부족 </p>
+				<input type="radio" name="eu"><p class="radiopo">개인정보(통신 및 신용정보)의 누출 우려</p> 
+				<input type="radio" name="eu"><p class="radiopo">기타</p>
+				<input type="button" class="sibals" value="탈퇴하기">
+			</div>
+			<div class="deletep2" style="display: none;">
+			<form id="modimodi" action="/myinfo/delete" method="POST">
+			<input type="hidden" name="user_id" value="${user.user_id }">
+			<p>고객님의 소중한 개인정보는 탈퇴즉시 파기됩니다.</p>
+			<button type="submit" class="delebtn">탈퇴하겠습니다.
+			</button>
+			</form>
+			</div>
+
+		</div>
 	</div>
 
 

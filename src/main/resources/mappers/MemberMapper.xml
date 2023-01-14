@@ -24,7 +24,10 @@
  	  select * from user
  	  where user_nick = #{user_nick} 
  	</select>
- 	
+ 	 	<select id="getMembera" resultType="MemberVO">
+ 	  select * from user 
+ 	  where user_id=#{user_id} and user_pw = #{user_pw} 	
+ 	</select>
  	
  	
 	<select id="login" resultType="MemberVO">
@@ -113,6 +116,17 @@
  	 select * from user
  	 where user_id != #{user_id} 	
  	</select>
+ 	
+ 	<update id="changeblack" >
+ 		update user set 
+ 		<if test="user_black == 0">
+ 		user_black = 1 
+ 		</if>
+ 		<if test="user_black == 1">
+ 		user_black = 0 
+ 		</if>
+ 		where user_no=#{user_no}
+ 	</update>
 	<!-- 관리자용 회원조회 -->
 	
 	
@@ -121,7 +135,7 @@
 	<!-- 정보 수정 -->
 	<update id="modify">
 		update user
-		set user_nick=#{user_name}, user_tel=#{user_tel}, user_email=#{user_email}
+		set user_nick=#{user_nick}, user_pw=#{user_pw},user_name=#{user_name},user_tel=#{user_tel} 
 		where user_id=#{user_id}
 	</update>
 	
@@ -135,7 +149,7 @@
 	<!-- 회원 탈퇴 -->
 	<delete id="exit">
 		delete from user
-		where user_id=#{user_id} and user_pw=#{user_pw}
+		where user_id=#{user_id}
 	</delete>
 	
 	

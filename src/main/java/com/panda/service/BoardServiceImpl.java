@@ -74,6 +74,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 
+
+
 //	@Override
 //	public List<BoardVO> getBoardCate(Criteria cri, String category) {
 //		
