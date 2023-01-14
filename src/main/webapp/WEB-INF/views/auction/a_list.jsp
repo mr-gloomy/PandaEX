@@ -7,7 +7,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>PANDA</title>
+<link rel="shortcut icon" type="image/x-icon" href="/resources/images/icons/PANDA.png">
 <!-- 헤더 -->	
 <%@ include file="../include/header.jsp" %>
 <%@ include file="../include/css.jsp" %>
@@ -115,11 +116,11 @@
 							<div class="block2-pic hov-img0">
 								<c:if test="${avo.auction_bidok eq 0}">
 									<a href="/auction/a_read?auction_no=${avo.auction_no }&user_no=${avo.user_no}">
-										<img src="${avo.thumbnail }" alt="IMG-PRODUCT" style="width: 280px; height: 250px;"></a>
+										<img src="${avo.thumbnail }" alt="IMG-PRODUCT" style="width: 290px; height: 250px;"></a>
 								</c:if>
 								<c:if test="${avo.auction_bidok eq 1}">
 										<figure style="margin: 0;">
-											<img src="${avo.thumbnail }" alt="IMG-PRODUCT" style="width: 280px; height: 250px; filter: brightness(50%);">
+											<img src="${avo.thumbnail }" alt="IMG-PRODUCT" style="width: 290px; height: 250px; filter: brightness(50%);">
 											<figcaption style="position:absolute; font-weight:bold; text-align:center; top:0; width:100%; color:white; margin-top:110px; font-family:Poppins-Regular; font-size:28px;">
 												경매종료</figcaption>
 										</figure>		
@@ -127,7 +128,7 @@
 							</div>
 	
 							<div class="block2-txt flex-w flex-t p-t-14">
-								<div class="block2-txt-child1 flex-col-l ">
+								<div class="block2-txt-child1 flex-col-l " style="margin-right:-20px;">
 									<c:if test="${avo.auction_bidok eq 0}">
 										<a href="/auction/a_read?auction_no=${avo.auction_no }&user_no=${avo.user_no}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6" 
 										style="font-weight:bold; font-size:17px; color:darkslategray;">
@@ -158,8 +159,8 @@
 								</div>
 								
 	
-								<div class="block2-txt-child2 flex-r p-t-3" id="${avo.auction_no}">
-									<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+								<div class="block2-txt-child2 flex-r p-t-3" id="${avo.auction_no}" >
+									<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2" style="margin-right:10px;">
 										<img class="icon-heart1 dis-block trans-04" src="/resources/images/icons/icon-heart-01.png" alt="ICON">
 										<img class="icon-heart2 dis-block trans-04 ab-t-l" src="/resources/images/icons/icon-heart-02.png" alt="ICON">
 									</a>

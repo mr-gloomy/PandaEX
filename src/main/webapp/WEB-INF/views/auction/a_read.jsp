@@ -6,7 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>PANDA</title>
+<link rel="shortcut icon" type="image/x-icon" href="/resources/images/icons/PANDA.png">
 <!-- 헤더 -->
 <%@ include file="../include/header.jsp"%>
 <%@ include file="../include/css.jsp"%>
@@ -132,19 +133,13 @@ function CountDownTimer(dt, id) {
 					</div>
 					<div class="row mb-2 mr-5">
 						<div class="col-3 p-0 d-flex align-items-end">
-							<h5 class="fw-bold">최초 입찰가</h5>
-							<h5 id="maxBidLabel" class="fw-bold" style="display: none;">현재
-								최고가</h5>
+							<h5 class="fw-bold" >최초 입찰가</h5>
 						</div>
 						<div class="col p-0">
 							<h3 class="text-primary fw-bold">
-								<span id="openingBid" class="comma">
-								<fmt:formatNumber value="${avooo.auction_price }"/>
-								</span> 원
-							</h3>
-							<h3 class="text-primary fw-bold" id="blind"
-								style="display: none;">
-								<span id="maxBid" class="comma">0</span> 원
+								<span id="openingBid" class="comma" style="color:orange;" >
+								<fmt:formatNumber value="${avooo.auction_price }"/> 원
+								</span> 
 							</h3>
 						</div>
 					</div>
@@ -154,23 +149,9 @@ function CountDownTimer(dt, id) {
 						</div>
 						<div class="col p-0">
 							<h3 class="text-info fw-bold">
-								<span id="closingBid" class="comma">
-								<fmt:formatNumber value="${avooo.auction_bid }"/>
-								</span> 원
-							</h3>
-						</div>
-					</div>
-					<div class="row mt-3 mr-5 mb-auto pt-3 border-top"
-						style="display: none;">
-						<div class="col-3 p-0 d-flex align-items-end">
-							<h5 class="fw-bold">내 입찰가</h5>
-						</div>
-						<div class="col p-0">
-							<h3 class="text-secondary fw-bold">
-								<span id="myBid" class="comma">0</span> 원 <span
-									class="text-warning pl-2 align-self-center" id="topBidder"
-									style="display: none;"><i class="fa-solid fa-crown"></i>
-									최고 입찰자</span>
+								<span id="closingBid" class="comma" style="color:#28a745;">
+								<fmt:formatNumber value="${avooo.auction_bid }"/> 원
+								</span>
 							</h3>
 						</div>
 					</div>
@@ -188,12 +169,12 @@ function CountDownTimer(dt, id) {
 					<c:if test="${sessionScope.user_id eq avooo.user_id || sessionScope.user_id eq 'admin' }">
 					<div class="row">
 						<div class="col p-0">
-							<a class="btn btn-info btn-lg btn-block py-3"
+							<a class="btn btn-info btn-lg btn-block py-3"  style="background-color:orange; border-color:orange;"
 								href="/auction/a_modify?auction_no=${avooo.auction_no }&user_no=${avooo.user_no}" role="button"><i
 								class="fa-solid fa-comments-dollar pr-2"></i> 경매 수정 </a>
 						</div>
 						<div class="col">
-							<button type="button"
+							<button type="button" style="background-color:#28a745; border-color:#28a745;" 
 								class="btn btn-primary btn-lg btn-block py-3"
 								data-bs-toggle="modal" data-bs-target="#cancelAuctionModal">
 								<i class="fa-solid fa-ban pr-2"></i> 경매 취소
@@ -205,14 +186,13 @@ function CountDownTimer(dt, id) {
 					<c:if test="${sessionScope.user_id ne avooo.user_id && sessionScope.user_id ne 'admin'}">
 					<div class="row">
 						<div class="col p-0">
-							<!-- <a class="btn btn-info btn-lg btn-block py-3 loginControl" role="button" id="chat">
-								<i class="fa-solid fa-comments-dollar pr-2 " ></i> 1:1 채팅하기  </a> -->
 							<a class="btn btn-info btn-lg btn-block py-3 loginControl" id="chat"
-								href="#" role="button"><i
+								href="#" role="button" style="background-color:orange; border-color:orange;"><i
 								class="fa-solid fa-comments-dollar pr-2"></i> 1:1 채팅하기  </a>
 						</div>
 						<div class="col">
-							<button type="button" class="btn btn-primary btn-lg btn-block py-3 loginControl"  id="startBidding" >
+							<button type="button" class="btn btn-primary btn-lg btn-block py-3 loginControl"  id="startBidding"
+							        style="background-color:#28a745; border-color:#28a745;" >
 			                    <i class="fa-solid fa-gavel pr-2"></i> 입찰하기
 			                </button>
 		                </div>
@@ -229,8 +209,9 @@ function CountDownTimer(dt, id) {
 					<div class="row">
 						<nav aria-label="breadcrumb">
 							<ol class="breadcrumb">
-								<li class="breadcrumb-item active">물품 상태 : <span
-									class="text-primary pl-1">${avooo.auction_condition }</span></li>
+								<li class="breadcrumb-item active">물품 상태 :  
+									<span style="color:#28a745; font-weight:bold;">
+										 ${avooo.auction_condition }</span></li>
 							</ol>
 						</nav>
 					</div>
@@ -256,7 +237,7 @@ function CountDownTimer(dt, id) {
 					</div>
 					<div class="row ml-3 py-3 border-bottom">
 						<div class="col-4 text-muted ml-2">
-							긍정 평가 <span class="text-success fw-bold fs-large ml-3">2개</span>
+							긍정 평가 <span class="text-success fw-bold fs-large ml-3">5개</span>
 						</div>
 						<div class="col-4 text-muted ml-2">
 							부정 평가 <span class="text-primary fw-bold fs-large ml-3">0개</span>
@@ -267,7 +248,7 @@ function CountDownTimer(dt, id) {
 						<fmt:formatDate value="${avooo.user_regdate }" pattern="yyyy-MM-dd"/></div>
 					</div>
 					<div class="row ml-3">
-						<div class="text-muted">누적 제재 : 4회</div>
+						<div class="text-muted">누적 제재 : 1회</div>
 					</div>
 				</div>
 			</div>
@@ -302,8 +283,7 @@ function CountDownTimer(dt, id) {
 							<div class="row">
 								<div class="col-10">
 									<div class="form-group pl-2">
-										<label for="inputBid"> 입찰 가격을 입력해주세요 ( 입찰 단위 : <span
-											class="comma text-primary">1,000</span> 원 )
+										<label for="inputBid"> 입찰 가격을 입력해주세요 
 										</label><input type="number" class="form-control" id="inputBid"
 											autocomplete="off" max="999999900">
 											<small class="form-text text-info pl-1"></small>
@@ -318,7 +298,7 @@ function CountDownTimer(dt, id) {
 							<button type="button" class="btn btn-secondary"
 								data-bs-dismiss="modal">돌아가기</button>
 							<button type="button" class="btn btn-primary" id="updateBid"
-								data-bs-dismiss="modal">입찰하기</button>
+								data-bs-dismiss="modal" style="background-color:#28a745; border-color:#28a745;">입찰하기</button>
 						</div>
 					</div>
 				</div>
@@ -404,7 +384,7 @@ function CountDownTimer(dt, id) {
 					<div class="modal-content">
 						<div class="modal-header">
 							<h5 class="modal-title" id="cancelAuctionModalLable">
-								<i class="fa-solid fa-ban pr-2 text-primary"></i> 경매 취소
+								<i class="fa-solid fa-ban pr-2 text-primary" ></i> 경매 취소
 							</h5>
 							<button type="button" class="btn-close close"
 								data-bs-dismiss="modal">
