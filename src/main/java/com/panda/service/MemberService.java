@@ -44,7 +44,7 @@ public interface MemberService {
 		// * 관리자용
 		//   전체회원 목록 조회
 		public List<MemberVO> getMemList(String id)throws Exception;
-		public MemberVO getMembers(MemberVO mVO) throws Exception;
+		public MemberVO getMemberA(MemberVO mVO) throws Exception;
 	
 		
 		

@@ -108,7 +108,7 @@
 	
 	
 	<!-- 관리자용 회원조회 -->
-	<select id="getMembers" resultType="MemberVO">
+	<select id="getMemberA" resultType="MemberVO">
 		select * from user where user_no=#{user_no}
 	</select>
 		

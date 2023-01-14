@@ -5,7 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Insert title here</title>
+<title>PANDA</title>
+<link rel="shortcut icon" type="image/x-icon" href="/resources/images/icons/PANDA.png">
 <!-- 헤더 -->
 <%@ include file="../include/header.jsp"%>
 <%@ include file="../include/css.jsp"%>
@@ -89,14 +90,14 @@
 <%-- ${acmap } --%>
 
 
-<form method="post" enctype="multipart/form-data">
+<form method="post" enctype="multipart/form-data" name="fr">
 	<div class="container">
 		<div>
 				<div class="card">
 					<div class="card-body">
 						<div>
 							<div class="col-sm">
-								<h2>경매상품 수정</h2><hr>
+								<h2>기부경매 상품수정</h2><hr>
 							</div>
 						</div>
 						<input type="hidden" name="auction_no" value="${acmap.auction_no }">
@@ -112,7 +113,7 @@
 							</div>
 						</div>		
 						</div>
-						이미지 실제경로 : <%=request.getRealPath("/") %>
+<%-- 						이미지 실제경로 : <%=request.getRealPath("/") %> --%>
 						<div class="row py-4 border-bottom">
 							<div class="col-sm-2">
 								<label for="goods_title" class="form-label"></label>
@@ -224,15 +225,50 @@
 							</div>
 						</div>
 						<div class="G_btn" align="center">
-							<button type="submit" class="btn btn-success py-2 px-3">수정완료</button>
+							<button type="button" class="btn btn-success py-2 px-3" onclick="fun1()">수정완료</button>
 							<button type="reset" class="btn btn-success py-2 px-3" id="resetB">수정취소</button>
-							<button onclick="href='/auction/a_list';" class="btn btn-success py-2 px-3">목록이동</button>
+							<button onclick="location.href='/auction/a_list';" class="btn btn-success py-2 px-3">목록이동</button>
 						</div>
 					</div>
 				</div>
 		</div>
 	</div>
 </form>
+<script type="text/javascript">
+function fun1() {
+	if(document.fr.uploadFile.value==""){
+		alert("사진파일을 첨부하세요");
+		document.fr.uploadFile.focus();
+		return;
+	}
+	if(document.fr.auction_category.value==""){
+		alert("카테고리를 선택하세요");
+		document.fr.auction_category.focus();
+		return;
+	}
+	if(document.fr.auction_title.value==""){
+		alert("상품명을 입력하세요");
+		document.fr.searchKeyword.focus();
+		return;
+	}
+	if(document.fr.auction_price.value==""){
+		alert("상품가격을 입력하세요");
+		document.fr.auction_price.focus();
+		return;
+	}
+	if(document.fr.auction_condition[0].checked==false && document.fr.auction_condition[1].checked==false
+	   && document.fr.auction_condition[2].checked==false){
+		alert("상품상태를 선택하세요");
+		return;
+	}
+	if(document.fr.auction_detail.value==""){
+		alert("내용을 입력하세요");
+		document.fr.auction_detail.focus();
+		return;
+	}
+	document.fr.submit();
+}
+</script>
 <!--   푸터 -->
 <%@ include file="../include/footer.jsp"%>
 </body>

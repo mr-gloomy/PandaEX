@@ -2,19 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="/WEB-INF/views/admin/include/header.jsp"%>
-<script
-	src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js">
-	
-</script>
-
-<script type="text/javascript">
-	$(document).ready(function() {
-		$("").on("click", function() {
-
-		});
-	});
-</script>
-
 
 <div class="col-md-6">
 	<div class="box box-solid">
@@ -44,22 +31,22 @@
 
 				</button>
 			</form>
-			<div>신고사유 : 
+			<!-- <div>신고사유 : 
 				<select>
 					<option></option>
 					<option></option>
 					<option></option>
 				</select>
-			</div>
+			</div> -->
 		</div>
 
 
-	<div class="box-body">
+	<!-- <div class="box-body">
 		<h3 class="box-title">상품정보</h3>
 		<div>구매한 상품 :</div>
 		<div>판매중인 상품 :</div>
 		<div>:</div>
-	</div>
+	</div> -->
 	<!-- /.box-body -->
 	<button type="button" onclick="location.href='/admin/memberList';">회원목록</button>
 </div>

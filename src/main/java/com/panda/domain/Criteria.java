@@ -5,12 +5,14 @@ public class Criteria {
 	
 	private int page; // 시작페이지 정보
 	private int perPageNum;	// 페이지 개수
+	private String p_category = "";
 	
 	// 페이징처리 정보가 없을경우 - 기본값[기본생성자 =>> 전달인자가 없으면 기본값으로 세팅됨.]
 	public Criteria() {
 		this.page = 1;
 		this.perPageNum = 10;
 	}
+	
 	// 페이징 정보 (음수일때 1페이지 정보)
 	public void setPage(int page) {
 		if(page<=0) {
@@ -45,11 +47,16 @@ public class Criteria {
 		return perPageNum;
 		
 	}
+	public String getP_category() {
+		return p_category;
+	}
+	public void setP_category(String p_category) {
+		this.p_category = p_category;
+	}
 	@Override
 	public String toString() {
-		return "Criteria [page=" + page + ", perPageNum=" + perPageNum + "]";
+		return "Criteria [page=" + page + ", perPageNum=" + perPageNum + ", p_category=" + p_category + "]";
 	}
-	
 	
 	
 }

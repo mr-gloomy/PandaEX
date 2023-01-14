@@ -23,9 +23,7 @@ public interface MemberDAO {
 
 			public void kakaoinsert(HashMap<String, Object> userInfo)throws Exception;
 			
-			// * 관리자용
-			//   전체회원 목록 조회
-			public List<MemberVO> getMemList(String id)throws Exception;
+		
 			
 			//이메일인증~
 			int updateMailKey(MemberVO vo) throws Exception;
@@ -40,12 +38,13 @@ public interface MemberDAO {
 			
 			// 마이 페이지 - 메인 
 			public MemberVO getMemberss(String user_id);
-			
-			// 관리자용 회원조회
-			public MemberVO getMemberss(MemberVO vo) throws Exception;
+
 			
 			// 마이 페이지 - 정보 수정 
 			public void modify(MemberVO memberVO) throws Exception;
+			
+			// 마이페이지 회원조회
+			public MemberVO getMemberss(MemberVO vo) throws Exception;
 			
 			// 마이 페이지 - 정보 수정 - 비밀번호 확인 
 			public Integer passCheck(MemberVO memberVO) throws Exception;
@@ -62,8 +61,15 @@ public interface MemberDAO {
 			
 //			public Integer mypupdate(MemberVO vo) throws Exception;
 			
+			
+			// * 관리자용
+			//   전체회원 목록 조회
+			public List<MemberVO> getMemList(String id)throws Exception;
+			
 			// 일반회원 <-> 블랙회원 전환
 			public void changeblack(MemberVO mvo)throws Exception;
 			
-			public MemberVO getMembera(MemberVO vo);
+			// 관리자용 회원조회
+			public MemberVO getMemberA(MemberVO vo);
+			
 }
