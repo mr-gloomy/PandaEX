@@ -3588,6 +3588,7 @@ input.num-product::-webkit-outer-spin-button, input.num-product::-webkit-inner-s
 	opacity: 0.9;
 	border-radius: 10px;
 	background: ghostwhite;
+	
 }
 
 .category .user-sel-images {
@@ -5330,6 +5331,46 @@ background: rgb(0 0 0 / 20%);
 }
 .sibals:hover{
 	opacity: 1;
+}
+.shop-dropdown{
+	position: absolute;
+    width: 120px;
+    height: 75px;
+    margin-top: 35px;
+    padding-top: 15px;
+    border-radius: 10px;
+    text-align: center;
+    background: ghostwhite;
+    box-shadow: 0px 8px 16px 0px rgb(0 0 0 / 20%);
+    opacity : 0.9;
+    display : none;
+    /* visible */
+}
+#moveToMyShop:hover  .shop-dropdown,
+#moveToMyShop:hover  .shop-dropdown-sup{
+	display:block;
+}
+.shop-dropdown-sup:hover ~ .shop-dropdown{
+	display:block;
+}
+.shop-dropdown-sup:hover{
+	display :block;
+}
+.shop-dropdown-sup{
+	background: none;
+    position: absolute;
+    width: 65px;
+    height: 100px;
+    margin-top: -10px;
+    display: none;
+}
+.junggogo:hover{
+	color :black;
+	opacity : 1;
+}
+.gibugo:hover{
+	color :black;
+	opacity : 1;
 }
 /* 추가 - 김태홍  손대면 안됍니다!!!!*/
 /*////////////////////////////////////////////////////////*/
