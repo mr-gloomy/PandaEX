@@ -23,12 +23,14 @@
 		}
 		 function doLogout() {
 		    	var cur = window.location.href;
-		   		var cur2 = cur.substring(22);
+		    	var origin = window.location.origin.toString();
+		   		var cur2 = cur.substring(origin.length+1);
 		    	location.href="/member/logout?exUrl="+cur2.replace('&','!rep!');
 		 }
 		 function doLogin() {
 		    	var cur = window.location.href;
-		   		var cur2 = cur.substring(22);
+		    	var origin = window.location.origin.toString();
+		   		var cur2 = cur.substring(origin.length+1);
 		   		var theForm = document.getElementById('login');
 		   		theForm.action="/member/login?exUrl="+cur2.replace('&','!rep!');
 		   		theForm.submit();
@@ -573,20 +575,20 @@
        		});
         	
         	
-        	//비번체크였나
-        	$("#search-pw").click(function(){
-    			$.ajax({
-    				url : "/member/findpw",
-    				type : "POST",
-    				data : {
-    					id : $("#findpw-pw").val(),
-    					email : $("#findpw-tel").val()
-    				},
-    				success : function(result) {
-    					alert(result);
-    				},
-    			})
-    		});
+//         	비번체크였나
+//         	$("#search-pw").click(function(){
+//     			$.ajax({
+//     				url : "/member/findpw",
+//     				type : "POST",
+//     				data : {
+//     					id : $("#findpw-pw").val(),
+//     					email : $("#findpw-tel").val()
+//     				},
+//     				success : function(result) {
+//     					alert(result);
+//     				},
+//     			})
+//     		});
         	
         	
         	
