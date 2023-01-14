@@ -161,7 +161,7 @@ public class MainPageController {
 	@RequestMapping(value = "/board", method = RequestMethod.GET)
 	public void mainBoard(Criteria cri,Model model)throws Exception{
 		
-		mylog.debug(" mainBoard() 호 ");
+		mylog.debug(" mainBoard() 호출 ");
 		
 		session.setAttribute("updateCheck", true);
 		
@@ -195,7 +195,6 @@ public class MainPageController {
 		
 		
 		if(isUpdateCheck) {
-			// list >> content 로 왔을때만 
 			mylog.debug(" 조회수 1증가 ! ");
 			
 			
@@ -204,17 +203,11 @@ public class MainPageController {
 			mylog.debug(" isUpdateCheck : "+isUpdateCheck);
 			
 			bService.upReadCnt(bno);
-			
-			
-			
 		}
 		
-		// 서비스 -> DAO (특정 글번호에 해당하는 정보 가져오기)
 		BoardVO cvo = bService.getContent(bno);
 		
 		model.addAttribute("cvo", cvo);
-		
-		
 		
 	}
 	
