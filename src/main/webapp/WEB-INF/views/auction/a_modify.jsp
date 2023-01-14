@@ -97,7 +97,7 @@
 					<div class="card-body">
 						<div>
 							<div class="col-sm">
-								<h2>경매상품 수정</h2><hr>
+								<h2>기부경매 상품수정</h2><hr>
 							</div>
 						</div>
 						<input type="hidden" name="auction_no" value="${acmap.auction_no }">

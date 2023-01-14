@@ -97,7 +97,7 @@
 					<div class="card-body">
 						<div>
 							<div class="col-sm">
-								<h2>상품등록</h2><hr>
+								<h2>기부경매 상품등록</h2><hr>
 							</div>
 						</div>
 						<div class="row py-4 border-bottom">
