@@ -4,6 +4,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
+<script type="text/javascript">
+function next()
+{location = "/main/index";}
+</script>
 <head>
 <meta charset="UTF-8">
 <title>PANDA</title>
@@ -13,53 +17,27 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js"></script>
 
 </head>
-<body>
-<br><br><br><br><br><br>
-<div class="container d-flex" id="app">
-	<div class="row col-3 mt-3">
-		<ul class="nav flex-column text-center">
-		  <li class="nav-item border-bottom">
-		  	<a href="${root}/mypage/index" class="nav-link btn-outline-dark fw-bold fs-large">마이페이지</a>
-		  </li>
-		  <li class="nav-item border-bottom">
-		  	<a href="${root}/mypage/info" class="nav-link btn-outline-info">내 정보 수정</a>
-		  </li>
-		  <li class="nav-item border-bottom">
-		    <a href="${root}/mypage/auction_history" class="nav-link btn-outline-info">내 경매</a>
-		  </li>
-		  <li class="nav-item border-bottom">
-		    <a href="${root}/mypage/pay_history" class="nav-link btn-outline-info">내 입찰</a>
-		  </li>
-		  <li class="nav-item border-bottom">
-			<a href="${root}/payment/paymentReady" class="nav-link btn-outline-info">포인트 충전</a>
-		  </li>
-		  <li class="nav-item border-bottom">
-			<a href="${root}/payment/list" class="nav-link btn-outline-info">포인트 충전 내역</a>
-		  </li>
-		  <li class="nav-item border-bottom">
-			<a href="${root}/payment/cashing" class="nav-link btn-outline-info">현금화 신청</a>
-		  </li>
-		  <li class="nav-item border-bottom">
-			<a href="${root}/payment/cashingList" class="nav-link btn-outline-info">현금화 신청 내역</a>
-		  </li>
-		  <li class="nav-item border-bottom">
-		    <a href="${root}/mypage/exit" class="nav-link btn-outline-secondary">회원 탈퇴</a>
-		  </li>
-		</ul>
-	</div>
-	${success }
-	<div class="row flex-fill d-flex flex-column">
-		<h4 class="row fw-bold my-4 pt-2">포인트 충전</h4>
+<body onLoad="setTimeout('next()', 10000)">
+<div class="container d-flex" id="app" style="display: flex;
+    justify-content: center; margin-bottom : 40px;">
+<%-- 	${success } --%>
+	<div class="row flex-fill d-flex flex-column" style=" align-items: center;">
+<!-- 		<h4 class="row fw-bold my-4 pt-2">포인트 충전	</h4> -->
+		<br><br><br><br>
+		<img src="/resources/images/icons/PANDA.png" height="350px" width="250px">
 		
 		<div class="row fw-bold mt-1 pt-2 justify-content-center">
-			<h3 class="text-center">포인트 충전이 완료되었습니다.</h3>
+			<h3 class="text-center">${success.payment_price }원 충전이 완료되었습니다.</h3>
 		</div>
 	
 		<div class="row fw-bold mt-1 pt-2 justify-content-center">
-			<span class="text-center text-muted">현재 보유 포인트는 ${success.user_pandaPay } P 입니다.</span>
+			<span class="text-center text-muted">${mvo.user_name }님의 현재 보유 포인트는 ${success.user_pandaPay } P 입니다.</span>
+		</div>
+		<br><br><br><br>
+		<div class="row fw-bold mt-1 pt-2 justify-content-center">
+			<span class="text-center text-muted">10초 후 메인페이지로 이동합니다. 다양한 거래를 즐겨보세요!</span>
 		</div>
 	</div>
-	
 </div>
     
 

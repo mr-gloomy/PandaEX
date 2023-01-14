@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.panda.domain.MemberVO;
+import com.panda.paymentvo.PaymentDto;
 import com.panda.paymentvo.PaymentInsertVO;
 import com.panda.service.MyPageService;
 
@@ -50,10 +51,10 @@ public class MyInfoContoroller {
 		
 		model.addAttribute("memberVO", memberVO);
 		mylog.debug(" 마이페이지 정보나와라~ : "+myservice.getMemberss(memberVO)); 
-		List<PaymentInsertVO> pList = new ArrayList<PaymentInsertVO>();
+		List<PaymentDto> pList = new ArrayList<PaymentDto>();
 		pList = myservice.getUserPay(user_id);
 		model.addAttribute("pList",pList);
-		
+		mylog.debug("pList : " + pList);
 		
 
 		return "/myinfo/myinfo";

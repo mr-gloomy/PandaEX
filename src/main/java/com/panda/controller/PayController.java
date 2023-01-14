@@ -74,6 +74,10 @@ public class PayController {
 				@ModelAttribute PurchaseVO purchaseVO, HttpSession session
 			) throws Exception {
 		
+		String user_id = (String)session.getAttribute("user_id");
+		MemberVO mvo = paymentService.getUser(user_id);
+		mylog.debug("user_no : " + mvo.getUser_no());
+		int user_no = mvo.getUser_no();
 		//결제 준비(ready) 요청을 진행
 //		int paymentNo = paymentDao.paymentSequence();
 		int paymentNo = (int)((Math.random()+1)*100000000);
@@ -85,7 +89,7 @@ public class PayController {
 //												.item_name("판다페이 충전")
 //												.total_amount(purchaseVO.getChargeMoney())
 												.partner_order_id(String.valueOf(paymentNo))
-												.partner_user_id("7") // user_no
+												.partner_user_id(String.valueOf(user_no)) // user_no
 												.item_name("pandaPay")
 												.total_amount(purchaseVO.getChargeMoney())
 											.build();
@@ -146,8 +150,13 @@ public class PayController {
 		int paymentNo = (int) session.getAttribute("paymentNo");
 		session.removeAttribute("paymentNo");
 		PaymentSuccessVO pvo = paymentService.successOne(paymentNo);
+		
+		String user_id = (String)session.getAttribute("user_id");
+		MemberVO mvo = paymentService.getUser(user_id);
+		
 		mylog.debug("pvo : " + pvo);
 		model.addAttribute("success", pvo);
+		model.addAttribute("mvo", mvo);
 		mylog.debug("pvo 를 success란 이름으로 가지고 payment/finish.jsp로 이동");
 		return "/payment/finish";
 	}
@@ -177,7 +186,7 @@ public class PayController {
 		mylog.debug("goods_price : " + gvo.getGoods_price());
 		String user_id = (String)session.getAttribute("user_id");
 		MemberVO mvo = paymentService.getUser(user_id);
-		mylog.debug("user_no : " + mvo.getUser_no());
+//		mylog.debug("user_no : " + mvo.getUser_no());
 //		model.addAttribute("goods_no", goods_no);
 //		model.addAttribute("goods_price", goods_price);
 		model.addAttribute("mvo", mvo);

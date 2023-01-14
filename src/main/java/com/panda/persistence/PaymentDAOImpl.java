@@ -15,6 +15,7 @@ import com.panda.domain.MemberVO;
 import com.panda.paymentvo.CashingListVO;
 import com.panda.paymentvo.CashingPointsVO;
 import com.panda.paymentvo.KakaoPayApproveResponseVO;
+import com.panda.paymentvo.PaymentDto;
 import com.panda.paymentvo.PaymentInsertVO;
 import com.panda.paymentvo.PaymentSuccessVO;
 import com.panda.paymentvo.PurchaseVO;
@@ -111,8 +112,8 @@ public class PaymentDAOImpl implements PaymentDAO{
 	}
 	
 	@Override
-	public List<PaymentInsertVO> getUserPay(String user_id) throws Exception {
-		mylog.debug("getUserPay List<PaymentInsertVO>");
+	public List<PaymentDto> getUserPay(String user_id) throws Exception {
+		mylog.debug("getUserPay List<PaymentDto>");
 		return sqlSession.selectList(NAMESPACE+".getUserPay", user_id);
 	}
 	@Override

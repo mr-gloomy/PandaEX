@@ -55,7 +55,7 @@
 	</select>
 	
 		<!-- user_id 사용한 payment 조회  -->
-	<select id="getUserPay" resultType="com.panda.paymentvo.PaymentInsertVO">
+	<select id="getUserPay" resultType="com.panda.paymentvo.PaymentDto">
 		 select a.* 
 			  from payment a
 			 inner join user b

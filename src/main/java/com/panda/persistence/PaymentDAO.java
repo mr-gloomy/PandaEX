@@ -7,6 +7,7 @@ import com.panda.domain.GoodsVO;
 import com.panda.domain.MemberVO;
 import com.panda.paymentvo.CashingListVO;
 import com.panda.paymentvo.CashingPointsVO;
+import com.panda.paymentvo.PaymentDto;
 import com.panda.paymentvo.PaymentInsertVO;
 import com.panda.paymentvo.PaymentSuccessVO;
 import com.panda.paymentvo.SuccessfulBidDto;
@@ -36,7 +37,7 @@ public interface PaymentDAO {
 	
 	public GoodsVO getGoods(Integer goods_no) throws Exception;
 	
-	public List<PaymentInsertVO> getUserPay(String user_id) throws Exception;
+	public List<PaymentDto> getUserPay(String user_id) throws Exception;
 	
 	public List<PaymentInsertVO> allList(int memberNo, int page, int filter, int sort) throws Exception;
 	public List<PaymentInsertVO> refundList(int memberNo) throws Exception;

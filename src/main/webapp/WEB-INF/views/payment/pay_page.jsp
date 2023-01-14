@@ -19,19 +19,21 @@
 <body>
 
 	<%--임시변수 나중에 지우고 쓰세요~   --%>
-	<c:set var="user_coin" value="12312" />
+<%-- 	<c:set var="user_coin" value="12312" /> --%>
 <%-- 	<c:set var="user_pandapay" value="${user.user_pandapay" /> --%>
-	<c:set var="itemprice" value="25000" />
+<%-- 	<c:set var="itemprice" value="25000" /> --%>
 <%-- 	<c:set var="goods_price" value="${goods.goods_price" /> --%>
-	<c:set var="itemname" value="내사랑 따듯한 유자차" />
+<%-- 	<c:set var="itemname" value="내사랑 따듯한 유자차" /> --%>
 <%-- 	<c:set var="goods_title" value="${goods.goods_title" /> --%>
 	<c:set var="fareper" value="100" />
-	<c:set var="safefare" value="${itemprice div fareper}" />
+	<c:set var="postprice" value="2000" />
+	<c:set var="totalz" value="${gvo.goods_price + postprice}" />
+	<c:set var="total" value="${gvo.goods_price + postprice + safefare }" />
+	<c:set var="safefare" value="${total div fareper}" />
+	<c:set var="totalv" value="${gvo.goods_price + postprice + safefare }" />
 	<!-- safefare = 안전거래 수수료 상품금액 1%입니다. 
 		 fareper 100당 1% 입니다.
 	-->
-	<c:set var="postprice" value="2500" />
-	<c:set var="total" value="${gvo.goods_price + postprice + safefare }" />
 	<fmt:formatNumber var="user_pandapay" value="${mvo.user_pandapay }" type="number"
 		maxFractionDigits="0" />
 	<fmt:formatNumber var="good_price" value="${gvo.goods_price }" type="number"
@@ -40,20 +42,17 @@
 		maxFractionDigits="0" />
 	<fmt:formatNumber var="postprices" value="${postprice }" type="number"
 		maxFractionDigits="0" />
-	<fmt:formatNumber var="totals" value="${total }" type="number"
+	<fmt:formatNumber var="totals" value="${total+safefare }" type="number"
+		maxFractionDigits="0" />
+	<fmt:formatNumber var="totalzz" value="${totalz }" type="number"
 		maxFractionDigits="0" />
 
 	<%--임시변수 나중에 지우고 쓰세요~  --%>
-	${gvo.goods_title }
-	${gvo.goods_no }
-	${gvo.goods_price } <hr>
-	${gvo }
-	${mvo.user_no }
-<!-- 	<form role="form" method="post"> -->
-<%-- 		<input type="hidden" name="goods_no" value="${goods_no }"> --%>
-<%-- 		<input type="hidden" name="goods_price" value="${goods_price }"> --%>
-<%-- 		<input type="hidden" name="user_no" value="${mvo.user_no }"> --%>
-<!-- 	</form> -->
+<%-- 	${gvo.goods_title } --%>
+<%-- 	${gvo.goods_no } --%>
+<%-- 	${gvo.goods_price } <hr> --%>
+<%-- 	${gvo } --%>
+<%-- 	${mvo.user_no } --%>
 	
 	<section class="pay_section">
 		<form action="/payment/buying" method="get" onsubmit="return agree();">
@@ -102,25 +101,28 @@
 				<div class="body-5-1">
 					<div class="pay-name">
 						<div class="body-5-1-1">상품금액</div>
-						<div>안전 결제 수수료</div>
 						<div>배송비</div>
+						<div>결제금액</div>
+						<div>안전 결제 수수료</div>
 					</div>
 					<div class="pay_price">
-						<div class="body-5-1-2">${gvo.goods_price }원</div>
-						<div>${safefares }원</div>
+						<div class="body-5-1-2">${good_price }원</div>
 						<div>${postprices }원</div>
+						<div>${totalzz }원</div>
+						<div>+ ${safefares }원</div>
 					</div>
 				</div>
 				<div class="body-5-2">
+					<c:if test="${totalv<=mvo.user_pandapay }">
 					<div class="body-5-2-1">총 결제금액</div>
-					<c:if test="${gvo.goods_price<=mvo.user_pandapay }">
 						<div>
-							<div class="body-5-2-2"><i>${total.toString().substring(0,total.toString().length()-2)}원</i></div>
+<%-- 							<div class="body-5-2-2"><i>${total.toString().substring(0,total.toString().length()-2)}원</i></div> --%>
+								<div class="body-5-2-2"><i>${totals }원</i></div>
 						</div>
 					</c:if>
-					<c:if test="${gvo.goods_price>mvo.user_pandapay }">
+					<c:if test="${totalv>mvo.user_pandapay }">
 						<div>
-							<div class="body-5-2-2"><i>판다페이가 부족합니다.</i></div>
+							<div class="body-5-2-2"><i>총 결제금액 : ${totals }원 / 판다페이가 부족합니다. </i></div>
 						</div>
 					</c:if>
 					
@@ -187,7 +189,7 @@
 	    	return false;
 	    }
 	    else if (${mvo.user_pandapay<total}) {
-	    	alert('돈이 없노');
+	    	alert('판다페이가 부족합니다! 충전 후 결제 진행해주세요.');
 	    	return false;
 	    }
 	    
