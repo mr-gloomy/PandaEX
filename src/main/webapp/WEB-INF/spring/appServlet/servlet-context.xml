@@ -25,19 +25,7 @@
 	
 <!-- 	<context:component-scan base-package="com.panda.controller" /> -->
 	<context:component-scan base-package="com.panda.*" />
-	
-	<beans:bean id="chattingHandler"
-		class="com.panda.controller.ChattingHandler" />
-
-
-	<websocket:handlers>
-		<websocket:mapping handler="chattingHandler" path="/chatting"/>
-		<websocket:handshake-interceptors>
-			<beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor" />
-		</websocket:handshake-interceptors>
-		<websocket:sockjs websocket-enabled="true"/>
-	</websocket:handlers>
-	
+		
    <!-- 파일업로드 설정 -->
     <resources mapping="/imgUpload/**" location="/resources/imgUpload/" />
 	<beans:bean id="multipartResolver"

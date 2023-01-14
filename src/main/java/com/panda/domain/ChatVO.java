@@ -10,6 +10,7 @@ public class ChatVO {
 	private	String receive_id;
 	private	String bang_id;
 	private	String message;
+	private Long msg_date;
 	private	int goods_no;
 	private	int auction_no;
 	private	int g;

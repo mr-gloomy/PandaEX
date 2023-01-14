@@ -35,12 +35,21 @@ public class ChatServiceImpl implements ChatService {
 		return dao.getRoom(hm);
 	}
 	
-	public void recordMsg(Map<String, Object> hm) throws Exception{
-		dao.recordMsg(hm);
+	public void recordMsg(ChatVO vo) throws Exception{
+		dao.recordMsg(vo);
 	}
 	
-	public List getMsg(String bang_id) throws Exception{
+	public List<ChatVO> getMsg(String bang_id) throws Exception{
 		return dao.getMsg(bang_id);
 	}
+
+	@Override
+	public List<ChatVO> getNewMsg(ChatVO vo) throws Exception {
+		return dao.getNewMsg(vo);
+	}
 	
+	@Override
+	public void sendUp(String bang_id) throws Exception {
+		dao.sendUp(bang_id);
+	}
 }

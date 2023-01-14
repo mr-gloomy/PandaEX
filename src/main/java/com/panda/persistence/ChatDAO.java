@@ -14,7 +14,11 @@ public interface ChatDAO {
 	
 	public String getRoom(Map<String, Object> hm) throws Exception;
 	
-	public void recordMsg(Map<String, Object> hm) throws Exception;
+	public void recordMsg(ChatVO vo) throws Exception;
 	
-	public List getMsg(String bang_id) throws Exception;
+	public List<ChatVO> getMsg(String bang_id) throws Exception;
+	
+	public List<ChatVO> getNewMsg(ChatVO vo) throws Exception;
+	
+	public void sendUp(String bang_id) throws Exception;
 }
