@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 public class KakaoPayReadyRequestVO {
 	private String cid;//가맹점 ID
 	private String partner_order_id;//가맹점 주문번호
-	private String partner_user_id;//가맹점 회원아이디
+	private String partner_user_id;//가맹점 회원아이디 user_no
 	private String item_name;//상품명
 	private int quantity;//상품 수량
 	private int total_amount;//구매 금액

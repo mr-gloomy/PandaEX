@@ -10,10 +10,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.panda.domain.GoodsVO;
 import com.panda.domain.MemberVO;
 import com.panda.paymentvo.CashingListVO;
 import com.panda.paymentvo.CashingPointsVO;
 import com.panda.paymentvo.KakaoPayApproveResponseVO;
+import com.panda.paymentvo.PaymentDto;
 import com.panda.paymentvo.PaymentInsertVO;
 import com.panda.paymentvo.PaymentSuccessVO;
 import com.panda.paymentvo.PurchaseVO;
@@ -99,10 +101,19 @@ public class PaymentDAOImpl implements PaymentDAO{
 		return sqlSession.selectList(NAMESPACE+".allList", info);
 	}
 	
+	// 상품번호(goods_no) 정보 조회
+	@Override
+	public GoodsVO getGoods(Integer goods_no) throws Exception {
+		mylog.debug("getGoods(Integer goods_no) 호출");
+		
+		GoodsVO vo = sqlSession.selectOne(NAMESPACE + ".getGoods", goods_no);
+		
+		return vo;
+	}
 	
 	@Override
-	public List<PaymentInsertVO> getUserPay(String user_id) throws Exception {
-		mylog.debug("getUserPay List<PaymentInsertVO>");
+	public List<PaymentDto> getUserPay(String user_id) throws Exception {
+		mylog.debug("getUserPay List<PaymentDto>");
 		return sqlSession.selectList(NAMESPACE+".getUserPay", user_id);
 	}
 	@Override

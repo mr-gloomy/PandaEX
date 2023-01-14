@@ -146,7 +146,7 @@ $(function() {
 						<div class="row">
 							<div class="col p-0">
 								<a class="btn btn-warning btn-lg btn-block py-3 loginControl" 
-									href="/payment/pay_page?goods_no=${vo.goods_no }&goods_price=${vo.goods_price }" role="button">
+									href="/payment/pay_page?goods_no=${vo.goods_no }" role="button">
 									<i class="fa-sharp fa-solid fa-paper-plane"></i> 판다페이 결제하기 </a>
 							</div>
 							<div class="col">

@@ -15,7 +15,10 @@
 <!-- 		select payment_no+1 from payment where payment_no = #{paymentNo} -->
 <!-- 	</select> -->
 	
-
+	<!-- 글번호(goods_no) 글정보 모두 조회 -->
+ 	<select id="getGoods" resultType="com.panda.domain.GoodsVO">
+ 		select * from goods where goods_no = #{goods_no}
+ 	</select>
 	
 	<insert id="insert">
 		insert into payment(payment_no, member_no, payment_tid, payment_price, payment_status)
@@ -52,7 +55,7 @@
 	</select>
 	
 		<!-- user_id 사용한 payment 조회  -->
-	<select id="getUserPay" resultType="com.panda.paymentvo.PaymentInsertVO">
+	<select id="getUserPay" resultType="com.panda.paymentvo.PaymentDto">
 		 select a.* 
 			  from payment a
 			 inner join user b
