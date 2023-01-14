@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.common.util.concurrent.Service;
+import com.panda.domain.GoodsVO;
 import com.panda.domain.MemberVO;
 import com.panda.paymentvo.CashingListVO;
 import com.panda.paymentvo.CashingPointsVO;
@@ -168,16 +169,19 @@ public class PayController {
 	}
 	
 	@RequestMapping(value = "/pay_page",method = RequestMethod.GET)
-	public void pay_page(@RequestParam Integer goods_no,@RequestParam int goods_price,HttpSession session,Model model) throws Exception{
+	public void pay_page(GoodsVO gvo,HttpSession session,Model model) throws Exception{
 		mylog.debug("/payment/pay_page(GET) 호출 -> 페이지 이동 ");
-		mylog.debug("goods_no : " + goods_no);
-		mylog.debug("goods_price : " + goods_price);
+		mylog.debug("goods_no : " + gvo.getGoods_no());
+		gvo = paymentService.getGoods(gvo.getGoods_no());
+		
+		mylog.debug("goods_price : " + gvo.getGoods_price());
 		String user_id = (String)session.getAttribute("user_id");
 		MemberVO mvo = paymentService.getUser(user_id);
-		mylog.debug("user_no : " +mvo.getUser_no());
-		model.addAttribute("goods_no", goods_no);
-		model.addAttribute("goods_price", goods_price);
+		mylog.debug("user_no : " + mvo.getUser_no());
+//		model.addAttribute("goods_no", goods_no);
+//		model.addAttribute("goods_price", goods_price);
 		model.addAttribute("mvo", mvo);
+		model.addAttribute("gvo", gvo);
 		
 		// /payment/pay_page.jsp 페이지 이동
 	}
@@ -185,11 +189,12 @@ public class PayController {
 	@GetMapping("/buying")
 	//@ResponseBody
 	public String buying(HttpSession session,@RequestParam int goods_price, 
-			@RequestParam int goods_no ,@RequestParam int user_no)  throws Exception {
+			@RequestParam int goods_no ,MemberVO mvo)  throws Exception {
 //								@PathVariable int goods_no @ModelAttribute("goods_no")
 		mylog.debug("/payment/buying(GET) 호출 -> Service 실행 ");
 		String user_id = (String)session.getAttribute("user_id");
 //		mylog.debug("mvo : " + mvo);
+		int user_no = mvo.getUser_no();
 		mylog.debug("user_no : " + user_no);
 		mylog.debug("goods_no : " + goods_no);
 		mylog.debug("goods_price : " + goods_price);

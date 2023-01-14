@@ -1,7 +1,9 @@
 package com.panda.controller;
 
 
+import java.util.ArrayList;
 import java.util.List;
+
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -32,7 +34,7 @@ public class MyInfoContoroller {
 	
 	// http://localhost:8080/myinfo/myinfo
 	@RequestMapping(value = "/myinfo", method = RequestMethod.GET)
-	public String mainGET(HttpSession session, Model model, MemberVO memberVO,@RequestBody List<PaymentInsertVO> pList) throws Exception {
+	public String mainGET(HttpSession session, Model model, MemberVO memberVO) throws Exception {
 //		 로그인 제어	
 		String user_id = (String) session.getAttribute("user_id");
 		
@@ -48,6 +50,7 @@ public class MyInfoContoroller {
 		
 		model.addAttribute("memberVO", memberVO);
 		
+		List<PaymentInsertVO> pList = new ArrayList<PaymentInsertVO>();
 		pList = myservice.getUserPay(user_id);
 		model.addAttribute("pList",pList);
 		

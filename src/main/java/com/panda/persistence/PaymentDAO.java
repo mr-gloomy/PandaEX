@@ -3,6 +3,7 @@ package com.panda.persistence;
 import java.util.List;
 
 import com.panda.domain.AuctionVO;
+import com.panda.domain.GoodsVO;
 import com.panda.domain.MemberVO;
 import com.panda.paymentvo.CashingListVO;
 import com.panda.paymentvo.CashingPointsVO;
@@ -32,6 +33,8 @@ public interface PaymentDAO {
 	public void buyer(int user_no, int goods_no) throws Exception;
 	
 	public void seller(int goods_no) throws Exception;
+	
+	public GoodsVO getGoods(Integer goods_no) throws Exception;
 	
 	public List<PaymentInsertVO> getUserPay(String user_id) throws Exception;
 	
