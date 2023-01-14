@@ -147,7 +147,9 @@ public class MemberDAOImpl implements MemberDAO{
 		public void exit(MemberVO memberVO) throws Exception {
 			sqlSession.delete(NAMESPACE + ".exit", memberVO);
 		}
-
+		
+		
+		// 관리자용
 		@Override
 		public List<MemberVO> getMemList(String id) throws Exception {
 			
@@ -155,11 +157,11 @@ public class MemberDAOImpl implements MemberDAO{
 		}
 
 		@Override
-		public MemberVO getMembera(MemberVO vo) {
+		public MemberVO getMemberA(MemberVO vo) {
 			
-			return sqlSession.selectOne(NAMESPACE + ".getMembera",vo);
+			return sqlSession.selectOne(NAMESPACE + ".getMemberA",vo);
 		}
-
+		
 
 		@Override
 		public void changeblack(MemberVO mvo) throws Exception {
