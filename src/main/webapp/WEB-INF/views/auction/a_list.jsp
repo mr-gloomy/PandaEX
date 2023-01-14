@@ -7,7 +7,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>PANDA</title>
+<link rel="shortcut icon" type="image/x-icon" href="/resources/images/icons/PANDA.png">
 <!-- 헤더 -->	
 <%@ include file="../include/header.jsp" %>
 <%@ include file="../include/css.jsp" %>
