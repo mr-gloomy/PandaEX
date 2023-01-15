@@ -60,7 +60,7 @@
     margin-left: 18px;
 }
 .container {
-    max-width: 80%;
+    max-width: 90%;
     margin-left: auto;
 }
 .wrap-menu-desktop {
