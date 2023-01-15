@@ -166,7 +166,6 @@ $(function() {
 </head>
 <body>
 
-
 	<div class="box box-success direct-chat direct-chat-success">
 		<div class="box-header with-border">
 			<h3 class="box-title">Panda Chat</h3>

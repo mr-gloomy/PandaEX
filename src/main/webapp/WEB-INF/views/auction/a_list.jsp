@@ -39,11 +39,11 @@
 	});
 	
 	
-	function getDate(x,y) {
-		var date1 = new Date(x).getTime();
+	function getDate(y) {
+		var date1 = new Date().getTime();
 		var date2 = new Date(y).getTime();
 		
-		document.write("남은 "+(date1-date2)/(1000*60*60*24)+"일");
+		document.write("남은 "+parseInt((date2-date1)/(1000*60*60*24))+"일");
 	}
 </script>
 </head>
@@ -151,7 +151,9 @@
 										</c:if>
 									</span>
 									<span class="stext-105 cl3">
-										 <script>getDate('${avo.auction_cdate.toString().substring(0,10)}','${avo.auction_date.toString().substring(0,10)}')</script>
+									<c:if test="${avo.auction_bidok!=1 }">
+										 <script>getDate('${avo.auction_cdate.toString().substring(0,10)}')</script>
+									</c:if>
 									</span>
 									<span class="stext-105 cl3" style="color:gray; font-size:13px;">
 										조회수 ${avo.auction_viewcount }회
