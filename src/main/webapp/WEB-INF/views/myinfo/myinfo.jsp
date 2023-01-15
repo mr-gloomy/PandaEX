@@ -51,7 +51,7 @@
 			<div class="myp_info">
 				<div class="myp_user">
 					<div class="myp_img">
-						<img src="/resources/images/icons/dd.jpg" style="width:150px;height:150px; border-radius: 50%;background: #ffffff85;">
+						<img src="/resources/images/member.jpg" style="width:150px;height:150px; border-radius: 50%;background: #ffffff85;">
 					</div>
 					<div class="myp_name">${user.user_name }</div>
 				</div>

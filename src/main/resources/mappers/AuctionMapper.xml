@@ -14,8 +14,11 @@
 	<!-- 경매 상품 전체 목록 -->
 	<select id="alistAll" resultType="AuctionVO">
 		select * from auction 
+		<if test="k!=null or s==5">
+			where
+		</if>
 		<if test="k!=null">
-			where auction_title like concat('%',#{k},'%')
+			auction_title like concat('%',#{k},'%')
 		</if>
 		<if test="s==0">
 			order by auction_date desc
@@ -31,6 +34,9 @@
 		</if>
 		<if test="s==4">
 			order by auction_viewcount desc
+		</if>
+		<if test="s==5">
+			auction_bidok=1
 		</if>
 	</select>
 	

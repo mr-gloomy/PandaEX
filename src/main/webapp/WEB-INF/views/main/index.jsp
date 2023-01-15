@@ -49,78 +49,79 @@
 	overflow: hidden;
 	text-overflow:ellipsis;
 }
+.cl2 {
+    color: #ffffff;
+}
+.hov-btn1:hover {
+    border-color: #28a745;
+    background-color: #28a745;
+    color: #fff;
+}
+
 
 </style>
 </head>
 <body class="animsition">
-<br><br><br>
+<br><br><br><br>
 	<!-- Slider -->
 	<section class="section-slide">
 		<div class="wrap-slick1">
 			<div class="slick1">
-				<div class="item-slick1" style="background-image: url(/resources/images/main.jpg);">
+				<div class="item-slick1" style="background-image: url(/resources/images/mai.jpg);">
 					<div class="container h-full">
 						<div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
 							<div class="layer-slick1 animated visible-false" data-appear="fadeInDown" data-delay="0">
 								<span class="ltext-101 cl2 respon2">
-									안전한 중고거래 플랫폼
+									안전한 중고거래 · 기부경매 플랫폼
 								</span>
 							</div>
-								
 							<div class="layer-slick1 animated visible-false" data-appear="fadeInUp" data-delay="800">
 								<h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1">
 									PANDA
 								</h2>
 							</div>
-								
 							<div class="layer-slick1 animated visible-false" data-appear="zoomIn" data-delay="1600">
-								<a href="product.html" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
+								<a href="" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
 									시작하기
 								</a>
 							</div>
 						</div>
 					</div>
 				</div>
-
 				<div class="item-slick1" style="background-image: url(/resources/images/main4.jpg);">
 					<div class="container h-full">
 						<div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
 							<div class="layer-slick1 animated visible-false" data-appear="rollIn" data-delay="0">
 								<span class="ltext-101 cl2 respon2">
-									기부경매 멘트
+									일상에서 만나는 환경보호와 나눔에 동참해요!
 								</span>
 							</div>
-								
 							<div class="layer-slick1 animated visible-false" data-appear="lightSpeedIn" data-delay="800">
 								<h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1">
-									기부경매 
+									 중고상품 기부하기
 								</h2>
 							</div>
-								
 							<div class="layer-slick1 animated visible-false" data-appear="slideInUp" data-delay="1600">
 								<a href="product.html" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
-									구경가기
+									바로가기
 								</a>
 							</div>
 						</div>
 					</div>
 				</div>
-
 				<div class="item-slick1" style="background-image: url(/resources/images/main3.jpg);">
 					<div class="container h-full">
 						<div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
 							<div class="layer-slick1 animated visible-false" data-appear="rotateInDownLeft" data-delay="0">
 								<span class="ltext-101 cl2 respon2">
-									판다페이 멘트 뭐라고 하지
+									쉽고 빠르고 안전하게 거래하세요!
 								</span>
 							</div>
-								
 							<div class="layer-slick1 animated visible-false" data-appear="rotateInUpRight" data-delay="800">
 								<h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1">
 									PANDAPAY
 								</h2>
 							</div>
-								
 							<div class="layer-slick1 animated visible-false" data-appear="rotateIn" data-delay="1600">
 								<a href="product.html" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
 									가입하기
@@ -155,7 +156,7 @@
 							 style="float: left; width: 300px; height: 350px; margin-top: 10px;">
 							<div class="block2">
 								<div class="block2-pic hov-img0">
-									<img src="${vo.thumbnail }" onerror="this.src='/resources/images/cat.jpg';" style="max-width: 100%; height: auto;">
+									<img src="${vo.thumbnail }" onerror="this.src='/resources/images/cat.jpg';" style="width: 280px; height: 250px;"">
 								</div>
 								<div class="block2-txt flex-w flex-t p-t-14">
 									<div class="block2-txt-child1 flex-col-l ">
@@ -194,7 +195,7 @@
 							 style="width: 300px; height: 350px; margin-top: 10px; float: left;">
 							<div class="block2">
 								<div class="block2-pic hov-img0">
-									<img src="${avo.thumbnail }" onerror="this.src='/resources/images/cat.jpg';" style="max-width: 100%; height: auto;">
+									<img src="${avo.thumbnail }" onerror="this.src='/resources/images/cat.jpg';" style="width: 280px; height: 250px;">
 								</div>
 								<div class="block2-txt flex-w flex-t p-t-14">
 									<div class="block2-txt-child1 flex-col-l ">
