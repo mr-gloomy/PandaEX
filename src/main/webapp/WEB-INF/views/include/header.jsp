@@ -158,8 +158,8 @@
 						<c:if test="${sessionScope.user_id != null }">
 						<div class="shop-dropdown-sup"></div>
 						<div class="shop-dropdown">
-							<div><p class="junggogo" style="margin-bottom: 3px; color:black; opacity : 0.7;">중고상품등록</p></div>
-							<div><p class="gibugo" style="color:black; opacity : 0.7;">기부상품등록</p></div>
+							<div><a href="/goods/regist" class="junggogo" style="margin-bottom: 3px; color:black; opacity : 0.7;">중고상품등록</a></div>
+							<div><a href="/auction/a_regist"  class="gibugo" style="color:black; opacity : 0.7;">기부상품등록</a></div>
 						</div>
 						</c:if>
 					</div>
