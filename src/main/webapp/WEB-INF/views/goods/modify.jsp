@@ -59,7 +59,7 @@
 <!-- 작성자 -->
 <input type="hidden" name="${sessionScope.user_id}" value="user_id">
 <!-- 본문 -->
-<div class="container">
+<div class="container" style="margin-top: 90px;">
 	<div>
 		<form method="post" enctype="multipart/form-data" name="fr">
 			<div class="card">

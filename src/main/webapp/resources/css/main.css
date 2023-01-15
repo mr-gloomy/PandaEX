@@ -1201,6 +1201,7 @@ opacity
 [ Slick1 ]*/
 .wrap-slick1 {
 	position: relative;
+	margin-top: 16px;
 }
 
 .item-slick1 {
@@ -2092,7 +2093,7 @@ input.num-product::-webkit-outer-spin-button, input.num-product::-webkit-inner-s
     TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT
 ==================================================================*/
 .cl0 {
-	color: #999;
+	color: #fff;
 }
 
 .cl1 {
@@ -2652,7 +2653,7 @@ input.num-product::-webkit-outer-spin-button, input.num-product::-webkit-inner-s
 }
 
 .bg3 {
-	background-color: #f8f9fa;
+	background-color: #222;
 }
 
 .bg5 {
@@ -3859,7 +3860,7 @@ input.num-product::-webkit-outer-spin-button, input.num-product::-webkit-inner-s
 	z-index: 100002;
 	position: absolute;
 	top: 10%;
-	left: 39%;
+	left: 30%;
 	height: 500px;
 	width: 700px;
 	padding: 25px;
@@ -5108,7 +5109,7 @@ input[type=number] {
     flex-wrap: wrap;
 }	
 .myp_sell_goods .sell_goods_set{
-    margin: 0px 25px 20px 17px;
+    margin: 0px 15px 20px 15px;
 }	
 .myp_sell_goods .sell_goods_set .set_position img{
 	width: 200px;
@@ -5162,7 +5163,7 @@ background: rgb(0 0 0 / 20%);
 .hide005,
 .hide006,
 .hide007{
-	min-height: 100px;
+	min-height: 500px;
 	display: none;
 }
 .remote1 {
@@ -5372,5 +5373,12 @@ background: rgb(0 0 0 / 20%);
 	color :black;
 	opacity : 1;
 }
+.myinfos,.myaucion,.po-charge,.pocharge,.order-name{
+	font-size: 30px;
+    color: rgb(60 150 240 / 70%);
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
 /* 추가 - 김태홍  손대면 안됍니다!!!!*/
 /*////////////////////////////////////////////////////////*/

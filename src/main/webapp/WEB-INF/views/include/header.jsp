@@ -125,7 +125,6 @@
 					<ul class="main-menu">
 						<li><a href="/goods/list?s=0">중고거래</a></li>
 						<li><a href="/auction/a_list?s=0">기부하기</a></li>
-						<li><a href="/main/board">고객지원</a></li>
 					</ul>
 				</div>
 
@@ -226,7 +225,7 @@
 								<!-- 로그아웃 -->
 								<div class="user-logout">
 									<%-- 						<input type="button" onclick="location.href='/member/logout?exUrl=<%=request.getRequestURI().substring(14,request.getRequestURI().indexOf(".jsp")) %>'; " value="로그아웃"> --%>
-									<input type="button" onclick="doLogout()" value="로그아웃">
+									<input type="button" class="logout" onclick="doLogout()" value="로그아웃">
 									<%-- 							<input type="button" onclick="location.href='/member/logout?exUrl=<%=request.getHeader("referer") %>'; " value="로그아웃"> --%>
 
 								</div>
@@ -234,7 +233,7 @@
 							<c:if test="${kakao!=null}">
 								<div class="user-logout">
 									<input type="button"
-										onclick="location.href='https://kauth.kakao.com/oauth/logout?client_id=d2adbec5b44fdcc0559d1e3ca898739e&logout_redirect_uri=http://testteam.ga/member/logout';"
+										onclick="location.href='https://kauth.kakao.com/oauth/logout?client_id=d2adbec5b44fdcc0559d1e3ca898739e&logout_redirect_uri=http://localhost:8080/member/logout'"
 										value="로그아웃">
 								</div>
 							</c:if>
@@ -409,7 +408,7 @@
 
 
 			<a class="p-2"
-				href="https://kauth.kakao.com/oauth/authorize?client_id=d2adbec5b44fdcc0559d1e3ca898739e&redirect_uri=http://testteam.ga/member/kakaoLogin&response_type=code">
+				href="https://kauth.kakao.com/oauth/authorize?client_id=d2adbec5b44fdcc0559d1e3ca898739e&redirect_uri=http://localhost:8080/member/kakaoLogin&response_type=code">
 
 				<img src="/resources/images/icons/kakao_login_large_wide.png"
 				style="width: 268pt; height: 50pt; margin: auto;"><br>
@@ -509,7 +508,7 @@
 		<div class="modal-findid">
 			<div class="findid-input">
 				<!--전화번호 uq걸기 -->
-				<form action="/member/findId" method="post" id="find">
+				<form action="/member/findId" method="post" id="find" style="    margin-left: 145px;">
 					<input type="text" id="findid-id" placeholder="가입하신 이름을 입력해주세요."
 						autocomplete="off" name="user_name"> <input type="text"
 						id="findid-nick" placeholder="가입하신 전화번호 입력해주세요."
@@ -523,7 +522,7 @@
 		<div class="modal-findpw">
 			<div class="findpw-input">
 
-				<form action="/member/findpw" method="post" id="findpw">
+				<form action="/member/findpw" method="post" id="findpw" style="    margin-left: 145px;">
 					<input type="text" id="findpw-pw" placeholder="사용중인 아이디를 입력해주세요."
 						name="user_id" autocomplete="off"> <input type="email"
 						id="findpw-tel" placeholder="가입하신 이메일을 입력해주세요." name="user_email"
