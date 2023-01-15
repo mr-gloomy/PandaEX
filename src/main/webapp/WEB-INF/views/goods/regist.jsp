@@ -124,10 +124,7 @@ $(document).ready(function(){
 							</div>
 						</div>
 					</div>
-<%-- 					이미지 실제경로 : <%=request.getRealPath("/") %> --%>
-					
-<!-- 					** 현재 프로젝트는 개발자의 컴퓨터에서 로컬로 실행됩니다. 이 프로젝트가 완성되어 서버에 업로드하여 -->
-<!-- 					실행된다면 저 경로가 아닌 새로운 경로를 확인해야합니다. -->
+<%-- 				이미지 실제경로 : <%=request.getRealPath("/") %> --%>
 					
 					
 					<div class="row py-4 border-bottom">
