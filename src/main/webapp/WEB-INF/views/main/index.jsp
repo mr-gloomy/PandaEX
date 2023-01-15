@@ -28,9 +28,6 @@
 	overflow: hidden;
 	text-overflow:ellipsis;
 }
-.p-b-140, .p-tb-140, .p-all-140 {
-    padding-bottom: 100%;
-}
 .stext-105 {
     font-family: ui-monospace;
     font-size: 18px;
@@ -56,7 +53,7 @@
 </style>
 </head>
 <body class="animsition">
-<br><br><br><br>
+<br><br><br>
 	<!-- Slider -->
 	<section class="section-slide">
 		<div class="wrap-slick1">
@@ -236,7 +233,14 @@
 			</c:forEach>
 		</div>	
 		
+		<!-- load page -->
+		<div class="flex-c-m flex-w w-full p-t-45">
+			<a href="#" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
+				더보기
+			</a>
+		</div>
 	</section>
+	
 
 
 

@@ -12,13 +12,10 @@ import org.springframework.stereotype.Repository;
 
 import com.panda.domain.GoodsVO;
 import com.panda.domain.MemberVO;
-import com.panda.paymentvo.CashingListVO;
-import com.panda.paymentvo.CashingPointsVO;
 import com.panda.paymentvo.KakaoPayApproveResponseVO;
 import com.panda.paymentvo.PaymentDto;
 import com.panda.paymentvo.PaymentInsertVO;
 import com.panda.paymentvo.PaymentSuccessVO;
-import com.panda.paymentvo.PurchaseVO;
 import com.panda.paymentvo.SuccessfulBidDto;
 
 @Repository
@@ -115,41 +112,6 @@ public class PaymentDAOImpl implements PaymentDAO{
 	public List<PaymentDto> getUserPay(String user_id) throws Exception {
 		mylog.debug("getUserPay List<PaymentDto>");
 		return sqlSession.selectList(NAMESPACE+".getUserPay", user_id);
-	}
-	@Override
-	public List<PaymentInsertVO> refundList(int memberNo) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public void refund(int paymentNo) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public boolean cashingRequest(CashingPointsVO vo) throws Exception {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	@Override
-	public List<CashingListVO> cashingList(int memberNo, int page, int filter, int sort) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public boolean enoughPoint(int memberNo, int auctionNo) throws Exception {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	@Override
-	public void pointPaying(int memberNo, int auctionNo) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public SuccessfulBidDto bidSelect(int auctionNo) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
 	}
 	
 	
