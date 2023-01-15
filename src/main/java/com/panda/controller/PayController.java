@@ -196,7 +196,7 @@ public class PayController {
 		paymentService.buyer(user_no, goods_no);
 		paymentService.seller(goods_no);
 		
-		return "/main/index";
+		return "redirect:/main/index";
 		
 	}
 

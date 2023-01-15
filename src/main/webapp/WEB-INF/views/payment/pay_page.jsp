@@ -47,13 +47,6 @@
 	<fmt:formatNumber var="totalzz" value="${totalz }" type="number"
 		maxFractionDigits="0" />
 
-	<%--임시변수 나중에 지우고 쓰세요~  --%>
-<%-- 	${gvo.goods_title } --%>
-<%-- 	${gvo.goods_no } --%>
-<%-- 	${gvo.goods_price } <hr> --%>
-<%-- 	${gvo } --%>
-<%-- 	${mvo.user_no } --%>
-	
 	<section class="pay_section">
 		<form action="/payment/buying" method="get" onsubmit="return agree();">
 		<div class="pay_body">
@@ -68,7 +61,7 @@
 			<div class="body-2">
 				<ul class="body-2-1">
 					<li class="body-2-1-1"><img
-						src="/resources/images/icons/myloveuza.jpg" class="item_image"></li>
+						src="${gvo.thumbnail }" class="item_image"></li>
 				</ul>
 				<ul class="body-2-2">
 					<li><i class="body-2-2-1" id="good_price">${gvo.goods_price }원</i></li>
