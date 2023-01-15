@@ -3861,7 +3861,7 @@ input.num-product::-webkit-outer-spin-button, input.num-product::-webkit-inner-s
 	top: 10%;
 	left: 39%;
 	height: 500px;
-	width: 700px;
+	width: 500px;
 	padding: 25px;
 	background: white;
 	border-radius: 25px;
@@ -3887,7 +3887,7 @@ input.num-product::-webkit-outer-spin-button, input.num-product::-webkit-inner-s
 
 .login-modal .modal-body .modal-text .id {
 	background-color: rgb(197 197 197/ 70%);
-    width: 550px;
+    width: 75%
     height: 40px;
     border-radius: 5px;
     padding-left: 15px;
@@ -3900,7 +3900,7 @@ input.num-product::-webkit-outer-spin-button, input.num-product::-webkit-inner-s
 
 .login-modal .modal-body .modal-text .pass {
 	background-color: rgb(197 197 197/ 70%);
-    width: 550px;
+    width: 75%
     height: 40px;
     border-radius: 5px;
     padding-left: 15px;
@@ -4380,14 +4380,25 @@ input.num-product::-webkit-outer-spin-button, input.num-product::-webkit-inner-s
 	margin-bottom: 10px;
 	opacity: 0.6;
 	cursor: text;
+	margin-left: 15%;
+	text-align:center;
 }
 
-#search-id, #search-pw, .login-submit input[type="submit"] {
-	width: 350px;
-	height: 40px;
-	color: white;
-	background: rgba(90, 90, 90, 1);
-	opacity: 0.8;
+#search-id, #search-pw {
+	width: 30%;
+    height: 40px;
+    color: white;
+    background: forestgreen;
+    opacity: 0.8;
+    margin-left: 48%;
+}
+.login-submit input[type="submit"]{
+width: 41%;
+    height: 40px;
+    color: white;
+    background: forestgreen;
+    opacity: 0.8;
+    margin-left: 2%;
 }
 
 #search-id:hover, #search-pw:hover

@@ -226,7 +226,7 @@
 								<!-- 로그아웃 -->
 								<div class="user-logout">
 									<%-- 						<input type="button" onclick="location.href='/member/logout?exUrl=<%=request.getRequestURI().substring(14,request.getRequestURI().indexOf(".jsp")) %>'; " value="로그아웃"> --%>
-									<input type="button" onclick="doLogout()" value="로그아웃">
+									<input type="button" onclick="doLogout()" value="로그아웃" class="logout">
 									<%-- 							<input type="button" onclick="location.href='/member/logout?exUrl=<%=request.getHeader("referer") %>'; " value="로그아웃"> --%>
 
 								</div>
@@ -235,7 +235,7 @@
 								<div class="user-logout">
 									<input type="button"
 										onclick="location.href='https://kauth.kakao.com/oauth/logout?client_id=d2adbec5b44fdcc0559d1e3ca898739e&logout_redirect_uri=http://testteam.ga/member/logout';"
-										value="로그아웃">
+										class="logout" value="로그아웃">
 								</div>
 							</c:if>
 						</c:if>
@@ -544,7 +544,7 @@
         	$("#user-id-join").keyup(function(){
         		if(5>$("#user-id-join").val().length || $("#user-id-join").val().length > 10){
 	        		// 문제 있을때
-	        		$("#userIDdiv").html("<font color='red'> 영어,숫자 5~10글자, 한글,특수문자 사용불가 </font>");
+	        		$("#userIDdiv").html("<font color='red',font size='2px'> 영어,숫자 5~10글자, 한글,특수문자 사용불가 </font>");
         		}else{
 	        		// 문제 없을때(5~10자리 일때)
 	        		// 해당 아이디 정보가,디비에 있는지 체크
@@ -557,15 +557,15 @@
 	        				//alert("성공");
 	        				console.log(data);
 	        				if(data == "OK"){
-	        	        		$("#userIDdiv").html("<font color='blue'> 정상적인 아이디 사용입니다 </font>");
+	        	        		$("#userIDdiv").html("<font color='blue',font size='2px'> 정상적인 아이디 사용입니다 </font>");
 	        				}else{
-	        	        		$("#userIDdiv").html("<font color='green'> 이미 사용중인 아이디입니다 </font>");
+	        	        		$("#userIDdiv").html("<font color='green',font size='2px'> 이미 사용중인 아이디입니다 </font>");
 
 	        				}
 	        			}
 	        		});
 	        		
-	        		$("#userIDdiv").html("<font color='blue'> 정상적인 아이디 사용입니다 </font>");
+	        		$("#userIDdiv").html("<font color='blue',font size='2px'> 정상적인 아이디 사용입니다 </font>");
         		}
         		
         	});
@@ -573,7 +573,7 @@
         	$("#user-nick-join").keyup(function(){
         		if(2>$("#user-nick-join").val().length || $("#user-nick-join").val().length > 10){
 	        		// 문제 있을때
-	        		$("#userNickdiv").html("<font color='red'> 닉네임은 2~10글자 입력.. </font>");
+	        		$("#userNickdiv").html("<font color='red',font size='2px'> 닉네임은 2~10글자 입력.. </font>");
         		}else{
 	        		// 문제 없을때(5~10자리 일때)
 	        		// 해당 아이디 정보가,디비에 있는지 체크
@@ -586,15 +586,15 @@
 	        				//alert("성공");
 	        				console.log(data);
 	        				if(data == "OK"){
-	        	        		$("#userNickdiv").html("<font color='blue'> 정상적인 닉네임 사용입니다 </font>");
+	        	        		$("#userNickdiv").html("<font color='blue',font size='2px'> 정상적인 닉네임 사용입니다 </font>");
 	        				}else{
-	        	        		$("#userNickdiv").html("<font color='green'> 이미 사용중인 닉네임입니다 </font>");
+	        	        		$("#userNickdiv").html("<font color='green',font size='2px'> 이미 사용중인 닉네임입니다 </font>");
 
 	        				}
 	        			}
 	        		});
 	        		
-	        		$("#userNickdiv").html("<font color='blue'> 정상적인 닉네임 사용입니다 </font>");
+	        		$("#userNickdiv").html("<font color='blue',font size='2px'> 정상적인 닉네임 사용입니다 </font>");
         		}
         		
         	});
