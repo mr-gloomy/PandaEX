@@ -6,15 +6,6 @@
 
 <mapper namespace="com.panda.mapper.PaymentMapper">
 	
-	<!-- 해당 월 포인트 총 충전액 select -->
-<!-- 	<select id="monthlyTotalPoints" resultType="int"> -->
-<!-- 		select sum(payment_price) "total_points" from payment where to_char(payment_time, 'MM') = (select to_char(sysdate,'MM')-1 from dual) -->
-<!-- 	</select> -->
-	
-<!-- 	<select id="sequence" resultType="int"> -->
-<!-- 		select payment_no+1 from payment where payment_no = #{paymentNo} -->
-<!-- 	</select> -->
-	
 	<!-- 글번호(goods_no) 글정보 모두 조회 -->
  	<select id="getGoods" resultType="com.panda.domain.GoodsVO">
  		select * from goods where goods_no = #{goods_no}
@@ -29,9 +20,6 @@
 		update user set user_pandapay = user_pandapay + #{paymentPrice} where user_no = #{memberNo}
 	</update>
 	
-<!-- 	<insert id="monthlyCharge"> -->
-		
-<!-- 	</insert> -->
 	
 	<select id="one" resultType="com.panda.paymentvo.PaymentInsertVO">
 		select * from payment where payment_no = #{paymentNo}
@@ -63,15 +51,6 @@
 			 where b.user_id = #{user_id};
 	</select>
 	
-	<!-- 상품번호, 회원번호 사용한 글정보 조회 -->
-<!--    	<select id="getGoods" resultType="Map"> -->
-<!--    		select A.*, B.* -->
-<!--    		  from goods A join user B -->
-<!--    		    on A.user_no = B.user_no -->
-<!--    		 where A.auction_no = #{auction_no} -->
-<!--    		   and B.user_no = #{user_no} -->
-<!--    	</select> -->
-	
 <!--  결제 시 구매자 pandapay 금액 - goods 금액 -->
 	<update id="buyer" >
 		update user
@@ -97,130 +76,4 @@
 	 where user_no = (select x.user_no from (select user_no from goods where goods_no = #{goods_no}) x)
 	;	
 	</update>
-	
-<!-- 	<select id="allList" parameterType="Map" resultType="PaymentInsertVO"> -->
-<!-- 		select * from ( -->
-<!-- 	 		select rownum rn, TMP.*, count(*) over() payment_count from (		 -->
-<!-- 				select A.payment_time, A.payment_price, A.payment_no, -->
-<!-- 			        case when A.payment_time >  (sysdate - 7) and A.payment_status = 1 and B.member_holding_points >= A.payment_price then '취소하기' -->
-<!-- 			            else '' -->
-<!-- 			            end as refund  -->
-<!-- 				from payment A -->
-<!-- 				join member B on A.member_no = B.member_no -->
-<!-- 				where A.member_no = #{memberNo} -->
-<!-- 				<if test="filter == 1"> -->
-<!-- 					<![CDATA[ -->
-<!-- 					and A.payment_time >  (sysdate - 7) and A.payment_status = 1 and B.member_holding_points >= A.payment_price -->
-<!-- 					]]> -->
-<!-- 				</if> -->
-<!-- 				order by  -->
-<!-- 				<if test="sort == 0"> -->
-<!-- 					<![CDATA[				 -->
-<!-- 					A.payment_no desc -->
-<!-- 					]]> -->
-<!-- 				</if> -->
-<!-- 				<if test="sort == 1"> -->
-<!-- 					<![CDATA[				 -->
-<!-- 					A.payment_no asc -->
-<!-- 					]]> -->
-<!-- 				</if> -->
-<!-- 				<if test="sort == 2"> -->
-<!-- 					<![CDATA[				 -->
-<!-- 					A.payment_price desc -->
-<!-- 					]]> -->
-<!-- 				</if> -->
-<!-- 				<if test="sort == 3"> -->
-<!-- 					<![CDATA[				 -->
-<!-- 					A.payment_price asc -->
-<!-- 					]]> -->
-<!-- 				</if> -->
-<!-- 	 		) TMP -->
-<!-- 	 	) where rn between #{begin} and #{end}									 -->
-<!-- 	</select> -->
-
-<!-- 	<select id="refundList" resultType="com.panda.paymentvo.PaymentInsertVO"> -->
-<!-- 		select p.payment_price, p.payment_time, p.payment_no from payment p, user u  -->
-<!--        		where u.user_no = #{memberNo}  -->
-<!--         and  -->
-<!--         	to_char(p.payment_time, 'YYYYMMDD')>sysdate-7 -->
-<!--         and -->
-<!--         	p.payment_status = 1 -->
-<!--         and -->
-<!--         	u.user_pandapay >= p.payment_price -->
-<!-- 	</select> -->
-
-<!-- 	<update id="refund"> -->
-<!-- 		update payment set payment_status = 0 where payment_no=#{paymentNo} -->
-<!-- 	</update> -->
-	
-<!-- 	<update  id="refundMember" parameterType="com.panda.paymentvo.PaymentInsertVO"> -->
-<!-- 		update user set user_pandapay =  user_pandapay - #{paymentPrice} where user_no = #{memberNo} -->
-<!-- 	</update> -->
-	
-<!-- 	<select id="cashingSequence" resultType="int"> -->
-<!-- 		select cashing_points_seq.nextval from dual -->
-<!-- 	</select> -->
-	
-<!-- 	<update id="cashing" parameterType="CashingPointsVO"> -->
-<!-- 		update member set member_holding_points = member_holding_points - #{cashingMoney} where member_no = #{memberNo} -->
-<!-- 	</update> -->
-	
-<!-- 	<insert id="cashingInsert" parameterType="CashingPointsVO"> -->
-<!-- 		insert into cashing_points(cashing_no, member_no, cashing_money, cashing_bank, cashing_account, cashing_type, cashing_request_time) -->
-<!-- 		values (#{cashingNo}, #{memberNo}, #{cashingMoney}, #{cashingBank}, #{cashingAccount}, #{cashingType}, sysdate) -->
-<!-- 	</insert> -->
-	
-<!-- 	<select id="cashingList" parameterType="Map" resultType="CashingListVO"> -->
-<!-- 		select * from ( -->
-<!-- 	 		select rownum rn, TMP.*, count(*) over() cashing_count, -->
-<!-- 	 			sum(case when TMP.cashing_status = '출금완료' then TMP.cashing_money end) over() total_money -->
-<!-- 	 		from (		 -->
-<!-- 				select * -->
-<!-- 				from cashing_points -->
-<!-- 				where member_no = #{memberNo} -->
-<!-- 				<if test="filter == 1"> -->
-<!-- 					<![CDATA[ -->
-<!-- 					and cashing_status = '출금신청' -->
-<!-- 					]]> -->
-<!-- 				</if> -->
-<!-- 				<if test="filter == 2"> -->
-<!-- 					<![CDATA[ -->
-<!-- 					and cashing_status = '출금완료' -->
-<!-- 					]]> -->
-<!-- 				</if> -->
-<!-- 				<if test="filter == 3"> -->
-<!-- 					<![CDATA[ -->
-<!-- 					and cashing_status = '출금처리중' -->
-<!-- 					]]> -->
-<!-- 				</if> -->
-<!-- 				<if test="filter == 4"> -->
-<!-- 					<![CDATA[ -->
-<!-- 					and cashing_status = '출금보류' -->
-<!-- 					]]> -->
-<!-- 				</if>												 -->
-<!-- 				order by  -->
-<!-- 				<if test="sort == 0"> -->
-<!-- 					<![CDATA[				 -->
-<!-- 					cashing_no desc -->
-<!-- 					]]> -->
-<!-- 				</if> -->
-<!-- 				<if test="sort == 1"> -->
-<!-- 					<![CDATA[				 -->
-<!-- 					cashing_no asc -->
-<!-- 					]]> -->
-<!-- 				</if> -->
-<!-- 				<if test="sort == 2"> -->
-<!-- 					<![CDATA[				 -->
-<!-- 					cashing_money desc -->
-<!-- 					]]> -->
-<!-- 				</if> -->
-<!-- 				<if test="sort == 3"> -->
-<!-- 					<![CDATA[				 -->
-<!-- 					cashing_money asc -->
-<!-- 					]]> -->
-<!-- 				</if> -->
-<!-- 	 		) TMP -->
-<!-- 	 	) where rn between #{begin} and #{end} -->
-<!-- 	</select> -->
-	
 </mapper> 

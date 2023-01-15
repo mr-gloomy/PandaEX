@@ -21,8 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.common.util.concurrent.Service;
 import com.panda.domain.GoodsVO;
 import com.panda.domain.MemberVO;
-import com.panda.paymentvo.CashingListVO;
-import com.panda.paymentvo.CashingPointsVO;
 import com.panda.paymentvo.KakaoPayApproveRequestVO;
 import com.panda.paymentvo.KakaoPayApproveResponseVO;
 import com.panda.paymentvo.KakaoPayCancelRequestVO;
@@ -79,15 +77,9 @@ public class PayController {
 		mylog.debug("user_no : " + mvo.getUser_no());
 		int user_no = mvo.getUser_no();
 		//결제 준비(ready) 요청을 진행
-//		int paymentNo = paymentDao.paymentSequence();
 		int paymentNo = (int)((Math.random()+1)*100000000);
-//		int paymentNo = 1213143335;
 		KakaoPayReadyRequestVO requestVO = 
 									KakaoPayReadyRequestVO.builder()
-//												.partner_order_id(String.valueOf(paymentNo))
-//												.partner_user_id(String.valueOf(session.getAttribute("whoLogin")))
-//												.item_name("판다페이 충전")
-//												.total_amount(purchaseVO.getChargeMoney())
 												.partner_order_id(String.valueOf(paymentNo))
 												.partner_user_id(String.valueOf(user_no)) // user_no
 												.item_name("pandaPay")
@@ -95,7 +87,6 @@ public class PayController {
 											.build();
 		mylog.debug(" requestVO : " + requestVO);
 		KakaoPayReadyResponseVO responseVO = kakaoPayService.ready(requestVO);
-		//mylog.debug(" responseVO : " + responseVO);
 		//결제성공 페이지에서 승인요청을 보내기 위해 알아야할 데이터 3개를 세션에 임시로 추가한다
 		//-> 결제가 성공할지 실패할지 취소될지 모르기 때문에 모든 경우에 추가한 데이터를 지워야 한다
 		session.setAttribute("pay", KakaoPayApproveRequestVO.builder()
@@ -186,9 +177,6 @@ public class PayController {
 		mylog.debug("goods_price : " + gvo.getGoods_price());
 		String user_id = (String)session.getAttribute("user_id");
 		MemberVO mvo = paymentService.getUser(user_id);
-//		mylog.debug("user_no : " + mvo.getUser_no());
-//		model.addAttribute("goods_no", goods_no);
-//		model.addAttribute("goods_price", goods_price);
 		model.addAttribute("mvo", mvo);
 		model.addAttribute("gvo", gvo);
 		
@@ -196,13 +184,10 @@ public class PayController {
 	}
 	
 	@GetMapping("/buying")
-	//@ResponseBody
 	public String buying(HttpSession session,@RequestParam int goods_price, 
 			@RequestParam int goods_no ,MemberVO mvo)  throws Exception {
-//								@PathVariable int goods_no @ModelAttribute("goods_no")
 		mylog.debug("/payment/buying(GET) 호출 -> Service 실행 ");
 		String user_id = (String)session.getAttribute("user_id");
-//		mylog.debug("mvo : " + mvo);
 		int user_no = mvo.getUser_no();
 		mylog.debug("user_no : " + user_no);
 		mylog.debug("goods_no : " + goods_no);
@@ -214,21 +199,6 @@ public class PayController {
 		return "/main/index";
 		
 	}
-//	@GetMapping("/paying/{auctionNo}")
-//	public String paying(HttpSession session, @PathVariable int auctionNo) {
-//		mylog.debug("======1=====");
-//		int memberNo = (int)session.getAttribute("whoLogin");
-//		boolean enoughPoint = paymentService.enoughPoint(memberNo, auctionNo);
-//		mylog.debug("======2=====");
-//		if(enoughPoint) {
-//			paymentService.pointPaying(memberNo, auctionNo);
-//			mylog.debug("======3=====");
-//			return "payment/auctionFinish";
-//		}else {
-//			mylog.debug("======4=====");
-//			return"redirect:/payment/paymentReady/"+auctionNo;
-//		}
-//	}
 
 	@GetMapping("/refund/{paymentNo}")
 	public String refund(HttpSession session, @PathVariable int paymentNo) throws Exception {
@@ -243,86 +213,7 @@ public class PayController {
 																					.build();
 		KakaoPayCancelResponseVO responseVO = kakaoPayService.cancel(requestVO);
 		
-//		paymentService.refund(paymentNo);
 		
 		return "redirect:/payment/list";
 	}
-
-//	@PostMapping("/cashingRequest")
-//	public String cashingRequest(HttpSession session,
-//			@ModelAttribute CashingPointsVO cashingPointsVO) {
-//		int memberNo = (int)session.getAttribute("whoLogin");
-//		cashingPointsVO.setMemberNo(memberNo);
-//		boolean success = paymentService.cashingRequest(cashingPointsVO);
-//		if(success) {
-//			return "redirect:cashingSuccess";
-//		}else {
-//			return "redirect:cashingFail";
-//		}
-//	}
-//	@GetMapping("/cashingSuccess")
-//	public String cashingSuccess() {
-//		return "payment/cashingSuccess";
-//	}
-//	@GetMapping("/cashingFail")
-//	public String cashingFail() {
-//		return "payment/cashingFail";
-//	}
-//
-
-//	@GetMapping("/paymentReady/{auctionNo}")
-//	public String paymentReadyAuction(HttpSession session, Model model ,@PathVariable int auctionNo) {
-//		int memberNo = (int)session.getAttribute("whoLogin");
-//		model.addAttribute("memberDto", memberDAO.selectOne(memberNo));
-//		model.addAttribute("bidDto", paymentService.bidSelect(auctionNo));
-//		model.addAttribute("auctionNo", auctionNo);
-//		return "payment/paymentReadyAuction";
-//	}
-//	
-//	@GetMapping("/paymentReady")
-//	public String pay1Purchase(HttpSession httpSession, Model model) {
-//		int memberNo = (int) httpSession.getAttribute("whoLogin");
-//		
-//		model.addAttribute("memberDto", memberDao.selectOne(memberNo));
-//		return "payment/paymentReady";
-//	}
-//	
-//	@GetMapping("/list")
-//	public String payList() {
-//		return "payment/list";
-//	}
-//	
-//	@ResponseBody
-//	@GetMapping("/loadList")
-//	public List<PaymentInsertVO> payList(@RequestParam int page,
-//											@RequestParam Integer filter,
-//											@RequestParam Integer sort,
-//											HttpSession session) {
-//		int memberNo = (int) session.getAttribute("whoLogin");
-//		List<PaymentInsertVO> list = paymentService.allList(memberNo, page, filter, sort);
-//		return list;
-//	}
-//	
-//	
-//	@GetMapping("/cashing")
-//	public String cashing(HttpSession session, Model model) {
-//		model.addAttribute("memberDto", MemberVO.selectOne((int)session.getAttribute("whoLogin")));
-//		return "payment/cashing";
-//	}
-//
-//	@GetMapping("/cashingList")
-//	public String cashingList() {
-//		return "/payment/cashingList";
-//	}
-	
-//	@ResponseBody
-//	@GetMapping("/loadCashingList")
-//	public List<CashingListVO> cashingList(@RequestParam int page,
-//												@RequestParam Integer filter,
-//												@RequestParam Integer sort,
-//												HttpSession session) {
-//		int memberNo = (int) session.getAttribute("whoLogin");
-//		List<CashingListVO> list = paymentService.cashingList(memberNo, page, filter, sort);
-//		return list;
-//	}
 }	

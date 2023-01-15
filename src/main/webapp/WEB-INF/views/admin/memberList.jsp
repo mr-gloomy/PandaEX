@@ -54,7 +54,9 @@
 		</div>
 		
 		<div class="row p-2 mt-2">
-			<!-- 검색창 -->
+		
+		
+			<!-- 검색창(미완성) -->
 			<form action="" method="get">
 				<div class="row justify-content-md-center">
 					<div class="col-2">
@@ -80,56 +82,4 @@
 
 
 
-<script
-	src="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.16/dist/sweetalert2.all.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js"></script>
-
-<script type="text/javascript">
-	$(document).ready(function() {
-
-		$('#theForm').submit(function(event) {
-
-			// 자동 submit을 시키는 것을 막는다.
-			event.preventDefault();
-
-			// 초기값은 false로 셋팅을 한다.
-			var isSubmit = false;
-
-			if ($("input[name=title]").val() == "") {
-				Swal.fire({
-					icon : 'error',
-					title : '제목을 작성하세요!'
-				})
-				isSubmit = false;
-			}
-
-			else if ($("input[name=writer]").val() == "") {
-				Swal.fire({
-					icon : 'error',
-					title : '작성자명을 작성하세요!'
-				})
-				isSubmit = false;
-			}
-
-			else if ($("#id_select").val() == null) {
-				Swal.fire({
-					icon : 'error',
-					title : '카테고리를 선택하세요!'
-				})
-
-				isSubmit = false;
-			}
-
-			else {
-				isSubmit = true;
-			}
-
-			if (isSubmit)
-				this.submit();
-
-		});
-
-	});
-</script>
 <%@ include file="/WEB-INF/views/admin/include/footer.jsp"%>
