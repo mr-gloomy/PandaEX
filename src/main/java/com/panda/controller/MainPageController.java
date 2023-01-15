@@ -18,18 +18,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.panda.domain.AuctionVO;
 import com.panda.domain.BoardVO;
 import com.panda.domain.ChatVO;
 import com.panda.domain.Criteria;
+import com.panda.domain.GoodsVO;
 import com.panda.domain.PageVO;
 import com.panda.service.AuctionService;
 import com.panda.service.BoardService;
 import com.panda.service.ChatService;
 import com.panda.service.GoodsService;
+import com.panda.service.MemberService;
+
+import lombok.NoArgsConstructor;
 
 
 @Controller
 @RequestMapping(value = "/main/*")
+@NoArgsConstructor
 public class MainPageController {
 	
 	@Inject
@@ -40,6 +46,9 @@ public class MainPageController {
 	
 	@Inject
 	AuctionService aService;
+	
+	@Inject
+	private MemberService mService;
 	
 	@Inject
 	private BoardService bService;
@@ -53,10 +62,17 @@ public class MainPageController {
 	
 	// http://localhost:8080/main/index
 	@RequestMapping(value = "/index",method = RequestMethod.GET)
-	public void indexGET(HttpSession session) {
-		mylog.debug(" 메인페이지 GET() 호출123123 ");
+	public void indexGET(HttpSession session, Model model, GoodsVO gvo, AuctionVO avo) throws Exception {
 		
-	}
+		mylog.debug(" /main/index 호출 ");
+		
+		// random List
+		model.addAttribute("GoodsRand", gService.g_randList());
+		model.addAttribute("AuctionRand", gService.a_randList());
+		model.addAttribute("vo",mService.getMember((String)session.getAttribute("user_id")));
+		model.addAttribute("gvo",gService.getGoods2(gvo));
+
+	}	
 	
 	@GetMapping("/chat")
 	public String chat(Model model,HttpSession session,String bang_id, ChatVO vo, HttpServletResponse response) throws Exception{

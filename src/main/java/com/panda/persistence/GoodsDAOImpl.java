@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import com.panda.domain.AuctionVO;
 import com.panda.domain.GoodsVO;
 import com.panda.domain.MemberVO;
 import com.panda.domain.SearchVO;
@@ -112,6 +113,26 @@ public class GoodsDAOImpl implements GoodsDAO{
 
 		return sqlSession.selectList(NAMESPACE+".getUserGoods", memberVO);
 	}
+	// 메인 상품 랜덤 메서드
+	@Override
+	public List<GoodsVO> g_randList() throws Exception {
+		mylog.debug("g_randList() -> sqlSession mapper 호출 ");
+		
+		List<GoodsVO> GoodsRand = sqlSession.selectList(NAMESPACE +".g_rand");
+		
+		return GoodsRand;
+	}
+	
+	// 메인 경매상품 랜덤 메서드
+	@Override
+	public List<AuctionVO> a_randList() throws Exception {
+		mylog.debug("a_randList() -> sqlSession mapper 호출 ");
+		
+		List<AuctionVO> AuctionRand = sqlSession.selectList(NAMESPACE +".a_rand");
+		
+		return AuctionRand;
+	}
+	
 	
 	
 	

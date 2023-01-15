@@ -24,6 +24,10 @@
 .how-active1 {
     color: #28a745;
 }
+.show-search:hover:after, .show-filter:hover:after {
+    background-color: #28a745;
+    border-color: #28a745;
+}
 .row {
     margin-top: 20px;
     margin-bottom: 60px;
@@ -32,9 +36,9 @@
     flex-wrap: wrap;
 }
 .stext-104 { /* 상품명 말줄임표 넣ㄱ*/
-	width: 275px;
+	width: 260px;
 	font-family: sans-serif;
-	font-size: 18px;
+	font-size: 16px;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow:ellipsis;
@@ -42,7 +46,7 @@
 }
 .stext-105 {
     font-family: ui-monospace;
-    font-size: 18px;
+    font-size: 16px;
     line-height: 1.466667;
     letter-spacing: 1px;
 }
@@ -56,26 +60,24 @@
     margin-left: 18px;
 }
 .container {
-    max-width: 1200px;
+    max-width: 80%;
     margin-left: auto;
 }
 .wrap-menu-desktop {
 	top:0px;
 }
-/* .bor4 { */
-/*     border: 1px solid #28a745; */
-/*     border-radius: 3px; */
-/* } */
 .hov-btn3:hover {
     border-color: #28a745;
     background-color: #28a745;
     color: #fff;
 }
+.hov-cl1:hover {
+    color: #28a745;
+}
 </style>
 <script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2c915430ac4edcd6aa694ae234c0de27"></script>
 <script type="text/javascript">
-
 $(function() {
 	
 	$("#sort").val($("#g_sort").val()).prop("selected", true);
@@ -104,7 +106,6 @@ $(function() {
 	});
 	
 });
-
 $(function() {
 	   $('#findlocationH').on('click', function() {
 	   	if($('#us').val()!="") {
@@ -152,10 +153,9 @@ $(function() {
 	   });
 });
 	   
-
 </script>
 </head>
-<body>
+<body class="animsition">
 <!-- 위치 -->
 <input type="hidden" value="${param.s}" name="g_sort" id="g_sort">
 <input type="hidden" value="${user_id}" id="us">
@@ -236,50 +236,55 @@ $(function() {
 	<c:set var="col" value="4" />
 	<c:set var="row" value="${ Math.ceil(size/col) }" />
 	<c:set var="num" value="0" />
-	result : ${result }
-	request : ${requestScope.result }
-	session : ${sessionScope.result }
-	param : ${param.result } 
-	
 	<div class="row isotope-grid">	
 		<c:forEach begin="1" end="${row }" step="1">
 			<c:forEach var="i" begin="1" end="${col }" step="1">
 				<c:if test="${num < size}">
 					<c:set var="vo" value="${GoodsList[num]}" />
-					<div class="card rounded border-0 mb-4 px-2 isotope-item ${vo.goods_category}" style="width: 300px; height: 350px; margin-top: 10px;">
-						<img src="${vo.thumbnail }" class="rounded" alt="사진없음" style="width: 280px; height: 250px; ">
-						<div class="block2-txt flex-w flex-t p-t-14">
-							<div class="block2-txt-child1 flex-col-l ">
-								<a href="/goods/read?goods_no=${vo.goods_no}&user_no=${vo.user_no}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-									<c:choose>
-									 	<c:when test="${vo.goods_trade == '판매중'}">			
-											<button type="button" class="btn btn-outline-success py-1 px-1">${vo.goods_trade}</button>&nbsp; <b>${vo.goods_title }</b>
-										</c:when>
-									 	<c:when test="${vo.goods_trade == '예약중'}">			
-											<button type="button" class="btn btn-outline-warning py-1 px-1">${vo.goods_trade}</button>&nbsp; <b>${vo.goods_title }</b>
-										</c:when>
-									 	<c:otherwise>			
-											<button type="button" class="btn btn-outline-secondary py-1 px-1">${vo.goods_trade}</button>&nbsp; <b>${vo.goods_title }</b>
-										</c:otherwise>
-									</c:choose>
-								</a>
-								<span class="stext-104 cl3 text-success">
-									<fmt:formatNumber value="${vo.goods_price }" pattern="#,###"/> 원
-								</span>
+					<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item ${vo.goods_category}"  
+						 style="float: left; width: 300px; height: 350px; margin-top: 10px;">
+						<div class="block2">
+							<div class="block2-pic hov-img0">
+								<img src="${vo.thumbnail }" onerror="this.src='/resources/images/cat.jpg';" style="max-width: 100%; height: auto; ">
 							</div>
-							<div class="block2-txt-child2 flex-r p-t-3" id="${vo.goods_no}">
-								<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-									<img class="icon-heart1 dis-block trans-04" src="/resources/images/icons/icon-heart-01.png" alt="ICON">
-									<img class="icon-heart2 dis-block trans-04 ab-t-l" src="/resources/images/icons/icon-heart-02.png" alt="ICON">
-								</a>
+							<div class="block2-txt flex-w flex-t p-t-14">
+								<div class="block2-txt-child1 flex-col-l ">
+									<a href="/goods/read?goods_no=${vo.goods_no}&user_no=${vo.user_no}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+										<c:choose>
+										 	<c:when test="${vo.goods_trade == '판매중'}">			
+												<button type="button" class="btn btn-outline-success py-1 px-1">판매중</button>
+											</c:when>
+										 	<c:when test="${vo.goods_trade == '예약중'}">			
+												<button type="button" class="btn btn-outline-warning py-1 px-1">예약중</button> 
+											</c:when>
+										 	<c:otherwise>			
+												<button type="button" class="btn btn-outline-secondary py-1 px-1">판매완료</button>
+											</c:otherwise>
+										</c:choose>
+										<b>${vo.goods_title }</b>
+									</a>
+									<span class="stext-105 cl3" style="font-size:17px; color:darkslategray;">
+										<span style="color:#28a745;"><fmt:formatNumber value="${vo.goods_price }"/></span>원
+									</span>
+									<div>
+										<div style="float: left;"> ${vo.user_area } ${vo.user_addr} </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<div style="float: right;">조회 ${vo.viewcount } </div> 
+									</div>
+								</div>
+								<div class="block2-txt-child2 flex-r p-t-3" id="${vo.goods_no}">
+									<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+										<img class="icon-heart1 dis-block trans-04" src="/resources/images/icons/icon-heart-01.png" alt="ICON">
+										<img class="icon-heart2 dis-block trans-04 ab-t-l" src="/resources/images/icons/icon-heart-02.png" alt="ICON">
+									</a>
+								</div>
 							</div>
 						</div>
-					  </div>
+					</div>
 					<c:set var="num" value="${num+1 }" />
 				</c:if>
 			</c:forEach>
 		</c:forEach>
-	</div>
+	</div>	
 </div>
 <!-- 상품목록 -->
  <script type="text/javascript">
