@@ -156,7 +156,7 @@
 							 style="float: left; width: 300px; height: 350px; margin-top: 10px;">
 							<div class="block2">
 								<div class="block2-pic hov-img0">
-									<img src="${vo.thumbnail }" onerror="this.src='/resources/images/cat.jpg';" style="max-width: 100%; height: auto;">
+									<img src="${vo.thumbnail }" onerror="this.src='/resources/images/cat.jpg';" style="width: 280px; height: 250px;"">
 								</div>
 								<div class="block2-txt flex-w flex-t p-t-14">
 									<div class="block2-txt-child1 flex-col-l ">
@@ -195,7 +195,7 @@
 							 style="width: 300px; height: 350px; margin-top: 10px; float: left;">
 							<div class="block2">
 								<div class="block2-pic hov-img0">
-									<img src="${avo.thumbnail }" onerror="this.src='/resources/images/cat.jpg';" style="max-width: 100%; height: auto;">
+									<img src="${avo.thumbnail }" onerror="this.src='/resources/images/cat.jpg';" style="width: 280px; height: 250px;">
 								</div>
 								<div class="block2-txt flex-w flex-t p-t-14">
 									<div class="block2-txt-child1 flex-col-l ">

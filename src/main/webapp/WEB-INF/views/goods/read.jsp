@@ -190,7 +190,7 @@ $(function() {
 					<div class="row ml-3 pb-3 border-bottom">
 						<div class="col-2">
 							<img id="profile" class="rounded-circle"
-								src="/resources/image/default_attachment.jpg">
+								src="/resources/images/member.jpg">
 						</div>
 						<div class="col ml-4">
 							<h6 class="row fw-bold mb-2">${vo.user_nick }</h6>
