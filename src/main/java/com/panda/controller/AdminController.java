@@ -104,6 +104,8 @@ public class AdminController {
 		}
 		PageVO pvo = new PageVO();
 		
+		
+		// selectbox 속성 가져와서 페이지내 글 갯수 조절
 		if(cri.getPerPageNum() != 10 && cri.getPerPageNum() != 0) {
 			
 			
