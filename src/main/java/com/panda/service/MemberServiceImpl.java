@@ -61,7 +61,7 @@ public class MemberServiceImpl implements MemberService {
 	                "<h1>PANDA 메일인증</h1>" +
 	                "<br>PANDA에 오신것을 환영합니다!" +
 	                "<br>아래 [이메일 인증 확인]을 눌러주세요." +
-	                "<br><a href='http://localhost:8080/member/registerEmail?email=" + vo.getUser_email() +
+	                "<br><a href='http://testteam.ga/member/registerEmail?email=" + vo.getUser_email() +
 	                "&mail_key=" + mail_key +
 	                "' target='_blank'>이메일 인증 확인</a>");
 	        sendMail.setFrom("leweeewel@gmail.com", "Panda 판다");
@@ -120,7 +120,8 @@ public class MemberServiceImpl implements MemberService {
 			sb.append("grant_type=authorization_code");
         
 			sb.append("&client_id=d2adbec5b44fdcc0559d1e3ca898739e"); //본인이 발급받은 key
-			sb.append("&redirect_uri=http://localhost:8080/member/kakaoLogin"); // 본인이 설정한 주소
+			sb.append("&redirect_uri=http://testteam.ga/member/kakaoLogin"); // 본인이 설정한 주소
+
             
 			sb.append("&code=" + authorize_code);
 			bw.write(sb.toString());
@@ -299,7 +300,7 @@ public class MemberServiceImpl implements MemberService {
 			                "<h1>PANDA 비밀번호 찾기</h1><br>" + vo.getUser_pw() + 
 			                		
 			                "<br> 비밀번호 바꾸러 가기! click! " +
-			                "<br><a href='http://localhost:8080/member/pwUpdate?user_no=" + vo.getUser_no() + 
+			                "<br><a href='http://testteam.ga/member/pwUpdate?user_no=" + vo.getUser_no() + 
 			                "' target='_blank'>마이페이지에서 변경해주세요....</a>");
 			        sendMail.setFrom("leweeewel@gmail.com", "Panda 판다");
 			        sendMail.setTo(vo.getUser_email());

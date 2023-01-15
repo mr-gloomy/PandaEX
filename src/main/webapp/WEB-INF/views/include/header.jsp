@@ -233,7 +233,7 @@
 							<c:if test="${kakao!=null}">
 								<div class="user-logout">
 									<input type="button"
-										onclick="location.href='https://kauth.kakao.com/oauth/logout?client_id=d2adbec5b44fdcc0559d1e3ca898739e&logout_redirect_uri=http://localhost:8080/member/logout'"
+										onclick="location.href='https://kauth.kakao.com/oauth/logout?client_id=d2adbec5b44fdcc0559d1e3ca898739e&logout_redirect_uri=http://testteam.ga/member/logout';"
 										value="로그아웃">
 								</div>
 							</c:if>
@@ -408,7 +408,7 @@
 
 
 			<a class="p-2"
-				href="https://kauth.kakao.com/oauth/authorize?client_id=d2adbec5b44fdcc0559d1e3ca898739e&redirect_uri=http://localhost:8080/member/kakaoLogin&response_type=code">
+				href="https://kauth.kakao.com/oauth/authorize?client_id=d2adbec5b44fdcc0559d1e3ca898739e&redirect_uri=http://testteam.ga/member/kakaoLogin&response_type=code">
 
 				<img src="/resources/images/icons/kakao_login_large_wide.png"
 				style="width: 268pt; height: 50pt; margin: auto;"><br>

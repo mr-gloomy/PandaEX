@@ -9,15 +9,26 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 		<!-- 디비연결정보 - DataSource -->
-	<bean id="dataSource"
+	<!--  <bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<!-- 객체에 있는 set() 메서드 -->
 		<property name="driverClassName"
 			value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
 		<property name="url"
 			value="jdbc:log4jdbc:mysql://db.itwillbs.dev:3306/class7_220721_team1" />
 		<property name="username" value="class7_220721_team1" />
 		<property name="password" value="1234" />
+ 	</bean>   -->
+	<!-- 디비연결정보 - DataSource -->	
+	
+		<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<!-- 객체에 있는 set() 메서드 -->
+		<property name="driverClassName"
+			value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
+		<property name="url"
+			value="jdbc:mysql://localhost/itwillbs2" />
+		<property name="username" value="itwillbs2" />
+		<property name="password" value="itwillbs8030909" />
 	</bean>
 	<!-- 디비연결정보 - DataSource -->	
 	
