@@ -64,23 +64,22 @@ $(function() {
 					$('#divChatData')
 							.append(
 									"<div class='direct-chat-msg'><div class='direct-chat-info clearfix'><span class='direct-chat-name pull-left'>"
-											+ item.send_id
-											+ "</span><span class='direct-chat-timestamp pull-right'>"
-											+ time_hour
+											+ item.send_id 
+											+ "</span><span class='direct-chat-timestamp' style='float: left;'>&nbsp;&nbsp;"
+											+ msg_time.getFullYear()+"-"+(msg_time.getMonth()+1)+"-"+msg_time.getDate()+" "+time_hour
 											+ " : "
 											+ msg_time.getMinutes()
-											+ "</span></div><div class='direct-chat-text'>"
+											+ "</span></div><div class='direct-chat-text' style='margin-left: 0px; margin-right: 40%'>"
 											+ item.message + "</div></div>");
 				} else {
 					$('#divChatData')
 							.append(
-									"<div class='direct-chat-msg right'><div class='direct-chat-info clearfix'><span class='direct-chat-name pull-right'>"
-											+ item.send_id
-											+ "</span><span class='direct-chat-timestamp pull-left'>"
-											+ time_hour
+									"<div class='direct-chat-msg right'><div class='direct-chat-info clearfix'>"
+											+ "<span class='direct-chat-timestamp' style='float: right;'>"
+											+ msg_time.getFullYear()+"-"+(msg_time.getMonth()+1)+"-"+msg_time.getDate()+" "+time_hour
 											+ " : "
 											+ msg_time.getMinutes()
-											+ "</span></div><img class='direct-chat-img' src='../dist/img/user3-128x128.jpg' alt='Message User Image'><div class='direct-chat-text'>"
+											+ "</span></div><div class='direct-chat-text' style='margin-right:0px; margin-left:40%;'>"
 											+ item.message + "</div></div>");
 				}
 			});
@@ -102,13 +101,13 @@ $(function() {
 						$('#divChatData')
 								.append(
 										"<div class='direct-chat-msg'><div class='direct-chat-info clearfix'><span class='direct-chat-name pull-left'>"
-												+ item.send_id
-												+ "</span><span class='direct-chat-timestamp pull-right'>"
-												+ time_hour
-												+ " : "
-												+ msg_time.getMinutes()
-												+ "</span></div><div class='direct-chat-text'>"
-												+ item.message + "</div></div>");
+										+ item.send_id 
+										+ "</span><span class='direct-chat-timestamp' style='float: left;'>&nbsp;&nbsp;"
+										+ msg_time.getFullYear()+"-"+(msg_time.getMonth()+1)+"-"+msg_time.getDate()+" "+time_hour
+										+ " : "
+										+ msg_time.getMinutes()
+										+ "</span></div><div class='direct-chat-text' style='margin-left: 0px; margin-right: 40%'>"
+										+ item.message + "</div></div>");
 				});
 			}
 		});
@@ -137,14 +136,13 @@ $(function() {
 			success:function(data) {
 				$('#divChatData')
 				.append(
-						"<div class='direct-chat-msg right'><div class='direct-chat-info clearfix'><span class='direct-chat-name pull-right'>"
-								+ '${user_id}'
-								+ "</span><span class='direct-chat-timestamp pull-left'>"
-								+ time_hour
-								+ " : "
-								+ msg_time.getMinutes()
-								+ "</span></div><img class='direct-chat-img' src='../dist/img/user3-128x128.jpg' alt='Message User Image'><div class='direct-chat-text'>"
-								+ msg + "</div></div>");
+						"<div class='direct-chat-msg right'><div class='direct-chat-info clearfix'>"
+						+ "<span class='direct-chat-timestamp' style='float: right;'>"
+						+ msg_time.getFullYear()+"-"+(msg_time.getMonth()+1)+"-"+msg_time.getDate()+" "+time_hour
+						+ " : "
+						+ msg_time.getMinutes()
+						+ "</span></div><div class='direct-chat-text' style='margin-right:0px; margin-left:40%;'>"
+						+ msg + "</div></div>");
 			}
 		});
 		$('#message').val('');
@@ -169,22 +167,6 @@ $(function() {
 	<div class="box box-success direct-chat direct-chat-success">
 		<div class="box-header with-border">
 			<h3 class="box-title">Panda Chat</h3>
-			<div class="box-tools pull-right">
-				<span data-toggle="tooltip" title="" class="badge bg-green"
-					data-original-title="3 New Messages">3</span>
-				<button type="button" class="btn btn-box-tool"
-					data-widget="collapse">
-					<i class="fa fa-minus"></i>
-				</button>
-				<button type="button" class="btn btn-box-tool" data-toggle="tooltip"
-					title="" data-widget="chat-pane-toggle"
-					data-original-title="Contacts">
-					<i class="fa fa-comments"></i>
-				</button>
-				<button type="button" class="btn btn-box-tool" data-widget="remove">
-					<i class="fa fa-times"></i>
-				</button>
-			</div>
 		</div>
 
 
