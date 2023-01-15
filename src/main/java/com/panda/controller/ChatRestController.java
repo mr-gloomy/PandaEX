@@ -65,14 +65,13 @@ public class ChatRestController {
 		List<ChatVO> cVO = null;
 		try {
 			 cVO = service.getNewMsg(vo);
-			 if (cVO!=null) {
-					service.sendUp(bang_id);
+			 if (!(cVO.isEmpty())) {
+				service.sendUp(bang_id);
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		mylog.info("cVO: "+cVO.toString());
 		return cVO;
 	}
 }
