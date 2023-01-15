@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.panda.domain.GoodsVO;
+import com.panda.domain.MemberVO;
 import com.panda.domain.SearchVO;
 import com.panda.persistence.GoodsDAO;
 
@@ -92,6 +93,13 @@ public class GoodsServiceImpl  implements GoodsService {
 	public Integer updateLike(GoodsVO vo) throws Exception {
 
 		return dao.updateLike(vo);
+	}
+	
+	// 마이페이지 상품정보 
+	@Override
+	public List<GoodsVO> getUserGoods(MemberVO memberVO) {
+		
+		return dao.userGoods(memberVO);
 	}
 	
 	

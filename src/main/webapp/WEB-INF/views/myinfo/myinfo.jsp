@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -122,78 +123,18 @@
 			<div class="myp_sell_goods">
 				<div class="sell_goods_set">
 					<div class="set_position">
-						<img src="/resources/images/icons/myloveuza.jpg">
-						<p class="sellgoodsname">상&nbsp;&nbsp;품&nbsp;&nbsp;명 : 아이패드</p>
-						<p>상품가격 : 500,000원
+						<c:forEach var="gvo" items="${goodsList }">
+						<img src="${vo.thumbnail }">
+						<p class="sellgoodsname">${gvo.goods_title }</p>
+						<p>상품가격 : ${gvo.goods_price }원
 						<p>
-							<input type="button" value="수정" class="goods_modify"> <input
-								type="button" value="삭제" class="goods_remove">
+							<input type="button" value="수정" class="goods_modify" onclick="location.href='/goods/modify?goods_no=${gvo.goods_no}';"> 
+							<input type="button" value="삭제" class="goods_remove">
+								
+						</c:forEach>	
 					</div>
 				</div>
 
-				<!-- 더미 -->
-				<div class="sell_goods_set">
-					<div class="set_position">
-						<img src="/resources/images/icons/myloveuza.jpg">
-						<p class="sellgoodsname">상&nbsp;&nbsp;품&nbsp;&nbsp;명 : 아이패드</p>
-						<p>상품가격 : 500,000원
-						<p>
-							<input type="button" value="수정" class="goods_modify"> <input
-								type="button" value="삭제" class="goods_remove">
-					</div>
-				</div>
-				<div class="sell_goods_set">
-					<div class="set_position">
-						<img src="/resources/images/icons/myloveuza.jpg">
-						<p class="sellgoodsname">상&nbsp;&nbsp;품&nbsp;&nbsp;명 : 아이패드</p>
-						<p>상품가격 : 500,000원
-						<p>
-							<input type="button" value="수정" class="goods_modify"> <input
-								type="button" value="삭제" class="goods_remove">
-					</div>
-				</div>
-				<div class="sell_goods_set">
-					<div class="set_position">
-						<img src="/resources/images/icons/myloveuza.jpg">
-						<p class="sellgoodsname">상&nbsp;&nbsp;품&nbsp;&nbsp;명 : 아이패드</p>
-						<p>상품가격 : 500,000원
-						<p>
-							<input type="button" value="수정" class="goods_modify"> <input
-								type="button" value="삭제" class="goods_remove">
-					</div>
-				</div>
-				<div class="sell_goods_set">
-					<div class="set_position">
-						<img src="/resources/images/icons/myloveuza.jpg">
-						<p class="sellgoodsname">상&nbsp;&nbsp;품&nbsp;&nbsp;명 : 아이패드</p>
-						<p>상품가격 : 500,000원
-						<p>
-							<input type="button" value="수정" class="goods_modify"> <input
-								type="button" value="삭제" class="goods_remove">
-					</div>
-				</div>
-				<div class="sell_goods_set">
-					<div class="set_position">
-						<img src="/resources/images/icons/myloveuza.jpg">
-						<p class="sellgoodsname">상&nbsp;&nbsp;품&nbsp;&nbsp;명 : 아이패드</p>
-						<p>상품가격 : 500,000원
-						<p>
-							<input type="button" value="수정" class="goods_modify"> <input
-								type="button" value="삭제" class="goods_remove">
-					</div>
-				</div>
-
-				<div class="sell_goods_set">
-					<div class="set_position">
-						<img src="/resources/images/icons/myloveuza.jpg">
-						<p class="sellgoodsname">상&nbsp;&nbsp;품&nbsp;&nbsp;명 : 아이패드</p>
-						<p>상품가격 : 500,000원
-						<p>
-							<input type="button" value="수정" class="goods_modify"> <input
-								type="button" value="삭제" class="goods_remove">
-					</div>
-				</div>
-				<!-- 더미 -->
 			</div>
 			<div class="myp_shop_review"></div>
 			<div class="myp_zzim"></div>

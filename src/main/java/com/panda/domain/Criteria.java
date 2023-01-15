@@ -5,7 +5,7 @@ public class Criteria {
 	
 	private int page; // 시작페이지 정보
 	private int perPageNum;	// 페이지 개수
-	private String p_category = "";
+	private String p_category = ""; // 페이징+카테고리 정
 	
 	// 페이징처리 정보가 없을경우 - 기본값[기본생성자 =>> 전달인자가 없으면 기본값으로 세팅됨.]
 	public Criteria() {

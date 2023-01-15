@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.panda.domain.GoodsVO;
+import com.panda.domain.MemberVO;
 import com.panda.domain.SearchVO;
 
 @Repository
@@ -104,6 +105,12 @@ public class GoodsDAOImpl implements GoodsDAO{
 		mylog.debug("updateLike(vo) 호출");
 		
 		return sqlSession.update(NAMESPACE + ".updateLike", vo);
+	}
+
+	@Override
+	public List<GoodsVO> userGoods(MemberVO memberVO) {
+
+		return sqlSession.selectList(NAMESPACE+".getUserGoods", memberVO);
 	}
 	
 	

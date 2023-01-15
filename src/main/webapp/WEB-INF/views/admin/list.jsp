@@ -21,22 +21,9 @@
 		<div class="flex-w flex-l-m filter-tope-group m-tb-10">
 		
 		
-			<form role="form" >
 			
-				<button
-					class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1"
-					name="p_category" value="all" id="btnA">전체</button>
-	
-				<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
-					name="p_category" value="notice" id="btnN">공지사항</button>
-	
-				<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
-					 name="p_category" value="event" id="btnE">이벤트</button>
-	
-				<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
-					name="p_category" value="donate" id="btnD">기부문의</button>
 				
-			</form>
+				
 
 
 		</div>
@@ -59,22 +46,43 @@
 				<div class="row">
 					<div class="col-sm-6">
 						<div class="dataTables_length" id="example1_length">
+							<form role="form">
+							<button
+								class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1"
+								name="p_category" value="all" id="btnA">전체</button>
+				
+							<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
+								name="p_category" value="notice" id="btnN">공지사항</button>
+				
+							<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
+								 name="p_category" value="event" id="btnE">이벤트</button>
+				
+							<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5"
+								name="p_category" value="donate" id="btnD">기부문의</button>
+							<br>
+							
+							
+							
 							<label> 글 표시갯수
-							<select name="example1_length" id="perpageNum"
-								aria-controls="example1" class="form-control input-sm"
-								onchange="chageLangSelect()">
-								<option value="10">10</option>
-								<option value="25">25</option>
-								<option value="50">50</option>
-								<option value="100">100</option></select> 
+							<select name="perPageNum" id="perpageNum"
+								aria-controls="example1" class="form-control input-sm">
+								<option value="10" <c:if test="${pvo.cri.perPageNum == 10 }">selected="selected"</c:if>>10</option>
+								<option value="25" <c:if test="${pvo.cri.perPageNum == 25 }">selected="selected"</c:if>>25</option>
+								<option value="50" <c:if test="${pvo.cri.perPageNum == 50 }">selected="selected"</c:if>>50</option>
+								<option value="100" <c:if test="${pvo.cri.perPageNum == 100 }">selected="selected"</c:if>>100</option></select> 
 							</label>
+							
+							
+							
+							
+							</form>
+							
 						</div>
 					</div>
 					<div class="col-sm-6">
 						<div id="example1_filter" class="dataTables_filter">
 
 							<!-- 검색 -->
-
 							<label>Search: <input type="search"
 								class="form-control input-sm" placeholder=""
 								aria-controls="example1"></label>
@@ -183,7 +191,7 @@
 
 					 <li
                 <c:out value="${i==pvo.cri.page? 'class=active':''  }" /> 
-                ><a href="/admin/list?page=${i }&p_category=${pvo.cri.p_category}">${i }</a></li>
+                ><a href="/admin/list?page=${i }&p_category=${pvo.cri.p_category}&perPageNum=${pvo.cri.perPageNum}">${i }</a></li>
 
 				</c:forEach>
 
@@ -240,37 +248,23 @@
 	$(document).ready(function(){
 		
 		var formObj=$("form[role='form']");
+		var perPageNum = $("#perpageNum option:selected").val();
+		console.log(perPageNum);
 		
-			$("#btnA").on('click', function() {
+			$("button[name=p_category]").on('click', function() {
 				console.log(formObj);
-				formObj.attr("action","/admin/list");			
-				formObj.attr("method","get");
-				formObj.submit();
-				
-			});
-			$("#btnN").on('click', function() {
-				console.log(formObj);
-				formObj.attr("action","/admin/list");			
-				formObj.attr("method","get");
-				formObj.submit();
-				
-			});
-			$("#btnE").on('click', function() {
-				console.log(formObj);
-				formObj.attr("action","/admin/list");			
-				formObj.attr("method","get");
-				formObj.submit();
-				
-			});
-			$("#btnD").on('click', function() {
-				console.log(formObj);
-				formObj.attr("action","/admin/list");			
+				formObj.attr("action","/admin/list?perPageNum="+perPageNum);			
 				formObj.attr("method","get");
 				formObj.submit();
 				
 			});
 			
-			
+			$("#perpageNum").change(function(){
+				
+				formObj.attr("action","/admin/list?perPageNum="+perPageNum);			
+				formObj.attr("method","get");
+				formObj.submit();
+			});
 			
 			
 			

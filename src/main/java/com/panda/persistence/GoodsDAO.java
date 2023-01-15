@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.panda.domain.GoodsVO;
+import com.panda.domain.MemberVO;
 import com.panda.domain.SearchVO;
 
 public interface GoodsDAO {
@@ -34,6 +35,9 @@ public interface GoodsDAO {
 	
 	// 상품 찜
 	public Integer updateLike(GoodsVO vo) throws Exception;
+	
+	// 마이페이지 상품정보
+	public List<GoodsVO> userGoods(MemberVO memberVO);
 	
 	
 }

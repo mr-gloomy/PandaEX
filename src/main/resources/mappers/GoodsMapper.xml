@@ -101,5 +101,22 @@
 	where goods_no = #{goods_no}
 	</update>	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- 마이페이지 상품정보 가져오 -->
+	<select id="getUserGoods" resultType="GoodsVO">
+		select * from goods 
+		where user_no = #{user_no}
+	</select>
+	
+	
 
 </mapper>

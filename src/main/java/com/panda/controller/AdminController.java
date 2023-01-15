@@ -90,7 +90,6 @@ public class AdminController {
 	@RequestMapping(value = "/list",method = RequestMethod.GET)
 	public String listGET(Criteria cri,Model model)throws Exception {
 		
-		
 		mylog.debug(" listGET() 호출 ");
 		mylog.debug("@@@@@@ Cri : "+cri.toString());
 		
@@ -103,19 +102,30 @@ public class AdminController {
 			return resultURI;
 			
 		}
+		PageVO pvo = new PageVO();
 		
-		
-		
-//		mylog.debug(" 글쓰기 결과 (result) : "+result);
+		if(cri.getPerPageNum() != 10 && cri.getPerPageNum() != 0) {
+			
+			
+			session.setAttribute("perPageNum", cri.getPerPageNum());
+			
+		 	cri.setPerPageNum((int)session.getAttribute("perPageNum"));
+		 	pvo.setCri(cri);
+		}else {
+			
+			session.removeAttribute("perPageNum");
+			
+			cri.setPerPageNum(10);
+			pvo.setCri(cri);
+		}
 		
 		session.setAttribute("updateCheck", true);
 		
 		List<BoardVO> boardList =  service.getBoardAll(cri);
 		
 		// 페이징처리 하단부 정보 준비 -> view페이지 전달
-		PageVO pvo = new PageVO();
 		
-		pvo.setCri(cri);
+		
 		
 		
 		mylog.debug(" totalCnt : "+service.totalCnt());
