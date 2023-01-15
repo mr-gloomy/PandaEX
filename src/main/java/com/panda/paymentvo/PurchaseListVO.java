@@ -7,7 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
+@Data@AllArgsConstructor@NoArgsConstructor@Builder
 public class PurchaseListVO {
 	private List<PurchaseVO> purchase;
 }

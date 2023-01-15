@@ -18,7 +18,6 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.panda.controller.PayController;
-import com.panda.openbanking.domain.ResponseTokenVO;
 import com.panda.paymentvo.KakaoPayApproveRequestVO;
 import com.panda.paymentvo.KakaoPayApproveResponseVO;
 import com.panda.paymentvo.KakaoPayCancelRequestVO;

@@ -5,12 +5,9 @@ import java.util.Map;
 
 import com.panda.domain.GoodsVO;
 import com.panda.domain.MemberVO;
-import com.panda.paymentvo.CashingListVO;
-import com.panda.paymentvo.CashingPointsVO;
 import com.panda.paymentvo.KakaoPayApproveResponseVO;
 import com.panda.paymentvo.PaymentInsertVO;
 import com.panda.paymentvo.PaymentSuccessVO;
-import com.panda.paymentvo.PurchaseVO;
 import com.panda.paymentvo.SuccessfulBidDto;
 
 public interface PaymentService {
@@ -26,12 +23,4 @@ public interface PaymentService {
 	public void seller(int goods_no) throws Exception;
 	
 	public GoodsVO getGoods(Integer goods_no) throws Exception;
-//	List<PaymentInsertVO> allList(Map<String, Object> info) throws Exception;
-//	List<PaymentInsertVO> refundList(int memberNo) throws Exception;
-//	void refund(int paymentNo) throws Exception;
-//	boolean cashingRequest(CashingPointsVO vo) throws Exception;
-//	List<CashingListVO> cashingList(int memberNo, int page, int filter, int sort) throws Exception;
-//	boolean enoughPoint(int memberNo, int auctionNo) throws Exception;
-//	void pointPaying(int memberNo, int auctionNo) throws Exception;
-//	SuccessfulBidDto bidSelect(int auctionNo) throws Exception;
 }

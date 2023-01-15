@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data @NoArgsConstructor @AllArgsConstructor @Builder
+@Data 
 public class KakaoPayOrderResponseVO {
 	private String tid;//결제 고유 번호
 	private String cid;//가맹점 코드
@@ -23,7 +23,6 @@ public class KakaoPayOrderResponseVO {
 	private Date created_at;//결제 준비 요청 시각
 	private Date approved_at;//결제 승인 시각
 	private Date canceled_at;//결제 취소 시각
-	private SelectedCardInfoVO selected_card_info;//결제 카드 정보
-	private PaymentActionDetailsVO[] payment_action_details;//결제, 취소 상세내역
+//	private SelectedCardInfoVO selected_card_info;//결제 카드 정보
 //	private List<PaymentActionDetailsVO> payment_action_details;
 }
