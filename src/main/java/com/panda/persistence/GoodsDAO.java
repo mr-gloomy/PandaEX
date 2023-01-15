@@ -1,8 +1,10 @@
 package com.panda.persistence;
 
 import java.util.List;
+
 import java.util.Map;
 
+import com.panda.domain.AuctionVO;
 import com.panda.domain.GoodsVO;
 import com.panda.domain.SearchVO;
 
@@ -34,6 +36,12 @@ public interface GoodsDAO {
 	
 	// 상품 찜
 	public Integer updateLike(GoodsVO vo) throws Exception;
+	
+	// 메인 상품 랜덤 메서드
+	public List<GoodsVO> g_randList() throws Exception;
+
+	// 메인 경매상품 랜덤 메서드
+	public List<AuctionVO> a_randList() throws Exception;
 	
 	
 }

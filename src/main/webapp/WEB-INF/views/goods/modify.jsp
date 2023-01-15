@@ -19,41 +19,35 @@
 
 <!--  CSS -->
 <style type="text/css">
-.card {
-    margin: auto;
-    margin-top: 130px;
-    margin-bottom: 70px;
-    width: 1050px;
-}
-.card-body {
-    padding: 4.5rem;
-}
-.form-check-label {
-    padding-left: 0.5rem;
-    padding-right: 1.5rem;
-    align-content: center;
-}
-.form {
-	align-content: center;
-}
-.py-4 {
-    padding-top: 1rem!important;
-}
-.btn {
-    padding: 3rem 3rem;
-    font-size: 1rem;
-    line-height: 1.25;
-    border-radius: 0.25rem;
-}
-.form-check-input { 
-    position: absolute;
-    margin-top: 0.25rem;
-    margin-left: -1.25rem;
-    accent-color: #28a745;
-}
-.form-control:focus {
-  border-color: #28a745;
-}
+/* .card-body { */
+/*     padding: 4.5rem; */
+/* } */
+/* .form-check-label { */
+/*     padding-left: 0.5rem; */
+/*     padding-right: 1.5rem; */
+/*     align-content: center; */
+/* } */
+/* .form { */
+/* 	align-content: center; */
+/* } */
+/* .py-4 { */
+/*     padding-top: 1rem!important; */
+/* } */
+/* .btn { */
+/*     padding: 3rem 3rem; */
+/*     font-size: 1rem; */
+/*     line-height: 1.25; */
+/*     border-radius: 0.25rem; */
+/* } */
+/* .form-check-input {  */
+/*     position: absolute; */
+/*     margin-top: 0.25rem; */
+/*     margin-left: -1.25rem; */
+/*     accent-color: #28a745; */
+/* } */
+/* .form-control:focus { */
+/*   border-color: #28a745; */
+/* } */
 </style>
 </head>
 <body class="animsition">

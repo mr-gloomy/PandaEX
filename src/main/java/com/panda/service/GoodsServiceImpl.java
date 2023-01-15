@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.panda.domain.AuctionVO;
 import com.panda.domain.GoodsVO;
 import com.panda.domain.SearchVO;
 import com.panda.persistence.GoodsDAO;
@@ -93,9 +94,25 @@ public class GoodsServiceImpl  implements GoodsService {
 
 		return dao.updateLike(vo);
 	}
-	
-	
 
+	// 메인 상품 랜덤 메서드
+	@Override
+	public List<GoodsVO> g_randList() throws Exception {
+		mylog.debug(" g_randList() - DAO 호출(결과 리턴받기)");
+		
+		return dao.g_randList();
+	}
+
+	// 메인 경매 랜덤 메서드
+	@Override
+	public List<AuctionVO> a_randList() throws Exception {
+		mylog.debug(" g_randList() - DAO 호출(결과 리턴받기)");
+		
+		return dao.a_randList();
+	}
+	
+	
+	
 	
 	
 	

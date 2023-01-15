@@ -71,8 +71,9 @@
  	
  	<!-- 글정보 수정 -->
  	<update id="updateGoods">
- 		update goods set goods_category=#{goods_category},goods_title=#{goods_title},goods_condition=#{goods_condition},goods_price=#{goods_price},
- 						 goods_discount=#{goods_discount},goods_detail=#{goods_detail},goods_refund=#{goods_refund},goods_trade=#{goods_trade}
+ 		update goods set goods_category=#{goods_category},goods_title=#{goods_title},goods_condition=#{goods_condition},
+ 						 goods_price=#{goods_price},goods_discount=#{goods_discount},goods_detail=#{goods_detail},
+ 						 goods_refund=#{goods_refund},goods_trade=#{goods_trade}
  		where goods_no=#{goods_no}
  	</update>
  	
@@ -100,6 +101,22 @@
 	 		                    END
 	where goods_no = #{goods_no}
 	</update>	
+	
+	<!-- 중고상품 랜덤 -->
+	<select resultType="GoodsVO" id="g_rand">
+		select *
+		from goods
+		where goods_trade='판매중'
+		order by rand() limit 8
+	</select>
+	
+	<!-- 경매상품 랜덤 -->
+	<select resultType="auctionVO" id="a_rand">
+		select *
+		from auction
+		where auction_trade='0'
+		order by rand() limit 8
+	</select>
 	
 
 </mapper>
