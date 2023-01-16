@@ -474,7 +474,7 @@ function CountDownTimer(dt, id) {
 				$("input[name=auction_bid]").val(auction_bid_new);
 	 			formObj.submit();
 			} else {
-				alert("금액오류");
+				alert("현재 입찰가보다 높은 금액을 입력해주세요");
 	 			$("#inputBid").val("");
 			}
 			
