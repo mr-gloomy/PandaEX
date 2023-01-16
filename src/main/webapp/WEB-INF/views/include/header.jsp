@@ -125,8 +125,10 @@
 					<ul class="main-menu">
 						<li><a href="/goods/list?s=0">중고거래</a></li>
 						<li><a href="/auction/a_list?s=0">기부하기</a></li>
+						<li><a href="/main/board">고객지원</a></li>
 					</ul>
 				</div>
+				
 
 				<!-- Icon header -->
 
