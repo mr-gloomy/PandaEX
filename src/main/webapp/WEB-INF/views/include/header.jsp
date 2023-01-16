@@ -235,7 +235,7 @@
 							<c:if test="${kakao!=null}">
 								<div class="user-logout">
 									<input type="button"
-										onclick="location.href='https://kauth.kakao.com/oauth/logout?client_id=d2adbec5b44fdcc0559d1e3ca898739e&logout_redirect_uri=http://localhost:8080/member/logout'"
+										onclick="location.href='https://kauth.kakao.com/oauth/logout?client_id=d2adbec5b44fdcc0559d1e3ca898739e&logout_redirect_uri=https://testteam.ga/member/logout'"
 										value="로그아웃">
 								</div>
 							</c:if>
